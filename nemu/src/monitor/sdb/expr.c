@@ -240,7 +240,7 @@ int tokens_len = nr_token;
 	}
     }
 
-     // ! reverse
+     // ! bool reverse
     for(int i = 0 ; i < tokens_len ; i ++)
     {
 	if(tokens[i].type == '!')
