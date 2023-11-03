@@ -287,7 +287,8 @@ int tokens_len = nr_token;
             int tmp = char_to_int(tokens[i+1].str);
             uintptr_t a = (uintptr_t)tmp;//int <-> *()
             int value = *((int*)a);
-            int_to_char(value, tokens[i+1].str);	    
+            //int_to_char(value, tokens[i+1].str);	    
+	    sprintf(tokens[i+1].str,"%d",value);
             for(int j = 0 ; j < tokens_len ; j ++){
                 if(tokens[j].type == TK_NOTYPE){
                     for(int k = j +1 ; k < tokens_len ; k ++){
