@@ -246,20 +246,14 @@ int tokens_len = nr_token;
 	if(tokens[i].type == '!')
 	{
 	    tokens[i].type = TK_NOTYPE;
-	    int k=strlen(tokens[i+1].str);
-	    int t;
-	    for(t=0;t<k;t++)
-	    {
-	    //int tmp = atoi(tokens[i+1].str[t]);
-	    if(tokens[i+1].str[t] == '0'){
-	        //memset(tokens[i+1].str, 0 ,sizeof(tokens[i+1].str));
-		tokens[i+1].str[t]='1';
+	    int tmp = atoi(tokens[i+1].str);
+	    if(tmp==0){
+	        memset(tokens[i+1].str, 0 ,sizeof(tokens[i+1].str));
+		tokens[i+1].str[0]='1';
 	    }
 	    else
 	    {
-	        //memset(tokens[i+1].str[t], 0 , sizeof(tokens[i+1].str[t]));
-	        tokens[i+1].str[t]='0';
-	    }
+	        memset(tokens[i+1].str, 0 , sizeof(tokens[i+1].str));
 	    }
 	    for(int j = 0 ; j < tokens_len ; j ++){
 		if(tokens[j].type == TK_NOTYPE)
