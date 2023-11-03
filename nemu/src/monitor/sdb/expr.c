@@ -248,7 +248,7 @@ int tokens_len = nr_token;
 	    tokens[i].type = TK_NOTYPE;
 	    int tmp = atoi(tokens[i+1].str);
 	    if(tmp == 0){
-		memset(tokens[i+1].str, 1 ,sizeof(tokens[i+1].str));
+		memset(tokens[i+1].str, 0 ,sizeof(tokens[i+1].str));
 		//tokens[i+1].str[0] = '1';
 	    }
 	    else
