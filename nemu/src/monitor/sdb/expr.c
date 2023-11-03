@@ -246,7 +246,7 @@ int tokens_len = nr_token;
 	if(tokens[i].type == '!')
 	{
 	    tokens[i].type = TK_NOTYPE;
-	    int k=sizeof(tokens[i+1].str);
+	    int k=strlen(tokens[i+1].str);
 	    int t;
 	    for(t=0;t<k;t++)
 	    {
