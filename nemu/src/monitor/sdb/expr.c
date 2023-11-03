@@ -246,7 +246,7 @@ int tokens_len = nr_token;
 	if(tokens[i].type == '!')
 	{
 	    tokens[i].type = TK_NOTYPE;
-	    int tmp = char_to_int(tokens[i+1].str);
+	    int tmp = atoi(tokens[i+1].str);
 	    if(tmp == 0){
 		memset(tokens[i+1].str, 0 ,sizeof(tokens[i+1].str));
 		tokens[i+1].str[0] = '1';
