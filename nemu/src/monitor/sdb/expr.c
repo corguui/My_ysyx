@@ -189,7 +189,8 @@ int tokens_len = nr_token;
 	    tmp = isa_reg_str2val(tokens[i].str, &flat);
 	    if(flat)
 	    {
-	        sprintf(tokens[i].str,"%x",tmp);
+	        sprintf(tokens[i].str,"0x%x",tmp);
+		tokens[i].type=HEX;
 	//	int_to_char(tmp, tokens[i].str); // transfrom the str --> $egx
 	    }
 	    else
