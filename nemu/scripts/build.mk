@@ -9,14 +9,10 @@ endif
 
 WORK_DIR  = $(shell pwd)
 BUILD_DIR = $(WORK_DIR)/build
-BUILD_DIR1 = $(WORK_DIR)/build_marco
-
 
 INC_PATH := $(WORK_DIR)/include $(INC_PATH)
 OBJ_DIR  = $(BUILD_DIR)/obj-$(NAME)$(SO)
-OBJ_DIR1  = $(BUILD_DIR1)/obj-$(NAME)$(SO)
 BINARY   = $(BUILD_DIR)/$(NAME)$(SO)
-BINARY1   = $(BUILD_DIR1)/$(NAME)$(SO)
 
 # Compilation flags
 ifeq ($(CC),clang)
@@ -32,15 +28,6 @@ LDFLAGS := -O2 $(LDFLAGS)
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o) $(CXXSRC:%.cc=$(OBJ_DIR)/%.o)
 
 # Compilation patterns
-$(OBJ_DIR1)/%.o: %.c
-	@$(CC) -E -P  $< -o | clang-format > $(patsubst %.o,%.i,$@) 
-	@$(CC) $(patsubst %.o,%.i,$@) -g -o $@
- $(OBJ_DIR1)/%.o: %.cc
-	@$(CXX) -E -P  $< -o | clang-format > $(patsubst %.o,%.i,$@) 
-	@$(CXX) $(patsubst %.o,%.i,$@) -g -o $@
- 
-
-
 $(OBJ_DIR)/%.o: %.c
 	@echo + CC $<
 	@mkdir -p $(dir $@)
