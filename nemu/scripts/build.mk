@@ -33,9 +33,13 @@ OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o) $(CXXSRC:%.cc=$(OBJ_DIR)/%.o)
 
 # Compilation patterns
 $(OBJ_DIR1)/%.o: %.c
-	@$(CC) -E -P -MF  /dev/null $< | clang-format > $(patsubst %.o,%.i,$@) 
+	@$(CC) -E -P  $< -o | clang-format > $(patsubst %.o,%.i,$@) 
 	@$(CC) $(patsubst %.o,%.i,$@) -g -o $@
+ $(OBJ_DIR1)/%.o: %.cc
+	@$(CXX) -E -P  $< -o | clang-format > $(patsubst %.o,%.i,$@) 
+	@$(CXX) $(patsubst %.o,%.i,$@) -g -o $@
  
+
 
 $(OBJ_DIR)/%.o: %.c
 	@echo + CC $<
