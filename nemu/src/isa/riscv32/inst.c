@@ -96,8 +96,8 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 ????? ????? 000 ????? 01100 11", add    , R, R(rd)=src1+src2);
   INSTPAT("0100000 ????? ????? 000 ????? 01100 11", sub    , R, R(rd)=src1-src2);
   INSTPAT("0000001 ????? ????? 000 ????? 01100 11", mul    , R, R(rd)=src1*src2);
-  //INSTPAT("0000001 ????? ????? 001 ????? 01100 11", mulh   , R, R(rd)=(int64_t)src1*(int64_t)src2 >> 32 ;printf("R(rd) == %x\n",R(rd)) );
-  INSTPAT("0000001 ????? ????? 001 ????? 01100 11", mulh    , R, R(rd)= ((SEXT(src1,32)*SEXT(src2,32)) >> 32) ; printf("R(rd) == %x src1== %lx\n",R(rd),SEXT(src1,32)) );
+  INSTPAT("0000001 ????? ????? 001 ????? 01100 11", mulh   , R, R(rd)=(int64_t)src1*(int64_t)src2 >> 32 ;printf("R(rd) == %x\n",R(rd)) );
+  //INSTPAT("0000001 ????? ????? 001 ????? 01100 11", mulh    , R, R(rd)= ((SEXT(src1,32)*SEXT(src2,32)) >> 32) ; printf("R(rd) == %x src1== %lx\n",R(rd),SEXT(src1,32)) );
   INSTPAT("0000000 ????? ????? 011 ????? 01100 11", sltu   , R, R(rd) = src1<src2 ? 1 : 0);
   INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, R(rd) = (int32_t)src1<(int32_t)src2 ? 1 : 0);
   INSTPAT("0000000 ????? ????? 110 ????? 01100 11", or     , R, R(rd) = src1|src2 );
@@ -116,10 +116,6 @@ static int decode_exec(Decode *s) {
 
 printf("src1 %d  |  src2 %d  | imm  %d\n",src1,src2,imm);
 printf("src1 %u  |  src2 %u  | imm  %u\n",src1,src2,imm);
-printf("src1 %lx  |  src2 %lx  | imm  %d\n",(int64_t)src1,(int64_t)src2,imm);
-printf("src1 %lx  |  src2 %lx  | imm  %u\n",(uint64_t)src1,(uint64_t)src2,imm);
-
-
 printf("src1 %x  |  src2 %x  | imm  %x\n",src1,src2,imm);
 printf("pc   %x  \n",s->pc);
 
