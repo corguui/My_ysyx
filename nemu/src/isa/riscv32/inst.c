@@ -116,6 +116,9 @@ static int decode_exec(Decode *s) {
 
 printf("src1 %d  |  src2 %d  | imm  %d\n",src1,src2,imm);
 printf("src1 %u  |  src2 %u  | imm  %u\n",src1,src2,imm);
+printf("src1 %ld  |  src2 %ld  | imm  %d\n",(int64_t)src1,(int64_t)src2,imm);
+printf("src1 %lu  |  src2 %lu  | imm  %u\n",(uint64_t)src1,(uint64_t)src2,imm);
+
 
 printf("src1 %x  |  src2 %x  | imm  %x\n",src1,src2,imm);
 printf("pc   %x  \n",s->pc);
