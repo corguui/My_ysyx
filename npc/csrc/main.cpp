@@ -1,5 +1,10 @@
 #include <nvboard.h>
 #include <Vtop.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include "verilated.h"
+#include "verilated_vcd_c.h"
 
 static TOP_NAME dut;
 
@@ -19,6 +24,10 @@ static void reset(int n) {
 int main() {
   nvboard_bind_all_pins(&dut);
   nvboard_init();
+  VerilatedVcdC* tfp=new VerilatedVcdC;
+  contextp->traceEverOn(true);
+  top->trace(tfp,0);
+  tfp->open("wave.vcd");
 
   reset(10);
 
