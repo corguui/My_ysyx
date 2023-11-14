@@ -27,7 +27,7 @@ module top (
     output [7:0] seg7
 );
 
-ps2_keyboard(
+ps2_keyboard my_keyboard(
 	.clk(clk),
 	.resetn(~rst),
 	.ps2_clk(ps2_clk),
