@@ -7,11 +7,6 @@
 
 
 static uint8_t pmem[0x80000000] __attribute((aligned(4096)))={};
-uint32_t *p=(uint32_t *)pmem;
-for(int i=0;i<(int)(0x80000000);i++)
-{
-	p[i]=0;	
-}
 static uint32_t img[]
 {
 	0x00000297,
