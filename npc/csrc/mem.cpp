@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
-#inlcude "mem.h"
+#include<cstdint>
+#include "mem.h"
 
 
 static uint8_t pmem[0x80000000] __attribute((aligned(4096)))={};
