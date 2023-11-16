@@ -12,7 +12,7 @@ static const uint32_t img[]
 	0x00000297,
 };
 
-memcpy(0x80000000,img,sizeof(img));
+strncpy(pmem,img,sizeof(img));
 
 uint32_t pmem_read(uint32_t &pc)
 {
