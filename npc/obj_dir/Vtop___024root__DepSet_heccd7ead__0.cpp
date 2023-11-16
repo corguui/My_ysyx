@@ -80,8 +80,8 @@ void Vtop___024root___eval_debug_assertions(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_debug_assertions\n"); );
     // Body
-    if (VL_UNLIKELY((vlSelf->a & 0xfeU))) {
-        Verilated::overWidthError("a");}
+    if (VL_UNLIKELY((vlSelf->pc & 0xfeU))) {
+        Verilated::overWidthError("pc");}
     if (VL_UNLIKELY((vlSelf->b & 0xfeU))) {
         Verilated::overWidthError("b");}
 }

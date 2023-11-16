@@ -23,7 +23,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
     // Body
-    bufp->chgBit(oldp+0,(vlSelf->a));
+    bufp->chgBit(oldp+0,(vlSelf->pc));
     bufp->chgBit(oldp+1,(vlSelf->b));
 }
 

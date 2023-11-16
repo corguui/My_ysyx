@@ -11,10 +11,10 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     // Init
     const int c = vlSymsp->__Vm_baseCode;
     // Body
-    tracep->declBit(c+1,"a", false,-1);
+    tracep->declBit(c+1,"pc", false,-1);
     tracep->declBit(c+2,"b", false,-1);
     tracep->pushNamePrefix("top ");
-    tracep->declBit(c+1,"a", false,-1);
+    tracep->declBit(c+1,"pc", false,-1);
     tracep->declBit(c+2,"b", false,-1);
     tracep->popNamePrefix(1);
 }
@@ -59,6 +59,6 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode);
     // Body
-    bufp->fullBit(oldp+1,(vlSelf->a));
+    bufp->fullBit(oldp+1,(vlSelf->pc));
     bufp->fullBit(oldp+2,(vlSelf->b));
 }
