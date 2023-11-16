@@ -7,12 +7,18 @@
 
 
 static uint8_t pmem[0x80000000] __attribute((aligned(4096)))={};
-static uint8_t img[]
+uint32_t *p=(uint32_t *)pmem;
+int i;
+for(i=0;i<(int)(0x80000000);i++)
+{
+	p[i]=0;	
+}
+static uint32_t img[]
 {
 	0x00000297,
 };
 
-strncpy(pmem,img,sizeof(img));
+memcpy(pmem,img,sizeof(img));
 
 uint32_t pmem_read(uint32_t &pc)
 {
