@@ -19,10 +19,12 @@ void init_mem()
 }
 
 
-uint32_t pmem_read(uint32_t *pc)
+uint32_t pmem_read(uint32_t &pc)
 {
-	uint32_t inst =(*pc)-0x80000000;
-	(*pc)+=4; 
+	uint8_t *addr=pmem+pc-0x80000000;
+	uint32_t val=*(uint32_t *)addr;
+	uint32_t inst =val;
+	pc+=4; 
 	return inst;
 }
 
