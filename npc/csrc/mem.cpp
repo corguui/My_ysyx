@@ -7,7 +7,7 @@
 
 
 static uint8_t pmem[0x80000000] __attribute((aligned(4096)))={};
-static const uint32_t img[]
+static uint32_t img[]
 {
 	0x00000297,
 };
