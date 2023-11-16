@@ -6,7 +6,7 @@
 #include"../hsrc/mem.h"
 
 
-static uint8_t pmem[0x80000000] __attribute((aligned(4096)))={};
+static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
 static uint32_t img[]
 {
 	0x00000297,
@@ -22,11 +22,9 @@ void init_mem()
 
 uint32_t pmem_read(uint32_t &pc)
 {
-	//uint8_t *addr=pc-0x80000000;
-	printf("------pmem %d\n",pmem[0]);
-	//uint32_t val=*(uint32_t *)addr;
-	uint32_t inst =pc;
-	//pc+=4; 
+	uint8_t *addr =pmem+pc-0x80000000;
+	uint32_t inst =*(uint32_t *)addr;
+	pc+=4; 
 	return inst;
 }
 
