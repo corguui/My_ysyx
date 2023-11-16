@@ -11,7 +11,7 @@ void init_mem(){
 int i;
 for(i=0;i < (int)(0x80000000/sizeof(pmem[0]));i++)
 {
-	pmem[i]=rand();
+	pmem[i]=0;
 }
 static uint32_t img[]
 {
