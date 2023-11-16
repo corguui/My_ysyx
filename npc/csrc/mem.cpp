@@ -23,8 +23,7 @@ void init_mem()
 uint32_t pmem_read(uint32_t &pc)
 {
 	//uint8_t *addr=pc-0x80000000;
-	uint8_t ad=pmem[0];
-	printf("------ad %d\n",ad);
+	printf("------pmem %d\n",pmem[0]);
 	//uint32_t val=*(uint32_t *)addr;
 	uint32_t inst =pc;
 	//pc+=4; 
