@@ -7,10 +7,11 @@
 
 
 static uint8_t pmem[0x80000000] __attribute((aligned(4096)))={};
-uint32_t *p=(uint32_t *)pmem;
-for(int i=0;i < (int)(0x80000000/sizeof(p[0]));i++)
+void init_mem(){
+int i;
+for(i=0;i < (int)(0x80000000/sizeof(pmem[0]));i++)
 {
-	p[i]=rand();
+	pmem[i]=rand();
 }
 static uint32_t img[]
 {
@@ -18,6 +19,7 @@ static uint32_t img[]
 };
 
 memcpy(pmem,img,sizeof(img));
+}
 
 uint32_t pmem_read(uint32_t &pc)
 {

@@ -22,6 +22,7 @@ int main(int argc ,char** argv, char** env)
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
 
+	init_mem();
         uint32_t a=0x80000000;
 	top->pc=a;
 	while(count<=0&&!contextp->gotFinish())
