@@ -21,6 +21,8 @@ int main(int argc ,char** argv, char** env)
 	{
 		int a = rand() & 1;
 		int b = rand() & 1;
+		printf("--------------------%d\n",top->a);
+		printf("%x\n",top->a);
 		top->a =a;
 		top->b =b;
 		top->eval();
