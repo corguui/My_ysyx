@@ -16,7 +16,7 @@ static uint32_t img[]
 void init_mem()
 {
 
-	strncpy(pmem,img,sizeof(img));
+	memcpy(pmem,img,sizeof(img));
 }
 
 
