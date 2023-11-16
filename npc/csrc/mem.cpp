@@ -21,7 +21,7 @@ void init_mem()
 uint32_t pmem_read(uint32_t &pc)
 {
 	//uint8_t* inst =pmem+pc-0x80000000;
-	uint32_t inst=pc
+	uint32_t inst=pc;
 	pc=pc+4; 
 	//return *(uint32_t *)inst;
 	return inst;
