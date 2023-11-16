@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
+#include"mem.h"
 #include "Vtop.h"
 #include"verilated.h"
 #include"verilated_vcd_c.h"
@@ -17,20 +18,17 @@ int main(int argc ,char** argv, char** env)
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
 
-	while(count<=500&&!contextp->gotFinish())
+        uint32_t a=0x80000000;
+	top->a=a;
+	while(count<=0&&!contextp->gotFinish())
 	{
-		int a = rand() & 1;
-		int b = rand() & 1;
-		printf("--------------------%d\n",top->a);
-		printf("%x\n",top->a);
-		top->a =a;
-		top->b =b;
+		top->b =pmem_read(top->a);
+		printf("------%x\n",top->a);
+		printf("------top->b %x\n",top->b);
 		top->eval();
-		printf("a = %d, b = %d, f = %d\n",a,b,top->f);
 
 		tfp->dump(contextp->time());
 		contextp->timeInc(1);
-		assert(top->f ==(a ^ b));
 		count++;
 	}
 	delete top;
