@@ -1,5 +1,5 @@
 module top(
-  input a,
+  input pc,
   input b
 );
 endmodule

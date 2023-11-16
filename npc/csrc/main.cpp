@@ -19,11 +19,11 @@ int main(int argc ,char** argv, char** env)
 	tfp->open("wave.vcd");
 
         uint32_t a=0x80000000;
-	top->a=a;
+	top->pc=a;
 	while(count<=0&&!contextp->gotFinish())
 	{
-		top->b =pmem_read(top->a);
-		printf("------%x\n",top->a);
+		top->b =pmem_read(top->pc);
+		printf("------%x\n",top->pc);
 		printf("------top->b %x\n",top->b);
 		top->eval();
 

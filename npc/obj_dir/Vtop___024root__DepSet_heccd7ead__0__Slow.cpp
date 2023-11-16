@@ -61,5 +61,4 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     // Body
     vlSelf->a = VL_RAND_RESET_I(1);
     vlSelf->b = VL_RAND_RESET_I(1);
-    vlSelf->__pinNumber3 = VL_RAND_RESET_I(1);
 }
