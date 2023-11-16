@@ -11,7 +11,8 @@ VL_INLINE_OPT void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf) 
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___ico_sequent__TOP__0\n"); );
     // Body
-    vlSelf->f = (vlSelf->b ^ vlSelf->pc);
+    vlSelf->f = vlSelf->pc;
+    vlSelf->g = vlSelf->b;
 }
 
 void Vtop___024root___eval_ico(Vtop___024root* vlSelf) {

@@ -28,6 +28,7 @@ class Vtop VL_NOT_FINAL : public VerilatedModel {
     VL_IN(&pc,31,0);
     VL_IN(&b,31,0);
     VL_OUT(&f,31,0);
+    VL_OUT(&g,31,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
