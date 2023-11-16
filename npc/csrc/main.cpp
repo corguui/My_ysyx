@@ -7,8 +7,6 @@
 #include"../hsrc/mem.h"
 
 
-//static uint8_t pmem[0x80000000] __attribute((aligned(4096)))={};
-uint32_t pmem_read(uint32_t &pc);
 
 int main(int argc ,char** argv, char** env)
 {
@@ -22,7 +20,6 @@ int main(int argc ,char** argv, char** env)
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
 
-	init_mem();
         uint32_t a=0x80000000;
 	top->pc=a;
 	while(count<=0&&!contextp->gotFinish())
@@ -41,11 +38,4 @@ int main(int argc ,char** argv, char** env)
 	delete contextp;
 	return 0;
 }
-/*uint32_t pmem_read(uint32_t &pc)
-{
-	uint32_t inst =pc;
-	pc=pc+4; 
-	return inst;
-}
-*/
 
