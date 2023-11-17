@@ -35,9 +35,12 @@ uint32_t pmem_read(uint32_t &ad,int len)
 	case 4: return *(uint32_t *)addr;
 	}
 }
+
 /*
+
 void pmem_write(uint32_t ad, int len, uint32_t data)
 {
+
 
 
   switch (len) {
@@ -48,6 +51,5 @@ void pmem_write(uint32_t ad, int len, uint32_t data)
    
 
 }
-
 
 */
