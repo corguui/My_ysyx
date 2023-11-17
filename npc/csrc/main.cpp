@@ -28,7 +28,7 @@ int main(int argc ,char** argv, char** env)
 
 	while(count<=1&&!contextp->gotFinish())
 	{
-		top->b =pmem_read(top->pc);
+		top->b =pc_read(top->pc);
 		printf("------%x\n",top->pc);
 		printf("------top->b %x\n",top->b);
 		top->eval();
