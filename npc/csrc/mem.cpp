@@ -20,10 +20,11 @@ void init_mem()
 }
 
 
-void pc_read(uint32_t &pc)
+uint32_t pc_read(uint32_t &pc)
 {
-	pmem_read(pc,4);
+	uint32_t val=pmem_read(pc,4);
 	pc+=4;
+	return val;
 }
 uint32_t pmem_read(uint32_t &ad,int len)
 {
