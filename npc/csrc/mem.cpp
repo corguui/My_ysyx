@@ -47,7 +47,7 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
     	  case 2: *(uint16_t *)addr = data; return;
     	  case 4: *(uint32_t *)addr = data; return;
     	  default:
-	  { assert(0); printf("pmem_write error\n");   return 0;}
+	  { assert(0); printf("pmem_write error\n");   }
 	}
 
    
