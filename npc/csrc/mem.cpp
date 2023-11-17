@@ -33,6 +33,8 @@ uint32_t pmem_read(uint32_t &ad,int len)
 	case 1: return *(uint8_t *)addr;
 	case 2: return *(uint16_t *)addr;
 	case 4: return *(uint32_t *)addr;
+	default:
+	{ assert(0); printf("pmem_read error\n");   return 0;}
 	}
 }
 
