@@ -10,6 +10,7 @@
 
 int main(int argc ,char** argv, char** env)
 {
+	//init
 	int count=0;
 	VerilatedContext* contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
@@ -20,9 +21,11 @@ int main(int argc ,char** argv, char** env)
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
 
+	//init mem
 	init_mem();
         uint32_t a=0x80000000;
 	top->pc=a;
+
 	while(count<=1&&!contextp->gotFinish())
 	{
 		top->b =pmem_read(top->pc);

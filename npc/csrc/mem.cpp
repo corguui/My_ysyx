@@ -27,5 +27,11 @@ uint32_t pmem_read(uint32_t &pc)
 	pc+=4; 
 	return inst;
 }
+uint32_t pmem_write()
+{
+
+
+
+}
 
 
