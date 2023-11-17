@@ -22,7 +22,7 @@ void init_mem()
 
 uint32_t pmem_read(uint32_t &ad)
 {
-        uint32_t *addr =pmem+ad-0x80000000;
+        uint8_t *addr =pmem+ad-0x80000000;
 	uint32_t inst =*(uint32_t *)addr;
 	ad+=4; 
 	return inst;
