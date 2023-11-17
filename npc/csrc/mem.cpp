@@ -38,20 +38,19 @@ uint32_t pmem_read(uint32_t &ad,int len)
 	}
 }
 
-/*
 
-void pmem_write(uint32_t ad, int len, uint32_t data)
+void pmem_write(uint32_t &ad, int len, uint32_t data)
 {
+  	uint8_t *addr =pmem+ad-0x80000000;
+  	switch (len) {
+          case 1: *(uint8_t  *)addr = data; return;
+    	  case 2: *(uint16_t *)addr = data; return;
+    	  case 4: *(uint32_t *)addr = data; return;
+    	  default:
+	  { assert(0); printf("pmem_write error\n");   return 0;}
+	}
 
-
-
-  switch (len) {
-    case 1: *(uint8_t  *)addr = data; return;
-    case 2: *(uint16_t *)addr = data; return;
-    case 4: *(uint32_t *)addr = data; return;
-    }
    
 
 }
 
-*/
