@@ -20,15 +20,11 @@ void init_mem()
 }
 
 
-uint32_t pmem_read(uint32_t &ad,int len)
+uint32_t pmem_read(uint32_t &ad)
 {
-  	switch (len) {
-   		case 1: uint8_t  *addr =pmem+pc-0x80000000;
-		case 2: uint16_t *addr =pmem+pc-0x80000000;
-    		case 4: uint32_t *addr =pmem+pc-0x80000000;
-		}
+        uint32_t *addr =pmem+ad-0x80000000;
 	uint32_t inst =*(uint32_t *)addr;
-	pc+=4; 
+	ad+=4; 
 	return inst;
 }
 /*
