@@ -14,30 +14,30 @@ int main(int argc ,char** argv, char** env)
 	int count=0;
 	VerilatedContext* contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
-	Vyxyx_23060111_top *top = new Vyxyx_23060111_top{contextp};
+	Vtop *ysyx_23060111_top = new Vtop{contextp};
 
 	VerilatedVcdC* tfp=new VerilatedVcdC;
 	contextp->traceEverOn(true);
-	top->trace(tfp,0);
+	yxyx_23060111_top->trace(tfp,0);
 	tfp->open("wave.vcd");
 
 	//init mem
 	init_mem();
         uint32_t a=0x80000000;
-	top->pc=a;
+	ysyx_23060111_top->pc=a;
 
 	while(count<=1&&!contextp->gotFinish())
 	{
-		top->inst =pc_read(top->pc);
-		printf("------%x\n",top->pc);
-		printf("------top->b %x\n",top->inst);
-		top->eval();
+		ysyx_23060111_top->inst =pc_read(ysyx_23060111_top->pc);
+		printf("------%x\n",ysyx_23060111_top->pc);
+		printf("------top->b %x\n",ysyx_23060111_top->inst);
+		ysyx_23060111_top->eval();
 
 		tfp->dump(contextp->time());
 		contextp->timeInc(1);
 		count++;
 	}
-	delete top;
+	delete ysyx_23060111_top;
 	tfp->close();
 	delete contextp;
 	return 0;
