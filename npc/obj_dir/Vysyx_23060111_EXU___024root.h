@@ -17,9 +17,11 @@ class Vysyx_23060111_EXU___024root final : public VerilatedModule {
     VL_IN8(rst,0,0);
     VL_OUT8(rs1,19,15);
     VL_OUT8(rd,11,7);
+    VL_OUT8(rbb,19,15);
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
     VL_OUT16(imm,31,20);
+    VL_OUT16(rbb1,10,0);
     VL_IN(inst,31,0);
     VL_OUT(val,31,0);
     VL_OUT(snpc,31,0);

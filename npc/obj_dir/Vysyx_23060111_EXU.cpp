@@ -15,7 +15,9 @@ Vysyx_23060111_EXU::Vysyx_23060111_EXU(VerilatedContext* _vcontextp__, const cha
     , rst{vlSymsp->TOP.rst}
     , rs1{vlSymsp->TOP.rs1}
     , rd{vlSymsp->TOP.rd}
+    , rbb{vlSymsp->TOP.rbb}
     , imm{vlSymsp->TOP.imm}
+    , rbb1{vlSymsp->TOP.rbb1}
     , inst{vlSymsp->TOP.inst}
     , val{vlSymsp->TOP.val}
     , snpc{vlSymsp->TOP.snpc}

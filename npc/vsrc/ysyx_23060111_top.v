@@ -14,7 +14,7 @@ module ysyx_23060111_top(
   output[31:0] reg_out,
   output[31:0] reg_out1,
   output[19:15] rbb,
-  output[10:0] rbb1
+  output[11:0] rbb1
 );
 
 assign val=inst;

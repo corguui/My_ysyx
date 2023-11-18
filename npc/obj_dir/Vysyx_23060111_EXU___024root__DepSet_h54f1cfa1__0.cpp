@@ -13,9 +13,12 @@ VL_INLINE_OPT void Vysyx_23060111_EXU___024root___ico_sequent__TOP__0(Vysyx_2306
     // Body
     vlSelf->val = vlSelf->inst;
     vlSelf->imm = (vlSelf->inst >> 0x14U);
+    vlSelf->reg_out1 = (vlSelf->inst >> 0x14U);
+    vlSelf->rbb1 = ((0x380U & (vlSelf->inst >> 5U)) 
+                    | (0x7fU & vlSelf->inst));
     vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
     vlSelf->rd = (0x1fU & (vlSelf->inst >> 7U));
-    vlSelf->reg_out1 = (vlSelf->inst >> 0x14U);
+    vlSelf->rbb = (0x1fU & ((IData)(vlSelf->rd) + (IData)(vlSelf->rs1)));
 }
 
 void Vysyx_23060111_EXU___024root___eval_ico(Vysyx_23060111_EXU___024root* vlSelf) {
