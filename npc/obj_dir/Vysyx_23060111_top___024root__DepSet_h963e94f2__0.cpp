@@ -11,7 +11,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___ico_sequent__TOP__0(Vysyx_2306
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___ico_sequent__TOP__0\n"); );
     // Body
-    vlSelf->out = vlSelf->pc;
+    vlSelf->out = (vlSelf->pc | (vlSelf->snpc | (vlSelf->dnpc 
+                                                 | vlSelf->inst)));
 }
 
 void Vysyx_23060111_top___024root___eval_ico(Vysyx_23060111_top___024root* vlSelf) {
