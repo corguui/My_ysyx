@@ -28,9 +28,10 @@ int main(int argc ,char** argv, char** env)
 
 	while(count<=0&&!contextp->gotFinish())
 	{
+		top->inst =pc_read(top->pc);
 		top->clk =0; top->eval();
 		top->clk =1; top->eval();
-		top->inst =pc_read(top->pc);
+
 		printf("------%x\n",top->pc);
 		printf("------top->reg_out1 %x\n",top->reg_out1);
 		printf("------top->imm %x\n",top->imm);
