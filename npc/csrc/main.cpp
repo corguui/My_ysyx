@@ -25,11 +25,11 @@ int main(int argc ,char** argv, char** env)
 	init_mem();
         uint32_t a=0x80000000;
 	top->pc=a;
-	top->clk=0;
 
 	while(count<=0&&!contextp->gotFinish())
 	{
-		top->clk =1;
+		top->clk =0; top->eval();
+		top->clk =1; top->eval();
 		top->inst =pc_read(top->pc);
 		printf("------%x\n",top->pc);
 		printf("------top->reg_out1 %x\n",top->reg_out1);
