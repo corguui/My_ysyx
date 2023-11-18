@@ -14,7 +14,7 @@ int main(int argc ,char** argv, char** env)
 	int count=0;
 	VerilatedContext* contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
-	Vysyx_23060111_top *top = new Vtop{contextp};
+	Vyxyx_23060111_top *top = new Vyxyx_23060111_top{contextp};
 
 	VerilatedVcdC* tfp=new VerilatedVcdC;
 	contextp->traceEverOn(true);
