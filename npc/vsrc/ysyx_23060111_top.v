@@ -18,8 +18,8 @@ module ysyx_23060111_top(
  assign out = pc|snpc|inst|dnpc; 
 
  //init reg
- ysyx_23060111_reg #(4,31) reg_$0(clk,0,0,1'b1,out_reg);
- ysyx_23060111_reg #(4,31) reg_t0(clk,0,5'd5,1'b1,out_reg);
+ ysyx_23060111_reg #(5,32) reg_$0(clk,0,0,1'b1,out_reg);
+ ysyx_23060111_reg #(5,32) reg_t0(clk,0,5'd5,1'b1,out_reg);
 
  //init IDU
  ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,rs1,rd);
@@ -43,6 +43,7 @@ module ysyx_23060111_trigger #(WIDTH = 1, RESET_VAL = 0) (
   end
 endmodule
 
+/*
 module ysyx_23060111_MuxKeyInternal #(NR_KEY = 2, KEY_LEN = 1, DATA_LEN = 1, HAS_DEFAULT = 0) (
   output reg [DATA_LEN-1:0] out,
   input [KEY_LEN-1:0] key,
@@ -77,3 +78,4 @@ module ysyx_23060111_MuxKeyInternal #(NR_KEY = 2, KEY_LEN = 1, DATA_LEN = 1, HAS
     else out = (hit ? lut_out : default_out);
   end
 endmodule
+*/
