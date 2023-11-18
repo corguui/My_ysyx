@@ -32,7 +32,7 @@ int main(int argc ,char** argv, char** env)
 		top->clk =1; top->eval();
 		top->inst =pc_read(top->pc);
 		printf("------%x\n",top->pc);
-		printf("------top->reg_out1 %x\n",ysyx_23060111_reg->rf[1]);
+		printf("------top->reg_out1 %x\n",top->reg_out1);
 		top->eval();
 
 		tfp->dump(contextp->time());
