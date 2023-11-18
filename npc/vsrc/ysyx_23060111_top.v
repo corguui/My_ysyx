@@ -22,10 +22,10 @@ module ysyx_23060111_top(
  ysyx_23060111_reg #(4,31) reg_t0(clk,0,5'd5,1'b1,out_reg);
 
  //init IDU
- ysyx_23060111_IDU init_IDU (snpc,dnpc,inst,imm,rs1,rd);
+ ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,rs1,rd);
 
  //init EXU
- ysyx_23060111_EXU init_EXU (clk,rst,pc,dnpc,imm,rs1,rd,reg_out,reg_out1);
+ ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,rd,pc,reg_out,reg_out1);
 endmodule
 
 
