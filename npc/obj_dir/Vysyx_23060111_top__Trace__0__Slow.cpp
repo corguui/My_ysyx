@@ -87,7 +87,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->popNamePrefix(2);
     tracep->pushNamePrefix("init_IDU ");
     tracep->declBus(c+5,"snpc", false,-1, 31,0);
-    tracep->declBus(c+4,"inst", false,-1, 31,0);
+    tracep->declBus(c+3,"inst", false,-1, 31,0);
     tracep->declBus(c+5,"dnpc", false,-1, 31,0);
     tracep->declBus(c+8,"imm", false,-1, 31,20);
     tracep->declBus(c+9,"rs1", false,-1, 19,15);
