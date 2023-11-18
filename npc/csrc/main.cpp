@@ -25,12 +25,15 @@ int main(int argc ,char** argv, char** env)
 	init_mem();
         uint32_t a=0x80000000;
 	top->pc=a;
+	top->clk=0;
 
-	while(count<=1&&!contextp->gotFinish())
+	while(count<=0&&!contextp->gotFinish())
 	{
+		top->clk =1;
 		top->inst =pc_read(top->pc);
+		top->snpc=top->pc+4;
 		printf("------%x\n",top->pc);
-		printf("------top->b %x\n",top->inst);
+		printf("------top->reg_out1 %x\n",top->reg_out1);
 		top->eval();
 
 		tfp->dump(contextp->time());
