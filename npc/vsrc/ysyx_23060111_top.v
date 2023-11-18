@@ -10,7 +10,7 @@ module ysyx_23060111_top(
   output[19:15] rs1,
   output[11:7] rd,
   //output[31:0] out1,
-  //output[31:0] out,
+  output[31:0] out,
   output[31:0] reg_out,
   output[31:0] reg_out1,
   output[19:15] rbb,
