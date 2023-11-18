@@ -79,6 +79,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_2306
                                       >> 7U))) ? vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf
                         [(1U & (vlSelf->inst >> 7U))]
                          : 0U);
+    vlSelf->out = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
+        [0U];
     vlSelf->snpc = ((IData)(4U) + vlSelf->pc);
     vlSelf->dnpc = vlSelf->snpc;
 }
@@ -90,7 +92,6 @@ void Vysyx_23060111_top___024root___eval_nba(Vysyx_23060111_top___024root* vlSel
     // Body
     if (vlSelf->__VnbaTriggered.at(0U)) {
         Vysyx_23060111_top___024root___nba_sequent__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[1U] = 1U;
     }
 }
 
