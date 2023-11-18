@@ -10,12 +10,10 @@ module ysyx_23060111_top(
   output[31:20] imm,
   output[19:15] rs1,
   output[11:7] rd,
-  output[31:0] out,
   output[31:0] out_reg,
   output[31:0] reg_out,
   output[31:0] reg_out1
 );
- assign out = pc|snpc|inst|dnpc; 
 
  //init reg
  ysyx_23060111_reg #(5,32) reg_$0(clk,0,0,1'b1,out_reg);

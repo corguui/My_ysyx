@@ -50,6 +50,7 @@ void Vysyx_23060111_EXU___024root__trace_chg_sub_0(Vysyx_23060111_EXU___024root*
     bufp->chgIData(oldp+22,(vlSelf->out_reg),32);
     bufp->chgIData(oldp+23,(vlSelf->reg_out),32);
     bufp->chgIData(oldp+24,(vlSelf->reg_out1),32);
+    bufp->chgIData(oldp+25,((vlSelf->inst >> 0x14U)),32);
 }
 
 void Vysyx_23060111_EXU___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
