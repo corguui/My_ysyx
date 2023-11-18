@@ -5,7 +5,7 @@ module ysyx_23060111_IDU(
   output [31:20] imm,
   output [19:15] rs1,
   output [11:7] rd,
-  output [11:0] rbb
+  output [9:0] rbb
 );
   assign rbb={inst[14:12],inst[6:0]};
   assign dnpc=snpc;
