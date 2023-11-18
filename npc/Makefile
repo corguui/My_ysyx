@@ -62,8 +62,6 @@ wave:$(Wavefile)
 	gtkwave $(Wavefile)
 lint:$(Vfile)
 	verilator --lint-only $(Vfile)
-abc:$(Vfile) $(Cfile) $(TOPfile)
-	@echo $(basename $(subst vsrc/,,$(TOPfile))
 
 
 
