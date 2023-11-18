@@ -39,9 +39,9 @@ VL_INLINE_OPT void Vysyx_23060111_EXU___024root___nba_sequent__TOP__0(Vysyx_2306
     Vysyx_23060111_EXU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_EXU___024root___nba_sequent__TOP__0\n"); );
     // Init
-    IData/*31:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h731b7a34__0;
-    ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h731b7a34__0 = 0;
-    CData/*2:0*/ __Vdlyvdim0__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0;
+    IData/*31:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h9dec41c8__0;
+    ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h9dec41c8__0 = 0;
+    CData/*0:0*/ __Vdlyvdim0__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0;
     __Vdlyvdim0__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 = 0;
     IData/*31:0*/ __Vdlyvval__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0;
     __Vdlyvval__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 = 0;
@@ -49,14 +49,14 @@ VL_INLINE_OPT void Vysyx_23060111_EXU___024root___nba_sequent__TOP__0(Vysyx_2306
     __Vdlyvset__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 = 0;
     // Body
     __Vdlyvset__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 = 0U;
-    ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h731b7a34__0 
+    ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h9dec41c8__0 
         = vlSelf->reg_out1;
-    if ((4U >= (7U & (IData)(vlSelf->rd)))) {
+    if ((0U >= (1U & (vlSelf->inst >> 7U)))) {
         __Vdlyvval__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 
-            = ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h731b7a34__0;
+            = ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h9dec41c8__0;
         __Vdlyvset__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 = 1U;
         __Vdlyvdim0__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 
-            = (7U & (IData)(vlSelf->rd));
+            = (1U & (vlSelf->inst >> 7U));
     }
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
                    : vlSelf->snpc);
@@ -76,7 +76,6 @@ void Vysyx_23060111_EXU___024root___eval_nba(Vysyx_23060111_EXU___024root* vlSel
     // Body
     if (vlSelf->__VnbaTriggered.at(0U)) {
         Vysyx_23060111_EXU___024root___nba_sequent__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[1U] = 1U;
     }
 }
 
