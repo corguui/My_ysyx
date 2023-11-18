@@ -9,8 +9,6 @@ module ysyx_23060111_top(
   output[31:20] imm,
   output[19:15] rs1,
   output[11:7] rd,
-  output[31:0] out_reg,
-  output[31:0] out_reg1,
   output[31:0] reg_out,
   output[31:0] reg_out1,
   output[19:15] rbb,
@@ -21,8 +19,8 @@ assign val=inst;
 assign snpc=pc+32'h4;
  
  //init reg
- ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out_reg);
- ysyx_23060111_reg #(1,32) reg_t0(clk,0,1'b1,1'b1,out_reg1);
+ ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1);
+ ysyx_23060111_reg #(1,32) reg_t0(clk,0,1'b1,1'b1);
 
  //init IDU
  ysyx_23060111_IDU init_IDU (snpc,val,dnpc,imm,rs1,rd,rbb1);
