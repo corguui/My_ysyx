@@ -34,7 +34,7 @@ int main(int argc ,char** argv, char** env)
 		printf("------%x\n",top->pc);
 		printf("------top->reg_out1 %x\n",top->reg_out1);
 		printf("------top->imm %x\n",top->imm);
-		printf("------top->val %x\n",top->val);
+		printf("------top->val %x\n",top->inst);
 
 
 		top->eval();
