@@ -20,7 +20,7 @@ assign snpc=pc+32'h4;
  
  //init reg
  ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out_reg);
- ysyx_23060111_reg #(1,32) reg_t0(clk,0,1'b1,1'b1,out_reg);
+ ysyx_23060111_reg #(1,32) reg_t0(clk,0,1'b1,1'b1,out_reg1);
 
  //init IDU
  ysyx_23060111_IDU init_IDU (snpc,val,dnpc,imm,rs1,rd);

@@ -171,12 +171,13 @@ VL_ATTR_COLD void Vysyx_23060111_EXU___024root___ctor_var_reset(Vysyx_23060111_E
     vlSelf->rs1 = VL_RAND_RESET_I(5);
     vlSelf->rd = VL_RAND_RESET_I(5);
     vlSelf->out_reg = VL_RAND_RESET_I(32);
+    vlSelf->out_reg1 = VL_RAND_RESET_I(32);
     vlSelf->reg_out = VL_RAND_RESET_I(32);
     vlSelf->reg_out1 = VL_RAND_RESET_I(32);
-    for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
         vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
     }
-    for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
         vlSelf->ysyx_23060111_top__DOT__reg_t0__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
     }
     for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
