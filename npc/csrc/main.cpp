@@ -31,7 +31,6 @@ int main(int argc ,char** argv, char** env)
 	{
 		top->clk =1;
 		top->inst =pc_read(top->pc);
-		top->snpc=top->pc+4;
 		printf("------%x\n",top->pc);
 		printf("------top->reg_out1 %x\n",top->reg_out1);
 		top->eval();

@@ -1,7 +1,8 @@
 module ysyx_23060111_top(
   input       rst,
   input       clk,
-  output[31:0] inst,
+  input[31:0] inst,
+  output[31:0] val,
   output[31:0] snpc,
   output[31:0] dnpc,
   output[31:0] pc,
@@ -12,13 +13,16 @@ module ysyx_23060111_top(
   output[31:0] reg_out,
   output[31:0] reg_out1
 );
+
+assign val=inst;
+assign snpc=pc+32'h4;
  
  //init reg
  ysyx_23060111_reg #(5,32) reg_$0(clk,0,5'b0,1'b1,out_reg);
  ysyx_23060111_reg #(5,32) reg_t0(clk,0,5'd5,1'b1,out_reg);
 
  //init IDU
- ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,rs1,rd);
+ ysyx_23060111_IDU init_IDU (snpc,val,dnpc,imm,rs1,rd);
 
  //init EXU
  ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,rd,pc,reg_out,reg_out1);
