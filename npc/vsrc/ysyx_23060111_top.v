@@ -9,8 +9,8 @@ module ysyx_23060111_top(
   output[31:20] imm,
   output[19:15] rs1,
   output[11:7] rd,
-  output[31:0] reg_out,
-  output[31:0] reg_out1,
+  //output[31:0] reg_out,
+  //output[31:0] reg_out1,
   output[19:15] rbb,
   output[9:0] rbb1
 );
@@ -26,7 +26,7 @@ assign snpc=pc+32'h4;
  ysyx_23060111_IDU init_IDU (snpc,val,dnpc,imm,rs1,rd,rbb1);
 
  //init EXU
- ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,rd,pc,reg_out,reg_out1,rbb);
+ ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,rd,pc,rbb);
 endmodule
 
 
