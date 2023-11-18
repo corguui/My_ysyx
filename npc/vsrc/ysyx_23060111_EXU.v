@@ -1,11 +1,11 @@
 module ysyx_23060111_EXU(
   input       clk,
   input       rst,
-  input[31:0] pc,
   input[31:0] dnpc,
   input[31:20] imm,
   input[19:15] rs1,
   input[11:7] rd,
+  output[31:0] pc,
   output[31:0] reg_out,
   output[31:0] reg_out1
 );

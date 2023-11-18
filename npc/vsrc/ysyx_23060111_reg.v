@@ -6,7 +6,7 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   output [DATA_WIDTH-1:0] out 
 );
   reg [DATA_WIDTH-1:0] rf [ADDR_WIDTH-1:0];
-  assign out =wadta;
+  assign out =wdata;
   always @(posedge clk) begin
     if (wen) rf[waddr] <= wdata;
   end
