@@ -30,7 +30,8 @@ class Vysyx_23060111_EXU VL_NOT_FINAL : public VerilatedModel {
     VL_OUT8(&rs1,19,15);
     VL_OUT8(&rd,11,7);
     VL_OUT16(&imm,31,20);
-    VL_OUT(&inst,31,0);
+    VL_IN(&inst,31,0);
+    VL_OUT(&val,31,0);
     VL_OUT(&snpc,31,0);
     VL_OUT(&dnpc,31,0);
     VL_OUT(&pc,31,0);
