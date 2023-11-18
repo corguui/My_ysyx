@@ -30,6 +30,7 @@ VL_ATTR_COLD void Vysyx_23060111_EXU___024root___eval_initial__TOP(Vysyx_2306011
     // Body
     vlSelf->reg_out = 0U;
     vlSelf->out_reg = 0U;
+    vlSelf->out_reg1 = 0U;
 }
 
 VL_ATTR_COLD void Vysyx_23060111_EXU___024root___eval_final(Vysyx_23060111_EXU___024root* vlSelf) {

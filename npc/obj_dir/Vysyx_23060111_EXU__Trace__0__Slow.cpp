@@ -113,7 +113,7 @@ VL_ATTR_COLD void Vysyx_23060111_EXU___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+27,"wdata", false,-1, 31,0);
     tracep->declBus(c+26,"waddr", false,-1, 0,0);
     tracep->declBit(c+26,"wen", false,-1);
-    tracep->declBus(c+17,"out", false,-1, 31,0);
+    tracep->declBus(c+18,"out", false,-1, 31,0);
     for (int i = 0; i < 1; ++i) {
         tracep->declBus(c+36+i*1,"rf", true,(i+0), 31,0);
     }
