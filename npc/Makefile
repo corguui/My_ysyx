@@ -1,7 +1,7 @@
 Vfile=$(wildcard ./vsrc/*.v)
 Cfile=$(wildcard ./csrc/*.cpp)
 Wavefile=$(wildcard ./*.vcd)
-TOPfile=$(./vsrc/ysyx_23060111_top.v)
+TOPfile=vsrc/ysyx_23060111_top.v
 
 
 #nvboard
