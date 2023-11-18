@@ -28,9 +28,9 @@ int main(int argc ,char** argv, char** env)
 
 	while(count<=1&&!contextp->gotFinish())
 	{
-		top->b =pc_read(top->pc);
+		top->inst =pc_read(top->pc);
 		printf("------%x\n",top->pc);
-		printf("------top->b %x\n",top->b);
+		printf("------top->b %x\n",top->inst);
 		top->eval();
 
 		tfp->dump(contextp->time());
