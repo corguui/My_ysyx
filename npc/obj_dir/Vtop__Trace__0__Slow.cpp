@@ -12,14 +12,14 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     const int c = vlSymsp->__Vm_baseCode;
     // Body
     tracep->declBus(c+1,"pc", false,-1, 31,0);
-    tracep->declBus(c+2,"b", false,-1, 31,0);
-    tracep->declBus(c+3,"f", false,-1, 31,0);
-    tracep->declBus(c+4,"g", false,-1, 31,0);
-    tracep->pushNamePrefix("top ");
+    tracep->declBus(c+2,"snpc", false,-1, 31,0);
+    tracep->declBus(c+3,"dnpc", false,-1, 31,0);
+    tracep->declBus(c+4,"inst", false,-1, 31,0);
+    tracep->pushNamePrefix("ysyx_23060111_top ");
     tracep->declBus(c+1,"pc", false,-1, 31,0);
-    tracep->declBus(c+2,"b", false,-1, 31,0);
-    tracep->declBus(c+3,"f", false,-1, 31,0);
-    tracep->declBus(c+4,"g", false,-1, 31,0);
+    tracep->declBus(c+2,"snpc", false,-1, 31,0);
+    tracep->declBus(c+3,"dnpc", false,-1, 31,0);
+    tracep->declBus(c+4,"inst", false,-1, 31,0);
     tracep->popNamePrefix(1);
 }
 
@@ -64,7 +64,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode);
     // Body
     bufp->fullIData(oldp+1,(vlSelf->pc),32);
-    bufp->fullIData(oldp+2,(vlSelf->b),32);
-    bufp->fullIData(oldp+3,(vlSelf->f),32);
-    bufp->fullIData(oldp+4,(vlSelf->g),32);
+    bufp->fullIData(oldp+2,(vlSelf->snpc),32);
+    bufp->fullIData(oldp+3,(vlSelf->dnpc),32);
+    bufp->fullIData(oldp+4,(vlSelf->inst),32);
 }
