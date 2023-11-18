@@ -166,9 +166,5 @@ void Vysyx_23060111_EXU___024root___eval_debug_assertions(Vysyx_23060111_EXU___0
         Verilated::overWidthError("rst");}
     if (VL_UNLIKELY((vlSelf->clk & 0xfeU))) {
         Verilated::overWidthError("clk");}
-    if (VL_UNLIKELY((vlSelf->en_reg & 0xfeU))) {
-        Verilated::overWidthError("en_reg");}
-    if (VL_UNLIKELY((vlSelf->en_trigger & 0xfeU))) {
-        Verilated::overWidthError("en_trigger");}
 }
 #endif  // VL_DEBUG

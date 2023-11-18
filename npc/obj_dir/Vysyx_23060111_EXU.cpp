@@ -13,8 +13,6 @@ Vysyx_23060111_EXU::Vysyx_23060111_EXU(VerilatedContext* _vcontextp__, const cha
     , vlSymsp{new Vysyx_23060111_EXU__Syms(contextp(), _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
-    , en_reg{vlSymsp->TOP.en_reg}
-    , en_trigger{vlSymsp->TOP.en_trigger}
     , rs1{vlSymsp->TOP.rs1}
     , rd{vlSymsp->TOP.rd}
     , imm{vlSymsp->TOP.imm}

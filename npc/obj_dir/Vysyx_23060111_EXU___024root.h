@@ -15,8 +15,6 @@ class Vysyx_23060111_EXU___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_IN8(en_reg,0,0);
-    VL_IN8(en_trigger,0,0);
     VL_OUT8(rs1,19,15);
     VL_OUT8(rd,11,7);
     CData/*0:0*/ __Vtrigrprev__TOP__clk;

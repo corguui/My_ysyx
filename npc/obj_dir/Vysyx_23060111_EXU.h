@@ -27,8 +27,6 @@ class Vysyx_23060111_EXU VL_NOT_FINAL : public VerilatedModel {
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
     VL_IN8(&rst,0,0);
-    VL_IN8(&en_reg,0,0);
-    VL_IN8(&en_trigger,0,0);
     VL_OUT8(&rs1,19,15);
     VL_OUT8(&rd,11,7);
     VL_OUT16(&imm,31,20);
