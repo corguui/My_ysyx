@@ -18,7 +18,7 @@ int main(int argc ,char** argv, char** env)
 
 	VerilatedVcdC* tfp=new VerilatedVcdC;
 	contextp->traceEverOn(true);
-	yxyx_23060111_top->trace(tfp,0);
+	ysyx_23060111_top->trace(tfp,0);
 	tfp->open("wave.vcd");
 
 	//init mem
