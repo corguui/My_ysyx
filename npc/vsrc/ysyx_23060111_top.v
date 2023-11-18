@@ -1,8 +1,6 @@
 module ysyx_23060111_top(
   input       rst,
   input       clk,
-  input       en_reg,
-  input       en_trigger,
   input[31:0] inst,
   output[31:0] snpc,
   output[31:0] dnpc,
@@ -14,7 +12,7 @@ module ysyx_23060111_top(
   output[31:0] reg_out,
   output[31:0] reg_out1
 );
-
+ 
  //init reg
  ysyx_23060111_reg #(5,32) reg_$0(clk,0,0,1'b1,out_reg);
  ysyx_23060111_reg #(5,32) reg_t0(clk,0,5'd5,1'b1,out_reg);
