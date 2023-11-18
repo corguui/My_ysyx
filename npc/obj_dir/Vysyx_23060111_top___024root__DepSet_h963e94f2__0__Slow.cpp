@@ -12,23 +12,12 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_static(Vysyx_23060111_top_
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_static\n"); );
 }
 
-VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial__TOP(Vysyx_23060111_top___024root* vlSelf);
-
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_initial\n"); );
     // Body
-    Vysyx_23060111_top___024root___eval_initial__TOP(vlSelf);
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
-}
-
-VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial__TOP(Vysyx_23060111_top___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_initial__TOP\n"); );
-    // Body
-    vlSelf->out1 = 0U;
 }
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_final(Vysyx_23060111_top___024root* vlSelf) {
@@ -94,8 +83,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     vlSelf->imm = (vlSelf->inst >> 0x14U);
     vlSelf->rbb1 = ((0x380U & (vlSelf->inst >> 5U)) 
                     | (0x7fU & vlSelf->inst));
-    vlSelf->out = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
-        [0U];
     vlSelf->reg_out = ((0U >= (1U & (vlSelf->inst >> 0xfU)))
                         ? vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_src1__DOT__rf
                        [(1U & (vlSelf->inst >> 0xfU))]
@@ -187,12 +174,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___ctor_var_reset(Vysyx_23060111_t
     vlSelf->reg_out1 = VL_RAND_RESET_I(32);
     vlSelf->rbb = VL_RAND_RESET_I(5);
     vlSelf->rbb1 = VL_RAND_RESET_I(10);
-    for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
-        vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
-    }
-    for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
-        vlSelf->ysyx_23060111_top__DOT__reg_t0__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
-    }
     for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
         vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_src1__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
     }
