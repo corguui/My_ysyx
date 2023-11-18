@@ -168,8 +168,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___ctor_var_reset(Vysyx_23060111_t
     vlSelf->imm = VL_RAND_RESET_I(12);
     vlSelf->rs1 = VL_RAND_RESET_I(5);
     vlSelf->rd = VL_RAND_RESET_I(5);
-    vlSelf->out1 = VL_RAND_RESET_I(32);
-    vlSelf->out = VL_RAND_RESET_I(32);
     vlSelf->reg_out = VL_RAND_RESET_I(32);
     vlSelf->reg_out1 = VL_RAND_RESET_I(32);
     vlSelf->rbb = VL_RAND_RESET_I(5);
