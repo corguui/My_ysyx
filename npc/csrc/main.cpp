@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
-#include "Vtop.h"
+#include "Vysyx_23060111_top.h"
 #include"verilated.h"
 #include"verilated_vcd_c.h"
 #include"../hsrc/mem.h"
@@ -14,7 +14,7 @@ int main(int argc ,char** argv, char** env)
 	int count=0;
 	VerilatedContext* contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
-	Vtop *ysyx_23060111_top = new Vtop{contextp};
+	Vysyx_23060111_top *ysyx_23060111_top = new Vysyx_23060111_top{contextp};
 
 	VerilatedVcdC* tfp=new VerilatedVcdC;
 	contextp->traceEverOn(true);
