@@ -46,11 +46,10 @@ void Vysyx_23060111_EXU___024root__trace_chg_sub_0(Vysyx_23060111_EXU___024root*
     bufp->chgSData(oldp+18,(vlSelf->imm),12);
     bufp->chgCData(oldp+19,(vlSelf->rs1),5);
     bufp->chgCData(oldp+20,(vlSelf->rd),5);
-    bufp->chgIData(oldp+21,(vlSelf->out),32);
-    bufp->chgIData(oldp+22,(vlSelf->out_reg),32);
-    bufp->chgIData(oldp+23,(vlSelf->reg_out),32);
-    bufp->chgIData(oldp+24,(vlSelf->reg_out1),32);
-    bufp->chgIData(oldp+25,((vlSelf->inst >> 0x14U)),32);
+    bufp->chgIData(oldp+21,(vlSelf->out_reg),32);
+    bufp->chgIData(oldp+22,(vlSelf->reg_out),32);
+    bufp->chgIData(oldp+23,(vlSelf->reg_out1),32);
+    bufp->chgIData(oldp+24,((vlSelf->inst >> 0x14U)),32);
 }
 
 void Vysyx_23060111_EXU___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {

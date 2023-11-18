@@ -22,7 +22,6 @@ Vysyx_23060111_EXU::Vysyx_23060111_EXU(VerilatedContext* _vcontextp__, const cha
     , snpc{vlSymsp->TOP.snpc}
     , dnpc{vlSymsp->TOP.dnpc}
     , pc{vlSymsp->TOP.pc}
-    , out{vlSymsp->TOP.out}
     , out_reg{vlSymsp->TOP.out_reg}
     , reg_out{vlSymsp->TOP.reg_out}
     , reg_out1{vlSymsp->TOP.reg_out1}

@@ -15,8 +15,6 @@ VL_INLINE_OPT void Vysyx_23060111_EXU___024root___ico_sequent__TOP__0(Vysyx_2306
     vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
     vlSelf->rd = (0x1fU & (vlSelf->inst >> 7U));
     vlSelf->reg_out1 = (vlSelf->inst >> 0x14U);
-    vlSelf->out = (vlSelf->pc | (vlSelf->snpc | (vlSelf->inst 
-                                                 | vlSelf->snpc)));
 }
 
 void Vysyx_23060111_EXU___024root___eval_ico(Vysyx_23060111_EXU___024root* vlSelf) {
@@ -66,8 +64,6 @@ VL_INLINE_OPT void Vysyx_23060111_EXU___024root___nba_sequent__TOP__0(Vysyx_2306
         vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf[__Vdlyvdim0__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0] 
             = __Vdlyvval__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0;
     }
-    vlSelf->out = (vlSelf->pc | (vlSelf->snpc | (vlSelf->inst 
-                                                 | vlSelf->snpc)));
 }
 
 void Vysyx_23060111_EXU___024root___eval_nba(Vysyx_23060111_EXU___024root* vlSelf) {

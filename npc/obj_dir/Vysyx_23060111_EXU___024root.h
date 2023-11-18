@@ -26,7 +26,6 @@ class Vysyx_23060111_EXU___024root final : public VerilatedModule {
     VL_OUT(snpc,31,0);
     VL_OUT(dnpc,31,0);
     VL_OUT(pc,31,0);
-    VL_OUT(out,31,0);
     VL_OUT(out_reg,31,0);
     VL_OUT(reg_out,31,0);
     VL_OUT(reg_out1,31,0);

@@ -91,13 +91,11 @@ VL_ATTR_COLD void Vysyx_23060111_EXU___024root___stl_sequent__TOP__0(Vysyx_23060
     Vysyx_23060111_EXU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_EXU___024root___stl_sequent__TOP__0\n"); );
     // Body
-    vlSelf->dnpc = vlSelf->snpc;
     vlSelf->imm = (vlSelf->inst >> 0x14U);
     vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
     vlSelf->rd = (0x1fU & (vlSelf->inst >> 7U));
     vlSelf->reg_out1 = (vlSelf->inst >> 0x14U);
-    vlSelf->out = (vlSelf->pc | (vlSelf->snpc | (vlSelf->inst 
-                                                 | vlSelf->snpc)));
+    vlSelf->dnpc = vlSelf->snpc;
 }
 
 VL_ATTR_COLD void Vysyx_23060111_EXU___024root___eval_stl(Vysyx_23060111_EXU___024root* vlSelf) {
@@ -171,7 +169,6 @@ VL_ATTR_COLD void Vysyx_23060111_EXU___024root___ctor_var_reset(Vysyx_23060111_E
     vlSelf->imm = VL_RAND_RESET_I(12);
     vlSelf->rs1 = VL_RAND_RESET_I(5);
     vlSelf->rd = VL_RAND_RESET_I(5);
-    vlSelf->out = VL_RAND_RESET_I(32);
     vlSelf->out_reg = VL_RAND_RESET_I(32);
     vlSelf->reg_out = VL_RAND_RESET_I(32);
     vlSelf->reg_out1 = VL_RAND_RESET_I(32);
