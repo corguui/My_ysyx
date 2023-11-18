@@ -26,10 +26,6 @@ class Vysyx_23060111_EXU VL_NOT_FINAL : public VerilatedModel {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
-    VL_OUT8(&ysyx_23060111_MuxKeyInternal__02Eout,0,0);
-    VL_IN8(&key,0,0);
-    VL_IN8(&default_out,0,0);
-    VL_IN8(&lut,3,0);
     VL_IN8(&rst,0,0);
     VL_IN8(&en_reg,0,0);
     VL_IN8(&en_trigger,0,0);
@@ -40,7 +36,7 @@ class Vysyx_23060111_EXU VL_NOT_FINAL : public VerilatedModel {
     VL_OUT(&snpc,31,0);
     VL_OUT(&dnpc,31,0);
     VL_OUT(&pc,31,0);
-    VL_OUT(&ysyx_23060111_top__02Eout,31,0);
+    VL_OUT(&out,31,0);
     VL_OUT(&out_reg,31,0);
     VL_OUT(&reg_out,31,0);
     VL_OUT(&reg_out1,31,0);

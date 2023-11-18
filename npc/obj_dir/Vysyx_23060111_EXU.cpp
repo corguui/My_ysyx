@@ -12,10 +12,6 @@ Vysyx_23060111_EXU::Vysyx_23060111_EXU(VerilatedContext* _vcontextp__, const cha
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vysyx_23060111_EXU__Syms(contextp(), _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
-    , ysyx_23060111_MuxKeyInternal__02Eout{vlSymsp->TOP.ysyx_23060111_MuxKeyInternal__02Eout}
-    , key{vlSymsp->TOP.key}
-    , default_out{vlSymsp->TOP.default_out}
-    , lut{vlSymsp->TOP.lut}
     , rst{vlSymsp->TOP.rst}
     , en_reg{vlSymsp->TOP.en_reg}
     , en_trigger{vlSymsp->TOP.en_trigger}
@@ -26,7 +22,7 @@ Vysyx_23060111_EXU::Vysyx_23060111_EXU(VerilatedContext* _vcontextp__, const cha
     , snpc{vlSymsp->TOP.snpc}
     , dnpc{vlSymsp->TOP.dnpc}
     , pc{vlSymsp->TOP.pc}
-    , ysyx_23060111_top__02Eout{vlSymsp->TOP.ysyx_23060111_top__02Eout}
+    , out{vlSymsp->TOP.out}
     , out_reg{vlSymsp->TOP.out_reg}
     , reg_out{vlSymsp->TOP.reg_out}
     , reg_out1{vlSymsp->TOP.reg_out1}
