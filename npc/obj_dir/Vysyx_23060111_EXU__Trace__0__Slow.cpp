@@ -175,8 +175,8 @@ VL_ATTR_COLD void Vysyx_23060111_EXU___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullIData(oldp+12,(vlSelf->out_reg1),32);
     bufp->fullIData(oldp+13,(vlSelf->reg_out),32);
     bufp->fullIData(oldp+14,(vlSelf->reg_out1),32);
-    bufp->fullCData(oldp+15,((0x1fU & ((vlSelf->inst 
-                                        >> 0x14U) + (IData)(vlSelf->rs1)))),5);
+    bufp->fullCData(oldp+15,((0x1fU & ((IData)(vlSelf->rd) 
+                                       + (IData)(vlSelf->rs1)))),5);
     bufp->fullIData(oldp+16,((vlSelf->inst >> 0x14U)),32);
     bufp->fullBit(oldp+17,((1U & (vlSelf->inst >> 7U))));
     bufp->fullIData(oldp+18,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf[0]),32);
