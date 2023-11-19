@@ -26,7 +26,7 @@ int main(int argc ,char** argv, char** env)
         uint32_t a=0x80000000;
 	top->pc=a;
 
-	while(count<=0&&!contextp->gotFinish())
+	while(count<=3&&!contextp->gotFinish())
 	{
 		top->inst =pc_read(top->pc);
 		top->clk =0; top->eval();
