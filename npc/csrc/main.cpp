@@ -31,11 +31,11 @@ int main(int argc ,char** argv, char** env)
 		top->inst =pc_read(top->pc);
 		if(count==2)
 		{
-		top->ysyx_23060111_top__DOT__ysyx_23060111_EXU->rst=1;
+		top->rst=1;
 		}
 		else
 		{
-		top->ysyx_23060111_top__DOT__ysyx_23060111_EXU->rst=0;
+		top->->rst=0;
 		}
 		top->clk =0; top->eval();
 		top->clk =1; top->eval();
