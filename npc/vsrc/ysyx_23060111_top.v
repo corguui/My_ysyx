@@ -19,17 +19,14 @@ module ysyx_23060111_top(
 assign val=inst;
 assign snpc=pc+32'h4;
  
-initial
-begin
  //init reg
-ysyx_23060111_reg (1,32) reg_$0(clk,0,1'b0,1'b1,out);
+ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out);
 
  //init IDU
  ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,rs1,rd,rbb1);
 
  //init EXU
  ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,rd,pc,reg_out,reg_out1,rbb);
-end
 endmodule
 
 
