@@ -26,14 +26,14 @@ int main(int argc ,char** argv, char** env)
         uint32_t a=0x80000000;
 	top->pc=a;
 
-	Vysyx_23060111_top *EXU=top->top_DOT_ysyx_23060111_EXU; 
+	Vysyx_23060111_top__Syms =top->ysyx_23060111_top__DOT__ysyx_23060111_EXU->__VISymsp;
 
 	while(count<=3&&!contextp->gotFinish())
 	{
 		top->inst =pc_read(top->pc);
 		if(count==2)
 		{
-	        EXU->rst=1;
+	        syms->TOP__ysyx_2306011_top__DOT__ysyx_23060111_EXU__DOT__rst=1;
 		}
 		else
 		{
