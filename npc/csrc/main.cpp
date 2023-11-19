@@ -26,7 +26,7 @@ int main(int argc ,char** argv, char** env)
         uint32_t a=0x80000000;
 	top->pc=a;
 
-	Vysyx_23060111_top *EXU=top->ysyx_23060111_EXU; 
+	Vysyx_23060111_top *EXU=top->top_DOT_ysyx_23060111_EXU; 
 
 	while(count<=3&&!contextp->gotFinish())
 	{
