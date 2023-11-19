@@ -26,17 +26,18 @@ int main(int argc ,char** argv, char** env)
         uint32_t a=0x80000000;
 	top->pc=a;
 
+        Vysyx_23060111_top__Syms* syms= top->ysyx_23060111_top__DOT__ysyx_23060111_EXU->__VlSymsp;
 
 	while(count<=3&&!contextp->gotFinish())
 	{
 		top->inst =pc_read(top->pc);
 		if(count==2)
 		{
-		top->ysyx_23060111_EXU->rst=1;
+		syms->ysyx_23060111_top__ysyx_23060111_top__DOT__ysyx_2306011_EXU__DOT__rst=1;
 		}
 		else
 		{
-		top->ysyx_23060111_EXU->rst=0;
+		syms->ysyx_23060111_top__ysyx_23060111_top__DOT__ysyx_2306011_EXU__DOT__rst=0;
 		}
 		top->clk =0; top->eval();
 		top->clk =1; top->eval();
