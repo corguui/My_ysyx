@@ -22,7 +22,7 @@ assign snpc=pc+32'h4;
 initial
 begin
  //init reg
-ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out);
+ysyx_23060111_reg (1,32) reg_$0(clk,0,1'b0,1'b1,out);
 
  //init IDU
  ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,rs1,rd,rbb1);
