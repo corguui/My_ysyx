@@ -31,7 +31,7 @@ int main(int argc ,char** argv, char** env)
 		top->inst =pc_read(top->pc);
 		if(count==2)
 		{
-		top->ysyx_23060111_EXU->rst=1;
+		top->EXU->rst=1;
 		}
 		else
 		{
