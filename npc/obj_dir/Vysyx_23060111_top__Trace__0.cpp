@@ -38,7 +38,7 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     bufp->chgIData(oldp+12,(vlSelf->out),32);
     bufp->chgIData(oldp+13,(vlSelf->reg_out),32);
     bufp->chgIData(oldp+14,(vlSelf->reg_out1),32);
-    bufp->chgIData(oldp+15,(vlSelf->rbb),21);
+    bufp->chgIData(oldp+15,(vlSelf->rbb),20);
     bufp->chgSData(oldp+16,(vlSelf->rbb1),10);
     bufp->chgIData(oldp+17,((vlSelf->inst >> 0x14U)),32);
     bufp->chgIData(oldp+18,((vlSelf->reg_out + (vlSelf->inst 
