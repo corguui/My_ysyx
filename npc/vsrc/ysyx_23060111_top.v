@@ -22,6 +22,10 @@ assign snpc=pc+32'h4;
 
 //break
 import "DPI-C" function void ebreak(input inst);
+always @(inst)
+begin 
+ebreak(inst);
+end
  
  //init reg
 ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out);
