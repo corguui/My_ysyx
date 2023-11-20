@@ -65,7 +65,6 @@ int ebreak (uint32_t inst)
 {
 	if(inst == 0x00100073 )
 	{
-
-	}
 	return 0;
+	}
 }
