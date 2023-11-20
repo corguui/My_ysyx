@@ -8,12 +8,12 @@
 #include "Vysyx_23060111_top__Syms.h"
 #include "Vysyx_23060111_top___024root.h"
 
-extern "C" void ebreak(svLogic inst);
+extern "C" void ebreak(int inst);
 
-VL_INLINE_OPT void Vysyx_23060111_top___024root____Vdpiimwrap_ysyx_23060111_top__DOT__ebreak_TOP(CData/*0:0*/ inst) {
+VL_INLINE_OPT void Vysyx_23060111_top___024root____Vdpiimwrap_ysyx_23060111_top__DOT__ebreak_TOP(IData/*31:0*/ inst) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root____Vdpiimwrap_ysyx_23060111_top__DOT__ebreak_TOP\n"); );
     // Body
-    svLogic inst__Vcvt;
+    int inst__Vcvt;
     for (size_t inst__Vidx = 0; inst__Vidx < 1; ++inst__Vidx) inst__Vcvt = inst;
     ebreak(inst__Vcvt);
 }
