@@ -1,3 +1,4 @@
+import "DPI-C" function void ebreak(input int inst);
 module ysyx_23060111_top(
   input       rst,
   input       clk,
@@ -14,16 +15,16 @@ module ysyx_23060111_top(
   output[31:0] out,
   output[31:0] reg_out,
   output[31:0] reg_out1,
+  output reg[31:0] outtest,
   output[20:1] rbb
 );
 
 assign val=inst;
 assign snpc=pc+32'h4;
 //break
-import "DPI-C" function void ebreak(input int inst);
 always @(inst)
 begin 
-ebreak(inst);
+     outtest=ebreak(inst);
 end
  
  //init reg
