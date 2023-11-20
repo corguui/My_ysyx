@@ -25,13 +25,14 @@ void Vysyx_23060111_top___024root___eval_triggers__ico(Vysyx_23060111_top___024r
 #endif
 }
 
-void Vysyx_23060111_top___024unit____Vdpiimwrap_add_TOP____024unit(IData/*31:0*/ inst, IData/*31:0*/ &add__Vfuncrtn);
+void Vysyx_23060111_top___024unit____Vdpiimwrap_add_TOP____024unit(IData/*31:0*/ inst);
 
 VL_INLINE_OPT void Vysyx_23060111_top___024root___ico_sequent__TOP__0(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___ico_sequent__TOP__0\n"); );
     // Body
+    Vysyx_23060111_top___024unit____Vdpiimwrap_add_TOP____024unit(vlSelf->inst);
     vlSelf->val = vlSelf->inst;
     vlSelf->imm = (vlSelf->inst >> 0x14U);
     vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
@@ -44,8 +45,6 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___ico_sequent__TOP__0(Vysyx_2306
                                       >> 7U))) ? vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf
                         [(1U & (vlSelf->inst >> 7U))]
                          : 0U);
-    Vysyx_23060111_top___024unit____Vdpiimwrap_add_TOP____024unit(vlSelf->inst, vlSelf->__Vfunc_add__0__Vfuncout);
-    vlSelf->out_test = vlSelf->__Vfunc_add__0__Vfuncout;
     vlSelf->rd = (0x1fU & (vlSelf->inst >> 7U));
     vlSelf->opcode = (0x7fU & vlSelf->inst);
     vlSelf->rbb = (((IData)(vlSelf->rd) << 0xfU) | 

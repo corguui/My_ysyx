@@ -34,9 +34,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_OUT(out,31,0);
     VL_OUT(reg_out,31,0);
     VL_OUT(reg_out1,31,0);
-    VL_OUT(out_test,31,0);
     VL_OUT(rbb,20,1);
-    IData/*31:0*/ __Vfunc_add__0__Vfuncout;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;
     IData/*31:0*/ __VactIterCount;
