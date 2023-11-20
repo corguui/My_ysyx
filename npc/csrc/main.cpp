@@ -61,10 +61,8 @@ int main(int argc ,char** argv, char** env)
 	return 0;
 }
 
-int ebreak (uint32_t inst)
+void ebreak (uint32_t inst)
 {
 	if(inst == 0x00100073 )
-	{
-	return 0;
-	}
+	assert(0);	
 }

@@ -9,6 +9,7 @@
 #define VERILATED_VYSYX_23060111_TOP_H_  // guard
 
 #include "verilated.h"
+#include "svdpi.h"
 
 class Vysyx_23060111_top__Syms;
 class Vysyx_23060111_top___024root;
