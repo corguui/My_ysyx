@@ -21,7 +21,7 @@ assign val=inst;
 assign snpc=pc+32'h4;
 
 //break
-import "DPI-C" function void ebreak(input  uint32_t inst);
+import "DPI-C" function int ebreak(input uint32_t inst);
 ebreak(inst);
  
  //init reg
