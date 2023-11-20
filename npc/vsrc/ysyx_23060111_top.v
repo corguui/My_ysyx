@@ -15,16 +15,16 @@ module ysyx_23060111_top(
   output[31:0] out,
   output[31:0] reg_out,
   output[31:0] reg_out1,
-  output reg[31:0] outtest,
+  output reg[31:0] out_test,
   output[20:1] rbb
 );
 
 assign val=inst;
 assign snpc=pc+32'h4;
 //break
-always @(inst)
+always @(*)
 begin 
-     outtest=add(inst);
+     out_test=add(inst);
 end
  
  //init reg
