@@ -186,7 +186,5 @@ void Vysyx_23060111_top___024root___eval_debug_assertions(Vysyx_23060111_top___0
         Verilated::overWidthError("rst");}
     if (VL_UNLIKELY((vlSelf->clk & 0xfeU))) {
         Verilated::overWidthError("clk");}
-    if (VL_UNLIKELY((vlSelf->__pinNumber17 & 0xfeU))) {
-        Verilated::overWidthError("__pinNumber17");}
 }
 #endif  // VL_DEBUG

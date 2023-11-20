@@ -17,7 +17,6 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     , funct3{vlSymsp->TOP.funct3}
     , rd{vlSymsp->TOP.rd}
     , opcode{vlSymsp->TOP.opcode}
-    , __pinNumber17{vlSymsp->TOP.__pinNumber17}
     , imm{vlSymsp->TOP.imm}
     , inst{vlSymsp->TOP.inst}
     , val{vlSymsp->TOP.val}
