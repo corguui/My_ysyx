@@ -12,7 +12,7 @@
 int add (int inst)
 {
 	if(inst == 0x00100073 )
-	return 100;
+	return 0;
 		
 }
 
