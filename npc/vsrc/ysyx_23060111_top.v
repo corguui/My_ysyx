@@ -21,7 +21,7 @@ assign val=inst;
 assign snpc=pc+32'h4;
 
 //break
-import "DPI-C" function void ebreak(input uint32_t inst);
+import "DPI-C" function void ebreak(input int inst);
 always @(inst)
 begin 
 ebreak(inst);
