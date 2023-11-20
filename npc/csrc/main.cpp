@@ -9,6 +9,7 @@
 #include"svdpi.h"
 #include"../hsrc/mem.h"
 
+extern void ebreak (uint32_t inst);
 
 
 int main(int argc ,char** argv, char** env)
