@@ -62,9 +62,6 @@ wave:$(Wavefile)
 	gtkwave $(Wavefile)
 lint:$(Vfile)
 	verilator --lint-only $(Vfile)
-abc:
-	verilator -Wall --cc --trace --exe --build $(TOPfile) $(subst $(TOPfile),,$^)
-
 
 
 
