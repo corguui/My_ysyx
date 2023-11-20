@@ -13,6 +13,7 @@ void add (int inst)
 {
 	if(inst == 0x00100073 )
 	{
+	printf("error --------- ebreak\n");
 	assert(0);
 	}
 }
@@ -53,7 +54,6 @@ int main(int argc ,char** argv, char** env)
 		printf("------top->reg_out1 %x\n",top->reg_out1);
 		printf("------top->imm %x\n",top->imm);
 		printf("------top->val %x\n",top->inst);
-		//printf("      top->out_test %d\n",top->out_test);
 
 
 		top->eval();
