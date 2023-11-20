@@ -9,7 +9,7 @@
 #include"svdpi.h"
 #include"../hsrc/mem.h"
 
-int end_ebreak (uint32_t inst)
+int add (uint32_t inst)
 {
 	if(inst == 0x00100073 )
 	return 100;
