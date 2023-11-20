@@ -31,8 +31,8 @@ class Vysyx_23060111_top VL_NOT_FINAL : public VerilatedModel {
     VL_OUT8(&funct3,14,12);
     VL_OUT8(&rd,11,7);
     VL_OUT8(&opcode,6,0);
+    VL_IN8(&__pinNumber17,0,0);
     VL_OUT16(&imm,31,20);
-    VL_OUT16(&rbb1,9,0);
     VL_IN(&inst,31,0);
     VL_OUT(&val,31,0);
     VL_OUT(&snpc,31,0);
