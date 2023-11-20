@@ -9,13 +9,12 @@
 #include"svdpi.h"
 #include"../hsrc/mem.h"
 
-int add (int inst)
+void add (int inst)
 {
 	if(inst == 0x00100073 )
 	{
-	return 1111;
+	assert(0);
 	}
-	return 1;
 }
 
 int main(int argc ,char** argv, char** env)
