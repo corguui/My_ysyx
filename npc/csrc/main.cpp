@@ -1,9 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
+#include<cstdint>
 #include "Vysyx_23060111_top.h"
 #include"verilated.h"
 #include"verilated_vcd_c.h"
+#include"Vysyx_23060111_top__Dpi.h"
+#include"svdpi.h"
 #include"../hsrc/mem.h"
 
 
@@ -58,3 +61,8 @@ int main(int argc ,char** argv, char** env)
 	return 0;
 }
 
+void ebreak (uint32_t inst)
+{
+	if(inst == 0x00100073 )
+	return 0;
+}

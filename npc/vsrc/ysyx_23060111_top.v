@@ -19,6 +19,10 @@ module ysyx_23060111_top(
 
 assign val=inst;
 assign snpc=pc+32'h4;
+
+//break
+import "DPI-C" function void ebreak(input  uint32_t inst);
+ebreak(inst);
  
  //init reg
 ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out);
