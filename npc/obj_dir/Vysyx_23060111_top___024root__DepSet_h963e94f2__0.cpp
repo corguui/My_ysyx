@@ -13,8 +13,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___ico_sequent__TOP__0(Vysyx_2306
     // Body
     vlSelf->val = vlSelf->inst;
     vlSelf->imm = (vlSelf->inst >> 0x14U);
-    vlSelf->rbb1 = ((0x380U & (vlSelf->inst >> 5U)) 
-                    | (0x7fU & vlSelf->inst));
+    vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
+    vlSelf->funct3 = (7U & (vlSelf->inst >> 0xcU));
     vlSelf->reg_out = ((0U >= (1U & (vlSelf->inst >> 0xfU)))
                         ? vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_src1__DOT__rf
                        [(1U & (vlSelf->inst >> 0xfU))]
@@ -23,9 +23,11 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___ico_sequent__TOP__0(Vysyx_2306
                                       >> 7U))) ? vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf
                         [(1U & (vlSelf->inst >> 7U))]
                          : 0U);
-    vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
     vlSelf->rd = (0x1fU & (vlSelf->inst >> 7U));
-    vlSelf->rbb = (0x1fU & ((IData)(vlSelf->rd) + (IData)(vlSelf->rs1)));
+    vlSelf->opcode = (0x7fU & vlSelf->inst);
+    vlSelf->rbb = (((IData)(vlSelf->rd) << 0xfU) | 
+                   ((0x7f80U & (vlSelf->inst >> 5U)) 
+                    | (IData)(vlSelf->opcode)));
 }
 
 void Vysyx_23060111_top___024root___eval_ico(Vysyx_23060111_top___024root* vlSelf) {

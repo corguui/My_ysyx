@@ -14,8 +14,9 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
     , rs1{vlSymsp->TOP.rs1}
+    , funct3{vlSymsp->TOP.funct3}
     , rd{vlSymsp->TOP.rd}
-    , rbb{vlSymsp->TOP.rbb}
+    , opcode{vlSymsp->TOP.opcode}
     , imm{vlSymsp->TOP.imm}
     , rbb1{vlSymsp->TOP.rbb1}
     , inst{vlSymsp->TOP.inst}
@@ -26,6 +27,7 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     , out{vlSymsp->TOP.out}
     , reg_out{vlSymsp->TOP.reg_out}
     , reg_out1{vlSymsp->TOP.reg_out1}
+    , rbb{vlSymsp->TOP.rbb}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context

@@ -81,8 +81,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     // Body
     vlSelf->val = vlSelf->inst;
     vlSelf->imm = (vlSelf->inst >> 0x14U);
-    vlSelf->rbb1 = ((0x380U & (vlSelf->inst >> 5U)) 
-                    | (0x7fU & vlSelf->inst));
+    vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
+    vlSelf->funct3 = (7U & (vlSelf->inst >> 0xcU));
     vlSelf->out = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [0U];
     vlSelf->reg_out = ((0U >= (1U & (vlSelf->inst >> 0xfU)))
@@ -94,10 +94,12 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
                         [(1U & (vlSelf->inst >> 7U))]
                          : 0U);
     vlSelf->snpc = ((IData)(4U) + vlSelf->pc);
-    vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
     vlSelf->rd = (0x1fU & (vlSelf->inst >> 7U));
+    vlSelf->opcode = (0x7fU & vlSelf->inst);
     vlSelf->dnpc = vlSelf->snpc;
-    vlSelf->rbb = (0x1fU & ((IData)(vlSelf->rd) + (IData)(vlSelf->rs1)));
+    vlSelf->rbb = (((IData)(vlSelf->rd) << 0xfU) | 
+                   ((0x7f80U & (vlSelf->inst >> 5U)) 
+                    | (IData)(vlSelf->opcode)));
 }
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_stl(Vysyx_23060111_top___024root* vlSelf) {
@@ -169,11 +171,13 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___ctor_var_reset(Vysyx_23060111_t
     vlSelf->pc = VL_RAND_RESET_I(32);
     vlSelf->imm = VL_RAND_RESET_I(12);
     vlSelf->rs1 = VL_RAND_RESET_I(5);
+    vlSelf->funct3 = VL_RAND_RESET_I(3);
     vlSelf->rd = VL_RAND_RESET_I(5);
+    vlSelf->opcode = VL_RAND_RESET_I(7);
     vlSelf->out = VL_RAND_RESET_I(32);
     vlSelf->reg_out = VL_RAND_RESET_I(32);
     vlSelf->reg_out1 = VL_RAND_RESET_I(32);
-    vlSelf->rbb = VL_RAND_RESET_I(5);
+    vlSelf->rbb = VL_RAND_RESET_I(21);
     vlSelf->rbb1 = VL_RAND_RESET_I(10);
     for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
         vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);

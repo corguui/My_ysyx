@@ -14,7 +14,7 @@ module ysyx_23060111_top(
   output[31:0] out,
   output[31:0] reg_out,
   output[31:0] reg_out1,
-  output[20:0] rbb,
+  output[20:1] rbb,
   output[9:0] rbb1
 );
 

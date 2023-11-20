@@ -10,7 +10,7 @@ module ysyx_23060111_EXU(
   output[31:0] pc,
   output[31:0] reg_out,
   output[31:0] reg_out1,
-  output[20:0] out
+  output[20:1] out
 );
   reg [31:0] imm_32;
   assign imm_32={20'h00000,imm};
