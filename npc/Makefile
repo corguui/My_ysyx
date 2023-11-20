@@ -57,11 +57,11 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 	verilator -Wall --cc --trace --exe --build $(TOPfile) $(subst $(TOPfile),,$^)
+	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile)))
 wave:$(Wavefile)
 	gtkwave $(Wavefile)
 lint:$(Vfile)
 	verilator --lint-only $(Vfile)
-	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile)))
 
 
 
