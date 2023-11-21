@@ -22,10 +22,11 @@ assign val=inst;
 assign snpc=pc+32'h4;
 
 //break
-always @(*)
+/*always @(*)
 begin 
      ebreak(inst);
 end
+*/
  
  //init reg
 ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out);

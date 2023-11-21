@@ -17,7 +17,7 @@ extern "C" {
 
     // DPI IMPORTS
     // DPI import at vsrc/ysyx_23060111_top.v:1:30
-    extern void add(int inst);
+    extern void ebreak(int inst);
 
 #ifdef __cplusplus
 }

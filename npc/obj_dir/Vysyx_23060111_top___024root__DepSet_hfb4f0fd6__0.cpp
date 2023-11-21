@@ -25,14 +25,14 @@ void Vysyx_23060111_top___024root___eval_triggers__ico(Vysyx_23060111_top___024r
 #endif
 }
 
-void Vysyx_23060111_top___024unit____Vdpiimwrap_add_TOP____024unit(IData/*31:0*/ inst);
+void Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024unit(IData/*31:0*/ inst);
 
 VL_INLINE_OPT void Vysyx_23060111_top___024root___ico_sequent__TOP__0(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___ico_sequent__TOP__0\n"); );
     // Body
-    Vysyx_23060111_top___024unit____Vdpiimwrap_add_TOP____024unit(vlSelf->inst);
+    Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024unit(vlSelf->inst);
     vlSelf->val = vlSelf->inst;
     vlSelf->imm = (vlSelf->inst >> 0x14U);
     vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
