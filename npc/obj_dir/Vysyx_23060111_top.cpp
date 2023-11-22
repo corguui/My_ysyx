@@ -18,7 +18,6 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     , funct3{vlSymsp->TOP.funct3}
     , rd{vlSymsp->TOP.rd}
     , opcode{vlSymsp->TOP.opcode}
-    , ebreak_val{vlSymsp->TOP.ebreak_val}
     , imm{vlSymsp->TOP.imm}
     , inst{vlSymsp->TOP.inst}
     , val{vlSymsp->TOP.val}
@@ -29,6 +28,7 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     , reg_out{vlSymsp->TOP.reg_out}
     , reg_out1{vlSymsp->TOP.reg_out1}
     , rbb{vlSymsp->TOP.rbb}
+    , ebreak_val{vlSymsp->TOP.ebreak_val}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
 {

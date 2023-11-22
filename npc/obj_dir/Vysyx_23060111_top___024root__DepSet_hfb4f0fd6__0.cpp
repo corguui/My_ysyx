@@ -62,5 +62,5 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
     __Vfunc_ebreak__0__Vfuncout = 0;
     // Body
     Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024unit(vlSelf->inst, __Vfunc_ebreak__0__Vfuncout);
-    vlSelf->ebreak_val = (1U & __Vfunc_ebreak__0__Vfuncout);
+    vlSelf->ebreak_val = __Vfunc_ebreak__0__Vfuncout;
 }
