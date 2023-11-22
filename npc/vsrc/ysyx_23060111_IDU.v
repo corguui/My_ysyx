@@ -1,4 +1,4 @@
-import "DPI-C" function int ebreak(input int inst);
+import "DPI-C" function void ebreak(input int inst);
 module ysyx_23060111_IDU(
   input [31:0] snpc,
   input [31:0] inst,
@@ -7,12 +7,11 @@ module ysyx_23060111_IDU(
   output [14:12] funct3,
   output [19:15] rs1,
   output [11:7] rd,
-  output [6:0] opcode,
-  output reg[31:0] ebreak_val
+  output [6:0] opcode
 );
 always @(inst)
 begin 
-     ebreak_val<=ebreak(inst);
+     ebreak(inst);
 end
 
   assign dnpc=snpc;

@@ -9,15 +9,13 @@
 #include"svdpi.h"
 #include"../hsrc/mem.h"
 
-int ebreak (int inst)
+void ebreak (int inst)
 {
 	if(inst == 0x00100073 )
 	{
 	printf("error --------- ebreak\n");
-//	assert(0);
-	return 0;
+	assert(0);
 	}
-	return 1;
 }
 
 int main(int argc ,char** argv, char** env)
