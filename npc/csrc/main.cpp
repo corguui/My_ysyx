@@ -14,7 +14,8 @@ void ebreak (int inst)
 	if(inst == 0x00100073 )
 	{
 	printf("error --------- ebreak\n");
-	assert(0);
+//	assert(0);
+	return 0;
 	}
 }
 
