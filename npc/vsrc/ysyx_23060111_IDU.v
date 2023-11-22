@@ -8,11 +8,11 @@ module ysyx_23060111_IDU(
   output [19:15] rs1,
   output [11:7] rd,
   output [6:0] opcode,
-  output reg ebreak_val
+  output reg[31:0] ebreak_val
 );
 always @(inst)
 begin 
-     ebreak_val=>ebreak(inst);
+     ebreak_val=ebreak(inst);
 end
 
   assign dnpc=snpc;

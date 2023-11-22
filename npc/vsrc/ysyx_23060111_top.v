@@ -16,7 +16,7 @@ module ysyx_23060111_top(
   output[31:0] reg_out,
   output[31:0] reg_out1,
   output[20:1] rbb,
-  output ebreak_val
+  output[31:0] ebreak_val
 );
 
 assign val=inst;
