@@ -12,7 +12,7 @@ module ysyx_23060111_IDU(
 );
 always @(inst)
 begin 
-     ebreak_val=ebreak(inst);
+     ebreak_val=>ebreak(inst);
 end
 
   assign dnpc=snpc;

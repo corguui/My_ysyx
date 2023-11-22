@@ -18,6 +18,7 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     , funct3{vlSymsp->TOP.funct3}
     , rd{vlSymsp->TOP.rd}
     , opcode{vlSymsp->TOP.opcode}
+    , ebreak_val{vlSymsp->TOP.ebreak_val}
     , imm{vlSymsp->TOP.imm}
     , inst{vlSymsp->TOP.inst}
     , val{vlSymsp->TOP.val}

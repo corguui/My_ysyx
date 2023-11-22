@@ -58,8 +58,9 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___nba_sequent__TOP__1\n"); );
     // Init
-    IData/*31:0*/ __Vtask_ebreak__0__Vfuncout;
-    __Vtask_ebreak__0__Vfuncout = 0;
+    IData/*31:0*/ __Vfunc_ebreak__0__Vfuncout;
+    __Vfunc_ebreak__0__Vfuncout = 0;
     // Body
-    Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024unit(vlSelf->inst, __Vtask_ebreak__0__Vfuncout);
+    Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024unit(vlSelf->inst, __Vfunc_ebreak__0__Vfuncout);
+    vlSelf->ebreak_val = (1U & __Vfunc_ebreak__0__Vfuncout);
 }
