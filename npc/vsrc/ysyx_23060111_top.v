@@ -15,7 +15,8 @@ module ysyx_23060111_top(
   output[31:0] out,
   output[31:0] reg_out,
   output[31:0] reg_out1,
-  output[20:1] rbb
+  output[20:1] rbb,
+  output ebreak_val
 );
 
 assign val=inst;
@@ -32,7 +33,7 @@ end
 ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out);
 
  //init IDU
- ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
+ ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode,ebreak_val);
 
  //init EXU
  ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,reg_out,reg_out1,rbb);
