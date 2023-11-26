@@ -26,8 +26,10 @@ $(BINARY): compile_git
 
 ifdef CONFIG_TARGET_AM
 override ARGS ?= --batch
+$(info "--------------------")
 else
 override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
+$(info "====================")
 endif
 override ARGS += $(ARGS_DIFF)
 
