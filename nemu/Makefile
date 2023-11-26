@@ -54,6 +54,7 @@ include $(NEMU_HOME)/scripts/config.mk
 
 ifdef CONFIG_TARGET_AM
 include $(AM_HOME)/Makefile
+$(info "---------------------")
 LINKAGE += $(ARCHIVES)
 else
 # Include rules to build NEMU
