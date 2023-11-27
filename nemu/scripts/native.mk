@@ -25,11 +25,6 @@ $(BINARY): compile_git
 # Some convenient rules
 
 ifdef CONFIG_TARGET_AM
-override ARGS ?= --batch
-$(info "--------------------")
-else
-override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
-$(info "====================")
 endif
 override ARGS += $(ARGS_DIFF)
 
@@ -41,11 +36,13 @@ run-env: $(BINARY) $(DIFF_REF_SO)
 
 run: run-env
 	$(call git_commit, "run NEMU")
+	override ARGS ?= --batch
 	echo $(NEMU_EXEC)
 	$(NEMU_EXEC)
 
 gdb: run-env
 	$(call git_commit, "gdb NEMU")
+	override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
 	gdb -s $(BINARY) --args $(NEMU_EXEC)
 
 clean-tools = $(dir $(shell find ./tools -maxdepth 2 -mindepth 2 -name "Makefile"))
