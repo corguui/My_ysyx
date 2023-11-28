@@ -52,7 +52,7 @@ app: $(BINARY)
 
 $(BINARY): $(OBJS) $(ARCHIVES)
 	@echo + LD $@
-	echo ---------------------------$(ARCHIVES)
+	echo 1111111111111$(ARCHIVES)11111111
 	@$(LD) -o $@ $(OBJS) $(LDFLAGS) $(ARCHIVES) $(LIBS)
 
 clean:
