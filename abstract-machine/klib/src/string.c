@@ -34,7 +34,27 @@ char *strcpy(char *dst, const char *src) {
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {
-  panic("Not implemented");
+	if(dst==NULL||src==NULL)
+	{
+		return 0;
+	}
+	char* str=dst;
+	for(int i=0;i<n;i++)
+	{
+		if(*src!='\0')
+		{
+			*dst=*src;
+			dst++;
+			src++;
+		}
+		else
+		{
+			*dst='\0';
+		}
+	}
+	return str;
+  
+ // panic("Not implemented");
 }
 
 char *strcat(char *dst, const char *src) {
