@@ -18,7 +18,19 @@ size_t strlen(const char *s) {
 }
 
 char *strcpy(char *dst, const char *src) {
-  panic("Not implemented");
+	if(dst==NULL||src==NULL)
+	{
+		return 0;
+	}
+	char* str=dst;
+	while(*src!='\0')	
+	{
+		*dst=*src;
+		dst++;
+		src++;
+	}
+	*dst='\0';
+	return str;
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {
