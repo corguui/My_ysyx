@@ -41,6 +41,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
 	char* str=dst;
 	for(int i=0;i<n;i++)
 	{
+	/*
 		if(*src!='\0')
 		{
 			*dst=*src;
@@ -51,6 +52,11 @@ char *strncpy(char *dst, const char *src, size_t n) {
 		{
 			*dst='\0';
 		}
+		*/
+		*dst=*src;
+		dst++;
+		src++;
+
 	}
 	return str;
   
