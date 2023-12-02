@@ -130,8 +130,8 @@ void *memset(void *s, int c, size_t n) {
 	char * sr=(char *)s;
 	while(n!=0)
 	{
-		*sr=ch;
-		sr++;
+	       	*(char *)s=ch;
+		(char *)s++;
 		n--;
 	}
 	return (void *) sr;
