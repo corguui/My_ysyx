@@ -41,7 +41,6 @@ char *strncpy(char *dst, const char *src, size_t n) {
 	char* str=dst;
 	for(int i=0;i<n;i++)
 	{
-	/*
 		if(*src!='\0')
 		{
 			*dst=*src;
@@ -52,10 +51,6 @@ char *strncpy(char *dst, const char *src, size_t n) {
 		{
 			*dst='\0';
 		}
-		*/
-		*dst=*src;
-		dst++;
-		src++;
 
 	}
 	return str;
@@ -64,7 +59,24 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-  panic("Not implemented");
+	if(dst==NULL||src==NULL)
+	{
+		return 0;
+	}
+	char* str=dst;
+	while(*dst!='\0')	
+	{
+		dst++;
+	}
+	while(*src!='\0')	
+	{
+		*dst=*src;
+		dst++;
+		src++;
+	}
+	*dst='\0';
+	return str;
+
 }
 
 int strcmp(const char *s1, const char *s2) {
