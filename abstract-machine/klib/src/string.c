@@ -126,6 +126,8 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
+	if(s==NULL)
+	return 0;
 	char * sr=(char *)s;
 	int i=0;
 	while(n!=0)
@@ -138,6 +140,8 @@ void *memset(void *s, int c, size_t n) {
 }
 
 void *memmove(void *dst, const void *src, size_t n) {
+	if(dst==NULL||src==NULL)
+	return 0;
 	char* sr=(char *)dst;
 	while(n!=0)
 	{
@@ -150,11 +154,45 @@ void *memmove(void *dst, const void *src, size_t n) {
 }
 
 void *memcpy(void *out, const void *in, size_t n) {
-  panic("Not implemented");
+	if(out==NULL||in==NULL)
+	return 0;
+	char* sr1=(char *)out;
+	char* sr2=(char *)in;
+	while(n!=0)
+	{
+		*sr1=*sr2;
+		sr1++;
+		sr2++;
+		n--;
+	}
+	return (void *)sr1;
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
-  panic("Not implemented");
+	char* sr1=(char *)s1;
+	char* sr2=(char *)s2;
+	while(n!=0&&(*sr1!='\0'||*sr2!='\0'))
+	{
+		if(*sr1>*sr2)
+		{
+			return 1;
+		}
+		else if(*sr1<*sr2)
+		{
+			return -1;
+		}
+		sr1++;
+		sr2++;
+		n--;
+	}
+	if(*sr1!='\0'&&*sr2=='\0'&&n!=0)
+		return 1;
+	else if(*sr2!='\0'&&*sr1=='\0'&&n!=0)
+		return -1;
+	else 
+		return 0;
+
+
 }
 
 #endif
