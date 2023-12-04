@@ -15,7 +15,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...) {
 	   va_list ap;
-	   int n;
            va_start(ap, fmt);
            while (*fmt)
                switch (*fmt++) {
@@ -29,9 +28,8 @@ int sprintf(char *out, const char *fmt, ...) {
                    break;
 		}
 		
-	   n=strlen(out);  
            va_end(ap);
-           return n;
+           return 0;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
