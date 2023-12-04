@@ -20,12 +20,15 @@ int sprintf(char *out, const char *fmt, ...) {
            while (*fmt)
                switch (*fmt++) {
                case 's':              /* string */
-                   out = va_arg(ap, char *);
+                   char * s = va_arg(ap, char *);
+		   out =s;
                    break;
                case 'd':              /* int */
-                   out = (char *)va_arg(ap, int);
+                   int d = va_arg(ap, int);
+		   out =(char *)d;
                    break;
 		}
+		
 	   n=strlen(out);  
            va_end(ap);
            return n;
