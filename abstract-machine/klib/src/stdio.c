@@ -17,6 +17,7 @@ int sprintf(char *out, const char *fmt, ...) {
 	   va_list ap;
            va_start(ap, fmt);
            while (*fmt)
+	   {
                switch (*fmt++) {
                case 's':              /* string */
                    char * s = va_arg(ap, char *);
@@ -27,7 +28,7 @@ int sprintf(char *out, const char *fmt, ...) {
 		   out =(char *)d;
                    break;
 		}
-		
+	   }	
            va_end(ap);
            return 0;
 }
