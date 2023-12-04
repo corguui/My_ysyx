@@ -15,22 +15,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...) {
 	   va_list ap;
+	   int n;
            va_start(ap, fmt);
-           while (*fmt)
-	   {
-               switch (*fmt++) {
-               case 's':              /* string */
-                   char * s = va_arg(ap, char *);
-		   out =s;
-                   break;
-               case 'd':              /* int */
-                   int d = va_arg(ap, int);
-		   out =(char *)d;
-                   break;
-		}
-	   }	
+	   n=vsprintf(out,fmt,ap);
            va_end(ap);
-           return 0;
+           return n;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
