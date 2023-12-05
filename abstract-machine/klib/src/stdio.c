@@ -15,11 +15,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...) {
 	   va_list ap;
-	   size_t n=0;
+	   int n;
            va_start(ap, fmt);
-	   vsprintf(out,fmt,ap);
+	   n=vsprintf(out,fmt,ap);
            va_end(ap);
-	   n=strlen(out);
            return n;
 }
 
