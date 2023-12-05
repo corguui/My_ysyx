@@ -29,7 +29,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			     len++;
 			     val=0-val;}
 			     int r;
-			     char p[1024];
+			     char *p="0";
 			     int plen=0;
 			     while(val>0)
 			     {
