@@ -8,7 +8,7 @@
 int printf(const char *fmt, ...) {
 	va_list ap;
 	int n;
-	char *str="0";
+	char str[1024];
 	va_start(ap,fmt);
 	n=vsprintf(str,fmt,ap);
 	va_end(ap);
