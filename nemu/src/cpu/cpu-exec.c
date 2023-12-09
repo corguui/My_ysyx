@@ -162,9 +162,9 @@ void cpu_exec(uint64_t n) {
 
 void iringbuf_put_char(char *p)
 {
-		//int n=sizeof(ringbuf[w]);
+		int n=sizeof(ringbuf[w]);
+		memset(ringbuf[w],'\0',n);
 		strcpy(ringbuf[w],p);
-		//ringbuf[w]=p;
 		w=NEXT_POS(w);
 
 }
