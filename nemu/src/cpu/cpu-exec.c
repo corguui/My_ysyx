@@ -20,13 +20,20 @@
 
 #include "../monitor/sdb/watchpoint.h"
 
-
+#include "string.h"
+#include "stdio.h"
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
  * You can modify this value as you want.
  */
 #define MAX_INST_TO_PRINT 10
+//ringbuf val
+#define BUF_LEN 10
+#define NEXT_POS(x) ((x+1)%BUF_LEN)
+char* ringbuf[BUF_LEN];
+static int r,w;//ringbuf's read and write flag
+static void iringbuf_put_char(char *p);
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -68,6 +75,9 @@ static void exec_once(Decode *s, vaddr_t pc) {
   for (i = ilen - 1; i >= 0; i --) {
     p += snprintf(p, 4, " %02x", inst[i]);
   }
+
+  iringbuf_put_char(p);
+
   int ilen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
   int space_len = ilen_max - ilen;
   if (space_len < 0) space_len = 0;
@@ -84,6 +94,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
 #endif
 #endif
 }
+
+
 
 static void execute(uint64_t n) {
   Decode s;
@@ -136,7 +148,30 @@ void cpu_exec(uint64_t n) {
            (nemu_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :
             ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))),
           nemu_state.halt_pc);
+	  if(nemu_state.halt_ret ==0)
+	  {
+		for(int num=0;num<BUF_LEN;num++)
+		{
+			if((num!=w-1)&&(ringbuf[num]!=NULL))
+			printf("    %s\n",ringbuf[num]);
+			else
+			printf("--> %s\n",ringbuf[num]);
+		}
+	  }
       // fall through
     case NEMU_QUIT: statistic();
   }
+}
+
+
+static void iringbuf_put_char(char *p)
+{
+	if(!(r==NEXT_POS(w)))
+	{
+		int n=sizeof(ringbuf[w]);
+		memset(ringbuf[w], '\0', n);
+		strcpy(ringbuf[w],p);
+		w=NEXT_POS(w);
+	}
+
 }
