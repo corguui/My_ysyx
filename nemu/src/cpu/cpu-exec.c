@@ -156,8 +156,8 @@ void cpu_exec(uint64_t n) {
 			printf("    %s\n",ringbuf[num]);
 			else
 			printf("--> %s\n",ringbuf[num]);
-		};
-          }
+		}
+          };
       // fall through
     case NEMU_QUIT: statistic();
 
