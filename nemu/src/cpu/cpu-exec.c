@@ -83,6 +83,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   p += space_len;
   
   //itrace the wrong instruct
+  printf("----%s\n",s->logbuf);
   iringbuf_put_char(s->logbuf);
 
 #ifndef CONFIG_ISA_loongarch32r
