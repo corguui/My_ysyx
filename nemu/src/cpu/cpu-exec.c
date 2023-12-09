@@ -28,7 +28,7 @@
 #define MAX_INST_TO_PRINT 10
 
 //ringbuf val
-#define BUF_LEN 10
+#define BUF_LEN 16
 #define NEXT_POS(x) ((x+1)%BUF_LEN)
 char ringbuf[BUF_LEN][128];
 int w=0;//ringbuf's read and write flag
