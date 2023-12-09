@@ -82,7 +82,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   memset(p, ' ', space_len);
   p += space_len;
   printf("----%s\n",s->logbuf);
-  if(s->pc!=0x80000000)
+  //if(s->pc!=0x80000000)
   iringbuf_put_char(s->logbuf);
 
 #ifndef CONFIG_ISA_loongarch32r
