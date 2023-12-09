@@ -33,7 +33,7 @@
 #define NEXT_POS(x) ((x+1)%BUF_LEN)
 char* ringbuf[BUF_LEN];
 int r=0,w=0;//ringbuf's read and write flag
-static void iringbuf_put_char(char *p);
+void iringbuf_put_char(char *p);
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -82,7 +82,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-  iringbuf_put_char(s->logbuf);
+  printf("----%s\n",s->logbuf);
+  //iringbuf_put_char(s->logbuf);
 
 #ifndef CONFIG_ISA_loongarch32r
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
@@ -159,7 +160,7 @@ void cpu_exec(uint64_t n) {
   }
 }
 
-static void iringbuf_put_char(char *p)
+void iringbuf_put_char(char *p)
 {
 	if(!(r==NEXT_POS(w)))
 	{
