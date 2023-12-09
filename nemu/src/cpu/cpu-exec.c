@@ -29,11 +29,13 @@
  */
 #define MAX_INST_TO_PRINT 10
 //ringbuf val
+/*
 #define BUF_LEN 10
 #define NEXT_POS(x) ((x+1)%BUF_LEN)
 char* ringbuf[BUF_LEN];
 int r=0,w=0;//ringbuf's read and write flag
 static void iringbuf_put_char(char *p);
+*/
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -76,7 +78,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
     p += snprintf(p, 4, " %02x", inst[i]);
   }
 
-  iringbuf_put_char(p);
+  //iringbuf_put_char(p);
 
   int ilen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
   int space_len = ilen_max - ilen;
@@ -164,7 +166,7 @@ void cpu_exec(uint64_t n) {
   }
 }
 
-
+/*
 static void iringbuf_put_char(char *p)
 {
 	if(!(r==NEXT_POS(w)))
@@ -176,3 +178,4 @@ static void iringbuf_put_char(char *p)
 	}
 
 }
+*/
