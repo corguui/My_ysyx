@@ -165,8 +165,8 @@ void iringbuf_put_char(char *p)
 	if(!(r==NEXT_POS(w)))
 	{
 		int n=sizeof(ringbuf[w]);
-		memset(ringbuf[w], '\0', n);
-		//strcpy(ringbuf[w],p);
+		memset(ringbuf[w], ' ', n);
+		strcpy(ringbuf[w],p);
 		ringbuf[w]=p;
 		w=NEXT_POS(w);
 	}
