@@ -78,7 +78,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
     p += snprintf(p, 4, " %02x", inst[i]);
   }
 
-  printf("****%d\n",inst[i]);
+  printf("****%s\n",inst);
   //iringbuf_put_char(p);
 
   int ilen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
