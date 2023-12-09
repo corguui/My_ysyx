@@ -28,7 +28,7 @@
 #define MAX_INST_TO_PRINT 10
 
 //ringbuf val
-#define BUF_LEN 16
+#define BUF_LEN 10
 #define NEXT_POS(x) ((x+1)%BUF_LEN)
 char ringbuf[BUF_LEN][128];
 int w=0;//ringbuf's read and write flag
@@ -81,8 +81,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-  printf("----%s\n",s->logbuf);
-  //if(s->pc!=0x80000000)
+  
+  //itrace the wrong instruct
   iringbuf_put_char(s->logbuf);
 
 #ifndef CONFIG_ISA_loongarch32r
@@ -148,6 +148,7 @@ void cpu_exec(uint64_t n) {
            (nemu_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :
             ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))),
           nemu_state.halt_pc);
+	  /*
 		for(int num=0;num<BUF_LEN;num++)
 		{
 			if((num!=w-1)&&(ringbuf[num]!=NULL))
@@ -155,6 +156,7 @@ void cpu_exec(uint64_t n) {
 			else
 			printf("--> %s\n",ringbuf[num]);
 		};
+		*/
       // fall through
     case NEMU_QUIT: statistic();
   }
