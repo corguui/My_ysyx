@@ -159,7 +159,16 @@ void cpu_exec(uint64_t n) {
 		};
           }
       // fall through
-    case NEMU_QUIT: statistic();
+    case NEMU_QUIT:
+          for(int num=0;num<BUF_LEN;num++) 
+                   { 
+                           if((num!=w-1)&&(ringbuf[num]!=NULL)) 
+                           printf("    %s\n",ringbuf[num]); 
+                           else   
+                           printf("--> %s\n",ringbuf[num]); 
+                   };
+    statistic();
+
   }
 }
 
