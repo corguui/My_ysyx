@@ -33,6 +33,7 @@
 char ringbuf[BUF_LEN][128];
 int w=0;//ringbuf's write flag
 void iringbuf_put_char(char *p);
+void print_ringbuf();
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -83,7 +84,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
   p += space_len;
   
   //itrace the wrong instruct
-  printf("----%s\n",s->logbuf);
   iringbuf_put_char(s->logbuf);
 
 #ifndef CONFIG_ISA_loongarch32r
@@ -150,15 +150,7 @@ void cpu_exec(uint64_t n) {
             ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))),
           nemu_state.halt_pc);
 	  if(nemu_state.halt_ret !=0)
-	  {
-		for(int num=0;num<BUF_LEN;num++)
-		{
-			if((num!=w-1)&&(ringbuf[num]!=NULL))
-			printf("    %s\n",ringbuf[num]);
-			else
-			printf("--> %s\n",ringbuf[num]);
-		}
-          };
+	  print_ringbuf();
       // fall through
     case NEMU_QUIT: statistic();
 
@@ -173,3 +165,15 @@ void iringbuf_put_char(char *p)
 		w=NEXT_POS(w);
 
 }
+
+void print_ringbuf(){
+	for(int num=0;num<BUF_LEN;num++)
+		{
+			if((num!=w-1)&&(ringbuf[num]!=NULL))
+			printf("    %s\n",ringbuf[num]);
+			else
+			printf("--> %s\n",ringbuf[num]);
+		}
+
+}
+
