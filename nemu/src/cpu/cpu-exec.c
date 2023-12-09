@@ -32,7 +32,7 @@
 #define BUF_LEN 10
 #define NEXT_POS(x) ((x+1)%BUF_LEN)
 char* ringbuf[BUF_LEN];
-static int r,w;//ringbuf's read and write flag
+static int r=0,w=0;//ringbuf's read and write flag
 static void iringbuf_put_char(char *p);
 
 CPU_state cpu = {};
