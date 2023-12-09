@@ -166,8 +166,10 @@ void iringbuf_put_char(char *p)
 	{
 		//int n=sizeof(ringbuf[w]);
 		//strcpy(ringbuf[w],p);
+		printf("%d\n",w);
 		ringbuf[w]=p;
 		w=NEXT_POS(w);
+		printf("%d\n",w);
 	}
 
 }
