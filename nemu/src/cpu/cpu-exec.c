@@ -164,8 +164,8 @@ void cpu_exec(uint64_t n) {
 void iringbuf_put_char(char *p)
 {
 		//int n=sizeof(ringbuf[w]);
-		//strcpy(ringbuf[w],p);
-		ringbuf[w]=p;
+		strcpy(ringbuf[w],p);
+		//ringbuf[w]=p;
 		w=NEXT_POS(w);
 
 }
