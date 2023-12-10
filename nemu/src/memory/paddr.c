@@ -18,6 +18,11 @@
 #include <device/mmio.h>
 #include <isa.h>
 
+
+//memory tarce
+unsigned int write_buf[256];
+int write_num=0;
+
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;
 #else // CONFIG_PMEM_GARRAY
@@ -37,6 +42,10 @@ static void pmem_write(paddr_t addr, int len, word_t data) {
 }
 
 static void out_of_bound(paddr_t addr) {
+  for(int i=0;i<write_num;i++)
+  {
+  	printf("----  %u\n",write_buf[i]);
+  }
   panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR "] at pc = " FMT_WORD,
       addr, PMEM_LEFT, PMEM_RIGHT, cpu.pc);
 }
@@ -64,7 +73,11 @@ word_t paddr_read(paddr_t addr, int len) {
 }
 
 void paddr_write(paddr_t addr, int len, word_t data) {
-  if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; }
+  if (likely(in_pmem(addr))) { pmem_write(addr, len, data);
+  	//strcpy(write_buf[write_num],addr);	
+	write_buf[write_num]=addr;
+	write_num++;
+  return; }
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
   out_of_bound(addr);
 }
