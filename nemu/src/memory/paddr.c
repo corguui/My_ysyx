@@ -44,12 +44,12 @@ static void pmem_write(paddr_t addr, int len, word_t data) {
 }
 
 static void out_of_bound(paddr_t addr) {
-  printf("--------  write  --------");
+  printf("--------  write  --------\n");
   for(int i=0;i<write_num;i++)
   {
   	printf("----  %x\n",write_buf[i]);
   }
-  printf("--------  read  ---------");
+  printf("--------  read  ---------\n");
   for(int i=0;i<read_num;i++)
   {
   	printf("----  %x\n",read_buf[i]);
