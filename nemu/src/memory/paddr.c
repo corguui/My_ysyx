@@ -21,7 +21,9 @@
 
 //memory tarce
 unsigned int write_buf[256];
+unsigned int read_buf[256];
 int write_num=0;
+int read_num=0;
 
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;
@@ -42,10 +44,17 @@ static void pmem_write(paddr_t addr, int len, word_t data) {
 }
 
 static void out_of_bound(paddr_t addr) {
+  printf("--------  write  --------");
   for(int i=0;i<write_num;i++)
   {
   	printf("----  %x\n",write_buf[i]);
   }
+  printf("--------  read  ---------");
+  for(int i=0;i<read_num;i++)
+  {
+  	printf("----  %x\n",read_buf[i]);
+  }
+
   panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR "] at pc = " FMT_WORD,
       addr, PMEM_LEFT, PMEM_RIGHT, cpu.pc);
 }
@@ -66,7 +75,11 @@ void init_mem() {
 }
 
 word_t paddr_read(paddr_t addr, int len) {
-  if (likely(in_pmem(addr))) return pmem_read(addr, len);
+  if (likely(in_pmem(addr))){
+  read_buf[read_num]=addr;
+  read_num++;
+  return pmem_read(addr, len);
+  }
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
   out_of_bound(addr);
   return 0;
@@ -74,7 +87,6 @@ word_t paddr_read(paddr_t addr, int len) {
 
 void paddr_write(paddr_t addr, int len, word_t data) {
   if (likely(in_pmem(addr))) { pmem_write(addr, len, data);
-  	//strcpy(write_buf[write_num],addr);	
 	write_buf[write_num]=addr;
 	write_num++;
   return; }
