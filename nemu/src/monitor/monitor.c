@@ -83,9 +83,9 @@ static int parse_args(int argc, char *argv[]) {
     switch (o) {
       case 'b':
       		printf("------%s\n",optarg);
-		log_file = strtok(optarg,","); 
+		log_file = strtok(optarg," "); 
       		#ifdef CONFIG_FTRACE
-		elf_file = strtok(NULL,",");	
+		elf_file = strtok(NULL," ");	
 		#endif
 		printf("---%s\n",elf_file);
 		printf("---%s\n",log_file);
