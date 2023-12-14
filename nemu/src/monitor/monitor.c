@@ -37,6 +37,9 @@ static void welcome() {
 #ifndef CONFIG_TARGET_AM
 #include <getopt.h>
 
+#ifdef CONFIG_FTRACE
+char *elf_file =NULL;
+#endif
 void sdb_set_batch_mode();
 
 static char *log_file = NULL;
@@ -78,7 +81,13 @@ static int parse_args(int argc, char *argv[]) {
   int o;
   while ( (o = getopt_long(argc, argv, "-bhl:d:p:", table, NULL)) != -1) {
     switch (o) {
-      case 'b': log_file = optarg; sdb_set_batch_mode(); break;
+      case 'b':
+		log_file = strtok(optarg," "); 
+      		#ifdef CONFIG_FTRACE
+		elf_file = strtok(NULL," ");	
+		#endif
+		sdb_set_batch_mode();
+		break;
       case 'p': sscanf(optarg, "%d", &difftest_port); break;
       case 'l': log_file = optarg; break;
       case 'd': diff_so_file = optarg; break;
