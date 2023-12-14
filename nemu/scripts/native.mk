@@ -24,10 +24,12 @@ $(BINARY): compile_git
 
 # Some convenient rules
 
-#ifdef CONFIG_FTRACE
+ifdef CONFIG_FTRACE
 ELF_FILE=$(subst bin,elf,$(IMG))
-
+override ARGS_RUN ?= --batch=$(BUILD_DIR)/nemu-log.txt $(ELF_FILE) 
+else
 override ARGS_RUN ?= --batch=$(BUILD_DIR)/nemu-log.txt 
+endif
 override ARGS_GDB ?= --log=$(BUILD_DIR)/nemu-log.txt
 override ARGS_RUN += $(ARGS_DIFF)
 override ARGS_GDB += $(ARGS_DIFF)
@@ -41,7 +43,7 @@ NEMU_EXEC_RUN := $(BINARY) $(ARGS_RUN) $(IMG)
 run-env: $(BINARY) $(DIFF_REF_SO)
 
 run: run-env
-	echo "---$(ELF_FILE)"
+	echo "---$(ARGS_RUN)"
 	$(call git_commit, "run NEMU")
 	echo $(NEMU_EXEC_RUN)
 	$(NEMU_EXEC_RUN)
