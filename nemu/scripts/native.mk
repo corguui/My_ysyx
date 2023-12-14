@@ -25,7 +25,7 @@ $(BINARY): compile_git
 # Some convenient rules
 
 #ifdef CONFIG_FTRACE
-#AM_kernels_HOME=~/ysyx-workbench/am-kernels/tests/cpu-tests/build
+ELF_FILE=$(subst bin,elf.$(IMG))
 
 override ARGS_RUN ?= --batch=$(BUILD_DIR)/nemu-log.txt 
 override ARGS_GDB ?= --log=$(BUILD_DIR)/nemu-log.txt
@@ -41,7 +41,7 @@ NEMU_EXEC_RUN := $(BINARY) $(ARGS_RUN) $(IMG)
 run-env: $(BINARY) $(DIFF_REF_SO)
 
 run: run-env
-	echo "---$(IMG)"
+	echo "---$(ELF_FILE)"
 	$(call git_commit, "run NEMU")
 	echo $(NEMU_EXEC_RUN)
 	$(NEMU_EXEC_RUN)
