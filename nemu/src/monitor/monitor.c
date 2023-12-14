@@ -86,7 +86,7 @@ static int parse_args(int argc, char *argv[]) {
       		#ifdef CONFIG_FTRACE
 		elf_file = strtok(optarg," ");	
 		#endif
-		printf("---%s\n",elf_file);
+		printf("---%s\n",img_file);
 		printf("---%s\n",log_file);
 		//sdb_set_batch_mode();
 		break;
