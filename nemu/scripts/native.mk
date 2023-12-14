@@ -26,7 +26,8 @@ $(BINARY): compile_git
 
 override ARGS_RUN ?= --batch=$(BUILD_DIR)/nemu-log.txt 
 ifdef CONFIG_FTRACE
-ELF_FILE=$(subst bin,elf,$(IMG))
+IMG_CP=$(IMG)
+ELF_FILE=$(subst bin,elf,$(IMG_CP))
 override ARGS_RUN +=,$(ELF_FILE) 
 endif
 override ARGS_GDB ?= --log=$(BUILD_DIR)/nemu-log.txt
