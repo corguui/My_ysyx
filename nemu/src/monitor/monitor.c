@@ -86,7 +86,9 @@ static int parse_args(int argc, char *argv[]) {
       		#ifdef CONFIG_FTRACE
 		elf_file = strtok(NULL," ");	
 		#endif
-		sdb_set_batch_mode();
+		printf("---%s\n",elf_file);
+		printf("---%s\n",log_file);
+		//sdb_set_batch_mode();
 		break;
       case 'p': sscanf(optarg, "%d", &difftest_port); break;
       case 'l': log_file = optarg; break;
