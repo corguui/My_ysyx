@@ -25,11 +25,10 @@ $(BINARY): compile_git
 # Some convenient rules
 
 override ARGS_RUN ?= --batch=$(BUILD_DIR)/nemu-log.txt 
-#ifdef CONFIG_FTRACE
-#IMG_CP=$(IMG)
-#ELF_FILE=$(subst bin,elf,$(IMG_CP))
-#override ARGS_RUN += $(ELF_FILE) 
-#endif
+ifdef CONFIG_FTRACE
+ELF_FILE=$(subst bin,elf,$(IMG))
+override ARGS_RUN += $(ELF_FILE) 
+endif
 override ARGS_GDB ?= --log=$(BUILD_DIR)/nemu-log.txt
 override ARGS_RUN += $(ARGS_DIFF)
 override ARGS_GDB += $(ARGS_DIFF)
