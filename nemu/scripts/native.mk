@@ -24,7 +24,7 @@ $(BINARY): compile_git
 
 # Some convenient rules
 
-override ARGS_RUN ?= --batch=$(BUILD_DIR)/nemu-log.txt
+override ARGS_RUN ?= --batch=$(BUILD_DIR)/nemu-log.txt 
 override ARGS_GDB ?= --log=$(BUILD_DIR)/nemu-log.txt
 override ARGS_RUN += $(ARGS_DIFF)
 override ARGS_GDB += $(ARGS_DIFF)
@@ -38,6 +38,7 @@ NEMU_EXEC_RUN := $(BINARY) $(ARGS_RUN) $(IMG)
 run-env: $(BINARY) $(DIFF_REF_SO)
 
 run: run-env
+	echo "---$(ALL)"
 	$(call git_commit, "run NEMU")
 	echo $(NEMU_EXEC_RUN)
 	$(NEMU_EXEC_RUN)
