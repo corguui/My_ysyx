@@ -84,7 +84,7 @@ static int parse_args(int argc, char *argv[]) {
       case 'b':
 		log_file = strtok(optarg," "); 
       		#ifdef CONFIG_FTRACE
-		elf_file = strtok(NULL," ");	
+		elf_file = strtok(optarg," ");	
 		#endif
 		printf("---%s\n",elf_file);
 		printf("---%s\n",log_file);
