@@ -82,6 +82,7 @@ static int parse_args(int argc, char *argv[]) {
   while ( (o = getopt_long(argc, argv, "-bhl:d:p:", table, NULL)) != -1) {
     switch (o) {
       case 'b':
+      		printf("------%s\n",optarg);
 		log_file = strtok(optarg," "); 
       		#ifdef CONFIG_FTRACE
 		elf_file = strtok(optarg," ");	
