@@ -16,6 +16,12 @@
 #include <isa.h>
 #include <memory/paddr.h>
 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
 void init_rand();
 void init_log(const char *log_file);
 void init_mem();
@@ -38,8 +44,10 @@ static void welcome() {
 #include <getopt.h>
 
 #ifdef CONFIG_FTRACE
+#include <elf.h>
 char *elf_file =NULL;
 int times=0;
+void elf_read(char *elf_file);
 #endif
 void sdb_set_batch_mode();
 
@@ -100,6 +108,7 @@ static int parse_args(int argc, char *argv[]) {
 		#endif
       		img_file = optarg;
 		printf("-0-%s\n",img_file);
+		elf_read(elf_file);
 		return 0;
       default:
         printf("Usage: %s [OPTION...] IMAGE [args]\n\n", argv[0]);
@@ -174,5 +183,67 @@ void am_init_monitor() {
   load_img();
   IFDEF(CONFIG_DEVICE, init_device());
   welcome();
+}
+#endif
+
+#ifdef CONFIG_FTRACE
+void elf_read(char *elf_file) {
+    FILE *fp = fopen(elf_file, "rb");
+    if (!fp) {
+        printf("Failed to open file");
+       	assert(0); 
+    }
+
+    /* Read ELF header */
+    Elf32_Ehdr ehdr;
+    int ret=fread(&ehdr, sizeof(ehdr), 1, fp);
+    assert(ret==1);
+
+    /* Check if valid ELF file */
+    if (memcmp(ehdr.e_ident, ELFMAG, SELFMAG) != 0 ||
+        ehdr.e_type != ET_EXEC ||
+        ehdr.e_machine != EM_386) {
+        fprintf(stderr, "Invalid ELF file\n");
+	assert(0);
+    }
+
+    /* Read section header table */
+    Elf32_Shdr shdr[ehdr.e_shnum];
+    fseek(fp, ehdr.e_shoff, SEEK_SET);
+    ret=fread(shdr, sizeof(shdr), 1, fp);
+    assert(ret==1);
+
+    /* Find symbol table and string table */
+    Elf32_Shdr *symtab = NULL, *strtab = NULL;
+    for (int i = 0; i < ehdr.e_shnum; ++i) {
+        if (shdr[i].sh_type == SHT_SYMTAB) {
+            symtab = &shdr[i];
+        }
+        if (shdr[i].sh_type == SHT_STRTAB) {
+            strtab = &shdr[i];
+        }
+    }
+
+    /* Read symbol table */
+    if (symtab && strtab) {
+        Elf32_Sym syms[symtab->sh_size / sizeof(Elf32_Sym)];
+        fseek(fp, symtab->sh_offset, SEEK_SET);
+        ret=fread(syms, sizeof(syms), 1, fp);
+	assert(ret==1);
+
+        /* Read string table */
+        char strtab_content[strtab->sh_size];
+        fseek(fp, strtab->sh_offset, SEEK_SET);
+        ret=fread(strtab_content, sizeof(strtab_content), 1, fp);
+	assert(ret==1);
+
+        /* Print symbol table */
+        for (int i = 0; i < symtab->sh_size / sizeof(Elf32_Sym); ++i) {
+            char *name = strtab_content + syms[i].st_name;
+            printf("%s\n", name);
+        }
+    }
+
+    fclose(fp);
 }
 #endif
