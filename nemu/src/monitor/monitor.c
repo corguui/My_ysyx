@@ -205,7 +205,7 @@ void elf_read(char *elf_file) {
 	int str_tab_ind=elf_header.e_shstrndx;
 	fseek(fp,sec_headers[str_tab_ind].sh_offset,SEEK_SET);
 	char* string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
-	int ret2=fread(string_table,1,sec_headers[str_tab_ind].sh_size,fp);
+	int ret2=fread(string_table,sec_headers[str_tab_ind].sh_size,1,fp);
 	assert(ret2==1);
 
 	printf("  [Nr]\tName\t\t\tType\t\tAddr\t\tOffset\t\tSize\t\t"
