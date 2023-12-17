@@ -52,7 +52,7 @@ void elf_read(char *elf_file);
 void elf_read_fun(char* elf_file);
 void elf_read_strtab(char* elf_file);
 
-typedef struct
+typedef struct function
 {
 	uint32_t value;
 	int      size;
