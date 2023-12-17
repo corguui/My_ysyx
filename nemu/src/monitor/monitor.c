@@ -216,7 +216,7 @@ void elf_read(char *elf_file) {
 	{
         printf("  [%2d]\t", i);
         printf("%-24s", &string_table[sec_headers[i].sh_name]);
-        printf("-strtab");
+        printf("-strtab        ");
         printf("0x%08x\t", sec_headers[i].sh_addr);
         printf("0x%08x\t", sec_headers[i].sh_offset);
         printf("0x%08x\t", sec_headers[i].sh_size);
