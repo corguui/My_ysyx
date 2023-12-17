@@ -47,9 +47,19 @@ static void welcome() {
 #include <elf.h>
 char *elf_file =NULL;
 int times=0;
+int fun_num=0;
 void elf_read(char *elf_file);
 void elf_read_fun(char* elf_file);
 void elf_read_strtab(char* elf_file);
+
+typedef struct
+{
+	uint32_t value;
+	int      size;
+	char     name[128];
+}FUN;
+FUN fun_buff[128];
+
 #endif
 void sdb_set_batch_mode();
 
@@ -333,6 +343,7 @@ void elf_read_fun(char *elf_file) {
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 	assert(ret5==1);
 
+
 	fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
 
         Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
@@ -348,11 +359,23 @@ void elf_read_fun(char *elf_file) {
 	   {
  	    printf("  %3d:\t", i);
             printf("0x%08x:\t", sym_entries[i].st_value);
+	    fun_buff[fun_num].value=sym_entries[i].st_value;
             printf("%4d\t", sym_entries[i].st_size);
+	    fun_buff[fun_num].size=sym_entries[i].st_size;
 	    printf("FUN\t");
             printf("%s", &strtab_string_table[sym_entries[i].st_name]);
+	    strcpy(fun_buff[fun_num].name,&strtab_string_table[sym_entries[i].st_name]);
             printf("\n");
+	    fun_num++;
 	    }
+	}
+	printf("--------------------------");
+	for(int i=0;i<fun_num;i++)
+	{
+		printf("0x%08x:\t",fun_buff[fun_num].value);
+		printf("%4d\t",fun_buff[fun_num].size);
+		printf("%s",fun_buff[fun_num].name);
+		printf("\n");
 	}
 
     free (sym_entries);
