@@ -200,14 +200,12 @@ void elf_read(char *elf_file) {
     assert(ret==1);
 
     /* Check if valid ELF file */
-    /*
     if (memcmp(ehdr.e_ident, ELFMAG, SELFMAG) != 0 ||
         ehdr.e_type != ET_EXEC ||
         ehdr.e_machine != EM_386) {
         fprintf(stderr, "Invalid ELF file\n");
 	assert(0);
     }
-    */
 
     /* Read section header table */
     Elf32_Shdr shdr[ehdr.e_shnum];
