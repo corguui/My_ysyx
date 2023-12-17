@@ -200,9 +200,8 @@ void elf_read(char *elf_file) {
     assert(ret==1);
 
     /* Check if valid ELF file */
-    if (memcmp(ehdr.e_ident, ELFMAG, SELFMAG) != 0 ||
-        ehdr.e_type != ET_EXEC ||
-        ehdr.e_machine != EM_386) {
+    if (ehdr.e_ident[0]!=0x7f||ehdr.e_ident[1]!='E'
+        ) {
         fprintf(stderr, "Invalid ELF file\n");
 	assert(0);
     }
