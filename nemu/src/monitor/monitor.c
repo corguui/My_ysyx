@@ -58,6 +58,7 @@ typedef struct function
 	int      size;
 	char     name[128];
 }FUN;
+
 FUN fun_buff[128];
 
 #endif
@@ -320,9 +321,12 @@ void elf_read_fun(char *elf_file) {
 	   {
  	    printf("  %3d:\t", i);
             printf("0x%08x:\t", sym_entries[i].st_value);
+	    fun_buff[fun_num].value=sym_entries[i].st_value;
             printf("%4d\t", sym_entries[i].st_size);
+	    fun_buff[fun_num].size=sym_entries[i].st_size;
 	    printf("FUN\t");
             printf("%s", &dynstr_string_table[sym_entries[i].st_name]);
+	    strcpy(fun_buff[fun_num].name,&dynstr_string_table[sym_entries[i].st_name]);
             printf("\n");
 	   }
 	}
