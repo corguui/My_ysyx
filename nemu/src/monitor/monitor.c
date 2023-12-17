@@ -309,7 +309,7 @@ void elf_read_fun(char *elf_file) {
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
  	    printf("  %3d:\t", i);
-            printf("0x%016x:\t", sym_entries[i].st_value);
+            printf("0x%08x:\t", sym_entries[i].st_value);
             printf("%4d\t", sym_entries[i].st_size);
 	    printf("FUN\t");
             printf("%s", &dynstr_string_table[sym_entries[i].st_name]);
@@ -347,7 +347,7 @@ void elf_read_fun(char *elf_file) {
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
  	    printf("  %3d:\t", i);
-            printf("0x%016x:\t", sym_entries[i].st_value);
+            printf("0x%08x:\t", sym_entries[i].st_value);
             printf("%4d\t", sym_entries[i].st_size);
 	    printf("FUN\t");
             printf("%s", &strtab_string_table[sym_entries[i].st_name]);
