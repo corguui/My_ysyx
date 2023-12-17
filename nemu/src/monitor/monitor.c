@@ -188,61 +188,52 @@ void am_init_monitor() {
 
 #ifdef CONFIG_FTRACE
 void elf_read(char *elf_file) {
-    FILE *fp = fopen(elf_file, "rb");
-    if (!fp) {
-        printf("Failed to open file");
-       	assert(0); 
-    }
+	FILE* fp;
+	Elf32_Ehdr elf_header;
+	fp=fopen(elf_file,"r");
+	if(fp==NULL)   exit(0);
+	int ret=fread(&elf_header,sizeof(Elf32_Ehdr),1,fp);
+	assert(ret==1);
+	if(elf_header.e_ident[0] !=0x7f||elf_header.e_ident[1]!='E')  {printf("no elf file\n");exit(0);} 
+	
+	Elf32_Shdr* sec_headers=(Elf32_Shdr*)malloc(sizeof(Elf32_Shdr)*elf_header.e_shnum);
+	fseek(fp,elf_header.e_shoff,SEEK_SET);
+	ret=fread(sec_headers,sizeof(Elf32_Shdr),elf_header.e_shnum,fp);
+	assert(ret==1);
+	printf("There are %d section headers, starting at offset 0x%x\n\n", elf_header.e_shnum, elf_header.e_shoff);
 
-    /* Read ELF header */
-    Elf32_Ehdr ehdr;
-    int ret=fread(&ehdr, sizeof(ehdr), 1, fp);
-    assert(ret==1);
-
-    /* Check if valid ELF file */
-    if (ehdr.e_ident[0]!=0x7f||ehdr.e_ident[1]!='E'
-        ) {
-        fprintf(stderr, "Invalid ELF file\n");
-	assert(0);
-    }
-
-    /* Read section header table */
-    Elf32_Shdr shdr[ehdr.e_shnum];
-    fseek(fp, ehdr.e_shoff, SEEK_SET);
-    ret=fread(shdr, sizeof(shdr), 1, fp);
-    assert(ret==1);
-
-    /* Find symbol table and string table */
-    Elf32_Shdr *symtab = NULL, *strtab = NULL;
-    for (int i = 0; i < ehdr.e_shnum; ++i) {
-        if (shdr[i].sh_type == SHT_SYMTAB) {
-            symtab = &shdr[i];
-        }
-        if (shdr[i].sh_type == SHT_STRTAB) {
-            strtab = &shdr[i];
-        }
-    }
-
-    /* Read symbol table */
-    if (symtab && strtab) {
-        Elf32_Sym syms[symtab->sh_size / sizeof(Elf32_Sym)];
-        fseek(fp, symtab->sh_offset, SEEK_SET);
-        ret=fread(syms, sizeof(syms), 1, fp);
+	int str_tab_ind=elf_header.e_shstrndx;
+	fseek(fp,sec_headers[str_tab_ind].sh_offset,SEEK_SET);
+	char* string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
+	ret=fread(string_table,1,sec_headers[str_tab_ind].sh_size,fp);
 	assert(ret==1);
 
-        /* Read string table */
-        char strtab_content[strtab->sh_size];
-        fseek(fp, strtab->sh_offset, SEEK_SET);
-        ret=fread(strtab_content, sizeof(strtab_content), 1, fp);
-	assert(ret==1);
-
-        /* Print symbol table */
-        for (int i = 0; i < symtab->sh_size / sizeof(Elf32_Sym); ++i) {
-            char *name = strtab_content + syms[i].st_name;
-            printf("%s\n", name);
-        }
+	printf("  [Nr]\tName\t\t\tType\t\tAddr\t\tOffset\t\tSize\t\t"
+           "EntSize\t\tLink\tInfo\tAlign\n");
+    //遍历section_headers段表里的每个section,输出相应的信息
+    for (int i = 0; i < elf_header.e_shnum; i++) {
+    	if(sec_headers[i].sh_type==SHT_STRTAB)
+	{
+        printf("  [%2d]\t", i);
+        printf("%-24s", &string_table[sec_headers[i].sh_name]);
+        printf("-strtab");
+        printf("0x%08x\t", sec_headers[i].sh_addr);
+        printf("0x%08x\t", sec_headers[i].sh_offset);
+        printf("0x%08x\t", sec_headers[i].sh_size);
+        printf("0x%08x\t", sec_headers[i].sh_entsize);
+        printf("%-8d", sec_headers[i].sh_link);
+        printf("%-8d", sec_headers[i].sh_info);
+        printf("%-8d", sec_headers[i].sh_addralign);
+        printf("\n");
+	}
     }
 
-    fclose(fp);
+    //释放堆内存
+    free (string_table);
+    free (sec_headers);
+    fclose(fp);	
+
+
+
 }
 #endif
