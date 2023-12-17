@@ -198,7 +198,7 @@ void elf_read(char *elf_file) {
 	
 	Elf32_Shdr* sec_headers=(Elf32_Shdr*)malloc(sizeof(Elf32_Shdr)*elf_header.e_shnum);
 	fseek(fp,elf_header.e_shoff,SEEK_SET);
-	int ret1=fread(sec_headers,sizeof(Elf32_Shdr),elf_header.e_shnum,fp);
+	int ret1=fread(sec_headers,sizeof(Elf32_Shdr)*elf_header.e_shnum,1,fp);
 	assert(ret1==1);
 	printf("There are %d section headers, starting at offset 0x%x\n\n", elf_header.e_shnum, elf_header.e_shoff);
 
