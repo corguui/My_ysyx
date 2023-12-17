@@ -20,8 +20,8 @@
 
 #ifdef CONFIG_MTRACE
 //memory tarce
-unsigned int write_buf[2048];
-unsigned int read_buf[2048];
+unsigned int write_buf[10000];
+unsigned int read_buf[10000];
 int write_num=0;
 int read_num=0;
 #endif
