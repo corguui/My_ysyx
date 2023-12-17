@@ -198,15 +198,15 @@ void elf_read(char *elf_file) {
 	
 	Elf32_Shdr* sec_headers=(Elf32_Shdr*)malloc(sizeof(Elf32_Shdr)*elf_header.e_shnum);
 	fseek(fp,elf_header.e_shoff,SEEK_SET);
-	ret=fread(sec_headers,sizeof(Elf32_Shdr),elf_header.e_shnum,fp);
-	assert(ret==1);
+	int ret1=fread(sec_headers,sizeof(Elf32_Shdr),elf_header.e_shnum,fp);
+	assert(ret1==1);
 	printf("There are %d section headers, starting at offset 0x%x\n\n", elf_header.e_shnum, elf_header.e_shoff);
 
 	int str_tab_ind=elf_header.e_shstrndx;
 	fseek(fp,sec_headers[str_tab_ind].sh_offset,SEEK_SET);
 	char* string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
-	ret=fread(string_table,1,sec_headers[str_tab_ind].sh_size,fp);
-	assert(ret==1);
+	int ret2=fread(string_table,1,sec_headers[str_tab_ind].sh_size,fp);
+	assert(ret2==1);
 
 	printf("  [Nr]\tName\t\t\tType\t\tAddr\t\tOffset\t\tSize\t\t"
            "EntSize\t\tLink\tInfo\tAlign\n");
