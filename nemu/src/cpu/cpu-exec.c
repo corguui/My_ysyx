@@ -82,6 +82,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   fspace_len = fspace_len * 3 + 1;
   memset(q, ' ', fspace_len);
   q += fspace_len;
+  printf("%s\n",s->funbuf);
 
 /*
   fun_str=strtok(s->funbuf," ");		
