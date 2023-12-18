@@ -94,6 +94,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
 	}
 	else if(strcmp(fun_str,"jalr")==0)
 	{
+		printf("jalr\n");
 		printf("%s\n",fun_str);
 		printf("%s\n",s->funbuf);
 		break;
