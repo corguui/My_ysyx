@@ -84,7 +84,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
   q += fspace_len;
 
   fun_str=strtok(s->funbuf," ");		
-  printf("%s\n",fun_str);
   while(fun_str!=NULL) 
   {
   	if(strcmp(fun_str,"jal")==0)
@@ -102,6 +101,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
 	else
 	{
 	fun_str=strtok(NULL," ");	
+	printf("%s\n",fun_str);
 	}
 
   }
