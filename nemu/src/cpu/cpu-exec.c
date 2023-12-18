@@ -68,14 +68,12 @@ static void exec_once(Decode *s, vaddr_t pc) {
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
-  printf("%s\n",s->logbuf);
   int ilen = s->snpc - s->pc;
   int i;
   uint8_t *inst = (uint8_t *)&s->isa.inst.val;
   for (i = ilen - 1; i >= 0; i --) {
     p += snprintf(p, 4, " %02x", inst[i]);
   }
-  printf("%s\n",s->logbuf);
 
   int ilen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
   int space_len = ilen_max - ilen;
@@ -83,11 +81,11 @@ static void exec_once(Decode *s, vaddr_t pc) {
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-  printf("%s\n",s->logbuf);
   //itrace the wrong instruct
   iringbuf_put_char(s->logbuf);
 
 #ifndef CONFIG_ISA_loongarch32r
+  printf("0000000000000000\n");
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
@@ -151,9 +149,11 @@ void cpu_exec(uint64_t n) {
             ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))),
           nemu_state.halt_pc);
 
+	#ifdef CONFIG_ITRACE
 	  //print the ringbuf
 	  if(nemu_state.halt_ret !=0)
 	  print_ringbuf();
+	#endif
 
       // fall through
     case NEMU_QUIT: statistic();
@@ -161,6 +161,7 @@ void cpu_exec(uint64_t n) {
   }
 }
 
+#ifdef CONFIG_ITRACE
 void iringbuf_put_char(char *p)
 {
 		int n=sizeof(ringbuf[w]);
@@ -180,4 +181,4 @@ void print_ringbuf(){
 		}
 
 }
-
+#endif
