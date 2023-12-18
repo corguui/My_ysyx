@@ -101,7 +101,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
 	else
 	{
 	fun_str=strtok(NULL," ");	
-	printf("%s\n",fun_str);
 	}
 
   }
