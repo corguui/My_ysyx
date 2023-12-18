@@ -89,7 +89,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
 
   fun_str=strtok(s->funbuf," ");		
   printf("%s\n",s->funbuf);
-  fun_str=strtok(s->funbuf," ");		
+  fun_str=strtok(NULL," ");		
   printf("%s\n",s->funbuf);
   printf("%s---\n",fun_str);
 
