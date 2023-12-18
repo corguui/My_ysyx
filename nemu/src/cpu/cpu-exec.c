@@ -66,6 +66,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   isa_exec_once(s);
   cpu.pc = s->dnpc;
 #ifdef CONFIG_FTRACE
+  //char fun_str[64];
   char *q = s->funbuf;
   q += snprintf(q, sizeof(s->funbuf), FMT_WORD ":", s->pc);
   int funlen = s->snpc - s->pc;
@@ -81,6 +82,29 @@ static void exec_once(Decode *s, vaddr_t pc) {
   fun_space_len = fun_space_len * 3 + 1;
   memset(q, ' ', fun_space_len);
   q += fun_space_len;
+  printf("%s\n",s->funbuf);
+
+/*
+  fun_str=strtok(s->funbuf," ");		
+  while(fun_str!=NULL) 
+  {
+  	if(strcmp(fun_str,"jal"))
+	{
+		printf("jal\n");
+		printf("%s\n",s->funbuf);
+		break;
+	}
+	else if(strcmp(fun_str,"jalr"))
+	{
+		printf("jalr\n");
+		printf("%s\n",s->funbuf);
+		break;
+	}
+	fun_str=strtok(NULL," ");	
+  	memset(fun_str,'\0',64);
+
+  }
+  */
 #endif
 
 #ifdef CONFIG_ITRACE
