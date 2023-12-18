@@ -66,7 +66,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   isa_exec_once(s);
   cpu.pc = s->dnpc;
 #ifdef CONFIG_FTRACE
-  //char fun_str[64];
+  //char fun_str[128];
   char *q = s->funbuf;
   q += snprintf(q, sizeof(s->funbuf), FMT_WORD ":", s->pc);
   int funlen = s->snpc - s->pc;
@@ -82,9 +82,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
   fspace_len = fspace_len * 3 + 1;
   memset(q, ' ', fspace_len);
   q += fspace_len;
-  printf("%s\n",s->funbuf);
 
-#ifndef CONFIG_ISA_loongarch32r
+  #ifndef CONFIG_ISA_loongarch32r
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(q, s->funbuf + sizeof(s->funbuf) - q,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, funlen);
@@ -92,7 +91,9 @@ static void exec_once(Decode *s, vaddr_t pc) {
   q[0] = '\0'; // the upstream llvm does not support loongarch32r
 #endif
 
+printf("%s\n",s->funbuf);
 /*
+  memset(fun_str,'\0',128);
   fun_str=strtok(s->funbuf," ");		
   while(fun_str!=NULL) 
   {
@@ -109,10 +110,11 @@ static void exec_once(Decode *s, vaddr_t pc) {
 		break;
 	}
 	fun_str=strtok(NULL," ");	
-  	memset(fun_str,'\0',64);
+  	memset(fun_str,'\0',128);
 
   }
   */
+
 #endif
 
 #ifdef CONFIG_ITRACE
