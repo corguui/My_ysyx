@@ -180,10 +180,11 @@ void init_monitor(int argc, char *argv[]) {
   /* Display welcome message. */
   welcome();
 
+/*
 #ifdef CONFIG_FTRACE
-  /* read the elf file. */
   elf_read(elf_file);
 #endif
+*/
 
 }
 #else // CONFIG_TARGET_AM
