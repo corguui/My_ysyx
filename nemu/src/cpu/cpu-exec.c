@@ -83,6 +83,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   memset(q, ' ', fspace_len);
   q += fspace_len;
 
+  printf("%s\n",s->funbuf);
   fun_str=strtok(s->funbuf," ");		
   while(fun_str!=NULL) 
   {
@@ -94,7 +95,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
 	}
 	else if(strcmp(fun_str,"jalr")==0)
 	{
-		printf("jalr\n");
 		printf("%s\n",fun_str);
 		printf("%s\n",s->funbuf);
 		break;
