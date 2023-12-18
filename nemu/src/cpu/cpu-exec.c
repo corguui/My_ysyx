@@ -65,6 +65,24 @@ static void exec_once(Decode *s, vaddr_t pc) {
   s->snpc = pc;
   isa_exec_once(s);
   cpu.pc = s->dnpc;
+#ifdef CONFIG_FTRACE
+  char *q = s->funbuf;
+  q += snprintf(q, sizeof(s->funbuf), FMT_WORD ":", s->pc);
+  int funlen = s->snpc - s->pc;
+  int j;
+  uint8_t *funinst = (uint8_t *)&s->isa.inst.val;
+  for (j = funlen - 1; j >= 0; j --) {
+    q += snprintf(q, 4, " %02x", funinst[j]);
+  }
+
+  int funlen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
+  int fun_space_len = funlen_max - funlen;
+  if (fun_space_len < 0) fun_space_len = 0;
+  fun_space_len = fun_space_len * 3 + 1;
+  memset(q, ' ', fun_space_len);
+  q += fun_space_len;
+#endif
+
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
@@ -85,7 +103,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
   iringbuf_put_char(s->logbuf);
 
 #ifndef CONFIG_ISA_loongarch32r
-  printf("0000000000000000\n");
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
