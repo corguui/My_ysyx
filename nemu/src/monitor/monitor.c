@@ -121,7 +121,6 @@ static int parse_args(int argc, char *argv[]) {
 		#endif
       		img_file = optarg;
 		printf("-0-%s\n",img_file);
-		elf_read(elf_file);
 		return 0;
       default:
         printf("Usage: %s [OPTION...] IMAGE [args]\n\n", argv[0]);
@@ -147,6 +146,11 @@ void init_monitor(int argc, char *argv[]) {
 
   /* Open the log file. */
   init_log(log_file);
+
+#ifdef CONFIG_FTRACE
+  /* read the elf file. */
+  elf_read(elf_file);
+#endif
 
   /* Initialize memory. */
   init_mem();
@@ -226,8 +230,8 @@ void elf_read_strtab(char *elf_file) {
 	int ret2=fread(string_table,sec_headers[str_tab_ind].sh_size,1,fp);
 	assert(ret2==1);
 
-	printf("  [Nr]\tName\t\t\tType\t\tAddr\t\tOffset\t\tSize\t\t"
-           "EntSize\t\tLink\tInfo\tAlign\n");
+	/*printf("  [Nr]\tName\t\t\tType\t\tAddr\t\tOffset\t\tSize\t\t"
+           "EntSize\t\tLink\tInfo\tAlign\n");*/
     //遍历section_headers段表里的每个section,输出相应的信息
     for (int i = 0; i < elf_header.e_shnum; i++) {
     	if(sec_headers[i].sh_type==SHT_STRTAB)
@@ -313,21 +317,23 @@ void elf_read_fun(char *elf_file) {
 	assert(ret3==1);
 
 
-	printf("  NUM:\tValue\t\tSize\tType\tName\n");
+	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
 
 	for(int i=0;i<entry_num;i++)
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
+	   /*
  	    printf("  %3d:\t", i);
             printf("0x%08x:\t", sym_entries[i].st_value);
-	    fun_buff[fun_num].value=sym_entries[i].st_value;
             printf("%4d\t", sym_entries[i].st_size);
-	    fun_buff[fun_num].size=sym_entries[i].st_size;
 	    printf("FUN\t");
             printf("%s", &dynstr_string_table[sym_entries[i].st_name]);
-	    strcpy(fun_buff[fun_num].name,&dynstr_string_table[sym_entries[i].st_name]);
             printf("\n");
+	    */
+	    fun_buff[fun_num].value=sym_entries[i].st_value;
+	    fun_buff[fun_num].size=sym_entries[i].st_size;
+	    strcpy(fun_buff[fun_num].name,&dynstr_string_table[sym_entries[i].st_name]);
 	   }
 	}
 
@@ -355,29 +361,28 @@ void elf_read_fun(char *elf_file) {
 	assert(ret3==1);
 
 
-	printf("  NUM:\tValue\t\tSize\tType\tName\n");
+	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
 
 	for(int i=0;i<entry_num;i++)
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
+	   /*
  	    printf("  %3d:\t", i);
             printf("0x%08x:\t", sym_entries[i].st_value);
-	    fun_buff[fun_num].value=sym_entries[i].st_value;
-
             printf("%4d\t", sym_entries[i].st_size);
-	    fun_buff[fun_num].size=sym_entries[i].st_size;
-
 	    printf("FUN\t");
-
             printf("%s", &strtab_string_table[sym_entries[i].st_name]);
+            printf("\n");
+	    */
+	    fun_buff[fun_num].value=sym_entries[i].st_value;
+	    fun_buff[fun_num].size=sym_entries[i].st_size;
 	    strcpy(fun_buff[fun_num].name,&strtab_string_table[sym_entries[i].st_name]);
 
-            printf("\n");
 	    fun_num++;
 	    }
 	}
-	printf("--------------------------\n");
+	/*
 	for(int i=0;i<fun_num;i++)
 	{
 		printf("0x%08x:\t",fun_buff[i].value);
@@ -385,6 +390,7 @@ void elf_read_fun(char *elf_file) {
 		printf("%s",fun_buff[i].name);
 		printf("\n");
 	}
+	*/
 
     free (sym_entries);
 
