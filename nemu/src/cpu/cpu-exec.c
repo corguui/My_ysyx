@@ -82,7 +82,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   fun_space_len = fun_space_len * 3 + 1;
   memset(q, ' ', fun_space_len);
   q += fun_space_len;
-  printf("%s\n",s->funbuf);
+  printf("%d\n",fun_space_len);
 
 /*
   fun_str=strtok(s->funbuf," ");		
@@ -123,7 +123,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-  printf("%s\n",s->logbuf);
+  printf("%d\n",space_len);
   //itrace the wrong instruct
   iringbuf_put_char(s->logbuf);
 
