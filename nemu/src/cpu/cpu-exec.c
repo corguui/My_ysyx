@@ -77,12 +77,11 @@ static void exec_once(Decode *s, vaddr_t pc) {
   }
 
   int funlen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
-  int fun_space_len = funlen_max - funlen;
-  printf("--%d\n",fun_space_len);
-  if (fun_space_len < 0) fun_space_len = 0;
-  fun_space_len = fun_space_len * 3 + 1;
-  memset(q, ' ', fun_space_len);
-  q += fun_space_len;
+  int fspace_len = funlen_max - funlen;
+  if (fspace_len < 0) fspace_len = 0;
+  fspace_len = fspace_len * 3 + 1;
+  memset(q, ' ', fspace_len);
+  q += fspace_len;
 
 /*
   fun_str=strtok(s->funbuf," ");		
@@ -119,7 +118,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
 
   int ilen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
   int space_len = ilen_max - ilen;
-  printf("%d\n",space_len);
   if (space_len < 0) space_len = 0;
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
