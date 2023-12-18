@@ -82,7 +82,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   fun_space_len = fun_space_len * 3 + 1;
   memset(q, ' ', fun_space_len);
   q += fun_space_len;
-  printf("%d\n",fun_space_len);
+  printf("--%d\n",fun_space_len);
 
 /*
   fun_str=strtok(s->funbuf," ");		
