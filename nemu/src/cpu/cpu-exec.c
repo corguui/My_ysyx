@@ -67,8 +67,10 @@ static void exec_once(Decode *s, vaddr_t pc) {
   cpu.pc = s->dnpc;
 #ifdef CONFIG_FTRACE
   char* fun_str;
+  /*
   char ar1[]="jal";
   char ar2[]="jalr";
+  */
   char *q = s->funbuf;
   q += snprintf(q, sizeof(s->funbuf), FMT_WORD ":", s->pc);
   int funlen = s->snpc - s->pc;
@@ -87,6 +89,11 @@ static void exec_once(Decode *s, vaddr_t pc) {
 
   fun_str=strtok(s->funbuf," ");		
   printf("%s\n",s->funbuf);
+  fun_str=strtok(s->funbuf," ");		
+  printf("%s\n",s->funbuf);
+  printf("%s---\n",fun_str);
+
+  /*
   while(fun_str!=NULL) 
   {
   	if(strcmp(fun_str,ar1)==0)
@@ -107,6 +114,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
 	}
 
   }
+  */
 
 
   #ifndef CONFIG_ISA_loongarch32r
