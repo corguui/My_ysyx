@@ -90,11 +90,11 @@ static void exec_once(Decode *s, vaddr_t pc) {
   while(fun_str!=NULL) 
   {
   */
-  	if(strncmp(s->funbuf+24,ar1,3)==0)
+  	if(strncmp(s->funbuf+24,ar2,4)==0)
 	{
 		printf("1\n");
 	}
-	else if(strncmp(s->funbuf+24,ar2,4)==0)
+	else if(strncmp(s->funbuf+24,ar1,3)==0)
 	{
 		printf("2\n");
 	}
