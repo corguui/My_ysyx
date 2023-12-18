@@ -180,11 +180,6 @@ void init_monitor(int argc, char *argv[]) {
   /* Display welcome message. */
   welcome();
 
-/*
-#ifdef CONFIG_FTRACE
-  elf_read(elf_file);
-#endif
-*/
 
 }
 #else // CONFIG_TARGET_AM
@@ -203,6 +198,10 @@ void am_init_monitor() {
   load_img();
   IFDEF(CONFIG_DEVICE, init_device());
   welcome();
+  #ifdef CONFIG_FTRACE
+  elf_read(elf_file);
+  #endif
+
 }
 #endif
 
