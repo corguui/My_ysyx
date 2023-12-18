@@ -147,10 +147,6 @@ void init_monitor(int argc, char *argv[]) {
   /* Open the log file. */
   init_log(log_file);
 
-#ifdef CONFIG_FTRACE
-  /* read the elf file. */
-  elf_read(elf_file);
-#endif
 
   /* Initialize memory. */
   init_mem();
@@ -183,6 +179,12 @@ void init_monitor(int argc, char *argv[]) {
 
   /* Display welcome message. */
   welcome();
+
+#ifdef CONFIG_FTRACE
+  /* read the elf file. */
+  elf_read(elf_file);
+#endif
+
 }
 #else // CONFIG_TARGET_AM
 static long load_img() {
