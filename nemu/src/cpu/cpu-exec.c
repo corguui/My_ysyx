@@ -28,7 +28,7 @@
 #define MAX_INST_TO_PRINT 10
 
 #include "../monitor/monitor.h"
-
+extern FUN fun_buff[128];
 
 //ringbuf val
 #define BUF_LEN 18

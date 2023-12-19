@@ -60,8 +60,8 @@ typedef struct function
 	char     name[128];
 }FUN;
 
-FUN fun_buff[128];
 */
+FUN fun_buff[128];
 
 #endif
 void sdb_set_batch_mode();

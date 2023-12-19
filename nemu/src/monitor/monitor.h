@@ -8,7 +8,6 @@ typedef struct function
            char     name[128];
  }FUN;
   
-FUN fun_buff[128];
 #endif
 
 #endif
