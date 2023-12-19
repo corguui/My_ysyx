@@ -53,6 +53,7 @@ void elf_read(char *elf_file);
 void elf_read_fun(char* elf_file);
 void elf_read_strtab(char* elf_file);
 /*
+transfer to momitor.h
 typedef struct function
 {
 	uint32_t value;
@@ -387,6 +388,7 @@ void elf_read_fun(char *elf_file) {
 	    fun_num++;
 	    }
 	}
+	/*   print the fun_buff
 	for(int i=0;i<fun_num;i++)
 	{
 		printf("0x%08x:\t",fun_buff[i].value);
@@ -394,6 +396,7 @@ void elf_read_fun(char *elf_file) {
 		printf("%s",fun_buff[i].name);
 		printf("\n");
 	}
+	*/
 
     free (sym_entries);
 
