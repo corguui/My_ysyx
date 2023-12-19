@@ -114,7 +114,7 @@ else if(strncmp(s->funbuf+24,ar1,3)==0)
 		uint32_t call_pc;
 		sscanf(fun_str,"%08x",&call_pc);
 		printf("call %x\n",call_pc);
-		printf("%x %d %s\n",fun_buff[0].value,fun_buff[0].size,fun_buff[0].name);
+		printf("%x %d %s\n",fun_buff[1].value,fun_buff[1].size,fun_buff[1].name);
 		
  }
  
