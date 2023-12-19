@@ -29,6 +29,7 @@
 
 #include "../monitor/monitor.h"
 extern FUN fun_buff[128];
+extern int fun_num;
 
 //ringbuf val
 #define BUF_LEN 18
@@ -103,7 +104,9 @@ if(pc!=0x80000000)
  //jalr
  if(strncmp(s->funbuf+24,ar2,4)==0)
  {
-		printf("1\n");
+		printf("%d\n",fun_num);
+		printf("%x\n",s->pc);
+		printf("%x\n",s->dnpc);
  }
 //jal
 else if(strncmp(s->funbuf+24,ar1,3)==0)
