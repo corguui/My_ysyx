@@ -69,11 +69,9 @@ static void exec_once(Decode *s, vaddr_t pc) {
   isa_exec_once(s);
   cpu.pc = s->dnpc;
 #ifdef CONFIG_FTRACE
-/*
   char fun_str[32]="";
   char ar1[]="jal";
   char ar2[]="jalr";
-  */
   char *q = s->funbuf;
   q += snprintf(q, sizeof(s->funbuf), FMT_WORD ":", s->pc);
   int funlen = s->snpc - s->pc;
@@ -99,7 +97,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
   q[0] = '\0'; // the upstream llvm does not support loongarch32r
 #endif
 
-/*
 if(pc!=0x80000000)
 {
  printf("%s\n",s->funbuf);
@@ -120,7 +117,6 @@ else if(strncmp(s->funbuf+24,ar1,3)==0)
 		printf("%x %d %s\n",fun_buff[1].value,fun_buff[1].size,fun_buff[1].name);
 		
  }
- */
  
 #endif
 
