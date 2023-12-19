@@ -353,7 +353,7 @@ void elf_read_fun(char *elf_file) {
 
 	if ((symtab_ind != -1) && (strtab_ind != -1)) {
         unsigned long entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
-        printf("Symbol table '.symtab' contains %ld entries\n", entry_num);
+        //printf("Symbol table '.symtab' contains %ld entries\n", entry_num);
         fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
         char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
