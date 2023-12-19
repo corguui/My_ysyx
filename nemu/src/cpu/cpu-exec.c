@@ -104,9 +104,37 @@ if(pc!=0x80000000)
  //jalr
  if(strncmp(s->funbuf+24,ar2,4)==0)
  {
-		printf("%d\n",fun_num);
-		printf("%x\n",s->pc);
-		printf("%x\n",s->dnpc);
+ 	int flat=0;
+	int f,g;
+ 	for(g=0;g<fun_num;g++)
+	{
+		
+		if(s->dnpc>=fun_buff[g].value&&s->dnpc<fun_buff[g].value+fun_buff[g].size)
+		{
+		   for(f=0;f<fun_num;f++)
+		   {
+		       if(s->pc==fun_buff[f].value+fun_buff[f].size)	
+		       {
+		          flat=1;
+			  break;
+		       }
+		   }
+		   if(flat==1)
+		   {
+		     printf("%x:  ret[%s@%x]\n",s->pc,fun_buff[f].name,fun_buff[f].value); 
+		     break;
+		   }
+		   else if(flat==0)
+		   {
+		   	printf("%x:  call[%s@%x]\n",s->pc,fun_buff[g].name,fun_buff[g].value);
+			break;
+		   }
+		}
+		else if(g==fun_num-1)
+		{
+			printf("??????\n");
+		}
+	}
  }
 //jal
 else if(strncmp(s->funbuf+24,ar1,3)==0)
