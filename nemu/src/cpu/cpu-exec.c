@@ -66,7 +66,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   isa_exec_once(s);
   cpu.pc = s->dnpc;
 #ifdef CONFIG_FTRACE
-  //char* fun_str;
+  char fun_str[32]="";
   char ar1[]="jal";
   char ar2[]="jalr";
   char *q = s->funbuf;
@@ -86,26 +86,18 @@ static void exec_once(Decode *s, vaddr_t pc) {
   q += fspace_len;
   printf("%s\n",s->funbuf);
 
-  /*
-  while(fun_str!=NULL) 
-  {
-  */
-  	if(strncmp(s->funbuf+24,ar2,4)==0)
-	{
+//jalr
+ if(strncmp(s->funbuf+24,ar2,4)==0)
+ {
 		printf("1\n");
-	}
-	else if(strncmp(s->funbuf+24,ar1,3)==0)
-	{
+ }
+//jal
+else if(strncmp(s->funbuf+24,ar1,3)==0)
+ {
 		printf("2\n");
-	}
-	/*
-	else
-	{
-	fun_str=strtok(NULL," ");	
-	}
-
-  }
-  */
+		sscanf(s->funbuf+24,"0x%8[0-9a-z]",fun_str);
+		printf("call %s\n",fun_str);
+ }
 
 
   #ifndef CONFIG_ISA_loongarch32r
