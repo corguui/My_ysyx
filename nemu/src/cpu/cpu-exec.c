@@ -115,7 +115,7 @@ if(pc!=0x80000000)
 		{
 		   for(f=0;f<fun_num;f++)
 		   {
-		       if(s->pc==fun_buff[f].value+fun_buff[f].size)	
+		       if(s->pc==fun_buff[f].value+fun_buff[f].size-4)	
 		       {
 		          flat=1;
 			  break;
