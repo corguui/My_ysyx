@@ -95,8 +95,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
 else if(strncmp(s->funbuf+24,ar1,3)==0)
  {
 		printf("2\n");
-		sscanf(s->funbuf+24,"0x%8[0-9a-z]",fun_str);
-		printf("call %s\n",fun_str);
+		sscanf(s->funbuf+24,"%[0-9a-z]",fun_str);
+		printf("call 0x%s\n",fun_str);
  }
 
 
