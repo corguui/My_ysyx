@@ -96,7 +96,7 @@ else if(strncmp(s->funbuf+24,ar1,3)==0)
  {
 		printf("2\n");
 		strcpy(fun_str,s->funbuf+34);
-		int call_pc=atol(fun_str);
+		uint32_t call_pc=atol(fun_str);
 		printf("call %d\n",call_pc);
  }
 
