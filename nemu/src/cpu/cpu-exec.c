@@ -86,7 +86,16 @@ static void exec_once(Decode *s, vaddr_t pc) {
   q += fspace_len;
   printf("%s\n",s->funbuf);
 
-//jalr
+
+  #ifndef CONFIG_ISA_loongarch32r
+  void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+  disassemble(q, s->funbuf + sizeof(s->funbuf) - q,
+      MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, funlen);
+#else
+  q[0] = '\0'; // the upstream llvm does not support loongarch32r
+#endif
+
+ //jalr
  if(strncmp(s->funbuf+24,ar2,4)==0)
  {
 		printf("1\n");
@@ -100,17 +109,7 @@ else if(strncmp(s->funbuf+24,ar1,3)==0)
 		sscanf(fun_str,"%08x",&call_pc);
 		printf("call %x\n",call_pc);
  }
-
-
-  #ifndef CONFIG_ISA_loongarch32r
-  void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
-  disassemble(q, s->funbuf + sizeof(s->funbuf) - q,
-      MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, funlen);
-#else
-  q[0] = '\0'; // the upstream llvm does not support loongarch32r
-#endif
-
-  
+ 
 #endif
 
 #ifdef CONFIG_ITRACE
