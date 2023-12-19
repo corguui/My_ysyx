@@ -45,13 +45,14 @@ static void welcome() {
 
 #ifdef CONFIG_FTRACE
 #include <elf.h>
+#include "monitor.h"
 char *elf_file =NULL;
 int times=0;
 int fun_num=0;
 void elf_read(char *elf_file);
 void elf_read_fun(char* elf_file);
 void elf_read_strtab(char* elf_file);
-
+/*
 typedef struct function
 {
 	uint32_t value;
@@ -60,6 +61,7 @@ typedef struct function
 }FUN;
 
 FUN fun_buff[128];
+*/
 
 #endif
 void sdb_set_batch_mode();

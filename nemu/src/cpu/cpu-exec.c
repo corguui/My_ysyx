@@ -27,6 +27,10 @@
  */
 #define MAX_INST_TO_PRINT 10
 
+#include "../monitor/monitor.h"
+extern FUN fun_buff[128];
+
+
 //ringbuf val
 #define BUF_LEN 18
 #define NEXT_POS(x) ((x+1)%BUF_LEN)
@@ -111,6 +115,8 @@ else if(strncmp(s->funbuf+24,ar1,3)==0)
 		uint32_t call_pc;
 		sscanf(fun_str,"%08x",&call_pc);
 		printf("call %x\n",call_pc);
+		printf("%x %d %s\n",fun_buff[0].value,fun_buff[0].size,fun_buff[0].name);
+		
  }
  
 #endif
