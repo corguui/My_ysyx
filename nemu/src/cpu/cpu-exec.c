@@ -27,9 +27,11 @@
  */
 #define MAX_INST_TO_PRINT 10
 
+#ifdef CONFIG_FTRACE
 #include "../monitor/monitor.h"
 extern FUN fun_buff[128];
 extern int fun_num;
+#endif
 
 //ringbuf val
 #define BUF_LEN 18
@@ -70,8 +72,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   isa_exec_once(s);
   cpu.pc = s->dnpc;
 #ifdef CONFIG_FTRACE
-  //char fun_str[32]="";
-  char ar2[]="jalr";
+  char ar[]="jal";//read the jal and jalr
   char *q = s->funbuf;
   q += snprintf(q, sizeof(s->funbuf), FMT_WORD ":", s->pc);
   int funlen = s->snpc - s->pc;
@@ -96,12 +97,14 @@ static void exec_once(Decode *s, vaddr_t pc) {
 #else
   q[0] = '\0'; // the upstream llvm does not support loongarch32r
 #endif
+/*
 if(pc!=0x80000000)
 {
  printf("%s\n",s->funbuf);
 }
- //jalr
- if(strncmp(s->funbuf+24,ar2,3)==0)
+*/
+ //read jal and jalr
+ if(strncmp(s->funbuf+24,ar,3)==0)
  {
  	int flat=0;
 	int f,g;
@@ -120,33 +123,22 @@ if(pc!=0x80000000)
 		   }
 		   if(flat==1)
 		   {
-		     printf("%x:  ret[%s@%x]\n",s->pc,fun_buff[f].name,fun_buff[f].value); 
+		     printf("0x%x:   ret[fun:%s  @%x]\n",s->pc,fun_buff[f].name,fun_buff[f].value); 
 		     break;
 		   }
 		   else if(flat==0)
 		   {
-		   	printf("%x:  call[%s@%x]\n",s->pc,fun_buff[g].name,fun_buff[g].value);
+		   	printf("0x%x:  call[fun:%s  @%x]\n",s->pc,fun_buff[g].name,fun_buff[g].value);
 			break;
 		   }
 		}
 		else if(g==fun_num-1)
 		{
-			printf("??????\n");
+			printf("error no funcion\n");
+			assert(0);
 		}
 	}
  }
- /*
-//jal
-else if(strncmp(s->funbuf+24,ar1,3)==0)
- {
-		printf("2\n");
-		strcpy(fun_str,s->funbuf+34);
-		uint32_t call_pc;
-		sscanf(fun_str,"%08x",&call_pc);
-		printf("call %x\n",call_pc);
-		
- }
- */
  
 #endif
 
