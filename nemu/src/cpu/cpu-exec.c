@@ -84,7 +84,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
   fspace_len = fspace_len * 3 + 1;
   memset(q, ' ', fspace_len);
   q += fspace_len;
-  printf("%s\n",s->funbuf);
 
 
   #ifndef CONFIG_ISA_loongarch32r
@@ -95,6 +94,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
   q[0] = '\0'; // the upstream llvm does not support loongarch32r
 #endif
 
+
+ printf("%s\n",s->funbuf);
  //jalr
  if(strncmp(s->funbuf+24,ar2,4)==0)
  {
