@@ -128,6 +128,7 @@ if(pc!=0x80000000)
 		   }
 		   if(flat_ret==1)//ret
 		   {
+		     printf("%d\n",space_num);
 		     printf("0x%x:",s->pc);
 		     int n=space_num;
 		     while (n>0)
@@ -145,6 +146,7 @@ if(pc!=0x80000000)
 		   }
 		   else if(flat_ret==0)//call
 		   {
+		     printf("%d\n",space_num);
 		     printf("0x%x:",s->pc);
 		     int m=space_num;
 		     while (m>0)
