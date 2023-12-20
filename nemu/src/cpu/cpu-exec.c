@@ -124,16 +124,18 @@ if(pc!=0x80000000)
 		       if(s->pc>=fun_buff[f].value&&s->pc<fun_buff[f].size+fun_buff[f].value)	
 		       {
 		          flat_ret=1;
+			  space_num--;
 			  break;
+		       }
+		       else
+		       {
+		       	 space_num++;
+			 break;
 		       }
 		   }
 		   }
 		   if(flat_ret==1)//ret
 		   {
-		     if(space_flat==1)
-		     {
-		     	space_num--;
-		     }
 		     printf("%d\n",space_num);
 		     printf("0x%x:",s->pc);
 		     int n=space_num;
@@ -148,10 +150,6 @@ if(pc!=0x80000000)
 		   }
 		   else if(flat_ret==0)//call
 		   {
-		     if(space_flat==0)
-			{
-			  space_num++;
-			}
 		     printf("%d\n",space_num);
 		     printf("0x%x:",s->pc);
 		     int m=space_num;
