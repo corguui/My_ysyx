@@ -32,7 +32,7 @@
 extern FUN fun_buff[128];
 extern int fun_num;
 int space_num=0;
-int space_flat=0;
+int space_flat;
 #endif
 
 //ringbuf val
