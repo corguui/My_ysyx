@@ -122,7 +122,6 @@ if(pc!=0x80000000)
 		       if(s->pc>=fun_buff[f].value&&s->pc<fun_buff[f].size+fun_buff[f].value)	
 		       {
 		          flat_ret=1;
-			  space_flat=1;
 			  break;
 		       }
 		   }
@@ -133,7 +132,7 @@ if(pc!=0x80000000)
 		     int n=space_num;
 		     while (n>0)
 		     {
-		     	printf("11");
+		     	printf("  ");
 			n--;
 		     }
 		     printf("ret [fun:%s  @%x]\n",fun_buff[f].name,fun_buff[f].value); 
@@ -141,6 +140,7 @@ if(pc!=0x80000000)
 		     {
 		     	space_num--;
 		     }
+		     space_flat=1;
 		     break;
 		   }
 		   else if(flat_ret==0)//call
@@ -157,6 +157,7 @@ if(pc!=0x80000000)
 			{
 			  space_num++;
 			}
+			space_flat=0;
 			break;
 		   }
 		}
