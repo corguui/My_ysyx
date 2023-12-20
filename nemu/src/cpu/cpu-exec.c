@@ -73,6 +73,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
   cpu.pc = s->dnpc;
 #ifdef CONFIG_FTRACE
   char ar[]="jal";//read the jal and jalr
+  char ar1[]="jalr";
+  char ar2[]="80 67";
   char *q = s->funbuf;
   q += snprintf(q, sizeof(s->funbuf), FMT_WORD ":", s->pc);
   int funlen = s->snpc - s->pc;
@@ -111,13 +113,16 @@ if(pc!=0x80000000)
 		
 		if(s->dnpc>=fun_buff[g].value&&s->dnpc<fun_buff[g].value+fun_buff[g].size)
 		{
+		   if(strncmp(s->funbuf+24,ar1,4)==0&&(strncmp(s->funbuf+18,ar2,5)))
+		   {
 		   for(f=0;f<fun_num;f++)
 		   {
-		       if(s->pc==fun_buff[f].value+fun_buff[f].size-4)	
+		       if(s->pc>=fun_buff[f].value&&s->pc<fun_buff[f].size+fun_buff[f].value)	
 		       {
 		          flat=1;
 			  break;
 		       }
+		   }
 		   }
 		   if(flat==1)
 		   {
