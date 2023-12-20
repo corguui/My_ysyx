@@ -31,7 +31,7 @@
 #include "../monitor/monitor.h"
 extern FUN fun_buff[128];
 extern int fun_num;
-int space_num=0;
+int space_num=-1;
 int space_flat=0;
 #endif
 
@@ -130,6 +130,10 @@ if(pc!=0x80000000)
 		   }
 		   if(flat_ret==1)//ret
 		   {
+		     if(space_flat==1)
+		     {
+		     	space_num--;
+		     }
 		     printf("%d\n",space_num);
 		     printf("0x%x:",s->pc);
 		     int n=space_num;
@@ -139,15 +143,15 @@ if(pc!=0x80000000)
 			n--;
 		     }
 		     printf("ret [fun:%s  @%x]\n",fun_buff[f].name,fun_buff[f].value); 
-		     if(space_flat==1)
-		     {
-		     	space_num--;
-		     }
 		     space_flat=1;
 		     break;
 		   }
 		   else if(flat_ret==0)//call
 		   {
+		     if(space_flat==0)
+			{
+			  space_num++;
+			}
 		     printf("%d\n",space_num);
 		     printf("0x%x:",s->pc);
 		     int m=space_num;
@@ -157,10 +161,6 @@ if(pc!=0x80000000)
 			m--;
 		     }
 		   	printf("call [fun:%s  @%x]\n",fun_buff[g].name,fun_buff[g].value);
-			if(space_flat==0)
-			{
-			  space_num++;
-			}
 			space_flat=0;
 			break;
 		   }
