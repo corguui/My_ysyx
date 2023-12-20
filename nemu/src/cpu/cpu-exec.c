@@ -32,7 +32,7 @@
 extern FUN fun_buff[128];
 extern int fun_num;
 int space_num=0;
-int space_flat;
+int space_flat=0;
 #endif
 
 //ringbuf val
@@ -110,7 +110,6 @@ if(pc!=0x80000000)
  {
  	int flat_ret=0;
 	int f,g;
-	space_flat=0;
  	for(g=0;g<fun_num;g++)
 	{
 		
