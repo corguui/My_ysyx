@@ -134,7 +134,7 @@ if(pc!=0x80000000)
 		     int n=space_num;
 		     while (n>0)
 		     {
-		     	printf("  ");
+		     	printf("11");
 			n--;
 		     }
 		     printf("ret [fun:%s  @%x]\n",fun_buff[f].name,fun_buff[f].value); 
@@ -150,7 +150,7 @@ if(pc!=0x80000000)
 		     int m=space_num;
 		     while (m>0)
 		     {
-		     	printf("  ");
+		     	printf("11");
 			m--;
 		     }
 		   	printf("call [fun:%s  @%x]\n",fun_buff[g].name,fun_buff[g].value);
