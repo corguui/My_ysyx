@@ -113,7 +113,7 @@ if(pc!=0x80000000)
 		
 		if(s->dnpc>=fun_buff[g].value&&s->dnpc<fun_buff[g].value+fun_buff[g].size)
 		{
-		   if(strncmp(s->funbuf+24,ar1,4)==0&&(strncmp(s->funbuf+18,ar2,5)))
+		   if(strncmp(s->funbuf+24,ar1,4)==0&&strncmp(s->funbuf+18,ar2,5)==0)
 		   {
 		   for(f=0;f<fun_num;f++)
 		   {
