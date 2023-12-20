@@ -31,7 +31,7 @@
 #include "../monitor/monitor.h"
 extern FUN fun_buff[128];
 extern int fun_num;
-int space_num=-1;
+int space_num=0;
 int space_flat=0;
 #endif
 
@@ -124,13 +124,7 @@ if(pc!=0x80000000)
 		       if(s->pc>=fun_buff[f].value&&s->pc<fun_buff[f].size+fun_buff[f].value)	
 		       {
 		          flat_ret=1;
-			  space_num--;
 			  break;
-		       }
-		       else
-		       {
-		       	 space_num++;
-			 break;
 		       }
 		   }
 		   }
