@@ -123,7 +123,7 @@ if(pc!=0x80000000)
 		   }
 		   if(flat==1)
 		   {
-		     printf("0x%x:   ret[fun:%s  @%x]\n",s->pc,fun_buff[f].name,fun_buff[f].value); 
+		     printf("0x%x:                          ret[fun:%s  @%x]\n",s->pc,fun_buff[f].name,fun_buff[f].value); 
 		     break;
 		   }
 		   else if(flat==0)
