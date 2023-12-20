@@ -101,10 +101,12 @@ static void exec_once(Decode *s, vaddr_t pc) {
 #else
   q[0] = '\0'; // the upstream llvm does not support loongarch32r
 #endif
+/*
 if(pc!=0x80000000)
 {
  printf("%s\n",s->funbuf);
 }
+*/
  //read jal and jalr
  if(strncmp(s->funbuf+24,ar,3)==0)
  {
@@ -151,7 +153,7 @@ if(pc!=0x80000000)
 		     int m=space_num;
 		     while (m>0)
 		     {
-		     	printf("11");
+		     	printf("  ");
 			m--;
 		     }
 		   	printf("call [fun:%s  @%x]\n",fun_buff[g].name,fun_buff[g].value);
