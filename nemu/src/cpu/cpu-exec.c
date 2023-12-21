@@ -144,7 +144,7 @@ if(pc!=0x80000000)
 			n--;
 		     }
 		     */
-		     printf("--- %d   ret [fun:%s  @%x]\n",space_num,fun_buff[f].name,fun_buff[f].value); 
+		     printf("---num: %d   ret [fun:%s  @%x]\n",space_num,fun_buff[f].name,fun_buff[f].value); 
 		     space_flat=1;
 		     break;
 		   }
@@ -164,7 +164,7 @@ if(pc!=0x80000000)
 			m--;
 		     }
 		     */
-		   	printf("--- %d  call [fun:%s  @%x]\n",space_num,fun_buff[g].name,fun_buff[g].value);
+		   	printf("---num: %d  call [fun:%s  @%x]\n",space_num,fun_buff[g].name,fun_buff[g].value);
 			space_flat=0;
 			break;
 		   }
