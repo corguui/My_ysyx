@@ -136,13 +136,15 @@ if(pc!=0x80000000)
 		     	space_num--;
 		     }
 		     printf("0x%x:",s->pc);
+		     /*
 		     int n=space_num;
 		     while (n>0)
 		     {
 		     	printf(" ");
 			n--;
 		     }
-		     printf("ret [fun:%s  @%x]\n",fun_buff[f].name,fun_buff[f].value); 
+		     */
+		     printf("--- %d   ret [fun:%s  @%x]\n",space_num,fun_buff[f].name,fun_buff[f].value); 
 		     space_flat=1;
 		     break;
 		   }
@@ -154,13 +156,15 @@ if(pc!=0x80000000)
 		     	space_num++;
 		     }
 		     printf("0x%x:",s->pc);
+		     /*
 		     int m=space_num;
 		     while (m>0)
 		     {
 		     	printf(" ");
 			m--;
 		     }
-		   	printf("call [fun:%s  @%x]\n",fun_buff[g].name,fun_buff[g].value);
+		     */
+		   	printf("--- %d  call [fun:%s  @%x]\n",space_num,fun_buff[g].name,fun_buff[g].value);
 			space_flat=0;
 			break;
 		   }
