@@ -31,7 +31,7 @@
 #include "../monitor/monitor.h"
 extern FUN fun_buff[128];
 extern int fun_num;
-int space_num=0;
+int space_num=-1;
 int space_flat=0;
 #endif
 
@@ -151,7 +151,7 @@ if(pc!=0x80000000)
 		     printf("%d\n",space_flat);
 		     if(space_flat==0)
 		     {
-		     	space_flat++;
+		     	space_num++;
 		     }
 		     printf("0x%x:",s->pc);
 		     int m=space_num;
