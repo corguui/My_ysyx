@@ -77,6 +77,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   char ar[]="jal";//read the jal and jalr
   char ar1[]="jalr";
   char ar2[]="00 00 80 67";//funbuf 0x8--------: 00 00 80 67 jalr  ..... the ret is 80 67
+  //00 07 80 67 jr mean call to but no printf the ret//in f1 have jr call to f0 the f1 no ret
   char *q = s->funbuf;
   q += snprintf(q, sizeof(s->funbuf), FMT_WORD ":", s->pc);
   int funlen = s->snpc - s->pc;
