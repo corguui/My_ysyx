@@ -179,6 +179,19 @@ void *memcpy(void *out, const void *in, size_t n) {
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
+	if(s1==NULL||s2==NULL)
+	return 0;
+	while(n--)
+	{
+		if(*(char*)s1!=*(char*)s2)
+		{
+			return *(char*)s1-*(char*)s2;
+		}
+		s1=(char*)s1+1;
+		s2=(char*)s2+1;
+	}
+	return 0;
+/*
 	char* sr1=(char *)s1;
 	char* sr2=(char *)s2;
 	while(n!=0&&(*sr1!='\0'||*sr2!='\0'))
@@ -201,6 +214,8 @@ int memcmp(const void *s1, const void *s2, size_t n) {
 		return -1;
 	else 
 		return 0;
+*/
+	
 
 
 }
