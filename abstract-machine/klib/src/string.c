@@ -143,23 +143,32 @@ void *memset(void *s, int c, size_t n) {
 void *memmove(void *dst, const void *src, size_t n) {
 	if(dst==NULL||src==NULL)
 	return 0;
-	char* sr=(char *)dst;
-	while(n!=0)
+	void* ret=dst;
+	if(dst<src)
 	{
-		*sr=*(char *)src;
-		n--;
-		sr++;
-		(char *)src++;
+		while(n--)//前到后拷贝
+		{
+		*(char*)dst=*(char *)src;
+		dst=(char*)dst+1;
+		src=(char*)src+1;
+		
+		}
 	}
-	return (void *) sr;
+	else
+	{
+		while(n--)
+		{
+		*((char*)dst+n)=*((char*)src+n);
+		}
+	}
+	return ret;
 }
 
 void *memcpy(void *out, const void *in, size_t n) {
 	if(out==NULL||in==NULL)
 	return 0;
 	char* sr1=(char *)out;
-	char* sr2=(char *)in;
-	while(n!=0)
+	char* sr2=(char *)in; while(n!=0)
 	{
 		*sr1=*sr2;
 		sr1++;
