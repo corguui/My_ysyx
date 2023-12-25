@@ -9,11 +9,9 @@ void trm_init() {
   __am_platform_dummy();
 }
 
-/*
 void putch(char ch) {
   putchar(ch);
 }
-*/
 
 void halt(int code) {
   const char *fmt = "Exit code = 40h\n";
