@@ -154,8 +154,8 @@ if(pc!=0x80000000)
 		}
 		else if(g==fun_num-1)
 		{
-			printf("error no funcion\n");
-			assert(0);
+			printf("error no funcion\nsrc/cpu/cpu-exec.c:158:error\n");
+			
 		}
 	}
  }
