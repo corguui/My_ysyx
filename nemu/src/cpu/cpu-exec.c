@@ -247,7 +247,7 @@ void cpu_exec(uint64_t n) {
 
 	#ifdef CONFIG_ITRACE
 	  //print the ringbuf
-	  if(nemu_state.halt_ret !=0)
+	  if(nemu_state.halt_ret !=0||nemu_state.state==NEMU_ABORT);
 	  print_ringbuf();
 	#endif
 
