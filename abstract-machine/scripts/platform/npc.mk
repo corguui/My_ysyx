@@ -7,6 +7,7 @@ AM_SRCS := riscv/npc/start.S \
            riscv/npc/trap.S \
            platform/dummy/vme.c \
            platform/dummy/mpe.c
+NPC_HOME =~/ysyx-workbench/npc
 
 CFLAGS    += -fdata-sections -ffunction-sections
 LDFLAGS   += -T $(AM_HOME)/scripts/linker.ld \
@@ -21,4 +22,4 @@ image: $(IMAGE).elf
 	@$(OBJCOPY) -S --set-section-flags .bss=alloc,contents -O binary $(IMAGE).elf $(IMAGE).bin
 
 run: image
-
+	$(MAKE) -C $(NPC_HOME)  sim 

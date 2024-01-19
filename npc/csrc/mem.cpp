@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<assert.h>
 #include<cstdint>
+#include<unistd.h>
 #include"../hsrc/mem.h"
 
 
