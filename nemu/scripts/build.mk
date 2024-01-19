@@ -53,6 +53,7 @@ app: $(BINARY)
 $(BINARY): $(OBJS) $(ARCHIVES)
 	@echo + LD $@
 	@$(LD) -o $@ $(OBJS) $(LDFLAGS) $(ARCHIVES) $(LIBS)
+	@echo("--------")
 
 clean:
 	-rm -rf $(BUILD_DIR)
