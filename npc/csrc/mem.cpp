@@ -24,7 +24,7 @@ void init_mem()
 	for(i=0;i<14;i++);
 	{
 		printf("%x\n",pmem_read(b,4));
-		b=b+4;
+		b=b+16;
 	}
 }
 
