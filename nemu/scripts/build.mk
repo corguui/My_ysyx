@@ -32,6 +32,8 @@ $(OBJ_DIR)/%.o: %.c
 	@echo + CC $<
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c -o $@ $<
+	echo "$@"
+	ehco "$<"
 	@$(CC) $(CFLAGS) -E -MF  /dev/null $< | clang-format > $@.i
 	$(call call_fixdep, $(@:.o=.d), $@)
 
