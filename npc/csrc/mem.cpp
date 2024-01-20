@@ -18,8 +18,7 @@ void init_mem()
 {
 
 memcpy(pmem,img,sizeof(img));
-char *img_file=(char *)IMG ;
-printf("%s\n",img_file);
+
 //long n=load_img();
 //printf("%ld\n",n);
 }
@@ -60,6 +59,8 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
 uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
 
 static long load_img(){
+   char *img_file=(char *)IMG ;
+   printf("%s\n",img_file);
       /*
    if (img_file == NULL) {
      printf("No image is given. Use the default build-in image.");
