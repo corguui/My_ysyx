@@ -81,6 +81,6 @@ static long load_img(){
                
    fclose(fp); 
    */
-   size =1;
+   long size =1;
    return size;
 }
