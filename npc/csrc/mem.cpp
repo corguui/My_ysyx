@@ -6,7 +6,7 @@
 #include<unistd.h>
 #include"../hsrc/mem.h"
 
-
+static long load_img();
 static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
 static uint32_t img[]
 {
