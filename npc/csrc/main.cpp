@@ -37,6 +37,7 @@ int main(int argc ,char** argv, char** env)
 	init_mem();
         uint32_t a=0x80000000;
 	top->pc=a;
+	int time=0;
 	while(count<=10&&!contextp->gotFinish())
 	{
 		//printf("------%x\n",top->pc);
@@ -50,7 +51,11 @@ int main(int argc ,char** argv, char** env)
 		top->rst=0;
 		}
 		top->clk =0; top->eval();
+		tfp->dump(time);
+		time++;
 		top->clk =1; top->eval();
+		tfp->dump(time);
+		time++;
 		//printf("----top->inst %x\n",top->inst);
 		/*
 		printf("------top->reg_out1 %x\n",top->reg_out1);
@@ -61,7 +66,7 @@ int main(int argc ,char** argv, char** env)
 
 		top->eval();
 
-		tfp->dump(contextp->time());
+		//tfp->dump(contextp->time());
 		contextp->timeInc(1);
 		count++;
 	}
