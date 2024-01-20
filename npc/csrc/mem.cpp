@@ -70,8 +70,7 @@ static long load_img(){
    fseek(fp, 0, SEEK_END);
    long size = ftell(fp);
                
-   printf("The image is %s, size = %ld", img_file, size);
-               
+   printf("the size =%ld\n",size);           
    fseek(fp, 0, SEEK_SET);
    int ret = fread(guest_to_host(0x80000000), size, 1, fp);
    assert(ret == 1);
