@@ -19,10 +19,12 @@ void init_mem()
 
 	//memcpy(pmem,img,sizeof(img));
 	long size=load_img();
+	uint32_t b=0x80000000;
 	int i=0;
-	for(i=0;i<size;i++);
+	for(i=0;i<14;i++);
 	{
-		printf("%x\n",pmem[2]);
+		printf("%x\n",pmem_read(b,4));
+		b=b+4;
 	}
 }
 
