@@ -19,7 +19,7 @@ void init_mem()
 
 	//memcpy(pmem,img,sizeof(img));
 	long n=load_img();
-	printf("%d\n",n);
+	printf("%ld\n",n);
 }
 
 
