@@ -20,6 +20,12 @@ void ebreak (int inst)
 
 int main(int argc ,char** argv, char** env)
 {
+	
+	for (int i=0;i<argc;i++)
+	{
+		printf("---%s\n",argv[i]);
+	}
+
 	//init
 	int count=0;
 	VerilatedContext* contextp = new VerilatedContext;
