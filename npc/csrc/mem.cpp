@@ -60,6 +60,8 @@ uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
 static long load_img(){
    char *img_file =NULL;
    strcpy(img_file,IMG);
+   printf("%s\n",img_file);
+   /*
    if (img_file == NULL) {
      printf("No image is given. Use the default build-in image.");
      return 4096; // built-in image size
@@ -78,5 +80,7 @@ static long load_img(){
    assert(ret == 1);
                
    fclose(fp); 
+   */
+   size =1;
    return size;
 }
