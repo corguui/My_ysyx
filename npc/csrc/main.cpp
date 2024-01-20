@@ -53,11 +53,9 @@ int main(int argc ,char** argv, char** env)
 		top->clk =0; top->eval();
 		tfp->dump(time);
 		time++;
-		tfp->dump(contextp->time());
 		top->clk =1; top->eval();
 		tfp->dump(time);
 		time++;
-		tfp->dump(contextp->time());
 
 		//printf("----top->inst %x\n",top->inst);
 		/*
