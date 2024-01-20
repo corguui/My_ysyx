@@ -9,6 +9,8 @@
 #include"svdpi.h"
 #include"../hsrc/mem.h"
 
+#define ARG "hello"
+
 
 void ebreak (int inst)
 {
@@ -21,7 +23,7 @@ void ebreak (int inst)
 
 int main(int argc ,char** argv, char** env)
 {
-	printf("%s\n",IMG);
+	printf("%s\n",ARG);
 	for (int i=0;i<argc;i++)
 	{
 		printf("---%s\n",argv[i]);
