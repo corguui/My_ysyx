@@ -21,7 +21,7 @@ void ebreak (int inst)
 
 int main(int argc ,char** argv, char** env)
 {
-	printf("%d\n",IMG);
+	printf("%d\n",argv[1]);
 	for (int i=0;i<argc;i++)
 	{
 		printf("---%s\n",argv[i]);
