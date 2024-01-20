@@ -55,7 +55,7 @@ run: $(BIN)
 all:
 	@echo "Write this Makefile by your self."
 
-sim:$(Vfile) $(Cfile) $(TOPfile)
+sim:$(Vfile) $(Cfile) $(TOPfile) $(IMG)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 	verilator -Wall --cc --trace --exe --build $(TOPfile) $(subst $(TOPfile),,$^)
