@@ -22,7 +22,7 @@ void ebreak (int inst)
 int main(int argc ,char** argv, char** env)
 {
 	//init
-	printf("%s\n",IMG);
+	printf("%s\n",(char *)IMG);
 	int count=0;
 	VerilatedContext* contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
