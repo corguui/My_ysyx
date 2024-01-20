@@ -35,6 +35,7 @@ VM_PREFIX = Vysyx_23060111_top
 VM_MODPREFIX = Vysyx_23060111_top
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
+	-D ARGS= \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
