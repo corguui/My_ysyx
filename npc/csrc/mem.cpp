@@ -22,7 +22,7 @@ void init_mem()
 	int i=0;
 	for(i=0;i<size;i++);
 	{
-		printf("%x\n",pmem[i]);
+		printf("%x\n",pmem[1]);
 	}
 }
 
