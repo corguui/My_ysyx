@@ -9,7 +9,7 @@
 #include"svdpi.h"
 #include"../hsrc/mem.h"
 
-
+extern const char* IMG;
 
 void ebreak (int inst)
 {
