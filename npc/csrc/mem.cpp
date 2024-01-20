@@ -19,8 +19,8 @@ void init_mem()
 
 memcpy(pmem,img,sizeof(img));
 
-//long n=load_img();
-//printf("%ld\n",n);
+long n=load_img();
+printf("%ld\n",n);
 }
 
 
