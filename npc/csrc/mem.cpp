@@ -55,7 +55,7 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
 
 }
 
-static int parse_args(int argc ,char *argv[])
+static int parse_args(int argc ,char **argv)
 {
     const struct option table[] = {                               
       {0          , 0                , NULL,  0 },
