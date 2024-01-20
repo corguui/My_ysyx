@@ -64,6 +64,7 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
 uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
 
 static long load_img(){
+   printf("%s\n",IMG); 	
    char *img_file=(char *)IMG ;
    if (img_file == NULL) {
      printf("No image is given. Use the default build-in image.");
