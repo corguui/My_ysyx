@@ -36,7 +36,6 @@ int main(int argc ,char** argv, char** env)
 	init_mem();
         uint32_t a=0x80000000;
 	top->pc=a;
-/*
 	while(count<=10&&!contextp->gotFinish())
 	{
 		printf("------%x\n",top->pc);
@@ -63,7 +62,6 @@ int main(int argc ,char** argv, char** env)
 		contextp->timeInc(1);
 		count++;
 	}
-*/
 	delete top;
 	tfp->close();
 	delete contextp;
