@@ -17,9 +17,9 @@ static uint32_t img[]
 void init_mem()
 {
 
-	//memcpy(pmem,img,sizeof(img));
-	long n=load_img();
-	printf("%ld\n",n);
+	memcpy(pmem,img,sizeof(img));
+	//long n=load_img();
+	//printf("%ld\n",n);
 }
 
 
