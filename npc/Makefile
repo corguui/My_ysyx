@@ -3,7 +3,7 @@ Cfile=$(wildcard ./csrc/*.cpp)
 Wavefile=$(wildcard ./*.vcd)
 TOPfile=vsrc/ysyx_23060111_top.v
 
-IMG = word
+IMG ?= 
 
 #nvboard
 TOPNAME = top
