@@ -3,7 +3,7 @@ Cfile=$(wildcard ./csrc/*.cpp)
 Wavefile=$(wildcard ./*.vcd)
 TOPfile=vsrc/ysyx_23060111_top.v
 
-ARGS ?=
+IMG ?=
 
 #nvboard
 TOPNAME = top
@@ -57,7 +57,7 @@ all:
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator -Wall --cc --trace --exe --build $(TOPfile) $(subst $(TOPfile),,$^) --CFLAGS "-DARGS=123" 
+	verilator -Wall --cc --trace --exe --build $(TOPfile) $(subst $(TOPfile),,$^) --CFLAGS "-DARGS=$(IMG)" 
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 wave:$(Wavefile)
 	gtkwave $(Wavefile)
