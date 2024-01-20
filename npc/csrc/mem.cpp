@@ -21,7 +21,7 @@ void init_mem()
 	long size=load_img();
 	uint32_t b=0x80000000;
 	int i=0;
-	for(i=0;i<12;i++)
+	for(i=0;i<(size-1)/4;i++)
 	{
 		printf("%x\n",pmem_read(b,4));
 		b=b+0x4;
