@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 #else
   for (int i=0;i<argc;i++)
   {
-  	printf("%s\n",argv[i]);
+  	printf("------%s\n",argv[i]);
   }
   init_monitor(argc, argv);
 #endif
