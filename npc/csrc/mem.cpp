@@ -18,8 +18,11 @@ void init_mem()
 {
 
 	//memcpy(pmem,img,sizeof(img));
-
 	long size=load_img();
+	for(int i=0;i<size;i++);
+	{
+		printf("%s\n",pmem[i]);
+	}
 }
 
 
