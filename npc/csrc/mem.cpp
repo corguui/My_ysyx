@@ -21,7 +21,7 @@ void init_mem()
 	long size=load_img();
 	for(int i=0;i<size;i++);
 	{
-		printf("%s\n",pmem[i]);
+		printf("%x\n",pmem[i]);
 	}
 }
 
