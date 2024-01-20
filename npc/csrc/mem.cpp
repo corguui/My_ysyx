@@ -60,14 +60,13 @@ uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
 
 static long load_img(){
    char *img_file=(char *)IMG ;
-   printf("%s\n",img_file);
    if (img_file == NULL) {
      printf("No image is given. Use the default build-in image.");
      return 4096; // built-in image size
    }           
                
    FILE *fp = fopen(img_file, "rb");
-   assert(fp==NULL);
+   //assert(fp==NULL);
                
    fseek(fp, 0, SEEK_END);
    long size = ftell(fp);
