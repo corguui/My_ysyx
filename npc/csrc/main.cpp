@@ -50,10 +50,12 @@ int main(int argc ,char** argv, char** env)
 		}
 		top->clk =0; top->eval();
 		top->clk =1; top->eval();
-
+		printf("----top->inst %8x\n",top->inst);
+		/*
 		printf("------top->reg_out1 %x\n",top->reg_out1);
 		printf("------top->imm %x\n",top->imm);
 		printf("------top->val %x\n",top->inst);
+		*/
 
 
 		top->eval();
