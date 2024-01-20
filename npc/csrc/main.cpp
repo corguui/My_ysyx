@@ -53,9 +53,12 @@ int main(int argc ,char** argv, char** env)
 		top->clk =0; top->eval();
 		tfp->dump(time);
 		time++;
+		tfp->dump(contextp->time());
 		top->clk =1; top->eval();
 		tfp->dump(time);
 		time++;
+		tfp->dump(contextp->time());
+
 		//printf("----top->inst %x\n",top->inst);
 		/*
 		printf("------top->reg_out1 %x\n",top->reg_out1);
@@ -66,7 +69,7 @@ int main(int argc ,char** argv, char** env)
 
 		top->eval();
 
-		tfp->dump(contextp->time());
+		//tfp->dump(contextp->time());
 		contextp->timeInc(1);
 		count++;
 	}
