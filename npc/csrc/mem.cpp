@@ -79,6 +79,5 @@ static long load_img(){
    assert(ret == 1);
                
    fclose(fp); 
-   long size =1;
    return size;
 }
