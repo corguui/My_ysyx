@@ -5,6 +5,8 @@ uint32_t pmem_read(uint32_t &ad,int len);
 uint32_t pc_read(uint32_t &pc);
 void pmem_write(uint32_t &ad,int len ,uint32_t data);
 void init_mem();
-
+uint8_t *
+uint8_t* guest to host(uint32_t paddr);
+static long load_img(); 
 #endif
 

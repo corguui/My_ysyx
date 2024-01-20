@@ -17,7 +17,8 @@ static uint32_t img[]
 void init_mem()
 {
 
-	memcpy(pmem,img,sizeof(img));
+	//memcpy(pmem,img,sizeof(img));
+	long n=load_img();
 }
 
 
@@ -53,22 +54,28 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
    
 
 }
+uint8_t* guest to host(uint32_t paddr) { return pmem+ paddr - 0x80000000; }
 
-/*
-static int parse_args(int argc ,char **argv)
-{
-    const struct option table[] = {                               
-      {0          , 0                , NULL,  0 },
-    };
-    int o;                 
-    while ( (o = getopt_long(argc, argv, "-h", table, NULL)    ) != -1) {
-      switch (o) {         
-        case 1:   img_file =optarg; return 0;         
-	default :
-	printf("---help---\n");
-	}
-  }
-  return 0;
+static long load_img(){
+   char *img_file ==NULL;
+   strcpy(img_file,IMG);
+   if (img_file == NULL) {
+     Log("No image is given. Use the default build-in image.");
+     return 4096; // built-in image size
+   }           
+               
+   FILE *fp = fopen(img_file, "rb");
+   assert(fp==NULL);
+               
+   fseek(fp, 0, SEEK_END);
+   long size = ftell(fp);
+               
+   printf("The image is %s, size = %ld", img_file, size);
+               
+   fseek(fp, 0, SEEK_SET);
+   int ret = fread(guest_to_host(0x80000000), size, 1, fp);
+   assert(ret == 1);
+               
+   fclose(fp); 
+   return size;
 }
-*/
-

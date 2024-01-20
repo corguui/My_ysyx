@@ -21,12 +21,6 @@ void ebreak (int inst)
 
 int main(int argc ,char** argv, char** env)
 {
-	printf("%s\n",IMG);
-	for (int i=0;i<argc;i++)
-	{
-		printf("---%s\n",argv[i]);
-	}
-
 	//init
 	int count=0;
 	VerilatedContext* contextp = new VerilatedContext;
@@ -43,10 +37,11 @@ int main(int argc ,char** argv, char** env)
         uint32_t a=0x80000000;
 	top->pc=a;
 
-	while(count<=3&&!contextp->gotFinish())
+	while(count<=10&&!contextp->gotFinish())
 	{
 		printf("------%x\n",top->pc);
 		top->inst =pc_read(top->pc);
+		/*
 		if(count==2)
 		{
 		top->rst=1;
@@ -61,6 +56,7 @@ int main(int argc ,char** argv, char** env)
 		printf("------top->reg_out1 %x\n",top->reg_out1);
 		printf("------top->imm %x\n",top->imm);
 		printf("------top->val %x\n",top->inst);
+		*/
 
 
 		top->eval();
