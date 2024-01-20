@@ -19,7 +19,7 @@ void init_mem()
 
 	//memcpy(pmem,img,sizeof(img));
 	long size=load_img();
-	uint32_t b=0x80000000;
+	uint32_t b=0x80000004;
 	int i=0;
 	for(i=0;i<14;i++);
 	{
