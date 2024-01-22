@@ -24,7 +24,6 @@ assign raddr=rs1[19:15];
 assign wdata=rout+imm_32;
 assign waddr=rd[11:7];
 assign wen=1'b1;
-assign wen=1'b0;
 
 
 endmodule

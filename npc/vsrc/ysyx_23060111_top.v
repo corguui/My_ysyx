@@ -30,7 +30,6 @@ assign wdata=0;
 assign waddr=5'd0;
 assign raddr=5'd0;
 assign wen=1'b1;
-assign wen=1'b0;
 /*
 ysyx_23060111_reg #(5,32) reg_$1(clk,0,5'd1,1'b1,out);
 ysyx_23060111_reg #(5,32) reg_$2(clk,0,5'd2,1'b1,out);
