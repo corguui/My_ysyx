@@ -49,7 +49,7 @@ int main(int argc ,char** argv, char** env)
 		{
 		top->rst=0;
 		}
-		cpu_exce_once(VerilatedVcdC* tfp,time)
+		cpu_exce_once(tfp,time)
 
 		//contextp->timeInc(1);
 		count++;
