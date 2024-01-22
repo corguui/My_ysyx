@@ -32,7 +32,7 @@ end
 ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out);
 
  //init IDU
- ysyx_23060111_IDU init_IDU (inst,dnpc,imm,funct3,rs1,rd,opcode);
+ ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
 
  //init EXU
  ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,reg_out,reg_out1,rbb);
