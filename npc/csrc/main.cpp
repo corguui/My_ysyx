@@ -68,7 +68,7 @@ void cpu_exce_once(VerilatedVcdC* tfp)
 		main_time++;
 		top->eval();
 		top->clk =1; top->eval();
-		tfp->dump(mian_time);
+		tfp->dump(main_time);
 		main_time++;
 		top->eval();
 }
