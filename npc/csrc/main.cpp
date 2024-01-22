@@ -78,7 +78,7 @@ void cpu_init()
 	tfp->dump(main_time);
 	main_time++;
 	top->eval();
-	top-rst=0;
+	top->rst=0;
 
 	
 }
