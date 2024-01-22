@@ -16,7 +16,11 @@ module ysyx_23060111_EXU(
   output [4:0] raddr,
   output wen
 );
-  reg dnpc,snpc,imm,pc,rout,wdata,waddr,raddr,wen;
+  reg [31:0] dnpc,snpc,pc;
+  reg [31:20] imm;
+  reg [31:0]rout,wdata;
+  reg [4:0]waddr,raddr;
+  reg wen;
   reg [31:0] imm_32;
   assign rbb ={rd,rs1,funct3,opcode};
   ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
