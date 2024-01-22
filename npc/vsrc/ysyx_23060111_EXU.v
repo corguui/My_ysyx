@@ -15,7 +15,7 @@ module ysyx_23060111_EXU(
   output reg wen
 );
   reg[31:0] imm_32;
-	
+  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
   always @(posedge clk)
     begin
     	dnpc<=snpc;
