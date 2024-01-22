@@ -15,17 +15,9 @@ VerilatedContext* contextp=NULL;
 Vysyx_23060111_top *top=NULL; 
 VerilatedVcdC* tfp=NULL;
 
-void cpu_exce_once(VerilatedVcdC* tfp)
+void cpu_exce_once(VerilatedVcdC* tfp);
+void ebreak(int inst);
 
-
-void ebreak (int inst)
-{
-	if(inst == 0x00100073 )
-	{
-	printf("error --------- ebreak\n");
-	//assert(0);
-	}
-}
 
 int main(int argc ,char** argv, char** env)
 {
@@ -79,3 +71,13 @@ void cpu_exce_once(VerilatedVcdC* tfp,int time)
 		time++;
 		top->eval();
 }
+void ebreak (int inst)
+{
+	if(inst == 0x00100073 )
+	{
+	printf("error --------- ebreak\n");
+	//assert(0);
+	}
+}
+
+
