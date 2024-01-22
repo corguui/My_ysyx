@@ -16,8 +16,7 @@ module ysyx_23060111_top(
   output[4:0]waddr,
   output[4:0]raddr,
   output wen,
-  output[31:0] rout,
-  output[20:1] rbb
+  output[31:0] rout
 );
 
 assign val=inst;
@@ -37,7 +36,11 @@ assign wen=1'b1;
  ysyx_23060111_idu init_idu (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
 
  //init exu
- ysyx_23060111_exu init_exu (clk,rst,dnpc,snpc,imm,rs1,funct3,rd,opcode,pc,rbb,rout,wdata,waddr,raddr,wen);
+ ysyx_23060111_exu init_exu (clk,dnpc,snpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,wen);
+
+
+ ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
+
 endmodule
 
 

@@ -1,6 +1,5 @@
 module ysyx_23060111_EXU(
   input       clk,
-  input       rst,
   output reg [31:0] dnpc,
   input reg [31:0] snpc,
   input reg [31:20] imm,
@@ -8,8 +7,7 @@ module ysyx_23060111_EXU(
   input[14:12] funct3,
   input[11:7] rd,
   input[6:0] opcode,
-  output reg [31:0] pc,
-  output[20:1] rbb,
+  input reg [31:0] pc,
   input  reg [31:0] rout,
   output reg [31:0] wdata,
   output reg [4:0] waddr,
@@ -17,8 +15,6 @@ module ysyx_23060111_EXU(
   output reg wen
 );
   reg[31:0] imm_32;
-  assign rbb ={rd,rs1,funct3,opcode};
-  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
 	
   always @(posedge clk)
     begin
