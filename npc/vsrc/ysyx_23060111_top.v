@@ -4,32 +4,32 @@ module ysyx_23060111_top(
   input       clk,
   input[31:0] inst,
   output[31:0] val,
-  output[31:0] snpc,
-  output[31:0] dnpc,
-  output[31:0] pc,
-  output[31:20] imm,
-  output[19:15] rs1,
-  output[14:12] funct3,
-  output[11:7] rd,
-  output[6:0] opcode,
-  output[31:0] wdata,
-  output[4:0]waddr,
-  output[4:0]raddr,
-  output wen,
-  output[31:0] rout
-);
+  output reg[31:0] snpc,
+  output reg[31:0] dnpc,
+  output reg[31:0] pc
+  );
 
 assign val=inst;
 assign snpc=pc;
 
- 
+  reg [31:20] imm;
+  reg[14:12] funct3;
+  reg [19:15] rs1;
+  reg[11:7] rd;
+  reg[6:0] opcode;
+  wire[31:0] wdata;
+  wire[4:0]waddr;
+  wire[4:0]raddr;
+  wire wen;
+  wire[31:0] rout;
+
+
  //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 assign wdata=0;
 assign waddr=5'd0;
 assign raddr=5'd0;
 assign wen=1'b1;
-
 
 
  //init idu
