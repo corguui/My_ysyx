@@ -11,7 +11,7 @@ module ysyx_23060111_EXU(
   output[31:0] reg_out,
   output[31:0] reg_out1,
   output[20:1] rbb,
-  output[31:0] out,
+  input[31:0] out,
   output[31:0] wdata,
   output[4:0] waddr,
   output wen
@@ -24,6 +24,7 @@ module ysyx_23060111_EXU(
 ysyx_23060111_reg #(5,32) reg_src1(clk,0,rs1[19:15],1'b0,reg_out);
 assign wdata=reg_out+imm_32;
 assign waddr=rd[11:7];
+assign wen=1'b1;
 assign reg_out1=out;
 
 
