@@ -1,3 +1,4 @@
+extern ysyx_23060111_reg #(5,32) reg_$0;
 module ysyx_23060111_EXU(
   input       clk,
   input       rst,
@@ -18,8 +19,9 @@ module ysyx_23060111_EXU(
   assign dnpc=32'h80000008;
  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
 //ysyx_23060111_reg #(5,32) reg_src1(clk,0,rs1[19:15],1'b0,reg_out);
-ysyx_23060111_reg #(5,32) reg_$0(clk,reg_out+imm_32,rd[11:7],1'b1,reg_out1);
-ysyx_23060111_reg #(5,32) reg_$0(clk,0,rs1[19:15],1'b0,reg_out);
+reg_$0.wdata=reg_out+imm_32;
+reg_$0.waddr=rd[11:7];
+reg_$0.out=reg_out1;
 
 
 endmodule
