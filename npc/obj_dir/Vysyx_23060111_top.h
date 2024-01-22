@@ -28,8 +28,13 @@ class Vysyx_23060111_top VL_NOT_FINAL : public VerilatedModel {
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    VL_IN8(&clk,0,0);
-    VL_IN8(&rst,0,0);
+    VL_IN8(&ysyx_23060111_trigger__02Eclk,0,0);
+    VL_IN8(&ysyx_23060111_top__02Eclk,0,0);
+    VL_IN8(&ysyx_23060111_trigger__02Erst,0,0);
+    VL_IN8(&din,0,0);
+    VL_OUT8(&dout,0,0);
+    VL_IN8(&wen,0,0);
+    VL_IN8(&ysyx_23060111_top__02Erst,0,0);
     VL_OUT8(&rs1,19,15);
     VL_OUT8(&funct3,14,12);
     VL_OUT8(&rd,11,7);
