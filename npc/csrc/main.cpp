@@ -17,7 +17,7 @@ VerilatedVcdC* tfp=NULL;
 
 int main_time=0;
 
-void cpu_init()
+void cpu_init();
 void cpu_exce_once(VerilatedVcdC* tfp);
 void ebreak(int inst);
 void cpu_exce(uint32_t n);
