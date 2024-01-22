@@ -35,12 +35,12 @@ module ysyx_23060111_EXU(
 	//auipc
 	32'b?????????????????????????0010111:
 	begin
-	waddr=rd[11:7]+{imm,rs1,funct3};	
+	waddr={15'b0,rd[11:7]}+{imm,rs1,funct3};	
 	wen=1'b1;//write
 	end
 	32'b?????????????????????????0110111:
 	begin
-	waddr=rd[11:7]+{imm,rs1,funct3};
+	waddr={15'b0,rd[11:7]}+{imm,rs1,funct3};
 	wen=1'b1;
 	end
 	//jalr
@@ -48,7 +48,7 @@ module ysyx_23060111_EXU(
 	begin
 	waddr=rd[11:7];
 	wdata=snpc;
-	dnpc=imm+rs1;
+	dnpc={20'b0,imm}+{27'b0,rs1};
 	wen=1'b1;
 	end
 	//jal
@@ -56,7 +56,7 @@ module ysyx_23060111_EXU(
 	begin
 	waddr=rd[11:7];
 	wdata=snpc;
-	dnpc={imm,rs1,funct3}+pc;
+	dnpc={12'b0,imm,rs1,funct3}+pc;
 	wen=1'b1;
 	end
 	default:
