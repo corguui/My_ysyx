@@ -14,6 +14,7 @@ int time=0;
 void cpu_exce_once(VerilatedVcdC* tfp)
 
 VerilatedContext* contextp = new VerilatedContext;
+contextp->commandArgs(argc,argv);
 Vysyx_23060111_top *top = new Vysyx_23060111_top{contextp};
 VerilatedVcdC* tfp=new VerilatedVcdC;
 
@@ -32,7 +33,6 @@ int main(int argc ,char** argv, char** env)
 	//init
 	printf("%s\n",IMG);
 	int count=0;
-	contextp->commandArgs(argc,argv);
 	contextp->traceEverOn(true);
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
