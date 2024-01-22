@@ -95,7 +95,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
                                       >> 7U))) ? vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf
                         [(1U & (vlSelf->inst >> 7U))]
                          : 0U);
-    vlSelf->snpc = ((IData)(4U) + vlSelf->pc);
+    vlSelf->snpc = vlSelf->pc;
     vlSelf->rd = (0x1fU & (vlSelf->inst >> 7U));
     vlSelf->opcode = (0x7fU & vlSelf->inst);
     vlSelf->dnpc = vlSelf->snpc;
