@@ -12,9 +12,9 @@
 
 void cpu_exce_once(VerilatedVcdC* tfp)
 
-VerilatedContext* contextp; 
-Vysyx_23060111_top *top; 
-VerilatedVcdC* tfp;
+VerilatedContext* contextp=NULL; 
+Vysyx_23060111_top *top=NULL; 
+VerilatedVcdC* tfp=NULL;
 
 
 void ebreak (int inst)
