@@ -18,7 +18,7 @@ module ysyx_23060111_EXU(
   reg [31:0] imm_32;
   assign imm_32={20'h00000,imm};
   assign rbb ={rd,rs1,funct3,opcode};
-  assign dnpc=32'h80000008;
+  assign dnpc=32'h80000004;
  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
 assign raddr=rs1[19:15];
 assign wdata=rout+imm_32;
