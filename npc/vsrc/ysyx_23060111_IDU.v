@@ -1,6 +1,6 @@
 import "DPI-C" function void ebreak(input int inst);
 module ysyx_23060111_IDU(
-  input [31:0] snpc,
+  //input [31:0] snpc,
   input [31:0] inst,
   output [31:0] dnpc,
   output [31:20] imm,

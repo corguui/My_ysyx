@@ -33,7 +33,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+3,"inst", false,-1, 31,0);
     tracep->declBus(c+4,"val", false,-1, 31,0);
     tracep->declBus(c+5,"snpc", false,-1, 31,0);
-    tracep->declBus(c+5,"dnpc", false,-1, 31,0);
+    tracep->declBus(c+6,"dnpc", false,-1, 31,0);
     tracep->declBus(c+7,"pc", false,-1, 31,0);
     tracep->declBus(c+8,"imm", false,-1, 31,20);
     tracep->declBus(c+9,"rs1", false,-1, 19,15);
@@ -47,7 +47,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->pushNamePrefix("init_EXU ");
     tracep->declBit(c+2,"clk", false,-1);
     tracep->declBit(c+1,"rst", false,-1);
-    tracep->declBus(c+5,"dnpc", false,-1, 31,0);
+    tracep->declBus(c+6,"dnpc", false,-1, 31,0);
     tracep->declBus(c+8,"imm", false,-1, 31,20);
     tracep->declBus(c+9,"rs1", false,-1, 19,15);
     tracep->declBus(c+10,"funct3", false,-1, 14,12);
@@ -87,14 +87,14 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+29,"RESET_VAL", false,-1, 31,0);
     tracep->declBit(c+2,"clk", false,-1);
     tracep->declBit(c+1,"rst", false,-1);
-    tracep->declBus(c+5,"din", false,-1, 31,0);
+    tracep->declBus(c+6,"din", false,-1, 31,0);
     tracep->declBus(c+7,"dout", false,-1, 31,0);
     tracep->declBit(c+25,"wen", false,-1);
     tracep->popNamePrefix(2);
     tracep->pushNamePrefix("init_IDU ");
     tracep->declBus(c+5,"snpc", false,-1, 31,0);
     tracep->declBus(c+3,"inst", false,-1, 31,0);
-    tracep->declBus(c+5,"dnpc", false,-1, 31,0);
+    tracep->declBus(c+6,"dnpc", false,-1, 31,0);
     tracep->declBus(c+8,"imm", false,-1, 31,20);
     tracep->declBus(c+10,"funct3", false,-1, 14,12);
     tracep->declBus(c+9,"rs1", false,-1, 19,15);
