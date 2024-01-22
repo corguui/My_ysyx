@@ -1,4 +1,3 @@
-extern ysyx_23060111_reg #(5,32) reg_$0;
 module ysyx_23060111_EXU(
   input       clk,
   input       rst,
@@ -13,6 +12,7 @@ module ysyx_23060111_EXU(
   output[31:0] reg_out1,
   output[20:1] out
 );
+extern ysyx_23060111_reg #(5,32) reg_$0;
   reg [31:0] imm_32;
   assign imm_32={20'h00000,imm};
   assign out ={rd,rs1,funct3,opcode};
