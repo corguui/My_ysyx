@@ -21,15 +21,42 @@ module ysyx_23060111_top(
 assign val=inst;
 assign snpc=pc;
 
-//break
-/*always @(*)
-begin 
-     ebreak(inst);
-end
-*/
  
  //init reg
-ysyx_23060111_reg #(1,32) reg_$0(clk,0,1'b0,1'b1,out);
+ysyx_23060111_reg #(5,32) reg_$0(clk,0,5'd0,1'b1,out);
+reg_$0(clk,0,5'd1,1'b1,out);
+reg_$0(clk,0,5'd2,1'b1,out);
+reg_$0(clk,0,5'd3,1'b1,out);
+reg_$0(clk,0,5'd4,1'b1,out);
+reg_$0(clk,0,5'd5,1'b1,out);
+reg_$0(clk,0,5'd6,1'b1,out);
+reg_$0(clk,0,5'd7,1'b1,out);
+reg_$0(clk,0,5'd8,1'b1,out);
+reg_$0(clk,0,5'd9,1'b1,out);
+reg_$0(clk,0,5'd10,1'b1,out);
+reg_$0(clk,0,5'd11,1'b1,out);
+reg_$0(clk,0,5'd12,1'b1,out);
+reg_$0(clk,0,5'd13,1'b1,out);
+reg_$0(clk,0,5'd14,1'b1,out);
+reg_$0(clk,0,5'd15,1'b1,out);
+reg_$0(clk,0,5'd16,1'b1,out);
+reg_$0(clk,0,5'd17,1'b1,out);
+reg_$0(clk,0,5'd18,1'b1,out);
+reg_$0(clk,0,5'd19,1'b1,out);
+reg_$0(clk,0,5'd20,1'b1,out);
+reg_$0(clk,0,5'd21,1'b1,out);
+reg_$0(clk,0,5'd22,1'b1,out);
+reg_$0(clk,0,5'd23,1'b1,out);
+reg_$0(clk,0,5'd24,1'b1,out);
+reg_$0(clk,0,5'd25,1'b1,out);
+reg_$0(clk,0,5'd26,1'b1,out);
+reg_$0(clk,0,5'd27,1'b1,out);
+reg_$0(clk,0,5'd28,1'b1,out);
+reg_$0(clk,0,5'd29,1'b1,out);
+reg_$0(clk,0,5'd30,1'b1,out);
+reg_$0(clk,0,5'd31,1'b1,out);
+
+
 
  //init IDU
  ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
