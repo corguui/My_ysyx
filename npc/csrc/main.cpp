@@ -57,18 +57,10 @@ int main(int argc ,char** argv, char** env)
 		tfp->dump(time);
 		time++;
 
-		//printf("----top->inst %x\n",top->inst);
-		/*
-		printf("------top->reg_out1 %x\n",top->reg_out1);
-		printf("------top->imm %x\n",top->imm);
-		printf("------top->val %x\n",top->inst);
-		*/
-
 
 		top->eval();
 
-		//tfp->dump(contextp->time());
-		contextp->timeInc(1);
+		//contextp->timeInc(1);
 		count++;
 	}
 	delete top;
