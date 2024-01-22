@@ -1,7 +1,7 @@
 module ysyx_23060111_EXU(
   input       clk,
   input       rst,
-  input[31:0] dnpc,
+  output[31:0] dnpc,
   input[31:20] imm,
   input[19:15] rs1,
   input[14:12] funct3,
