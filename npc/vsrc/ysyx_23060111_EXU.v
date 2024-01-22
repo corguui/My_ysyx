@@ -22,7 +22,6 @@ module ysyx_23060111_EXU(
   ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
 	
   always @(posedge clk)
-  {
     begin
   	casex({imm,rs1,funct3,rd,opcode})
 	//addi
@@ -56,8 +55,6 @@ module ysyx_23060111_EXU(
 	endcase
     end
 
-
-  }
   //addi
   //assign imm_32={20'h00000,imm};
   //assign raddr=rs1[19:15];
