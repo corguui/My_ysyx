@@ -12,13 +12,8 @@
 Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vysyx_23060111_top__Syms(contextp(), _vcname__, this)}
-    , ysyx_23060111_trigger__02Eclk{vlSymsp->TOP.ysyx_23060111_trigger__02Eclk}
-    , ysyx_23060111_top__02Eclk{vlSymsp->TOP.ysyx_23060111_top__02Eclk}
-    , ysyx_23060111_trigger__02Erst{vlSymsp->TOP.ysyx_23060111_trigger__02Erst}
-    , din{vlSymsp->TOP.din}
-    , dout{vlSymsp->TOP.dout}
-    , wen{vlSymsp->TOP.wen}
-    , ysyx_23060111_top__02Erst{vlSymsp->TOP.ysyx_23060111_top__02Erst}
+    , clk{vlSymsp->TOP.clk}
+    , rst{vlSymsp->TOP.rst}
     , rs1{vlSymsp->TOP.rs1}
     , funct3{vlSymsp->TOP.funct3}
     , rd{vlSymsp->TOP.rd}

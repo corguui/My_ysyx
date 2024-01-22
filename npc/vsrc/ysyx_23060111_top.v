@@ -19,7 +19,7 @@ module ysyx_23060111_top(
 );
 
 assign val=inst;
-assign snpc=pc+32'h4;
+assign snpc=pc;
 
 //break
 /*always @(*)

@@ -23,8 +23,8 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
     // Body
-    bufp->chgBit(oldp+0,(vlSelf->ysyx_23060111_top__02Erst));
-    bufp->chgBit(oldp+1,(vlSelf->ysyx_23060111_top__02Eclk));
+    bufp->chgBit(oldp+0,(vlSelf->rst));
+    bufp->chgBit(oldp+1,(vlSelf->clk));
     bufp->chgIData(oldp+2,(vlSelf->inst),32);
     bufp->chgIData(oldp+3,(vlSelf->val),32);
     bufp->chgIData(oldp+4,(vlSelf->snpc),32);
@@ -39,18 +39,13 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     bufp->chgIData(oldp+13,(vlSelf->reg_out),32);
     bufp->chgIData(oldp+14,(vlSelf->reg_out1),32);
     bufp->chgIData(oldp+15,(vlSelf->rbb),20);
-    bufp->chgBit(oldp+16,(vlSelf->ysyx_23060111_trigger__02Eclk));
-    bufp->chgBit(oldp+17,(vlSelf->ysyx_23060111_trigger__02Erst));
-    bufp->chgBit(oldp+18,(vlSelf->din));
-    bufp->chgBit(oldp+19,(vlSelf->dout));
-    bufp->chgBit(oldp+20,(vlSelf->wen));
-    bufp->chgIData(oldp+21,((vlSelf->inst >> 0x14U)),32);
-    bufp->chgIData(oldp+22,((vlSelf->reg_out + (vlSelf->inst 
+    bufp->chgIData(oldp+16,((vlSelf->inst >> 0x14U)),32);
+    bufp->chgIData(oldp+17,((vlSelf->reg_out + (vlSelf->inst 
                                                 >> 0x14U))),32);
-    bufp->chgBit(oldp+23,((1U & (vlSelf->inst >> 7U))));
-    bufp->chgIData(oldp+24,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf[0]),32);
-    bufp->chgBit(oldp+25,((1U & (vlSelf->inst >> 0xfU))));
-    bufp->chgIData(oldp+26,(vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0]),32);
+    bufp->chgBit(oldp+18,((1U & (vlSelf->inst >> 7U))));
+    bufp->chgIData(oldp+19,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf[0]),32);
+    bufp->chgBit(oldp+20,((1U & (vlSelf->inst >> 0xfU))));
+    bufp->chgIData(oldp+21,(vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0]),32);
 }
 
 void Vysyx_23060111_top___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
