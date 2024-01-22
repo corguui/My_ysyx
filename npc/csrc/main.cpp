@@ -15,6 +15,8 @@ VerilatedContext* contextp=NULL;
 Vysyx_23060111_top *top=NULL; 
 VerilatedVcdC* tfp=NULL;
 
+int time=0;
+
 void cpu_exce_once(VerilatedVcdC* tfp);
 void ebreak(int inst);
 
@@ -24,7 +26,6 @@ int main(int argc ,char** argv, char** env)
 	//init
 	printf("%s\n",IMG);
 	int count=0;
-	int time=0;
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new Vysyx_23060111_top{contextp};
@@ -49,7 +50,7 @@ int main(int argc ,char** argv, char** env)
 		{
 		top->rst=0;
 		}
-		cpu_exce_once(tfp,time);
+		cpu_exce_once(tfp);
 
 		//contextp->timeInc(1);
 		count++;
@@ -60,7 +61,7 @@ int main(int argc ,char** argv, char** env)
 	return 0;
 }
 
-void cpu_exce_once(VerilatedVcdC* tfp,int time)
+void cpu_exce_once(VerilatedVcdC* tfp)
 {
 		top->clk =0; top->eval();
 		tfp->dump(time);
