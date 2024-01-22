@@ -10,17 +10,21 @@ module ysyx_23060111_EXU(
   output[31:0] pc,
   output[31:0] reg_out,
   output[31:0] reg_out1,
-  output[20:1] out
+  output[20:1] rbb,
+  output[31:0] out,
+  output[31:0] wdata,
+  output[4:0] waddr,
+  output wen
 );
   reg [31:0] imm_32;
   assign imm_32={20'h00000,imm};
-  assign out ={rd,rs1,funct3,opcode};
+  assign rbb ={rd,rs1,funct3,opcode};
   assign dnpc=32'h80000008;
  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
-//ysyx_23060111_reg #(5,32) reg_src1(clk,0,rs1[19:15],1'b0,reg_out);
-reg_$0.wdata[31:0]=reg_out+imm_32;
-reg_$0.waddr[4:0]=rd[11:7];
-reg_$0.out=reg_out1;
+ysyx_23060111_reg #(5,32) reg_src1(clk,0,rs1[19:15],1'b0,reg_out);
+assign wdata=reg_out+imm_32;
+assign waddr=rd[11:7];
+assign reg_out1=out;
 
 
 endmodule

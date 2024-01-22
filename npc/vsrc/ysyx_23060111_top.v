@@ -12,6 +12,9 @@ module ysyx_23060111_top(
   output[14:12] funct3,
   output[11:7] rd,
   output[6:0] opcode,
+  output[31:0] wdata,
+  output[4:0] waddr,
+  output wen,
   output[31:0] out,
   output[31:0] reg_out,
   output[31:0] reg_out1,
@@ -23,7 +26,10 @@ assign snpc=pc;
 
  
  //init reg
-extern ysyx_23060111_reg #(5,32) reg_$0(clk,0,5'd0,1'b1,out);
+ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,wen,out);
+assign wdata=0;
+assign waddr=5'd0;
+assign wen=1'b1;
 /*
 ysyx_23060111_reg #(5,32) reg_$1(clk,0,5'd1,1'b1,out);
 ysyx_23060111_reg #(5,32) reg_$2(clk,0,5'd2,1'b1,out);
@@ -64,7 +70,7 @@ ysyx_23060111_reg #(5,32) reg_$31(clk,0,5'd31,1'b1,out);
  ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
 
  //init EXU
- ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,reg_out,reg_out1,rbb);
+ ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,reg_out,reg_out1,rbb,out,wdata,waddr,wen);
 endmodule
 
 
