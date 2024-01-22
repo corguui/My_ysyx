@@ -3,10 +3,10 @@ module ysyx_23060111_EXU(
   output reg [31:0] dnpc,
   input reg [31:0] snpc,
   input reg [31:20] imm,
-  input[19:15] rs1,
-  input[14:12] funct3,
-  input[11:7] rd,
-  input[6:0] opcode,
+  input reg[19:15] rs1,
+  input reg[14:12] funct3,
+  input reg[11:7] rd,
+  input reg[6:0] opcode,
   input reg [31:0] pc,
   input  reg [31:0] rout,
   output reg [31:0] wdata,
@@ -18,7 +18,7 @@ module ysyx_23060111_EXU(
 	
   always @(posedge clk)
     begin
-  	casex({imm,rs1,funct3,rd,opcode})
+  	casez({imm,rs1,funct3,rd,opcode})
 	//addi
 	32'b?????????????????000?????0010011:
 	begin
