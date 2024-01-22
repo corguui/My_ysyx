@@ -10,7 +10,7 @@
 #include"../hsrc/mem.h"
 
 
-uint32_t time=0;
+int time=0;
 void cpu_exce_once(VerilatedVcdC* tfp)
 
 VerilatedContext* contextp = new VerilatedContext;
