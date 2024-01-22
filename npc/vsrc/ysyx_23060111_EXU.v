@@ -21,7 +21,9 @@ module ysyx_23060111_EXU(
   assign rbb ={rd,rs1,funct3,opcode};
   assign dnpc=32'h80000008;
  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
-ysyx_23060111_reg #(5,32) reg_src1(clk,0,rs1[19:15],1'b0,reg_out);
+assign waddr=rs1[19:15];
+assign wen=1'b0;
+assign reg_out=out;
 assign wdata=reg_out+imm_32;
 assign waddr=rd[11:7];
 assign wen=1'b1;
