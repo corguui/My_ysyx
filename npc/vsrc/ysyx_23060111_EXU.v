@@ -22,43 +22,43 @@ module ysyx_23060111_EXU(
 	//addi
 	32'b?????????????????000?????0010011:
 	begin
-	imm_32<={20'h00000,imm};
-	raddr<=rs1[19:15];
-  	wdata<=rout+imm_32;
-  	waddr<=rd[11:7];
-  	wen<=1'b1;
+	imm_32={20'h00000,imm};
+	raddr=rs1[19:15];
+  	wdata=rout+imm_32;
+  	waddr=rd[11:7];
+  	wen=1'b1;
 	end
 	//auipc
 	32'b?????????????????????????0010111:
 	begin
-	waddr<=rd[11:7];
-	wdata<=pc+{12'b0,imm,rs1,funct3};	
-	wen<=1'b1;//write
+	waddr=rd[11:7];
+	wdata=pc+{12'b0,imm,rs1,funct3};	
+	wen=1'b1;//write
 	end
 	32'b?????????????????????????0110111:
 	begin
-	waddr<=rd[11:7];
-	wdata<={12'b0,imm,rs1,funct3};
-	wen<=1'b1;
+	waddr=rd[11:7];
+	wdata={12'b0,imm,rs1,funct3};
+	wen=1'b1;
 	end
 	//jalr
 	32'b?????????????????000?????1100111:
 	begin
-	waddr<=rd[11:7];
-	wdata<=snpc;
-	dnpc<={20'b0,imm}+{27'b0,rs1};
-	wen<=1'b1;
+	waddr=rd[11:7];
+	wdata=snpc;
+	dnpc={20'b0,imm}+{27'b0,rs1};
+	wen=1'b1;
 	end
 	//jal
 	32'b?????????????????????????1101111:
 	begin
-	waddr<=rd[11:7];
-	wdata<=snpc;
-	dnpc<={12'b0,imm,rs1,funct3}+pc;
-	wen<=1'b1;
+	waddr=rd[11:7];
+	wdata=snpc;
+	dnpc={12'b0,imm,rs1,funct3}+pc;
+	wen=1'b1;
 	end
 	default:
-	wen<=1'b0;
+	wen=1'b0;
 	endcase
     end
 
