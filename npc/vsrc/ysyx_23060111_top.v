@@ -23,7 +23,7 @@ assign snpc=pc;
 
  
  //init reg
-ysyx_23060111_reg #(5,32) reg_$0(clk,0,5'd0,1'b1,out);
+extern ysyx_23060111_reg #(5,32) reg_$0(clk,0,5'd0,1'b1,out);
 /*
 ysyx_23060111_reg #(5,32) reg_$1(clk,0,5'd1,1'b1,out);
 ysyx_23060111_reg #(5,32) reg_$2(clk,0,5'd2,1'b1,out);
