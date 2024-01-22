@@ -1,27 +1,21 @@
 module ysyx_23060111_EXU(
   input       clk,
   input       rst,
-  output [31:0] dnpc,
-  input [31:0] snpc,
-  input [31:20] imm,
+  output reg [31:0] dnpc,
+  input reg [31:0] snpc,
+  input reg [31:20] imm,
   input[19:15] rs1,
   input[14:12] funct3,
   input[11:7] rd,
   input[6:0] opcode,
-  output [31:0] pc,
+  output reg [31:0] pc,
   output[20:1] rbb,
-  input  [31:0] rout,
-  output [31:0] wdata,
-  output [4:0] waddr,
-  output [4:0] raddr,
-  output wen
+  input  reg [31:0] rout,
+  output reg [31:0] wdata,
+  output reg [4:0] waddr,
+  output reg [4:0] raddr,
+  output reg wen
 );
-  reg [31:0] dnpc,snpc,pc;
-  reg [31:20] imm;
-  reg [31:0]rout,wdata;
-  reg [4:0]waddr,raddr;
-  reg wen;
-  reg [31:0] imm_32;
   assign rbb ={rd,rs1,funct3,opcode};
   ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
 	
