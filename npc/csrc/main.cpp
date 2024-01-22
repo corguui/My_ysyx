@@ -27,7 +27,7 @@ void execute(uint32_t n);
 
 int main(int argc ,char** argv, char** env)
 {
-	int count=2;
+	int count=3;
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new Vysyx_23060111_top{contextp};
