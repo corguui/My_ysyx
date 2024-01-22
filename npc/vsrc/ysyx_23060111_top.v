@@ -4,9 +4,9 @@ module ysyx_23060111_top(
   input       clk,
   input[31:0] inst,
   output[31:0] val,
-  output reg[31:0] snpc,
-  output reg[31:0] dnpc,
-  output reg[31:0] pc
+  output [31:0] snpc,
+  output [31:0] dnpc,
+  output [31:0] pc
   );
 
 assign val=inst;
