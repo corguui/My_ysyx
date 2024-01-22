@@ -64,7 +64,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
     __Vdlyvset__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 = 0U;
     ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT____Vlvbound_h9dec41c8__0 
         = (vlSelf->reg_out + (vlSelf->inst >> 0x14U));
-    vlSelf->pc = 0x80000000U;
+    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
+                   : 0x80000004U);
     vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0U] = 0U;
     if ((0U >= (1U & (vlSelf->inst >> 7U)))) {
         __Vdlyvval__ysyx_23060111_top__DOT__init_EXU__DOT__reg_rd__DOT__rf__v0 
