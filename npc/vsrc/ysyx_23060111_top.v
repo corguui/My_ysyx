@@ -16,8 +16,8 @@ module ysyx_23060111_top(
   output[4:0]waddr,
   output[4:0]raddr,
   output wen,
-  output[31:0]rout,
-  output[20:1] reg rbb
+  output[31:0] rout,
+  output[20:1] rbb
 );
 
 assign val=inst;
