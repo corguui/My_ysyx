@@ -83,7 +83,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     // Body
     vlSelf->val = vlSelf->inst;
     vlSelf->snpc = vlSelf->pc;
-    vlSelf->dnpc = vlSelf->snpc;
 }
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_stl(Vysyx_23060111_top___024root* vlSelf) {
