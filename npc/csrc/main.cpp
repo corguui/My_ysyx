@@ -15,7 +15,7 @@ VerilatedContext* contextp=NULL;
 Vysyx_23060111_top *top=NULL; 
 VerilatedVcdC* tfp=NULL;
 
-int time=0;
+int main_time=0;
 
 void cpu_exce_once(VerilatedVcdC* tfp);
 void ebreak(int inst);
@@ -64,12 +64,12 @@ int main(int argc ,char** argv, char** env)
 void cpu_exce_once(VerilatedVcdC* tfp)
 {
 		top->clk =0; top->eval();
-		tfp->dump(time);
-		time++;
+		tfp->dump(main_time);
+		main_time++;
 		top->eval();
 		top->clk =1; top->eval();
-		tfp->dump(time);
-		time++;
+		tfp->dump(mian_time);
+		main_time++;
 		top->eval();
 }
 void ebreak (int inst)
