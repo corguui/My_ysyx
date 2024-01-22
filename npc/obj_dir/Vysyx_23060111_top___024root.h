@@ -24,6 +24,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_OUT8(rd,11,7);
     VL_OUT8(opcode,6,0);
     VL_OUT8(waddr,4,0);
+    VL_OUT8(raddr,4,0);
     VL_OUT8(wen,0,0);
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactDidInit;
@@ -35,9 +36,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_OUT(dnpc,31,0);
     VL_OUT(pc,31,0);
     VL_OUT(wdata,31,0);
-    VL_OUT(out,31,0);
-    VL_OUT(reg_out,31,0);
-    VL_OUT(reg_out1,31,0);
+    VL_OUT(rout,31,0);
     VL_OUT(rbb,20,1);
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;

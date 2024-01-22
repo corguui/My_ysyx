@@ -71,12 +71,15 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     bufp->chgCData(oldp+43,(vlSelf->opcode),7);
     bufp->chgIData(oldp+44,(vlSelf->wdata),32);
     bufp->chgCData(oldp+45,(vlSelf->waddr),5);
-    bufp->chgBit(oldp+46,(vlSelf->wen));
-    bufp->chgIData(oldp+47,(vlSelf->out),32);
-    bufp->chgIData(oldp+48,(vlSelf->reg_out),32);
-    bufp->chgIData(oldp+49,(vlSelf->reg_out1),32);
-    bufp->chgIData(oldp+50,(vlSelf->rbb),20);
+    bufp->chgCData(oldp+46,(vlSelf->raddr),5);
+    bufp->chgBit(oldp+47,(vlSelf->wen));
+    bufp->chgIData(oldp+48,(vlSelf->rout),32);
+    bufp->chgIData(oldp+49,(vlSelf->rbb),20);
+    bufp->chgBit(oldp+50,((1U & vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
+                           [vlSelf->rs1])));
     bufp->chgIData(oldp+51,((vlSelf->inst >> 0x14U)),32);
+    bufp->chgIData(oldp+52,(vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
+                            [vlSelf->rs1]),32);
 }
 
 void Vysyx_23060111_top___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {

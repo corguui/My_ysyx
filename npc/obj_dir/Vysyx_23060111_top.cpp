@@ -19,6 +19,7 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     , rd{vlSymsp->TOP.rd}
     , opcode{vlSymsp->TOP.opcode}
     , waddr{vlSymsp->TOP.waddr}
+    , raddr{vlSymsp->TOP.raddr}
     , wen{vlSymsp->TOP.wen}
     , imm{vlSymsp->TOP.imm}
     , inst{vlSymsp->TOP.inst}
@@ -27,9 +28,7 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     , dnpc{vlSymsp->TOP.dnpc}
     , pc{vlSymsp->TOP.pc}
     , wdata{vlSymsp->TOP.wdata}
-    , out{vlSymsp->TOP.out}
-    , reg_out{vlSymsp->TOP.reg_out}
-    , reg_out1{vlSymsp->TOP.reg_out1}
+    , rout{vlSymsp->TOP.rout}
     , rbb{vlSymsp->TOP.rbb}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
