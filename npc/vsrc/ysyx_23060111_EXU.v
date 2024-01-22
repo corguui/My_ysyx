@@ -23,7 +23,7 @@ module ysyx_23060111_EXU(
 	
   always @(posedge clk)
   {
-  	casez({imm,rs1,funct3,rd,opcode})
+  	case({imm,rs1,funct3,rd,opcode})
 	//addi
 	32'b?????????????????000?????0010011:
 	imm_32={20'h00000,imm};
