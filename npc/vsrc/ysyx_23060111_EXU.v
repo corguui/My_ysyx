@@ -23,7 +23,8 @@ module ysyx_23060111_EXU(
 	
   always @(posedge clk)
   {
-  	case({imm,rs1,funct3,rd,opcode})
+    begin
+  	casex({imm,rs1,funct3,rd,opcode})
 	//addi
 	32'b?????????????????000?????0010011:
 	imm_32={20'h00000,imm};
@@ -50,7 +51,10 @@ module ysyx_23060111_EXU(
 	wdata=snpc;
 	dnpc={imm,rs1,funct3}+pc;
 	wen=1'b1;
+	default:
+	wen=1'b0;
 	endcase
+    end
 
 
   }
