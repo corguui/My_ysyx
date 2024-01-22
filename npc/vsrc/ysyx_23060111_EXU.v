@@ -21,7 +21,7 @@ module ysyx_23060111_EXU(
   assign rbb ={rd,rs1,funct3,opcode};
   ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
 	
-  always(posedge clk)
+  always @(posedge clk)
   {
   	casex({imm,rs1,funct3,rd,opcode})
 	//addi
