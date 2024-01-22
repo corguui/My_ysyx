@@ -101,17 +101,19 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     vlSelf->val = vlSelf->inst;
     vlSelf->imm = (vlSelf->inst >> 0x14U);
     vlSelf->funct3 = (7U & (vlSelf->inst >> 0xcU));
-    vlSelf->wdata = (vlSelf->rout + (vlSelf->inst >> 0x14U));
-    vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
     vlSelf->snpc = vlSelf->pc;
     vlSelf->opcode = (0x7fU & vlSelf->inst);
     vlSelf->rd = (0x1fU & (vlSelf->inst >> 7U));
-    vlSelf->raddr = vlSelf->rs1;
+    vlSelf->rs1 = (0x1fU & (vlSelf->inst >> 0xfU));
     vlSelf->dnpc = vlSelf->snpc;
     vlSelf->waddr = vlSelf->rd;
     vlSelf->rbb = (((IData)(vlSelf->rd) << 0xfU) | 
                    ((0x7f80U & (vlSelf->inst >> 5U)) 
                     | (IData)(vlSelf->opcode)));
+    vlSelf->raddr = vlSelf->rs1;
+    vlSelf->rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
+        [vlSelf->rs1];
+    vlSelf->wdata = (vlSelf->rout + (vlSelf->inst >> 0x14U));
 }
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_stl(Vysyx_23060111_top___024root* vlSelf) {

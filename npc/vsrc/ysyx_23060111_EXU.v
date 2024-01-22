@@ -21,10 +21,10 @@ module ysyx_23060111_EXU(
   assign dnpc=32'h80000008;
  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
 assign raddr=rs1[19:15];
-assign wen=1'b0;
 assign wdata=rout+imm_32;
 assign waddr=rd[11:7];
 assign wen=1'b1;
+assign wen=1'b0;
 
 
 endmodule
