@@ -26,7 +26,7 @@ void execute(uint32_t n);
 
 int main(int argc ,char** argv, char** env)
 {
-	int count=10;
+	int count=1;
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new Vysyx_23060111_top{contextp};
@@ -38,8 +38,7 @@ int main(int argc ,char** argv, char** env)
 
 	//init mem
 	init_mem();
-        uint32_t a=0x80000000;
-	top->pc=a;
+	top->pc=0x80000000;
 	/*
 	while(count<=10&&!contextp->gotFinish())
 	{
@@ -66,6 +65,10 @@ int main(int argc ,char** argv, char** env)
 
 void cpu_exce_once(VerilatedVcdC* tfp)
 {
+		top->snpc=top->pc;
+		top->inst =pc_read(top->snpc);
+		top->dnpc=top->snpc;
+
 		top->clk =0; top->eval();
 		tfp->dump(main_time);
 		main_time++;
@@ -74,6 +77,9 @@ void cpu_exce_once(VerilatedVcdC* tfp)
 		tfp->dump(main_time);
 		main_time++;
 		top->eval();
+
+		top->pc=top->dnpc;
+
 }
 void cpu_exce(uint32_t n)
 {
@@ -83,7 +89,6 @@ void execute(uint32_t n)
 {
 	for(;n>0;n--)
 	{
-		top->inst =pc_read(top->pc);
 		cpu_exce_once(tfp);
 	}
 }
