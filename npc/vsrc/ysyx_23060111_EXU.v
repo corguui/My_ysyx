@@ -16,14 +16,16 @@ module ysyx_23060111_EXU(
   output wen
 );
   reg [31:0] imm_32;
-  assign imm_32={20'h00000,imm};
   assign rbb ={rd,rs1,funct3,opcode};
+  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
+
+  //addi
+  assign imm_32={20'h00000,imm};
   assign dnpc=32'h80000004;
- ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
-assign raddr=rs1[19:15];
-assign wdata=rout+imm_32;
-assign waddr=rd[11:7];
-assign wen=1'b1;
+  assign raddr=rs1[19:15];
+  assign wdata=rout+imm_32;
+  assign waddr=rd[11:7];
+  assign wen=1'b1;
 
 
 endmodule

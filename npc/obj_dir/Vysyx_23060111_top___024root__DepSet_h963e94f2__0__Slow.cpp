@@ -34,7 +34,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial__TOP(Vysyx_2306011
     vlSelf->waddr = 0U;
     vlSelf->raddr = 0U;
     vlSelf->wen = 1U;
-    vlSelf->dnpc = 0x80000008U;
+    vlSelf->dnpc = 0x80000004U;
     vlSelf->wen = 1U;
 }
 
