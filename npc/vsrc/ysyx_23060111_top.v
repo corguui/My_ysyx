@@ -36,7 +36,7 @@ assign wen=1'b1;
  ysyx_23060111_IDU init_idu (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
 
  //init exu
- ysyx_23060111_exu init_exu (clk,dnpc,snpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,wen);
+ ysyx_23060111_EXU init_exu (clk,dnpc,snpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,wen);
 
 
  ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
