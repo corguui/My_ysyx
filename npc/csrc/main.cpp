@@ -10,6 +10,14 @@
 #include"../hsrc/mem.h"
 
 
+uint32_t time=0;
+void cpu_exce_once(VerilatedVcdC* tfp)
+
+VerilatedContext* contextp = new VerilatedContext;
+Vysyx_23060111_top *top = new Vysyx_23060111_top{contextp};
+VerilatedVcdC* tfp=new VerilatedVcdC;
+
+
 void ebreak (int inst)
 {
 	if(inst == 0x00100073 )
@@ -24,11 +32,7 @@ int main(int argc ,char** argv, char** env)
 	//init
 	printf("%s\n",IMG);
 	int count=0;
-	VerilatedContext* contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
-	Vysyx_23060111_top *top = new Vysyx_23060111_top{contextp};
-
-	VerilatedVcdC* tfp=new VerilatedVcdC;
 	contextp->traceEverOn(true);
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
@@ -37,10 +41,8 @@ int main(int argc ,char** argv, char** env)
 	init_mem();
         uint32_t a=0x80000000;
 	top->pc=a;
-	int time=0;
 	while(count<=10&&!contextp->gotFinish())
 	{
-		//printf("------%x\n",top->pc);
 		top->inst =pc_read(top->pc);
 		if(count==2)
 		{
@@ -50,15 +52,7 @@ int main(int argc ,char** argv, char** env)
 		{
 		top->rst=0;
 		}
-		top->clk =0; top->eval();
-		tfp->dump(time);
-		time++;
-		top->clk =1; top->eval();
-		tfp->dump(time);
-		time++;
-
-
-		top->eval();
+		cpu_exce_once(VerilatedVcdC* tfp)
 
 		//contextp->timeInc(1);
 		count++;
@@ -69,4 +63,14 @@ int main(int argc ,char** argv, char** env)
 	return 0;
 }
 
-
+void cpu_exce_once(VerilatedVcdC* tfp)
+{
+		top->clk =0; top->eval();
+		tfp->dump(time);
+		time++;
+		top->eval();
+		top->clk =1; top->eval();
+		tfp->dump(time);
+		time++;
+		top->eval();
+}
