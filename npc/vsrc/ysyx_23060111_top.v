@@ -36,7 +36,7 @@ assign wen=1'b1;
  ysyx_23060111_IDU init_idu (inst,imm,funct3,rs1,rd,opcode);
 
  //init exu
- ysyx_23060111_EXU init_exu (clk,dnpc,snpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,wen);
+ ysyx_23060111_EXU init_exu (clk,rst,dnpc,snpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,wen);
 
 
 

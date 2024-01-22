@@ -1,5 +1,6 @@
 module ysyx_23060111_EXU(
   input       clk,
+  input      rst,
   output reg [31:0] dnpc,
   input reg [31:0] snpc,
   input reg [31:20] imm,
