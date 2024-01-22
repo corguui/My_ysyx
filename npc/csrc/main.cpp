@@ -17,6 +17,7 @@ VerilatedVcdC* tfp=NULL;
 
 int main_time=0;
 
+void cpu_init()
 void cpu_exce_once(VerilatedVcdC* tfp);
 void ebreak(int inst);
 void cpu_exce(uint32_t n);
@@ -38,7 +39,10 @@ int main(int argc ,char** argv, char** env)
 
 	//init mem
 	init_mem();
-	top->pc=0x80000000;
+
+	//init cpu
+	cpu_init();
+	//top->pc=0x80000000;
 	/*
 	while(count<=10&&!contextp->gotFinish())
 	{
@@ -62,7 +66,22 @@ int main(int argc ,char** argv, char** env)
 	delete contextp;
 	return 0;
 }
+void cpu_init()
+{
+	top->pc=0x80000000;
+	top->rst=1;
+	top->clk =0; top->eval();
+	tfp->dump(main_time);
+	main_time++;
+	top->eval();
+	top->clk =1; top->eval();
+	tfp->dump(main_time);
+	main_time++;
+	top->eval();
+	top-rst=0;
 
+	
+}
 void cpu_exce_once(VerilatedVcdC* tfp)
 {
 		top->snpc=top->pc;
