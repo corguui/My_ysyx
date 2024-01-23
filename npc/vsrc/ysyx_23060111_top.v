@@ -18,25 +18,17 @@ module ysyx_23060111_top(
   wire wen;
   wire[31:0] rout;
 
-assign dnpc=pc+32'h4;
 
 //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
-/*
-assign wdata=0;
-assign waddr=5'd0;
-assign raddr=5'd0;
-assign wen=1'b1;
-*/
-
 
  //init IDU
 ysyx_23060111_IDU init_IDU (inst,imm,funct3,rs1,rd,opcode);
 
-
  //init EXU
-ysyx_23060111_EXU init_EXU (clk,rst,pc,dnpc,imm,rs1,funct3,rd,opcode,rout,wdata,waddr,raddr,rbb,wen);
+ysyx_23060111_EXU init_EXU (dnpc,imm,rs1,funct3,rd,opcode,rout,wdata,waddr,raddr,rbb,wen);
 
+ysyx_23060111_pc pc_renew (clk,rst,dnpc,pc);
 
 
 endmodule
