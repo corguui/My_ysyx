@@ -21,7 +21,6 @@ module ysyx_23060111_EXU(
 
   //addi
   assign imm_32={20'h00000,imm};
-  assign dnpc=32'h80000004;
   assign raddr=rs1[19:15];
   assign wdata=rout+imm_32;
   assign waddr=rd[11:7];

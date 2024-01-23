@@ -30,10 +30,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial__TOP(Vysyx_2306011
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_initial__TOP\n"); );
     // Body
-    vlSelf->wdata = 0U;
-    vlSelf->waddr = 0U;
-    vlSelf->raddr = 0U;
-    vlSelf->wen = 1U;
     vlSelf->dnpc = 0x80000004U;
     vlSelf->wen = 1U;
 }
