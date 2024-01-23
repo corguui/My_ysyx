@@ -26,9 +26,9 @@ module ysyx_23060111_EXU(
 	begin
 	imm_32<={20'h00000,imm};
 	raddr<=rs1[19:15];
-  	//wdata<=rout+imm_32;
-	wdata<=32'h80000004;
-  	waddr<=rd[11:7];
+  	wdata<=rout+imm_32;
+  	//waddr<=rd[11:7];
+	waddr<=5'd1;
   	wen<=1'b1;
 	end
 	//auipc
