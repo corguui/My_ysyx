@@ -139,7 +139,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
                                                         & vlSelf->inst))))));
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [vlSelf->ysyx_23060111_top__DOT__raddr];
-    vlSelf->pc = vlSelf->dnpc;
+    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
+                   : vlSelf->dnpc);
     vlSelf->dnpc = __Vdly__dnpc;
     vlSelf->snpc = vlSelf->pc;
 }

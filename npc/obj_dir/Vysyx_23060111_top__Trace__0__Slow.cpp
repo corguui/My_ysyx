@@ -74,14 +74,14 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
         tracep->declBus(c+7+i*1,"rf", true,(i+0), 31,0);
     }
     tracep->popNamePrefix(1);
-    tracep->pushNamePrefix("renew_snpc ");
+    tracep->pushNamePrefix("renew_pc ");
     tracep->declBus(c+52,"WIDTH", false,-1, 31,0);
     tracep->declBus(c+53,"RESET_VAL", false,-1, 31,0);
     tracep->declBit(c+40,"clk", false,-1);
-    tracep->declBit(c+54,"rst", false,-1);
+    tracep->declBit(c+39,"rst", false,-1);
     tracep->declBus(c+44,"din", false,-1, 31,0);
     tracep->declBus(c+45,"dout", false,-1, 31,0);
-    tracep->declBit(c+55,"wen", false,-1);
+    tracep->declBit(c+54,"wen", false,-1);
     tracep->popNamePrefix(2);
 }
 
@@ -180,6 +180,5 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullIData(oldp+51,(5U),32);
     bufp->fullIData(oldp+52,(0x20U),32);
     bufp->fullIData(oldp+53,(0x80000000U),32);
-    bufp->fullBit(oldp+54,(0U));
-    bufp->fullBit(oldp+55,(1U));
+    bufp->fullBit(oldp+54,(1U));
 }
