@@ -3,22 +3,22 @@ module ysyx_23060111_top(
   input       rst,
   input       clk,
   input[31:0] inst,
-  output[31:0] val,
   output[31:0] snpc,
   output[31:0] dnpc,
-  output[31:0] pc,
-  output[31:20] imm,
-  output[19:15] rs1,
-  output[14:12] funct3,
-  output[11:7] rd,
-  output[6:0] opcode,
-  output[31:0] wdata,
-  output[4:0] waddr,
-  output[4:0] raddr,
-  output wen,
-  output[31:0] rout,
-  output[20:1] rbb
-);
+  output[31:0] pc
+  );
+
+  wire[31:0] val;
+  wire[31:20] imm;
+  wire[19:15] rs1;
+  wire[14:12] funct3;
+  wire[11:7] rd;
+  wire[6:0] opcode;
+  wire[31:0] wdata;
+  wire[4:0] waddr;
+  wire[4:0] raddr;
+  wire wen;
+  wire[31:0] rout;
 
 assign val=inst;
 assign snpc=pc;
@@ -38,7 +38,7 @@ assign wen=1'b1;
  ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
 
  //init EXU
- ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,rbb,rout,wdata,waddr,raddr,wen);
+ ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,wen);
 endmodule
 
 
