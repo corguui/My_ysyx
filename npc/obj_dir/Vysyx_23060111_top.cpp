@@ -13,7 +13,6 @@ Vysyx_23060111_top::Vysyx_23060111_top(VerilatedContext* _vcontextp__, const cha
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vysyx_23060111_top__Syms(contextp(), _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
-    , rst{vlSymsp->TOP.rst}
     , inst{vlSymsp->TOP.inst}
     , val{vlSymsp->TOP.val}
     , snpc{vlSymsp->TOP.snpc}
