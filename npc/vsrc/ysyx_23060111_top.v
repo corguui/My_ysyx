@@ -22,7 +22,7 @@ module ysyx_23060111_top(
 
 assign snpc=pc;
 
- 
+ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,pc,pc,1'b1);  
  //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 /*
@@ -34,10 +34,12 @@ assign wen=1'b1;
 
 
  //init IDU
- ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
+ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
 
  //init EXU
- ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,rbb,wen);
+ysyx_23060111_EXU init_EXU (dnpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,rbb,wen);
+
+assign pc=dnpc;
 endmodule
 
 
