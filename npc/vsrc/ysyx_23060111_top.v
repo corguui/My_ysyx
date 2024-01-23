@@ -38,7 +38,7 @@ assign dnpc=snpc;
 ysyx_23060111_IDU init_IDU (inst,imm,funct3,rs1,rd,opcode);
 
  //init EXU
-ysyx_23060111_EXU init_EXU (dnpc,pc,imm,rs1,funct3,rd,opcode,rout,wdata,waddr,raddr,rbb,wen);
+ysyx_23060111_EXU init_EXU (dnpc,imm,rs1,funct3,rd,opcode,rout,wdata,waddr,raddr,rbb,wen);
 
 assign pc=dnpc;
 
