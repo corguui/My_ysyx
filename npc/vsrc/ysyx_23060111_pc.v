@@ -1,8 +1,8 @@
 module ysyx_23060111_pc(	
 	input clk,
 	input rst,
-	input [31:0]snpc,
-	output [31:0] dnpc,
+	output [31:0]snpc,
+	input [31:0] dnpc,
 	output [31:0]pc
 );
 	assign dnpc=pc+32'h4;
