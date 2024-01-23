@@ -7,7 +7,7 @@ module ysyx_23060111_EXU(
   input[14:12] funct3,
   input[11:7] rd,
   input[6:0] opcode,
-  output[31:0] pc,
+  //output[31:0] pc,
   input[31:0] rout,
   output[31:0] wdata,
   output[4:0] waddr,
