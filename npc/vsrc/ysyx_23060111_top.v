@@ -9,9 +9,6 @@ module ysyx_23060111_top(
   output[9:0] rbb
   );
 
-  //wire[31:0] snpc;
-  //wire[31:0] pc;
-  //wire[31:0] dnpc;
   wire[31:20] imm;
   wire[19:15] rs1;
   wire[14:12] funct3;
@@ -42,6 +39,8 @@ ysyx_23060111_IDU init_IDU (inst,imm,funct3,rs1,rd,opcode);
 
  //init EXU
 ysyx_23060111_EXU init_EXU (dnpc,pc,imm,rs1,funct3,rd,opcode,rout,wdata,waddr,raddr,rbb,wen);
+
+assign pc=dnpc;
 
 endmodule
 

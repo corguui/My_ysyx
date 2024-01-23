@@ -24,7 +24,9 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     CData/*0:0*/ __VactContinue;
     VL_OUT16(rbb,9,0);
     VL_IN(inst,31,0);
-    IData/*31:0*/ ysyx_23060111_top__DOT__pc;
+    VL_OUT(snpc,31,0);
+    VL_OUT(dnpc,31,0);
+    VL_OUT(pc,31,0);
     IData/*31:0*/ ysyx_23060111_top__DOT__rout;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;
