@@ -62,8 +62,7 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
     // Body
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
                    : 0x80000008U);
-    vlSelf->snpc = vlSelf->pc;
-    vlSelf->dnpc = vlSelf->snpc;
+    vlSelf->dnpc = vlSelf->pc;
 }
 
 void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_23060111_top___024root* vlSelf);
