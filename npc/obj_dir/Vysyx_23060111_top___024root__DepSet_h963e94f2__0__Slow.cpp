@@ -83,7 +83,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     // Body
     vlSelf->rbb = ((0x380U & (vlSelf->inst >> 5U)) 
                    | (0x7fU & vlSelf->inst));
-    vlSelf->dnpc = ((IData)(4U) + vlSelf->ysyx_23060111_top__DOT__pc);
+    vlSelf->ysyx_23060111_top__DOT__dnpc = ((IData)(4U) 
+                                            + vlSelf->pc);
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->inst >> 0xfU))];
 }
@@ -157,9 +158,9 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___ctor_var_reset(Vysyx_23060111_t
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->inst = VL_RAND_RESET_I(32);
-    vlSelf->dnpc = VL_RAND_RESET_I(32);
+    vlSelf->pc = VL_RAND_RESET_I(32);
     vlSelf->rbb = VL_RAND_RESET_I(10);
-    vlSelf->ysyx_23060111_top__DOT__pc = VL_RAND_RESET_I(32);
+    vlSelf->ysyx_23060111_top__DOT__dnpc = VL_RAND_RESET_I(32);
     vlSelf->ysyx_23060111_top__DOT__rout = VL_RAND_RESET_I(32);
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
