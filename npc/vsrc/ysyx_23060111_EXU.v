@@ -22,7 +22,7 @@ module ysyx_23060111_EXU(
     	dnpc<=snpc;
   	casez({imm,rs1,funct3,rd,opcode})
 	//addi
-	32'bxxxxxxxxxxxxxxxxx000xxxxx0010011:
+	32'bzzzzzzzzzzzzzzzzz000zzzzz0010011:
 	begin
 	imm_32<={20'h00000,imm};
 	raddr<=rs1[19:15];
@@ -31,20 +31,20 @@ module ysyx_23060111_EXU(
   	wen<=1'b1;
 	end
 	//auipc
-	32'bxxxxxxxxxxxxxxxxxxxxxxxxx0010111:
+	32'bzzzzzzzzzzzzzzzzzzzzzzzzz0010111:
 	begin
 	waddr<=rd[11:7];
 	wdata<=pc+{12'b0,imm,rs1,funct3};	
 	wen<=1'b1;//write
 	end
-	32'bxxxxxxxxxxxxxxxxxxxxxxxxx0110111:
+	32'bzzzzzzzzzzzzzzzzzzzzzzzzz0110111:
 	begin
 	waddr<=rd[11:7];
 	wdata<={12'b0,imm,rs1,funct3};
 	wen<=1'b1;
 	end
 	//jalr
-	32'bxxxxxxxxxxxxxxxxx000xxxxx1100111:
+	32'bzzzzzzzzzzzzzzzzz000zzzzz1100111:
 	begin
 	waddr<=rd[11:7];
 	wdata<=snpc;
@@ -52,7 +52,7 @@ module ysyx_23060111_EXU(
 	wen<=1'b1;
 	end
 	//jal
-	32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111:
+	32'bzzzzzzzzzzzzzzzzzzzzzzzzz1101111:
 	begin
 	waddr<=rd[11:7];
 	wdata<=snpc;

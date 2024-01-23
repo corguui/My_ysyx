@@ -35,37 +35,11 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_2306
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___nba_sequent__TOP__0\n"); );
-    // Init
-    IData/*31:0*/ __Vdly__dnpc;
-    __Vdly__dnpc = 0;
     // Body
-    __Vdly__dnpc = vlSelf->dnpc;
-    __Vdly__dnpc = vlSelf->snpc;
-    if ((0x13U != (0x707fU & vlSelf->inst))) {
-        if ((0x17U != (0x7fU & vlSelf->inst))) {
-            if ((0x37U != (0x7fU & vlSelf->inst))) {
-                if ((0x67U == (0x707fU & vlSelf->inst))) {
-                    __Vdly__dnpc = ((vlSelf->inst >> 0x14U) 
-                                    + (0x1fU & (vlSelf->inst 
-                                                >> 0xfU)));
-                } else if ((0x6fU == (0x7fU & vlSelf->inst))) {
-                    __Vdly__dnpc = (((0xfff00U & (vlSelf->inst 
-                                                  >> 0xcU)) 
-                                     | (0xffU & (vlSelf->inst 
-                                                 >> 0xcU))) 
-                                    + vlSelf->pc);
-                }
-            }
-        }
-    }
-    if ((0x13U == (0x707fU & vlSelf->inst))) {
-        vlSelf->ysyx_23060111_top__DOT__init_exu__DOT__imm_32 
-            = (vlSelf->inst >> 0x14U);
-    }
-    vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0U] = 0U;
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
                    : vlSelf->dnpc);
-    vlSelf->dnpc = __Vdly__dnpc;
+    vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0U] = 0U;
+    vlSelf->dnpc = vlSelf->snpc;
     vlSelf->snpc = vlSelf->pc;
 }
 
