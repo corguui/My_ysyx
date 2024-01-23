@@ -85,14 +85,14 @@ void cpu_init()
 void cpu_exce_once(VerilatedVcdC* tfp)
 {
 		//top->snpc=top->pc;
-		top->inst =pc_read(top->snpc);
 		//top->dnpc=top->snpc;
 
-		top->clk =1; top->eval();
+		top->clk =0; top->eval();
+		top->inst =pc_read(top->snpc);
 		tfp->dump(main_time);
 		main_time++;
 		top->eval();
-		top->clk =0; top->eval();
+		top->clk =1; top->eval();
 		tfp->dump(main_time);
 		main_time++;
 		top->eval();
