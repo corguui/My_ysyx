@@ -2,7 +2,7 @@
 module ysyx_23060111_top(
   input       rst,
   input       clk,
-  output[31:0] inst,
+  input[31:0] inst,
   output[9:0] rbb
  );
 
