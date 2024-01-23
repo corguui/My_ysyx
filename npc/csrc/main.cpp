@@ -70,7 +70,6 @@ void cpu_init()
 {
 	top->pc=0x80000000;
 	top->rst=1;
-	top->ren=1;
 	top->clk =0; top->eval();
 	tfp->dump(main_time);
 	main_time++;
@@ -80,7 +79,6 @@ void cpu_init()
 	main_time++;
 	top->eval();
 	top->rst=0;
-	top->ren=0;
 
 	
 }

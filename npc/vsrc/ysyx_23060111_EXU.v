@@ -1,6 +1,6 @@
 module ysyx_23060111_EXU(
-  //input       clk,
-  //input       rst,
+  input       clk,
+  input       rst,
   output[31:0] pc,
   input[31:0] dnpc,
   input[31:20] imm,
@@ -15,6 +15,7 @@ module ysyx_23060111_EXU(
   output[9:0] rbb,
   output wen
 );
+  wire nclk=~clk;
   wire [31:0] imm_32;
   assign rbb={funct3,opcode};
 
@@ -25,7 +26,6 @@ module ysyx_23060111_EXU(
   assign waddr=rd[11:7];
   assign wen=1'b1;
 
-  assign pc=dnpc;
-
+ysyx_23060111_trigger #(32,32'h80000000) renew_pc(nclk,rst,dnpc,pc,1'b1);
 endmodule
   

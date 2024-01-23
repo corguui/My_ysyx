@@ -3,7 +3,6 @@ module ysyx_23060111_top(
   input       rst,
   input       clk,
   input[31:0] inst,
-  input ren,
   output[31:0] snpc,
   output[31:0] dnpc,
   output[31:0] pc,
@@ -21,7 +20,6 @@ module ysyx_23060111_top(
   wire[31:0] rout;
 
 assign snpc=pc;
-ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,snpc,pc,ren);
 //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 /*
@@ -38,7 +36,8 @@ assign dnpc=snpc;
 ysyx_23060111_IDU init_IDU (inst,imm,funct3,rs1,rd,opcode);
 
  //init EXU
-ysyx_23060111_EXU init_EXU (pc,dnpc,imm,rs1,funct3,rd,opcode,rout,wdata,waddr,raddr,rbb,wen);
+ysyx_23060111_EXU init_EXU (clk,rst,pc,dnpc,imm,rs1,funct3,rd,opcode,rout,wdata,waddr,raddr,rbb,wen);
+
 
 
 endmodule
