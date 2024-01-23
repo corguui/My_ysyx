@@ -85,7 +85,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
                    | (0x7fU & vlSelf->inst));
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->inst >> 0xfU))];
-    vlSelf->snpc = ((IData)(4U) + vlSelf->pc);
+    vlSelf->snpc = vlSelf->pc;
     vlSelf->dnpc = vlSelf->snpc;
 }
 
