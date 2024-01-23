@@ -18,6 +18,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
 
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
+    VL_IN8(rst,0,0);
     CData/*4:0*/ ysyx_23060111_top__DOT__waddr;
     CData/*4:0*/ ysyx_23060111_top__DOT__raddr;
     CData/*0:0*/ ysyx_23060111_top__DOT__wen;
