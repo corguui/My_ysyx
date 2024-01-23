@@ -7,6 +7,7 @@ module ysyx_23060111_top(
   output[9:0] rbb
  );
   wire[31:0] dnpc;
+  wire[31:0] snpc;
   wire[31:20] imm;
   wire[19:15] rs1;
   wire[14:12] funct3;
