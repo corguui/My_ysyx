@@ -22,7 +22,7 @@ module ysyx_23060111_EXU(
   assign wdata=rout+imm_32;
   assign waddr=rd[11:7];
   assign wen=1'b1;
-  assign snpc=32'h80000008;
+  assign snpc=dnpc;
 
 endmodule
   
