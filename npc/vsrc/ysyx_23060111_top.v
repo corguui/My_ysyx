@@ -3,7 +3,6 @@ module ysyx_23060111_top(
   input       rst,
   input       clk,
   input[31:0] inst,
-  output[31:0] snpc,
   output[31:0] dnpc,
   output[31:0] pc,
   output[9:0] rbb
@@ -19,8 +18,8 @@ module ysyx_23060111_top(
   wire wen;
   wire[31:0] rout;
 
-assign snpc=pc;
-assign dnpc=snpc;
+assign dnpc=pc;
+
 //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 /*
@@ -29,7 +28,6 @@ assign waddr=5'd0;
 assign raddr=5'd0;
 assign wen=1'b1;
 */
-
 
 
  //init IDU
