@@ -49,13 +49,14 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
                                                    >> 0x14U));
     __Vdlyvdim0__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0 
         = (0x1fU & (vlSelf->inst >> 7U));
-    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
-                   : 0x80000008U);
+    vlSelf->ysyx_23060111_top__DOT__pc_renew__DOT____Vcellout__renew_pc____pinNumber4 
+        = ((IData)(vlSelf->rst) ? 0x80000000U : vlSelf->pc);
     vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[__Vdlyvdim0__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0] 
         = __Vdlyvval__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0;
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->inst >> 0xfU))];
-    vlSelf->dnpc = ((IData)(4U) + vlSelf->pc);
+    vlSelf->pc = (1U & vlSelf->ysyx_23060111_top__DOT__pc_renew__DOT____Vcellout__renew_pc____pinNumber4);
+    vlSelf->dnpc = vlSelf->pc;
 }
 
 void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_23060111_top___024root* vlSelf);
