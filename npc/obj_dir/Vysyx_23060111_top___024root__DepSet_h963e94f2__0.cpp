@@ -130,8 +130,7 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
     }
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [vlSelf->ysyx_23060111_top__DOT__raddr];
-    vlSelf->snpc = ((IData)(vlSelf->rst) ? 0x80000000U
-                     : vlSelf->pc);
+    vlSelf->snpc = vlSelf->pc;
     vlSelf->pc = vlSelf->dnpc;
     vlSelf->dnpc = __Vdly__dnpc;
 }
@@ -237,8 +236,6 @@ void Vysyx_23060111_top___024root___eval_debug_assertions(Vysyx_23060111_top___0
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_debug_assertions\n"); );
     // Body
-    if (VL_UNLIKELY((vlSelf->rst & 0xfeU))) {
-        Verilated::overWidthError("rst");}
     if (VL_UNLIKELY((vlSelf->clk & 0xfeU))) {
         Verilated::overWidthError("clk");}
 }

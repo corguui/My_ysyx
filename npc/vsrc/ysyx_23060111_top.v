@@ -10,6 +10,7 @@ module ysyx_23060111_top(
   );
 
 assign val=inst;
+assign snpc=pc;
 
   wire [31:20] imm;
   wire[14:12] funct3;
@@ -23,7 +24,7 @@ assign val=inst;
   wire[31:0] rout;
 
 
-ysyx_23060111_trigger #(32,32'h80000000) renew_snpc(clk,1'b0,pc,snpc,1'b1);
+//ysyx_23060111_trigger #(32,32'h80000000) renew_snpc(clk,1'b0,pc,snpc,1'b1);
  //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 /*
