@@ -5,6 +5,7 @@ module ysyx_23060111_top(
   input[31:0] inst,
   output[31:0] snpc,
   output[31:0] dnpc,
+  output[9:0] rbb,
   output[31:0] pc
   );
 
