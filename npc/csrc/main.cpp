@@ -69,7 +69,7 @@ int main(int argc ,char** argv, char** env)
 void cpu_init()
 {
 	top->pc=0x80000000;
-	top->rst=1;
+	top->rst=0;
 	top->clk =1; top->eval();
 	tfp->dump(main_time);
 	main_time++;
@@ -88,11 +88,11 @@ void cpu_exce_once(VerilatedVcdC* tfp)
 		top->inst =pc_read(top->snpc);
 		//top->dnpc=top->snpc;
 
-		top->clk =0; top->eval();
+		top->clk =1; top->eval();
 		tfp->dump(main_time);
 		main_time++;
 		top->eval();
-		top->clk =1; top->eval();
+		top->clk =0; top->eval();
 		tfp->dump(main_time);
 		main_time++;
 		top->eval();
