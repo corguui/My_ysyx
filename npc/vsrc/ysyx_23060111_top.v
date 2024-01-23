@@ -3,7 +3,7 @@ module ysyx_23060111_top(
   input       rst,
   input       clk,
   input[31:0] inst,
-  input reg[31:0] pc,
+  output reg[31:0] pc,
   output[9:0] rbb
  );
   wire[31:0] dnpc;
