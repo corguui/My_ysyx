@@ -20,7 +20,7 @@ module ysyx_23060111_EXU(
   always @(posedge clk)
     begin
     	dnpc<=snpc;
-  	case?({imm,rs1,funct3,rd,opcode})
+  	casez({imm,rs1,funct3,rd,opcode})
 	//addi
 	32'b?????????????????000?????0010011:
 	begin
