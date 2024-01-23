@@ -70,11 +70,11 @@ void cpu_init()
 {
 	top->pc=0x80000000;
 	top->rst=1;
-	top->clk =1; top->eval();
+	top->clk =0; top->eval();
 	tfp->dump(main_time);
 	main_time++;
 	top->eval();
-	top->clk =0; top->eval();
+	top->clk =1; top->eval();
 	top->rst=0;
 	tfp->dump(main_time);
 	main_time++;
