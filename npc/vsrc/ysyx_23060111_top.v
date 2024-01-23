@@ -29,11 +29,12 @@ assign raddr=5'd0;
 assign wen=1'b1;
 */
 
-assign dnpc=snpc;
 
 
  //init IDU
 ysyx_23060111_IDU init_IDU (inst,imm,funct3,rs1,rd,opcode);
+
+assign dnpc=snpc;
 
  //init EXU
 ysyx_23060111_EXU init_EXU (clk,rst,pc,dnpc,imm,rs1,funct3,rd,opcode,rout,wdata,waddr,raddr,rbb,wen);
