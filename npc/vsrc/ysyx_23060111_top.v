@@ -19,7 +19,7 @@ module ysyx_23060111_top(
   wire wen;
   wire[31:0] rout;
 
-assign dnpc=pc;
+assign dnpc=pc+32'h4;
 
 //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
