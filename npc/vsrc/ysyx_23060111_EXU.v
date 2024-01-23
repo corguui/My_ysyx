@@ -12,10 +12,10 @@ module ysyx_23060111_EXU(
   output[31:0] wdata,
   output[4:0] waddr,
   output[4:0] raddr,
+  output[9:0] rbb,
   output wen
 );
 
-  reg[9:0] rbb;
   wire [31:0] imm_32;
   assign rbb={funct3,opcode};
   ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);

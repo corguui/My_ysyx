@@ -36,7 +36,7 @@ assign wen=1'b1;
  ysyx_23060111_IDU init_IDU (snpc,inst,dnpc,imm,funct3,rs1,rd,opcode);
 
  //init EXU
- ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,wen);
+ ysyx_23060111_EXU init_EXU (clk,rst,dnpc,imm,rs1,funct3,rd,opcode,pc,rout,wdata,waddr,raddr,rbb,wen);
 endmodule
 
 
