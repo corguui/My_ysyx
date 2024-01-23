@@ -12,11 +12,11 @@ module ysyx_23060111_top(
 assign val=inst;
 assign snpc=pc;
 
-  reg [31:20] imm;
-  reg[14:12] funct3;
-  reg [19:15] rs1;
-  reg[11:7] rd;
-  reg[6:0] opcode;
+  wire [31:20] imm;
+  wire[14:12] funct3;
+  wire [19:15] rs1;
+  wire[11:7] rd;
+  wire[6:0] opcode;
   wire[31:0] wdata;
   wire[4:0]waddr;
   wire[4:0]raddr;
