@@ -26,6 +26,8 @@ module ysyx_23060111_EXU(
   assign waddr=rd[11:7];
   assign wen=1'b1;
 
+  assign pc=dnpc;
+
 
 endmodule
   
