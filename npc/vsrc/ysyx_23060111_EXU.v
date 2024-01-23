@@ -15,7 +15,7 @@ module ysyx_23060111_EXU(
   output[9:0] rbb,
   output wen
 );
-  wire nclk=~clk;
+  wire nclk=!clk;
   wire [31:0] imm_32;
   assign rbb={funct3,opcode};
 
