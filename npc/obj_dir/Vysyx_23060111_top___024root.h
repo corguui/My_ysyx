@@ -31,6 +31,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_OUT(dnpc,31,0);
     VL_OUT(pc,31,0);
     IData/*31:0*/ ysyx_23060111_top__DOT__wdata;
+    IData/*31:0*/ ysyx_23060111_top__DOT__rout;
     IData/*31:0*/ ysyx_23060111_top__DOT__init_exu__DOT__imm_32;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;
@@ -40,8 +41,8 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<2> __VactTriggered;
-    VlTriggerVec<2> __VnbaTriggered;
+    VlTriggerVec<3> __VactTriggered;
+    VlTriggerVec<3> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vysyx_23060111_top__Syms* const vlSymsp;
