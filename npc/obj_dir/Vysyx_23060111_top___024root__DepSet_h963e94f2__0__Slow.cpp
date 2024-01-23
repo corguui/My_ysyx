@@ -83,7 +83,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     // Body
     vlSelf->rbb = ((0x380U & (vlSelf->inst >> 5U)) 
                    | (0x7fU & vlSelf->inst));
-    vlSelf->dnpc = vlSelf->ysyx_23060111_top__DOT__pc;
+    vlSelf->dnpc = ((IData)(4U) + vlSelf->ysyx_23060111_top__DOT__pc);
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->inst >> 0xfU))];
 }
