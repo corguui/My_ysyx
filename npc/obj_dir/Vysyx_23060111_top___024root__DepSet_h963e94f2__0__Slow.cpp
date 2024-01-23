@@ -82,7 +82,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___stl_sequent__TOP__0\n"); );
     // Body
     vlSelf->val = vlSelf->inst;
-    vlSelf->snpc = vlSelf->pc;
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [vlSelf->ysyx_23060111_top__DOT__raddr];
 }
