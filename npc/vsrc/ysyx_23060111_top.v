@@ -8,7 +8,7 @@ module ysyx_23060111_top(
   output[31:0] pc,
   output[9:0] rbb
   );
-
+  wire ren;
   wire[31:20] imm;
   wire[19:15] rs1;
   wire[14:12] funct3;
@@ -21,7 +21,7 @@ module ysyx_23060111_top(
   wire[31:0] rout;
 
 assign snpc=pc;
-ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,snpc,pc,1'b1);
+ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,snpc,pc,ren);
 //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 /*
