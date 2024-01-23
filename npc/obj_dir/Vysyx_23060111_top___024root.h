@@ -19,6 +19,9 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
+    CData/*4:0*/ ysyx_23060111_top__DOT__waddr;
+    CData/*4:0*/ ysyx_23060111_top__DOT__raddr;
+    CData/*0:0*/ ysyx_23060111_top__DOT__wen;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
@@ -27,6 +30,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_OUT(snpc,31,0);
     VL_OUT(dnpc,31,0);
     VL_OUT(pc,31,0);
+    IData/*31:0*/ ysyx_23060111_top__DOT__wdata;
     IData/*31:0*/ ysyx_23060111_top__DOT__init_exu__DOT__imm_32;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;
