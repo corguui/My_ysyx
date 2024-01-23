@@ -22,6 +22,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
+    VL_OUT16(rbb,9,0);
     VL_IN(inst,31,0);
     VL_OUT(snpc,31,0);
     VL_OUT(dnpc,31,0);
