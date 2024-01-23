@@ -26,10 +26,12 @@ assign snpc=pc;
 
  //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
+/*
 assign wdata=0;
 assign waddr=5'd0;
 assign raddr=5'd0;
 assign wen=1'b1;
+*/
 
 
  //init idu
