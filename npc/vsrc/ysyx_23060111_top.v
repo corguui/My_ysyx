@@ -1,5 +1,6 @@
 //import "DPI-C" function void ebreak(input int inst);
 module ysyx_23060111_top(
+  input       rst,
   input       clk,
   input[31:0] inst,
   output[31:0] val,
@@ -32,7 +33,7 @@ assign raddr=5'd0;
 assign wen=1'b1;
 */
 
-// ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
+ ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
 
  //init idu
  ysyx_23060111_IDU init_idu (inst,imm,funct3,rs1,rd,opcode);

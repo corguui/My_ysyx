@@ -61,7 +61,6 @@ module ysyx_23060111_EXU(
 	default:
 	wen<=1'b0;
 	endcase
-	pc<=dnpc;
     end
 
   //addi
