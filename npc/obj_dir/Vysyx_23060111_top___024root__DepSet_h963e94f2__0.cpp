@@ -91,7 +91,9 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
                                                        (0x7fU 
                                                         & vlSelf->inst))))));
     if ((0x13U == (0x707fU & vlSelf->inst))) {
-        vlSelf->ysyx_23060111_top__DOT__waddr = 1U;
+        vlSelf->ysyx_23060111_top__DOT__waddr = (0x1fU 
+                                                 & (vlSelf->inst 
+                                                    >> 7U));
         vlSelf->ysyx_23060111_top__DOT__wdata = (vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
                                                  [vlSelf->ysyx_23060111_top__DOT__raddr] 
                                                  + vlSelf->ysyx_23060111_top__DOT__init_exu__DOT__imm_32);

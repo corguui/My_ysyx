@@ -6,7 +6,7 @@ module ysyx_23060111_trigger #(WIDTH = 1, RESET_VAL = 0) (
   output reg [WIDTH-1:0] dout,
   input wen
 );
-  always @(posedge clk) begin
+  always @(negedge clk) begin
     if (rst) dout <= RESET_VAL;
     else if (wen) dout <= din;
   end

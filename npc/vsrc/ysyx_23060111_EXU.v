@@ -46,9 +46,10 @@ module ysyx_23060111_EXU(
 	//jalr
 	32'b?????????????????000?????1100111:
 	begin
+	raddr<=rs1[19:15];
 	waddr<=rd[11:7];
 	wdata<=snpc;
-	dnpc<={20'b0,imm}+{27'b0,rs1};
+	dnpc<={20'b0,imm}+rout;
 	wen<=1'b1;
 	end
 	//jal
