@@ -1,5 +1,6 @@
 module ysyx_23060111_EXU(
-  output[31:0] dnpc,
+  input[31:0] dnpc,
+  output [31:0] snpc,
   input[31:20] imm,
   input[19:15] rs1,
   input[14:12] funct3,
@@ -21,7 +22,7 @@ module ysyx_23060111_EXU(
   assign wdata=rout+imm_32;
   assign waddr=rd[11:7];
   assign wen=1'b1;
-  assign dnpc=32'h80000008;
+  assign snpc=32'h80000008;
 
 endmodule
   
