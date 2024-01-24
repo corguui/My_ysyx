@@ -8,7 +8,7 @@ module ysyx_23060111_top(
  );
 
 //pc
-  reg[31:0] dnpc;
+  wire[31:0] dnpc;
   wire[31:0] snpc;
 
 //IDU
@@ -22,10 +22,10 @@ module ysyx_23060111_top(
   wire [31:0] imm;
 
 //reg
-  reg[31:0] wdata;
+  wire[31:0] wdata;
   wire[4:0] waddr;
   wire[4:0] raddr;
-  reg wen;
+  wire wen;
   wire[31:0] rout;
 
 
