@@ -14,13 +14,11 @@ module ysyx_23060111_EXU(
   output[4:0] waddr,
   output[4:0] raddr,
   input[31:0] rout,
-  output reg wen,
-  output[31:0] rbb
+  output reg wen
 );
 	
   assign waddr=rd[11:7]; //R(rd)
   assign raddr=rs1[19:15]; //src1
-  assign rbb={opcode,rd,funct3,rs1,rs2,funct7};//rbb
 
 
   always @(type_i)

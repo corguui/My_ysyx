@@ -3,8 +3,7 @@ module ysyx_23060111_top(
   input       rst,
   input       clk,
   input[31:0] inst,
-  output [31:0] pc,
-  output[31:0] rbb
+  output [31:0] pc
  );
 
 //pc
@@ -39,7 +38,7 @@ ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 //ysyx_23060111_IDU init_IDU (inst,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm);
 
  //init EXU
-//ysyx_23060111_EXU init_EXU (dnpc,pc,snpc,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm,wdata,waddr,raddr,rout,wen,rbb);
+//ysyx_23060111_EXU init_EXU (dnpc,pc,snpc,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm,wdata,waddr,raddr,rout,wen);
 
 
 
