@@ -57,7 +57,7 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     }
     if (VL_UNLIKELY((vlSelf->__Vm_traceActivity[1U] 
                      | vlSelf->__Vm_traceActivity[2U]))) {
-        bufp->chgIData(oldp+44,(vlSelf->ysyx_23060111_top__DOT__wdata),32);
+        bufp->chgIData(oldp+44,(vlSelf->ysyx_23060111_top__DOT__dnpc),32);
         bufp->chgIData(oldp+45,(vlSelf->ysyx_23060111_top__DOT__rout),32);
         bufp->chgQData(oldp+46,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[0]),36);
         bufp->chgQData(oldp+48,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[1]),36);

@@ -7,7 +7,7 @@ module ysyx_23060111_top(
  );
 
 //pc
-  wire[31:0] dnpc;
+ reg[31:0] dnpc;
   wire[31:0] snpc;
 
 //IDU

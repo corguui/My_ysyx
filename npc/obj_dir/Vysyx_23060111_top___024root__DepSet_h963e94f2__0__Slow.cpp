@@ -109,8 +109,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     IData/*31:0*/ __VdfgTmp_h229725e1__0;
     __VdfgTmp_h229725e1__0 = 0;
     // Body
-    vlSelf->ysyx_23060111_top__DOT__dnpc = ((IData)(4U) 
-                                            + vlSelf->pc);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[3U] 
         = (0x37200000000ULL | (QData)((IData)((0xfffff000U 
                                                & vlSelf->inst))));
@@ -326,9 +324,9 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
            | ((0xfU & (IData)((vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1 
                                >> 0x20U))) == vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__key_list
               [4U]));
-    vlSelf->ysyx_23060111_top__DOT__wdata = ((IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__hit)
-                                              ? vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__lut_out
-                                              : 0U);
+    vlSelf->ysyx_23060111_top__DOT__dnpc = ((IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__hit)
+                                             ? vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__lut_out
+                                             : 0U);
 }
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_stl(Vysyx_23060111_top___024root* vlSelf) {
@@ -405,7 +403,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___ctor_var_reset(Vysyx_23060111_t
     vlSelf->inst = VL_RAND_RESET_I(32);
     vlSelf->pc = VL_RAND_RESET_I(32);
     vlSelf->ysyx_23060111_top__DOT__dnpc = VL_RAND_RESET_I(32);
-    vlSelf->ysyx_23060111_top__DOT__wdata = VL_RAND_RESET_I(32);
     vlSelf->ysyx_23060111_top__DOT__rout = VL_RAND_RESET_I(32);
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
