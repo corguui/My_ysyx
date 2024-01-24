@@ -5,10 +5,9 @@ TOPfile=vsrc/ysyx_23060111_top.v
 
 IMG ?= 
 
-WORK_DIR = $(shell pwd)
+WORK_DIR = $(shell pwd)                 
 INC_PATH := $(WORK_DIR)/include $(INC_PATH)
 INCLUDES = $(addprefix -I, $(INC_PATH))
-
 all:
 	@echo "Write this Makefile by your self."
 
