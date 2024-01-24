@@ -19,11 +19,11 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    CData/*3:0*/ ysyx_23060111_top__DOT__type_i;
+    CData/*4:0*/ ysyx_23060111_top__DOT__waddr;
+    CData/*4:0*/ ysyx_23060111_top__DOT__raddr;
     CData/*0:0*/ ysyx_23060111_top__DOT__wen;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__i0__DOT__i0__DOT__hit;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
-    CData/*3:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__type_i;
     CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
     VL_IN(inst,31,0);
@@ -31,9 +31,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_OUT(rbb,31,0);
     IData/*31:0*/ ysyx_23060111_top__DOT__dnpc;
     IData/*31:0*/ ysyx_23060111_top__DOT__wdata;
-    IData/*31:0*/ ysyx_23060111_top__DOT__rout;
     VlWide<7>/*214:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__i0____pinNumber4;
-    IData/*31:0*/ __Vdly__ysyx_23060111_top__DOT__dnpc;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;
     IData/*31:0*/ __Vtrigrprev__TOP__inst;
@@ -47,8 +45,8 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<3> __VactTriggered;
-    VlTriggerVec<3> __VnbaTriggered;
+    VlTriggerVec<2> __VactTriggered;
+    VlTriggerVec<2> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vysyx_23060111_top__Syms* const vlSymsp;
