@@ -21,8 +21,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_IN8(rst,0,0);
     CData/*0:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__hit;
-    CData/*0:0*/ __VstlDidInit;
-    CData/*0:0*/ __VicoDidInit;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
@@ -39,7 +37,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     QData/*35:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__lut_out;
     QData/*63:0*/ ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1;
     QData/*63:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__lut_out;
-    QData/*63:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1;
     VlUnpacked<IData/*31:0*/, 32> ysyx_23060111_top__DOT__reg___0240__DOT__rf;
     VlUnpacked<QData/*42:0*/, 5> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list;
     VlUnpacked<CData/*6:0*/, 5> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list;
@@ -47,11 +44,11 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VlUnpacked<VlWide<3>/*67:0*/, 5> ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list;
     VlUnpacked<CData/*3:0*/, 5> ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__key_list;
     VlUnpacked<QData/*63:0*/, 5> ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__data_list;
-    VlUnpacked<CData/*0:0*/, 6> __Vm_traceActivity;
-    VlTriggerVec<2> __VstlTriggered;
-    VlTriggerVec<2> __VicoTriggered;
-    VlTriggerVec<3> __VactTriggered;
-    VlTriggerVec<3> __VnbaTriggered;
+    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
+    VlTriggerVec<1> __VstlTriggered;
+    VlTriggerVec<1> __VicoTriggered;
+    VlTriggerVec<2> __VactTriggered;
+    VlTriggerVec<2> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vysyx_23060111_top__Syms* const vlSymsp;

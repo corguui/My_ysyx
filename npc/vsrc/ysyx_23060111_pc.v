@@ -1,7 +1,7 @@
 module ysyx_23060111_pc(	
 	input clk,
 	input rst,
-	output [31:0]snpc,
+	input [31:0]snpc,
 	//input  [31:0] dnpc,
 	output [31:0]pc
 );

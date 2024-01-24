@@ -30,7 +30,7 @@ module ysyx_23060111_EXU(
   });
 */
 
- ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,snpc},type_i , 64'b0, {
+ ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,snpc},type_i , {32'b0,pc+32'h4}, {
 	4'b0001, {pc+imm,pc+32'h4},
 	4'b0010, {imm,pc+32'h4},
 	4'b0011, {pc+32'h4,pc+imm},
