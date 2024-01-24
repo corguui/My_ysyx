@@ -86,7 +86,7 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     bufp->chgBit(oldp+72,(vlSelf->clk));
     bufp->chgIData(oldp+73,(vlSelf->inst),32);
     bufp->chgIData(oldp+74,(vlSelf->pc),32);
-    bufp->chgIData(oldp+75,(vlSelf->ysyx_23060111_top__DOT__dnpc),32);
+    bufp->chgIData(oldp+75,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__dnpc_p),32);
     bufp->chgIData(oldp+76,(((IData)(4U) + vlSelf->pc)),32);
     bufp->chgCData(oldp+77,((0x7fU & vlSelf->inst)),7);
     bufp->chgCData(oldp+78,((0x1fU & (vlSelf->inst 
@@ -97,7 +97,7 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     bufp->chgCData(oldp+81,((0x1fU & (vlSelf->inst 
                                       >> 0x14U))),5);
     bufp->chgCData(oldp+82,((vlSelf->inst >> 0x19U)),7);
-    bufp->chgIData(oldp+83,(vlSelf->ysyx_23060111_top__DOT__wdata),32);
+    bufp->chgIData(oldp+83,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__wdata_p),32);
     bufp->chgIData(oldp+84,(vlSelf->ysyx_23060111_top__DOT__rout),32);
 }
 

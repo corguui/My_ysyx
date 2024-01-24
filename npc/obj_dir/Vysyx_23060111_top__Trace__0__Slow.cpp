@@ -52,6 +52,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+81,"raddr", false,-1, 4,0);
     tracep->declBus(c+85,"rout", false,-1, 31,0);
     tracep->declBit(c+86,"wen", false,-1);
+    tracep->declBus(c+84,"wdata_p", false,-1, 31,0);
+    tracep->declBus(c+76,"dnpc_p", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("init_IDU ");
     tracep->declBus(c+74,"inst", false,-1, 31,0);
@@ -222,7 +224,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullBit(oldp+73,(vlSelf->clk));
     bufp->fullIData(oldp+74,(vlSelf->inst),32);
     bufp->fullIData(oldp+75,(vlSelf->pc),32);
-    bufp->fullIData(oldp+76,(vlSelf->ysyx_23060111_top__DOT__dnpc),32);
+    bufp->fullIData(oldp+76,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__dnpc_p),32);
     bufp->fullIData(oldp+77,(((IData)(4U) + vlSelf->pc)),32);
     bufp->fullCData(oldp+78,((0x7fU & vlSelf->inst)),7);
     bufp->fullCData(oldp+79,((0x1fU & (vlSelf->inst 
@@ -233,7 +235,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullCData(oldp+82,((0x1fU & (vlSelf->inst 
                                        >> 0x14U))),5);
     bufp->fullCData(oldp+83,((vlSelf->inst >> 0x19U)),7);
-    bufp->fullIData(oldp+84,(vlSelf->ysyx_23060111_top__DOT__wdata),32);
+    bufp->fullIData(oldp+84,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__wdata_p),32);
     bufp->fullIData(oldp+85,(vlSelf->ysyx_23060111_top__DOT__rout),32);
     bufp->fullBit(oldp+86,(1U));
     bufp->fullIData(oldp+87,(5U),32);
