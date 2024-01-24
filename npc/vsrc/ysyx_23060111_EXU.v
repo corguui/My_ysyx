@@ -26,25 +26,25 @@ module ysyx_23060111_EXU(
 	case(type_i)
 	//auipc  UPC
 	4'd1:begin
- 	     wdata<=pc+imm;    wen<=1'b1;         dnpc<=snpc;	
+ 	     wdata=pc+imm;    wen=1'b1;         dnpc=snpc;	
 	     end
 	//lui    U
 	4'd2:begin
-	     wdata<=imm;       wen<=1'b1;         dnpc<=snpc;
+	     wdata=imm;       wen=1'b1;         dnpc=snpc;
 	     end
 	//jal    J
 	4'd3:begin
-	     wdata<=snpc;      wen<=1'b1;         dnpc<=pc+imm;
+	     wdata=snpc;      wen=1'b1;         dnpc=pc+imm;
              end
 	//addi   I
 	4'd4:begin
-	     wdata<=rout+imm;  wen<=1'b1;         dnpc<=snpc;
+	     wdata=rout+imm;  wen=1'b1;         dnpc=snpc;
 	     end
 	//jalr   JR
 	4'd5:begin
-	     wdata<=snpc;      wen<=1'b1;         dnpc<=imm+rout;
+	     wdata=snpc;      wen=1'b1;         dnpc=imm+rout;
 	     end
-	default: dnpc<=32'h00000000;
+	default: dnpc=32'h00000000;
 	       
 	endcase
 	
