@@ -9,8 +9,6 @@ WORK_DIR = $(shell pwd)
 INC_PATH := $(WORK_DIR)/include $(INC_PATH)
 INCLUDES = $(addprefix -I, $(INC_PATH))
 
-all: default
-
 all:
 	@echo "Write this Makefile by your self."
 
