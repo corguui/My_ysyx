@@ -1,5 +1,5 @@
 module ysyx_23060111_EXU(
-  output reg[31:0] dnpc,
+  output [31:0] dnpc,
   input [31:0] pc,
   input [31:0] snpc,
   input[6:0] opcode,
@@ -21,7 +21,9 @@ module ysyx_23060111_EXU(
   assign raddr=rs1[19:15]; //src1
   assign wen=1'b1;
 
+  assign dnpc=snpc;
 
+/*
   always @(type_i)
 	begin
 	case(type_i)
@@ -50,6 +52,6 @@ module ysyx_23060111_EXU(
 	endcase
 	
 	end
-
+*/
 endmodule
   
