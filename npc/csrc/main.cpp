@@ -10,7 +10,7 @@
 
 #include <mem.h>
 #include <cpu/cpu.h>
-#include "./monitor/sdb"
+#include "monitor/sdb"
 
 
 VerilatedContext* contextp=NULL; 
