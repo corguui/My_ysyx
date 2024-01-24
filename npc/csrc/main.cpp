@@ -114,8 +114,8 @@ void ebreak (int inst)
 {
 	if(inst == 0x00100073 )
 	{
+	printf("npc: at pc = %s\n",top->pc);
 	printf("error --------- ebreak\n");
-	//assert(0);
 	}
 }
 
