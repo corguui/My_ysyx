@@ -3,4 +3,6 @@
 
 #include <common.h>
 
+void cpu_exce(uint64_t n);
+
 #endif

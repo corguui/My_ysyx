@@ -10,8 +10,7 @@
 
 #include <mem.h>
 #include <cpu/cpu.h>
-#include "monitor/sdb"
-
+#include <sdb.h>
 
 VerilatedContext* contextp=NULL; 
 Vysyx_23060111_top *top=NULL; 
@@ -22,10 +21,9 @@ int main_time=0;
 void cpu_init();
 void cpu_exce_once(VerilatedVcdC* tfp);
 void ebreak(int inst);
-void cpu_exce(uint64_t n);
+//void cpu_exce(uint64_t n);
 void execute(uint64_t n);
 
-void sdb_mainloop();
 
 
 int main(int argc ,char** argv, char** env)
