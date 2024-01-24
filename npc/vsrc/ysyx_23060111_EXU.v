@@ -1,5 +1,5 @@
 module ysyx_23060111_EXU(
-  output reg[31:0] dnpc,
+  output [31:0] dnpc,
   input [31:0] pc,
   input [31:0] snpc,
   input[6:0] opcode,
@@ -20,6 +20,7 @@ module ysyx_23060111_EXU(
   assign waddr=rd[11:7]; //R(rd)
   assign raddr=rs1[19:15]; //src1
   assign wen=1'b1;
+  assign dnpc=snpc;
 
 /*
   always @(type_i)
