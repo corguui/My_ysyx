@@ -23,6 +23,7 @@ end
   assign rs1=inst[19:15];
   assign rs2=inst[24:20];
   assign funct7=inst[31:25];
+  assign type_i=4'b0001;
 /*
 ysyx_23060111_MuxKeyWithDefault #(5, 7, 36) typeMux ({type_i,imm}, opcode ,36'b0 , {
   		      //4'd0    type:Can't find the type
