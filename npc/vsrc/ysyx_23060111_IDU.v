@@ -22,7 +22,8 @@ end
   assign rs1=inst[19:15];
   assign rs2=inst[24:20];
   assign funct7=inst[31:25];
-
+  assign imm=inst;
+/*
 ysyx_23060111_MuxKeyWithDefault #(5, 7, 36) typeMux ({type_i,imm}, opcode ,36'b0 , {
      					     //4'd0    type:Can't find the type
     7'b0010111, {4'b0001,inst[31:12],12'b0}, //auipc   type:UPC   4'd1
@@ -32,7 +33,17 @@ ysyx_23060111_MuxKeyWithDefault #(5, 7, 36) typeMux ({type_i,imm}, opcode ,36'b0
     7'b0010011, {4'b0100,{20{inst[31]}},inst[31:20]}, //addi    type:I  4'd4
     7'b1100111, {4'b0101,{20{inst[31]}},inst[31:20]}  //jalr    type:JR
   });
+*/
 
+ysyx_23060111_MuxKeyWithDefault #(5, 7, 4) typeMux (type_i, opcode ,4'b0 , {
+     					     //4'd0    type:Can't find the type
+    7'b0010111, 4'b0001, //auipc   type:UPC   4'd1
+    7'b0110111, 4'b0010, //lui     type:U   4'd2
+    7'b1101111, 4'b0011, 
+                                             //jal     type:J  4'd3
+    7'b0010011, 4'b0100, //addi    type:I  4'd4
+    7'b1100111, 4'b0101  //jalr    type:JR
+  });
 
 
 
