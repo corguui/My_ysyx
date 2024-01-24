@@ -18,6 +18,14 @@ void Vysyx_23060111_top___024root___eval_triggers__ico(Vysyx_23060111_top___024r
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_triggers__ico\n"); );
     // Body
     vlSelf->__VicoTriggered.at(0U) = (0U == vlSelf->__VicoIterCount);
+    vlSelf->__VicoTriggered.at(1U) = (vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1 
+                                      != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1);
+    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1 
+        = vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1;
+    if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->__VicoDidInit))))) {
+        vlSelf->__VicoDidInit = 1U;
+        vlSelf->__VicoTriggered.at(1U) = 1U;
+    }
 #ifdef VL_DEBUG
     if (VL_UNLIKELY(vlSymsp->_vm_contextp__->debug())) {
         Vysyx_23060111_top___024root___dump_triggers__ico(vlSelf);
@@ -34,15 +42,20 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_triggers__act\n"); );
     // Body
-    vlSelf->__VactTriggered.at(0U) = ((IData)(vlSelf->clk) 
+    vlSelf->__VactTriggered.at(0U) = (vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1 
+                                      != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1);
+    vlSelf->__VactTriggered.at(1U) = ((IData)(vlSelf->clk) 
                                       & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clk)));
-    vlSelf->__VactTriggered.at(1U) = (vlSelf->inst 
+    vlSelf->__VactTriggered.at(2U) = (vlSelf->inst 
                                       != vlSelf->__Vtrigrprev__TOP__inst);
+    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1 
+        = vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1;
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
     vlSelf->__Vtrigrprev__TOP__inst = vlSelf->inst;
     if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->__VactDidInit))))) {
         vlSelf->__VactDidInit = 1U;
-        vlSelf->__VactTriggered.at(1U) = 1U;
+        vlSelf->__VactTriggered.at(0U) = 1U;
+        vlSelf->__VactTriggered.at(2U) = 1U;
     }
 #ifdef VL_DEBUG
     if (VL_UNLIKELY(vlSymsp->_vm_contextp__->debug())) {
