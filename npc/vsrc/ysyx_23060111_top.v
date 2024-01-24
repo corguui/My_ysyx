@@ -3,7 +3,7 @@ module ysyx_23060111_top(
   input       rst,
   input       clk,
   input[31:0] inst,
-  output reg[31:0] pc,
+  output [31:0] pc,
   output[35:0] rbb
  );
 
@@ -23,10 +23,10 @@ module ysyx_23060111_top(
 
 //reg
   reg[31:0] wdata;
-  reg[4:0] waddr;
-  reg[4:0] raddr;
+  wire[4:0] waddr;
+  wire[4:0] raddr;
   reg wen;
-  reg[31:0] rout;
+  wire[31:0] rout;
 
 
 //init reg
