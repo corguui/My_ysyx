@@ -21,7 +21,7 @@ module ysyx_23060111_EXU(
   assign raddr=rs1[19:15]; //src1
   assign wen=1'b1;
 
-
+/*
   always @(type_i)
 	begin
 	case(type_i)
@@ -48,7 +48,8 @@ module ysyx_23060111_EXU(
 	default: dnpc=32'h00000000;
 	       
 	endcase
-	
 	end
+
+	*/
 endmodule
   
