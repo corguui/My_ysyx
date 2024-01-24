@@ -1,5 +1,5 @@
 module ysyx_23060111_EXU(
-  output [31:0] dnpc,
+  output reg[31:0] dnpc,
   input [31:0] pc,
   input [31:0] snpc,
   input[6:0] opcode,
