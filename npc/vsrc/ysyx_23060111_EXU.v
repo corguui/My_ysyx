@@ -8,7 +8,7 @@ module ysyx_23060111_EXU(
   input[19:15] rs1,
   input[24:20] rs2,
   input[31:25] funct7,
-  input[3:0] type,
+  input[3:0] type_i,
   input[31:0] imm,
   output[31:0] wdata,
   output[4:0] waddr,
@@ -25,7 +25,7 @@ module ysyx_23060111_EXU(
 
   always @(type)
 	begin
-	case(type)
+	case(type_i)
 	//auipc  UPC
 	4'd1: wdata=pc+imm;    wen=1'b1;         dnpc=snpc;	
 	//lui    U

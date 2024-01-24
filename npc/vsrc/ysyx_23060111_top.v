@@ -18,7 +18,7 @@ module ysyx_23060111_top(
   wire[19:15] rs1;
   wire[24:20] rs2;
   wire[31:25] funct7;
-  wire[3:0] type;
+  wire[3:0] type_i;
   wire [31:0] imm;
 
 //reg
@@ -33,10 +33,10 @@ module ysyx_23060111_top(
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 
  //init IDU
-ysyx_23060111_IDU init_IDU (inst,opcode,rd,funct3,rs1,rs2,funct7,type,imm);
+ysyx_23060111_IDU init_IDU (inst,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm);
 
  //init EXU
-ysyx_23060111_EXU init_EXU (dnpc,pc,snpc,opcode,rd,funct3,rs1,rs2,funct7,type,imm,wdata,waddr,raddr,rout,wen,rbb);
+ysyx_23060111_EXU init_EXU (dnpc,pc,snpc,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm,wdata,waddr,raddr,rout,wen,rbb);
 
 //init pc
 ysyx_23060111_pc pc_renew (clk,rst,snpc,dnpc,pc);

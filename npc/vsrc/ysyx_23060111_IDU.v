@@ -7,7 +7,7 @@ module ysyx_23060111_IDU(
   output [19:15] rs1,
   output [24:20] rs2,
   output [31:25] funct7,
-  output [3:0] type,
+  output [3:0] type_i,
   output [31:0] imm
 
  );
@@ -25,7 +25,7 @@ end
   assign rs2=inst[24:20];
   assign funct7=inst[31:25];
 
-MuxKeyWithDefault #(5, 7, 36) i0 ({tpye,imm}, opcode ,36'd0 , {
+MuxKeyWithDefault #(5, 7, 36) i0 ({tpye_i,imm}, opcode ,36'd0 , {
   		      //4'd0    type:Can't find the type
     7'b0010111, {4'b0001,inst[31:12],12'b0}, //auipc   type:UPC   4'd1
     7'b0110111, {4'b0010,inst[31:12],12'b0}, //lui     type:U   4'd2
