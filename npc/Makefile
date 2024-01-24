@@ -5,10 +5,10 @@ TOPfile=vsrc/ysyx_23060111_top.v
 
 IMG ?= 
 
-WORK_DIR = $(shell pwd)                 
-INC_PATH = $(WORK_DIR)/include
+INC_PATH = $(HOME)/ysyx-workbench/npc/include
 all:
 	@echo "Write this Makefile by your self."
+	@echo "$(INC_PATH)"
 
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
