@@ -23,7 +23,7 @@ module ysyx_23060111_EXU(
   assign rbb={opcode,rd,rs1,funct3,rs1,rs2,funct7};//rbb
 
 
-  always @(type)
+  always @(type_i)
 	begin
 	case(type_i)
 	//auipc  UPC
