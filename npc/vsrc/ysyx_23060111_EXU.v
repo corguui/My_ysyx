@@ -22,11 +22,11 @@ module ysyx_23060111_EXU(
 
 
   ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,dnpc},type_i , 64'b0, {
-	4'd1, {pc+imm,snpc},
-	4'd2, {imm,snpc},
-	4'd3, {snpc,pc+imm},
-	4'd4, {rout+imm,snpc},
-	4'd5, {snpc,imm+rout}
+	4'b0001, {pc+imm,snpc},
+	4'b0010, {imm,snpc},
+	4'b0011, {snpc,pc+imm},
+	4'b0100, {rout+imm,snpc},
+	4'b0101, {snpc,imm+rout}
   });
 /*
   always @(type_i)
