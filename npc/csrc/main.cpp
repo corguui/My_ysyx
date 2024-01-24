@@ -9,7 +9,7 @@
 #include"svdpi.h"
 #include"../hsrc/mem.h"
 
-#include <cpu/cpu.h>
+#include "../include/cpu/cpu.h"
 
 
 VerilatedContext* contextp=NULL; 
