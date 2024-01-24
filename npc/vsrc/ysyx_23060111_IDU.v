@@ -34,7 +34,7 @@ ysyx_23060111_MuxKeyWithDefault #(5, 7, 36) typeMux ({type_i,imm}, opcode ,36'b0
     7'b1100111, {4'b0101,{20{inst[31]}},inst[31:20]}  //jalr    type:JR
   });
 */
-
+/*
 ysyx_23060111_MuxKeyWithDefault #(5, 7, 4) typeMux (type_i, opcode ,4'b0 , {
      					     //4'd0    type:Can't find the type
     7'b0010111, 4'b0001, //auipc   type:UPC   4'd1
@@ -44,7 +44,8 @@ ysyx_23060111_MuxKeyWithDefault #(5, 7, 4) typeMux (type_i, opcode ,4'b0 , {
     7'b0010011, 4'b0100, //addi    type:I  4'd4
     7'b1100111, 4'b0101  //jalr    type:JR
   });
-
+  */
+ assign type_i=4'b0;
 
 
 endmodule
