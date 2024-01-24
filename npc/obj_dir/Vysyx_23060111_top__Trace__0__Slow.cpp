@@ -32,7 +32,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+46,"wdata", false,-1, 31,0);
     tracep->declBus(c+114,"waddr", false,-1, 4,0);
     tracep->declBus(c+116,"raddr", false,-1, 4,0);
-    tracep->declBit(c+131,"wen", false,-1);
+    tracep->declBit(c+133,"wen", false,-1);
     tracep->declBus(c+119,"rout", false,-1, 31,0);
     tracep->pushNamePrefix("init_EXU ");
     tracep->declBus(c+119,"rout", false,-1, 31,0);
@@ -49,24 +49,24 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+46,"wdata", false,-1, 31,0);
     tracep->declBus(c+114,"waddr", false,-1, 4,0);
     tracep->declBus(c+116,"raddr", false,-1, 4,0);
-    tracep->declBit(c+131,"wen", false,-1);
+    tracep->declBit(c+133,"wen", false,-1);
     tracep->pushNamePrefix("i1 ");
-    tracep->declBus(c+132,"NR_KEY", false,-1, 31,0);
-    tracep->declBus(c+133,"KEY_LEN", false,-1, 31,0);
-    tracep->declBus(c+134,"DATA_LEN", false,-1, 31,0);
+    tracep->declBus(c+134,"NR_KEY", false,-1, 31,0);
+    tracep->declBus(c+135,"KEY_LEN", false,-1, 31,0);
+    tracep->declBus(c+136,"DATA_LEN", false,-1, 31,0);
     tracep->declQuad(c+47,"out", false,-1, 63,0);
     tracep->declBus(c+11,"key", false,-1, 3,0);
-    tracep->declQuad(c+135,"default_out", false,-1, 63,0);
-    tracep->declArray(c+120,"lut", false,-1, 339,0);
+    tracep->declQuad(c+120,"default_out", false,-1, 63,0);
+    tracep->declArray(c+122,"lut", false,-1, 339,0);
     tracep->pushNamePrefix("i0 ");
-    tracep->declBus(c+132,"NR_KEY", false,-1, 31,0);
-    tracep->declBus(c+133,"KEY_LEN", false,-1, 31,0);
-    tracep->declBus(c+134,"DATA_LEN", false,-1, 31,0);
+    tracep->declBus(c+134,"NR_KEY", false,-1, 31,0);
+    tracep->declBus(c+135,"KEY_LEN", false,-1, 31,0);
+    tracep->declBus(c+136,"DATA_LEN", false,-1, 31,0);
     tracep->declBus(c+137,"HAS_DEFAULT", false,-1, 31,0);
     tracep->declQuad(c+47,"out", false,-1, 63,0);
     tracep->declBus(c+11,"key", false,-1, 3,0);
-    tracep->declQuad(c+135,"default_out", false,-1, 63,0);
-    tracep->declArray(c+120,"lut", false,-1, 339,0);
+    tracep->declQuad(c+120,"default_out", false,-1, 63,0);
+    tracep->declArray(c+122,"lut", false,-1, 339,0);
     tracep->declBus(c+138,"PAIR_LEN", false,-1, 31,0);
     for (int i = 0; i < 5; ++i) {
         tracep->declArray(c+49+i*3,"pair_list", true,(i+0), 67,0);
@@ -93,7 +93,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+11,"type_i", false,-1, 3,0);
     tracep->declBus(c+12,"imm", false,-1, 31,0);
     tracep->pushNamePrefix("typeMux ");
-    tracep->declBus(c+132,"NR_KEY", false,-1, 31,0);
+    tracep->declBus(c+134,"NR_KEY", false,-1, 31,0);
     tracep->declBus(c+140,"KEY_LEN", false,-1, 31,0);
     tracep->declBus(c+141,"DATA_LEN", false,-1, 31,0);
     tracep->declQuad(c+13,"out", false,-1, 35,0);
@@ -101,7 +101,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declQuad(c+142,"default_out", false,-1, 35,0);
     tracep->declArray(c+15,"lut", false,-1, 214,0);
     tracep->pushNamePrefix("i0 ");
-    tracep->declBus(c+132,"NR_KEY", false,-1, 31,0);
+    tracep->declBus(c+134,"NR_KEY", false,-1, 31,0);
     tracep->declBus(c+140,"KEY_LEN", false,-1, 31,0);
     tracep->declBus(c+141,"DATA_LEN", false,-1, 31,0);
     tracep->declBus(c+137,"HAS_DEFAULT", false,-1, 31,0);
@@ -136,16 +136,16 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBit(c+109,"rst", false,-1);
     tracep->declBus(c+45,"din", false,-1, 31,0);
     tracep->declBus(c+112,"dout", false,-1, 31,0);
-    tracep->declBit(c+131,"wen", false,-1);
+    tracep->declBit(c+133,"wen", false,-1);
     tracep->popNamePrefix(2);
     tracep->pushNamePrefix("reg_$0 ");
-    tracep->declBus(c+132,"ADDR_WIDTH", false,-1, 31,0);
+    tracep->declBus(c+134,"ADDR_WIDTH", false,-1, 31,0);
     tracep->declBus(c+145,"DATA_WIDTH", false,-1, 31,0);
     tracep->declBit(c+110,"clk", false,-1);
     tracep->declBus(c+46,"wdata", false,-1, 31,0);
     tracep->declBus(c+114,"waddr", false,-1, 4,0);
     tracep->declBus(c+116,"raddr", false,-1, 4,0);
-    tracep->declBit(c+131,"wen", false,-1);
+    tracep->declBit(c+133,"wen", false,-1);
     tracep->declBus(c+119,"rout", false,-1, 31,0);
     for (int i = 0; i < 32; ++i) {
         tracep->declBus(c+77+i*1,"rf", true,(i+0), 31,0);
@@ -285,6 +285,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullIData(oldp+119,(vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
                               [(0x1fU & (vlSelf->inst 
                                          >> 0xfU))]),32);
+    bufp->fullQData(oldp+120,((QData)((IData)(((IData)(4U) 
+                                               + vlSelf->pc)))),64);
     __Vtemp_h44e97e15__0[0U] = (IData)((((QData)((IData)(
                                                          ((IData)(4U) 
                                                           + vlSelf->pc))) 
@@ -407,12 +409,11 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
                                                                            + vlSelf->pc)))) 
                                                        >> 0x20U)) 
                                               >> 0x10U));
-    bufp->fullWData(oldp+120,(__Vtemp_h44e97e15__0),340);
-    bufp->fullBit(oldp+131,(1U));
-    bufp->fullIData(oldp+132,(5U),32);
-    bufp->fullIData(oldp+133,(4U),32);
-    bufp->fullIData(oldp+134,(0x40U),32);
-    bufp->fullQData(oldp+135,(0ULL),64);
+    bufp->fullWData(oldp+122,(__Vtemp_h44e97e15__0),340);
+    bufp->fullBit(oldp+133,(1U));
+    bufp->fullIData(oldp+134,(5U),32);
+    bufp->fullIData(oldp+135,(4U),32);
+    bufp->fullIData(oldp+136,(0x40U),32);
     bufp->fullIData(oldp+137,(1U),32);
     bufp->fullIData(oldp+138,(0x44U),32);
     bufp->fullIData(oldp+139,(5U),32);

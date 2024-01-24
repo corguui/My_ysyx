@@ -124,6 +124,8 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     bufp->chgIData(oldp+118,(vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
                              [(0x1fU & (vlSelf->inst 
                                         >> 0xfU))]),32);
+    bufp->chgQData(oldp+119,((QData)((IData)(((IData)(4U) 
+                                              + vlSelf->pc)))),64);
     __Vtemp_h44e97e15__0[0U] = (IData)((((QData)((IData)(
                                                          ((IData)(4U) 
                                                           + vlSelf->pc))) 
@@ -246,7 +248,7 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
                                                                            + vlSelf->pc)))) 
                                                        >> 0x20U)) 
                                               >> 0x10U));
-    bufp->chgWData(oldp+119,(__Vtemp_h44e97e15__0),340);
+    bufp->chgWData(oldp+121,(__Vtemp_h44e97e15__0),340);
 }
 
 void Vysyx_23060111_top___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
