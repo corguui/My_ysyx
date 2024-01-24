@@ -32,7 +32,7 @@ MuxKeyWithDefault #(5, 7, 36) i0 ({tpye,imm}, opcode ,36'd0 , {
     7'b1101111, {4'b0011,{11{inst[31]}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0}, 
                                              //jal     type:J  4'd3
     7'b0010011, {4'b0100,{20{inst[31]}},inst[31:20]}, //addi    type:I  4'd4
-    7'b1100111, {4'd0101,{20{inst[31]}},inst[31:20]}  //jalr    type:JR
+    7'b1100111, {4'b0101,{20{inst[31]}},inst[31:20]}  //jalr    type:JR
   });
 
 
