@@ -109,6 +109,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     IData/*31:0*/ __VdfgTmp_h229725e1__0;
     __VdfgTmp_h229725e1__0 = 0;
     // Body
+    vlSelf->ysyx_23060111_top__DOT__dnpc = ((IData)(4U) 
+                                            + vlSelf->pc);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[3U] 
         = (0x37200000000ULL | (QData)((IData)((0xfffff000U 
                                                & vlSelf->inst))));

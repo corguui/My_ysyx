@@ -19,10 +19,10 @@ module ysyx_23060111_EXU(
   assign waddr=rd[11:7]; //R(rd)
   assign raddr=rs1[19:15]; //src1
   assign wen=1'b1;
-  assign dnpc=snpc;
+  assign wdata=snpc;
 
 
- ysyx_23060111_MuxKeyWithDefault #(5, 4, 32 ) i1 (wdata,type_i , 32'b0, {
+ ysyx_23060111_MuxKeyWithDefault #(5, 4, 32 ) i1 (dnpc,type_i , 32'b0, {
 	4'b0001, pc+imm,
 	4'b0010, imm,
 	4'b0011, snpc,
@@ -32,11 +32,11 @@ module ysyx_23060111_EXU(
 
 /*
  ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,dnpc},type_i , 64'b0, {
-	4'b0001, {pc[31:0]+imm[31:0],snpc[31:0]},
-	4'b0010, {imm[31:0],snpc[31:0]},
-	4'b0011, {snpc[31:0],pc[31:0]+imm[31:0]},
-	4'b0100, {rout[31:0]+imm[31:0],snpc[31:0]},
-	4'b0101, {snpc[31:0],imm[31:0]+rout[31:0]}
+	4'b0001, {pc+imm,snpc},
+	4'b0010, {imm,snpc},
+	4'b0011, {snpc,pc+imm},
+	4'b0100, {rout+imm,snpc},
+	4'b0101, {snpc,imm+rout}
   });
   */
 

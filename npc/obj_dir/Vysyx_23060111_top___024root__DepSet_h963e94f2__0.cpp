@@ -264,6 +264,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
         = __Vdlyvval__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0;
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->inst >> 0xfU))];
+    vlSelf->ysyx_23060111_top__DOT__dnpc = ((IData)(4U) 
+                                            + vlSelf->pc);
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[0U] 
         = (0x500000000ULL | (QData)((IData)(((IData)(4U) 
                                              + vlSelf->pc))));
