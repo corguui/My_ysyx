@@ -15,7 +15,7 @@ module ysyx_23060111_EXU(
   output[4:0] raddr,
   input[31:0] rout,
   output wen,
-  output[31:0] rbb
+  output[35:0] rbb
 );
 	
   assign waddr=rd[11:7]; //R(rd)
