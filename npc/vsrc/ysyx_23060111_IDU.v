@@ -45,7 +45,7 @@ ysyx_23060111_MuxKeyWithDefault #(5, 7, 4) typeMux (type_i, opcode ,4'b0 , {
     7'b1100111, 4'b0101  //jalr    type:JR
   });
   */
- assign type_i=4'b0;
+ assign type_i=4'b0000;
 
 
 endmodule
