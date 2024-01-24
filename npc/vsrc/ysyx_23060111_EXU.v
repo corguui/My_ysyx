@@ -21,7 +21,7 @@ module ysyx_23060111_EXU(
   assign wen=1'b1;
 
 
-  MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,dnpc},type_i , 64'b0, {
+  ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,dnpc},type_i , 64'b0, {
 	4'd1, {pc+imm,snpc},
 	4'd2, {imm,snpc},
 	4'd3, {snpc,pc+imm},
