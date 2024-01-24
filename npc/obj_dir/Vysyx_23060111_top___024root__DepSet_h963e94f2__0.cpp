@@ -17,21 +17,20 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___ico_sequent__TOP__0(Vysyx_2306
     IData/*31:0*/ __VdfgTmp_h229725e1__0;
     __VdfgTmp_h229725e1__0 = 0;
     // Body
-    vlSelf->rbb = (QData)((IData)(((vlSelf->inst << 0x19U) 
-                                   | ((0x1f00000U & 
-                                       (vlSelf->inst 
-                                        << 0xdU)) | 
-                                      ((0xe0000U & 
-                                        (vlSelf->inst 
-                                         << 5U)) | 
-                                       ((0x1f000U & 
-                                         (vlSelf->inst 
-                                          >> 3U)) | 
-                                        ((0xf80U & 
-                                          (vlSelf->inst 
-                                           >> 0xdU)) 
-                                         | (vlSelf->inst 
-                                            >> 0x19U))))))));
+    vlSelf->rbb = ((vlSelf->inst << 0x19U) | ((0x1f00000U 
+                                               & (vlSelf->inst 
+                                                  << 0xdU)) 
+                                              | ((0xe0000U 
+                                                  & (vlSelf->inst 
+                                                     << 5U)) 
+                                                 | ((0x1f000U 
+                                                     & (vlSelf->inst 
+                                                        >> 3U)) 
+                                                    | ((0xf80U 
+                                                        & (vlSelf->inst 
+                                                           >> 0xdU)) 
+                                                       | (vlSelf->inst 
+                                                          >> 0x19U))))));
     vlSelf->ysyx_23060111_top__DOT__rout = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->inst >> 0xfU))];
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__i0__DOT__i0__DOT__pair_list[3U] 
