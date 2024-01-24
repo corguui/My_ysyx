@@ -4,7 +4,7 @@ module ysyx_23060111_top(
   input       clk,
   input[31:0] inst,
   output [31:0] pc,
-  output[32:0] rbb
+  output[31:0] rbb
  );
 
 //pc

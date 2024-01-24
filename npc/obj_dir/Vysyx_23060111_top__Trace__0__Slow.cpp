@@ -15,13 +15,13 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBit(c+73,"clk", false,-1);
     tracep->declBus(c+74,"inst", false,-1, 31,0);
     tracep->declBus(c+75,"pc", false,-1, 31,0);
-    tracep->declQuad(c+76,"rbb", false,-1, 35,0);
+    tracep->declQuad(c+76,"rbb", false,-1, 32,0);
     tracep->pushNamePrefix("ysyx_23060111_top ");
     tracep->declBit(c+72,"rst", false,-1);
     tracep->declBit(c+73,"clk", false,-1);
     tracep->declBus(c+74,"inst", false,-1, 31,0);
     tracep->declBus(c+75,"pc", false,-1, 31,0);
-    tracep->declQuad(c+76,"rbb", false,-1, 35,0);
+    tracep->declQuad(c+76,"rbb", false,-1, 32,0);
     tracep->declBus(c+78,"dnpc", false,-1, 31,0);
     tracep->declBus(c+79,"snpc", false,-1, 31,0);
     tracep->declBus(c+80,"opcode", false,-1, 6,0);
@@ -54,7 +54,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+83,"raddr", false,-1, 4,0);
     tracep->declBus(c+88,"rout", false,-1, 31,0);
     tracep->declBit(c+87,"wen", false,-1);
-    tracep->declQuad(c+76,"rbb", false,-1, 35,0);
+    tracep->declQuad(c+76,"rbb", false,-1, 32,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("init_IDU ");
     tracep->declBus(c+74,"inst", false,-1, 31,0);
@@ -225,7 +225,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullBit(oldp+73,(vlSelf->clk));
     bufp->fullIData(oldp+74,(vlSelf->inst),32);
     bufp->fullIData(oldp+75,(vlSelf->pc),32);
-    bufp->fullQData(oldp+76,(vlSelf->rbb),36);
+    bufp->fullQData(oldp+76,(vlSelf->rbb),33);
     bufp->fullIData(oldp+78,(vlSelf->ysyx_23060111_top__DOT__dnpc),32);
     bufp->fullIData(oldp+79,(((IData)(4U) + vlSelf->pc)),32);
     bufp->fullCData(oldp+80,((0x7fU & vlSelf->inst)),7);
