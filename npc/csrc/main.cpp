@@ -24,11 +24,12 @@ void ebreak(int inst);
 void cpu_exce(uint64_t n);
 void execute(uint64_t n);
 
+void sdb_mainloop();
 
 
 int main(int argc ,char** argv, char** env)
 {
-	int count=40;
+	//int count=40;
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new Vysyx_23060111_top{contextp};
@@ -43,25 +44,8 @@ int main(int argc ,char** argv, char** env)
 
 	//init cpu
 	cpu_init();
-	//top->pc=0x80000000;
-	/*
-	while(count<=10&&!contextp->gotFinish())
-	{
-		if(count==2)
-		{
-		top->rst=1;
-		}
-		else
-		{
-		top->rst=0;
-		}
-		cpu_exce_once(tfp);
-
-		//contextp->timeInc(1);
-		count++;
-	}
-	*/
-	cpu_exce(count);
+	sdb_mainloop();
+	//cpu_exce(count);
 	delete top;
 	tfp->close();
 	delete contextp;
