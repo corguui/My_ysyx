@@ -34,7 +34,6 @@ module ysyx_23060111_EXU(
 	4'd2:begin
 	     wdata<=imm;       wen<=1'b1;         dnpc<=snpc;
 	     end
-
 	//jal    J
 	4'd3:begin
 	     wdata<=snpc;      wen<=1'b1;         dnpc<=pc+imm;
@@ -49,7 +48,6 @@ module ysyx_23060111_EXU(
 	     end
 	default: dnpc<=32'h00000000;
 	       
-
 	endcase
 	
 	end
