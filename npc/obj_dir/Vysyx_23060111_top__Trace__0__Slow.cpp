@@ -36,7 +36,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBit(c+132,"wen", false,-1);
     tracep->declBus(c+120,"rout", false,-1, 31,0);
     tracep->pushNamePrefix("init_EXU ");
-    tracep->declBus(c+45,"dnpc", false,-1, 31,0);
+    tracep->declBus(c+120,"rout", false,-1, 31,0);
     tracep->declBus(c+112,"pc", false,-1, 31,0);
     tracep->declBus(c+113,"snpc", false,-1, 31,0);
     tracep->declBus(c+114,"opcode", false,-1, 6,0);
@@ -50,7 +50,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+46,"wdata", false,-1, 31,0);
     tracep->declBus(c+115,"waddr", false,-1, 4,0);
     tracep->declBus(c+117,"raddr", false,-1, 4,0);
-    tracep->declBus(c+120,"rout", false,-1, 31,0);
+    tracep->declBus(c+45,"dnpc", false,-1, 31,0);
     tracep->declBit(c+132,"wen", false,-1);
     tracep->pushNamePrefix("i1 ");
     tracep->declBus(c+133,"NR_KEY", false,-1, 31,0);
