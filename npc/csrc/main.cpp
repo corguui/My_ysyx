@@ -115,7 +115,7 @@ void ebreak (int inst)
 {
 	if(inst == 0x00100073 )
 	{
-	Log("npc: %s at pc = 0x%x\n",ANSI_FMT("HIT GOOD TRAP",ANSI_FG_GREEN),top->pc);
+	printf("npc: %s at pc = 0x%x\n",ANSI_FMT("HIT GOOD TRAP",ANSI_FG_GREEN),top->pc);
 	}
 }
 
