@@ -1,5 +1,5 @@
 module ysyx_23060111_EXU(
-  output [31:0] dnpc,
+  input[31:0] rout,
   input [31:0] pc,
   input [31:0] snpc,
   input[6:0] opcode,
@@ -13,7 +13,7 @@ module ysyx_23060111_EXU(
   output [31:0] wdata,
   output[4:0] waddr,
   output[4:0] raddr,
-  input[31:0] rout,
+  output [31:0] dnpc,
   output  wen
 );
   assign waddr=rd[11:7]; //R(rd)
@@ -22,11 +22,11 @@ module ysyx_23060111_EXU(
 
 
   ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,dnpc},type_i , 64'b0, {
-	4'b0001, {pc+imm,snpc},
-	4'b0010, {imm,snpc},
-	4'b0011, {snpc,pc+imm},
-	4'b0100, {rout+imm,snpc},
-	4'b0101, {snpc,imm+rout}
+	4'b0001, {pc[31:0]+imm[31:0],snpc[31:0]},
+	4'b0010, {imm[31:0],snpc[31:0]},
+	4'b0011, {snpc[31:0],pc[31:0]+imm[31:0]},
+	4'b0100, {rout[31:0]+imm[31:0],snpc[31:0]]},
+	4'b0101, {snpc[31:0],imm[31:0]+rout[31:0]}
   });
 /*
   always @(type_i)
