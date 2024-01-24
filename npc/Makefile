@@ -7,14 +7,14 @@ IMG ?=
 
 WORK_DIR = $(shell pwd)                 
 INC_PATH := $(WORK_DIR)/include $(INC_PATH)
-INCLUDES = -I$(INC_PATH)
+INCLUDES = $(INC_PATH)
 all:
 	@echo "Write this Makefile by your self."
 
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator -Wall --cc --trace --exe --build -Wno-lint -top ysyx_23060111_top $(TOPfile) $(subst $(TOPfile),,$^)  -CFLAGS $(INCLUDES)  -CFLAGS -DIMG='\"$(IMG)\"'
+	verilator -Wall --cc --trace --exe --build -Wno-lint -top ysyx_23060111_top $(TOPfile) $(subst $(TOPfile),,$^)  -CFLAGS -I $(INCLUDES)  -CFLAGS -DIMG='\"$(IMG)\"'
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 wave:$(Wavefile)
 	gtkwave $(Wavefile)
