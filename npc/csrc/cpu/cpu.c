@@ -36,6 +36,7 @@ static void execute(uint64_t n)
 	for(;n>0;n--)
 	{
 		cpu_exec_once(tfp);
+		if(nemu_state.state !=NEMU_RUNNING) break;
 	}
 }
 
