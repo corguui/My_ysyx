@@ -31,7 +31,7 @@ ysyx_23060111_MuxKeyWithDefault #(6, 7, 37) typeMux                             
     7'b0110111, {4'b0010,inst[31:12],12'b0,1'b0}, //lui     type:U   4'd2
     7'b1101111, {4'b0011,{11{inst[31]}},inst[31],inst[19:12],inst[20],inst[30:21],1'b0,1'b0},                                   //jal     type:J  4'd3
     7'b0010011, {4'b0100,{20{inst[31]}},inst[31:20],1'b0}, //addi    type:I  4'd4
-    7'b1100111, {4'b0101,{20{inst[31]}},inst[31:20],1'b0}  //jalr    type:JR
+    7'b1100111, {4'b0101,{20{inst[31]}},inst[31:20],1'b0},  //jalr    type:JR
     7'b1110011, {4'b0110,33'b0}   //ebreak
   });
 
