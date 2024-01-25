@@ -44,7 +44,7 @@ void ebreak (int inst)
 {
 	if(inst == 0x00100073 )
 	{
-	   NPCTRAP(top->reg->rf[10]);
+	   NPCTRAP(top->halt_ret);
 	}
 }
 
