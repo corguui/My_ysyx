@@ -1,6 +1,5 @@
 #include <cpu/cpu.h>
-#include "log.c"
-
+extern unsigned char isa_logo[];
 NEMUState nemu_state ={.state=NEMU_STOP};
 
 int is_exit_status_bad() {
