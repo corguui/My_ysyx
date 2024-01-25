@@ -38,6 +38,7 @@ VM_USER_CFLAGS = \
 	-I/home/corgi/ysyx-workbench/npc/include \
 	-DIMG=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin\" \
 	-lreadline \
+	-lncurses \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
