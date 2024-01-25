@@ -18,10 +18,10 @@ VerilatedVcdC* tfp=NULL;
 
 int main_time=0;
 
-extern void cpu_init();
+//extern void cpu_init();
 //void cpu_exce_once(VerilatedVcdC* tfp);
 //void ebreak(int inst);
-extern void cpu_exec(uint64_t n);
+//extern void cpu_exec(uint64_t n);
 //void execute(uint64_t n);
 
 
