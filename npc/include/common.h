@@ -2,5 +2,6 @@
 #define __COMMON_H_
 
 #include <debug.h>
+#include <cstdint>
 
 #endif
