@@ -44,6 +44,14 @@ void ebreak (int inst)
 	{
 	   NPCTRAP(top->halt_ret);
 	}
+	if(inst!=0&&top->inv_flag==1)
+	{
+		INV();
+	}
+	else if(inst==0&&top->inv_flag==1)
+	{
+		top->inv_flag=0;
+	}
 }
 
 

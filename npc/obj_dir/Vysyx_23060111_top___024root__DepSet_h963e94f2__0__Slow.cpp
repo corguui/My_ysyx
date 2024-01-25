@@ -271,10 +271,12 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[2U][2U] = 3U;
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[4U][0U] 
         = (IData)((((QData)((IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____VdfgTmp_h8a6dd40b__0)) 
-                    << 0x20U) | (QData)((IData)(vlSelf->pc))));
+                    << 0x20U) | (QData)((IData)(((IData)(4U) 
+                                                 + vlSelf->pc)))));
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[4U][1U] 
         = (IData)(((((QData)((IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____VdfgTmp_h8a6dd40b__0)) 
-                     << 0x20U) | (QData)((IData)(vlSelf->pc))) 
+                     << 0x20U) | (QData)((IData)(((IData)(4U) 
+                                                  + vlSelf->pc)))) 
                    >> 0x20U));
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[4U][2U] = 1U;
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__data_list[2U] 
@@ -282,7 +284,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
             << 0x20U) | (QData)((IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____VdfgTmp_h8a6dd40b__0)));
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__data_list[4U] 
         = (((QData)((IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____VdfgTmp_h8a6dd40b__0)) 
-            << 0x20U) | (QData)((IData)(vlSelf->pc)));
+            << 0x20U) | (QData)((IData)(((IData)(4U) 
+                                         + vlSelf->pc))));
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[0U][0U] 
         = (IData)((((QData)((IData)(((IData)(4U) + vlSelf->pc))) 
                     << 0x20U) | (QData)((IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT____VdfgTmp_h51178536__0))));
