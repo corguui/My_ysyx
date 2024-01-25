@@ -1,9 +1,9 @@
 #include <cpu/cpu.h>
 extern unsigned char isa_logo[];
-npcState npc_state ={.state=npc_STOP};
+NPCState npc_state ={.state=NPC_STOP};
 
 int is_exit_status_bad() {
-  int good = (npc_state.state == npc_END && npc_state.halt_ret == 0) ||      (npc_state.state == npc_QUIT);
+  int good = (npc_state.state == NPC_END && npc_state.halt_ret == 0) ||      (npc_state.state == NPC_QUIT);
   return !good;
 }
 
@@ -26,6 +26,6 @@ void invalid_inst()
         "* The machine is always right!\n"
         "* Every line of untested code is always wrong!\n\n", ANSI_FG_RED),isa_logo);
 
-	set_npc_state(npc_ABORT,-1);
+	set_npc_state(NPC_ABORT,-1);
 }
 
