@@ -37,7 +37,7 @@ ysyx_23060111_pc pc_renew (clk,rst,snpc,pc);
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout,halt_ret);
 
  //init IDU
-ysyx_23060111_IDU init_IDU (inst,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm,in);
+ysyx_23060111_IDU init_IDU (inst,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm);
 
  //init EXU
 ysyx_23060111_EXU init_EXU (rout,pc,snpc,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm,wdata,waddr,raddr,wen);
