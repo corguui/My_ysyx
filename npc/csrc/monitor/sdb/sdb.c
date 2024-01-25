@@ -1,6 +1,8 @@
 #include <cpu/cpu.h>
 #include <stdlib.h>
 #include <string.h>
+#include <cstdint>
+#include <cstdio>
 
 void cpu_exec(uint64_t n);
 
@@ -21,21 +23,6 @@ static char* rl_gets() {
   return line_read;
 }
 
-
-
-
-static struct {
-  const char *name;
-  const char *description;
-  int (*handler) (char *);
-} cmd_table [] = {
-  { "help", "Display information about all supported commands", cmd_help },
-  { "c", "Continue the execution of the program", cmd_c },
-  { "q", "Exit NEMU", cmd_q },
-
-  /* TODO: Add more commands */
-
-};
 
 static int cmd_c(char *args) {
   cpu_exec(-1);
@@ -68,6 +55,21 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
+
+
+
+static struct {
+  const char *name;
+  const char *description;
+  int (*handler) (char *);
+} cmd_table [] = {
+  { "help", "Display information about all supported commands", cmd_help },
+  { "c", "Continue the execution of the program", cmd_c },
+  { "q", "Exit NEMU", cmd_q },
+
+  /* TODO: Add more commands */
+
+};
 
 void sdb_mainloop() {
 /*
