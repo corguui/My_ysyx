@@ -1,7 +1,7 @@
 module ysyx_23060111_EXU(
   input[31:0] rout,
   input [31:0] pc,
-  output reg [31:0] snpc,
+  output[31:0] snpc,
   input[6:0] opcode,
   input[11:7] rd,
   input[14:12] funct3,
@@ -10,12 +10,14 @@ module ysyx_23060111_EXU(
   input[31:25] funct7,
   input[3:0] type_i,
   input[31:0] imm,
-  output reg[31:0] wdata,
+  output [31:0] wdata,
   output[4:0] waddr,
   output[4:0] raddr,
   //output [31:0] snpc,
   output  wen
 );
+  reg [31:0] dnpc;
+  reg [31:0] data;
   assign waddr=rd[11:7]; //R(rd)
   assign raddr=rs1[19:15]; //src1
   assign wen=1'b1;
@@ -35,25 +37,25 @@ module ysyx_23060111_EXU(
 	case(type_i)
 	//auipc  UPC
 	4'd1:begin
- 	     wdata=pc+imm;            snpc=pc+32'h4;	
+ 	     data=pc+imm;            dnpc=pc+32'h4;	
 	     end
 	//lui    U
 	4'd2:begin
-	     wdata=imm;                snpc=pc+32'h4;
+	     data=imm;                dnpc=pc+32'h4;
 	     end
 	//jal    J
 	4'd3:begin
-	     wdata=pc+32'h4;               snpc=pc+imm;
+	     data=pc+32'h4;               dnpc=pc+imm;
              end
 	//addi   I
 	4'd4:begin
-	     wdata=rout+imm;           snpc=pc+32'h4;
+	     data=rout+imm;           dnpc=pc+32'h4;
 	     end
 	//jalr   JR
 	4'd5:begin
-	     wdata=pc+32'h4;               snpc=imm+rout;
+	     data=pc+32'h4;               dnpc=imm+rout;
 	     end
-	default: snpc=32'h00000000;
+	default: dnpc=32'h00000000;
 	       
 	endcase
 	end
