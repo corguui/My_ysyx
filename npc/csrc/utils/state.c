@@ -18,11 +18,11 @@ void set_nemu_state(int state,int halt_ret)
 
 void invalid_inst()
 {	
-        printf("invalid opcode (PC = %s)\n",top->pc);
+        printf("invalid opcode (PC = 0x%x)\n",top->pc);
   printf("There are two cases which will trigger this unexpected exception:\n"
-      "1. The instruction at PC = " %s " is not implemented.\n"
+      "1. The instruction at PC = " 0x%x " is not implemented.\n"
       "2. Something is implemented incorrectly.\n", top->pc);
-  printf("Find this PC(" %s ") in the disassembling result to distinguish which case it is.\n\n", top->pc);
+  printf("Find this PC(" 0x%x ") in the disassembling result to distinguish which case it is.\n\n", top->pc);
   printf(ANSI_FMT("If it is the first case, see\n%s\nfor more details.\n\n"
         "If it is the second case, remember:\n"
         "* The machine is always right!\n"
