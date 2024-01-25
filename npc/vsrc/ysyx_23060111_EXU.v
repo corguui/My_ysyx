@@ -1,7 +1,7 @@
 module ysyx_23060111_EXU(
   input[31:0] rout,
   input [31:0] pc,
-  output reg[31:0] snpc,
+  output [31:0] snpc,
   input[6:0] opcode,
   input[11:7] rd,
   input[14:12] funct3,
@@ -19,6 +19,7 @@ module ysyx_23060111_EXU(
   assign waddr=rd[11:7]; //R(rd)
   assign raddr=rs1[19:15]; //src1
   assign wen=1'b1;
+  assign snpc=pc+32'h4;
 
 /*
  ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,snpc},type_i , {32'b0,pc+32'h4}, {
@@ -36,31 +37,31 @@ module ysyx_23060111_EXU(
 	//auipc  UPC
 	4'b0001:begin
  	     wdata=pc+imm;
-	     snpc=pc+32'h4;	
+	     //snpc=pc+32'h4;	
 	     end
 	//lui    U
 	4'b0010:begin
 	     wdata=imm;
-	     snpc=pc+32'h4;
+	     //snpc=pc+32'h4;
 	     end
 	//jal    J
 	4'b0011:begin
 	     wdata=pc+32'h4;
-	     snpc=pc+imm;
+	     //snpc=pc+imm;
              end
 	//addi   I
 	4'b0100:begin
 	     wdata=rout+imm;
-	     snpc=pc+32'h4;
+	     //snpc=pc+32'h4;
 	     end
 	//jalr   JR
 	4'b0101:begin
 	     wdata=pc+32'h4;
-	     snpc=imm+rout;
+	     //snpc=imm+rout;
 	     end
 	default:begin 
 	     wdata=32'h00000000;
-	     snpc=32'h00000000;
+	     //snpc=32'h00000000;
 	     end 
 	endcase
 	end
