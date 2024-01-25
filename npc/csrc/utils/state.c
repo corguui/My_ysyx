@@ -2,15 +2,6 @@
 
 NEMUState nemu_state ={.state=NEMU_STOP};
 
-unsigned char isa_logo[] ="
-  _____    _____    _____    _____  __      __  ____    ___         \n
- |  __ \\  |_   _|  / ____|  / ____| \\ \\    / / |___ \\  |__ \\        \n
- | |__) |   | |   | (___   | |       \\ \\  / /    __) |    ) |   ___ \n
- |  _  /    | |    \\___ \\  | |        \\ \\/ /    |__ <    / /   / _ \\\n
- | | \\ \\   _| |_   ____) | | |____     \\  /     ___) |  / /_  |  __/\n
- |_|  \\_\\ |_____| |_____/   \_____|     \\/     |____/  |____|  \\___|\n
-                                                                    \n
-                                                                    \n";
 int is_exit_status_bad() {
   int good = (nemu_state.state == NEMU_END && nemu_state.halt_ret == 0) ||      (nemu_state.state == NEMU_QUIT);
   return !good;
@@ -30,10 +21,19 @@ void invalid_inst()
       "1. The instruction at PC = \" 0x%x \" is not implemented.\n"
       "2. Something is implemented incorrectly.\n", top->pc);
   printf("Find this PC(\" 0x%x \") in the disassembling result to distinguish which case it is.\n\n", top->pc);
-  printf(ANSI_FMT("If it is the first case, see\n%s\nfor more details.\n\n"
+  printf(ANSI_FMT("If it is the first case, see\n
+  _____    _____    _____    _____  __      __  ____    ___         \n
+ |  __ \\  |_   _|  / ____|  / ____| \\ \\    / / |___ \\  |__ \\        \n
+ | |__) |   | |   | (___   | |       \\ \\  / /    __) |    ) |   ___ \n
+ |  _  /    | |    \\___ \\  | |        \\ \\/ /    |__ <    / /   / _ \\\n
+ | | \\ \\   _| |_   ____) | | |____     \\  /     ___) |  / /_  |  __/\n
+ |_|  \\_\\ |_____| |_____/   \_____|     \\/     |____/  |____|  \\___|\n
+                                                                    \n
+                                                                    \n
+for more details.\n\n"
         "If it is the second case, remember:\n"
         "* The machine is always right!\n"
-        "* Every line of untested code is always wrong!\n\n", ANSI_FG_RED), isa_logo);
+        "* Every line of untested code is always wrong!\n\n", ANSI_FG_RED));
 
 	set_nemu_state(NEMU_ABORT,-1);
 }
