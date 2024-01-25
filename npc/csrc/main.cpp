@@ -28,7 +28,7 @@ int main_time=0;
 
 int main(int argc ,char** argv, char** env)
 {
-	//int count=40;
+	int count=40;
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new Vysyx_23060111_top{contextp};
