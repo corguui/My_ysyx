@@ -21,6 +21,8 @@ module ysyx_23060111_EXU(
   assign waddr=rd[11:7]; //R(rd)
   assign raddr=rs1[19:15]; //src1
   assign wen=1'b1;
+  assign snpc=dnpc;
+  assign wdata=data;
 
 /*
  ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,snpc},type_i , {32'b0,pc+32'h4}, {
