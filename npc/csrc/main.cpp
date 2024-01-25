@@ -18,17 +18,11 @@ VerilatedVcdC* tfp=NULL;
 
 int main_time=0;
 
-//extern void cpu_init();
-//void cpu_exce_once(VerilatedVcdC* tfp);
-//void ebreak(int inst);
-//extern void cpu_exec(uint64_t n);
-//void execute(uint64_t n);
-
 
 
 int main(int argc ,char** argv, char** env)
 {
-	int count=40;
+	//int count=40;
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new Vysyx_23060111_top{contextp};
@@ -43,8 +37,8 @@ int main(int argc ,char** argv, char** env)
 
 	//init cpu
 	cpu_init();
-	//sdb_mainloop();
-	cpu_exec(count);
+	sdb_mainloop();
+	//cpu_exec(count);
 	delete top;
 	tfp->close();
 	delete contextp;
