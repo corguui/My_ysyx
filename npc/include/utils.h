@@ -5,22 +5,22 @@
 #include <cstdint>
 
 int is_exit_status_bad();
-void set_nemu_state(int state,int halt_ret);
-#define NPCTRAP(halt_ret) set_nemu_state(NEMU_END, halt_ret)
+void set_npc_state(int state,int halt_ret);
+#define NPCTRAP(halt_ret) set_npc_state(npc_END, halt_ret)
 void invalid_inst();
 #define INV() invalid_inst()
 
 
 // ----------- state -----------
 
-enum { NEMU_RUNNING, NEMU_STOP, NEMU_END, NEMU_ABORT, NEMU_QUIT };
+enum { npc_RUNNING, npc_STOP, npc_END, npc_ABORT, npc_QUIT };
 
 typedef struct {
    int state;
    uint32_t halt_ret;
-} NEMUState;
+} npcState;
 
-extern NEMUState nemu_state;
+extern npcState npc_state;
  
 // ----------- log -----------
  
