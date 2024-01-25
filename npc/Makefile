@@ -1,4 +1,4 @@
--lreadlineVfile=$(wildcard ./vsrc/*.v)
+Vfile=$(wildcard ./vsrc/*.v)
 Cfile=$(wildcard ./csrc/*.cpp)
 Cfile +=$(shell find -L ./csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
