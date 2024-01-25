@@ -13,7 +13,7 @@ module ysyx_23060111_IDU(
   output invalid_flags
 
  );
-always @(inst or invalid_flags)
+always @(inst)
 begin 
      if(invalid_flags==1'b0)
      invalid_opcode();
