@@ -1,5 +1,6 @@
 Vfile=$(wildcard ./vsrc/*.v)
 Cfile=$(wildcard ./csrc/*.cpp)
+Cfile +=$(shell find -L ./csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
 TOPfile=vsrc/ysyx_23060111_top.v
 
