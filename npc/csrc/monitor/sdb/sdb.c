@@ -8,6 +8,7 @@
 
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0])) 
 
+static int cmd_help(char *args);
 void cpu_exec(uint64_t n);
 
 static char* rl_gets() {
