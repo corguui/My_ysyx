@@ -8,6 +8,8 @@
 void set_nemu_state(int state,int halt_ret);
 int is_exit_status_bad();
 #define NPCTRAP(halt_ret) set_nemu_state( NEMU_END, halt_ret)
+void invalid_inst();
+#define INV() invalid_inst()
 
 
 // ----------- state -----------
@@ -43,8 +45,6 @@ extern NEMUState nemu_state;
 
 #define ANSI_FMT(str, fmt) fmt str ANSI_NONE
 
-void invalid_inst();
-#define INV() invalid_inst()
 
 
 
