@@ -2,6 +2,7 @@
 
 void cpu_init()
 {
+	top->invalid_flags=0;
 	top->rst=1;
 	top->clk =0; top->eval();
 	tfp->dump(main_time);

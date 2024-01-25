@@ -104,75 +104,74 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___stl_sequent__TOP__0\n"); );
     // Init
-    QData/*32:0*/ __VdfgTmp_hcb8e21dd__0;
-    __VdfgTmp_hcb8e21dd__0 = 0;
-    QData/*32:0*/ __VdfgTmp_h2287f56b__0;
-    __VdfgTmp_h2287f56b__0 = 0;
+    QData/*32:0*/ __VdfgTmp_hcb8dd02c__0;
+    __VdfgTmp_hcb8dd02c__0 = 0;
+    QData/*32:0*/ __VdfgTmp_h2287e566__0;
+    __VdfgTmp_h2287e566__0 = 0;
     // Body
     vlSelf->halt_ret = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [0xaU];
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[3U] 
-        = (0x6e400000001ULL | ((QData)((IData)((vlSelf->inst 
+        = (0x6e400000000ULL | ((QData)((IData)((vlSelf->inst 
                                                 >> 0xcU))) 
                                << 0xdU));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[4U] 
-        = (0x2e200000001ULL | ((QData)((IData)((vlSelf->inst 
+        = (0x2e200000000ULL | ((QData)((IData)((vlSelf->inst 
                                                 >> 0xcU))) 
                                << 0xdU));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list[3U] 
-        = (0x400000001ULL | ((QData)((IData)((vlSelf->inst 
+        = (0x400000000ULL | ((QData)((IData)((vlSelf->inst 
                                               >> 0xcU))) 
                              << 0xdU));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list[4U] 
-        = (0x200000001ULL | ((QData)((IData)((vlSelf->inst 
+        = (0x200000000ULL | ((QData)((IData)((vlSelf->inst 
                                               >> 0xcU))) 
                              << 0xdU));
-    __VdfgTmp_h2287f56b__0 = (((QData)((IData)((0x7ffU 
+    __VdfgTmp_h2287e566__0 = (((QData)((IData)((0x7ffU 
                                                 & (- (IData)(
                                                              (vlSelf->inst 
                                                               >> 0x1fU)))))) 
                                << 0x16U) | (QData)((IData)(
-                                                           (1U 
-                                                            | ((0x200000U 
+                                                           ((0x200000U 
+                                                             & (vlSelf->inst 
+                                                                >> 0xaU)) 
+                                                            | ((0x1fe000U 
                                                                 & (vlSelf->inst 
-                                                                   >> 0xaU)) 
-                                                               | ((0x1fe000U 
+                                                                   << 1U)) 
+                                                               | ((0x1000U 
                                                                    & (vlSelf->inst 
-                                                                      << 1U)) 
-                                                                  | ((0x1000U 
-                                                                      & (vlSelf->inst 
-                                                                         >> 8U)) 
-                                                                     | (0xffcU 
-                                                                        & (vlSelf->inst 
-                                                                           >> 0x13U)))))))));
-    __VdfgTmp_hcb8e21dd__0 = (1ULL | ((QData)((IData)(
-                                                      (((- (IData)(
-                                                                   (vlSelf->inst 
-                                                                    >> 0x1fU))) 
-                                                        << 0xcU) 
-                                                       | (vlSelf->inst 
-                                                          >> 0x14U)))) 
-                                      << 1U));
+                                                                      >> 8U)) 
+                                                                  | (0xffcU 
+                                                                     & (vlSelf->inst 
+                                                                        >> 0x13U))))))));
+    __VdfgTmp_hcb8dd02c__0 = ((QData)((IData)((((- (IData)(
+                                                           (vlSelf->inst 
+                                                            >> 0x1fU))) 
+                                                << 0xcU) 
+                                               | (vlSelf->inst 
+                                                  >> 0x14U)))) 
+                              << 1U);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[2U] 
-        = (0xde600000000ULL | __VdfgTmp_h2287f56b__0);
+        = (0xde600000000ULL | __VdfgTmp_h2287e566__0);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list[2U] 
-        = (0x600000000ULL | __VdfgTmp_h2287f56b__0);
+        = (0x600000000ULL | __VdfgTmp_h2287e566__0);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[0U] 
-        = (IData)((0x1cea00000000ULL | __VdfgTmp_hcb8e21dd__0));
+        = (IData)((0xcea00000000ULL | __VdfgTmp_hcb8dd02c__0));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[1U] 
         = ((0xffffe000U & (((- (IData)((vlSelf->inst 
                                         >> 0x1fU))) 
                             << 0x19U) | (0x1ffe000U 
                                          & (vlSelf->inst 
                                             >> 7U)))) 
-           | (IData)(((0x1cea00000000ULL | __VdfgTmp_hcb8e21dd__0) 
+           | (IData)(((0xcea00000000ULL | __VdfgTmp_hcb8dd02c__0) 
                       >> 0x20U)));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[2U] 
-        = (0x1268000U | ((0xfc000000U & (vlSelf->inst 
-                                         << 5U)) | 
-                         (0x1fffU & ((- (IData)((vlSelf->inst 
-                                                 >> 0x1fU))) 
-                                     >> 7U))));
+        = (0x268000U | ((0xfc000000U & (vlSelf->inst 
+                                        << 5U)) | (0x1fffU 
+                                                   & ((- (IData)(
+                                                                 (vlSelf->inst 
+                                                                  >> 0x1fU))) 
+                                                      >> 7U))));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[3U] 
         = (0xe6000000U | ((0x1ffc000U & ((- (IData)(
                                                     (vlSelf->inst 
@@ -187,22 +186,22 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
                                    | (0xfU & (vlSelf->inst 
                                               >> 0x1bU)))))));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[4U] 
-        = (0x1dU | (0xfffe0000U & (vlSelf->inst << 5U)));
+        = (0xdU | (0xfffe0000U & (vlSelf->inst << 5U)));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[5U] 
-        = (0x16e40U | ((0xe0000000U & (vlSelf->inst 
-                                       << 0x11U)) | 
-                       (0x1ffffU & (vlSelf->inst >> 0x1bU))));
+        = (0x6e40U | ((0xe0000000U & (vlSelf->inst 
+                                      << 0x11U)) | 
+                      (0x1ffffU & (vlSelf->inst >> 0x1bU))));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[6U] 
         = (0x2e20000U | (0x1fffffffU & (vlSelf->inst 
                                         >> 0xfU)));
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[0U] 
-        = (0xcea00000000ULL | __VdfgTmp_hcb8e21dd__0);
+        = (0xcea00000000ULL | __VdfgTmp_hcb8dd02c__0);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[1U] 
-        = (0x26800000000ULL | __VdfgTmp_hcb8e21dd__0);
+        = (0x26800000000ULL | __VdfgTmp_hcb8dd02c__0);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list[0U] 
-        = (0xa00000000ULL | __VdfgTmp_hcb8e21dd__0);
+        = (0xa00000000ULL | __VdfgTmp_hcb8dd02c__0);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list[1U] 
-        = (0x800000000ULL | __VdfgTmp_hcb8e21dd__0);
+        = (0x800000000ULL | __VdfgTmp_hcb8dd02c__0);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__lut_out 
         = ((- (QData)((IData)(((0x7fU & vlSelf->inst) 
                                == vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list
@@ -254,7 +253,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1 
         = ((IData)(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit)
             ? vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__lut_out
-            : 0ULL);
+            : 1ULL);
     vlSelf->invalid_flags = (1U & (IData)(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1));
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list[3U][0U] 
         = (IData)((((QData)((IData)((vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1 
