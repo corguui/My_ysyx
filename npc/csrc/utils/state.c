@@ -1,4 +1,4 @@
-#include <utils.h>
+
 
 NEMUState nemu_state ={.state=NEMU_STOP};
 
@@ -14,4 +14,3 @@ void set_nemu_state(int state,int halt_ret)
 	nemu_state.state=state;
 	nemu_state.halt_ret=halt_ret;
 }
-#define NPCTRAP(halt_ret) set_nemu_state( NEMU_END, halt_ret)
