@@ -47,5 +47,9 @@ void ebreak (int inst)
 	   NPCTRAP(top->halt_ret);
 	}
 }
+void invalid_opcode()
+{
+	INV();	
+}
 
 

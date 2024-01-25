@@ -6,6 +6,8 @@
 
 void set_nemu_state(int state,int halt_ret);
 int is_exit_status_bad();
+void invalid_inst()
+#define INV() invalid_inst()
 #define NPCTRAP(halt_ret) set_nemu_state( NEMU_END, halt_ret)
 
 // ----------- state -----------
