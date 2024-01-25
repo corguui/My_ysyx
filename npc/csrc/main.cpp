@@ -46,7 +46,6 @@ void ebreak (int inst)
 	}
 	if(top->invalid_flags==1)
 	{
-		INV();
 	}
 }
 
