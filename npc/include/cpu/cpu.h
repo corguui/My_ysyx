@@ -15,8 +15,8 @@ extern VerilatedContext* contextp;
 extern Vysyx_23060111_top *top;
 extern VerilatedVcdC* tfp;
 
-void cpu_exce_once(VerilatedVcdC* tfp);
+void cpu_exec_once(VerilatedVcdC* tfp);
 void cpu_init();
-void cpu_exce(uint64_t n);
+void cpu_exec(uint64_t n);
 
 #endif

@@ -31,7 +31,7 @@ void cpu_init()
 
 	
 }
-void cpu_exce_once(VerilatedVcdC* tfp)
+void cpu_exec_once(VerilatedVcdC* tfp)
 {
 
 		top->clk =0; top->eval();
@@ -51,11 +51,11 @@ static void execute(uint64_t n)
 {
 	for(;n>0;n--)
 	{
-		cpu_exce_once(tfp);
+		cpu_exec_once(tfp);
 	}
 }
 
-void cpu_exce(uint64_t n)
+void cpu_exec(uint64_t n)
 {
 	execute(n);
 }

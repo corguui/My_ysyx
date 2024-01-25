@@ -21,7 +21,7 @@ int main_time=0;
 extern void cpu_init();
 //void cpu_exce_once(VerilatedVcdC* tfp);
 //void ebreak(int inst);
-extern void cpu_exce(uint64_t n);
+extern void cpu_exec(uint64_t n);
 //void execute(uint64_t n);
 
 
@@ -44,7 +44,7 @@ int main(int argc ,char** argv, char** env)
 	//init cpu
 	cpu_init();
 	//sdb_mainloop();
-	cpu_exce(count);
+	cpu_exec(count);
 	delete top;
 	tfp->close();
 	delete contextp;
