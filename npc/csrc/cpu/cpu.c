@@ -1,5 +1,4 @@
 #include <cpu/cpu.h>
-#include <utils.h>
 
 void cpu_init()
 {

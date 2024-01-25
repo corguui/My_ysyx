@@ -1,4 +1,3 @@
-#include <utils.h>
 #include <cpu/cpu.h>
 
 NEMUState nemu_state ={.state=NEMU_STOP};
