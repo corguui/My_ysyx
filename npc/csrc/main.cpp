@@ -18,11 +18,11 @@ VerilatedVcdC* tfp=NULL;
 
 int main_time=0;
 
-void cpu_init();
-void cpu_exce_once(VerilatedVcdC* tfp);
-void ebreak(int inst);
+//void cpu_init();
+//void cpu_exce_once(VerilatedVcdC* tfp);
+//void ebreak(int inst);
 //void cpu_exce(uint64_t n);
-void execute(uint64_t n);
+//void execute(uint64_t n);
 
 
 
@@ -43,13 +43,14 @@ int main(int argc ,char** argv, char** env)
 
 	//init cpu
 	cpu_init();
-	sdb_mainloop();
-	//cpu_exce(count);
+	//sdb_mainloop();
+	cpu_exce(count);
 	delete top;
 	tfp->close();
 	delete contextp;
 	return 0;
 }
+/*
 void cpu_init()
 {
 	top->rst=1;
@@ -94,6 +95,7 @@ void execute(uint64_t n)
 		cpu_exce_once(tfp);
 	}
 }
+*/
 void ebreak (int inst)
 {
 	if(inst == 0x00100073 )

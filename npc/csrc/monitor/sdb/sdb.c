@@ -3,6 +3,7 @@
 #include <string.h>
 
 void cpu_exec(uint64_t n);
+
 static char* rl_gets() {
   static char *line_read = NULL;
 
