@@ -1,7 +1,4 @@
-extern int main_time;
-extern VerilatedContext* contextp;
-extern Vysyx_23060111_top *top;
-extern VerilatedVcdC* tfp;
+#include <cstdint>
 
 
 void cpu_init()
