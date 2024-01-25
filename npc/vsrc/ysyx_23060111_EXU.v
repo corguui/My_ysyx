@@ -60,7 +60,7 @@ module ysyx_23060111_EXU(
 	     end
 	default:begin 
 	     wdata=32'h00000000;
-	     //snpc=32'h00000000;
+	     snpc=pc+32'h4;
 	     end 
 	endcase
 	end
