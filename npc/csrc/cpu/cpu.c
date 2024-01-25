@@ -1,3 +1,9 @@
+extern int main_time;
+extern VerilatedContext* contextp;
+extern Vysyx_23060111_top *top;
+extern VerilatedVcdC* tfp;
+
+
 void cpu_init()
 {
 	top->rst=1;
