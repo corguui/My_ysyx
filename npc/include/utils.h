@@ -6,21 +6,21 @@
 
 int is_exit_status_bad();
 void set_npc_state(int state,int halt_ret);
-#define NPCTRAP(halt_ret) set_npc_state(npc_END, halt_ret)
+#define NPCTRAP(halt_ret) set_npc_state(NPC_END, halt_ret)
 void invalid_inst();
 #define INV() invalid_inst()
 
 
 // ----------- state -----------
 
-enum { npc_RUNNING, npc_STOP, npc_END, npc_ABORT, npc_QUIT };
+enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
 
 typedef struct {
    int state;
    uint32_t halt_ret;
-} npcState;
+} NPCState;
 
-extern npcState npc_state;
+extern NPCState npc_state;
  
 // ----------- log -----------
  
