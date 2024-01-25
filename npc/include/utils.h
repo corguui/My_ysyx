@@ -4,8 +4,15 @@
 #include <common.h>
 #include <cstdint>
 
-// ----------- state -----------
 
+void set_nemu_state(int state,int halt_ret);
+int is_exit_status_bad();
+void invalid_inst()
+#define INV() invalid_inst()
+#define NPCTRAP(halt_ret) set_nemu_state( NEMU_END, halt_ret)
+
+
+// ----------- state -----------
 
 enum { NEMU_RUNNING, NEMU_STOP, NEMU_END, NEMU_ABORT, NEMU_QUIT };
 typedef struct {
@@ -38,11 +45,7 @@ extern NEMUState nemu_state;
 #define ANSI_FMT(str, fmt) fmt str ANSI_NONE
 
 
-void set_nemu_state(int state,int halt_ret);
-int is_exit_status_bad();
-void invalid_inst()
-#define INV() invalid_inst()
-#define NPCTRAP(halt_ret) set_nemu_state( NEMU_END, halt_ret)
+
 
 
 
