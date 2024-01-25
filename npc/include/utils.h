@@ -43,7 +43,7 @@ extern NEMUState nemu_state;
 
 #define ANSI_FMT(str, fmt) fmt str ANSI_NONE
 
-void invalid_inst()
+void invalid_inst();
 #define INV() invalid_inst()
 
 
