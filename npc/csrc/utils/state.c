@@ -1,4 +1,5 @@
 #include <cpu/cpu.h>
+#include "log.c"
 
 NEMUState nemu_state ={.state=NEMU_STOP};
 
