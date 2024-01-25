@@ -5,15 +5,13 @@ module ysyx_23060111_top(
   input[31:0] inst,
   output [31:0] pc,
   output [31:0] halt_ret,
-  output [31:0] snpc,
-  output [31:0] wdata,
   output inv_flag//invalid_opcode
   
  );
 
 //pc
   //wire[31:0] dnpc;
-  //wire[31:0] snpc;
+  wire[31:0] snpc;
 
 //IDU
   wire[6:0] opcode;
@@ -26,7 +24,7 @@ module ysyx_23060111_top(
   wire[31:0] imm;
 
 //reg
- // wire[31:0] wdata;
+  wire[31:0] wdata;
   wire[4:0] waddr;
   wire[4:0] raddr;
   wire wen;

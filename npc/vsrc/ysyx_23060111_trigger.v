@@ -7,8 +7,8 @@ module ysyx_23060111_trigger #(WIDTH = 1, RESET_VAL = 0) (
   input wen
 );
   always @(posedge clk) begin
-    if (rst) dout <= RESET_VAL;
-    else if (wen) dout <= din;
+    if (rst) dout = RESET_VAL;
+    else if (wen) dout = din;
   end
 endmodule
 
