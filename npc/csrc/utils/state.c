@@ -20,8 +20,7 @@ void set_nemu_state(int state,int halt_ret)
 void invalid_inst()
 {	
         printf("invalid opcode (PC = %s)\n",top->pc);
-
-printf("There are two cases which will trigger this unexpected exception:\n"
+  printf("There are two cases which will trigger this unexpected exception:\n"
       "1. The instruction at PC = " %s " is not implemented.\n"
       "2. Something is implemented incorrectly.\n", top->pc);
   printf("Find this PC(" %s ") in the disassembling result to distinguish which case it is.\n\n", top->pc);

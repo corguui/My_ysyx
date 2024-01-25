@@ -23,7 +23,7 @@ void cpu_exec_once(VerilatedVcdC* tfp)
 		top->inst =pc_read(top->pc);
 		tfp->dump(main_time);
 		main_time++;
-		top->eval();1
+		top->eval();
 		top->clk =1; top->eval();
 		tfp->dump(main_time);
 		main_time++;
