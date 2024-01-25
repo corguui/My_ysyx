@@ -17,3 +17,11 @@ VL_INLINE_OPT void Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024u
     for (size_t inst__Vidx = 0; inst__Vidx < 1; ++inst__Vidx) inst__Vcvt = inst;
     ebreak(inst__Vcvt);
 }
+
+extern "C" void invalid_opcode();
+
+VL_INLINE_OPT void Vysyx_23060111_top___024unit____Vdpiimwrap_invalid_opcode_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        Vysyx_23060111_top___024unit____Vdpiimwrap_invalid_opcode_TOP____024unit\n"); );
+    // Body
+    invalid_opcode();
+}

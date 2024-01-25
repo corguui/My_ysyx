@@ -36,10 +36,13 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
     // Body
     vlSelf->__VactTriggered.at(0U) = ((IData)(vlSelf->clk) 
                                       & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clk)));
-    vlSelf->__VactTriggered.at(1U) = (vlSelf->inst 
-                                      != vlSelf->__Vtrigrprev__TOP__inst);
+    vlSelf->__VactTriggered.at(1U) = ((vlSelf->inst 
+                                       != vlSelf->__Vtrigrprev__TOP__inst) 
+                                      | ((IData)(vlSelf->invalid_flags) 
+                                         != (IData)(vlSelf->__Vtrigrprev__TOP__invalid_flags)));
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
     vlSelf->__Vtrigrprev__TOP__inst = vlSelf->inst;
+    vlSelf->__Vtrigrprev__TOP__invalid_flags = vlSelf->invalid_flags;
     if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->__VactDidInit))))) {
         vlSelf->__VactDidInit = 1U;
         vlSelf->__VactTriggered.at(1U) = 1U;
@@ -51,6 +54,7 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
 #endif
 }
 
+void Vysyx_23060111_top___024unit____Vdpiimwrap_invalid_opcode_TOP____024unit();
 void Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024unit(IData/*31:0*/ inst);
 
 VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_23060111_top___024root* vlSelf) {
@@ -58,5 +62,9 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_2306
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___nba_sequent__TOP__0\n"); );
     // Body
-    Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024unit(vlSelf->inst);
+    if (vlSelf->invalid_flags) {
+        Vysyx_23060111_top___024unit____Vdpiimwrap_invalid_opcode_TOP____024unit();
+    } else {
+        Vysyx_23060111_top___024unit____Vdpiimwrap_ebreak_TOP____024unit(vlSelf->inst);
+    }
 }
