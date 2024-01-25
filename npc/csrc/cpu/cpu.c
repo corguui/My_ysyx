@@ -11,6 +11,12 @@ extern Vysyx_23060111_top *top;
 extern VerilatedVcdC* tfp;
 
 
+void cpu_exce(uint64_t n)
+{
+	execute(n);
+}
+
+
 void cpu_init()
 {
 	top->rst=1;
@@ -41,10 +47,7 @@ void cpu_exce_once(VerilatedVcdC* tfp)
 
 
 }
-void cpu_exce(uint64_t n)
-{
-	execute(n);
-}
+
 void execute(uint64_t n)
 {
 	for(;n>0;n--)
