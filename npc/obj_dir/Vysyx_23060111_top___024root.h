@@ -28,7 +28,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_IN(inst,31,0);
     VL_OUT(pc,31,0);
     VL_OUT(halt_ret,31,0);
-    VlWide<9>/*263:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4;
+    VlWide<10>/*307:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4;
     IData/*31:0*/ ysyx_23060111_top__DOT__init_EXU__DOT____VdfgTmp_h8a6dd40b__0;
     IData/*31:0*/ ysyx_23060111_top__DOT__init_EXU__DOT____VdfgTmp_h51178536__0;
     IData/*31:0*/ __VstlIterCount;
@@ -40,9 +40,9 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     QData/*63:0*/ ysyx_23060111_top__DOT__init_EXU__DOT____Vcellout__i1____pinNumber1;
     QData/*63:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__lut_out;
     VlUnpacked<IData/*31:0*/, 32> ysyx_23060111_top__DOT__reg___0240__DOT__rf;
-    VlUnpacked<QData/*43:0*/, 6> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list;
-    VlUnpacked<CData/*6:0*/, 6> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list;
-    VlUnpacked<QData/*36:0*/, 6> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list;
+    VlUnpacked<QData/*43:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list;
+    VlUnpacked<CData/*6:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list;
+    VlUnpacked<QData/*36:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list;
     VlUnpacked<VlWide<3>/*67:0*/, 5> ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__pair_list;
     VlUnpacked<CData/*3:0*/, 5> ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__key_list;
     VlUnpacked<QData/*63:0*/, 5> ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__data_list;
