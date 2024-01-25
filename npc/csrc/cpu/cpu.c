@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <mem.h>
 #include "Vysyx_23060111_top.h"
 #include"verilated.h"
 #include"verilated_vcd_c.h"
