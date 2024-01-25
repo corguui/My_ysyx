@@ -50,6 +50,7 @@ void ebreak (int inst)
 	}
 	else if(inst==0&&top->inv_flag==1)
 	{
+		INV();
 		top->inv_flag=0;
 	}
 }

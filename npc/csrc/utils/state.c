@@ -2,8 +2,15 @@
 
 NEMUState nemu_state ={.state=NEMU_STOP};
 
-unsigned char isa_logo[] ="riscv32e";
-
+unsigned char isa_logo[] ="
+  _____    _____    _____    _____  __      __  ____    ___         \n
+ |  __ \  |_   _|  / ____|  / ____| \ \    / / |___ \  |__ \        \n
+ | |__) |   | |   | (___   | |       \ \  / /    __) |    ) |   ___ \n
+ |  _  /    | |    \___ \  | |        \ \/ /    |__ <    / /   / _ \\n
+ | | \ \   _| |_   ____) | | |____     \  /     ___) |  / /_  |  __/\n
+ |_|  \_\ |_____| |_____/   \_____|     \/     |____/  |____|  \___|\n
+                                                                    \n
+                                                                    \n";
 int is_exit_status_bad() {
   int good = (nemu_state.state == NEMU_END && nemu_state.halt_ret == 0) ||      (nemu_state.state == NEMU_QUIT);
   return !good;
