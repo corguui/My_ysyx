@@ -44,10 +44,10 @@ void ebreak (int inst)
 	{
 	   NPCTRAP(top->halt_ret);
 	}
-}
-void invalid_opcode()
-{
-	INV();	
+	if(top->invalid_flags==0)
+	{
+		INV();
+	}
 }
 
 

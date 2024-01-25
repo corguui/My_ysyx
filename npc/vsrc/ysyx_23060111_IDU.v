@@ -1,5 +1,4 @@
 import "DPI-C" function void ebreak(input int inst);
-import "DPI-C" function void invalid_opcode();
 module ysyx_23060111_IDU(
   input [31:0] inst,
   output [6:0] opcode,
@@ -15,9 +14,6 @@ module ysyx_23060111_IDU(
  );
 always @(inst)
 begin 
-     if(invalid_flags==1'b0)
-     invalid_opcode();
-     else
      ebreak(inst);
 end
   

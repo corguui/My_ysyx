@@ -18,12 +18,11 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
 
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
-    VL_OUT8(invalid_flags,0,0);
     VL_IN8(rst,0,0);
+    VL_OUT8(invalid_flags,0,0);
     CData/*0:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__i1__DOT__i0__DOT__hit;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
-    CData/*0:0*/ __Vtrigrprev__TOP__invalid_flags;
     CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
     VL_IN(inst,31,0);
