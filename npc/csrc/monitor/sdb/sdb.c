@@ -3,6 +3,10 @@
 #include <string.h>
 #include <cstdint>
 #include <cstdio>
+#include <readline/readline.h>
+#include <readline/history.h>
+
+#define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0])) 
 
 void cpu_exec(uint64_t n);
 
@@ -33,6 +37,27 @@ static int cmd_c(char *args) {
 static int cmd_q(char *args) {
   return -1;
 }
+
+
+
+
+static struct {
+  const char *name;
+  const char *description;
+  int (*handler) (char *);
+} cmd_table [] = {
+  { "help", "Display information about all supported commands", cmd_help },
+  { "c", "Continue the execution of the program", cmd_c },
+  { "q", "Exit NEMU", cmd_q },
+
+  /* TODO: Add more commands */
+
+};
+
+
+#define NR_CMD ARRLEN(cmd_table)
+
+
 static int cmd_help(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
@@ -56,20 +81,6 @@ static int cmd_help(char *args) {
   return 0;
 }
 
-
-
-static struct {
-  const char *name;
-  const char *description;
-  int (*handler) (char *);
-} cmd_table [] = {
-  { "help", "Display information about all supported commands", cmd_help },
-  { "c", "Continue the execution of the program", cmd_c },
-  { "q", "Exit NEMU", cmd_q },
-
-  /* TODO: Add more commands */
-
-};
 
 void sdb_mainloop() {
 /*
