@@ -22,7 +22,7 @@ extern void cpu_init();
 //void cpu_exce_once(VerilatedVcdC* tfp);
 //void ebreak(int inst);
 extern void cpu_exce(uint64_t n);
-extern void execute(uint64_t n);
+//void execute(uint64_t n);
 
 
 

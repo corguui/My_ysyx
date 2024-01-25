@@ -5,7 +5,6 @@
 
 void cpu_exce_once(VerilatedVcdC* tfp);
 void cpu_init();
-void execute(uint64_t n);
 void cpu_exce(uint64_t n);
 
 #endif
