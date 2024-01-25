@@ -1,7 +1,7 @@
 module ysyx_23060111_EXU(
   input[31:0] rout,
   input [31:0] pc,
-  output [31:0] snpc,
+  output reg [31:0] snpc,
   input[6:0] opcode,
   input[11:7] rd,
   input[14:12] funct3,
@@ -10,7 +10,7 @@ module ysyx_23060111_EXU(
   input[31:25] funct7,
   input[3:0] type_i,
   input[31:0] imm,
-  output [31:0] wdata,
+  output reg[31:0] wdata,
   output[4:0] waddr,
   output[4:0] raddr,
   //output [31:0] snpc,
