@@ -58,7 +58,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf),  "0x%x:", s->pc);
-  int ilen = s->snpc - s->pc;
+ int ilen = 0x4;
   int i;
   uint8_t *inst = (uint8_t *)&s->inst;
   for (i = ilen - 1; i >= 0; i --) {
