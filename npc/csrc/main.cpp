@@ -12,7 +12,6 @@ VerilatedVcdC* tfp=NULL;
 int main_time=0;
 
 
-
 int main(int argc ,char** argv, char** env)
 {
 	contextp = new VerilatedContext;
