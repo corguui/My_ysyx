@@ -7,11 +7,9 @@ TOPname=ysyx_23060111_top
 
 IMG ?= 
 
-ifneq ($(CONFIG_ITRACE)$(CONFIG_IQUEUE),)
 Cfile += csrc/utils/disasm.cc
 CFLAGS = $(shell llvm-config --cxxflags) -fPIE
 LIBS = $(shell llvm-config --libs)                                           
-endif
 
 
 
