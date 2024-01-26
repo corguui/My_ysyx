@@ -4,7 +4,7 @@
 #include<common.h>
 #include<disasm.h>
 
-void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
+extern void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 static bool g_print_step = false;  
 
 static void trace_and_difftest(Decode *_this) {
