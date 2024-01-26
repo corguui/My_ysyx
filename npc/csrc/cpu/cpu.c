@@ -1,6 +1,7 @@
 #include <cpu/cpu.h>
 #include <cstdint>
 #include <cpu/decode.h>
+#include<common.h>
 
 static bool g_print_step = false;  
 
