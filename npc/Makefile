@@ -11,7 +11,6 @@ Cfile += csrc/utils/disasm.cc
 CFLAGS = $(shell llvm-config --cxxflags) -fPIE
 LIBS = $(shell llvm-config --libs)                                           
 
-#-LDFLAGS -lreadline -LDFLAGS $(CFLAGS) -LDFLAGS $(LIBS) 
 
 INC_PATH = $(HOME)/ysyx-workbench/npc/include
 all:
@@ -20,7 +19,7 @@ all:
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -I$(INC_PATH) -CFLAGS -DIMG='\"$(IMG)\"' -LDFLAGS -lreadline -LDFLAGS -I/usr/lib/llvm-14/include -LDFLAGS -lLLVM-14 -LDFLAGS -ld                                        
+	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -I$(INC_PATH) -CFLAGS -DIMG='\"$(IMG)\"' -LDFLAGS -lreadline -CFLAGS $(CFLAGS) -LDFLAGS $(LIBS) 
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 wave:$(Wavefile)
 	gtkwave $(Wavefile)

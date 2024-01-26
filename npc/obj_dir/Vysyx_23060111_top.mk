@@ -43,6 +43,7 @@ VM_USER_LDLIBS = \
 	-lreadline \
 	-I/usr/lib/llvm-14/include \
 	-lLLVM-14 \
+	-ld \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
