@@ -1,3 +1,6 @@
+-include ./include/config.h
+
+
 Vfile=$(wildcard ./vsrc/*.v)
 Cfile=$(wildcard ./csrc/*.cpp)
 Cfile +=$(shell find -L ./csrc -name "*.c")
