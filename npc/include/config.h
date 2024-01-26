@@ -5,7 +5,7 @@
 #define CONFIG_TARGET_NATIVE_ELF 1
 #define CONFIG_ITRACE_COND "true"
 #define ITRACE_COND "true"
-
+#define __GUEST_ISA__ "riscv32" 
 
 #endif
 

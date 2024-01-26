@@ -2,7 +2,6 @@
 #define __CPU_DECODE_H__
 
 #include <common.h>
-#define __GUEST_ISA__ "riscv32"
 
 typedef struct Decode { 
   uint32_t pc;
