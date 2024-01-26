@@ -3,14 +3,12 @@
 
 #include <common.h>
 
-typedef concat(riscv32, _ISADecodeInfo) ISADecodeInfo;
-
 
 typedef struct Decode { 
   uint32_t pc;
   uint32_t snpc; // static next pc
   uint32_t dnpc; // dynamic next pc
-  ISADecodeInfo isa;    
+  riscv32_ISADecodeInfo isa;    
   IFDEF(CONFIG_ITRACE, char logbuf[128]);
 } Decode;
 
