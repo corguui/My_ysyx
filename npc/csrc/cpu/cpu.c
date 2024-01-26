@@ -45,7 +45,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clk =0; top->eval();
 		top->inst =pc_read(top->pc);
-		s->isa.inst.val=top->inst;
+		s->inst=top->inst;
 		s->pc=top->pc;
 		tfp->dump(main_time);
 		main_time++;
@@ -60,7 +60,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   p += snprintf(p, sizeof(s->logbuf),  "0x%x:", s->pc);
   int ilen = s->snpc - s->pc;
   int i;
-  uint8_t *inst = (uint8_t *)&s->isa.inst.val;
+  uint8_t *inst = (uint8_t *)&s->inst;
   for (i = ilen - 1; i >= 0; i --) {
     p += snprintf(p, 4, " %02x", inst[i]);
   }
