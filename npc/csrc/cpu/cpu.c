@@ -2,7 +2,6 @@
 #include <cstdint>
 #include <cpu/decode.h>
 #include<common.h>
-//#include<disasm.h>
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
 static bool g_print_step = false;  
@@ -104,10 +103,6 @@ void cpu_exec(uint64_t n)
      case NPC_RUNNING: npc_state.state =NPC_STOP;break;
 
      case NPC_END: case NPC_ABORT:
-     /*
-     printf("npc: %s at pc = 0x%x\n",
-     (npc_state.state == NPC_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :        ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED)))  ,top->pc);  
-     */
 
       Log("npc: %s at pc = 0x%x",
           (npc_state.state == NPC_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :
