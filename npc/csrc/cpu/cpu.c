@@ -44,9 +44,9 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
 		top->clk =0; top->eval();
+		s->pc=top->pc;
 		top->inst =pc_read(top->pc);
 		s->inst=top->inst;
-		s->pc=top->pc;
 		tfp->dump(main_time);
 		main_time++;
 		top->eval();
@@ -73,7 +73,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   p += space_len;
   //p[0] = '\0'; // the upstream llvm does not support loongarch32r
  void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);                                                                            
-   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, space_len);
+ disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, space_len);
 
 
 #endif
