@@ -1,4 +1,4 @@
--include ./include/config.h
+-include ./include/config/auto.conf
 
 
 Vfile=$(wildcard ./vsrc/*.v)
