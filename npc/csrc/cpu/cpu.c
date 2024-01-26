@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <cpu/decode.h>
 #include<common.h>
+#include<disasm.h>
 
 static bool g_print_step = false;  
 
@@ -72,7 +73,6 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   memset(p, ' ', space_len);
   p += space_len;
   //p[0] = '\0'; // the upstream llvm does not support loongarch32r
-void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
 disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, space_len);
 
 #endif
