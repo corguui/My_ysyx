@@ -43,12 +43,12 @@ VM_USER_CFLAGS = \
 	-D__STDC_CONSTANT_MACROS \
 	-D__STDC_FORMAT_MACROS \
 	-D__STDC_LIMIT_MACROS \
+	-fPIE \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
 	-lreadline \
 	-I/usr/lib/llvm-14/include \
-	-fPIE \
 	-lLLVM-14 \
 
 # User .cpp files (from .cpp's on Verilator command line)
