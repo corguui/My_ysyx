@@ -2,9 +2,9 @@
 #include <cstdint>
 #include <cpu/decode.h>
 #include<common.h>
-#include<disasm.h>
 
-extern void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
+void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
+
 static bool g_print_step = false;  
 
 static void trace_and_difftest(Decode *_this) {
@@ -74,7 +74,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   memset(p, ' ', space_len);
   p += space_len;
   //p[0] = '\0'; // the upstream llvm does not support loongarch32r
-disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, ilen);
+  disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, ilen);
 
 #endif
 

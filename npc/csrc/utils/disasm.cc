@@ -1,7 +1,7 @@
-//#if defined(__GNUC__) && !defined(__clang__)
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-//#endif
+#endif
 
 #include "llvm/MC/MCAsmInfo.h"
 #include "llvm/MC/MCContext.h"
@@ -17,9 +17,9 @@
 #endif
 #include "llvm/Support/TargetSelect.h"
 
-//#if defined(__GNUC__) && !defined(__clang__)
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic pop
-//#endif
+#endif
 
 #if LLVM_VERSION_MAJOR < 11
 #error Please use LLVM with major version >= 11
