@@ -6,10 +6,8 @@ TOPfile=vsrc/ysyx_23060111_top.v
 TOPname=ysyx_23060111_top
 
 IMG ?= 
-ifneq ($(CONFIG_ITRACE)$(CONFIG_IQUEUE),)
 Cfile += csrc/utils/disasm.cc
 LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++14  -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
-endif
 
 READLINE = -LDFLAGS -lreadline
 
@@ -23,6 +21,7 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -I$(INC_PATH) -CFLAGS -DIMG='\"$(IMG)\"' $(READLINE) $(LLVM)
+	@echo "$(CONFIG_ITRACE)"
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 wave:$(Wavefile)
 	gtkwave $(Wavefile)
