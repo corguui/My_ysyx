@@ -3,7 +3,7 @@
 #include <cpu/decode.h>
 #include<common.h>
 #include<disasm.h>
-void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
+extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
 static bool g_print_step = false;  
 

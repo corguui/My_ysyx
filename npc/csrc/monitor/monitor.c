@@ -4,7 +4,7 @@
 
 void init_mem();
 void init_log();
-void init_disasm(const char *triple);
+extern "C" void init_disasm(const char *triple);
 
 void init_monitor() {
 
