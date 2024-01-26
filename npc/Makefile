@@ -6,9 +6,10 @@ TOPfile=vsrc/ysyx_23060111_top.v
 TOPname=ysyx_23060111_top
 
 IMG ?= 
-
+ifneq ($(CONFIG_ITRACE)$(CONFIG_IQUEUE),)
 Cfile += csrc/utils/disasm.cc
 LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++14  -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
+endif
 
 READLINE = -LDFLAGS -lreadline
 
