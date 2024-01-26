@@ -4,6 +4,8 @@
 #define CONFIG_ITRACE 1
 #define CONFIG_TARGET_NATIVE_ELF 1
 #define CONFIG_ITRACE_COND "true"
+#define ITRACE_COND "true"
+
 
 #endif
 
