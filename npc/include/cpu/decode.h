@@ -2,7 +2,6 @@
 #define __CPU_DECODE_H__
 
 #include <common.h>
-#include <isa.h>
 
 typedef struct Decode { 
   uint32_t pc;
