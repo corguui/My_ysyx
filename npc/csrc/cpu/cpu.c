@@ -1,13 +1,15 @@
 #include <cpu/cpu.h>
+#include <cstdint>
+#include <cpu/decode.h>
 
 static bool g_print_step = false;  
 
-static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
+static void trace_and_difftest(Decode *_this) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
-  IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  //IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
 #ifdef CONFIG_CC_WATCHPOINT
 
@@ -79,7 +81,7 @@ static void execute(uint64_t n)
 	for(;n>0;n--)
 	{
 		cpu_exec_once(tfp,&s);
-		trace_and_difftest(&s, cpu.pc); 
+		trace_and_difftest(&s); 
 		if(npc_state.state !=NPC_RUNNING) break;
 	}
 }
