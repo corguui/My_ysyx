@@ -1,5 +1,3 @@
--include ./include/config/auto.conf
-
 
 Vfile=$(wildcard ./vsrc/*.v)
 Cfile=$(wildcard ./csrc/*.cpp)
