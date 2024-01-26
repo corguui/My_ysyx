@@ -46,16 +46,15 @@ extern NPCState npc_state;
 
 #define CONFIG_TARGET_NATIVE_ELF 1
 #define log_write(...) IFDEF(CONFIG_TARGET_NATIVE_ELF, \
-   do { \         
-     extern FILE* log_fp; \
-     extern bool log_enable(); \                                             
-     if (log_enable()) { \
-       fprintf(log_fp, __VA_ARGS__); \
-       fflush(log_fp); \
-     } \          
-   } while (0) \  
- )               
-
+  do { \
+    extern FILE* log_fp; \
+    extern bool log_enable(); \
+    if (log_enable()) { \
+      fprintf(log_fp, __VA_ARGS__); \
+      fflush(log_fp); \
+    } \
+  } while (0) \
+)
 #define _Log(...) \
   do { \
     printf(__VA_ARGS__); \
