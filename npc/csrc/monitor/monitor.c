@@ -189,7 +189,7 @@ void elf_read_fun(char *elf_file) {
 	}
 	*/
 	
-    free (sym_entries);
+    //free (sym_entries);
 	free (strtab_string_table);
     } else {
         printf("No symbol table!\n");
