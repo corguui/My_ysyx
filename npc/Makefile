@@ -24,7 +24,9 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -I$(INC_PATH) -CFLAGS -DIMG='\"$(IMG)\"' $(READLINE) $(LLVM)
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 
-
+gdb:$(Vfile) $(Cfile) $(TOPfile) 
+	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -I$(INC_PATH) -CFLAGS -DIMG='\"$(IMG)\"' $(READLINE) $(LLVM)
+	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 
 wave:$(Wavefile)
 	gtkwave $(Wavefile)
