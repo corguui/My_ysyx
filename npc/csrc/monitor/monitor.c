@@ -125,6 +125,7 @@ void elf_read_fun(char *elf_file) {
 	    fun_num++;
 	    }
 	}
+	/*
 	//   print the fun_buff
 	for(int i=0;i<fun_num;i++)
 	{
@@ -133,6 +134,7 @@ void elf_read_fun(char *elf_file) {
 		printf("%s",fun_buff[i].name);
 		printf("\n");
 	}
+	*/
 	
     free (sym_entries);
 	free (strtab_string_table);
