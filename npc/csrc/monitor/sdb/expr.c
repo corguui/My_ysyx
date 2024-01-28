@@ -17,7 +17,7 @@ uint32_t isa_reg_str2val(const char *s, bool *success);
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
-#include <regex.h>
+//#include <regex.h>
 
 enum {
   TK_NOTYPE = 256,EQ,Num,LEQ,NOTEQ,OR,AND,RESGISTER,HEX,
