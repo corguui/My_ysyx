@@ -207,7 +207,7 @@ void elf_read_fun(char *elf_file) {
 	assert(ret3==1);
 
 
-	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
+	printf("  NUM:\tValue\t\tSize\tType\tName\n");
 
 	for(int i=0;i<entry_num;i++)
 	{
