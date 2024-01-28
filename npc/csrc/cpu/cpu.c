@@ -94,7 +94,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   fspace_len = fspace_len * 3 + 1;
   memset(q, ' ', fspace_len);
   q += fspace_len;
-  disassemble(q, s->funbuf + sizeof(s->funbuf) - p,s->pc, (uint8_t *)&s->inst, funlen);
+  disassemble(q, s->funbuf + sizeof(s->funbuf) - q,s->pc, (uint8_t *)&s->inst, funlen);
 
 #endif
 
