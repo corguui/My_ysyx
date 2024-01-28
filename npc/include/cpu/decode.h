@@ -4,7 +4,7 @@
 #include <common.h>
 #include <isa.h>
 
-typedef struct Decode { :wq
+typedef struct Decode { 
   uint32_t pc;
   uint32_t snpc; // static next pc
   uint32_t dnpc; // dynamic next pc
