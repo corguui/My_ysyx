@@ -1,4 +1,5 @@
 #include <common.h>
+#include <sdb.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -13,4 +14,7 @@ void init_monitor() {
 	init_mem();
 
 	init_disasm("riscv32");
+
+	init_sdb();
+
 }
