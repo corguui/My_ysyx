@@ -62,16 +62,7 @@ static int cmd_info(char *args) {
   watchpoint_display();
   return 0;
 }
-static int cmd_w(char *args) {
-  create_wp(args);
-  return 0;
-}
 
-static int cmd_d(char *args) {
-  int n=atoi(args);
-  free_wp(n);
-  return 0;
-}
 
 static int cmd_x(char *args)
 {
@@ -132,8 +123,6 @@ static struct {
   { "q", "Exit NPC", cmd_q },
   {"si", "execute N row (default value:1)", cmd_si },
   {"info"," [r] print the rg state [w] print the monitoring points", cmd_info},
-  {"d", "delete the watchpoint",cmd_d},
-  {"w", "create the watchpoint",cmd_w},
   {"x"," format: x [N] [EXPR], [N] print N*4bytes(hexadecimal) [EXPR] get [EXPR] value as the start memory", cmd_x},
   {"p", "print the result of your input <exper>", cmd_p},
   /* TODO: Add more commands */
