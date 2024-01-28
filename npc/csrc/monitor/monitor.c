@@ -124,7 +124,6 @@ void elf_read_fun(char *elf_file) {
 	char* string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
 	int ret2=fread(string_table,sec_headers[str_tab_ind].sh_size,1,fp);
 	assert(ret2==1);
-/*
 	int dynsym_ind = -1;//默认.dynsym符号表索引为-1
     int symtab_ind = -1;//默认.symtab符号表索引为-1
     int dynstr_ind = -1;//默认.dynstr字符串表索引为-1
@@ -164,11 +163,11 @@ void elf_read_fun(char *elf_file) {
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
  	    printf("  %3d:\t", i);
-            printf("0x%08x:\t", sym_entries[i].st_value);
-            printf("%4d\t", sym_entries[i].st_size);
+        printf("0x%08x:\t", sym_entries[i].st_value);
+        printf("%4d\t", sym_entries[i].st_size);
 	    printf("FUN\t");
-            printf("%s", &strtab_string_table[sym_entries[i].st_name]);
-            printf("\n");
+        printf("%s", &strtab_string_table[sym_entries[i].st_name]);
+        printf("\n");
 	    fun_buff[fun_num].value=sym_entries[i].st_value;
 	    fun_buff[fun_num].size=sym_entries[i].st_size;
 	    strcpy(fun_buff[fun_num].name,&strtab_string_table[sym_entries[i].st_name]);
@@ -190,7 +189,6 @@ void elf_read_fun(char *elf_file) {
     } else {
         printf("No symbol table!\n");
     }
-*/
     //释放堆内存
     free (string_table);
     free (sec_headers);
