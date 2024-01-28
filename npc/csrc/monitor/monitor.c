@@ -124,7 +124,7 @@ void elf_read_fun(char *elf_file) {
 	char* string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
 	int ret2=fread(string_table,sec_headers[str_tab_ind].sh_size,1,fp);
 	assert(ret2==1);
-
+/*
 	int dynsym_ind = -1;//默认.dynsym符号表索引为-1
     int symtab_ind = -1;//默认.symtab符号表索引为-1
     int dynstr_ind = -1;//默认.dynstr字符串表索引为-1
@@ -142,54 +142,6 @@ void elf_read_fun(char *elf_file) {
             		dynstr_ind = i;
     }
 
-	
-	
-
-/*
-	if((dynsym_ind!=-1)&&(dynstr_ind !=-1))
-	{
-		 unsigned long entry_num = sec_headers[dynsym_ind].sh_size / sec_headers[dynsym_ind].sh_entsize;
-        	 //printf("Symbol table '.dynsym' contains %ld entries\n", entry_num);
-		 fseek(fp, sec_headers[dynstr_ind].sh_offset, SEEK_SET);
-		 char* dynstr_string_table=(char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
-		 int ret4=fread(dynstr_string_table, sec_headers[dynstr_ind].sh_size,1, fp);
-		 assert(ret4==1);
-
-
-	fseek(fp, sec_headers[dynsym_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
-
-        Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
-        int ret3=fread(sym_entries, sizeof(Elf64_Sym)*entry_num,1, fp);//读符号表
-	assert(ret3==1);
-
-
-	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
-
-	for(int i=0;i<entry_num;i++)
-	{
-	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
-	   {
- 	    printf("  %3d:\t", i);
-            printf("0x%08x:\t", sym_entries[i].st_value);
-            printf("%4d\t", sym_entries[i].st_size);
-	    printf("FUN\t");
-            printf("%s", &dynstr_string_table[sym_entries[i].st_name]);
-            printf("\n");
-	    fun_buff[fun_num].value=sym_entries[i].st_value;
-	    fun_buff[fun_num].size=sym_entries[i].st_size;
-	    strcpy(fun_buff[fun_num].name,&dynstr_string_table[sym_entries[i].st_name]);
-	   }
-	}
-
-    free (sym_entries);
-
-    free (dynstr_string_table);
-	}
-	else{printf("NO Dynamic linker symbol table!\n");}
-	printf("\n");
-*/
-
-
 	if ((symtab_ind != -1) && (strtab_ind != -1)) {
         unsigned long entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
         //printf("Symbol table '.symtab' contains %ld entries\n", entry_num);
@@ -197,7 +149,6 @@ void elf_read_fun(char *elf_file) {
         char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 	assert(ret5==1);
-
 
 	fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
 
@@ -212,14 +163,12 @@ void elf_read_fun(char *elf_file) {
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
-	   /*
  	    printf("  %3d:\t", i);
             printf("0x%08x:\t", sym_entries[i].st_value);
             printf("%4d\t", sym_entries[i].st_size);
 	    printf("FUN\t");
             printf("%s", &strtab_string_table[sym_entries[i].st_name]);
             printf("\n");
-	    */
 	    fun_buff[fun_num].value=sym_entries[i].st_value;
 	    fun_buff[fun_num].size=sym_entries[i].st_size;
 	    strcpy(fun_buff[fun_num].name,&strtab_string_table[sym_entries[i].st_name]);
@@ -227,7 +176,6 @@ void elf_read_fun(char *elf_file) {
 	    fun_num++;
 	    }
 	}
-	/*
 	//   print the fun_buff
 	for(int i=0;i<fun_num;i++)
 	{
@@ -236,14 +184,13 @@ void elf_read_fun(char *elf_file) {
 		printf("%s",fun_buff[i].name);
 		printf("\n");
 	}
-	*/
 	
     free (sym_entries);
 	free(strtab_string_table);
     } else {
         printf("No symbol table!\n");
     }
-
+*/
     //释放堆内存
     free (string_table);
     free (sec_headers);
