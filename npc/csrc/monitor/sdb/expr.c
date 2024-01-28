@@ -4,6 +4,7 @@
 #include<stdint.h>
 #include<stdlib.h>
 #include<string.h>
+#include<common.h>
 bool check_parentheses(int p, int q);
 uint32_t eval(int p , int q);
 int char_to_int(char s[]);
@@ -70,7 +71,8 @@ void init_regex() {
     ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
-      panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+      printf("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+      assert(0);
     }
   }
 }
