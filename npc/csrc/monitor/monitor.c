@@ -52,8 +52,9 @@ void init_monitor() {
 void elf_read(char *elf_file)
 {
 	//elf_read_strtab(elf_file);
+
+    Log("read elf file: %s",elf_file ?elf_file:"stdout");
 	elf_read_fun(elf_file);
-   Log("read elf file: %s",elf_file ?elf_file:"stdout");
 }
 void elf_read_strtab(char *elf_file) {
 	FILE* fp;
