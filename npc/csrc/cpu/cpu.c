@@ -3,6 +3,7 @@
 #include <cpu/decode.h>
 #include<common.h>
 #include <sdb.h>
+#include "Vysyx_23060111_top___024root.h"
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
 #ifdef CONFIG_FTRACE
@@ -33,7 +34,7 @@ static void trace_and_difftest(Decode *_this) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   //IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
-
+//watchpoint
   if(check_wp()!=true)
   {
   npc_state.state=NPC_STOP;
@@ -65,6 +66,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		top->clk =0; top->eval();
 		s->pc=top->pc;
 		top->inst =pc_read(top->pc);
+    s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 		s->inst=top->inst;
 		tfp->dump(main_time);
 		main_time++;
@@ -96,6 +98,57 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   q += fspace_len;
   disassemble(q, s->funbuf + sizeof(s->funbuf) - q,s->pc, (uint8_t *)&s->inst, funlen);
 
+if(strncmp(s->funbuf+24,ar,3)==0)
+ {
+ 	int flat_ret=0;
+	int f,g;
+ 	for(g=0;g<fun_num;g++)
+	{
+		
+		if(s->dnpc>=fun_buff[g].value&&s->dnpc<fun_buff[g].value+fun_buff[g].size)//read the next pc
+		{
+		   if(strncmp(s->funbuf+24,ar1,4)==0&&strncmp(s->funbuf+12,ar2,5)==0)//ret or not ret 
+		   {
+		   for(f=0;f<fun_num;f++)
+		   {
+		       if(s->pc>=fun_buff[f].value&&s->pc<fun_buff[f].size+fun_buff[f].value)	
+		       {
+		          flat_ret=1;
+			  break;
+		       }
+		   }
+		   }
+		   if(flat_ret==1)//ret
+		   {
+		     if(space_flat==1)
+		     {
+		     	space_num--;
+		     }
+		     printf("0x%x:",s->pc);
+		     printf("---num: %d   ret [fun:%s  @%x]\n",space_num,fun_buff[f].name,fun_buff[f].value); 
+		     space_flat=1;
+		     break;
+		   }
+		   else if(flat_ret==0)//call
+		   {
+		     if(space_flat==0)
+		     {
+		     	space_num++;
+		     }
+		     printf("0x%x:",s->pc);
+		     printf("---num: %d  call [fun:%s  @%x]\n",space_num,fun_buff[g].name,fun_buff[g].value);
+			space_flat=0;
+			break;
+		   }
+		}
+		else if(g==fun_num-1)
+		{
+			Log("error no funcion\nsrc/cpu/cpu-exec.c:1:error\n");
+      
+			
+		}
+	}
+ }
 #endif
 
 
