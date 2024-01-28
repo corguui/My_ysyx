@@ -9,7 +9,6 @@
 #include"verilated.h"    
 #include"verilated_vcd_c.h"
 #include"Vysyx_23060111_top__Dpi.h"
-#include "Vysyx_23060111_top___024root.h"
                          
 extern int main_time;    
 extern VerilatedContext* contextp;

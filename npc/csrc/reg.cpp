@@ -1,6 +1,6 @@
 #include <common.h>
 #include <cpu/cpu.h>
-//#include "Vysyx_23060111_top___024root.h"
+#include "Vysyx_23060111_top___024root.h"
 
 const char *regs[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
@@ -14,6 +14,6 @@ void isa_reg_display() {
 	printf("$ pc --> 0x%x \n",top->pc);
 	for(i=0;i<length;i++)
 	{
-	printf("$%3s --> 0x%x \n", regs[i],ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]);
+	printf("$%3s --> 0x%x \n", regs[i],top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]);
 	}
 }
