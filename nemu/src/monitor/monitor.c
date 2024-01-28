@@ -212,7 +212,7 @@ void am_init_monitor() {
 #ifdef CONFIG_FTRACE
 void elf_read(char *elf_file)
 {
-	elf_read_strtab(elf_file);
+	//elf_read_strtab(elf_file);
 	elf_read_fun(elf_file);
    Log("read elf file: %s",elf_file ?elf_file:"stdout");
 }

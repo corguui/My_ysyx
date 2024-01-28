@@ -77,7 +77,7 @@ void elf_read_strtab(char *elf_file) {
 	assert(ret2==1);
 
 	/*printf("  [Nr]\tName\t\t\tType\t\tAddr\t\tOffset\t\tSize\t\t"
-           "EntSize\t\tLink\tInfo\tAlign\n");*/
+           "EntSize\t\tLink\tInfo\tAlign\n");
     //遍历section_headers段表里的每个section,输出相应的信息
     for (int i = 0; i < elf_header.e_shnum; i++) {
     	if(sec_headers[i].sh_type==SHT_STRTAB)
@@ -95,6 +95,7 @@ void elf_read_strtab(char *elf_file) {
         printf("\n");
 	}
     }
+	*/
 
     //释放堆内存
     free (string_table);
