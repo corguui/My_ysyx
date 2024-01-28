@@ -10,7 +10,7 @@ extern "C" void init_disasm(const char *triple);
 
 #ifdef CONFIG_FTRACE
 #include <elf.h>
-#include "monitor.h"
+#include <monitor.h>
 char *elf_file =(char*)ELF;
 int times=0;
 int fun_num=0;
