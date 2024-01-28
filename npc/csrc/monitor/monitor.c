@@ -95,9 +95,9 @@ void elf_read_fun(char *elf_file) {
         unsigned long entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
         //printf("Symbol table '.symtab' contains %ld entries\n", entry_num);
         fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
-        //char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
-        //int ret5=fread(strtab_string_table, sec_headers[str_tab_ind].sh_size,1, fp);
-	//assert(ret5==1);
+        char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
+        int ret5=fread(strtab_string_table, sec_headers[str_tab_ind].sh_size,1, fp);
+	assert(ret5==1);
 
 	fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
 
@@ -139,7 +139,7 @@ void elf_read_fun(char *elf_file) {
 	*/
 	
     free (sym_entries);
-	free (strtab_string_table);
+	//free (strtab_string_table);
     } else {
         printf("No symbol table!\n");
     }
