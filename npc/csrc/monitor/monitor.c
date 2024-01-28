@@ -249,7 +249,6 @@ void elf_read_fun(char *elf_file) {
     free (string_table);
     free (sec_headers);
     fclose(fp);	
-	printf("num 6");
 
 
 
