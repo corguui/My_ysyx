@@ -55,6 +55,7 @@ VM_USER_CLASSES = \
 	monitor \
 	expr \
 	sdb \
+	watchpoint \
 	reg \
 	disasm \
 	log \
@@ -90,6 +91,8 @@ monitor.o: csrc/monitor/monitor.c
 expr.o: csrc/monitor/sdb/expr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 sdb.o: csrc/monitor/sdb/sdb.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+watchpoint.o: csrc/monitor/sdb/watchpoint.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 reg.o: csrc/reg.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<

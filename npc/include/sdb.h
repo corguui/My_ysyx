@@ -13,7 +13,7 @@ typedef struct watchpoint {
   int flat;
   struct watchpoint *next;
   char args[500];
-  word_t val;
+  uint32_t val;
 } WP;
 
 WP* new_wp();
