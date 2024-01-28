@@ -207,7 +207,7 @@ void elf_read_fun(char *elf_file) {
 	assert(ret3==1);
 
 
-	printf("  NUM:\tValue\t\tSize\tType\tName\n");
+	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
 
 	for(int i=0;i<entry_num;i++)
 	{
@@ -239,17 +239,20 @@ void elf_read_fun(char *elf_file) {
 	}
 	*/
 	
-
+    printf("num1");
     free (sym_entries);
-
+    printf("num2");
 	free(strtab_string_table);
     } else {
         printf("No symbol table!\n");
     }
 
     //释放堆内存
+    printf("num3");	
     free (string_table);
+	printf("num4");
     free (sec_headers);
+	printf("num5");
     fclose(fp);	
 
 
