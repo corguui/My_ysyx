@@ -1,7 +1,8 @@
 #ifndef __MONITOR_H
 #define __MONITOR_H
-#include <cstdint>
+#include<common.h>
 
+#ifdef CONFIG_FTRACE
 typedef struct function
 {
            uint32_t value;
@@ -9,5 +10,6 @@ typedef struct function
            char     name[128];
  }FUN;
   
+#endif
 
 #endif
