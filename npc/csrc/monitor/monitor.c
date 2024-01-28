@@ -147,7 +147,7 @@ void elf_read_fun(char *elf_file) {
 	
 
 
-	if((dynsym_ind!=-1)&&(dynstr_ind !=-1))
+	if((dynsym_ind==-1)&&(dynstr_ind ==-1))
 	{
 		 unsigned long entry_num = sec_headers[dynsym_ind].sh_size / sec_headers[dynsym_ind].sh_entsize;
         	 //printf("Symbol table '.dynsym' contains %ld entries\n", entry_num);
