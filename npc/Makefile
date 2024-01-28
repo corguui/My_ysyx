@@ -8,7 +8,7 @@ TOPname=ysyx_23060111_top
 
 IMG ?= 
 Cfile += csrc/utils/disasm.cc
-LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++14  -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
+LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17  -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
 
 READLINE = -LDFLAGS -lreadline
 
