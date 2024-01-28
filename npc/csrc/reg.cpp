@@ -1,6 +1,6 @@
 #include <common.h>
 #include <cpu/cpu.h>
-#include "../obj_dir/Vysyx_23060111_top___024root.h"
+#include "Vysyx_23060111_top___024root.h"
 
 void isa_reg_display() {
 	int length=32;
