@@ -1,8 +1,8 @@
 #include <cassert>
+#include <cstdio>
 #include <sdb.h>
 #include <string.h>
 
-//#define NR_WP 32
 
 WP wp_pool[NR_WP] = {};
 static WP *wp_head = NULL, *wp_tail = NULL,           // watch point list
@@ -95,21 +95,21 @@ void free_wp(int no){
 
 WP* new_wp() {
   if (free_) {
-    WP *new = free_;
+    WP *wp_new = free_;
     if (free_->next) {
       free_ = free_->next;
     }
-    new->next = NULL;
+    wp_new->next = NULL;
     if (wp_head == NULL) {
-      wp_head = new;
-      wp_tail = new;
+      wp_head = wp_new;
+      wp_tail = wp_new;
     }
     else
     {
-      wp_tail->next = new;
-      wp_tail = new;
+      wp_tail->next = wp_new;
+      wp_tail = wp_new;
     }
-    return new;
+    return wp_new;
   }
   else
   {
