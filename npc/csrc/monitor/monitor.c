@@ -16,7 +16,6 @@ int times=0;
 int fun_num=0;
 void elf_read(char *elf_file);
 void elf_read_fun(char* elf_file);
-void elf_read_strtab(char* elf_file);
 /*
 transfer to momitor.h
 typedef struct function
@@ -51,60 +50,10 @@ void init_monitor() {
 #ifdef CONFIG_FTRACE
 void elf_read(char *elf_file)
 {
-	//elf_read_strtab(elf_file);
 	elf_read_fun(elf_file);
    Log("read elf file: %s",elf_file ?elf_file:"stdout");
 }
-void elf_read_strtab(char *elf_file) {
-	FILE* fp;
-	Elf32_Ehdr elf_header;
-	fp=fopen(elf_file,"r");
-	if(fp==NULL)   exit(0);
-	int ret=fread(&elf_header,sizeof(Elf32_Ehdr),1,fp);
-	assert(ret==1);
-	if(elf_header.e_ident[0] !=0x7f||elf_header.e_ident[1]!='E')  {printf("no elf file\n");exit(0);} 
-	
-	Elf32_Shdr* sec_headers=(Elf32_Shdr*)malloc(sizeof(Elf32_Shdr)*elf_header.e_shnum);
-	fseek(fp,elf_header.e_shoff,SEEK_SET);
-	int ret1=fread(sec_headers,sizeof(Elf32_Shdr)*elf_header.e_shnum,1,fp);
-	assert(ret1==1);
-	printf("There are %d section headers, starting at offset 0x%x\n\n", elf_header.e_shnum, elf_header.e_shoff);
 
-	int str_tab_ind=elf_header.e_shstrndx;
-	fseek(fp,sec_headers[str_tab_ind].sh_offset,SEEK_SET);
-	char* string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
-	int ret2=fread(string_table,sec_headers[str_tab_ind].sh_size,1,fp);
-	assert(ret2==1);
-
-	/*printf("  [Nr]\tName\t\t\tType\t\tAddr\t\tOffset\t\tSize\t\t"
-           "EntSize\t\tLink\tInfo\tAlign\n");
-    //遍历section_headers段表里的每个section,输出相应的信息
-    for (int i = 0; i < elf_header.e_shnum; i++) {
-    	if(sec_headers[i].sh_type==SHT_STRTAB)
-	{
-        printf("  [%2d]\t", i);
-        printf("%-24s", &string_table[sec_headers[i].sh_name]);
-        printf("STRTAB          ");
-        printf("0x%08x\t", sec_headers[i].sh_addr);
-        printf("0x%08x\t", sec_headers[i].sh_offset);
-        printf("0x%08x\t", sec_headers[i].sh_size);
-        printf("0x%08x\t", sec_headers[i].sh_entsize);
-        printf("%-8d", sec_headers[i].sh_link);
-        printf("%-8d", sec_headers[i].sh_info);
-        printf("%-8d", sec_headers[i].sh_addralign);
-        printf("\n");
-	}
-    }
-	*/
-
-    //释放堆内存
-    free (string_table);
-    free (sec_headers);
-    fclose(fp);	
-
-
-
-}
 void elf_read_fun(char *elf_file) {
 	FILE* fp;
 	Elf32_Ehdr elf_header;
@@ -189,7 +138,7 @@ void elf_read_fun(char *elf_file) {
 	}
 	*/
 	
-    //free (sym_entries);
+    free (sym_entries);
 	free (strtab_string_table);
     } else {
         printf("No symbol table!\n");
