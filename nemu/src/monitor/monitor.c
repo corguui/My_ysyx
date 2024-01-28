@@ -287,9 +287,9 @@ void elf_read_fun(char *elf_file) {
 	assert(ret2==1);
 
 	int dynsym_ind = -1;//默认.dynsym符号表索引为-1
-    	int symtab_ind = -1;//默认.symtab符号表索引为-1
-    	int dynstr_ind = -1;//默认.dynstr字符串表索引为-1
-    	int strtab_ind = -1;//默认.strtab字符串索引为-1
+  int symtab_ind = -1;//默认.symtab符号表索引为-1
+  int dynstr_ind = -1;//默认.dynstr字符串表索引为-1
+  int strtab_ind = -1;//默认.strtab字符串索引为-1
 
     //遍历段表section_headers获取符号表.dynsym;.symtab;.dynstr;.strtab四张表在段表中的索引
     	for (int i = 0; i < elf_header.e_shnum; i++) {
