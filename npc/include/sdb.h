@@ -6,6 +6,7 @@
 uint32_t expr(char *e, bool *success);
 void sdb_mainloop();
 void init_regex();
+void init_wp_pool();
 //watchpoint
 #define NR_WP 32
 typedef struct watchpoint {
