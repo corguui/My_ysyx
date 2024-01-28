@@ -10,6 +10,7 @@
 class Vysyx_23060111_top__Syms;
 class Vysyx_23060111_top___024unit;
 
+
 class Vysyx_23060111_top___024root final : public VerilatedModule {
   public:
     // CELLS
