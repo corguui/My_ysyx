@@ -228,7 +228,7 @@ void elf_read_fun(char *elf_file) {
 	    fun_num++;
 	    }
 	}
-	/*   print the fun_buff
+	   print the fun_buff
 	for(int i=0;i<fun_num;i++)
 	{
 		printf("0x%08x:\t",fun_buff[i].value);
@@ -236,7 +236,7 @@ void elf_read_fun(char *elf_file) {
 		printf("%s",fun_buff[i].name);
 		printf("\n");
 	}
-	*/
+	
 
     free (sym_entries);
 
