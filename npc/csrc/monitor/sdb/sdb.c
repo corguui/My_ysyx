@@ -102,7 +102,7 @@ static int cmd_p(char *args)
   }
   else
   {
-  	if(flat_HEX)
+  if(flat_HEX)
 	printf("0x%x\n",num);
 	else
 	printf("%u\n",num);

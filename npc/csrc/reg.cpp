@@ -27,7 +27,7 @@ uint32_t isa_reg_str2val(const char *s, bool *success) {
   }
   for (int i = 1; i < 32; i++) {
     if (!strcmp(s+1, regs[i])) {
-      return top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0];
+      return top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
 
     }
   }

@@ -9,10 +9,10 @@ bool check_parentheses(int p, int q);
 uint32_t eval(int p , int q);
 int char_to_int(char s[]);
 void int_to_char(int x,char str[]);
+uint32_t isa_reg_str2val(const char *s, bool *success);
 int flat_HEX=0;
 #define max(a,b) (((a)>(b))?(a):(b))
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0])) 
-uint32_t isa_reg_str2val(const char *s, bool *success);
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
