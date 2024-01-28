@@ -5,6 +5,15 @@
 #include <sdb.h>
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
+#ifdef CONFIG_FTRACE
+#include <monitor.h>
+extern FUN fun_buff[128];
+extern int fun_num;
+int space_num=-1;
+int space_flat=0;
+#endif
+
+
 //ringbuf val
 #ifdef CONFIG_ITRACE
 #define BUF_LEN 18
@@ -64,6 +73,31 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		tfp->dump(main_time);
 		main_time++;
 		top->eval();
+
+#ifdef CONFIG_FTRACE
+  char ar[]="jal";//read the jal and jalr
+  char ar1[]="jalr";
+  char ar2[]="00 00 80 67";//funbuf 0x8--------: 00 00 80 67 jalr  ..... the ret is 80 67
+  //00 07 80 67 jr mean call to but no printf the ret//in f1 have jr call to f0 the f1 no ret
+  char *q = s->funbuf;
+  q += snprintf(q, sizeof(s->funbuf), "0x%x:", s->pc);
+  int funlen = 0x4;
+  int j;
+  uint8_t *funinst = (uint8_t *)&s->inst;
+  for (j = funlen - 1; j >= 0; j --) {
+    q += snprintf(q, 4, " %02x", funinst[j]);
+  }
+
+  int funlen_max = 4;
+  int fspace_len = funlen_max - funlen;
+  if (fspace_len < 0) fspace_len = 0;
+  fspace_len = fspace_len * 3 + 1;
+  memset(q, ' ', fspace_len);
+  q += fspace_len;
+  disassemble(p, s->funbuf + sizeof(s->funbuf) - p,s->pc, (uint8_t *)&s->inst, funlen);
+
+#endif
+
 
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
