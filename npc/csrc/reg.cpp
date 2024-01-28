@@ -1,8 +1,7 @@
 #include <common.h>
 #include <cpu/cpu.h>
-#include "Vysyx_23060111_top___024root.h"
+//#include "Vysyx_23060111_top___024root.h"
 
-//extern VlUnpacked<IData/*31:0*/, 32> ysyx_23060111_top__DOT__reg___0240__DOT__rf;
 const char *regs[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
   "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
