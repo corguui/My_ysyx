@@ -156,9 +156,9 @@ void watchpoint_display() {
 void create_wp(char* args)
 {
   bool success = true;
-  WP *new = new_wp();
-  strcpy(new->args,args);
-  new->val = expr(args, &success);
+  WP *wp_new = new_wp();
+  strcpy(wp_new->args,args);
+  wp_new->val = expr(args, &success);
   if (!success) {
     printf("Bad expression\n");
     }
