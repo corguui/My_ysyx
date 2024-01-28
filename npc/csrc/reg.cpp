@@ -17,3 +17,4 @@ void isa_reg_display() {
 	printf("$%3s --> 0x%x \n", regs[i],top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]);
 	}
 }
+

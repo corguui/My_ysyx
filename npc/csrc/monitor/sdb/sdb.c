@@ -60,7 +60,28 @@ static int cmd_info(char *args) {
   //watchpoint_display();
   return 0;
 }
-
+static int cmd_x(char *args){
+  char  *ch1;
+  char *EXPR;
+  int num;
+  uint32_t addr;
+  if(args==NULL)
+  printf("default\n");
+  else
+  {
+  ch1=strtok(args," ");
+  EXPR=strtok(NULL," ");
+  num=atoi(ch1);
+  sscanf(EXPR,"%x",&addr);
+  int i;
+  for(i=0;i<num;i++)
+  {
+	printf("%x\n",pmem_read(addr,4));
+	addr=addr+4;
+  }
+  }
+  return 0;
+}
 
 
 static struct {
@@ -73,6 +94,7 @@ static struct {
   { "q", "Exit NPC", cmd_q },
   {"si", "execute N row (default value:1)", cmd_si },
   {"info"," [r] print the rg state [w] print the monitoring points", cmd_info},
+  {"x"," format: x [N] [EXPR], [N] print N*4bytes(hexadecimal) [EXPR] get [EXPR] value as the start memory", cmd_x},
   /* TODO: Add more commands */
 
 };
