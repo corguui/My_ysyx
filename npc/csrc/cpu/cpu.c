@@ -5,6 +5,16 @@
 #include <sdb.h>
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
+//ringbuf val
+#ifdef CONFIG_ITRACE
+#define BUF_LEN 18
+#define NEXT_POS(x) ((x+1)%BUF_LEN)
+char ringbuf[BUF_LEN][128];
+int w=0;//ringbuf's write flag
+void iringbuf_put_char(char *p);
+void print_ringbuf();
+#endif
+
 static bool g_print_step = false;  
 
 static void trace_and_difftest(Decode *_this) {
@@ -71,6 +81,10 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
+  #ifdef CONFIG_ITRACE
+  //itrace the wrong instruct
+  iringbuf_put_char(s->logbuf);
+  #endif
   //p[0] = '\0'; // the upstream llvm does not support loongarch32r
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, ilen);
 
@@ -110,4 +124,25 @@ void cpu_exec(uint64_t n)
 
 }
 
+#ifdef CONFIG_ITRACE
+void iringbuf_put_char(char *p)
+{
+		int n=sizeof(ringbuf[w]);
+		memset(ringbuf[w],'\0',n);
+		strcpy(ringbuf[w],p);
+		w=NEXT_POS(w);
+
+}
+
+void print_ringbuf(){
+	for(int num=0;num<BUF_LEN;num++)
+		{
+			if((num!=w-1)&&(ringbuf[num]!=NULL))
+			printf("    %s\n",ringbuf[num]);
+			else
+			printf("--> %s\n",ringbuf[num]);
+		}
+
+}
+#endif
 
