@@ -96,7 +96,7 @@ void elf_read_fun(char *elf_file) {
         //printf("Symbol table '.symtab' contains %ld entries\n", entry_num);
         fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
         char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
-        int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
+        int ret5=fread(strtab_string_table, sec_headers[str_tab_ind].sh_size,1, fp);
 	assert(ret5==1);
 
 	fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
@@ -112,14 +112,12 @@ void elf_read_fun(char *elf_file) {
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
-		/*
  	    printf("  %3d:\t", i);
         printf("0x%08x:\t", sym_entries[i].st_value);
         printf("%4d\t", sym_entries[i].st_size);
 	    printf("FUN\t");
         printf("%s", &strtab_string_table[sym_entries[i].st_name]);
         printf("\n");
-		*/
 	    fun_buff[fun_num].value=sym_entries[i].st_value;
 	    fun_buff[fun_num].size=sym_entries[i].st_size;
 	    strcpy(fun_buff[fun_num].name,&strtab_string_table[sym_entries[i].st_name]);
@@ -127,7 +125,6 @@ void elf_read_fun(char *elf_file) {
 	    fun_num++;
 	    }
 	}
-	/*
 	//   print the fun_buff
 	for(int i=0;i<fun_num;i++)
 	{
@@ -136,7 +133,6 @@ void elf_read_fun(char *elf_file) {
 		printf("%s",fun_buff[i].name);
 		printf("\n");
 	}
-	*/
 	
     free (sym_entries);
 	free (strtab_string_table);
