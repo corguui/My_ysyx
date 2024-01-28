@@ -224,7 +224,7 @@ int tokens_len = nr_token;
 	  )
 	{
 	    tokens[i].type = TK_NOTYPE;
-	    for(int j = 31 ; j >= 0 ; j --){
+	    for(int j = 31 ; j > 0 ; j --){
 		tokens[i+1].str[j] = tokens[i+1].str[j-1];
 	    }
 	    tokens[i+1].str[0] = '-';

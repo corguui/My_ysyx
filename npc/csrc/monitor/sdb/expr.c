@@ -19,6 +19,8 @@ uint32_t isa_reg_str2val(const char *s, bool *success);
  */
 
 #include <regex.h>
+
+
 enum {
   TK_NOTYPE = 256,EQ,Num,LEQ,NOTEQ,OR,AND,RESGISTER,HEX,
 
@@ -210,7 +212,7 @@ int tokens_len = nr_token;
 	  )
 	{
 	    tokens[i].type = TK_NOTYPE;
-	    for(int j = 31 ; j >= 0 ; j --){
+	    for(int j = 31 ; j > 0 ; j --){
 		tokens[i+1].str[j] = tokens[i+1].str[j-1];
 	    }
 	    tokens[i+1].str[0] = '-';
