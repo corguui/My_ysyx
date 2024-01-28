@@ -5,7 +5,6 @@
 #include<stdlib.h>
 #include<string.h>
 #include<common.h>
-#include <regex.h>
 bool check_parentheses(int p, int q);
 uint32_t eval(int p , int q);
 int char_to_int(char s[]);
@@ -19,6 +18,7 @@ uint32_t isa_reg_str2val(const char *s, bool *success);
  * Type 'man regex' for more information about POSIX regex functions.
  */
 
+#include <regex.h>
 enum {
   TK_NOTYPE = 256,EQ,Num,LEQ,NOTEQ,OR,AND,RESGISTER,HEX,
 

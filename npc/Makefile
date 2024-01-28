@@ -14,6 +14,8 @@ READLINE = -LDFLAGS -lreadline
 
 
 INC_PATH = $(HOME)/ysyx-workbench/npc/include
+INC_PATH += usr/include
+
 
 
 all:
