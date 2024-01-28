@@ -22,7 +22,6 @@ uint32_t isa_reg_str2val(const char *s, bool *success) {
   if (!strcmp(s, "$0")) {
     return top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0];
 	}
-  }
   if (!strcmp(s, "$pc")) {
     return top->pc;
   }
