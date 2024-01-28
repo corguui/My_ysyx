@@ -162,12 +162,14 @@ void elf_read_fun(char *elf_file) {
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
+		/*
  	    printf("  %3d:\t", i);
         printf("0x%08x:\t", sym_entries[i].st_value);
         printf("%4d\t", sym_entries[i].st_size);
 	    printf("FUN\t");
         printf("%s", &strtab_string_table[sym_entries[i].st_name]);
         printf("\n");
+		*/
 	    fun_buff[fun_num].value=sym_entries[i].st_value;
 	    fun_buff[fun_num].size=sym_entries[i].st_size;
 	    strcpy(fun_buff[fun_num].name,&strtab_string_table[sym_entries[i].st_name]);
@@ -187,14 +189,14 @@ void elf_read_fun(char *elf_file) {
 	*/
 	
     free (sym_entries);
-	free(strtab_string_table);
+	free (strtab_string_table);
     } else {
         printf("No symbol table!\n");
     }
     //释放堆内存
     free (string_table);
     free (sec_headers);
-    fclose(fp);	
+    fclose (fp);	
 
 
 
