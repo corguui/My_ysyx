@@ -107,9 +107,9 @@ void elf_read_fun(char *elf_file) {
 
 
 	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
-
+    /*
 	for(int i=0;i<entry_num;i++)
-	{/*
+	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
 	   {
  	    printf("  %3d:\t", i);
@@ -138,7 +138,8 @@ void elf_read_fun(char *elf_file) {
 	
     //free (sym_entries);
 	free (strtab_string_table);
-    } else {
+    } 
+	else {
         printf("No symbol table!\n");
     }
     //释放堆内存
