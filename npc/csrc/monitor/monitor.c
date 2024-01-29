@@ -100,7 +100,6 @@ void elf_read_fun(char *elf_file) {
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
 
-        /*
         uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
 		printf("%d\n",sec_headers[symtab_ind].sh_size);
 		printf("%d\n",sec_headers[symtab_ind].sh_entsize);
@@ -109,7 +108,8 @@ void elf_read_fun(char *elf_file) {
 
         fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
 		printf("%d\n",sec_headers[symtab_ind].sh_offset);
-        Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
+        //Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
+        Elf32_Sym* sym_entries = (Elf32_Sym*)calloc(entry_num,sizeof(Elf32_Sym));
 		//Elf32_Sym sym_entries[entry_num];
         int ret3=fread(sym_entries, sizeof(Elf32_Sym)*entry_num,1, fp);//读符号表
 	assert(ret3==1);
@@ -144,7 +144,8 @@ void elf_read_fun(char *elf_file) {
 	}
 	*/
 	
-    //free (sym_entries);
+    free (sym_entries);
+	sym_entries=NULL;
 	//free (strtab_string_table);
     } 
 	else {
