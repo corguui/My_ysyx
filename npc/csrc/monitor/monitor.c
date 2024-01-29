@@ -136,12 +136,8 @@ void elf_read(char *elf_file)
                 {
                     const char *name = string_table + sym.st_name;
                     strncpy(symbol[func_num].name, name, sizeof(symbol[func_num].name) - 1);
-					printf("%s  ",symbol[func_num].name);
                     symbol[func_num].value = sym.st_value;
-					printf("%x  ",symbol[func_num].value);
                     symbol[func_num].size = sym.st_size;
-					printf("%d  ",symbol[func_num].size);
-					printf("\n");
                     func_num++;
                 }
             }

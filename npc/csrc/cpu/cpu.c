@@ -105,7 +105,9 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 	int f,g;
  	for(g=0;g<func_num;g++)
 	{
-		
+		printf("%x\n",s->dnpc);	
+		printf("%x\n",symbol[0].size);
+		printf("%x\n",symbol[0].value);
 		if(s->dnpc>=symbol[g].value&&s->dnpc<symbol[g].value+symbol[g].size)//read the next pc
 		{
 		   if(strncmp(s->funbuf+24,ar1,4)==0&&strncmp(s->funbuf+12,ar2,5)==0)//ret or not ret 
