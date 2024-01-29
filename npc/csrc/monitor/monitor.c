@@ -14,6 +14,7 @@ extern "C" void init_disasm(const char *triple);
 #include <monitor.h>
 char *elf_file =(char*)ELF;
 void elf_read(char *elf_file);
+
 /*
 transfer to momitor.h
 typedef struct function
@@ -22,8 +23,9 @@ typedef struct function
 	int      size;
 	char     name[128];
 }FUN;
-
 */
+FUN *symbol = NULL;  //dynamic allocate memory  or direct allocate memory (Symbol symbol[NUM])
+int func_num=0;
 
 #endif
 
@@ -45,8 +47,7 @@ void init_monitor() {
 //elf_file handle
 
 
-FUN *symbol = NULL;  //dynamic allocate memory  or direct allocate memory (Symbol symbol[NUM])
-int func_num=0;
+
 
 void elf_read(char *elf_file)
 {
