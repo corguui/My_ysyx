@@ -113,10 +113,8 @@ void elf_read_fun(char *elf_file) {
         int ret3=fread(sym_entries, sizeof(Elf32_Sym)*entry_num,1, fp);//读符号表
 	assert(ret3==1);
 
-        free (sym_entries);
 
 	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
-    /*
 	for(int i=0;i<entry_num;i++)
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
@@ -145,7 +143,7 @@ void elf_read_fun(char *elf_file) {
 	}
 	*/
 	
-    //free (sym_entries);
+    free (sym_entries);
 	//free (strtab_string_table);
     } 
 	else {
