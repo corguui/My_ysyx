@@ -63,6 +63,9 @@ void elf_read(char *elf_file)
         printf("failed to open the elf file!\n");
         exit(0);
     }
+    else {
+    Log("read elf file: %s",elf_file ?elf_file:"stdout");
+    }
 	
     Elf32_Ehdr edhr;
 	//读取elf头
