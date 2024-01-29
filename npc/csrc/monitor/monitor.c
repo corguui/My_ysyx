@@ -16,7 +16,7 @@ char *elf_file =(char*)ELF;
 int times=0;
 int fun_num=0;
 void elf_read(char *elf_file);
-void show_symbol_table(int symtab_ind,uint32_t entry_num,char *string_table,FILE* fp,Elf32_Shdr* sec_headers);
+void show_symbol_table(int symtab_ind,uint32_t entry_num,char *string_table,char* elf_file,Elf32_Shdr* sec_headers);
 void elf_read_fun(char* elf_file);
 /*
 transfer to momitor.h
@@ -167,7 +167,6 @@ void show_symbol_table(int symtab_ind,uint32_t entry_num,char *strtab_string_tab
     //Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
 	Elf32_Sym* sym_entries[entry_num];
     int ret3=fread(sym_entries, sizeof(Elf32_Sym),entry_num, fp);//读符号表
-	fclose(fp);
 	//assert(ret3==1);
 
 	for(int i=0;i<entry_num;i++)
@@ -189,5 +188,6 @@ void show_symbol_table(int symtab_ind,uint32_t entry_num,char *strtab_string_tab
 	}
 		//free (sym_entries);
 		//sym_entries=NULL;
+	fclose(fp);
 }
 #endif
