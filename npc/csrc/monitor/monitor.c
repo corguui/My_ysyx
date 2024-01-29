@@ -93,8 +93,8 @@ void elf_read_fun(char *elf_file) {
     }
 
 	if ((symtab_ind != -1) && (strtab_ind != -1)) {
-		rewind(fp);
-        fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_CUR);
+		printf("%d\n",sec_headers[str_tab_ind].sh_offset);
+        fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
 		char strtab_string_table [sec_headers[str_tab_ind].sh_size];
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
