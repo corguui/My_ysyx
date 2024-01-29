@@ -102,16 +102,16 @@ if(strncmp(s->funbuf+24,ar,3)==0)
  {
  	int flat_ret=0;
 	int f,g;
- 	for(g=0;g<fun_num;g++)
+ 	for(g=0;g<func_num;g++)
 	{
 		
-		if(s->dnpc>=fun_buff[g].value&&s->dnpc<fun_buff[g].value+fun_buff[g].size)//read the next pc
+		if(s->dnpc>=symbol[g].value&&s->dnpc<symbol[g].value+symbol[g].size)//read the next pc
 		{
 		   if(strncmp(s->funbuf+24,ar1,4)==0&&strncmp(s->funbuf+12,ar2,5)==0)//ret or not ret 
 		   {
-		   for(f=0;f<fun_num;f++)
+		   for(f=0;f<func_num;f++)
 		   {
-		       if(s->pc>=fun_buff[f].value&&s->pc<fun_buff[f].size+fun_buff[f].value)	
+		       if(s->pc>=symbol[f].value&&s->pc<symbol[f].size+symbol[f].value)	
 		       {
 		          flat_ret=1;
 			  break;
@@ -125,7 +125,7 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 		     	space_num--;
 		     }
 		     printf("0x%x:",s->pc);
-		     printf("---num: %d   ret [fun:%s  @%x]\n",space_num,fun_buff[f].name,fun_buff[f].value); 
+		     printf("---num: %d   ret [fun:%s  @%x]\n",space_num,symbol[f].name,symbol[f].value); 
 		     space_flat=1;
 		     break;
 		   }
@@ -136,12 +136,12 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 		     	space_num++;
 		     }
 		     printf("0x%x:",s->pc);
-		     printf("---num: %d  call [fun:%s  @%x]\n",space_num,fun_buff[g].name,fun_buff[g].value);
+		     printf("---num: %d  call [fun:%s  @%x]\n",space_num,symbol[g].name,symbol[g].value);
 			space_flat=0;
 			break;
 		   }
 		}
-		else if(g==fun_num-1)
+		else if(g==func_num-1)
 		{
 			Log("error no funcion\nsrc/cpu/cpu-exec.c:1:error\n");
       
