@@ -6,7 +6,7 @@
 #include "Vysyx_23060111_top___024root.h"
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
-#ifdef CONFIG_FTRACE
+#ifdef CONFIG_FTRACEe
 #include <monitor.h>
 extern FUN fun_buff[128];
 extern int fun_num;
@@ -76,7 +76,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		main_time++;
 		top->eval();
 
-#ifdef CONFIG_FTRACE
+#ifdef CONFIG_FTRACEe
   char ar[]="jal";//read the jal and jalr
   char ar1[]="jalr";
   char ar2[]="00 00 80 67";//funbuf 0x8--------: 00 00 80 67 jalr  ..... the ret is 80 67
