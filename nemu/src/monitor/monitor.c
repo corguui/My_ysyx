@@ -360,7 +360,7 @@ void elf_read_fun(char *elf_file) {
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 	assert(ret5==1);
 
-
+  printf("%d\n",sec_headers[symtab_ind].sh_offset);
 	fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
 
         Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
