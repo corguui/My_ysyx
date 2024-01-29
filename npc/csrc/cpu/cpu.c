@@ -3,6 +3,7 @@
 #include <cpu/decode.h>
 #include<common.h>
 #include <sdb.h>
+#include <stdio.h>
 #include "Vysyx_23060111_top___024root.h"
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
@@ -66,7 +67,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		top->clk =0; top->eval();
 		s->pc=top->pc;
 		top->inst =pc_read(top->pc);
-    s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
+    	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 		s->inst=top->inst;
 		tfp->dump(main_time);
 		main_time++;
@@ -97,7 +98,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   memset(q, ' ', fspace_len);
   q += fspace_len;
   disassemble(q, s->funbuf + sizeof(s->funbuf) - q,s->pc, (uint8_t *)&s->inst, funlen);
-
+  printf("%--x\n",s->dnpc);
 if(strncmp(s->funbuf+24,ar,3)==0)
  {
  	int flat_ret=0;
