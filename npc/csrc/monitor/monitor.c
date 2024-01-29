@@ -94,8 +94,8 @@ void elf_read_fun(char *elf_file) {
 
 	if ((symtab_ind != -1) && (strtab_ind != -1)) {
         fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
-        //char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
-		char strtab_string_table [sec_headers[str_tab_ind].sh_size];
+        char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
+		//char strtab_string_table [sec_headers[str_tab_ind].sh_size];
         //int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		//assert(ret5==1);
 
