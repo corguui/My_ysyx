@@ -96,8 +96,8 @@ void elf_read_fun(char *elf_file) {
         fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
         char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
 		//char strtab_string_table [sec_headers[str_tab_ind].sh_size];
-        //int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
-		//assert(ret5==1);
+        int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
+		assert(ret5==1);
 
 		//printf("%d\n",sec_headers[symtab_ind].sh_size);
 		//printf("%d\n",sec_headers[symtab_ind].sh_entsize);
