@@ -100,10 +100,10 @@ void elf_read_fun(char *elf_file) {
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
 
-        uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
+        //uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
 		printf("%d\n",sec_headers[symtab_ind].sh_size);
 		printf("%d\n",sec_headers[symtab_ind].sh_entsize);
-		printf("%d\n",entry_num);
+		//printf("%d\n",entry_num);
 		printf("%ld\n",sizeof(Elf32_Sym));
 		//rewind(fp);
         //fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
