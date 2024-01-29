@@ -115,7 +115,7 @@ void elf_read_fun(char *elf_file) {
         int ret3=fread(sym_entries, sizeof(Elf32_Sym)*entry_num,1, fp);//读符号表
 	assert(ret3==1);
 
-
+	/*
 	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
 	for(int i=0;i<entry_num;i++)
 	{
