@@ -77,6 +77,34 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		main_time++;
 		top->eval();
 
+
+
+
+#ifdef CONFIG_ITRACE
+  char *p = s->logbuf;
+  p += snprintf(p, sizeof(s->logbuf),  "0x%x:", s->pc);
+ int ilen = 0x4;
+  int i;
+  uint8_t *inst = (uint8_t *)&s->inst;
+  for (i = ilen - 1; i >= 0; i --) {
+    p += snprintf(p, 4, " %02x", inst[i]);
+  }
+
+  int ilen_max = 4;
+  int space_len = ilen_max - ilen;
+  if (space_len < 0) space_len = 0;
+  space_len = space_len * 3 + 1;
+  memset(p, ' ', space_len);
+  p += space_len;
+  #ifdef CONFIG_ITRACE
+  //itrace the wrong instruct
+  iringbuf_put_char(s->logbuf);
+  #endif
+  //p[0] = '\0'; // the upstream llvm does not support loongarch32r
+  disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, ilen);
+
+#endif
+
 #ifdef CONFIG_FTRACE
   char ar[]="jal";//read the jal and jalr
   char ar1[]="jalr";
@@ -152,33 +180,6 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 	}
  }
 #endif
-
-
-#ifdef CONFIG_ITRACE
-  char *p = s->logbuf;
-  p += snprintf(p, sizeof(s->logbuf),  "0x%x:", s->pc);
- int ilen = 0x4;
-  int i;
-  uint8_t *inst = (uint8_t *)&s->inst;
-  for (i = ilen - 1; i >= 0; i --) {
-    p += snprintf(p, 4, " %02x", inst[i]);
-  }
-
-  int ilen_max = 4;
-  int space_len = ilen_max - ilen;
-  if (space_len < 0) space_len = 0;
-  space_len = space_len * 3 + 1;
-  memset(p, ' ', space_len);
-  p += space_len;
-  #ifdef CONFIG_ITRACE
-  //itrace the wrong instruct
-  iringbuf_put_char(s->logbuf);
-  #endif
-  //p[0] = '\0'; // the upstream llvm does not support loongarch32r
-  disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, ilen);
-
-#endif
-
 }
 
 static void execute(uint64_t n)
