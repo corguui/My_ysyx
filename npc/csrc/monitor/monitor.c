@@ -106,17 +106,16 @@ void elf_read_fun(char *elf_file) {
 		//printf("%d\n",entry_num);
 		//printf("%ld\n",sizeof(Elf32_Sym));
         fseek(fp, sec_headers[symtab_ind].sh_offset,SEEK_SET );//将指针移动到符号表对应的偏移地址
-		Elf32_Sym* sym_entries=new Elf32_Sym[entry_num];
 		//printf("%ld\n",ftell(fp));
         //Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
         //Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(entry_num*sizeof(Elf32_Sym));
 		//Elf32_Sym sym_entries[entry_num];
-		fread(sym_entries,sizeof(Elf32_Sym),entry_num,fp );
         //int ret3=fread(sym_entries, sizeof(Elf32_Sym)*entry_num,1, fp);//读符号表
 		//assert(ret3==1);
   		//free (sym_entries);
 		//sym_entries=NULL;
 	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
+	/*
 	for(int i=0;i<entry_num;i++)
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
@@ -135,7 +134,6 @@ void elf_read_fun(char *elf_file) {
 	    }
 	}
 
-	delete [] sym_entries;
 	/*
 	//   print the fun_buff
 	for(int i=0;i<fun_num;i++)
