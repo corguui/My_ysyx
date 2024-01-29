@@ -81,6 +81,8 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 
 #ifdef CONFIG_ITRACE
+  if(s->pc>=0x80000000)
+  {
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf),  "0x%x:", s->pc);
  int ilen = 0x4;
@@ -103,7 +105,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   //p[0] = '\0'; // the upstream llvm does not support loongarch32r
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, ilen);
   printf("0x%x\n",s->dnpc);
-
+  }
 #endif
 
 #ifdef CONFIG_FTRACE
@@ -111,6 +113,8 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   char ar1[]="jalr";
   char ar2[]="00 00 80 67";//funbuf 0x8--------: 00 00 80 67 jalr  ..... the ret is 80 67
   //00 07 80 67 jr mean call to but no printf the ret//in f1 have jr call to f0 the f1 no ret
+  if(s->pc>=0x80000000)
+  {
   char *q = s->funbuf;
   q += snprintf(q, sizeof(s->funbuf), "0x%x:", s->pc);
   int funlen = 0x4;
@@ -178,6 +182,7 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 		}
 	}
  }
+  }
 #endif
 }
 
