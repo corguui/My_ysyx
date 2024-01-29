@@ -109,8 +109,7 @@ void elf_read_fun(char *elf_file) {
         Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
         int ret3=fread(sym_entries, sizeof(Elf32_Sym)*entry_num,1, fp);//读符号表
 		assert(ret3==1);
-  		free (sym_entries);
-		sym_entries=NULL;
+
 	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
 	for(int i=0;i<entry_num;i++)
 	{
@@ -140,7 +139,8 @@ void elf_read_fun(char *elf_file) {
 		printf("\n");
 	}
 	*/
-	
+		free (sym_entries);
+		sym_entries=NULL;
     
 	//free (strtab_string_table);
     } 
