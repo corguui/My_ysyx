@@ -68,7 +68,7 @@ void elf_read_fun(char *elf_file) {
 	int ret1=fread(sec_headers,sizeof(Elf32_Shdr)*elf_header.e_shnum,1,fp);
 	assert(ret1==1);
 	//printf("There are %d section headers, starting at offset 0x%x\n\n", elf_header.e_shnum, elf_header.e_shoff);
-
+	rewind(fp);
 	int str_tab_ind=elf_header.e_shstrndx;
 	fseek(fp,sec_headers[str_tab_ind].sh_offset,SEEK_SET);
 	char* string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
@@ -95,7 +95,8 @@ void elf_read_fun(char *elf_file) {
         unsigned long entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
         //printf("Symbol table '.symtab' contains %ld entries\n", entry_num);
         fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
-        char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
+        //char* strtab_string_table = (char*)malloc(sec_headers[str_tab_ind].sh_size * sizeof(char));
+		char strtab_string_table [sec_headers[str_tab_ind].sh_size];
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
 
