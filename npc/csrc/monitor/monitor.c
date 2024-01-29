@@ -101,15 +101,16 @@ void elf_read_fun(char *elf_file) {
 		assert(ret5==1);
 
         uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
+        fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
+
+		printf("%d\n",sec_headers[symtab_ind].sh_offset);
 		printf("%d\n",sec_headers[symtab_ind].sh_size);
 		printf("%d\n",sec_headers[symtab_ind].sh_entsize);
 		printf("%d\n",entry_num);
 		printf("%ld\n",sizeof(Elf32_Sym));
 
-        fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
-		printf("%d\n",sec_headers[symtab_ind].sh_offset);
         //Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
-        Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(entry_num*sizeof(Elf32_Sym));
+        Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(432);
 		printf("%ld\n",sizeof(sym_entries));
 		//Elf32_Sym sym_entries[entry_num];
         int ret3=fread(sym_entries, sizeof(Elf32_Sym)*sizeof(sym_entries ),1, fp);//读符号表
