@@ -67,7 +67,6 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		top->clk =0; top->eval();
 		s->pc=top->pc;
 		top->inst =pc_read(top->pc);
-    	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 		s->inst=top->inst;
 		tfp->dump(main_time);
 		main_time++;
@@ -75,6 +74,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		top->clk =1; top->eval();
 		tfp->dump(main_time);
 		main_time++;
+    	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 		top->eval();
 
 
