@@ -109,8 +109,8 @@ void elf_read_fun(char *elf_file) {
 		printf("%d\n",entry_num);
 		printf("%ld\n",sizeof(Elf32_Sym));
         //Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
-		Elf32_Sym sym_entrie[entry_num];
-        int ret3=fread(sym_entrie, sizeof(Elf32_Sym)*entry_num,1, fp);//读符号表
+		Elf32_Sym* sym_entries[entry_num];
+        int ret3=fread(sym_entries, sizeof(Elf32_Sym)*entry_num,1, fp);//读符号表
 	assert(ret3==1);
 
 
