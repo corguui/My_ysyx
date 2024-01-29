@@ -183,7 +183,7 @@ void show_symbol_table(int symtab_ind,uint32_t entry_num,char *strtab_string_tab
 	    fun_num++;
 	    }
 	}
-		free (sym_entries);
-		sym_entries=NULL;
+		//free (sym_entries);
+		//sym_entries=NULL;
 }
 #endif
