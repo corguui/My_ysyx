@@ -10,7 +10,7 @@ extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int 
 #include <monitor.h>
 extern FUN *symbol;
 extern int func_num;
-int space_num=0;
+int space_num=-1;
 int space_flat=0;
 #endif
 
@@ -143,7 +143,7 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 		}
 		else if(g==func_num-1)
 		{
-			Log("error no funcion\nsrc/cpu/cpu-exec.c:1:error\n");
+			Log("error no funcion error\n");
       
 			
 		}
