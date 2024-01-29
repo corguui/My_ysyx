@@ -141,7 +141,7 @@ void elf_read(char *elf_file)
 					printf("%x  ",symbol[func_num].value);
                     symbol[func_num].size = sym.st_size;
 					printf("%d  ",symbol[func_num].size);
-					printf("\n")
+					printf("\n");
                     func_num++;
                 }
             }
