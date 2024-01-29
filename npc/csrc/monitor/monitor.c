@@ -100,7 +100,8 @@ void elf_read_fun(char *elf_file) {
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
 
-        uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
+        //uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
+		uint32_t entry_num = sec_headers[symtab_ind].sh_size;
 		show_symbol_table(symtab_ind,entry_num,strtab_string_table,fp,sec_headers);
 
 		//printf("%d\n",sec_headers[symtab_ind].sh_size);
@@ -158,11 +159,11 @@ void elf_read_fun(char *elf_file) {
 void show_symbol_table(int symtab_ind,uint32_t entry_num,char *strtab_string_table,FILE* fp,Elf32_Shdr* sec_headers)
 {
 	fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
-    //Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(Elf32_Sym)*entry_num);//开辟堆内存用来存储符号表中所有entry
-	Elf32_Sym sym_entries[entry_num];
-    int ret3=fread(sym_entries, sizeof(sym_entries),1, fp);//读符号表
+    Elf32_Sym* sym_entries = (Elf32_Sym*)malloc(sizeof(char)*entry_num);//开辟堆内存用来存储符号表中所有entry
+	//Elf32_Sym sym_entries[entry_num];
+    int ret3=fread(sym_entries, sizeof(*sym_entries),1, fp);//读符号表
 	printf("%x\n",sec_headers[symtab_ind].sh_offset);
-	printf("%lx\n",sizeof(sym_entries));
+	printf("%lx\n",sizeof(*sym_entries));
 	assert(ret3==1);
 /*
 	for(int i=0;i<entry_num;i++)
