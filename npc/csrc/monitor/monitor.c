@@ -93,7 +93,7 @@ void elf_read_fun(char *elf_file) {
     }
 
 	if ((symtab_ind != -1) && (strtab_ind != -1)) {
-        fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
+        fseek(fp, sec_headers[strtab_ind].sh_offset-sec_headers[str_tab_ind].sh_offset, SEEK_CUR);
 		char strtab_string_table [sec_headers[str_tab_ind].sh_size];
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
@@ -109,6 +109,7 @@ void elf_read_fun(char *elf_file) {
 		assert(ret3==1);
 
 	//printf("  NUM:\tValue\t\tSize\tType\tName\n");
+	/*
 	for(int i=0;i<entry_num;i++)
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
@@ -117,7 +118,7 @@ void elf_read_fun(char *elf_file) {
         printf("0x%08x:\t", sym_entries[i].st_value);
         printf("%4d\t", sym_entries[i].st_size);
 	    printf("FUN\t");
-        printf("%s", &strtab_string_table[sym_entries[i].st_name]);
+        //printf("%s", &strtab_string_table[sym_entries[i].st_name]);
         printf("\n");
 	    fun_buff[fun_num].value=sym_entries[i].st_value;
 	    fun_buff[fun_num].size=sym_entries[i].st_size;
@@ -126,6 +127,7 @@ void elf_read_fun(char *elf_file) {
 	    fun_num++;
 	    }
 	}
+	*/
 
 	/*
 	//   print the fun_buff
