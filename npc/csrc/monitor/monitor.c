@@ -48,6 +48,7 @@ void init_monitor() {
 
 
 
+#ifdef CONFIG_FTRACE
 
 void elf_read(char *elf_file)
 {
@@ -146,3 +147,4 @@ void elf_read(char *elf_file)
     fclose(fp);
     free(string_table);
 }
+#endif
