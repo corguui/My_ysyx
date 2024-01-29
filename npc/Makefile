@@ -24,10 +24,12 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	@echo "Write this Makefile by your self."
 	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -I$(INC_PATH) -CFLAGS -DIMG='\"$(IMG)\"' -CFLAGS -DELF='\"$(ELF)\"'  $(READLINE) $(LLVM)
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+	@ctags -R -u
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
 	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -I$(INC_PATH) -CFLAGS -DIMG='\"$(IMG)\"' -CFLAGS -DELF='\"$(ELF)\"' $(READLINE) $(LLVM) -CFLAGS -g 
 	gdb obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+	@ctags -R -u
 
 wave:$(Wavefile)
 	gtkwave $(Wavefile)
