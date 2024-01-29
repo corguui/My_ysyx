@@ -101,7 +101,7 @@ void elf_read_fun(char *elf_file) {
 		assert(ret5==1);
 
 		printf("%d\n",sec_headers[symtab_ind].sh_offset);
-        fseek(fp, sec_headers[symtab_ind].sh_offset, SEEK_SET);//将指针移动到符号表对应的偏移地址
+        fseek(fp, sec_headers[symtab_ind].sh_offset+4, SEEK_SET);//将指针移动到符号表对应的偏移地址
         uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
 
 		printf("%d\n",sec_headers[symtab_ind].sh_size);
