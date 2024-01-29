@@ -104,7 +104,7 @@ void elf_read_fun(char *elf_file) {
 		assert(ret5==1);
 
         uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
-		show_symbol_table(symtab_ind,entry_num,strtab_string_table,fp,sec_headers);
+		//show_symbol_table(symtab_ind,entry_num,strtab_string_table,fp,sec_headers);
 
 		//printf("%d\n",sec_headers[symtab_ind].sh_size);
 		//printf("%d\n",sec_headers[symtab_ind].sh_entsize);
