@@ -119,7 +119,8 @@ void elf_read_fun(char *elf_file) {
         printf("0x%08x:\t", sym_entries[i].st_value);
         printf("%4d\t", sym_entries[i].st_size);
 	    printf("FUN\t");
-        printf("%s", &strtab_string_table[sym_entries[i].st_name]);
+        //printf("%s", &strtab_string_table[sym_entries[i].st_name]);
+		printf("%d",sym_entries[i].st_name);
         printf("\n");
 	    fun_buff[fun_num].value=sym_entries[i].st_value;
 	    fun_buff[fun_num].size=sym_entries[i].st_size;
