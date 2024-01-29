@@ -1,5 +1,6 @@
 #ifndef __MONITOR_H
 #define __MONITOR_H
+#include<common.h>
 #ifdef CONFIG_FTRACE
 typedef struct function
 {
