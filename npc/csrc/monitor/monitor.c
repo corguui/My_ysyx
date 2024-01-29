@@ -127,7 +127,7 @@ void elf_read_fun(char *elf_file) {
         printf("\n");
 	    fun_buff[fun_num].value=sym_entries[i].st_value;
 	    fun_buff[fun_num].size=sym_entries[i].st_size;
-	    //strcpy(fun_buff[fun_num].name,&strtab_string_table[sym_entries[i].st_name]);
+	    strcpy(fun_buff[fun_num].name,&strtab_string_table[sym_entries[i].st_name]);
 
 	    fun_num++;
 	    }
@@ -143,7 +143,7 @@ void elf_read_fun(char *elf_file) {
 	}
 	*/
 	
-    //free (sym_entries);
+    free (sym_entries);
 	//free (strtab_string_table);
     } 
 	else {
