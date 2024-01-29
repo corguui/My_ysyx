@@ -13,6 +13,7 @@ extern "C" void init_disasm(const char *triple);
 #include <elf.h>
 #include <monitor.h>
 char *elf_file =(char*)ELF;
+void elf_read(char *elf_file);
 /*
 transfer to momitor.h
 typedef struct function
@@ -47,7 +48,7 @@ void init_monitor() {
 FUN *symbol = NULL;  //dynamic allocate memory  or direct allocate memory (Symbol symbol[NUM])
 int func_num=0;
 
-void parse_elf(char *elf_file)
+void elf_read(char *elf_file)
 {
     
     if(elf_file == NULL) return;
@@ -92,7 +93,7 @@ void parse_elf(char *elf_file)
         if(shdr.sh_type == SHT_STRTAB)
         {
             //获取字符串表
-            string_table = malloc(shdr.sh_size);
+            string_table = (char*)malloc(shdr.sh_size);
             fseek(fp, shdr.sh_offset, SEEK_SET);
             if(fread(string_table, shdr.sh_size, 1, fp) <= 0)
             {
@@ -120,7 +121,7 @@ void parse_elf(char *elf_file)
             Elf32_Sym sym;
 
             size_t sym_count = shdr.sh_size / shdr.sh_entsize;
-            symbol = malloc(sizeof(FUN) * sym_count);
+            symbol = (FUN*)malloc(sizeof(FUN) * sym_count);
 
             for(size_t j = 0; j < sym_count; j++)
             {
