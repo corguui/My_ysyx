@@ -99,6 +99,7 @@ void elf_read_fun(char *elf_file) {
         int ret3=fread(sym_entries, sizeof(Elf32_Sym)*entry_num,1, fp);//读符号表
 		assert(ret3==1);
 
+        fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
 		char strtab_string_table [sec_headers[str_tab_ind].sh_size];
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
