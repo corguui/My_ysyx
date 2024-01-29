@@ -98,7 +98,6 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   memset(q, ' ', fspace_len);
   q += fspace_len;
   disassemble(q, s->funbuf + sizeof(s->funbuf) - q,s->pc, (uint8_t *)&s->inst, funlen);
-  printf("%x\n",s->dnpc);
 if(strncmp(s->funbuf+24,ar,3)==0)
  {
  	int flat_ret=0;
