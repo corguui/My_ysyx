@@ -95,16 +95,13 @@ void elf_read_fun(char *elf_file) {
     }
 
 	if ((symtab_ind != -1) && (strtab_ind != -1)) {
-		
-
-
         fseek(fp, sec_headers[strtab_ind].sh_offset, SEEK_SET);
 		char strtab_string_table [sec_headers[str_tab_ind].sh_size];
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
 
         uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
-		//show_symbol_table(symtab_ind,entry_num,strtab_string_table,fp,sec_headers);
+		show_symbol_table(symtab_ind,entry_num,strtab_string_table,fp,sec_headers);
 
 		//printf("%d\n",sec_headers[symtab_ind].sh_size);
 		//printf("%d\n",sec_headers[symtab_ind].sh_entsize);
@@ -167,7 +164,7 @@ void show_symbol_table(int symtab_ind,uint32_t entry_num,char *strtab_string_tab
 	printf("%x\n",sec_headers[symtab_ind].sh_offset);
 	printf("%lx\n",sizeof(sym_entries));
 	assert(ret3==1);
-
+/*
 	for(int i=0;i<entry_num;i++)
 	{
 	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
@@ -187,5 +184,6 @@ void show_symbol_table(int symtab_ind,uint32_t entry_num,char *strtab_string_tab
 	}
 		//free (sym_entries);
 		//sym_entries=NULL;
+		*/
 }
 #endif
