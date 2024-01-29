@@ -100,6 +100,7 @@ void elf_read_fun(char *elf_file) {
         int ret5=fread(strtab_string_table, sec_headers[strtab_ind].sh_size,1, fp);
 		assert(ret5==1);
 
+        /*
         uint32_t entry_num = sec_headers[symtab_ind].sh_size / sec_headers[symtab_ind].sh_entsize;
 		printf("%d\n",sec_headers[symtab_ind].sh_size);
 		printf("%d\n",sec_headers[symtab_ind].sh_entsize);
@@ -143,7 +144,7 @@ void elf_read_fun(char *elf_file) {
 	}
 	*/
 	
-    free (sym_entries);
+    //free (sym_entries);
 	//free (strtab_string_table);
     } 
 	else {
