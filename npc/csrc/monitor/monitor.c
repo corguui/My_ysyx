@@ -168,7 +168,7 @@ void show_symbol_table(int symtab_ind,uint32_t entry_num,char *strtab_string_tab
 
 	for(int i=0;i<entry_num;i++)
 	{
-	   if((sym_entries[i].st_info & 0x0000000f)==STT_FUNC)
+	   if((sym_entries[i]->st_info & 0x0000000f)==STT_FUNC)
 	   {
  	    printf("  %3d:\t", i);
         printf("0x%08x:\t", sym_entries[i]->st_value);
