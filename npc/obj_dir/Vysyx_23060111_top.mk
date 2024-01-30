@@ -36,10 +36,17 @@ VM_MODPREFIX = Vysyx_23060111_top
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-I/home/corgi/ysyx-workbench/npc/include \
-	-DIMG=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin\"-CFLAGS \
+	-DIMG=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin\" \
+	-DELF=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.elf\" \
+	-I/usr/lib/llvm-14/include \
+	-std=c++17 \
+	-fno-exceptions \
+	-fPIE \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
+	-lreadline \
+	-lLLVM-14 \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
