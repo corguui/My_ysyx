@@ -11,6 +11,7 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 void (*ref_difftest_init)(int port) = NULL;
 
 void isa_reg_display();
+static void checkregs(NPC_CPU_state *ref, uint32_t pc);
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
 static bool is_skip_ref = false;
@@ -23,7 +24,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   handle = dlopen(ref_so_file, RTLD_LAZY);
   assert(handle);
 
-  ref_difftest_memcpy = dlsym(handle, "difftest_memcpy");
+  ref_difftest_memcpy = dlsym(void*)(handle, "difftest_memcpy");
   assert(ref_difftest_memcpy);
 
   ref_difftest_regcpy = dlsym(handle, "difftest_regcpy");
@@ -53,7 +54,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   NPC_CPU_state ref_r;
 
   if (skip_dut_nr_inst > 0) {
-    ref_difftest_regcpy(ref_r.gpr, DIFFTEST_TO_DUT);
+    ref_difftest_regcpy(ref_r.gpr,ref_r.pc, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
       skip_dut_nr_inst = 0;
       checkregs(&ref_r, npc);
