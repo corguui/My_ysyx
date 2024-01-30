@@ -11,7 +11,7 @@ extern "C" void init_disasm(const char *triple);
 #ifdef CONFIG_FTRACE
 #include <elf.h>
 #include <monitor.h>
-char *elf_file =(char*)ELF;
+char *elf_file =(char*)NPC_ELF;
 void elf_read(char *elf_file);
 
 /*
@@ -31,7 +31,7 @@ int func_num=0;
 #ifdef CONFIG_DIFFTEST
 extern long img_size;
 int difftest_port =1234;
-char *diff_so_file=(char*)DNPC_IFF;
+char *diff_so_file=(char*)NPC_DIFF;
 void init_difftest(char *ref_so_file, long img_size, int port);
 #endif
 void init_monitor() {
