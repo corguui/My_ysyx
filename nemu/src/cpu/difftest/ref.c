@@ -19,7 +19,6 @@
 #include <memory/paddr.h>
 #include <string.h>
 #include <stdio.h>
-#include "../../npc/include/cpu/cpu.h"
 
 
 __EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
@@ -38,21 +37,19 @@ __EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction)
 }
 
 __EXPORT void difftest_regcpy(void *dut, bool direction) {
-  NPC_CPU_state* p=(NPC_CPU_state*) dut;
+  uint32_t* gpr=(uint32_t*) dut;
   if(direction==DIFFTEST_TO_DUT)
   {
-    p->pc=cpu.pc;
     for(int i = 0;i<32;i++ )
     {
-      p->gpr[i]=cpu.gpr[i];
+      gpr[i]=cpu.gpr[i];
     }
   }
   else if(direction==DIFFTEST_TO_REF)
   {
-    cpu.pc=p->pc;
     for(int i = 0;i<32;i++ )
     {
-      cpu.gpr[i]=p->gpr[i];
+      cpu.gpr[i]=gpr[i];
     }
   }
   else
