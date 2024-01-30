@@ -28,8 +28,7 @@ all:
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC)  $(READLINE) $(LLVM) $(NPC_LIB) $(NPC_DEF) 
-	export LD_LIBRARY_PATH=$(LIB_PATH)
+	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC)  $(READLINE) $(LLVM)  $(NPC_DEF) 
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 	@ctags -R -u
 
