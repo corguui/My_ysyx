@@ -14,7 +14,8 @@ LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17  -CFLAGS -fno-excep
 READLINE = -LDFLAGS -lreadline
 
 LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
-NPC_LIB =  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so
+LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
+NPC_LIB =  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so -CFLAGS -DDIFF='\"$(LIB)\"'
 
 
 INC_PATH = $(HOME)/ysyx-workbench/npc/include
@@ -33,8 +34,9 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	@ctags -R -u
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
-	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF) $(READLINE) $(LLVM) $(NPC_GDB) 
+	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF) $(READLINE) $(LLVM) $(NPC_GDB) $(NPC_LIB)
 	gdb obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+	export LD_LIBRARY_PATH=$(LIB_PATH)
 	@ctags -R -u
 
 wave:$(Wavefile)
