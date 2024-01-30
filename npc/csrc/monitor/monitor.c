@@ -1,5 +1,4 @@
 #include <common.h>
-#include <cstdint>
 #include <stdio.h>
 #include <string.h>
 
