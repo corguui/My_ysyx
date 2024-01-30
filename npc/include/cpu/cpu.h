@@ -14,9 +14,9 @@
 typedef struct {
   uint32_t gpr[MUXDEF(CONFIG_RVE, 16, 32)];
   uint32_t pc;
-} CPU_state;
+} CPU;
 
-extern CPU_state cpu;
+extern CPU cpu;
 extern int main_time;    
 extern VerilatedContext* contextp;
 extern Vysyx_23060111_top *top;
@@ -26,6 +26,6 @@ void cpu_exec_once(VerilatedVcdC* tfp);
 void cpu_init();
 void cpu_exec(uint64_t n);
 void cpu_read_reg();
-
+void cpu_write_reg();
 
 #endif

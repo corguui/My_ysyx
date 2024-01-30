@@ -27,7 +27,7 @@ void iringbuf_put_char(char *p);
 void print_ringbuf();
 #endif
 
-CPU_state cpu{};
+CPU cpu{};
 static bool g_print_step = false;  
 
 void cpu_read_reg()
@@ -38,6 +38,14 @@ void cpu_read_reg()
 		cpu.gpr[i]=top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
 	}
 
+}
+void cpu_write_reg()
+{
+	top->pc=cpu.pc;
+	for(int i=0;i<32;i++)
+	{
+		top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]=cpu.gpr[i];
+	}
 }
 
 static void trace_and_difftest(Decode *_this) {

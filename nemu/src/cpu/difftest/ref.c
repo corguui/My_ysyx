@@ -19,6 +19,7 @@
 #include <memory/paddr.h>
 #include <string.h>
 #include <stdio.h>
+#include "../../npc/include/cpu/cpu.h"
 /*
 #include "../../../../../usr/local/share/verilator/include/verilated.h"
 #include "../../npc/obj_dir/Vysyx_23060111_top___024root.h"
@@ -41,13 +42,13 @@ __EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction)
 }
 
 __EXPORT void difftest_regcpy(void *dut, bool direction) {
-  Vysyx_23060111_top* p=(Vysyx_23060111_top *)dut;
+  CPU* p=(CPU*) dut;
   if(direction==DIFFTEST_TO_DUT)
   {
     p->pc=cpu.pc;
     for(int i = 0;i<32;i++ )
     {
-      p->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]=cpu.gpr[i];
+      p->gpr[i]=cpu.gpr[i];
     }
   }
   else if(direction==DIFFTEST_TO_REF)
@@ -55,7 +56,7 @@ __EXPORT void difftest_regcpy(void *dut, bool direction) {
     cpu.pc=p->pc;
     for(int i = 0;i<32;i++ )
     {
-      cpu.gpr[i]=p->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
+      cpu.gpr[i]=p->gpr[i];
     }
   }
   else

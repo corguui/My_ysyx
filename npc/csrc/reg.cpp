@@ -22,16 +22,20 @@ void isa_reg_display() {
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
+  cpu_read_reg();
   if (!strcmp(s, "$0")) {
-    return top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0];
+    //return top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[0];
+    return cpu.gpr[0];
+
 	}
   if (!strcmp(s, "$pc")) {
-    return top->pc;
+    //return top->pc;
+    return cpu.pc;
   }
   for (int i = 1; i < 32; i++) {
     if (!strcmp(s+1, regs[i])) {
-      return top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
-
+      //return top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
+      return cpu.gpr[i];
     }
   }
   *success = true;
