@@ -38,6 +38,10 @@ VM_USER_CFLAGS = \
 	-I/home/corgi/ysyx-workbench/npc/include \
 	-DIMG=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin\" \
 	-DELF=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.elf\" \
+	-I/usr/lib/llvm-14/include \
+	-std=c++17 \
+	-fno-exceptions \
+	-fPIE \
 	-L/home/corgi/ysyx-workbench/nemu/build/ \
 	-lriscv32-nemu-interpreter-so \
 	-DDIFF=\"/home/corgi/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so\" \
@@ -45,6 +49,7 @@ VM_USER_CFLAGS = \
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
 	-lreadline \
+	-lLLVM-14 \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
