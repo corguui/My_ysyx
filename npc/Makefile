@@ -13,8 +13,8 @@ LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17  -CFLAGS -fno-excep
 
 READLINE = -LDFLAGS -lreadline
 
-LIB_PATH = -LDFLAGS -L$(HOME)/ysyx-workbench/nemu/build/
-NPC_LIB =  $(LIB_PATH) -LDFLAGS -lriscv32-nemu-interpreter-so
+LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
+NPC_LIB =  -LDFLAGS -lriscv32-nemu-interpreter-so
 
 
 INC_PATH = $(HOME)/ysyx-workbench/npc/include
@@ -27,6 +27,7 @@ all:
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
+	export LD_LIBRARY_PATH=$(LIB_PATH)
 	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF)  $(READLINE) $(LLVM) $(NPC_LIB)
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 	@ctags -R -u
