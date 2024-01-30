@@ -15,7 +15,7 @@ READLINE = -LDFLAGS -lreadline
 
 LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
 LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
-NPC_LIB =  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so -CFLAGS -fsanitize=address  -CFLAGS -DNPC_DIFF='\"$(LIB)\"'
+NPC_LIB =  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so -CFLAGS -DNPC_DIFF='\"$(LIB)\"'
 
 INC_PATH = $(HOME)/ysyx-workbench/npc/include
 NPC_INC = -CFLAGS -I$(INC_PATH) 
