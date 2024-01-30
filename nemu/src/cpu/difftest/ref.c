@@ -17,17 +17,55 @@
 #include <cpu/cpu.h>
 #include <difftest-def.h>
 #include <memory/paddr.h>
+#include <string.h>
+#include <stdio.h>
+/*
+#include "../../../../../usr/local/share/verilator/include/verilated.h"
+#include "../../npc/obj_dir/Vysyx_23060111_top___024root.h"
+#include "../../npc/obj_dir/Vysyx_23060111_top.h"
+*/
 
 __EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
+  if(direction==DIFFTEST_TO_DUT)
+  {
+    memcpy(buf,&addr, n );
+  }
+  else if(direction==DIFFTEST_TO_REF)
+  {
+    memcpy(&addr,buf, n );
+  }
+  else
+  printf("direction error\n");
+  printf("please type DIFFTEST_TO_REF or DIFFTEST_TO_DUT");
   assert(0);
 }
 
 __EXPORT void difftest_regcpy(void *dut, bool direction) {
+  Vysyx_23060111_top* p=(Vysyx_23060111_top *)dut;
+  if(direction==DIFFTEST_TO_DUT)
+  {
+    p->pc=cpu.pc;
+    for(int i = 0;i<32;i++ )
+    {
+      p->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]=cpu.gpr[i];
+    }
+  }
+  else if(direction==DIFFTEST_TO_REF)
+  {
+    cpu.pc=p->pc;
+    for(int i = 0;i<32;i++ )
+    {
+      cpu.gpr[i]=p->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
+    }
+  }
+  else
+  printf("direction error\n");
+  printf("please type DIFFTEST_TO_REF or DIFFTEST_TO_DUT");
   assert(0);
 }
 
 __EXPORT void difftest_exec(uint64_t n) {
-  assert(0);
+   cpu_exec(n);
 }
 
 __EXPORT void difftest_raise_intr(word_t NO) {
