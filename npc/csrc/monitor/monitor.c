@@ -1,5 +1,4 @@
 #include <common.h>
-#include <cstdint>
 #include <stdio.h>
 #include <string.h>
 
@@ -41,8 +40,6 @@ void init_monitor() {
 
 	init_mem();
 
-	init_disasm("riscv32");
-
     #ifdef CONFIG_DIFFTEST
     if(diff_so_file!=NULL)
     {
@@ -52,6 +49,8 @@ void init_monitor() {
     #endif
 
 	init_sdb();
+
+	init_disasm("riscv32");
 
     #ifdef CONFIG_FTRACE
     elf_read(elf_file);
