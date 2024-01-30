@@ -38,7 +38,7 @@ VM_USER_CFLAGS = \
 	-I/home/corgi/ysyx-workbench/npc/include \
 	-DIMG=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin\" \
 	-I/usr/lib/llvm-14/include \
-	-std=c++14 \
+	-std=c++17 \
 	-fno-exceptions \
 	-fPIE \
 	-DELF=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.elf\" \
