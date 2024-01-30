@@ -5,7 +5,6 @@
 #include <sched.h>
 #include <sdb.h>
 #include <stdio.h>
-#include "Vysyx_23060111_top___024root.h"
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
 #ifdef CONFIG_FTRACE
