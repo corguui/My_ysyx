@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <dlfcn.h>
 #include <cpu/cpu.h>
 #include <mem.h>
@@ -5,7 +6,7 @@
 
 #ifdef CONFIG_DIFFTEST
 void (*ref_difftest_memcpy)(uint32_t addr, void *buf, size_t n, bool direction) = NULL;
-void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
+void (*ref_difftest_regcpy)(void *dut,uint32_t*pc, bool direction) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
 void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 void (*ref_difftest_init)(int port) = NULL;
@@ -24,7 +25,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   handle = dlopen(ref_so_file, RTLD_LAZY);
   assert(handle);
 
-  ref_difftest_memcpy = dlsym(void*)(handle, "difftest_memcpy");
+  ref_difftest_memcpy = dlsym(handle, "difftest_memcpy");
   assert(ref_difftest_memcpy);
 
   ref_difftest_regcpy = dlsym(handle, "difftest_regcpy");
@@ -47,14 +48,14 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_init(port);
   ref_difftest_memcpy(0x80000000, guest_to_host(0x80000000), img_size, DIFFTEST_TO_REF);
   cpu_read_reg();
-  ref_difftest_regcpy(cpu.gpr,cpu.pc, DIFFTEST_TO_REF);
+  ref_difftest_regcpy(cpu.gpr,&cpu.pc, DIFFTEST_TO_REF);
 }
 
 void difftest_step(uint32_t pc, uint32_t npc) {
   NPC_CPU_state ref_r;
 
   if (skip_dut_nr_inst > 0) {
-    ref_difftest_regcpy(ref_r.gpr,ref_r.pc, DIFFTEST_TO_DUT);
+    ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
       skip_dut_nr_inst = 0;
       checkregs(&ref_r, npc);
@@ -68,13 +69,13 @@ void difftest_step(uint32_t pc, uint32_t npc) {
 
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
-    ref_difftest_regcpy(cpu.gpr,cpu.pc,DIFFTEST_TO_REF);
+    ref_difftest_regcpy(cpu.gpr,&cpu.pc,DIFFTEST_TO_REF);
     is_skip_ref = false;
     return;
   }
 
   ref_difftest_exec(1);
-  ref_difftest_regcpy(ref_r.gpr,ref_r.pc, DIFFTEST_TO_DUT);
+  ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
 
   checkregs(&ref_r, pc);
 }

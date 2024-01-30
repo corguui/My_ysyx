@@ -21,7 +21,7 @@
 #include <stdio.h>
 
 
-__EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
+__EXPORT void difftest_memcpy(uint32_t addr, void *buf, size_t n, bool direction) {
   if(direction==DIFFTEST_TO_DUT)
   {
     memcpy(buf,guest_to_host(addr), n );
@@ -36,11 +36,11 @@ __EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction)
   assert(0);
 }
 
-__EXPORT void difftest_regcpy(void *dut,uint32_t pc, bool direction) {
+__EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
   uint32_t* gpr=(uint32_t*) dut;
   if(direction==DIFFTEST_TO_DUT)
   {
-      pc=cpu.pc;
+      *pc=cpu.pc;
     for(int i = 0;i<32;i++ )
     {
       gpr[i]=cpu.gpr[i];
@@ -48,7 +48,7 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t pc, bool direction) {
   }
   else if(direction==DIFFTEST_TO_REF)
   {
-      cpu.pc=pc;
+      cpu.pc=*pc;
     for(int i = 0;i<32;i++ )
     {
       cpu.gpr[i]=gpr[i];
