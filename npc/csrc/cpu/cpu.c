@@ -27,7 +27,7 @@ void iringbuf_put_char(char *p);
 void print_ringbuf();
 #endif
 
-CPU cpu{};
+NPC_CPU_state cpu{};
 static bool g_print_step = false;  
 
 void cpu_read_reg()

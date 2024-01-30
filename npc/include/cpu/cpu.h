@@ -14,9 +14,9 @@
 typedef struct {
   uint32_t gpr[MUXDEF(CONFIG_RVE, 16, 32)];
   uint32_t pc;
-} CPU;
+} NPC_CPU_state;
 
-extern CPU cpu;
+extern NPC_CPU_state cpu;
 extern int main_time;    
 extern VerilatedContext* contextp;
 extern Vysyx_23060111_top *top;

@@ -20,11 +20,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "../../npc/include/cpu/cpu.h"
-/*
-#include "../../../../../usr/local/share/verilator/include/verilated.h"
-#include "../../npc/obj_dir/Vysyx_23060111_top___024root.h"
-#include "../../npc/obj_dir/Vysyx_23060111_top.h"
-*/
+
 
 __EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
   if(direction==DIFFTEST_TO_DUT)
@@ -42,7 +38,7 @@ __EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction)
 }
 
 __EXPORT void difftest_regcpy(void *dut, bool direction) {
-  CPU* p=(CPU*) dut;
+  NPC_CPU_state* p=(NPC_CPU_state*) dut;
   if(direction==DIFFTEST_TO_DUT)
   {
     p->pc=cpu.pc;
