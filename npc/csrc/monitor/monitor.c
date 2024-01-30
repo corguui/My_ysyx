@@ -33,6 +33,7 @@ int func_num=0;
 extern long img_size;
 int difftest_port =1234;
 char *diff_so_file=(char*)DIFF;
+void init_difftest(char *ref_so_file, long img_size, int port);
 #endif
 void init_monitor() {
 
@@ -43,6 +44,10 @@ void init_monitor() {
 	init_disasm("riscv32");
 
     #ifdef CONFIG_DIFFTEST
+    if(diff_so_file!=NULL)
+    {
+        Log(" succeed read The ref_so_file %s ", diff_so_file ); 
+    }
     init_difftest(diff_so_file,img_size,difftest_port);
     #endif
 

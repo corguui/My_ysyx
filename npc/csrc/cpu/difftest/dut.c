@@ -1,13 +1,14 @@
-#include <cstdint>
 #include <dlfcn.h>
 #include <cpu/cpu.h>
 #include <mem.h>
 #include <utils.h>
 
+#ifdef CONFIG_DIFFTEST
 void (*ref_difftest_memcpy)(uint32_t addr, void *buf, size_t n, bool direction) = NULL;
 void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
 void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
+void (*ref_difftest_init)(int port) = NULL;
 
 void isa_reg_display();
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -34,7 +35,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_raise_intr = dlsym(handle, "difftest_raise_intr");
   assert(ref_difftest_raise_intr);
 
-  void (*ref_difftest_init)(int) = dlsym(handle, "difftest_init");
+  ref_difftest_init = dlsym(handle, "difftest_init");
   assert(ref_difftest_init);
 
   Log("Differential testing: %s", ANSI_FMT("ON", ANSI_FG_GREEN));
@@ -50,8 +51,8 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
 
 static void checkregs(CPU_state *ref, uint32_t pc) {
   if (!isa_difftest_checkregs(ref, pc)) {
-    nemu_state.state = NEMU_ABORT;
-    nemu_state.halt_pc = pc;
+    npc_state.state = NCP_ABORT;
+    npc_state.halt_pc = pc;
     isa_reg_display();
   }
 }
@@ -81,7 +82,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     ref_difftest_regcpy(ref_r.gpr, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
       skip_dut_nr_inst = 0;
-      checkregs(ref_r.gpr, npc);
+      checkregs(&ref_r, npc);
       return;
     }
     skip_dut_nr_inst --;
@@ -98,7 +99,8 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   }
 
   ref_difftest_exec(1);
-  ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
+  ref_difftest_regcpy(ref_r.gpr,ref_r.pc, DIFFTEST_TO_DUT);
 
   checkregs(&ref_r, pc);
 }
+#endif
