@@ -49,32 +49,6 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_regcpy(cpu.gpr,cpu.pc, DIFFTEST_TO_REF);
 }
 
-static void checkregs(CPU_state *ref, uint32_t pc) {
-  if (!isa_difftest_checkregs(ref, pc)) {
-    npc_state.state = NCP_ABORT;
-    npc_state.halt_pc = pc;
-    isa_reg_display();
-  }
-}
-
-bool isa_difftest_checkregs(CPU_state *ref_r, uint32_t pc) {
-  int num=32;
-  for(int i=0;i<num;i++)
-  {
-  	if(ref_r->gpr[i]!=cpu.gpr[i])
-	{
-    pc=ref_r->pc;
-		return false;
-	}
-  }
-  if(ref_r->pc!=cpu.pc)
-  {
-    pc=ref_r->pc;
-    return false;
-  }
-  return true;
-}
-
 void difftest_step(uint32_t pc, uint32_t npc) {
   NPC_CPU_state ref_r;
 
@@ -103,4 +77,30 @@ void difftest_step(uint32_t pc, uint32_t npc) {
 
   checkregs(&ref_r, pc);
 }
+
+bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
+  int num=32;
+  for(int i=0;i<num;i++)
+  {
+  	if(ref_r->gpr[i]!=cpu.gpr[i])
+	{
+    pc=ref_r->pc;
+		return false;
+	}
+  }
+  if(ref_r->pc!=cpu.pc)
+  {
+    pc=ref_r->pc;
+    return false;
+  }
+  return true;
+}
+
+static void checkregs(NPC_CPU_state *ref, uint32_t pc) {
+  if (!isa_difftest_checkregs(ref, pc)) {
+    npc_state.state = NPC_ABORT;
+    isa_reg_display();
+  }
+}
+
 #endif
