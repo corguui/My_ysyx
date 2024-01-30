@@ -11,7 +11,7 @@ extern "C" void init_disasm(const char *triple);
 #ifdef CONFIG_FTRACE
 #include <elf.h>
 #include <monitor.h>
-char *elf_file =(char*)NPC_ELF;
+char *elf_file =(char*)ELF;
 void elf_read(char *elf_file);
 
 /*
@@ -28,15 +28,29 @@ int func_num=0;
 
 #endif
 
+#ifdef CONFIG_DIFFTEST
+extern long img_size;
+int difftest_port =1234;
+char *diff_so_file=(char*)DNPC_IFF;
+void init_difftest(char *ref_so_file, long img_size, int port);
+#endif
 void init_monitor() {
 
     init_log();
 
 	init_mem();
 
-	init_disasm("riscv32");
+    #ifdef CONFIG_DIFFTEST
+    if(diff_so_file!=NULL)
+    {
+        Log(" succeed read The ref_so_file %s ", diff_so_file ); 
+    }
+    init_difftest(diff_so_file,img_size,difftest_port);
+    #endif
 
 	init_sdb();
+
+	init_disasm("riscv32");
 
     #ifdef CONFIG_FTRACE
     elf_read(elf_file);
@@ -61,6 +75,9 @@ void elf_read(char *elf_file)
     {
         printf("failed to open the elf file!\n");
         exit(0);
+    }
+    else {
+    Log("read elf file: %s",elf_file ?elf_file:"stdout");
     }
 	
     Elf32_Ehdr edhr;

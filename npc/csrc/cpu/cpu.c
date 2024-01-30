@@ -2,9 +2,9 @@
 #include <cstdint>
 #include <cpu/decode.h>
 #include<common.h>
+#include <sched.h>
 #include <sdb.h>
 #include <stdio.h>
-#include "Vysyx_23060111_top___024root.h"
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
 #ifdef CONFIG_FTRACE
@@ -26,14 +26,39 @@ void iringbuf_put_char(char *p);
 void print_ringbuf();
 #endif
 
+NPC_CPU_state cpu{};
 static bool g_print_step = false;  
+
+void cpu_read_reg()
+{
+	cpu.pc=top->pc;
+	for(int i=0;i<32;i++)
+	{
+		cpu.gpr[i]=top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
+	}
+
+}
+void cpu_write_reg()
+{
+	top->pc=cpu.pc;
+	for(int i=0;i<32;i++)
+	{
+		top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]=cpu.gpr[i];
+	}
+}
+
+#ifdef CONFIG_DIFFTEST
+void difftest_step(uint32_t pc, uint32_t npc);
+#endif
 
 static void trace_and_difftest(Decode *_this) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
-  //IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  #ifdef CONFIG_DIFFTEST
+  difftest_step(_this->pc, top->rootp->ysyx_23060111_top__DOT__dnpc);
+  #endif
 
 //watchpoint
   if(check_wp()!=true)
@@ -240,4 +265,3 @@ void print_ringbuf(){
 
 }
 #endif
-
