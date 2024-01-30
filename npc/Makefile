@@ -13,7 +13,7 @@ LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17  -CFLAGS -fno-excep
 
 READLINE = -LDFLAGS -lreadline
 
-LIB_PATH = -LDFLAGS -L $(HOME)/ysyx-workbench/nemu/build/
+LIB_PATH = -LDFLAGS -L$(HOME)/ysyx-workbench/nemu/build/
 NPC_LIB =  -LDFLAGS -lriscv32-nemu-interpreter-so
 
 
