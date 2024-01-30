@@ -41,7 +41,6 @@ VM_USER_CFLAGS = \
 	-fno-exceptions \
 	-fPIE \
 	-DIMG=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin\" \
-	-DELF=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.elf\" \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
