@@ -47,7 +47,7 @@ VM_USER_CFLAGS = \
 VM_USER_LDLIBS = \
 	-lreadline \
 	-lLLVM-14 \
-	-L//home/corgi/ysyx-workbench/nemu/build/ \
+	-L/home/corgi/ysyx-workbench/nemu/build/ \
 	-lriscv32-nemu-interpreter-so \
 
 # User .cpp files (from .cpp's on Verilator command line)
