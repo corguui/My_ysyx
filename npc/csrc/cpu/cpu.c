@@ -56,9 +56,7 @@ static void trace_and_difftest(Decode *_this) {
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
-  #ifdef CONFIG_DIFFTEST
-  difftest_step(_this->pc, top->rootp->ysyx_23060111_top__DOT__dnpc);
-  #endif
+  //IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
 //watchpoint
   if(check_wp()!=true)

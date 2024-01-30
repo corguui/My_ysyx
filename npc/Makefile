@@ -17,6 +17,7 @@ LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
 LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
 NPC_LIB =  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so -CFLAGS -DNPC_DIFF='\"$(LIB)\"'
 
+
 INC_PATH = $(HOME)/ysyx-workbench/npc/include
 NPC_INC = -CFLAGS -I$(INC_PATH) 
 NPC_DEF = -CFLAGS -DNPC_IMG='\"$(IMG)\"' -CFLAGS -DNPC_ELF='\"$(ELF)\"'
@@ -27,8 +28,7 @@ all:
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF) $(READLINE) $(LLVM) $(NPC_LIB)
-	export LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so
+	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF)  $(READLINE) $(LLVM) $(NPC_LIB)
 	export LD_LIBRARY_PATH=$(LIB_PATH)
 	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 	@ctags -R -u
