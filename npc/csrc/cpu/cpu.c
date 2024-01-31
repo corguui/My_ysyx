@@ -119,12 +119,10 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-  #ifdef CONFIG_ITRACE
-  //itrace the wrong instruct
-  iringbuf_put_char(s->logbuf);
-  #endif
   //p[0] = '\0'; // the upstream llvm does not support loongarch32r
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,s->pc, (uint8_t *)&s->inst, ilen);
+  //itrace the wrong instruct
+  iringbuf_put_char(s->logbuf);
 #endif
 
 #ifdef CONFIG_FTRACE
