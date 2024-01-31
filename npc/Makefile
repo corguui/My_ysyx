@@ -25,6 +25,7 @@ NPC_GDB = -CFLAGS -g
 
 all:
 	@echo "Write this Makefile by your self."
+
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
@@ -37,9 +38,8 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
 	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF) $(READLINE) $(LLVM) $(NPC_GDB) $(NPC_LIB)
-	export LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so 
 	export LD_LIBRARY_PATH=$(LIB_PATH)
-	gdb obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+	gdb -ex 'set env LD_PRELOAD /usr/lib/gcc/x86_64-linux-gnu/11/libasan.so' obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 	@ctags -R -u
 
 wave:$(Wavefile)

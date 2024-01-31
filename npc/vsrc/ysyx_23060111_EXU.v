@@ -56,7 +56,7 @@ module ysyx_23060111_EXU(
 	//jalr   JR
 	4'b0101:begin
 	     wdata=snpc;
-	     dnpc=imm;
+	     dnpc=imm+rout;
 	     end
 	default:begin 
 	     wdata=32'h00000000;
