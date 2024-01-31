@@ -37,11 +37,11 @@ void init_difftest(char *ref_so_file, long img_size, int port);
 #endif
 void init_monitor() {
 
-    cpu_init();
-
     init_log();
 
 	init_mem();
+
+    cpu_init();
 
     #ifdef CONFIG_DIFFTEST
     if(diff_so_file!=NULL)
