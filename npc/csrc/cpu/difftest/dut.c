@@ -78,9 +78,8 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   ref_difftest_exec(1);
   ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
   printf("nemu-ref.pc%x\n",ref_r.pc);
-  printf("npc-dnpc%x\n",npc);
 
-  checkregs(&ref_r, npc);
+  checkregs(&ref_r, pc);
 }
 
 bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
@@ -89,15 +88,15 @@ bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
   {
   	if(ref_r->gpr[i]!=cpu.gpr[i])
 	{
-    printf("npc.gpr:%x\nnmeu.gpr:%x\n",cpu.gpr[i],ref_r->gpr[i]);
-    cpu.pc=ref_r->pc;
+    printf("npc:%x\nnmeu:%x\n",cpu.gpr[i],ref_r->gpr[i]);
+    pc=ref_r->pc;
 		return false;
 	}
   }
-  if(ref_r->pc!=pc)
+  if(ref_r->pc!=cpu.pc)
   {
     printf("npcpc:%x\nnemupc%x\n",cpu.pc,ref_r->pc);
-    cpu.pc=ref_r->pc;
+    pc=ref_r->pc;
     return false;
   }
   return true;
