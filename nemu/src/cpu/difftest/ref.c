@@ -33,6 +33,7 @@ __EXPORT void difftest_memcpy(uint32_t addr, void *buf, size_t n, bool direction
   else
   printf("direction error\n");
   printf("please type DIFFTEST_TO_REF or DIFFTEST_TO_DUT");
+  assert(0);
 }
 
 __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
@@ -71,5 +72,5 @@ __EXPORT void difftest_init(int port) {
   void init_mem();
   init_mem();
   /* Perform ISA dependent initialization. */
-  init_isa();
+  //init_isa();
 }
