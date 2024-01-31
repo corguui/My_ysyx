@@ -26,14 +26,13 @@ __EXPORT void difftest_memcpy(uint32_t addr, void *buf, size_t n, bool direction
   {
     memcpy(buf,guest_to_host(addr), n );
   }
-  else if(direction==1)
+  else if(direction==DIFFTEST_TO_REF)
   {
     memcpy(guest_to_host(addr),buf, n );
   }
   else
   printf("direction error\n");
   printf("please type DIFFTEST_TO_REF or DIFFTEST_TO_DUT");
-  assert(0);
 }
 
 __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
