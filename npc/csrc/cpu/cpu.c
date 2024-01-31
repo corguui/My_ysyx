@@ -5,7 +5,6 @@
 #include <sched.h>
 #include <sdb.h>
 #include <stdio.h>
-extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
 #ifdef CONFIG_FTRACE
 #include <monitor.h>
@@ -18,6 +17,7 @@ int space_flat=0;
 
 //ringbuf val
 #ifdef CONFIG_ITRACE
+extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 #define BUF_LEN 18
 #define NEXT_POS(x) ((x+1)%BUF_LEN)
 char ringbuf[BUF_LEN][128];
@@ -58,7 +58,6 @@ static void trace_and_difftest(Decode *_this) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
   difftest_step(_this->pc, top->rootp->ysyx_23060111_top__DOT__dnpc);
-  printf("----\n");
   #endif
 
 //watchpoint
