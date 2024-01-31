@@ -43,6 +43,13 @@ void init_monitor() {
 
     cpu_init();
 
+    #ifdef CONFIG_DIFFTEST
+    if(diff_so_file!=NULL)
+    {
+        Log(" succeed read The ref_so_file %s ", diff_so_file ); 
+    }
+    init_difftest(diff_so_file,img_size,difftest_port);
+    #endif
 
 	init_sdb();
 
@@ -50,14 +57,6 @@ void init_monitor() {
 
     #ifdef CONFIG_FTRACE
     elf_read(elf_file);
-    #endif
-
-    #ifdef CONFIG_DIFFTEST
-    if(diff_so_file!=NULL)
-    {
-        Log(" succeed read The ref_so_file %s ", diff_so_file ); 
-    }
-    init_difftest(diff_so_file,img_size,difftest_port);
     #endif
 }
 
