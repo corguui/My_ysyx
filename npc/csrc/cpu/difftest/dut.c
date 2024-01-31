@@ -79,7 +79,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
   printf("nemu-ref.pc%x\n",ref_r.pc);
 
-  checkregs(&ref_r, npc);
+  checkregs(&ref_r, pc);
 }
 
 bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
