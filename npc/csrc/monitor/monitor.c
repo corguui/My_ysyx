@@ -57,7 +57,6 @@ void init_monitor() {
     #ifdef CONFIG_FTRACE
     elf_read(elf_file);
     #endif
-
     cpu_init();
 }
 

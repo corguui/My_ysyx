@@ -25,11 +25,8 @@ int main(int argc ,char** argv, char** env)
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
 
-
 	//init_monitor
 	init_monitor();
-
-	//init cpu
 
 	sdb_mainloop();
 	delete top;
