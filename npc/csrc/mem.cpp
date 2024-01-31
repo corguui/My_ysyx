@@ -16,7 +16,7 @@ long img_size;
 void init_mem()
 {
 
-	img_size=load_img();
+	img_size=load_tepmg();
 
 	//memcpy(pmem,img,sizeof(img));
 	
