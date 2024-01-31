@@ -37,9 +37,9 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
 	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF) $(READLINE) $(LLVM) $(NPC_GDB) $(NPC_LIB)
-	gdb obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
-	export LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so
+	export LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so 
 	export LD_LIBRARY_PATH=$(LIB_PATH)
+	gdb obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 	@ctags -R -u
 
 wave:$(Wavefile)
