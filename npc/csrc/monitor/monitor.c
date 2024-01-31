@@ -41,7 +41,6 @@ void init_monitor() {
 
 	init_mem();
 
-    cpu_init();
 
     #ifdef CONFIG_DIFFTEST
     if(diff_so_file!=NULL)
@@ -58,6 +57,8 @@ void init_monitor() {
     #ifdef CONFIG_FTRACE
     elf_read(elf_file);
     #endif
+
+    cpu_init();
 }
 
 //elf_file handle
