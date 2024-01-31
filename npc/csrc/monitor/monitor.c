@@ -6,8 +6,10 @@ void init_mem();
 void init_log();
 void init_sdb();
 void cpu_init();
-extern "C" void init_disasm(const char *triple);
 
+#ifdef CONFIG_ITRACE
+extern "C" void init_disasm(const char *triple);
+#endif
 
 #ifdef CONFIG_FTRACE
 #include <elf.h>
@@ -53,7 +55,9 @@ void init_monitor() {
 
 	init_sdb();
 
+    #ifdef CONFIG_ITRACE
 	init_disasm("riscv32");
+    #endif
 
     #ifdef CONFIG_FTRACE
     elf_read(elf_file);
