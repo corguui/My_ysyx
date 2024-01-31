@@ -26,11 +26,11 @@ int main(int argc ,char** argv, char** env)
 	tfp->open("wave.vcd");
 
 
-	//init_monitor
-	init_monitor();
-
 	//init cpu
 	cpu_init();
+
+	//init_monitor
+	init_monitor();
 
 	sdb_mainloop();
 	delete top;
