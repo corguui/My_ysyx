@@ -30,13 +30,6 @@ __EXPORT void difftest_memcpy(uint32_t addr, void *buf, size_t n, bool direction
   else if(direction==DIFFTEST_TO_REF)
   {
     memcpy(guest_to_host(addr),NPC_buf, n );
-  uint32_t b=0x80000000;
-	int i=0;
-	for(i=0;i<(n-1)/4;i++)
-	{
-		printf("%x\n",paddr_read(b,4));
-		b=b+0x4;
-	}
   }
   else
   {
