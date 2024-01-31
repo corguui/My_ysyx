@@ -15,6 +15,7 @@ INC_PATH = $(HOME)/ysyx-workbench/npc/include
 VLTFLAGS += -CFLAGS -I$(INC_PATH) 
 
 NPC_SIM_RUN = ./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+NPC_GDB_RUN = obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 
 ELF =$(IMG:.bin=.elf)
 VLTFLAGS +=  -CFLAGS -DNPC_ELF='\"$(ELF)\"'
@@ -30,8 +31,10 @@ LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
 VLTFLAGS +=  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so\
  -CFLAGS -DNPC_DIFF='\"$(LIB)\"'
 NPC_SIM_RUN := LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so $(NPC_SIM_RUN)
+NPC_GDB_RUN := -ex 'set env LD_PRELOAD /usr/lib/gcc/x86_64-linux-gnu/11/libasan.so' 
 
 NPC_GDB = -CFLAGS -g 
+
 
 
 all:
@@ -42,14 +45,11 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	@echo "Write this Makefile by your self."
 	verilator $(VLTFLAGS) 
 	$(NPC_SIM_RUN)	
-
-
 	@ctags -R -u
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
 	verilator $(VLTFLAGS) $(NPC_GDB) 
-	export LD_LIBRARY_PATH=$(LIB_PATH)
-	gdb -ex 'set env LD_PRELOAD /usr/lib/gcc/x86_64-linux-gnu/11/libasan.so' obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+	gdb $(NPC_GDB_RUN)
 	@ctags -R -u
 
 wave:$(Wavefile)
