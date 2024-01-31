@@ -30,7 +30,6 @@ int main(int argc ,char** argv, char** env)
 	init_monitor();
 
 	//init cpu
-	
 
 	sdb_mainloop();
 	delete top;

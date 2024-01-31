@@ -1,4 +1,3 @@
-#include "cpu/cpu.h"
 #include <common.h>
 #include <stdio.h>
 #include <string.h>
@@ -40,9 +39,9 @@ void init_monitor() {
 
     init_log();
 
-	init_mem();
-
     cpu_init();
+
+	init_mem();
 
     #ifdef CONFIG_DIFFTEST
     if(diff_so_file!=NULL)
