@@ -78,6 +78,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   ref_difftest_exec(1);
   ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
   printf("nemu-ref.pc%x\n",ref_r.pc);
+  printf("npc-dnpc%x\n",npc);
 
   checkregs(&ref_r, npc);
 }
