@@ -53,7 +53,6 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
 
 void difftest_step(uint32_t pc, uint32_t npc) {
   NPC_CPU_state ref_r;
-  printf("%x\n%x\n",pc,npc);
 
   if (skip_dut_nr_inst > 0) {
     ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
@@ -80,7 +79,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
   printf("nemu-ref.pc%x\n",ref_r.pc);
 
-  checkregs(&ref_r, pc);
+  checkregs(&ref_r, npc);
 }
 
 bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
