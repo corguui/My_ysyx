@@ -14,6 +14,7 @@ VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
 INC_PATH = $(HOME)/ysyx-workbench/npc/include
 VLTFLAGS += -CFLAGS -I$(INC_PATH) 
 
+NPC_SIM_RUN = ./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 
 ELF =$(IMG:.bin=.elf)
 VLTFLAGS +=  -CFLAGS -DNPC_ELF='\"$(ELF)\"'
@@ -28,9 +29,10 @@ LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
 LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
 VLTFLAGS +=  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so\
  -CFLAGS -DNPC_DIFF='\"$(LIB)\"'
-
+NPC_SIM_RUN := LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so $(NPC_SIM_RUN)
 
 NPC_GDB = -CFLAGS -g 
+
 
 all:
 	@echo "Write this Makefile by your self."
@@ -39,13 +41,13 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 	verilator $(VLTFLAGS) 
-	LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so ./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+	$(NPC_SIM_RUN)	
 
 
 	@ctags -R -u
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
-	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF) $(READLINE) $(LLVM) $(NPC_GDB) $(NPC_LIB)
+	verilator $(VLTFLAGS) $(NPC_GDB) 
 	export LD_LIBRARY_PATH=$(LIB_PATH)
 	gdb -ex 'set env LD_PRELOAD /usr/lib/gcc/x86_64-linux-gnu/11/libasan.so' obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 	@ctags -R -u
