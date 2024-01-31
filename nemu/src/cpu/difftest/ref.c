@@ -52,9 +52,11 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
   else if(direction==DIFFTEST_TO_REF)
   {
       cpu.pc=*pc;
+      printf("%x\n",cpu.pc);
     for(int i = 0;i<32;i++ )
     {
       cpu.gpr[i]=gpr[i];
+      printf("%x\n",cpu.gpr[i]);
     }
   }
   else
