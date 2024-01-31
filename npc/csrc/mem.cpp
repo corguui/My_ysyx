@@ -65,7 +65,7 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
    
 
 }
-uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
+uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
 
 static long load_img(){
    char *img_file=(char*)NPC_IMG;
@@ -81,7 +81,7 @@ static long load_img(){
    long size = ftell(fp);
    Log("The image is %s, size = %ld", img_file, size); 
    fseek(fp, 0, SEEK_SET);
-   int ret = fread(guest_to_host(0x80000000), size, 1, fp);
+   int ret = fread(NPC_guest_to_host(0x80000000), size, 1, fp);
    assert(ret == 1);
                
    fclose(fp); 
