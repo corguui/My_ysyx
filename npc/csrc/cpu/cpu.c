@@ -57,8 +57,6 @@ static void trace_and_difftest(Decode *_this) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
-  printf("%x\n",_this->pc);
-  printf("%x\n",top->rootp->ysyx_23060111_top__DOT__dnpc);
   difftest_step(_this->pc, top->rootp->ysyx_23060111_top__DOT__dnpc);
   #endif
 

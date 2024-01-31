@@ -38,6 +38,7 @@ static void restart() {
 void init_isa() {
   /* Load built-in image. */
   memcpy(guest_to_host(RESET_VECTOR), img, sizeof(img));
+  Log("init the isa");
 
   /* Initialize this virtual computer system. */
   restart();
