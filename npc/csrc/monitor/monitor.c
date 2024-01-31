@@ -7,7 +7,9 @@ void init_log();
 void init_sdb();
 void cpu_init();
 
+#ifdef CONFIG_ITRACE
 extern "C" void init_disasm(const char *triple);
+#endif
 
 #ifdef CONFIG_FTRACE
 #include <elf.h>
