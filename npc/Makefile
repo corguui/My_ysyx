@@ -8,7 +8,7 @@ TOPname=ysyx_23060111_top
 
 NPC_IMG ?= 
 NPC_ELF =$(IMG:.bin=.elf)
-Cfile += csrc/utils/disasm.cc
+#Cfile += csrc/utils/disasm.cc
 NPC_LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17  -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
 
 READLINE = -LDFLAGS -lreadline
