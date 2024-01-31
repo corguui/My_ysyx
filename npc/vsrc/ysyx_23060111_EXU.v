@@ -35,7 +35,7 @@ module ysyx_23060111_EXU(
 	case(type_i)
 	//auipc  UPC
 	4'b0001:begin
- 	     wdata=pc+imm;
+ 	     wdata=pc;
 	     dnpc=snpc;	
 	     end
 	//lui    U
@@ -51,7 +51,7 @@ module ysyx_23060111_EXU(
 	//addi   I
 	4'b0100:begin
 	     wdata=rout+imm;
-	     dnpc=snpc+imm;
+	     dnpc=snpc;
 	     end
 	//jalr   JR
 	4'b0101:begin
