@@ -89,7 +89,7 @@ bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
   {
   	if(ref_r->gpr[i]!=cpu.gpr[i])
 	{
-    printf("npc:%x\nnmeu:%x\n",cpu.gpr[i],ref_r->gpr[i]);
+    printf("npc.gpr:%x\nnmeu.gpr:%x\n",cpu.gpr[i],ref_r->gpr[i]);
     cpu.pc=ref_r->pc;
 		return false;
 	}
