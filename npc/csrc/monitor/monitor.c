@@ -1,3 +1,4 @@
+#include "cpu/cpu.h"
 #include <common.h>
 #include <stdio.h>
 #include <string.h>
@@ -5,6 +6,7 @@
 void init_mem();
 void init_log();
 void init_sdb();
+void cpu_init();
 extern "C" void init_disasm(const char *triple);
 
 
@@ -39,6 +41,8 @@ void init_monitor() {
     init_log();
 
 	init_mem();
+
+    cpu_init();
 
     #ifdef CONFIG_DIFFTEST
     if(diff_so_file!=NULL)
