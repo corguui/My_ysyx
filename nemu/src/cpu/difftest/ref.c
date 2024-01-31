@@ -26,7 +26,7 @@ __EXPORT void difftest_memcpy(uint32_t addr, void *buf, size_t n, bool direction
   {
     memcpy(buf,guest_to_host(addr), n );
   }
-  else if(direction==DIFFTEST_TO_REF)
+  else if(direction==1)
   {
     memcpy(guest_to_host(addr),buf, n );
   }
