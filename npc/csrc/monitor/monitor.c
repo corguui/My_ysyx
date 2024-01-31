@@ -37,9 +37,9 @@ void init_difftest(char *ref_so_file, long img_size, int port);
 #endif
 void init_monitor() {
 
-    init_log();
-
     cpu_init();
+
+    init_log();
 
 	init_mem();
 
