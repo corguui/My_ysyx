@@ -50,7 +50,7 @@ module ysyx_23060111_EXU(
              end
 	//addi   I
 	4'b0100:begin
-	     wdata=snpc;
+	     wdata=rout+imm;
 	     dnpc=snpc+imm;
 	     end
 	//jalr   JR
