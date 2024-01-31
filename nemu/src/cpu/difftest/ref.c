@@ -13,7 +13,6 @@
 * See the Mulan PSL v2 for more details.
 ***************************************************************************************/
 
-#include <cstdint>
 #include <isa.h>
 #include <cpu/cpu.h>
 #include <difftest-def.h>
@@ -25,7 +24,7 @@
 __EXPORT void difftest_memcpy(uint32_t addr, void *buf, size_t n, bool direction) {
   printf("%x\n",addr);
   printf("%d\n",direction);
-  printf("%d\n",n);
+  printf("%ld\n",n);
   if(direction==DIFFTEST_TO_DUT)
   {
     memcpy(buf,guest_to_host(addr), n );
@@ -61,9 +60,11 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
     }
   }
   else
+  {
   printf("direction error\n");
   printf("please type DIFFTEST_TO_REF or DIFFTEST_TO_DUT");
   assert(0);
+  }
 }
 
 __EXPORT void difftest_exec(uint64_t n) {
