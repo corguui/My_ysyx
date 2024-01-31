@@ -57,7 +57,6 @@ VM_USER_CLASSES = \
 	sdb \
 	watchpoint \
 	reg \
-	disasm \
 	log \
 	logo \
 	state \
@@ -98,8 +97,6 @@ sdb.o: csrc/monitor/sdb/sdb.c
 watchpoint.o: csrc/monitor/sdb/watchpoint.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 reg.o: csrc/reg.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-disasm.o: csrc/utils/disasm.cc
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 log.o: csrc/utils/log.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
