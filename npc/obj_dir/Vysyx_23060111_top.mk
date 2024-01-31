@@ -42,7 +42,6 @@ VM_USER_CFLAGS = \
 	-std=c++17 \
 	-fno-exceptions \
 	-fPIE \
-	-g \
 	-L/home/corgi/ysyx-workbench/nemu/build/ \
 	-lriscv32-nemu-interpreter-so \
 	-DNPC_DIFF=\"/home/corgi/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so\" \

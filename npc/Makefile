@@ -5,26 +5,31 @@ Cfile +=$(shell find -L ./csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
 TOPfile=vsrc/ysyx_23060111_top.v
 TOPname=ysyx_23060111_top
-VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
- $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^)
-
-
 
 IMG ?= 
-ELF =$(IMG:.bin=.elf)
-Cfile += csrc/utils/disasm.cc
-LLVM = -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17  -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
 
-READLINE = -LDFLAGS -lreadline
+VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
+ $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -DNPC_IMG='\"$(IMG)\"'
+
+INC_PATH = $(HOME)/ysyx-workbench/npc/include
+VLTFLAGS += -CFLAGS -I$(INC_PATH) 
+
+
+ELF =$(IMG:.bin=.elf)
+VLTFLAGS +=  -CFLAGS -DNPC_ELF='\"$(ELF)\"'
+
+
+Cfile += csrc/utils/disasm.cc
+VLTFLAGS += -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17\
+  -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
+VLTFLAGS += -LDFLAGS -lreadline
 
 LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
 LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
-NPC_LIB =  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so -CFLAGS -DNPC_DIFF='\"$(LIB)\"'
+VLTFLAGS +=  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so\
+ -CFLAGS -DNPC_DIFF='\"$(LIB)\"'
 
 
-INC_PATH = $(HOME)/ysyx-workbench/npc/include
-NPC_INC = -CFLAGS -I$(INC_PATH) 
-NPC_DEF = -CFLAGS -DNPC_IMG='\"$(IMG)\"' -CFLAGS -DNPC_ELF='\"$(ELF)\"'
 NPC_GDB = -CFLAGS -g 
 
 all:
@@ -33,7 +38,7 @@ all:
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator $(VLTFLAGS) $(NPC_INC) $(NPC_DEF)  $(READLINE) $(LLVM) $(NPC_LIB)
+	verilator $(VLTFLAGS) 
 	LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so ./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 
 
