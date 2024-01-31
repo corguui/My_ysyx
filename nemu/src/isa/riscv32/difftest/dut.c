@@ -27,7 +27,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 		return false;
 	}
   }
-  if(ref_r->pc!=pc)
+  if(ref_r->pc!=cpu.pc)
   {
     printf("nemu-pc0x%x\nspik-pc0x%x\n",pc,ref_r->pc);
     return false;
