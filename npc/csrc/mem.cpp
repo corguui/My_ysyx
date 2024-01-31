@@ -28,7 +28,7 @@ void init_mem()
 	{
 		printf("%x\n",pmem_read(b,4));
 		b=b+0x4;
-	}
+	i 
 	*/
 }
 

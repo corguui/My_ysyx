@@ -5,6 +5,7 @@
 #include <sched.h>
 #include <sdb.h>
 #include <stdio.h>
+extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 
 #ifdef CONFIG_FTRACE
 #include <monitor.h>
@@ -17,7 +18,6 @@ int space_flat=0;
 
 //ringbuf val
 #ifdef CONFIG_ITRACE
-extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
 #define BUF_LEN 18
 #define NEXT_POS(x) ((x+1)%BUF_LEN)
 char ringbuf[BUF_LEN][128];
