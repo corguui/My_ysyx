@@ -5,6 +5,10 @@ Cfile +=$(shell find -L ./csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
 TOPfile=vsrc/ysyx_23060111_top.v
 TOPname=ysyx_23060111_top
+VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
+ $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^)
+
+
 
 IMG ?= 
 ELF =$(IMG:.bin=.elf)
@@ -29,8 +33,7 @@ all:
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF)  $(READLINE) $(LLVM) $(NPC_LIB)
-	export LD_LIBRARY_PATH=$(LIB_PATH)
+	verilator $(VLTFLAGS) $(NPC_INC) $(NPC_DEF)  $(READLINE) $(LLVM) $(NPC_LIB)
 	LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so ./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 
 
