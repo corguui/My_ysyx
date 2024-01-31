@@ -22,13 +22,14 @@
 
 
 __EXPORT void difftest_memcpy(uint32_t addr, void *buf, size_t n, bool direction) {
+  uint8_t*NPC_buf=(uint8_t*)buf;
   if(direction==DIFFTEST_TO_DUT)
   {
-    memcpy(buf,guest_to_host(addr), n );
+    memcpy(NPC_buf,guest_to_host(addr), n );
   }
   else if(direction==DIFFTEST_TO_REF)
   {
-    memcpy(guest_to_host(addr),buf, n );
+    memcpy(guest_to_host(addr),NPC_buf, n );
   }
   else
   {

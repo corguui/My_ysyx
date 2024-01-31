@@ -52,7 +52,6 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
 }
 
 void difftest_step(uint32_t pc, uint32_t npc) {
-  printf("%x\n%x\n",pc,npc);
   NPC_CPU_state ref_r;
 
   if (skip_dut_nr_inst > 0) {
