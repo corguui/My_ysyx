@@ -53,9 +53,11 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
 
 void difftest_step(uint32_t pc, uint32_t npc) {
   NPC_CPU_state ref_r;
+  printf("%x\n%x\n",pc,npc);
 
   if (skip_dut_nr_inst > 0) {
     ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
+    printf("%x\n",ref_r.pc);
     if (ref_r.pc == npc) {
       skip_dut_nr_inst = 0;
       checkregs(&ref_r, npc);
@@ -86,12 +88,14 @@ bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
   {
   	if(ref_r->gpr[i]!=cpu.gpr[i])
 	{
+    printf("npc:%x\nnmeu:%x\n",cpu.gpr[i],ref_r->gpr[i]);
     pc=ref_r->pc;
 		return false;
 	}
   }
   if(ref_r->pc!=cpu.pc)
   {
+    printf("npc:%x\nnemu%x\n",cpu.pc,ref_r->pc);
     pc=ref_r->pc;
     return false;
   }
