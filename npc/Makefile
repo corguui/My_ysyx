@@ -30,7 +30,9 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	@echo "Write this Makefile by your self."
 	verilator -Wall --cc --trace --exe --build -Wno-lint -top $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) $(NPC_INC) $(NPC_DEF)  $(READLINE) $(LLVM) $(NPC_LIB)
 	export LD_LIBRARY_PATH=$(LIB_PATH)
-	./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+	LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so ./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
+
+
 	@ctags -R -u
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
