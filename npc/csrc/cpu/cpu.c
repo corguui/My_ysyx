@@ -197,7 +197,6 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 	}
  }
 #endif
-s->pc=top->pc;
 }
 
 static void execute(uint64_t n)
