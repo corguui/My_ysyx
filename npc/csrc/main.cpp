@@ -27,10 +27,11 @@ int main(int argc ,char** argv, char** env)
 
 
 	//init cpu
-	cpu_init();
 
 	//init_monitor
 	init_monitor();
+
+	cpu_init();
 
 	sdb_mainloop();
 	delete top;
