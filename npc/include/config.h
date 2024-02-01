@@ -10,6 +10,8 @@ enum {npc_batch,npc_log};
 #define ITRACE_COND "true"
 #define __GUEST_ISA__ "riscv32" 
 #define CONFIG_FTRACE 1
+#define CONFIG_FTRACE_COND "true"
+#define FTRACE_COND "ture"
 #define CONFIG_DIFFTEST 1
 #endif
 
