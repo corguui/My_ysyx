@@ -55,7 +55,7 @@ uint32_t pmem_read(uint32_t &ad,int len)
 
 extern "C" int vlg_pmem_read(int ad)
 {
-	uint32_t data=pmem_read(&ad, 4);
+	uint32_t data=pmem_read((uint32_t)&ad, 4);
 	return (int) data; 
 }
 
