@@ -39,7 +39,7 @@ uint32_t pc_read(uint32_t &pc)
 	uint32_t val=pmem_read(pc,4);
 	return val;
 }
-uint32_t pmem_read(uint32_t &ad,int len)
+int pmem_read(int &ad,int len)
 {
         uint8_t *addr =pmem+ad-0x80000000;
 	switch(len){
@@ -52,7 +52,7 @@ uint32_t pmem_read(uint32_t &ad,int len)
 }
 
 
-void pmem_write(uint32_t &ad, uint32_t data, int len)
+void pmem_write(int &ad, int data, int len)
 {
   	uint8_t *addr =pmem+ad-0x80000000;
   	switch (len) {
