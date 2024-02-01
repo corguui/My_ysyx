@@ -25,7 +25,7 @@ VLTFLAGS += -CFLAGS -DNPC_LOG='\"$(NPC_LOG)\"'
 
 #ftrace
 ELF =$(IMG:.bin=.elf)
-#VLTFLAGS +=  -CFLAGS -DNPC_ELF='\"$(ELF)\"'
+VLTFLAGS +=  -CFLAGS -DNPC_ELF='\"$(ELF)\"'
 
 #itrace
 Cfile += csrc/utils/disasm.cc
@@ -52,8 +52,8 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 	@echo "$(ELF)"
-	verilator $(VLTFLAGS)
-	$(NPC_SIM_RUN) -DNPC_ELF="$(ELF)"
+	verilator $(VLTFLAGS) 
+	$(NPC_SIM_RUN) $(IMG)	
 	@ctags -R -u
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
