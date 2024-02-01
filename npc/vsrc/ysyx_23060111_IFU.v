@@ -4,7 +4,7 @@ module ysyx_23060111_IFU(
     input [31:0] pc,
     output reg [31:0] inst
 );
-    always@(pc) begin
+    always@(negedge clk) begin
             inst=vlg_pmem_read(pc);
     end
 
