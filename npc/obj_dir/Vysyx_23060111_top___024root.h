@@ -38,11 +38,13 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     IData/*31:0*/ __VactIterCount;
     QData/*36:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1;
     QData/*36:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__lut_out;
+    QData/*32:0*/ __VdfgTmp_hc90cd392__0;
+    QData/*32:0*/ __VdfgTmp_h327dca1e__0;
     VlUnpacked<IData/*31:0*/, 32> ysyx_23060111_top__DOT__reg___0240__DOT__rf;
     VlUnpacked<QData/*43:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list;
     VlUnpacked<CData/*6:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list;
     VlUnpacked<QData/*36:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list;
-    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<4> __VactTriggered;
     VlTriggerVec<4> __VnbaTriggered;
