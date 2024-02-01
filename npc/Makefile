@@ -47,6 +47,7 @@ NPC_GDB = -CFLAGS -g
 
 
 CONFIG: ./include/config.h
+	@touch config.mk
 	@sed 's/^#define \(.*) \(.*)/\1=\2/' config.h >./config.mk
 all:
 	@echo "Write this Makefile by your self."
