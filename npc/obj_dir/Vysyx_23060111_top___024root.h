@@ -33,7 +33,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     IData/*31:0*/ ysyx_23060111_top__DOT__rout;
     VlWide<10>/*307:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4;
     IData/*31:0*/ __VstlIterCount;
-    IData/*31:0*/ __Vtrigrprev__TOP__pc;
     IData/*31:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst;
     IData/*31:0*/ __VactIterCount;
     QData/*36:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1;

@@ -24,7 +24,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial(Vysyx_23060111_top
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
-    vlSelf->__Vtrigrprev__TOP__pc = vlSelf->pc;
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst 
         = vlSelf->ysyx_23060111_top__DOT__inst;
@@ -324,7 +323,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__act(Vysyx_230601
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VactTriggered.at(0U)) {
-        VL_DBG_MSGF("         'act' region trigger index 0 is active: @([changed] pc)\n");
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(negedge clk)\n");
     }
     if (vlSelf->__VactTriggered.at(1U)) {
         VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge clk)\n");
@@ -348,7 +347,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__nba(Vysyx_230601
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VnbaTriggered.at(0U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @([changed] pc)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(negedge clk)\n");
     }
     if (vlSelf->__VnbaTriggered.at(1U)) {
         VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge clk)\n");
@@ -394,7 +393,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___ctor_var_reset(Vysyx_23060111_t
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit = VL_RAND_RESET_I(1);
     vlSelf->__VdfgTmp_hc90cd392__0 = 0;
     vlSelf->__VdfgTmp_h327dca1e__0 = 0;
-    vlSelf->__Vtrigrprev__TOP__pc = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigrprev__TOP__clk = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__type_i = VL_RAND_RESET_I(4);
