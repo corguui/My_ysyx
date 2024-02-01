@@ -68,7 +68,9 @@ void init_monitor() {
 
 	init_sdb();
 
+    #if defined(CONFIG_FTRACE) or defined(CONFIG_ITRACE)
 	init_disasm("riscv32");
+    #endif
 
     #ifdef CONFIG_FTRACE
     elf_read(elf_file);
