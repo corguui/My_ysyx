@@ -81,5 +81,4 @@ clean:
 	rm -rf obj_dir wave.vcd
 	rm -rf $(BUILD_DIR)
 	rm -rf $(NPC_LOG)
-	rm -rf ./config.mk
 include ../Makefile
