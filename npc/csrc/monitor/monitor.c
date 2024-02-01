@@ -61,10 +61,10 @@ void parse_args(int argc,char **argv)
     elf_flat=1;
     #endif
     #ifdef CONFIG_DIFFTEST
-    if(elf_file==1)
-    diff_so_file=argv[4]
+    if(elf_flat==1)
+    diff_so_file=argv[4];
     else 
-    diff_so_file=argv[3]
+    diff_so_file=argv[3];
     #endif
 }
 
