@@ -1,3 +1,4 @@
+#include "config.h"
 #include <common.h>
 #include <stdio.h>
 #include <string.h>
@@ -6,6 +7,7 @@ void init_mem();
 void init_log();
 void init_sdb();
 void cpu_init();
+void sdb_set_batch_mode();
 
 extern "C" void init_disasm(const char *triple);
 
@@ -39,7 +41,11 @@ void init_difftest(char *ref_so_file, long img_size, int port);
 
 void init_mode()
 {
-    
+   if(CONFIG_MODE==npc_batch) 
+   {
+        sdb_set_batch_mode();
+   }
+
 
 }
 
