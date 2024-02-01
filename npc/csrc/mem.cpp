@@ -2,8 +2,6 @@
 #include<string.h>
 #include<unistd.h>
 #include<mem.h>
-#include"svdpi.h"
-#include"Vysyx_23060111_mem__Dpi.h"
 
 
 static long load_img();

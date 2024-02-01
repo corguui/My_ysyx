@@ -1,4 +1,4 @@
-import "DPI-C" function int pmem_read(input int raddr, int len); 
+import "DPI-C" function uint32_t pmem_read(input int raddr, int len); 
 module ysyx_23060111_IFU (
     input [31:0] pc, 
     output reg [31:0]inst
