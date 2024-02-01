@@ -46,11 +46,12 @@ NPC_GDB_RUN := -ex 'set env LD_PRELOAD /usr/lib/gcc/x86_64-linux-gnu/11/libasan.
 NPC_GDB = -CFLAGS -g 
 
 
-
+CONFIG: ./include/config.h
+	@sed 's/^#define \(.*) \(.*)/\1=\2/' config.h >./config.mk
 all:
 	@echo "Write this Makefile by your self."
 
-sim:$(Vfile) $(Cfile) $(TOPfile) 
+sim:$(Vfile) $(Cfile) $(TOPfile) $(CONFIG) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 	verilator $(VLTFLAGS) 
