@@ -15,7 +15,6 @@ void parse_args(int argc,char *argv[]);
 
 int main_time=0;
 
-
 int main(int argc ,char** argv, char** env)
 {
 	parse_args(argc, argv);
@@ -35,9 +34,11 @@ int main(int argc ,char** argv, char** env)
 	init_monitor();
 
 	sdb_mainloop();
+
 	delete top;
 	tfp->close();
 	delete contextp;
+
 	return is_exit_status_bad();
 }
 void ebreak (int inst)

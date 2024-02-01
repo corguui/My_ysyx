@@ -51,7 +51,7 @@ uint32_t pmem_read(uint32_t &ad,int len)
 }
 
 
-void pmem_write(uint32_t &ad, int len, uint32_t data)
+void pmem_write(uint32_t &ad, uint32_t data, int len)
 {
   	uint8_t *addr =pmem+ad-0x80000000;
   	switch (len) {
