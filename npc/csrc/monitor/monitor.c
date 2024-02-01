@@ -50,7 +50,7 @@ void init_mode()
         sdb_set_batch_mode();
    }
 
-parse_args(int argc,char *argv[])
+void parse_args(int argc,char **argv)
 {
     int elf_flat=0;
     img_file=argv[1];
