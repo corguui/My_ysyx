@@ -47,6 +47,7 @@ ysyx_23060111_EXU init_EXU (rout,pc,dnpc,opcode,rd,funct3,rs1,rs2,funct7,type_i,
 
 
 
+
 endmodule
 
 
