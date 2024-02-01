@@ -53,8 +53,10 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_sequent__TOP__0(Vysyx_2306
     IData/*31:0*/ __Vfunc_pmem_read__0__Vfuncout;
     __Vfunc_pmem_read__0__Vfuncout = 0;
     // Body
-    Vysyx_23060111_top___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->pc, 4U, __Vfunc_pmem_read__0__Vfuncout);
-    vlSelf->ysyx_23060111_top__DOT__inst = __Vfunc_pmem_read__0__Vfuncout;
+    if ((0U != vlSelf->pc)) {
+        Vysyx_23060111_top___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->pc, 4U, __Vfunc_pmem_read__0__Vfuncout);
+        vlSelf->ysyx_23060111_top__DOT__inst = __Vfunc_pmem_read__0__Vfuncout;
+    }
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[0U] = 0U;
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[1U] = 0x46cU;
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4[2U] 
