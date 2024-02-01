@@ -13,6 +13,5 @@ enum {npc_batch,npc_log};
 #define CONFIG_FTRACE_COND "true"
 #define FTRACE_COND "ture"
 #define CONFIG_DIFFTEST 1
-int CONFIG_TRY = 1;
 #endif
 
