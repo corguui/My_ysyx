@@ -41,7 +41,7 @@ uint32_t pc_read(uint32_t &pc)
 	return val;
 }
 */
-extern "C" int pmem_read(int ad,int data)
+extern "C" void pmem_read(int ad,int data)
 {
     uint8_t *addr =pmem+ad-0x80000000;
 	printf("%x\n",*(uint32_t*)addr);
