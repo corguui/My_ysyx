@@ -8,7 +8,7 @@ void init_sdb();
 void cpu_init();
 void sdb_set_batch_mode();
 
-char* img_file=NULL:
+char* img_file=NULL;
 char* log_file=NULL;//= (char*)NPC_LOG;
 
 #if defined(CONFIG_FTRACE) or defined(CONFIG_ITRACE)
@@ -50,7 +50,7 @@ void init_mode()
         sdb_set_batch_mode();
    }
 
-void parse_args(int argc,char *argv[])
+parse_args(int argc,char *argv[])
 {
     int elf_flat=0;
     img_file=argv[1];
