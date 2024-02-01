@@ -35,10 +35,10 @@ VM_PREFIX = Vysyx_23060111_top
 VM_MODPREFIX = Vysyx_23060111_top
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-DNPC_IMG=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin\" \
+	-DNPC_IMG=\"\" \
 	-I/home/corgi/ysyx-workbench/npc/include \
 	-DNPC_LOG=\"./npc-log.txt\" \
-	-DNPC_ELF=\"/home/corgi/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.elf\" \
+	-DNPC_ELF=\"\" \
 	-I/usr/lib/llvm-14/include \
 	-std=c++17 \
 	-fno-exceptions \
