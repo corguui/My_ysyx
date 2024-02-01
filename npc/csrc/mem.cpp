@@ -48,7 +48,7 @@ extern "C" void pmem_read(int ad,int data,int len)
 	case 2: data= *(uint16_t *)addr;
 	case 4: data= *(uint32_t *)addr;
 	default:
-	{ assert(0); printf("pmem_read error\n");   return 0;}
+	{ assert(0); printf("pmem_read error\n");   }
 	}
 }
 
