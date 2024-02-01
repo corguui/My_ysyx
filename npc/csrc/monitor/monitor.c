@@ -49,6 +49,7 @@ void init_mode()
    {
         sdb_set_batch_mode();
    }
+}
 
 void parse_args(int argc,char **argv)
 {
@@ -67,7 +68,6 @@ void parse_args(int argc,char **argv)
     #endif
 }
 
-}
 
 void init_monitor() {
 
