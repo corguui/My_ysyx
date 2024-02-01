@@ -6,7 +6,10 @@ module ysyx_23060111_IFU (
     wire [31:0] len;
     assign len=32'd4;
     always @(pc) begin
+        if(pc!=32'b0)
+        begin
         inst = pmem_read (pc,len);
+        end
     end
 
 endmodule
