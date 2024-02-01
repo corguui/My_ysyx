@@ -11,7 +11,7 @@ module ysyx_23060111_mem (
         output reg [31:0] rdata
 );
     wire [31:0] len;
-    assign len = 32'd8;
+    assign len = 32'd4;
 always @(*) begin
   if (valid) begin // 有读写请求时
     rdata = pmem_read(raddr,len);
