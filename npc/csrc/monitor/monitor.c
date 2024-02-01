@@ -43,6 +43,7 @@ char *diff_so_file=NULL;//=(char*)NPC_DIFF;
 void init_difftest(char *ref_so_file, long img_size, int port);
 #endif
 
+enum {npc_batch,npc_log};
 void init_mode()
 {
    if(CONFIG_MODE==npc_batch) 

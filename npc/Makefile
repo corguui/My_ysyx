@@ -48,7 +48,7 @@ NPC_GDB = -CFLAGS -g
 
 CONFIG: ./include/config.h
 	@touch config.mk
-	@sed 's/^#define \(.*) \(.*)/\1=\2/' config.h >./config.mk
+	@sed 's/^#define \(.*\) \(.*\)/\1=\2/' ./include/config.h | @sed 's/^#.+//' ./include/config.h >./config.mk
 all:
 	@echo "Write this Makefile by your self."
 
@@ -74,4 +74,5 @@ lint:$(Vfile)
 clean:
 	rm -rf obj_dir wave.vcd
 	rm -rf $(BUILD_DIR)
+	rm -rf $(NPC_LOG)
 include ../Makefile
