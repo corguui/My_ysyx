@@ -10,7 +10,9 @@ void sdb_set_batch_mode();
 
 char* log_file= (char*)NPC_LOG;
 
+#if defined(CONFIG_FTRACE) or defined(CONFIG_ITRACE)
 extern "C" void init_disasm(const char *triple);
+#endif
 
 
 #ifdef CONFIG_FTRACE
