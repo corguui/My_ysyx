@@ -13,6 +13,7 @@ extern FUN *symbol;
 extern int func_num;
 int space_num=-1;
 int space_flat=0;
+int print_flat=0;
 #endif
 
 
@@ -56,7 +57,7 @@ static void trace_and_difftest(Decode *_this) {
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
 #ifdef CONFIG_FTRACE_COND
-  if (FTRACE_COND) { log_write("%s\n", _this->fun_printf_buf); }
+  if (FTRACE_COND&&print_flat==1) { print_flat=0; log_write("%s\n", _this->fun_printf_buf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
@@ -178,6 +179,7 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 		     pr+=sprintf(pr,"0x%x:",s->pc);
 		     pr+=sprintf(pr,"---num: %d   ret [fun:%s  @%x]\n",space_num,symbol[f].name,symbol[f].value); 
 		     space_flat=1;
+			 print_flat=1;
 		     break;
 		   }
 		   else if(flat_ret==0)//call
@@ -189,6 +191,7 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 		     pr+=sprintf(pr,"0x%x:",s->pc);
 		     pr+=sprintf(pr,"---num: %d  call [fun:%s  @%x]\n",space_num,symbol[g].name,symbol[g].value);
 			space_flat=0;
+			print_flat=1;
 			break;
 		   }
 		}
