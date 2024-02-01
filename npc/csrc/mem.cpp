@@ -71,7 +71,8 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
 	  { assert(0); printf("pmem_write error\n");   }
 	}
 }
-extern "C" int vlg_pmem_write(int ad,int wdata,int len)
+
+extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 {
 	uint32_t pc=(uint32_t)ad;
 	uint32_t data=(uint32_t)data;
