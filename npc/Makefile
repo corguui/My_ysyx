@@ -11,7 +11,7 @@ TOPname=ysyx_23060111_top
 #init
 IMG ?= 
 VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
- $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) 
+ $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -DNPC_IMG='\"$(IMG)\"'
 
 RUN_FLAGS = $(IMG)
 
@@ -59,7 +59,7 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
 	verilator $(VLTFLAGS) $(NPC_GDB) 
-	gdb $(NPC_GDB_RUN) $(RUN_FLAGS)
+	gdb $(NPC_GDB_RUN)
 	@ctags -R -u
 
 wave:$(Wavefile)
