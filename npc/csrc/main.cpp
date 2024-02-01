@@ -17,7 +17,7 @@ int main_time=0;
 
 int main(int argc ,char** argv, char** env)
 {
-	for(int i=0;i<agrc;i++)
+	for(int i=0;i<argc;i++)
 	{
 		printf("%s\n",argv[i]);
 	}
