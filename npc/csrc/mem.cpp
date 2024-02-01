@@ -33,26 +33,27 @@ void init_mem()
 	*/
 }
 
-
+/*
 uint32_t pc_read(uint32_t &pc)
 {
 	uint32_t val=pmem_read(pc,4);
 	return val;
 }
-int pmem_read(int ad,int len)
+*/
+extern "C" void pmem_read(int ad,int data,int len)
 {
         uint8_t *addr =pmem+ad-0x80000000;
 	switch(len){
-	case 1: return *(uint8_t *)addr;
-	case 2: return *(uint16_t *)addr;
-	case 4: return *(uint32_t *)addr;
+	case 1: data= *(uint8_t *)addr;
+	case 2: data= *(uint16_t *)addr;
+	case 4: data= *(uint32_t *)addr;
 	default:
 	{ assert(0); printf("pmem_read error\n");   return 0;}
 	}
 }
 
 
-void pmem_write(int &ad, int data, int len)
+extern "C" void pmem_write(int &ad, int data, int len)
 {
   	uint8_t *addr =pmem+ad-0x80000000;
   	switch (len) {
