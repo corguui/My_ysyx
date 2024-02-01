@@ -53,7 +53,7 @@ extern "C" int pmem_read(int ad,int len)
 }
 
 
-void pmem_write(int &ad, int data, int len)
+void pmem_write(int ad, int data, int len)
 {
   	uint8_t *addr =pmem+ad-0x80000000;
   	switch (len) {
