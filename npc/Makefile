@@ -62,6 +62,7 @@ gdb:$(Vfile) $(Cfile) $(TOPfile)
 
 wave:$(Wavefile)
 	gtkwave $(Wavefile)
+
 lint:$(Vfile)
 	verilator --lint-only $(Vfile)
 
