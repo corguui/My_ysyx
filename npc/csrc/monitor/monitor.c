@@ -8,7 +8,8 @@ void init_sdb();
 void cpu_init();
 void sdb_set_batch_mode();
 
-char* log_file= (char*)NPC_LOG;
+char* img_file=NULL:
+char* log_file=NULL;//= (char*)NPC_LOG;
 
 #if defined(CONFIG_FTRACE) or defined(CONFIG_ITRACE)
 extern "C" void init_disasm(const char *triple);
@@ -38,7 +39,7 @@ int func_num=0;
 #ifdef CONFIG_DIFFTEST
 extern long img_size;
 int difftest_port =1234;
-char *diff_so_file=(char*)NPC_DIFF;
+char *diff_so_file=NULL;//=(char*)NPC_DIFF;
 void init_difftest(char *ref_so_file, long img_size, int port);
 #endif
 
@@ -49,6 +50,22 @@ void init_mode()
         sdb_set_batch_mode();
    }
 
+void parse_args(int argc,char *argv[])
+{
+    int elf_flat=0;
+    img_file=argv[1];
+    log_file=argv[2];
+    #ifdef CONFIG_FTRACE
+    elf_file=argv[3];
+    elf_flat=1;
+    #endif
+    #ifdef CONFIG_DIFFTEST
+    if(elf_file==1)
+    diff_so_file=argv[4]
+    else 
+    diff_so_file=argv[3]
+    #endif
+}
 
 }
 

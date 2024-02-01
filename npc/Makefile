@@ -13,6 +13,8 @@ IMG ?=
 VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
  $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) -CFLAGS -DNPC_IMG='\"$(IMG)\"'
 
+RUN_FLAGS = $(IMG)
+
 INC_PATH = $(HOME)/ysyx-workbench/npc/include
 VLTFLAGS += -CFLAGS -I$(INC_PATH) 
 
@@ -22,10 +24,12 @@ NPC_GDB_RUN = obj_dir/V$(basename $(subst vsrc/,,$(TOPfile)))
 #logfile
 NPC_LOG = ./npc-log.txt
 VLTFLAGS += -CFLAGS -DNPC_LOG='\"$(NPC_LOG)\"'
+RUN_FLAGS +=  $(NPC_LOG)
 
 #ftrace
 ELF =$(IMG:.bin=.elf)
 VLTFLAGS +=  -CFLAGS -DNPC_ELF='\"$(ELF)\"'
+RUN_FLAGS += $(ELF)
 
 #itrace
 Cfile += csrc/utils/disasm.cc
@@ -38,6 +42,7 @@ LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
 LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
 VLTFLAGS +=  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so\
  -CFLAGS -DNPC_DIFF='\"$(LIB)\"'
+RUN_FLAGS += $(LIB)
 NPC_SIM_RUN := LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so $(NPC_SIM_RUN)
 NPC_GDB_RUN := -ex 'set env LD_PRELOAD /usr/lib/gcc/x86_64-linux-gnu/11/libasan.so' 
 #gdb
@@ -51,9 +56,8 @@ all:
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	@echo "$(ELF)"
 	verilator $(VLTFLAGS) 
-	$(NPC_SIM_RUN) $(IMG)	
+	$(NPC_SIM_RUN) $(RUN_FLAGS)
 	@ctags -R -u
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
