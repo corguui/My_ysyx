@@ -1,7 +1,7 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
-#define CONFIG_MODE 0  //0 --batch 1 --log
+#define CONFIG_MODE 1  //0 --batch 1 --log
 enum {npc_batch,npc_log};
 #define CONFIG_ITRACE 1
 #define CONFIG_IQUEUE 1

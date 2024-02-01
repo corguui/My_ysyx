@@ -205,6 +205,7 @@ static void execute(uint64_t n)
 	for(;n>0;n--)
 	{
 		cpu_exec_once(tfp,&s);
+		 g_nr_guest_inst ++;
 		trace_and_difftest(&s); 
 		if(npc_state.state !=NPC_RUNNING) break;
 	}

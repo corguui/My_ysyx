@@ -19,6 +19,9 @@ VLTFLAGS += -CFLAGS -I$(INC_PATH)
 NPC_SIM_RUN = ./obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 NPC_GDB_RUN = obj_dir/V$(basename $(subst vsrc/,,$(TOPfile))) 
 
+#logfile
+NPC_LOG = ./npc-log.txt
+VLTFLAGS += -CFLAGS -DNPC_LOG='\"$(NPC_LOG)\"'
 
 #ftrace
 ELF =$(IMG:.bin=.elf)

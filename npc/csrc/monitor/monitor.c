@@ -4,10 +4,12 @@
 #include <string.h>
 
 void init_mem();
-void init_log();
+void init_log(char * log_file);
 void init_sdb();
 void cpu_init();
 void sdb_set_batch_mode();
+
+char* log_file= (char*)NPC_LOG;
 
 extern "C" void init_disasm(const char *triple);
 
@@ -51,7 +53,7 @@ void init_mode()
 
 void init_monitor() {
 
-    init_log();
+    init_log(log_file);
 
 	init_mem();
 
