@@ -1,5 +1,4 @@
 #include <cpu/cpu.h>
-#include <cstdint>
 #include <cpu/decode.h>
 #include<common.h>
 #include <sched.h>
