@@ -1,3 +1,4 @@
+#include <cstdint>
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
@@ -40,17 +41,11 @@ uint32_t pc_read(uint32_t &pc)
 	return val;
 }
 */
-extern "C" int pmem_read(int ad,int len)
+extern "C" int pmem_read(int ad,int data)
 {
     uint8_t *addr =pmem+ad-0x80000000;
 	printf("%x\n",*(uint32_t*)addr);
-	switch(len){
-	case 1: return *(uint8_t *)addr;
-	case 2: return *(uint16_t *)addr;
-	case 4: return *(uint32_t *)addr;
-	default:
-	{ assert(0); printf("pmem_read error\n");   return 0;}
-	}
+	data= *(uint32_t *)addr;
 }
 
 
