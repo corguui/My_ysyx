@@ -19,7 +19,7 @@ extern "C" void init_disasm(const char *triple);
 #ifdef CONFIG_FTRACE
 #include <elf.h>
 #include <monitor.h>
-char *elf_file =(char*)NPC_ELF;
+char *elf_file =NULL; 
 void elf_read(char *elf_file);
 
 /*
