@@ -6,6 +6,9 @@ Wavefile=$(wildcard ./*.vcd)
 TOPfile=vsrc/ysyx_23060111_top.v
 TOPname=ysyx_23060111_top
 
+CONFIG: ./include/config.h 
+	@sed -e 's/^#define \(.*\) \(.*\)/\1=\2/' -e '/^#\(.*\)/d' -e '/^\/\(.*\)/d' -e '/^_\(.*\)/d' ./include/config.h > ./config.mk
+
 #init
 IMG ?= 
 VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
@@ -22,6 +25,8 @@ NPC_GDB_RUN = obj_dir/V$(basename $(subst vsrc/,,$(TOPfile)))
 #logfile
 NPC_LOG = ./npc-log.txt
 RUN_FLAGS +=  $(NPC_LOG)
+
+-include config.mk
 
 #ftrace
 ifdef CONFIG_FTRACE
@@ -49,8 +54,7 @@ endif
 #gdb
 NPC_GDB = -CFLAGS -g 
 
-CONFIG: ./include/config.h 
-	@sed -e 's/^#define \(.*\) \(.*\)/\1=\2/' -e '/^#\(.*\)/d' -e '/^\/\(.*\)/d' -e '/^_\(.*\)/d' ./include/config.h > ./config.mk
+
 all:
 	@echo "Write this Makefile by your self."
 
