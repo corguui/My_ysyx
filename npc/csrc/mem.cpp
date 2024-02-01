@@ -2,6 +2,7 @@
 #include<string.h>
 #include<unistd.h>
 #include<mem.h>
+#include"svdpi.h"
 
 static long load_img();
 static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
