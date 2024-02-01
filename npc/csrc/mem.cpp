@@ -1,9 +1,7 @@
-#include <cstdint>
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
 #include<mem.h>
-
 
 static long load_img();
 static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
@@ -34,22 +32,26 @@ void init_mem()
 	*/
 }
 
-/*
+
 uint32_t pc_read(uint32_t &pc)
 {
 	uint32_t val=pmem_read(pc,4);
 	return val;
 }
-*/
-extern "C" void pmem_read(int ad,int data)
+uint32_t pmem_read(uint32_t &ad,int len)
 {
-    uint8_t *addr =pmem+ad-0x80000000;
-	printf("%x\n",*(uint32_t*)addr);
-	data= *(uint32_t *)addr;
+        uint8_t *addr =pmem+ad-0x80000000;
+	switch(len){
+	case 1: return *(uint8_t *)addr;
+	case 2: return *(uint16_t *)addr;
+	case 4: return *(uint32_t *)addr;
+	default:
+	{ assert(0); printf("pmem_read error\n");   return 0;}
+	}
 }
 
 
-void pmem_write(int ad, int data, int len)
+void pmem_write(uint32_t &ad, int len, uint32_t data)
 {
   	uint8_t *addr =pmem+ad-0x80000000;
   	switch (len) {

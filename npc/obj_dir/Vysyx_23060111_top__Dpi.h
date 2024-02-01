@@ -18,8 +18,6 @@ extern "C" {
     // DPI IMPORTS
     // DPI import at vsrc/ysyx_23060111_IDU.v:1:30
     extern void ebreak(int inst);
-    // DPI import at vsrc/ysyx_23060111_IFU.v:1:30
-    extern void pmem_read(int raddr, int* data);
 
 #ifdef __cplusplus
 }

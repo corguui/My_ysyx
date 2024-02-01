@@ -2,12 +2,12 @@
 module ysyx_23060111_top(
   input       rst,
   input       clk,
+  input[31:0] inst,
   output [31:0] pc,
   output inv_flag//invalid_opcode
   
  );
 
-  wire [31:0] inst;
 //pc
   wire[31:0] dnpc;
   wire[31:0] snpc;
@@ -33,9 +33,6 @@ module ysyx_23060111_top(
 //init pc
 ysyx_23060111_pc pc_renew (clk,rst,snpc,dnpc,pc);
 
-//init IFU
-ysyx_23060111_IFU IFU (pc,inst);
-
 //init reg
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr,wen,rout);
 
@@ -44,7 +41,6 @@ ysyx_23060111_IDU init_IDU (inst,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm,inv_
 
  //init EXU
 ysyx_23060111_EXU init_EXU (rout,pc,dnpc,opcode,rd,funct3,rs1,rs2,funct7,type_i,imm,wdata,waddr,raddr,snpc,wen);
-
 
 
 
