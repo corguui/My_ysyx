@@ -15,7 +15,7 @@ module ysyx_23060111_mem(
     begin
         if(wen)
         begin
-            vlg_pmem_write(waddr,wmask,wdata);
+            vlg_pmem_write(waddr,wdata,wmask);
         end
     end
 

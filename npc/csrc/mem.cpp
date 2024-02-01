@@ -75,8 +75,8 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
 extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 {
 	uint32_t pc=(uint32_t)ad;
-	uint32_t data=(uint32_t)data;
-	pmem_write(pc, data, len);
+	uint32_t data=(uint32_t)wdata;
+	pmem_write(pc,len,data);
 }
 
 uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
