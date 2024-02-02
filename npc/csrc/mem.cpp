@@ -132,6 +132,7 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	write_num++;
 	#endif
 	pmem_write(pc,len,data);
+	return ;
 	}
 	printf("write\n");
 	out_of_bound(ad);
