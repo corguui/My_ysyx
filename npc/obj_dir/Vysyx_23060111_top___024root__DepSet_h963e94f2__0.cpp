@@ -96,12 +96,12 @@ void Vysyx_23060111_top___024root___eval_nba(Vysyx_23060111_top___024root* vlSel
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_nba\n"); );
     // Body
-    if (vlSelf->__VnbaTriggered.at(1U)) {
-        Vysyx_23060111_top___024root___nba_sequent__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[2U] = 1U;
-    }
     if (vlSelf->__VnbaTriggered.at(2U)) {
+        Vysyx_23060111_top___024root___nba_sequent__TOP__0(vlSelf);
+    }
+    if (vlSelf->__VnbaTriggered.at(1U)) {
         Vysyx_23060111_top___024root___nba_sequent__TOP__1(vlSelf);
+        vlSelf->__Vm_traceActivity[2U] = 1U;
     }
     if (vlSelf->__VnbaTriggered.at(3U)) {
         Vysyx_23060111_top___024root___nba_sequent__TOP__2(vlSelf);

@@ -63,7 +63,7 @@ uint32_t pc_read(uint32_t &pc)
 }
 uint32_t pmem_read(uint32_t &ad,int len)
 {
-        uint8_t *addr =pmem+ad-0x80000000;
+    uint8_t *addr =pmem+ad-0x80000000;
 	switch(len){
 	case 1: return *(uint8_t *)addr;
 	case 2: return *(uint16_t *)addr;
@@ -77,6 +77,10 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 {
 	//flag == 0 IFU  flag ==  1  pmem_read
 	uint32_t pc=(uint32_t)ad;
+	if(ad==0)
+	{
+		return 0;
+	}
 	if(likely(check_mem(ad)))
 	{
 	uint32_t data=pmem_read(pc, 4);
