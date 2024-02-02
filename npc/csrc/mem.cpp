@@ -47,7 +47,7 @@ void init_mem()
 }
 static void out_of_bound(uint32_t addr)
 {
-	printf("address = 0x%x\npc = 0x%x",addr,top->pc);
+	printf("address = 0x%x\npc = 0x%x\n",addr,top->pc);
 	assert(0);
 }
 
@@ -123,6 +123,7 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	write_num++;
 	#endif
 	pmem_write(pc,len,data);
+	return ;
 	}
 	printf("write\n");
 	out_of_bound(ad);
