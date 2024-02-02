@@ -1,8 +1,20 @@
-#include <cstdint>
+#include "macro.h"
+#include "utils.h"
+#include <cassert>
+#include <stdexcept>
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
 #include<mem.h>
+#include<cpu/cpu.h>
+
+#ifdef CONFIG_MTRACE
+//memory tarce
+unsigned int write_buf[100000000];
+unsigned int read_buf[100000000];
+int write_num=0;
+int read_num=0;
+#endif
 
 static long load_img();
 static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
@@ -32,8 +44,16 @@ void init_mem()
 	i 
 	*/
 }
+static void out_of_bound(uint32_t addr)
+{
+	printf("address = 0x%x\npc = 0x%x",addr,top->pc);
+	assert(0);
+}
 
-
+static inline bool check_mem(uint32_t addr)
+{
+	return addr-0x80000000<0x80000000;
+}
 
 
 uint32_t pc_read(uint32_t &pc)
@@ -53,11 +73,25 @@ uint32_t pmem_read(uint32_t &ad,int len)
 	}
 }
 
-extern "C" int vlg_pmem_read(int ad)
+extern "C" int vlg_pmem_read(int ad,int flag)
 {
+	//flag == 0 IFU  flag ==  1  pmem_read
 	uint32_t pc=(uint32_t)ad;
+	if(likely(check_mem(ad)))
+	{
 	uint32_t data=pmem_read(pc, 4);
+	#ifdef  CONFIG_MTRACE
+	if(flag == 1)
+	{
+	 	read_buf[read_num]=ad;
+  		read_num++;
+	}
+	#endif
 	return (int) data; 
+	}
+	printf("read\n");
+	out_of_bound(ad);
+	return 0;
 }
 
 void pmem_write(uint32_t &ad, int len, uint32_t data)
@@ -75,8 +109,17 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
 extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 {
 	uint32_t pc=(uint32_t)ad;
+	if(likely(check_mem(ad)))
+	{
 	uint32_t data=(uint32_t)wdata;
+	#ifdef CONFIG_MTRACE
+	write_buf[write_num]=ad;
+	write_num++;
+	#endif
 	pmem_write(pc,len,data);
+	}
+	printf("write\n");
+	out_of_bound(ad);
 }
 
 uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
@@ -100,4 +143,22 @@ static long load_img(){
                
    fclose(fp); 
    return size;
+}
+
+void pmem_out()
+{
+		#ifdef CONFIG_MTRACE
+		log_write("----------write----------");
+		for(int i=0;i<write_num;i++)
+  		{
+  			log_write("----  %x\n",write_buf[i]);
+  		}
+  		log_write("--------  read  ---------\n");
+  		for(int i=0;i<read_num;i++)
+  		{
+  			log_write("----  %x\n",read_buf[i]);
+  		}
+		#else 
+		printf("don't open the mtrace");
+		#endif
 }

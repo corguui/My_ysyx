@@ -38,13 +38,17 @@ int main(int argc ,char** argv, char** env)
 
 	sdb_mainloop();
 
-		
+	/*	
 	printf("%x\n",top->rootp->ysyx_23060111_top__DOT__m_rdata);
 	uint32_t ad=0x80000040;
 	printf("%x\n",pmem_read(ad, 4));
+	*/
 	delete top;
 	tfp->close();
 	delete contextp;
+	#ifdef CONFIG_MTRACE
+	pmem_out();
+	#endif
 	return is_exit_status_bad();
 }
 void ebreak (int inst)
