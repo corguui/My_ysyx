@@ -16,6 +16,7 @@ int write_num=0;
 int read_num=0;
 #endif
 
+int init_flag=1;
 static long load_img();
 static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
 static uint32_t img[]
@@ -77,8 +78,9 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 {
 	//flag == 0 IFU  flag ==  1  pmem_read
 	uint32_t pc=(uint32_t)ad;
-	if(ad==0)
+	if(ad==0&&init_flag==1)  //ad before init
 	{
+		init_flag=0;
 		return 0;
 	}
 	if(likely(check_mem(ad)))
@@ -152,15 +154,15 @@ static long load_img(){
 void pmem_out()
 {
 		#ifdef CONFIG_MTRACE
-		log_write("----------write----------");
+		log_write("----------write----------\n");
 		for(int i=0;i<write_num;i++)
   		{
-  			log_write("----  %x\n",write_buf[i]);
+  			log_write("----  0x%x\n",write_buf[i]);
   		}
   		log_write("--------  read  ---------\n");
   		for(int i=0;i<read_num;i++)
   		{
-  			log_write("----  %x\n",read_buf[i]);
+  			log_write("----  0x%x\n",read_buf[i]);
   		}
 		#else 
 		printf("don't open the mtrace");
