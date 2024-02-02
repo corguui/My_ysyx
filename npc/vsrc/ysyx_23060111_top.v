@@ -35,7 +35,7 @@ module ysyx_23060111_top(
   wire [31:0] m_rdata;
   wire [31:0] m_raddr;
   wire  m_wen; 
-  assign m_waddr=32'h80000040;
+  assign m_waddr=32'h90000040;
   assign m_wdata=32'h00009117;
   assign m_wen=1;
   assign m_wmask=32'd4;

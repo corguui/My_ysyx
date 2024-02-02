@@ -1,7 +1,4 @@
-#include "macro.h"
-#include "utils.h"
-#include <cassert>
-#include <stdexcept>
+#include <assert.h>
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
@@ -47,7 +44,19 @@ void init_mem()
 }
 static void out_of_bound(uint32_t addr)
 {
-	printf("address = 0x%x\npc = 0x%x\n",addr,top->pc);
+	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->pc);
+	#ifdef CONFIG_MTRACE
+		log_write("----------write----------\n");
+		for(int i=0;i<write_num;i++)
+  		{
+  			log_write("----  0x%x\n",write_buf[i]);
+  		}
+  		log_write("--------  read  ---------\n");
+  		for(int i=0;i<read_num;i++)
+  		{
+  			log_write("----  0x%x\n",read_buf[i]);
+  		}
+	#endif
 	assert(0);
 }
 
