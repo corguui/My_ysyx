@@ -101,6 +101,7 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 	 	read_buf[read_num]=ad;
   		read_num++;
 	}
+	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->pc);
 	#endif
 	return (int) data; 
 	}
