@@ -269,19 +269,9 @@ begin
 	    end
 
     default:begin
-            wdata=32'b0;
-            dnpc=snpc;
-        end
-
-        endcase
+        wdata=32'b0;
+        dnpc=snpc;
     end
-
-
-
-
-
-
-    default: wdata=32'b0;
     endcase
 end
 
