@@ -242,31 +242,31 @@ begin
             dnpc=snpc;
         end
         endcase
-        end
+    end
     
     //J jal
     7'b1101111:begin
 	        wdata=snpc;
 	        dnpc=pc+imm;
-        end
+    end
     
     //JR jalr
 	7'b1100111:begin
 	        wdata=snpc;
 	        dnpc=imm+rout1;
-	    end    
+	end    
 
     //U lui
     7'b0110111:begin
 	        wdata=imm;
 	        dnpc=snpc;
-	    end
+	end
 
     //UPC auipc
 	7'b0010111:begin
  	        wdata=pc+imm;
 	        dnpc=snpc;	
-	    end
+	end
 
     default:begin
         wdata=32'b0;
