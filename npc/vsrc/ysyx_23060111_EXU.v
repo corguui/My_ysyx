@@ -1,5 +1,5 @@
 module ysyx_23060111_EXU(
-  input[32:0] inst,
+  input[31:0] inst,
   input[31:0] rout1,
   input[31:0] rout2,
   input [31:0] pc,
