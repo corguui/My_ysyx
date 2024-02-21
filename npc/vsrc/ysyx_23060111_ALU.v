@@ -262,7 +262,11 @@ begin
 	        dnpc=snpc;	
 	    end
 
-        default:wdata=32'b0;
+        default:begin
+            wdata=32'b0;
+            dnpc=snpc;
+        end
+
         endcase
     end
 
