@@ -15,6 +15,7 @@ module ysyx_23060111_ALU(
     output reg [31:0] m_wmask,
     output reg m_wen,
     output reg [31:0] m_raddr,
+    output reg m_ren,
     output [31:0] m_rdata
 
 );

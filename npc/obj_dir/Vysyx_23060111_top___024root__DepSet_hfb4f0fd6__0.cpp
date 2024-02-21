@@ -331,6 +331,9 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_2306
             = (0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                         >> 7U));
     }
+    if (vlSelf->rst) {
+        vlSelf->ysyx_23060111_top__DOT__pc_renew__DOT____Vcellout__renew_pc____pinNumber5 = 0U;
+    }
     if (__Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0) {
         vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf[__Vdlyvdim0__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0] 
             = __Vdlyvval__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0;
