@@ -32,8 +32,12 @@ ysyx_23060111_MuxKeyWithDefault #(7, 7, 33) typeMux ({imm,inv_flag}, opcode ,{32
     7'b0010011, {{20{inst[31]}},inst[31:20],1'b0}, //addi    type:I  
     7'b1100111, {{20{inst[31]}},inst[31:20],1'b0},  //jalr    type:JR
     7'b1110011, {33'b0},  //ebreak
-    7'b0100011, {{20{inst[31]}},inst[31:25],inst[11:7],1'b0}  //sw type:S  
+    7'b0100011, {{20{inst[31]}},inst[31:25],inst[11:7],1'b0},  //sw type:S  
+    7'b0110011, {32'b0,1'b0},//type:R
+    7'b0000011, {{20{inst[31]}},inst[31:20],1'b0}, //    type:IL
+    7'b1100011, {{19{inst[31]}},inst[31],inst[7],inst[30:25],inst[11:8],2'b0}//type:B
   });
 
 
 endmodule
+
