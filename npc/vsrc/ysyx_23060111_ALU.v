@@ -261,7 +261,7 @@ begin
     //JR jalr
 	7'b1100111:begin
 	        wdata=snpc;
-	        dnpc=imm+rout1;
+	        dnpc=imm+src1;
 	end    
 
     //U lui
