@@ -8,14 +8,17 @@ module ysyx_23060111_mem(
     input wen,
     input [31:0] raddr,
     input ren,
-    output [31:0] rdata
+    output reg [31:0] rdata
 
 ); 
     wire [31:0] flag; //flag ==1 pmem read
-    //wire [31:0] read_addr;
+    reg [31:0] read_addr;
     assign flag=32'd1;
-    //assign read_addr= (ren ==1'b1 )? raddr : 32'h80000000;
-    assign rdata =vlg_pmem_read(raddr,flag);
+    always @(raddr)
+    begin
+    read_addr= (ren ==1'b1 )? raddr : 32'h80000000;
+    rdata =vlg_pmem_read(read_addr,flag);
+    end
     always@(posedge clk)
     begin
         if(wen)
