@@ -39,9 +39,6 @@ int main(int argc ,char** argv, char** env)
 	//(npc)   command
 	sdb_mainloop();
 
-
-	delete top;
-	tfp->close();
 	delete contextp;
 	#ifdef CONFIG_MTRACE
 	//print the mem read and write  ---logfile
