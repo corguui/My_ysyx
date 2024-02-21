@@ -20,9 +20,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
     VL_OUT8(inv_flag,0,0);
-    CData/*4:0*/ ysyx_23060111_top__DOT__waddr;
-    CData/*4:0*/ ysyx_23060111_top__DOT__raddr1;
-    CData/*4:0*/ ysyx_23060111_top__DOT__raddr2;
     CData/*0:0*/ ysyx_23060111_top__DOT__wen;
     CData/*0:0*/ ysyx_23060111_top__DOT__m_wen;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit;
