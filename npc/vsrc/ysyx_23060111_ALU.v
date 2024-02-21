@@ -202,7 +202,7 @@ begin
         3'b010:begin
             m_waddr = src1 + imm; 
             m_wmask = 32'd4;
-            m_wdata = src2;
+            m_wdata = rout2;
             m_wen=1'b1;
         end
 
