@@ -51,8 +51,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
                             if ((1U & (IData)(vlSelf->ysyx_23060111_top__DOT__opcode))) {
                                 if ((0U == (7U & (vlSelf->ysyx_23060111_top__DOT__inst 
                                                   >> 0xcU)))) {
-                                    vlSelf->ysyx_23060111_top__DOT__m_wmask = 1U;
                                     vlSelf->ysyx_23060111_top__DOT__m_wen = 1U;
+                                    vlSelf->ysyx_23060111_top__DOT__m_wmask = 1U;
                                     vlSelf->ysyx_23060111_top__DOT__m_wdata 
                                         = vlSelf->ysyx_23060111_top__DOT__rout2;
                                     vlSelf->ysyx_23060111_top__DOT__m_waddr 
@@ -63,8 +63,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
                                 } else if ((1U == (7U 
                                                    & (vlSelf->ysyx_23060111_top__DOT__inst 
                                                       >> 0xcU)))) {
-                                    vlSelf->ysyx_23060111_top__DOT__m_wmask = 2U;
                                     vlSelf->ysyx_23060111_top__DOT__m_wen = 1U;
+                                    vlSelf->ysyx_23060111_top__DOT__m_wmask = 2U;
                                     vlSelf->ysyx_23060111_top__DOT__m_wdata 
                                         = vlSelf->ysyx_23060111_top__DOT__rout2;
                                     vlSelf->ysyx_23060111_top__DOT__m_waddr 
@@ -75,8 +75,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
                                 } else if ((2U == (7U 
                                                    & (vlSelf->ysyx_23060111_top__DOT__inst 
                                                       >> 0xcU)))) {
-                                    vlSelf->ysyx_23060111_top__DOT__m_wmask = 4U;
                                     vlSelf->ysyx_23060111_top__DOT__m_wen = 1U;
+                                    vlSelf->ysyx_23060111_top__DOT__m_wmask = 4U;
                                     vlSelf->ysyx_23060111_top__DOT__m_wdata 
                                         = vlSelf->ysyx_23060111_top__DOT__rout2;
                                     vlSelf->ysyx_23060111_top__DOT__m_waddr 

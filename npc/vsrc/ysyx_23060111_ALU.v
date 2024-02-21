@@ -181,6 +181,7 @@ begin
 
 
     //S
+    /*
     7'b0100011:begin
         dnpc=snpc;
         case(funct3)
@@ -209,6 +210,7 @@ begin
         default:wdata=32'b0;
         endcase
     end
+    */
 
     //B
     7'b1100011:begin
