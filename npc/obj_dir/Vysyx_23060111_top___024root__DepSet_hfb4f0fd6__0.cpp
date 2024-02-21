@@ -899,10 +899,6 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
     IData/*31:0*/ __Vfunc_vlg_pmem_read__2__Vfuncout;
     __Vfunc_vlg_pmem_read__2__Vfuncout = 0;
     // Body
-    vlSelf->ysyx_23060111_top__DOT__init_the_mem__DOT__read_addr 
-        = ((IData)(vlSelf->ysyx_23060111_top__DOT__m_ren)
-            ? vlSelf->ysyx_23060111_top__DOT__m_raddr
-            : 0x80000000U);
-    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(vlSelf->ysyx_23060111_top__DOT__init_the_mem__DOT__read_addr, 1U, __Vfunc_vlg_pmem_read__2__Vfuncout);
+    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(vlSelf->ysyx_23060111_top__DOT__m_raddr, 1U, __Vfunc_vlg_pmem_read__2__Vfuncout);
     vlSelf->ysyx_23060111_top__DOT__m_rdata = __Vfunc_vlg_pmem_read__2__Vfuncout;
 }

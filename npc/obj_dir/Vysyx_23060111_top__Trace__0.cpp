@@ -134,7 +134,6 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     bufp->chgBit(oldp+125,(vlSelf->ysyx_23060111_top__DOT__wen));
     bufp->chgIData(oldp+126,(vlSelf->ysyx_23060111_top__DOT__m_rdata),32);
     bufp->chgIData(oldp+127,(vlSelf->ysyx_23060111_top__DOT__m_raddr),32);
-    bufp->chgIData(oldp+128,(vlSelf->ysyx_23060111_top__DOT__init_the_mem__DOT__read_addr),32);
 }
 
 void Vysyx_23060111_top___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {

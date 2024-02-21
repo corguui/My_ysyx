@@ -11,12 +11,14 @@ module ysyx_23060111_mem(
     output reg [31:0] rdata
 
 ); 
+    /*
     wire [31:0] flag; //flag ==1 pmem read
     reg [31:0] read_addr;
     assign flag=32'd1;
+    */
     always @(raddr)
     begin
-    rdata =vlg_pmem_read(raddr,flag);
+    rdata =vlg_pmem_read(raddr,32'd1);
     end
     always@(posedge clk)
     begin
