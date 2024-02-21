@@ -87,11 +87,14 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 {
 	//flag == 0 IFU  flag ==  1  pmem_read
 	uint32_t pc=(uint32_t)ad;
-	if(ad==0||init_flag==1)  //ad before init
+	if(pc==0&&init_flag==1)  //pc before init
 	{
-		ad=0x80000000;
 		init_flag=0;
 		return 0;
+	}
+	if(ad==0)
+	{
+		ad=0x80000000;
 	}
 	if(likely(check_mem(ad)))
 	{
