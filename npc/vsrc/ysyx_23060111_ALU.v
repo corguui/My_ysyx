@@ -1,4 +1,5 @@
 module ysyx_23060111_ALU(
+    input [31:0] inst,
     input [6:0] opcode,
     input [14:12] funct3,
     input [31:25] funct7,
@@ -34,7 +35,7 @@ assign cond_bgeu = rout1 >= rout2;
 assign src1 = rout1;
 assign src2 = rout2;
 
-always @(opcode) 
+always @(inst) 
 begin
     case(opcode)
     //R

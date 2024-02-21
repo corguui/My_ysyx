@@ -1,4 +1,5 @@
 module ysyx_23060111_EXU(
+  input[32:0] inst,
   input[31:0] rout1,
   input[31:0] rout2,
   input [31:0] pc,
@@ -34,7 +35,7 @@ module ysyx_23060111_EXU(
 */
 
 
-ysyx_23060111_ALU ALU_init (opcode,funct3,funct7,imm,rout1,rout2,pc,snpc,dnpc,wen,wdata,m_waddr,m_wdata,m_wmask,m_wen,m_raddr,m_ren,m_rdata);
+ysyx_23060111_ALU ALU_init (inst,opcode,funct3,funct7,imm,rout1,rout2,pc,snpc,dnpc,wen,wdata,m_waddr,m_wdata,m_wmask,m_wen,m_raddr,m_ren,m_rdata);
 
 
 /*
