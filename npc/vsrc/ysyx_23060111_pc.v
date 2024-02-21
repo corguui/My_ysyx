@@ -3,9 +3,10 @@ module ysyx_23060111_pc(
 	input rst,
 	output [31:0]snpc,
 	input  [31:0]dnpc,
-	output [31:0]pc
+	output [31:0]pc,
+	output [31:0]raddr
 );
 	assign snpc=pc+32'h4;
- 	ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,1'b1);
+ 	ysyx_23060111_trigger #(32,32'h80000000) renew_pc(clk,rst,dnpc,pc,raddr,1'b1);
 	
 endmodule

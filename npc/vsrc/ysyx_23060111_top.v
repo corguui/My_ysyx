@@ -39,8 +39,8 @@ module ysyx_23060111_top(
 
 
 
-//init pc
-ysyx_23060111_pc pc_renew (clk,rst,snpc,dnpc,pc);
+//init pc and the rst of rmem 
+ysyx_23060111_pc pc_renew (clk,rst,snpc,dnpc,pc,raddr);
 
 //init IFU 取码
 ysyx_23060111_IFU init_IFU (clk,pc,inst);
