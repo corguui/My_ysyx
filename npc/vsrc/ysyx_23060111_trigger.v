@@ -16,4 +16,3 @@ module ysyx_23060111_trigger #(WIDTH = 1, RESET_VAL = 0) (
   end
 endmodule
 
-u
