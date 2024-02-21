@@ -154,7 +154,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBit(c+122,"ren", false,-1);
     tracep->declBus(c+119,"rdata", false,-1, 31,0);
     tracep->declBus(c+138,"flag", false,-1, 31,0);
-    tracep->declBus(c+120,"read_addr", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("pc_renew ");
     tracep->declBit(c+124,"clk", false,-1);
