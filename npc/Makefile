@@ -6,9 +6,6 @@ Wavefile=$(wildcard ./*.vcd)
 TOPfile=vsrc/ysyx_23060111_top.v
 TOPname=ysyx_23060111_top
 
-CONFIG: ./include/config.h 
-	@sed -e 's/^#define \(.*\) \(.*\)/\1=\2/' -e '/^#\(.*\)/d' -e '/^\/\(.*\)/d' -e '/^_\(.*\)/d' ./include/config.h > ./config.mk
-
 #init
 IMG ?= 
 VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
@@ -34,7 +31,7 @@ ELF =$(IMG:.bin=.elf)
 RUN_FLAGS += $(ELF)
 endif
 
-#itrace
+#itrace llvm--反汇编
 ifdef CONFIG_ITRACE
 Cfile += csrc/utils/disasm.cc
 VLTFLAGS += -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17\
@@ -42,7 +39,7 @@ VLTFLAGS += -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17\
 VLTFLAGS += -LDFLAGS -lreadline
 endif
 
-#difftest
+#difftest  链接nemu-so动态库
 ifdef CONFIG_DIFFTEST
 LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
 LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
@@ -57,6 +54,11 @@ NPC_GDB = -CFLAGS -g
 
 all:
 	@echo "Write this Makefile by your self."
+
+#  create the  Makefile config.mk 
+CONFIG: ./include/config.h 
+	@sed -e 's/^#define \(.*\) \(.*\)/\1=\2/' -e '/^#\(.*\)/d' -e '/^\/\(.*\)/d' -e '/^_\(.*\)/d' ./include/config.h > ./config.mk
+
 
 sim:$(Vfile) $(Cfile) $(TOPfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!

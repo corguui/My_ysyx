@@ -59,7 +59,7 @@ static void out_of_bound(uint32_t addr)
 	#endif
 	assert(0);
 }
-
+//check mem if out_of_bond will excute the fun out_of_bond
 static inline bool check_mem(uint32_t addr)
 {
 	return addr-0x80000000<0x80000000;
@@ -82,7 +82,7 @@ uint32_t pmem_read(uint32_t &ad,int len)
 	{ assert(0); printf("pmem_read error\n");   return 0;}
 	}
 }
-
+//pmem read in mem.v
 extern "C" int vlg_pmem_read(int ad,int flag)
 {
 	//flag == 0 IFU  flag ==  1  pmem_read
@@ -120,7 +120,7 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
 	  { assert(0); printf("pmem_write error\n");   }
 	}
 }
-
+//pmem_write in mem.v
 extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 {
 	uint32_t pc=(uint32_t)ad;
