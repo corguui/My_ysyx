@@ -37,8 +37,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     // Body
     Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(0x80000000U, 1U, __Vfunc_vlg_pmem_read__2__Vfuncout);
     vlSelf->ysyx_23060111_top__DOT__m_rdata = ((IData)(vlSelf->ysyx_23060111_top__DOT__m_ren)
-                                                ? __Vfunc_vlg_pmem_read__2__Vfuncout
-                                                : 0U);
+                                                ? 0U
+                                                : __Vfunc_vlg_pmem_read__2__Vfuncout);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[5U] 
         = (0x6e00000000ULL | ((QData)((IData)((vlSelf->ysyx_23060111_top__DOT__inst 
                                                >> 0xcU))) 
