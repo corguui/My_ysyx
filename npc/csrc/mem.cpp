@@ -90,8 +90,8 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 	if(ad==0&&init_flag==1)  //ad before init
 	{
 		init_flag=0;
-		printf("init");
 		return 0;
+		printf("init");
 	}
 	if(likely(check_mem(ad)))
 	{
