@@ -31,7 +31,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial__TOP(Vysyx_2306011
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list[1U] = 0ULL;
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[0U] = 0x4600000000ULL;
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[1U] = 0xe600000000ULL;
-    vlSelf->ysyx_23060111_top__DOT__m_raddr = 0x80000000U;
 }
 
 #ifdef VL_DEBUG
