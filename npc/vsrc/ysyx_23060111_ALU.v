@@ -93,11 +93,6 @@ begin
 
     //I
     7'b0010011:begin
-	     wdata=src1+imm;
-	     dnpc=snpc;
-	end
-    /*
-    7'b0010011:begin
         dnpc=snpc;
         case(funct3)
             //ADDI 
@@ -150,7 +145,6 @@ begin
             end
         endcase
     end
-    */
 
     //IL
     7'b0000011:begin
