@@ -8,12 +8,12 @@ module ysyx_23060111_ALU(
     input [31:0] pc,
     input [31:0] snpc,
     output reg[31:0] dnpc,
-    output wen,
+    output reg wen,
     output reg[31:0] wdata,
     output reg [31:0] m_waddr,
     output [31:0] m_wdata,
     output reg [31:0] m_wmask,
-    output m_wen,
+    output reg m_wen,
     output reg [31:0] m_raddr,
     output [31:0] m_rdata
 
