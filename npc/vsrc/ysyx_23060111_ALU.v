@@ -237,6 +237,12 @@ begin
         3'b111:begin
             dnpc = (cond_bgeu == 1'b1)? (pc+imm) : snpc; 
         end
+        default:begin
+            wdata=32'b0;
+            dnpc=snpc;
+        end
+        endcase
+        end
     
     //J jal
     7'b1101111:begin
@@ -262,7 +268,7 @@ begin
 	        dnpc=snpc;	
 	    end
 
-        default:begin
+    default:begin
             wdata=32'b0;
             dnpc=snpc;
         end

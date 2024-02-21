@@ -24,14 +24,17 @@ module ysyx_23060111_EXU(
   output [31:0] m_rdata
 );
 
-ysyx_23060111_ALU ALU_init (opcode,funct3,funct7,imm,rout1,rout2,pc,snpc,dnpc,wen,wdata,m_waddr,m_wdata,m_wmask,m_wen,m_raddr,m_rdata);
 
-/*
   assign waddr=rd[11:7]; //R(rd)
   assign raddr1=rs1[19:15]; //src1
   assign raddr2=rs2[24:20]; //src2
+/*
   assign wen=1'b1;
 */
+
+
+ysyx_23060111_ALU ALU_init (opcode,funct3,funct7,imm,rout1,rout2,pc,snpc,dnpc,wen,wdata,m_waddr,m_wdata,m_wmask,m_wen,m_raddr,m_rdata);
+
 
 /*
  ysyx_23060111_MuxKeyWithDefault #(5, 4, 64 ) i1 ({wdata,dnpc},type_i , {32'b0,snpc}, {
