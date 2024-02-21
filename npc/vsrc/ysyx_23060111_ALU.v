@@ -186,24 +186,24 @@ begin
         case(funct3)
         //SB
         3'b000:begin
+            m_wen=1'b1;
             m_waddr = src1 + imm; 
             m_wmask = 32'd1;
             m_wdata = src2;
-            m_wen=1'b1;
         end
         //SH
         3'b001:begin
+            m_wen=1'b1;
             m_waddr = src1 + imm; 
             m_wmask = 32'd2;
             m_wdata = src2;
-            m_wen=1'b1;
         end
         //SW
         3'b010:begin
+            m_wen=1'b1;
             m_waddr = src1 + imm; 
             m_wmask = 32'd4;
-            m_wdata = rout2;
-            m_wen=1'b1;
+            m_wdata = src2;
         end
 
         default:wdata=32'b0;
