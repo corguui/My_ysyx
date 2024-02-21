@@ -154,28 +154,36 @@ begin
         3'b000:begin
            m_raddr = src1 + imm;
            wdata = $signed({{24{m_rdata[7]}},m_rdata[7:0]});
+           wen=1'b1;
         end
         //LH
         3'b001:begin
            m_raddr = src1 + imm;
            wdata = $signed({{16{m_rdata[7]}},m_rdata[15:0]});
+           wen=1'b1;
         end
         //LW
         3'b010:begin
            m_raddr = src1 + imm;
            wdata = $signed(m_rdata);
+           wen=1'b1;
         end
         //LBU
         3'b100:begin
            m_raddr = src1 + imm;
            wdata = {24'b0,m_rdata[7:0]};
+           wen=1'b1;
         end
         //LHU
         3'b101:begin
            m_raddr = src1 + imm;
            wdata = {16'b0,m_rdata[15:0]};
+           wen=1'b1;
         end
-        default wdata=32'b0;
+        default:begin
+             wdata=32'b0;
+             wen=1'b1;
+        end
         endcase
     end
 
@@ -206,7 +214,10 @@ begin
             m_wdata = src2;
         end
 
-        default:wdata=32'b0;
+        default:begin
+            wdata=32'b0;
+            wen=1'b1;
+        end
         endcase
     end
 
@@ -239,6 +250,7 @@ begin
         end
         default:begin
             wdata=32'b0;
+            wen=1'b1;
             dnpc=snpc;
         end
         endcase
@@ -247,29 +259,34 @@ begin
     //J jal
     7'b1101111:begin
 	        wdata=snpc;
+            wen=1'b1;
 	        dnpc=pc+imm;
     end
     
     //JR jalr
 	7'b1100111:begin
 	        wdata=snpc;
+            wen=1'b1;
 	        dnpc=imm+src1;
 	end    
 
     //U lui
     7'b0110111:begin
 	        wdata=imm;
+            wen=1'b1;
 	        dnpc=snpc;
 	end
 
     //UPC auipc
 	7'b0010111:begin
  	        wdata=pc+imm;
+            wen=1'b1;
 	        dnpc=snpc;	
 	end
 
     default:begin
         wdata=32'b0;
+        wen=1'b1;
         dnpc=snpc;
     end
     endcase
