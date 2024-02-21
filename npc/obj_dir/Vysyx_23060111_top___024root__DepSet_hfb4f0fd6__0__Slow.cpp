@@ -31,14 +31,11 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___stl_sequent__TOP__0\n"); );
-    // Init
-    IData/*31:0*/ __Vfunc_vlg_pmem_read__2__Vfuncout;
-    __Vfunc_vlg_pmem_read__2__Vfuncout = 0;
     // Body
-    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(0x80000000U, 1U, __Vfunc_vlg_pmem_read__2__Vfuncout);
+    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(vlSelf->ysyx_23060111_top__DOT__m_raddr, 1U, vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout);
     vlSelf->ysyx_23060111_top__DOT__m_rdata = ((IData)(vlSelf->ysyx_23060111_top__DOT__m_ren)
-                                                ? 0U
-                                                : __Vfunc_vlg_pmem_read__2__Vfuncout);
+                                                ? vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout
+                                                : 0U);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[5U] 
         = (0x6e00000000ULL | ((QData)((IData)((vlSelf->ysyx_23060111_top__DOT__inst 
                                                >> 0xcU))) 
