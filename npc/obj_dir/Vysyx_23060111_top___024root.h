@@ -23,7 +23,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     CData/*6:0*/ ysyx_23060111_top__DOT__opcode;
     CData/*0:0*/ ysyx_23060111_top__DOT__wen;
     CData/*0:0*/ ysyx_23060111_top__DOT__m_wen;
-    CData/*0:0*/ ysyx_23060111_top__DOT__pc_renew__DOT____Vcellout__renew_pc____pinNumber5;
+    CData/*0:0*/ ysyx_23060111_top__DOT__m_ren;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_beq;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bge;
