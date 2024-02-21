@@ -41,7 +41,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     IData/*31:0*/ ysyx_23060111_top__DOT__m_wmask;
     IData/*31:0*/ ysyx_23060111_top__DOT__m_rdata;
     IData/*31:0*/ ysyx_23060111_top__DOT__m_raddr;
-    VlWide<9>/*279:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4;
+    VlWide<13>/*399:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4;
     IData/*31:0*/ __Vfunc_vlg_pmem_read__2__Vfuncout;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst;
@@ -51,10 +51,11 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     QData/*32:0*/ __VdfgTmp_h9a359807__0;
     QData/*32:0*/ __VdfgTmp_hc90cd392__0;
     QData/*32:0*/ __VdfgTmp_h170abfaf__0;
+    QData/*32:0*/ __VdfgTmp_h327dca1e__0;
     VlUnpacked<IData/*31:0*/, 32> ysyx_23060111_top__DOT__reg___0240__DOT__rf;
-    VlUnpacked<QData/*39:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list;
-    VlUnpacked<CData/*6:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list;
-    VlUnpacked<QData/*32:0*/, 7> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list;
+    VlUnpacked<QData/*39:0*/, 10> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list;
+    VlUnpacked<CData/*6:0*/, 10> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list;
+    VlUnpacked<QData/*32:0*/, 10> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list;
     VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<3> __VactTriggered;
