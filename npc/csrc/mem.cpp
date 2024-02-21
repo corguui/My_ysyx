@@ -92,6 +92,10 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 		init_flag=0;
 		return 0;
 	}
+	if(ad==0)
+	{
+		return 0;
+	}
 	if(likely(check_mem(ad)))
 	{
 	uint32_t data=pmem_read(pc, 4);
