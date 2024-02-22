@@ -175,6 +175,7 @@ begin
         3'b010:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
+           m_ren=1'b0;
            $display(m_rdata);
            $display(wdata);
            wdata = $signed(m_rdata);            
