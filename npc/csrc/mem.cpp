@@ -104,7 +104,7 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 	#endif
 	if(addr==0x80008fdc)
 	{
-		printf("----%x\n",data);
+		printf("----%x\n",(int)data);
 	}
 	return (int) data; 
 	}
