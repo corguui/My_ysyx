@@ -188,7 +188,7 @@ begin
            wen=1'b1;
         end
         default:begin
-            wdata=32'b1;
+            wdata=32'b0;
             wen=1'b1;
         end
         endcase
@@ -292,7 +292,7 @@ begin
 	end
 
     default:begin
-        wdata=32'b0;
+        wdata=32'b1;
         wen=1'b1;
         dnpc=snpc;
     end
