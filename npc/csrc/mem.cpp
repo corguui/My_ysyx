@@ -13,7 +13,6 @@ int write_num=0;
 int read_num=0;
 #endif
 
-int init_flag=1;
 static long load_img();
 static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
 static uint32_t img[]
@@ -87,11 +86,6 @@ extern "C" int vlg_pmem_read(int ad)
 {
 	//flag == 0 IFU  flag ==  1  pmem_read
 	uint32_t addr=(uint32_t)ad;
-	if(ad==0&&init_flag==1)  //ad before init
-	{
-		init_flag=0;
-		return 0;
-	}
 	if(likely(check_mem(addr)))
 	{
 	uint32_t data=pmem_read(addr, 4);
