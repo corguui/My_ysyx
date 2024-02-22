@@ -871,7 +871,7 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_2306
                                      : (0xffU & vlSelf->ysyx_23060111_top__DOT__m_rdata)))
                         : ((0x2000U & vlSelf->ysyx_23060111_top__DOT__inst)
                             ? ((0x1000U & vlSelf->ysyx_23060111_top__DOT__inst)
-                                ? 0U : vlSelf->ysyx_23060111_top__DOT__rout1)
+                                ? 0U : vlSelf->ysyx_23060111_top__DOT__m_rdata)
                             : ((0x1000U & vlSelf->ysyx_23060111_top__DOT__inst)
                                 ? (((- (IData)((1U 
                                                 & (vlSelf->ysyx_23060111_top__DOT__m_rdata 

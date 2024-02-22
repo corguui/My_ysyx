@@ -17,7 +17,7 @@ module ysyx_23060111_ALU(
     output reg m_wen,
     output reg [31:0] m_raddr,
     output reg m_ren,
-    input [31:0] m_rdata
+    output [31:0] m_rdata
 
 );
 
