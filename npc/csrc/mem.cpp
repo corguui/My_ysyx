@@ -84,7 +84,6 @@ uint32_t pmem_read(uint32_t &ad,int len)
 //pmem read in mem.v
 extern "C" int vlg_pmem_read(int ad)
 {
-	//flag == 0 IFU  flag ==  1  pmem_read
 	uint32_t addr=(uint32_t)ad;
 	if(likely(check_mem(addr)))
 	{
@@ -93,14 +92,14 @@ extern "C" int vlg_pmem_read(int ad)
 	 	read_buf[read_num]=addr;
   		read_num++;
 	#endif
-	if(addr==0x80008fdc)
+	if(ad==0x80008fdc)
 	{
 		printf("%x\n",(int)data);
 	}
 	return (int) data; 
 	}
 	printf("read\n");
-	out_of_bound(ad);
+	out_of_bound(addr);
 	return 0;
 }
 
