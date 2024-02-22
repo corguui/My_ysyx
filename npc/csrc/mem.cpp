@@ -83,7 +83,7 @@ uint32_t pmem_read(uint32_t &ad,int len)
 	}
 }
 //pmem read in mem.v
-extern "C" int vlg_pmem_read(int ad,int flag)
+extern "C" int vlg_pmem_read(int ad)
 {
 	//flag == 0 IFU  flag ==  1  pmem_read
 	uint32_t addr=(uint32_t)ad;
@@ -96,11 +96,8 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 	{
 	uint32_t data=pmem_read(addr, 4);
 	#ifdef  CONFIG_MTRACE
-	if(flag == 1)
-	{
 	 	read_buf[read_num]=addr;
   		read_num++;
-	}
 	#endif
 	return (int) data; 
 	}
@@ -109,7 +106,7 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 	return 0;
 }
 
-extern "C" int vlg_pc_read(int ad,int flag)
+extern "C" int vlg_pc_read(int ad)
 {
 	uint32_t pc=(uint32_t)ad;
 	if(likely(check_mem(pc)))
