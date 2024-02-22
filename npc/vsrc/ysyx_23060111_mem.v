@@ -6,9 +6,9 @@ module ysyx_23060111_mem(
     input [31:0] m_waddr,
     input [31:0] m_wdata,
     input [31:0] m_wmask,
-    output reg m_wen,
+    input m_wen,
     input [31:0] m_raddr,
-    output reg m_ren,
+    input m_ren,
     output reg [31:0] m_rdata
 
 ); 
@@ -16,7 +16,6 @@ module ysyx_23060111_mem(
     always @(m_raddr) begin
         if(m_ren) begin
              m_rdata=vlg_pmem_read(m_raddr);
-             m_ren=1'b0;
         end
     end
 
@@ -25,7 +24,6 @@ module ysyx_23060111_mem(
         if(m_wen)
         begin
             vlg_pmem_write(m_waddr,m_wdata,m_wmask);
-            m_wen=1'b0;
         end
     end
 
