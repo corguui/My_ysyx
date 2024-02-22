@@ -14,10 +14,12 @@ module ysyx_23060111_mem(
 ); 
 
     always @(raddr) begin
-        if(ren) begin
              rdata=vlg_pmem_read(raddr);
+/*
+        if(ren) begin
              ren=1'b0;
         end
+        */
     end
 
     always@(posedge clk)
