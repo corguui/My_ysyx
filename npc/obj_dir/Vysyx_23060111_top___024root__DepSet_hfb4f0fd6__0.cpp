@@ -878,6 +878,7 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
     if (((IData)(vlSelf->ysyx_23060111_top__DOT__wen) 
          & (0U != (0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                             >> 7U))))) {
+        vlSelf->ysyx_23060111_top__DOT__wen = 0U;
         __Vdlyvval__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0 
             = vlSelf->ysyx_23060111_top__DOT__wdata;
         __Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0 = 1U;
