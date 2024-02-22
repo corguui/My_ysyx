@@ -189,7 +189,7 @@ begin
         end
         default:begin
             wdata=32'b0;
-            wen=1'b1;
+            wen=1'b0;
         end
         endcase
     end
@@ -223,7 +223,7 @@ begin
 
         default:begin
             wdata=32'b0;
-            wen=1'b1;
+            wen=1'b0;
         end
         endcase
     end
@@ -257,7 +257,7 @@ begin
         end
         default:begin
             wdata=32'b0;
-            wen=1'b1;
+            wen=1'b0;
             dnpc=snpc;
         end
         endcase
@@ -292,8 +292,8 @@ begin
 	end
 
     default:begin
-        wdata=32'b1;
-        wen=1'b1;
+        wdata=32'b0;
+        wen=1'b0;
         dnpc=snpc;
     end
     endcase
