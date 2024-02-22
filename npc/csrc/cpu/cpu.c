@@ -222,7 +222,7 @@ static void execute(uint64_t n)
 		{
 			printf("------%x\n",top->rootp->ysyx_23060111_top__DOT__m_rdata);
 			printf("******%x\n",top->rootp->ysyx_23060111_top__DOT__m_raddr);
-			printf("%x\n",top->rootp->ysyx_23060111_top__DOT__wdata);
+			printf("%d\n",top->rootp->ysyx_23060111_top__DOT__m_waddr);
 			//printf("______%x\n",vlg_pmem_read(0x80008fdc));
 		}
 		trace_and_difftest(&s); 
