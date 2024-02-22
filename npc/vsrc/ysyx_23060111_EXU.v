@@ -23,7 +23,7 @@ module ysyx_23060111_EXU(
   output m_wen,
   output [31:0] m_raddr,
   output m_ren,
-  input [31:0] m_rdata
+  output [31:0] m_rdata
 );
 
 
