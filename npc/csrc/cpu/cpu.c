@@ -218,6 +218,7 @@ static void execute(uint64_t n)
 		if(top->pc==0x80000054)
 		{
 			printf("------%x\n",top->rootp->ysyx_23060111_top__DOT__m_rdata);
+			printf("======%x\n",top->rootp->ysyx_23060111_top__DOT__mem___0240__DOT__rdata);	
 		}
 		cpu_exec_once(tfp,&s);
 		trace_and_difftest(&s); 
