@@ -1,5 +1,4 @@
 module ysyx_23060111_ALU(
-    input [31:0] inst,
     input [6:0] opcode,
     input [14:12] funct3,
     input [31:25] funct7,
