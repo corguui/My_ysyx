@@ -128,10 +128,6 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	if(likely(check_mem(addr)))
 	{
 	uint32_t data=(uint32_t)wdata;
-	if(addr==0x80008fdc)
-	{
-		printf("-----%x\n%d\n",data,len);
-	}
 	#ifdef CONFIG_MTRACE
 	write_buf[write_num]=addr;
 	write_num++;
