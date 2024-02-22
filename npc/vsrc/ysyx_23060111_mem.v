@@ -13,7 +13,7 @@ module ysyx_23060111_mem(
 
 ); 
 
-    always @(m_raddr) begin
+    always @(m_ren) begin
         if(m_ren) begin
              m_rdata=vlg_pmem_read(m_raddr);
         end
