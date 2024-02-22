@@ -37,8 +37,10 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
                                           != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__rout2)) 
                                       | (vlSelf->ysyx_23060111_top__DOT__snpc 
                                          != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__snpc));
-    vlSelf->__VactTriggered.at(2U) = ((IData)(vlSelf->ysyx_23060111_top__DOT__m_ren) 
-                                      != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_ren));
+    vlSelf->__VactTriggered.at(2U) = ((vlSelf->ysyx_23060111_top__DOT__m_raddr 
+                                       != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_raddr) 
+                                      | ((IData)(vlSelf->ysyx_23060111_top__DOT__m_ren) 
+                                         != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_ren)));
     vlSelf->__VactTriggered.at(3U) = ((IData)(vlSelf->clk) 
                                       & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clk)));
     vlSelf->__VactTriggered.at(4U) = (vlSelf->ysyx_23060111_top__DOT__inst 
@@ -61,6 +63,8 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
         = vlSelf->ysyx_23060111_top__DOT__rout2;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__snpc 
         = vlSelf->ysyx_23060111_top__DOT__snpc;
+    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_raddr 
+        = vlSelf->ysyx_23060111_top__DOT__m_raddr;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_ren 
         = vlSelf->ysyx_23060111_top__DOT__m_ren;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst 
@@ -90,6 +94,7 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_sequent__TOP__0(Vysyx_2306
     // Body
     if (vlSelf->ysyx_23060111_top__DOT__m_ren) {
         Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(vlSelf->ysyx_23060111_top__DOT__m_raddr, __Vfunc_vlg_pmem_read__2__Vfuncout);
+        vlSelf->ysyx_23060111_top__DOT__m_ren = 0U;
         vlSelf->ysyx_23060111_top__DOT__m_rdata = __Vfunc_vlg_pmem_read__2__Vfuncout;
     }
 }
