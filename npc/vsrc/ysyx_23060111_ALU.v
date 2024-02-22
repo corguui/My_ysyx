@@ -175,14 +175,13 @@ begin
         3'b010:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
-           m_ren=1'b0;
            $display(m_rdata);
            $display(wdata);
            wdata = $signed(m_rdata);            
            $display(m_rdata);
            $display(wdata);
-
            wen=1'b1;
+           m_ren=1'b0;
         end
         //LBU
         3'b100:begin
