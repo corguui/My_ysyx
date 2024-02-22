@@ -95,13 +95,12 @@ begin
 
     //I
     7'b0010011:begin
-        dnpc=snpc;
         case(funct3)
             //ADDI 
             3'b000:begin
-             $display(dnpc);
              wdata = src1+imm;
              wen=1'b1;
+             dnpc=snpc;
             end
             //XORI
             3'b100:begin
