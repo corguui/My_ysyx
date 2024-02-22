@@ -153,6 +153,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+128,"raddr", false,-1, 31,0);
     tracep->declBit(c+120,"ren", false,-1);
     tracep->declBus(c+127,"rdata", false,-1, 31,0);
+    tracep->declBus(c+138,"flag", false,-1, 31,0);
+    tracep->declBus(c+139,"read_addr", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("pc_renew ");
     tracep->declBit(c+122,"clk", false,-1);
@@ -161,17 +163,17 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+114,"dnpc", false,-1, 31,0);
     tracep->declBus(c+123,"pc", false,-1, 31,0);
     tracep->pushNamePrefix("renew_pc ");
-    tracep->declBus(c+138,"WIDTH", false,-1, 31,0);
-    tracep->declBus(c+139,"RESET_VAL", false,-1, 31,0);
+    tracep->declBus(c+140,"WIDTH", false,-1, 31,0);
+    tracep->declBus(c+141,"RESET_VAL", false,-1, 31,0);
     tracep->declBit(c+122,"clk", false,-1);
     tracep->declBit(c+121,"rst", false,-1);
     tracep->declBus(c+114,"din", false,-1, 31,0);
     tracep->declBus(c+123,"dout", false,-1, 31,0);
-    tracep->declBit(c+140,"wen", false,-1);
+    tracep->declBit(c+142,"wen", false,-1);
     tracep->popNamePrefix(2);
     tracep->pushNamePrefix("reg_$0 ");
-    tracep->declBus(c+141,"ADDR_WIDTH", false,-1, 31,0);
-    tracep->declBus(c+138,"DATA_WIDTH", false,-1, 31,0);
+    tracep->declBus(c+143,"ADDR_WIDTH", false,-1, 31,0);
+    tracep->declBus(c+140,"DATA_WIDTH", false,-1, 31,0);
     tracep->declBit(c+122,"clk", false,-1);
     tracep->declBus(c+115,"wdata", false,-1, 31,0);
     tracep->declBus(c+13,"waddr", false,-1, 4,0);
@@ -334,8 +336,10 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullIData(oldp+135,(0x28U),32);
     bufp->fullIData(oldp+136,(0xaU),32);
     bufp->fullIData(oldp+137,(0U),32);
-    bufp->fullIData(oldp+138,(0x20U),32);
-    bufp->fullIData(oldp+139,(0x80000000U),32);
-    bufp->fullBit(oldp+140,(1U));
-    bufp->fullIData(oldp+141,(5U),32);
+    bufp->fullIData(oldp+138,(1U),32);
+    bufp->fullIData(oldp+139,(vlSelf->ysyx_23060111_top__DOT__init_the_mem__DOT__read_addr),32);
+    bufp->fullIData(oldp+140,(0x20U),32);
+    bufp->fullIData(oldp+141,(0x80000000U),32);
+    bufp->fullBit(oldp+142,(1U));
+    bufp->fullIData(oldp+143,(5U),32);
 }

@@ -86,26 +86,26 @@ uint32_t pmem_read(uint32_t &ad,int len)
 extern "C" int vlg_pmem_read(int ad,int flag)
 {
 	//flag == 0 IFU  flag ==  1  pmem_read
-	uint32_t pc=(uint32_t)ad;
+	uint32_t addr=(uint32_t)ad;
 	if(ad==0&&init_flag==1)  //ad before init
 	{
 		init_flag=0;
 		return 0;
 	}
-	if(likely(check_mem(ad)))
+	if(likely(check_mem(addr)))
 	{
-	uint32_t data=pmem_read(pc, 4);
+	uint32_t data=pmem_read(addr, 4);
 	#ifdef  CONFIG_MTRACE
 	if(flag == 1)
 	{
-	 	read_buf[read_num]=ad;
+	 	read_buf[read_num]=addr;
   		read_num++;
 	}
 	#endif
 	return (int) data; 
 	}
 	printf("read\n");
-	out_of_bound(ad);
+	out_of_bound(addr);
 	return 0;
 }
 

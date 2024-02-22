@@ -1,4 +1,3 @@
-import "DPI-C" function int vlg_pmem_read(input int pc,input int flag);
 import "DPI-C" function void vlg_pmem_write(
   input int waddr, input int wdata, input int wmask);
 module ysyx_23060111_mem(
@@ -13,11 +12,10 @@ module ysyx_23060111_mem(
 
 ); 
     wire [31:0] flag; //flag ==1 pmem read
-    reg [31:0] read_addr;
     assign flag=32'd1;
 
-    always @(raddr)
-    begin
+    reg [31:0] read_addr;
+    always @(raddr) begin
     rdata =vlg_pmem_read(raddr,flag);
     end
 

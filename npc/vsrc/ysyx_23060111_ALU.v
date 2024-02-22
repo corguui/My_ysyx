@@ -188,8 +188,8 @@ begin
            wen=1'b1;
         end
         default:begin
-             wdata=32'b0;
-             wen=1'b1;
+            wdata=32'b0;
+            wen=1'b1;
         end
         endcase
     end
