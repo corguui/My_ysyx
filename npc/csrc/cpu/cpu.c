@@ -218,7 +218,7 @@ static void execute(uint64_t n)
 	{
 
 		cpu_exec_once(tfp,&s);
-		if(top->pc==0x80000054)
+		if(top->pc==0x80000058)
 		{
 			printf("------%x\n",top->rootp->ysyx_23060111_top__DOT__m_rdata);
 			printf("******%x\n",top->rootp->ysyx_23060111_top__DOT__m_raddr);
