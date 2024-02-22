@@ -79,7 +79,7 @@ begin
              else
              //SRA
              begin
-                wdata = src1 >>> src2[4:0]; //maybe error 
+                wdata = $signed(src1) >>> src2[4:0]; //maybe error 
                 wen=1'b1;
              end
             end
@@ -135,8 +135,9 @@ begin
                 wen=1'b1;
              end
              else
+             //SRAI
              begin
-                wdata = src1 >>> imm[4:0]; //maybe error 
+                wdata = $signed(src1) >>> imm[4:0]; //maybe error 
                 wen=1'b1;
              end
             end
