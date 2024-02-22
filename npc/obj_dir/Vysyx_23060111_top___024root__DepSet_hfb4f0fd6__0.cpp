@@ -42,18 +42,18 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
 #endif
 }
 
-void Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(IData/*31:0*/ pc, IData/*31:0*/ flag, IData/*31:0*/ &vlg_pmem_read__Vfuncrtn);
+void Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(IData/*31:0*/ pc, IData/*31:0*/ flag, IData/*31:0*/ &vlg_pc_read__Vfuncrtn);
 
 VL_INLINE_OPT void Vysyx_23060111_top___024root___act_sequent__TOP__1(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___act_sequent__TOP__1\n"); );
     // Init
-    IData/*31:0*/ __Vfunc_vlg_pmem_read__0__Vfuncout;
-    __Vfunc_vlg_pmem_read__0__Vfuncout = 0;
+    IData/*31:0*/ __Vfunc_vlg_pc_read__0__Vfuncout;
+    __Vfunc_vlg_pc_read__0__Vfuncout = 0;
     // Body
-    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(vlSelf->pc, 0U, __Vfunc_vlg_pmem_read__0__Vfuncout);
-    vlSelf->ysyx_23060111_top__DOT__inst = __Vfunc_vlg_pmem_read__0__Vfuncout;
+    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(vlSelf->pc, 0U, __Vfunc_vlg_pc_read__0__Vfuncout);
+    vlSelf->ysyx_23060111_top__DOT__inst = __Vfunc_vlg_pc_read__0__Vfuncout;
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[8U] 
         = (0x6e00000000ULL | ((QData)((IData)((vlSelf->ysyx_23060111_top__DOT__inst 
                                                >> 0xcU))) 
@@ -905,6 +905,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bgeu 
         = (vlSelf->ysyx_23060111_top__DOT__rout1 >= vlSelf->ysyx_23060111_top__DOT__rout2);
 }
+
+void Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(IData/*31:0*/ raddr, IData/*31:0*/ flag, IData/*31:0*/ &vlg_pmem_read__Vfuncrtn);
 
 VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
