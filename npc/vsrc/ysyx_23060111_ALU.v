@@ -172,7 +172,8 @@ begin
            m_raddr = src1 + imm;
            $display(m_rdata);
            $display(wdata);
-           wdata = m_rdata;            
+           //wdata = m_rdata;            
+           wdata = src1;
            $display(m_rdata);
            $display(wdata);
 
