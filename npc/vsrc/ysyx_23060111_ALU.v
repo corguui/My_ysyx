@@ -177,7 +177,6 @@ begin
            $display(m_raddr);
            $display(m_rdata);
            wdata = $signed(m_rdata);            
-           $display(m_rdata);
            wen=1'b1;
         end
         //LBU
