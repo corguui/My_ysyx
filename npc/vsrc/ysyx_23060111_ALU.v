@@ -34,7 +34,7 @@ assign cond_bgeu = rout1 >= rout2;
 assign src1 = rout1;
 assign src2 = rout2;
 
-always @(opcode or imm or funct3 or funct7 or pc or m_rdata) 
+always @(opcode or funct3 or funct7 or pc or m_rdata) 
 begin
     case(opcode)
     //R

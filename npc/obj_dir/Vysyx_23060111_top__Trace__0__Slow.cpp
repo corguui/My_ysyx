@@ -246,16 +246,13 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullCData(oldp+21,(vlSelf->ysyx_23060111_top__DOT__opcode),7);
     bufp->fullCData(oldp+22,((0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                                        >> 7U))),5);
-    bufp->fullCData(oldp+23,((7U & (vlSelf->ysyx_23060111_top__DOT__inst 
-                                    >> 0xcU))),3);
+    bufp->fullCData(oldp+23,(vlSelf->ysyx_23060111_top__DOT__funct3),3);
     bufp->fullCData(oldp+24,((0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                                        >> 0xfU))),5);
     bufp->fullCData(oldp+25,((0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                                        >> 0x14U))),5);
-    bufp->fullCData(oldp+26,((vlSelf->ysyx_23060111_top__DOT__inst 
-                              >> 0x19U)),7);
-    bufp->fullIData(oldp+27,((IData)((vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1 
-                                      >> 1U))),32);
+    bufp->fullCData(oldp+26,(vlSelf->ysyx_23060111_top__DOT__funct7),7);
+    bufp->fullIData(oldp+27,(vlSelf->ysyx_23060111_top__DOT__imm),32);
     bufp->fullQData(oldp+28,(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1),33);
     bufp->fullWData(oldp+30,(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4),400);
     bufp->fullQData(oldp+43,(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[0]),40);
