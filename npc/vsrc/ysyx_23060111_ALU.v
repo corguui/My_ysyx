@@ -203,6 +203,7 @@ begin
     //S
     7'b0100011:begin
         dnpc=snpc;
+        wen=1'b0;
         case(funct3)
         //SB
         3'b000:begin
