@@ -77,6 +77,7 @@ begin
                 wen=1'b1;
              end
              else
+             //SRA
              begin
                 wdata = src1 >>> src2[4:0]; //maybe error 
                 wen=1'b1;
