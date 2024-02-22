@@ -99,9 +99,8 @@ begin
         case(funct3)
             //ADDI 
             3'b000:begin
-             wen=1'b1;
              wdata = src1+imm;
-             wen=1'b0;
+             wen=1'b1;
             end
             //XORI
             3'b100:begin
@@ -271,33 +270,29 @@ begin
     
     //J jal
     7'b1101111:begin
-            wen=1'b1;
 	        wdata=snpc;
-            wen=1'b0;
+            wen=1'b1;
 	        dnpc=pc+imm;
     end
     
     //JR jalr
 	7'b1100111:begin
-            wen=1'b1;
 	        wdata=snpc;
-            wen=1'b0;
+            wen=1'b1;
 	        dnpc=imm+src1;
 	end    
 
     //U lui
     7'b0110111:begin
-            wen=1'b1;
 	        wdata=imm;
-            wen=1'b0;
+            wen=1'b1;
 	        dnpc=snpc;
 	end
 
     //UPC auipc
 	7'b0010111:begin
-            wen=1'b1;
  	        wdata=pc+imm;
-            wen=1'b0;
+            wen=1'b1;
 	        dnpc=snpc;	
 	end
 
