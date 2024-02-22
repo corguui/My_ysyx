@@ -40,7 +40,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_OUT(pc,31,0);
     IData/*31:0*/ ysyx_23060111_top__DOT__inst;
     IData/*31:0*/ ysyx_23060111_top__DOT__dnpc;
-    IData/*31:0*/ ysyx_23060111_top__DOT__imm;
     IData/*31:0*/ ysyx_23060111_top__DOT__wdata;
     IData/*31:0*/ ysyx_23060111_top__DOT__rout1;
     IData/*31:0*/ ysyx_23060111_top__DOT__rout2;
@@ -52,7 +51,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VlWide<13>/*399:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __Vtrigrprev__TOP__pc;
-    IData/*31:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__imm;
     IData/*31:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_rdata;
     IData/*31:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_raddr;
     IData/*31:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst;

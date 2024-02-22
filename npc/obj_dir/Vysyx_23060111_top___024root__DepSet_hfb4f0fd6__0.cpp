@@ -19,14 +19,12 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
     // Body
     vlSelf->__VactTriggered.at(0U) = ((~ (IData)(vlSelf->clk)) 
                                       & (IData)(vlSelf->__Vtrigrprev__TOP__clk));
-    vlSelf->__VactTriggered.at(1U) = ((((((vlSelf->pc 
-                                           != vlSelf->__Vtrigrprev__TOP__pc) 
-                                          | ((IData)(vlSelf->ysyx_23060111_top__DOT__funct3) 
-                                             != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__funct3))) 
-                                         | ((IData)(vlSelf->ysyx_23060111_top__DOT__funct7) 
-                                            != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__funct7))) 
-                                        | (vlSelf->ysyx_23060111_top__DOT__imm 
-                                           != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__imm)) 
+    vlSelf->__VactTriggered.at(1U) = (((((vlSelf->pc 
+                                          != vlSelf->__Vtrigrprev__TOP__pc) 
+                                         | ((IData)(vlSelf->ysyx_23060111_top__DOT__funct3) 
+                                            != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__funct3))) 
+                                        | ((IData)(vlSelf->ysyx_23060111_top__DOT__funct7) 
+                                           != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__funct7))) 
                                        | (vlSelf->ysyx_23060111_top__DOT__m_rdata 
                                           != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_rdata)) 
                                       | ((IData)(vlSelf->ysyx_23060111_top__DOT__opcode) 
@@ -45,8 +43,6 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
         = vlSelf->ysyx_23060111_top__DOT__funct3;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__funct7 
         = vlSelf->ysyx_23060111_top__DOT__funct7;
-    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__imm 
-        = vlSelf->ysyx_23060111_top__DOT__imm;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_rdata 
         = vlSelf->ysyx_23060111_top__DOT__m_rdata;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__opcode 
@@ -127,14 +123,14 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_sequent__TOP__2(Vysyx_2306
                                                                           | (0xffcU 
                                                                              & (vlSelf->ysyx_23060111_top__DOT__inst 
                                                                                 >> 0x13U))))))));
+    vlSelf->ysyx_23060111_top__DOT__opcode = (0x7fU 
+                                              & vlSelf->ysyx_23060111_top__DOT__inst);
     vlSelf->ysyx_23060111_top__DOT__rout1 = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                    >> 0xfU))];
     vlSelf->ysyx_23060111_top__DOT__rout2 = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                    >> 0x14U))];
-    vlSelf->ysyx_23060111_top__DOT__opcode = (0x7fU 
-                                              & vlSelf->ysyx_23060111_top__DOT__inst);
     vlSelf->__VdfgTmp_h9a359807__0 = (((QData)((IData)(
                                                        (0x7ffffU 
                                                         & (- (IData)(
@@ -441,8 +437,6 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_sequent__TOP__2(Vysyx_2306
         = ((IData)(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit)
             ? vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__lut_out
             : 1ULL);
-    vlSelf->ysyx_23060111_top__DOT__imm = (IData)((vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1 
-                                                   >> 1U));
     vlSelf->inv_flag = (1U & (IData)(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1));
 }
 
