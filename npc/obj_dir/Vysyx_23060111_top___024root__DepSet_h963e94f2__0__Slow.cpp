@@ -25,13 +25,13 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial(Vysyx_23060111_top
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
+    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_ren 
+        = vlSelf->ysyx_23060111_top__DOT__m_ren;
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst 
         = vlSelf->ysyx_23060111_top__DOT__inst;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_rdata 
         = vlSelf->ysyx_23060111_top__DOT__m_rdata;
-    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_raddr 
-        = vlSelf->ysyx_23060111_top__DOT__m_raddr;
 }
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial__TOP(Vysyx_23060111_top___024root* vlSelf) {
@@ -105,6 +105,9 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__stl(Vysyx_230601
     }
     if (vlSelf->__VstlTriggered.at(0U)) {
         VL_DBG_MSGF("         'stl' region trigger index 0 is active: Internal 'stl' trigger - first iteration\n");
+    }
+    if (vlSelf->__VstlTriggered.at(1U)) {
+        VL_DBG_MSGF("         'stl' region trigger index 1 is active: @([hybrid] ysyx_23060111_top.m_ren)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -456,11 +459,16 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     vlSelf->inv_flag = (1U & (IData)(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1));
 }
 
+void Vysyx_23060111_top___024root___act_comb__TOP__0(Vysyx_23060111_top___024root* vlSelf);
+
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_stl(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_stl\n"); );
     // Body
+    if ((vlSelf->__VstlTriggered.at(0U) | vlSelf->__VstlTriggered.at(1U))) {
+        Vysyx_23060111_top___024root___act_comb__TOP__0(vlSelf);
+    }
     if (vlSelf->__VstlTriggered.at(0U)) {
         Vysyx_23060111_top___024root___stl_sequent__TOP__0(vlSelf);
         vlSelf->__Vm_traceActivity[3U] = 1U;
@@ -489,7 +497,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__act(Vysyx_230601
         VL_DBG_MSGF("         'act' region trigger index 2 is active: @([changed] ysyx_23060111_top.inst or [changed] ysyx_23060111_top.m_rdata)\n");
     }
     if (vlSelf->__VactTriggered.at(3U)) {
-        VL_DBG_MSGF("         'act' region trigger index 3 is active: @([changed] ysyx_23060111_top.m_raddr)\n");
+        VL_DBG_MSGF("         'act' region trigger index 3 is active: @([hybrid] ysyx_23060111_top.m_ren)\n");
     }
     if (vlSelf->__VactTriggered.at(4U)) {
         VL_DBG_MSGF("         'act' region trigger index 4 is active: @([changed] ysyx_23060111_top.inst)\n");
@@ -516,7 +524,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__nba(Vysyx_230601
         VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([changed] ysyx_23060111_top.inst or [changed] ysyx_23060111_top.m_rdata)\n");
     }
     if (vlSelf->__VnbaTriggered.at(3U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @([changed] ysyx_23060111_top.m_raddr)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @([hybrid] ysyx_23060111_top.m_ren)\n");
     }
     if (vlSelf->__VnbaTriggered.at(4U)) {
         VL_DBG_MSGF("         'nba' region trigger index 4 is active: @([changed] ysyx_23060111_top.inst)\n");
@@ -569,13 +577,15 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___ctor_var_reset(Vysyx_23060111_t
     vlSelf->__VdfgTmp_hc90cd392__0 = 0;
     vlSelf->__VdfgTmp_h170abfaf__0 = 0;
     vlSelf->__VdfgTmp_h327dca1e__0 = 0;
+    vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vdlyvdim0__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0 = 0;
     vlSelf->__Vdlyvval__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0 = VL_RAND_RESET_I(32);
     vlSelf->__Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0 = 0;
+    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_ren = VL_RAND_RESET_I(1);
+    vlSelf->__VstlDidInit = 0;
     vlSelf->__Vtrigrprev__TOP__clk = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_rdata = VL_RAND_RESET_I(32);
-    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__m_raddr = VL_RAND_RESET_I(32);
     vlSelf->__VactDidInit = 0;
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
