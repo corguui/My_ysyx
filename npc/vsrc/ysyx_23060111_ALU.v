@@ -99,6 +99,7 @@ begin
         case(funct3)
             //ADDI 
             3'b000:begin
+             $display(dnpc);
              wdata = src1+imm;
              wen=1'b1;
             end
