@@ -1,4 +1,4 @@
-import "DPI-C" function int vlg_pmem_read(input int pc,input int flag);
+
 module ysyx_23060111_IFU(
     input clk,
     input [31:0] pc,
