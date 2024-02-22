@@ -103,7 +103,7 @@ extern "C" int vlg_pmem_read(int ad)
 	{
 		printf("%x\n",(int)data);
 	}
-	return  data; 
+	return (int) data; 
 	}
 	printf("read\n");
 	out_of_bound(ad);

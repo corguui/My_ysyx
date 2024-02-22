@@ -220,7 +220,7 @@ static void execute(uint64_t n)
 		{
 			printf("------%x\n",top->rootp->ysyx_23060111_top__DOT__m_rdata);
 			printf("******%x\n",top->rootp->ysyx_23060111_top__DOT__m_raddr);
-			printf("______%x\n",vlg_pmem_read(top->rootp->ysyx_23060111_top__DOT__m_raddr));
+			printf("______%x\n",vlg_pmem_read(0));
 		}
 		cpu_exec_once(tfp,&s);
 		trace_and_difftest(&s); 
