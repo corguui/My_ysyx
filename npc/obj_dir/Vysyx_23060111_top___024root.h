@@ -30,8 +30,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_beq;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bge;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bgeu;
-    CData/*4:0*/ __Vdlyvdim0__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0;
-    CData/*0:0*/ __Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*2:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__funct3;
     CData/*6:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__funct7;
@@ -52,7 +50,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     IData/*31:0*/ ysyx_23060111_top__DOT__m_rdata;
     IData/*31:0*/ ysyx_23060111_top__DOT__m_raddr;
     VlWide<13>/*399:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4;
-    IData/*31:0*/ __Vdlyvval__ysyx_23060111_top__DOT__reg___0240__DOT__rf__v0;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __Vtrigrprev__TOP__pc;
     IData/*31:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__imm;
@@ -76,7 +73,6 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<5> __VactTriggered;
-    VlTriggerVec<5> __VpreTriggered;
     VlTriggerVec<5> __VnbaTriggered;
 
     // INTERNAL VARIABLES

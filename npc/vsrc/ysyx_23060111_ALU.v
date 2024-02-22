@@ -271,29 +271,33 @@ begin
     
     //J jal
     7'b1101111:begin
-	        wdata=snpc;
             wen=1'b1;
+	        wdata=snpc;
+            wen=1'b0;
 	        dnpc=pc+imm;
     end
     
     //JR jalr
 	7'b1100111:begin
-	        wdata=snpc;
             wen=1'b1;
+	        wdata=snpc;
+            wen=1'b0;
 	        dnpc=imm+src1;
 	end    
 
     //U lui
     7'b0110111:begin
-	        wdata=imm;
             wen=1'b1;
+	        wdata=imm;
+            wen=1'b0;
 	        dnpc=snpc;
 	end
 
     //UPC auipc
 	7'b0010111:begin
- 	        wdata=pc+imm;
             wen=1'b1;
+ 	        wdata=pc+imm;
+            wen=1'b0;
 	        dnpc=snpc;	
 	end
 
