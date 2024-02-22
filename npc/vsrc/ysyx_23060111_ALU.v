@@ -99,8 +99,9 @@ begin
         case(funct3)
             //ADDI 
             3'b000:begin
-             wdata = src1+imm;
              wen=1'b1;
+             wdata = src1+imm;
+             wen=1'b0;
             end
             //XORI
             3'b100:begin
