@@ -503,16 +503,16 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__act(Vysyx_230601
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VactTriggered.at(0U)) {
-        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(negedge clk)\n");
     }
     if (vlSelf->__VactTriggered.at(1U)) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(negedge clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @([changed] pc or [changed] ysyx_23060111_top.funct3 or [changed] ysyx_23060111_top.funct7 or [changed] ysyx_23060111_top.imm or [changed] ysyx_23060111_top.m_rdata or [changed] ysyx_23060111_top.opcode or [changed] ysyx_23060111_top.rout1 or [changed] ysyx_23060111_top.rout2 or [changed] ysyx_23060111_top.snpc)\n");
     }
     if (vlSelf->__VactTriggered.at(2U)) {
-        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([changed] pc or [changed] ysyx_23060111_top.funct3 or [changed] ysyx_23060111_top.funct7 or [changed] ysyx_23060111_top.imm or [changed] ysyx_23060111_top.m_rdata or [changed] ysyx_23060111_top.opcode or [changed] ysyx_23060111_top.rout1 or [changed] ysyx_23060111_top.rout2 or [changed] ysyx_23060111_top.snpc)\n");
+        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([changed] ysyx_23060111_top.m_raddr)\n");
     }
     if (vlSelf->__VactTriggered.at(3U)) {
-        VL_DBG_MSGF("         'act' region trigger index 3 is active: @([changed] ysyx_23060111_top.m_raddr)\n");
+        VL_DBG_MSGF("         'act' region trigger index 3 is active: @(posedge clk)\n");
     }
     if (vlSelf->__VactTriggered.at(4U)) {
         VL_DBG_MSGF("         'act' region trigger index 4 is active: @([changed] ysyx_23060111_top.inst)\n");
@@ -530,16 +530,16 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__nba(Vysyx_230601
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VnbaTriggered.at(0U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(negedge clk)\n");
     }
     if (vlSelf->__VnbaTriggered.at(1U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(negedge clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @([changed] pc or [changed] ysyx_23060111_top.funct3 or [changed] ysyx_23060111_top.funct7 or [changed] ysyx_23060111_top.imm or [changed] ysyx_23060111_top.m_rdata or [changed] ysyx_23060111_top.opcode or [changed] ysyx_23060111_top.rout1 or [changed] ysyx_23060111_top.rout2 or [changed] ysyx_23060111_top.snpc)\n");
     }
     if (vlSelf->__VnbaTriggered.at(2U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([changed] pc or [changed] ysyx_23060111_top.funct3 or [changed] ysyx_23060111_top.funct7 or [changed] ysyx_23060111_top.imm or [changed] ysyx_23060111_top.m_rdata or [changed] ysyx_23060111_top.opcode or [changed] ysyx_23060111_top.rout1 or [changed] ysyx_23060111_top.rout2 or [changed] ysyx_23060111_top.snpc)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([changed] ysyx_23060111_top.m_raddr)\n");
     }
     if (vlSelf->__VnbaTriggered.at(3U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @([changed] ysyx_23060111_top.m_raddr)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @(posedge clk)\n");
     }
     if (vlSelf->__VnbaTriggered.at(4U)) {
         VL_DBG_MSGF("         'nba' region trigger index 4 is active: @([changed] ysyx_23060111_top.inst)\n");
