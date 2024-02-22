@@ -95,7 +95,7 @@ extern "C" int vlg_pmem_read(int ad)
 	#endif
 	if(addr==0x80000220)
 	{
-		printf("%x\n",data);
+		printf("--%x\n",data);
 	}
 	return (int) data; 
 	}
