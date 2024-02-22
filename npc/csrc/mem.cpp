@@ -109,6 +109,27 @@ extern "C" int vlg_pmem_read(int ad,int flag)
 	return 0;
 }
 
+extern "C" int vlg_pc_read(int ad,int flag)
+{
+	//flag == 0 IFU  flag ==  1  pmem_read
+	uint32_t pc=(uint32_t)ad;
+	/*
+	if(ad==0&&pc_read_flag==1)  //ad before init
+	{
+		pc_read_flag=0;
+		return 0;
+	}
+	*/
+	if(likely(check_mem(pc)))
+	{
+	uint32_t data=pmem_read(pc, 4);
+	return (int) data; 
+	}
+	printf("pc_read\n");
+	out_of_bound(pc);
+	return 0;
+}
+
 void pmem_write(uint32_t &ad, int len, uint32_t data)
 {
   	uint8_t *addr =pmem+ad-0x80000000;

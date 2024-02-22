@@ -1,4 +1,4 @@
-import "DPI-C" function int vlg_pmem_read(input int pc,input int flag);
+import "DPI-C" function int vlg_pc_read(input int pc,input int flag);
 module ysyx_23060111_IFU(
     input clk,
     input [31:0] pc,
@@ -7,7 +7,7 @@ module ysyx_23060111_IFU(
     wire [31:0] flag;
     assign flag=32'd0;
     always@(negedge clk) begin
-            inst=vlg_pmem_read(pc,flag);
+            inst=vlg_pc_read(pc,flag);
     end
 
 

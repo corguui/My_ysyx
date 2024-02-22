@@ -156,40 +156,40 @@ begin
         3'b000:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
-           wen=1'b1;
            wdata = $signed({{24{m_rdata[7]}},m_rdata[7:0]});
+           wen=1'b1;
         end
         //LH
         3'b001:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
-           wen=1'b1;
            wdata = $signed({{16{m_rdata[7]}},m_rdata[15:0]});
+           wen=1'b1;
         end
         //LW
         3'b010:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
-           wen=1'b1;
            wdata = $signed(m_rdata);
+           wen=1'b1;
         end
         //LBU
         3'b100:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
-           wen=1'b1;
            wdata = {24'b0,m_rdata[7:0]};
+           wen=1'b1;
         end
         //LHU
         3'b101:begin
            m_ren=1'b1; 
            m_raddr = src1 + imm;
-           wen=1'b1;
            wdata = {16'b0,m_rdata[15:0]};
+           wen=1'b1;
         end
         default:begin
-            wen=1'b1;
             wdata=32'b0;
+            wen=1'b1;
         end
         endcase
     end
