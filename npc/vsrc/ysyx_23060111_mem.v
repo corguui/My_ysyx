@@ -3,31 +3,29 @@ import "DPI-C" function void vlg_pmem_write(
   input int waddr, input int wdata, input int wmask);
 module ysyx_23060111_mem(
     input clk,
-    input [31:0] waddr,
-    input [31:0] wdata,
-    input [31:0] wmask,
-    output reg wen,
-    input [31:0] raddr,
-    output reg ren,
-    output reg [31:0] rdata
+    input [31:0] m_waddr,
+    input [31:0] m_wdata,
+    input [31:0] m_wmask,
+    output reg m_wen,
+    input [31:0] m_raddr,
+    output reg m_ren,
+    output reg [31:0] m_rdata
 
 ); 
 
-    always @(raddr) begin
-             rdata=vlg_pmem_read(raddr);
-/*
-        if(ren) begin
-             ren=1'b0;
+    always @(m_raddr) begin
+        if(m_ren) begin
+             m_rdata=vlg_pmem_read(m_raddr);
+             m_ren=1'b0;
         end
-        */
     end
 
     always@(posedge clk)
     begin
-        if(wen)
+        if(m_wen)
         begin
-            vlg_pmem_write(waddr,wdata,wmask);
-            wen=1'b0;
+            vlg_pmem_write(m_waddr,m_wdata,m_wmask);
+            m_wen=1'b0;
         end
     end
 
