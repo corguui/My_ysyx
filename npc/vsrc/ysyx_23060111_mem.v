@@ -1,4 +1,4 @@
-import "DPI-C" function int vlg_pmem_read(input int raddr);
+import "DPI-C" function int vlg_pmem_read(input int m_raddr);
 import "DPI-C" function void vlg_pmem_write(
   input int waddr, input int wdata, input int wmask);
 module ysyx_23060111_mem(
