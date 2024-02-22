@@ -181,7 +181,6 @@ begin
            $display(m_rdata);
            $display(wdata);
            wen=1'b1;
-           m_ren=1'b0;
         end
         //LBU
         3'b100:begin
