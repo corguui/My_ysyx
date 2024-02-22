@@ -15,7 +15,7 @@ module ysyx_23060111_mem(
 
     always @(m_raddr) begin
         if(m_ren) begin
-             m_rdata=32'h80000000;
+             m_rdata=vlg_pmem_read(m_raddr);
              m_ren=1'b0;
         end
     end
