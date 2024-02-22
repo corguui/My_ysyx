@@ -16,7 +16,7 @@ module ysyx_23060111_mem(
 
     reg [31:0] read_addr;
     always @(raddr) begin
-    rdata =vlg_pmem_read(raddr,flag);
+    if(ren) rdata =vlg_pmem_read(raddr,flag);
     end
 
     always@(posedge clk)
