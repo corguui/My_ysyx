@@ -9,18 +9,16 @@ module ysyx_23060111_mem(
     output reg m_wen,
     input [31:0] m_raddr,
     output reg m_ren,
-    output [31:0] m_rdata
+    output reg [31:0] m_rdata
 
 ); 
-    assign m_rdata = vlg_pmem_read(m_raddr);
-/*
+
     always @(m_raddr) begin
         if(m_ren) begin
              m_rdata=vlg_pmem_read(m_raddr);
              m_ren=1'b0;
         end
     end
-    */
 
     always@(posedge clk)
     begin
