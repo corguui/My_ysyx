@@ -222,7 +222,7 @@ static void execute(uint64_t n)
 		{
 			printf("------%x\n",top->rootp->ysyx_23060111_top__DOT__m_rdata);
 			printf("******%x\n",top->rootp->ysyx_23060111_top__DOT__m_raddr);
-			printf("______%x\n",vlg_pmem_read(0x80008fdc));
+			//printf("______%x\n",vlg_pmem_read(0x80008fdc));
 		}
 		trace_and_difftest(&s); 
 		if(npc_state.state !=NPC_RUNNING) break;
