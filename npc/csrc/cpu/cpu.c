@@ -216,7 +216,6 @@ static void execute(uint64_t n)
 	Decode s;
 	for(;n>0;n--)
 	{
-
 		cpu_exec_once(tfp,&s);
 		if(top->pc==0x80000054)
 		{
