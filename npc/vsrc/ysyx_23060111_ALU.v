@@ -17,7 +17,7 @@ module ysyx_23060111_ALU(
     output reg m_wen,
     output reg [31:0] m_raddr,
     output reg m_ren,
-    output [31:0] m_rdata
+    input [31:0] m_rdata
 
 );
 
@@ -171,7 +171,7 @@ begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
            //wdata = $signed(m_rdata);            
-           wdata = m_rdata;
+           wdata = ;
            wen=1'b1;
         end
         //LBU
