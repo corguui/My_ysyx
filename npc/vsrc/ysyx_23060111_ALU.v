@@ -41,6 +41,8 @@ begin
     //R
     7'b0110011:begin
         dnpc=snpc;
+        m_ren=1'b0;
+        m_wen=1'b0;
         case(funct3)
             //ADD or SUB
             3'b000:begin
@@ -96,6 +98,8 @@ begin
     //I
     7'b0010011:begin
         dnpc=snpc;
+        m_ren=1'b0;
+        m_wen=1'b0;
         case(funct3)
             //ADDI 
             3'b000:begin
@@ -151,6 +155,7 @@ begin
     //IL
     7'b0000011:begin
         dnpc=snpc;
+        m_wen=1'b0;
         case(funct3)
         //LB
         3'b000:begin
@@ -204,6 +209,7 @@ begin
     7'b0100011:begin
         dnpc=snpc;
         wen=1'b0;
+        m_ren=1'b0;
         case(funct3)
         //SB
         3'b000:begin
@@ -236,6 +242,9 @@ begin
 
     //B
     7'b1100011:begin
+        m_ren=1'b0;
+        m_wen=1'b0;
+        wen=1'b0;
         case(funct3)
         //beq
         3'b000:begin
@@ -271,6 +280,8 @@ begin
     
     //J jal
     7'b1101111:begin
+            m_wen=1'b0;
+            m_ren=1'b0; 
 	        wdata=snpc;
             wen=1'b1;
 	        dnpc=pc+imm;
@@ -278,6 +289,8 @@ begin
     
     //JR jalr
 	7'b1100111:begin
+            m_wen=1'b0;
+            m_ren=1'b0;
 	        wdata=snpc;
             wen=1'b1;
 	        dnpc=imm+src1;
@@ -285,6 +298,8 @@ begin
 
     //U lui
     7'b0110111:begin
+            m_wen=1'b0;
+            m_ren=1'b0;
 	        wdata=imm;
             wen=1'b1;
 	        dnpc=snpc;
@@ -292,6 +307,8 @@ begin
 
     //UPC auipc
 	7'b0010111:begin
+            m_wen=1'b0;
+            m_ren=1'b0;
  	        wdata=pc+imm;
             wen=1'b1;
 	        dnpc=snpc;	
