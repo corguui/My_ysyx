@@ -154,7 +154,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBit(c+128,"ren", false,-1);
     tracep->declBus(c+125,"rdata", false,-1, 31,0);
     tracep->declBus(c+138,"flag", false,-1, 31,0);
-    tracep->declBus(c+139,"read_addr", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("pc_renew ");
     tracep->declBit(c+120,"clk", false,-1);
@@ -163,17 +162,17 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+82,"dnpc", false,-1, 31,0);
     tracep->declBus(c+121,"pc", false,-1, 31,0);
     tracep->pushNamePrefix("renew_pc ");
-    tracep->declBus(c+140,"WIDTH", false,-1, 31,0);
-    tracep->declBus(c+141,"RESET_VAL", false,-1, 31,0);
+    tracep->declBus(c+139,"WIDTH", false,-1, 31,0);
+    tracep->declBus(c+140,"RESET_VAL", false,-1, 31,0);
     tracep->declBit(c+120,"clk", false,-1);
     tracep->declBit(c+119,"rst", false,-1);
     tracep->declBus(c+82,"din", false,-1, 31,0);
     tracep->declBus(c+121,"dout", false,-1, 31,0);
-    tracep->declBit(c+142,"wen", false,-1);
+    tracep->declBit(c+141,"wen", false,-1);
     tracep->popNamePrefix(2);
     tracep->pushNamePrefix("reg_$0 ");
-    tracep->declBus(c+143,"ADDR_WIDTH", false,-1, 31,0);
-    tracep->declBus(c+140,"DATA_WIDTH", false,-1, 31,0);
+    tracep->declBus(c+142,"ADDR_WIDTH", false,-1, 31,0);
+    tracep->declBus(c+139,"DATA_WIDTH", false,-1, 31,0);
     tracep->declBit(c+120,"clk", false,-1);
     tracep->declBus(c+83,"wdata", false,-1, 31,0);
     tracep->declBus(c+13,"waddr", false,-1, 4,0);
@@ -337,9 +336,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullIData(oldp+136,(0xaU),32);
     bufp->fullIData(oldp+137,(0U),32);
     bufp->fullIData(oldp+138,(1U),32);
-    bufp->fullIData(oldp+139,(vlSelf->ysyx_23060111_top__DOT__init_the_mem__DOT__read_addr),32);
-    bufp->fullIData(oldp+140,(0x20U),32);
-    bufp->fullIData(oldp+141,(0x80000000U),32);
-    bufp->fullBit(oldp+142,(1U));
-    bufp->fullIData(oldp+143,(5U),32);
+    bufp->fullIData(oldp+139,(0x20U),32);
+    bufp->fullIData(oldp+140,(0x80000000U),32);
+    bufp->fullBit(oldp+141,(1U));
+    bufp->fullIData(oldp+142,(5U),32);
 }
