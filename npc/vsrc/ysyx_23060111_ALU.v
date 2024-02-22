@@ -173,10 +173,9 @@ begin
         //LW
         3'b010:begin
            m_ren=1'b1;
+           $display(src1);
            m_raddr = src1 + imm;
            $display(src1);
-           $display(m_raddr);
-           $display(m_rdata);
            wdata = $signed(m_rdata);            
            wen=1'b1;
         end
