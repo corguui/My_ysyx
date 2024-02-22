@@ -93,6 +93,10 @@ extern "C" int vlg_pmem_read(int ad)
 	 	read_buf[read_num]=addr;
   		read_num++;
 	#endif
+	if(addr==0x80000220)
+	{
+		printf("%x\n",data);
+	}
 	return (int) data; 
 	}
 	printf("read\n");
