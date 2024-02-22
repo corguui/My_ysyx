@@ -174,8 +174,10 @@ begin
         3'b010:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
+           $display(src1);
+           $display(imm);
            $display(m_raddr);
-           wdata = m_rdata;            
+           wdata = $signed(m_rdata);            
            wen=1'b1;
         end
         //LBU
