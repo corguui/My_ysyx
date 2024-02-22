@@ -15,7 +15,6 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   always @(posedge clk) begin
     if (wen&&waddr!=0)begin
        rf[waddr] <= wdata;
-       wen=1'b0;
     end
   end
 endmodule

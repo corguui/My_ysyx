@@ -20,11 +20,12 @@ void Vysyx_23060111_top___024root___eval_act(Vysyx_23060111_top___024root* vlSel
     }
 }
 
-VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__3(Vysyx_23060111_top___024root* vlSelf) {
+VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___nba_sequent__TOP__3\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___nba_sequent__TOP__2\n"); );
     // Body
+    vlSelf->ysyx_23060111_top__DOT__wen = 1U;
     if ((0x40U & (IData)(vlSelf->ysyx_23060111_top__DOT__opcode))) {
         if ((0x20U & (IData)(vlSelf->ysyx_23060111_top__DOT__opcode))) {
             if ((0x10U & (IData)(vlSelf->ysyx_23060111_top__DOT__opcode))) {
@@ -180,7 +181,7 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__4(Vysyx_2306
 
 void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_23060111_top___024root* vlSelf);
 void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_23060111_top___024root* vlSelf);
-void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_23060111_top___024root* vlSelf);
+void Vysyx_23060111_top___024root___nba_sequent__TOP__3(Vysyx_23060111_top___024root* vlSelf);
 
 void Vysyx_23060111_top___024root___eval_nba(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -194,10 +195,10 @@ void Vysyx_23060111_top___024root___eval_nba(Vysyx_23060111_top___024root* vlSel
         Vysyx_23060111_top___024root___nba_sequent__TOP__1(vlSelf);
         vlSelf->__Vm_traceActivity[2U] = 1U;
     }
-    if (vlSelf->__VnbaTriggered.at(4U)) {
+    if (vlSelf->__VnbaTriggered.at(3U)) {
         Vysyx_23060111_top___024root___nba_sequent__TOP__2(vlSelf);
     }
-    if (vlSelf->__VnbaTriggered.at(3U)) {
+    if (vlSelf->__VnbaTriggered.at(4U)) {
         Vysyx_23060111_top___024root___nba_sequent__TOP__3(vlSelf);
     }
     if (vlSelf->__VnbaTriggered.at(1U)) {
