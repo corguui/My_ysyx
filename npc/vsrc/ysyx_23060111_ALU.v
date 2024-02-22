@@ -35,7 +35,7 @@ assign cond_bgeu = rout1 >= rout2;
 assign src1 = rout1;
 assign src2 = rout2;
 
-always @(inst) 
+always @(*) 
 begin
     case(opcode)
     //R
@@ -160,20 +160,19 @@ begin
            wen=1'b1;
         end
         //LH
-        3'b010:begin
+        3'b001:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
            wdata = $signed({{16{m_rdata[7]}},m_rdata[15:0]});
            wen=1'b1;
         end
         //LW
-        3'b011:begin
+        3'b010:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
            $display(m_rdata);
            $display(wdata);
-           //wdata = m_rdata;            
-           wdata = src1;
+           wdata = $signed(m_rdata);            
            $display(m_rdata);
            $display(wdata);
 
