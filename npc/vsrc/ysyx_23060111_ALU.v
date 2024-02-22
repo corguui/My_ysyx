@@ -168,7 +168,7 @@ begin
         3'b001:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
-           wdata = $signed({{16{m_rdata[7]}},m_rdata[15:0]});
+           wdata = $signed({{16{m_rdata[15]}},m_rdata[15:0]});
            wen=1'b1;
         end
         //LW
