@@ -458,9 +458,9 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
                                 : ((0x1000U & vlSelf->ysyx_23060111_top__DOT__inst)
                                     ? ((0x40000000U 
                                         & vlSelf->ysyx_23060111_top__DOT__inst)
-                                        ? (vlSelf->ysyx_23060111_top__DOT__rout1 
-                                           >> (0x1fU 
-                                               & vlSelf->ysyx_23060111_top__DOT__rout2))
+                                        ? VL_SHIFTRS_III(32,32,5, vlSelf->ysyx_23060111_top__DOT__rout1, 
+                                                         (0x1fU 
+                                                          & vlSelf->ysyx_23060111_top__DOT__rout2))
                                         : (vlSelf->ysyx_23060111_top__DOT__rout1 
                                            >> (0x1fU 
                                                & vlSelf->ysyx_23060111_top__DOT__rout2)))
@@ -620,10 +620,11 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
                                               >> 1U))))
                             : ((0x1000U & vlSelf->ysyx_23060111_top__DOT__inst)
                                 ? ((0x40000000U & vlSelf->ysyx_23060111_top__DOT__inst)
-                                    ? (vlSelf->ysyx_23060111_top__DOT__rout1 
-                                       >> (0x1fU & (IData)(
-                                                           (vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1 
-                                                            >> 1U))))
+                                    ? VL_SHIFTRS_III(32,32,5, vlSelf->ysyx_23060111_top__DOT__rout1, 
+                                                     (0x1fU 
+                                                      & (IData)(
+                                                                (vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1 
+                                                                 >> 1U))))
                                     : (vlSelf->ysyx_23060111_top__DOT__rout1 
                                        >> (0x1fU & (IData)(
                                                            (vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT____Vcellout__typeMux____pinNumber1 
