@@ -128,19 +128,24 @@ void pmem_write(uint32_t &ad, int len, uint32_t data)
 //pmem_write in mem.v
 extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 {
-	uint32_t pc=(uint32_t)ad;
-	if(likely(check_mem(ad)))
+	uint32_t addr=(uint32_t)ad;
+
+	if(likely(check_mem(addr)))
 	{
 	uint32_t data=(uint32_t)wdata;
+	if(addr==0x80008fdc)
+	{
+		printf("-----%x\n",data);
+	}
 	#ifdef CONFIG_MTRACE
-	write_buf[write_num]=ad;
+	write_buf[write_num]=addr;
 	write_num++;
 	#endif
-	pmem_write(pc,len,data);
+	pmem_write(addr,len,data);
 	return ;
 	}
 	printf("write\n");
-	out_of_bound(ad);
+	out_of_bound(addr);
 }
 
 uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
