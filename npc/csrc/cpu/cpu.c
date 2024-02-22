@@ -215,6 +215,10 @@ static void execute(uint64_t n)
 	Decode s;
 	for(;n>0;n--)
 	{
+		if(top->pc==0x80000054)
+		{
+			printf("------%x\n",top->rootp->ysyx_23060111_top__DOT__m_rdata);
+		}
 		cpu_exec_once(tfp,&s);
 		trace_and_difftest(&s); 
 		if(npc_state.state !=NPC_RUNNING) break;
