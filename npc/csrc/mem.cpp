@@ -90,7 +90,7 @@ extern "C" int vlg_pmem_read(int ad)
 	//if(likely(check_mem(addr)))
 	//{
 	uint32_t data; 
-	if(addr==0)
+	if(addr<0x80000000)
 	data=0;
 	else
 	data=pmem_read(addr, 4);
