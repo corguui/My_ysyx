@@ -86,6 +86,7 @@ uint32_t pmem_read(uint32_t &ad,int len)
 extern "C" int vlg_pmem_read(int ad)
 {
 	uint32_t addr=(uint32_t)ad;
+	printf("%x\n",ad);
 	if(likely(check_mem(addr)))
 	{
 	uint32_t data=pmem_read(addr, 4);

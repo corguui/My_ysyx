@@ -225,7 +225,6 @@ begin
         //SW
         3'b010:begin
             m_wen=1'b1;
-            $display(src1);
             m_waddr = src1 + imm; 
             m_wmask = 32'd4;
             m_wdata = src2;
