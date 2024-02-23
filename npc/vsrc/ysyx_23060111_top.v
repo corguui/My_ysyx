@@ -33,7 +33,7 @@ module ysyx_23060111_top(
   wire [31:0] m_waddr;
   wire [31:0] m_wdata;
   wire [31:0] m_wmask;
-  reg [31:0] m_rdata;
+  wire [31:0] m_rdata;
   wire [31:0] m_raddr;
   wire  m_wen; 
   wire  m_ren;

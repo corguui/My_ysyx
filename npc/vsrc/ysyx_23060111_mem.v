@@ -6,7 +6,7 @@ module ysyx_23060111_mem(
     input [31:0] m_waddr,
     input [31:0] m_wdata,
     input [31:0] m_wmask,
-    output m_wen,
+    input m_wen,
     input [31:0] m_raddr,
     input m_ren,
     output reg [31:0] m_rdata
