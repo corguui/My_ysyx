@@ -58,7 +58,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VlUnpacked<QData/*39:0*/, 10> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list;
     VlUnpacked<CData/*6:0*/, 10> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list;
     VlUnpacked<QData/*32:0*/, 10> ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list;
-    VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     VlTriggerVec<2> __VstlTriggered;
     VlTriggerVec<4> __VactTriggered;
     VlTriggerVec<4> __VnbaTriggered;

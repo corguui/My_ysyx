@@ -21,7 +21,6 @@ void Vysyx_23060111_top___024root___eval_act(Vysyx_23060111_top___024root* vlSel
     }
     if ((vlSelf->__VactTriggered.at(0U) | vlSelf->__VactTriggered.at(1U))) {
         Vysyx_23060111_top___024root___act_comb__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[2U] = 1U;
     }
 }
 
@@ -38,11 +37,10 @@ void Vysyx_23060111_top___024root___eval_nba(Vysyx_23060111_top___024root* vlSel
     }
     if (vlSelf->__VnbaTriggered.at(2U)) {
         Vysyx_23060111_top___024root___nba_sequent__TOP__1(vlSelf);
-        vlSelf->__Vm_traceActivity[3U] = 1U;
+        vlSelf->__Vm_traceActivity[2U] = 1U;
     }
     if ((vlSelf->__VnbaTriggered.at(1U) | vlSelf->__VnbaTriggered.at(2U))) {
         Vysyx_23060111_top___024root___act_comb__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[4U] = 1U;
     }
 }
 
