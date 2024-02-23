@@ -972,7 +972,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_comb__TOP__0(Vysyx_2306011
         vlSelf->ysyx_23060111_top__DOT__dnpc = ((IData)(4U) 
                                                 + vlSelf->pc);
     }
-    if (vlSelf->ysyx_23060111_top__DOT__m_ren) {
+    if (((IData)(vlSelf->ysyx_23060111_top__DOT__m_ren) 
+         & (0U == vlSelf->ysyx_23060111_top__DOT__m_rdata))) {
         Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(vlSelf->ysyx_23060111_top__DOT__m_raddr, vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout);
         vlSelf->ysyx_23060111_top__DOT__m_rdata = vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout;
     } else {
