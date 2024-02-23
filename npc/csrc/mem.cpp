@@ -89,7 +89,11 @@ extern "C" int vlg_pmem_read(int ad)
 	uint32_t addr=(uint32_t)ad;
 	//if(likely(check_mem(addr)))
 	//{
-	uint32_t data=pmem_read(addr, 4);
+	uint32_t data; 
+	if(addr==0)
+	data=0;
+	else
+	data=pmem_read(addr, 4);
 	#ifdef  CONFIG_MTRACE
 	 	read_buf[read_num]=addr;
   		read_num++;
