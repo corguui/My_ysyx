@@ -24,8 +24,8 @@ module ysyx_23060111_ALU(
 wire cond_beq;
 wire cond_bge;
 wire cond_bgeu;
-wire [31:0] src1;
-wire [31:0] src2;
+reg [31:0] src1;
+reg [31:0] src2;
 
 assign cond_beq = (rout1==rout2);
 assign cond_bge = ($signed(rout1) >= $signed(rout2));
