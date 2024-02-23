@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <cstdint>
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
@@ -12,6 +13,8 @@ unsigned int read_buf[100000000];
 int write_num=0;
 int read_num=0;
 #endif
+
+uint32_t data_buf;
 
 static long load_img();
 static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
@@ -87,19 +90,19 @@ uint32_t pmem_read(uint32_t &ad,int len)
 extern "C" int vlg_pmem_read(int ad)
 {
 	uint32_t addr=(uint32_t)ad;
-	//if(likely(check_mem(addr)))
-	//{
-	uint32_t data; 
-	if(addr<0x80000000)
-	data=0;
-	else
-	data=pmem_read(addr, 4);
+	if(likely(check_mem(addr)))
+	{
+	uint32_t data=pmem_read(addr, 4);
 	#ifdef  CONFIG_MTRACE
 	 	read_buf[read_num]=addr;
   		read_num++;
 	#endif
+	data_buf = data;
 	return (int) data; 
-	//}
+	}
+	else {
+		return data_buf;
+	}
 	printf("read\n");
 	out_of_bound(addr);
 	return 0;
