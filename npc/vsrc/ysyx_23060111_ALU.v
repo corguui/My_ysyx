@@ -24,22 +24,18 @@ module ysyx_23060111_ALU(
 wire cond_beq;
 wire cond_bge;
 wire cond_bgeu;
-reg [31:0] src1;
-reg [31:0] src2;
+wire [31:0] src1;
+wire [31:0] src2;
 
 assign cond_beq = (rout1==rout2);
 assign cond_bge = ($signed(rout1) >= $signed(rout2));
 assign cond_bgeu = rout1 >= rout2;
 
-//assign src1 = rout1;
-//assign src2 = rout2;
-always@(*)
-begin
-    src1=rout1;
-    src2 =rout2;
-end
+assign src1 = rout1;
+assign src2 = rout2;
 
-always @(*) 
+
+always @(opcode or funct3 or funct7 or imm or pc or snpc or m_rdata) 
 begin
     case(opcode)
     //R
