@@ -233,6 +233,7 @@ begin
         end
 
         default:begin
+            m_wen=1'b0;
             wdata=32'b0;
             wen=1'b0;
         end
@@ -314,6 +315,8 @@ begin
 	end
 
     default:begin
+        m_ren=1'b0;
+        m_wen=1'b0;
         wdata=32'b0;
         wen=1'b0;
         dnpc=snpc;
