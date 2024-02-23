@@ -66,7 +66,7 @@ static void out_of_bound(uint32_t addr)
 //check mem if out_of_bond will excute the fun out_of_bond
 static inline bool check_mem(uint32_t addr)
 {
-	return addr-0x80000000<0x80000000;
+	return (addr>=0x80000000&&addr<0x87ffffff);
 }
 
 
