@@ -35,7 +35,7 @@ assign src1 = rout1;
 assign src2 = rout2;
 
 
-always @(opcode or funct3 or funct7 or imm or pc or snpc or m_rdata) 
+always @(*) 
 begin
     case(opcode)
     //R
