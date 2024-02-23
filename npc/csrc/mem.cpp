@@ -87,15 +87,15 @@ uint32_t pmem_read(uint32_t &ad,int len)
 extern "C" int vlg_pmem_read(int ad)
 {
 	uint32_t addr=(uint32_t)ad;
-	if(likely(check_mem(addr)))
-	{
+	//if(likely(check_mem(addr)))
+	//{
 	uint32_t data=pmem_read(addr, 4);
 	#ifdef  CONFIG_MTRACE
 	 	read_buf[read_num]=addr;
   		read_num++;
 	#endif
 	return (int) data; 
-	}
+	//}
 	printf("read\n");
 	out_of_bound(addr);
 	return 0;
