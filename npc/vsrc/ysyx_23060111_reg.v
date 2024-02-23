@@ -13,7 +13,7 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   reg [DATA_WIDTH-1:0] rf [2**ADDR_WIDTH-1:0];
   //assign rout1=rf[raddr1];
   //assign rout2=rf[raddr2];
-  always@(raddr1 or raddr2)
+  always@(*)
   begin
     rout1=rf[raddr1];
     rout2=rf[raddr2];
