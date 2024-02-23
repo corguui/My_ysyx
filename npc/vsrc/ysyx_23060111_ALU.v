@@ -1,5 +1,4 @@
 module ysyx_23060111_ALU(
-    input [31:0] inst,
     input [6:0] opcode,
     input [14:12] funct3,
     input [31:25] funct7,
@@ -35,7 +34,7 @@ assign cond_bgeu = rout1 >= rout2;
 assign src1 = rout1;
 assign src2 = rout2;
 
-always @(opcode or imm or snpc or pc or funct3 or funct7 or rout1 or rout2 or m_rdata) 
+always @(*) 
 begin
     case(opcode)
     //R
@@ -177,6 +176,7 @@ begin
         3'b010:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
+           $display(src1);
            wdata = $signed(m_rdata);            
            wen=1'b1;
         end
