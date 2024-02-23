@@ -57,7 +57,7 @@ static void out_of_bound(uint32_t addr)
   		}
 	#endif
 	tfp->close();
-	//assert(0);
+	assert(0);
 
 }
 //check mem if out_of_bond will excute the fun out_of_bond
