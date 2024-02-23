@@ -176,7 +176,6 @@ begin
         3'b010:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
-           $display(src1);
            wdata = $signed(m_rdata);            
            wen=1'b1;
         end
@@ -195,6 +194,8 @@ begin
            wen=1'b1;
         end
         default:begin
+            m_ren=1'b0;
+            m_raddr=32'b0;
             wdata=32'b0;
             wen=1'b0;
         end
