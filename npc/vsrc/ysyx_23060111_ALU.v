@@ -31,8 +31,13 @@ assign cond_beq = (rout1==rout2);
 assign cond_bge = ($signed(rout1) >= $signed(rout2));
 assign cond_bgeu = rout1 >= rout2;
 
-assign src1 = rout1;
-assign src2 = rout2;
+//assign src1 = rout1;
+//assign src2 = rout2;
+always@(*)
+begin
+    src1=rout1;
+    src2 =rout2;
+end
 
 always @(*) 
 begin
