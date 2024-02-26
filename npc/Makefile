@@ -69,7 +69,7 @@ sim:$(Vfile) $(Cfile) $(TOPfile)
 
 gdb:$(Vfile) $(Cfile) $(TOPfile) 
 	verilator $(VLTFLAGS) $(NPC_GDB) 
-	gdb $(NPC_GDB_RUN) $(RUN_FLAGS)
+	gdb $(RUN_FLAGS) $(NPC_GDB_RUN)
 	@ctags -R -u
 
 wave:$(Wavefile)
