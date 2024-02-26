@@ -24,7 +24,7 @@ void elf_read(char *elf_file);
 
 FUN *symbol = NULL;  //dynamic allocate memory  or direct allocate memory (Symbol symbol[NUM])
 
-int func_num=1;
+int func_num=-1;
 
 #endif
 
