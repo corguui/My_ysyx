@@ -15,7 +15,7 @@ extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int 
 #include <monitor.h>
 extern FUN *symbol;
 extern int func_num;
-int space_num=-1;
+int space_num=0;
 int space_flat=0;
 int print_flat=0;
 #endif
