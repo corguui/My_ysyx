@@ -108,8 +108,8 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		top->clk =1; top->eval();
 		tfp->dump(main_time);
 		main_time++;
-    	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 		top->eval();
+    	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 
 
 #ifdef CONFIG_ITRACE
@@ -159,7 +159,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   if(s->pc==0x80000028)
   {
 	printf("%s\n",s->funbuf);
-	printf("s->pc %x\n",s->pc);
+	printf("s->dnpc %x\n",s->dnpc);
   }
 
 if(strncmp(s->funbuf+24,ar,3)==0)
