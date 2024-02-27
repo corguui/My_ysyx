@@ -188,9 +188,6 @@ void elf_read(char *elf_file)
                     strncpy(symbol[func_num].name, name, sizeof(symbol[func_num].name) - 1);
                     symbol[func_num].value = sym.st_value;
                     symbol[func_num].size = sym.st_size;
-                    printf("%s\n",symbol[func_num].name);
-                    printf("%x\n",symbol[func_num].value);
-                    printf("%d\n",symbol[func_num].size);
                     func_num++;
                 }
             }

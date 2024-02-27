@@ -156,6 +156,12 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   memset(q, ' ', fspace_len);
   q += fspace_len;
   disassemble(q, s->funbuf + sizeof(s->funbuf) - q,s->pc, (uint8_t *)&s->inst, funlen);
+  if(s->pc==0x80000028)
+  {
+	printf("%s\n",s->funbuf);
+	printf("s->dnpc %x\n",s->dnpc);
+  }
+
 if(strncmp(s->funbuf+24,ar,3)==0)
  {
  	int flat_ret=0;
@@ -171,7 +177,7 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 		       if(s->pc>=symbol[f].value&&s->pc<symbol[f].size+symbol[f].value)	
 		       {
 		          flat_ret=1;
-			  break;
+			      break;
 		       }
 		   }
 		   }
