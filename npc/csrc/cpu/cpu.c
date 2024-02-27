@@ -106,10 +106,10 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		main_time++;
 		top->eval();
 		top->clk =1; top->eval();
+    	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 		tfp->dump(main_time);
 		main_time++;
 		top->eval();
-    	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 
 
 #ifdef CONFIG_ITRACE
