@@ -159,7 +159,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
   if(s->pc==0x80000028)
   {
 	printf("%s\n",s->funbuf);
-	printf("s->dnpc %x\n",s->dnpc);
+	printf("s->pc %x\n",s->pc);
   }
 
 if(strncmp(s->funbuf+24,ar,3)==0)
