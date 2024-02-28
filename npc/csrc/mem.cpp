@@ -170,7 +170,7 @@ static long load_img(){
    fseek(fp, 0, SEEK_END);
    long size = ftell(fp);
    Log("The image is %s, size = %ld", img_file, size); 
-   Log_color("hello",ANSI_BG_RED );
+   Log_color("hello %s",img_file,ANSI_BG_RED );
    fseek(fp, 0, SEEK_SET);
    int ret = fread(NPC_guest_to_host(0x80000000), size, 1, fp);
    assert(ret == 1);
