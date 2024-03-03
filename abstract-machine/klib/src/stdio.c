@@ -64,12 +64,17 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				len++;
 			     }
 			     break;
+				 case 'c':
+				char ch= (char)va_arg(ap,int);
+				out[len]=ch;
+				len++;
+				break;
 			}
 			break;
 			case '\n':
-			  out[len]='\n';
-			  len++;
-			  break;
+			out[len]='\n';
+			len++;
+			break;
 			default:
 			  out[len]=*fmt;
 			  len++;
