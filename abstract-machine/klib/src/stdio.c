@@ -108,6 +108,45 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			       len++;
 			     }
 			     break;
+				case 'x':
+				unsigned int hexx;
+				int hxval=va_arg(ap,int); 
+				out[len]='0';
+				len++;
+				out[len]='x';
+				len++;
+			    if(hxval==0)
+			    {out[len]='0';
+			     len++;
+			     break;}
+			    else
+			    {
+				 hexx=(unsigned int)hxval;
+				}
+			     int f;
+			     char x[1024];
+			     int xlen=0;
+			     while(hexx>0)
+			     {
+					f=hexx%16;
+			     	if(f>=10)
+					{
+					x[xlen]=87+f;
+					}
+					else
+					{
+					x[xlen]=48+f;
+					}
+					hexx=hexx/16;
+					xlen++;
+			     }
+			     for(int i=xlen-1;i>=0;i--)
+			     {
+			       out[len]=x[i];
+			       len++;
+			     }
+			     break;
+
 			}
 			break;
 			case '\n':
