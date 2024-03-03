@@ -29,7 +29,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			  fmt++;
 			switch(*fmt)
 			{
-			  case 'd':
+			  case 't':
 			    int val=va_arg(ap,int); 
 			    if(val==0)
 			    {out[len]='0';
