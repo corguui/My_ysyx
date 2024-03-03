@@ -2,6 +2,7 @@
 #include <klib.h>
 #include <klib-macros.h>
 #include <stdarg.h>
+#include <stdint.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
@@ -69,6 +70,44 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				out[len]=ch;
 				len++;
 				break;
+				case 'X':
+				unsigned int hex;
+				int hval=va_arg(ap,int); 
+				out[len]='0';
+				len++;
+				out[len]='X';
+				len++;
+			    if(hval==0)
+			    {out[len]='0';
+			     len++;
+			     break;}
+			    else
+			    {
+				 hex=(unsigned int)hval;
+				}
+			     int u;
+			     char q[1024];
+			     int qlen=0;
+			     while(hex>0)
+			     {
+					u=hex%16;
+			     	if(u>=10)
+					{
+					q[qlen]=55+u;
+					}
+					else
+					{
+					q[qlen]=48+u;
+					}
+					hex=hex/16;
+					qlen++;
+			     }
+			     for(int i=qlen-1;i>=0;i--)
+			     {
+			       out[len]=q[i];
+			       len++;
+			     }
+			     break;
 			}
 			break;
 			case '\n':
