@@ -25,7 +25,6 @@ static void rtc_io_handler(uint32_t offset, int len, bool is_write) {
     uint64_t us = get_time();
     rtc_port_base[0] = (uint32_t)us;
     rtc_port_base[1] = us >> 32;
-    printf("%d\n",rtc_port_base[0]);
     printf("use fun %ld\n",us);
   }
 }
@@ -44,7 +43,6 @@ void init_timer() {
 #ifdef CONFIG_HAS_PORT_IO
   add_pio_map ("rtc", CONFIG_RTC_PORT, rtc_port_base, 8, rtc_io_handler);
 #else
-  printf("init %d\n",rtc_port_base[0]);
   add_mmio_map("rtc", CONFIG_RTC_MMIO, rtc_port_base, 8, rtc_io_handler);
 #endif
   IFNDEF(CONFIG_TARGET_AM, add_alarm_handle(timer_intr));

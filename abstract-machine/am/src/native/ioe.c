@@ -70,6 +70,7 @@ void __am_ioe_init() {
 
 static void do_io(int reg, void *buf) {
   if (!ioe_init_done) {
+    printf("init\n");
     __am_ioe_init();
   }
   ((handler_t)lut[reg])(buf);
