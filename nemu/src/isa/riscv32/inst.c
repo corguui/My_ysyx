@@ -114,14 +114,11 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
   INSTPAT_END();
-if(s->pc==0x80001048)
-{
 //printf("src1 %d  |  src2 %d  | imm  %d\n",src1,src2,imm);
 //printf("src1 %u  |  src2 %u  | imm  %u\n",src1,src2,imm);
-printf("src1 %x  |  src2 %x  | imm  %x\n",src1,src2,imm);
-printf("Rd   %x\n",R(rd));
-printf("pc   %x  \n",s->pc);
-}
+//printf("src1 %x  |  src2 %x  | imm  %x\n",src1,src2,imm);
+//printf("Rd   %x\n",R(rd));
+//printf("pc   %x  \n",s->pc);
 
   R(0) = 0; // reset $zero to 0
 
