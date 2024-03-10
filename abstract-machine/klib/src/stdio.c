@@ -66,7 +66,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			     }
 				 if((plen-1)<Out_num)
 				 {
-					for(int y=0;y<=(Out_num-plen);y++)
+					for(int y=0;y<=(Out_num-plen+1);y++)
 					out[len]='0';
 					len++;
 				 }
