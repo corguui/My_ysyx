@@ -28,18 +28,19 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 		switch(*fmt)
 		{
 			case '%':
-			  fmt++;
+			fmt++;
+			case '0':
+			fmt++;
+			int a=0;
+			while(*fmt<=8&&*fmt>0)
+			{
+					Out_num=Out_num+(*fmt-49)*a;
+					a=a*9;
+					fmt++;
+			}
+
 			switch(*fmt)
 			{
-			  case '0':
-			  fmt++;
-			  int a=1;
-			  while(*fmt<=9&&*fmt>0)
-			  {
-					Out_num=Out_num+(*fmt-48)*a;
-					a=a*10;
-					fmt++;
-			  }
 			  	
 			  case 'd':
 			    int val=va_arg(ap,int); 
