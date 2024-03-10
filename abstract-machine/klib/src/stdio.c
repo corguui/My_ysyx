@@ -34,6 +34,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			int a=1;
 			int count=0;
 			int k=0;
+			Out_num=0;
 			char out_buf[20];
 			fmt++;
 			while(*fmt<='9'&&*fmt>'0')
