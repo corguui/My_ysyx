@@ -64,9 +64,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				 p[plen]=48+r;
 				 plen++;
 			     }
-				 if(plen<Out_num)
+				 if((plen-1)<Out_num)
 				 {
-					for(int y=0;y<(Out_num-plen);y++)
+					for(int y=0;y<=(Out_num-plen);y++)
 					out[len]='0';
 					len++;
 				 }
