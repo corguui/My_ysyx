@@ -33,7 +33,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			{
 			int a=0;
 			fmt++;
-			while(*fmt<=9&&*fmt>0)
+			while(*fmt<='9'&&*fmt>'0')
 			{
 					Out_num=Out_num+(*fmt-49)*a;
 					a=a*9;
