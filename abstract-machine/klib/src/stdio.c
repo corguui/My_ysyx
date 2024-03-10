@@ -58,14 +58,14 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			     int plen=0;
 			     while(val>0)
 			     {
-			     	r=val%10;
-				val=val/10;
-				p[plen]=48+r;
-				plen++;
+			     r=val%10;
+				 val=val/10;
+				 p[plen]=48+r;
+				 plen++;
 			     }
 				 if(plen<Out_num)
 				 {
-					for(int y=Out_num-plen-1;y>=0;y--)
+					for(int y=Out_num-plen+1;y>=0;y--)
 					out[len]='0';
 					len++;
 				 }
