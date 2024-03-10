@@ -124,11 +124,13 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					hex=hex/16;
 					qlen++;
 			     }
-				if(qlen<Out_num)
+				 if((qlen-1)<Out_num)
 				 {
-					for(int y=Out_num-qlen-1;y>=0;y--)
+					for(int y=0;y<=(Out_num-qlen);y++)
+					{
 					out[len]='0';
 					len++;
+					}
 				 }
 			     for(int i=qlen-1;i>=0;i--)
 			     {
@@ -168,11 +170,13 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					hexx=hexx/16;
 					xlen++;
 			     }
-				 if(xlen<Out_num)
+				 if((xlen-1)<Out_num)
 				 {
-					for(int y=Out_num-xlen-1;y>=0;y--)
+					for(int y=0;y<=(Out_num-xlen);y++)
+					{
 					out[len]='0';
 					len++;
+					}
 				 }				 
 			     for(int i=xlen-1;i>=0;i--)
 			     {
