@@ -106,10 +106,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				case 'X':
 				unsigned int hex;
 				int hval=va_arg(ap,int); 
-				out[len]='0';
-				len++;
-				out[len]='X';
-				len++;
 			    if(hval==0)
 			    {out[len]='0';
 			     len++;
@@ -152,10 +148,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				case 'x':
 				unsigned int hexx;
 				int hxval=va_arg(ap,int); 
-				out[len]='0';
-				len++;
-				out[len]='x';
-				len++;
 			    if(hxval==0)
 			    {out[len]='0';
 			     len++;
