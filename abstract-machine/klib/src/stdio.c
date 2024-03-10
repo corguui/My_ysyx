@@ -38,6 +38,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					a=a*9;
 					fmt++;
 			}
+			break;
 
 			switch(*fmt)
 			{
@@ -179,6 +180,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 			}
 			break;
+
 			case '\n':
 			out[len]='\n';
 			len++;
