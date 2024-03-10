@@ -22,14 +22,13 @@ int printf(const char *fmt, ...) {
 }
 int vsprintf(char *out, const char *fmt, va_list ap) {
 	int len=0;
-	//int Out_num=0;
+	int Out_num=0;
 	while(*fmt!='\0')
 	{
 		switch(*fmt)
 		{
 			case '%':
 			fmt++;
-			/*
 			if(*fmt=='0')
 			{
 			int a=1;
@@ -52,7 +51,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				count--;
 			}
 			}
-			*/
 
 			switch(*fmt)
 			{
@@ -77,7 +75,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				 p[plen]=48+r;
 				 plen++;
 			     }
-				 /*
 				 if((plen-1)<Out_num)
 				 {
 					for(int y=0;y<=(Out_num-plen);y++)
@@ -86,7 +83,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					len++;
 					}
 				 }
-				 */
 			     for(int i=plen-1;i>=0;i--)
 			     {
 			       out[len]=p[i];
@@ -135,7 +131,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					hex=hex/16;
 					qlen++;
 			     }
-				 /*
 				 if((qlen-1)<Out_num)
 				 {
 					for(int y=0;y<=(Out_num-qlen);y++)
@@ -144,7 +139,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					len++;
 					}
 				 }
-				 */
 			     for(int i=qlen-1;i>=0;i--)
 			     {
 			       out[len]=q[i];
@@ -179,7 +173,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					hexx=hexx/16;
 					xlen++;
 			     }
-				 /*
 				 if((xlen-1)<Out_num)
 				 {
 					for(int y=0;y<=(Out_num-xlen);y++)
@@ -188,7 +181,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					len++;
 					}
 				 }				 
-				 */
 			     for(int i=xlen-1;i>=0;i--)
 			     {
 			       out[len]=x[i];
