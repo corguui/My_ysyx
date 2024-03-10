@@ -32,12 +32,23 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			if(*fmt=='0')
 			{
 			int a=1;
+			int count=0;
+			int k=0;
+			char out_buf[20];
 			fmt++;
 			while(*fmt<='9'&&*fmt>'0')
 			{
-					Out_num=Out_num+(*fmt-49)*a;
+					out_buf[count]=*fmt;
+					count++;
 					a=a*10;
 					fmt++;
+			}
+			while(count>0)
+			{
+				a=a/10;
+				Out_num=Out_num+(out_buf[k]-48)*a;
+				k++;
+				count--;
 			}
 			}
 
