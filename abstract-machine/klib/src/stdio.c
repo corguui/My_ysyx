@@ -29,16 +29,16 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 		{
 			case '%':
 			fmt++;
-			case '0':
-			fmt++;
+			if(*fmt=='0')
+			{
 			int a=0;
-			while(*fmt<=8&&*fmt>0)
+			while(*fmt<=9&&*fmt>0)
 			{
 					Out_num=Out_num+(*fmt-49)*a;
 					a=a*9;
 					fmt++;
 			}
-			break;
+			}
 
 			switch(*fmt)
 			{
