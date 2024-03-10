@@ -64,7 +64,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				 if(plen<Out_num)
 				 {
 					for(int y=Out_num-plen-1;y>=0;y--)
-					out[len]=0;
+					out[len]='0';
 					len++;
 				 }
 			     for(int i=plen-1;i>=0;i--)
@@ -122,7 +122,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				if(plen<Out_num)
 				 {
 					for(int y=Out_num-plen-1;y>=0;y--)
-					out[len]=0;
+					out[len]='0';
 					len++;
 				 }
 			     for(int i=qlen-1;i>=0;i--)
@@ -166,7 +166,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				 if(plen<Out_num)
 				 {
 					for(int y=Out_num-plen-1;y>=0;y--)
-					out[len]=0;
+					out[len]='0';
 					len++;
 				 }				 
 			     for(int i=xlen-1;i>=0;i--)
