@@ -31,12 +31,12 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			fmt++;
 			if(*fmt=='0')
 			{
-			int a=0;
+			int a=1;
 			fmt++;
 			while(*fmt<='9'&&*fmt>'0')
 			{
 					Out_num=Out_num+(*fmt-49)*a;
-					a=a*9;
+					a=a*10;
 					fmt++;
 			}
 			}
@@ -122,9 +122,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					hex=hex/16;
 					qlen++;
 			     }
-				if(plen<Out_num)
+				if(qlen<Out_num)
 				 {
-					for(int y=Out_num-plen-1;y>=0;y--)
+					for(int y=Out_num-qlen-1;y>=0;y--)
 					out[len]='0';
 					len++;
 				 }
@@ -166,9 +166,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					hexx=hexx/16;
 					xlen++;
 			     }
-				 if(plen<Out_num)
+				 if(xlen<Out_num)
 				 {
-					for(int y=Out_num-plen-1;y>=0;y--)
+					for(int y=Out_num-xlen-1;y>=0;y--)
 					out[len]='0';
 					len++;
 				 }				 
