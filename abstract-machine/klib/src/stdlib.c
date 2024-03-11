@@ -39,7 +39,7 @@ void *malloc(size_t size) {
 #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
 #endif
   char* buf=addr;
-  addr=addr+(char)size;
+  addr=buf+(char)size;
   return (void*)buf;
 }
 
