@@ -178,12 +178,13 @@ void init_monitor(int argc, char *argv[]) {
   ));
 #endif
 
-   /* Display welcome message. */
-  welcome();
-
  #ifdef CONFIG_FTRACE
   elf_read(elf_file);
   #endif
+   /* Display welcome message. */
+  welcome();
+
+
 
 
   
