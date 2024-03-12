@@ -29,8 +29,8 @@
 
 #ifdef CONFIG_FTRACE
 #include "../monitor/monitor.h"
-extern FUN fun_buff[128];
-extern int fun_num;
+extern FUN *symbol;
+extern int func_num;
 int space_num=-1;
 int space_flat=0;
 int print_flat=0;
@@ -118,16 +118,16 @@ if(pc!=0x80000000)
  {
  	int flat_ret=0;
 	int f,g;
- 	for(g=0;g<fun_num;g++)
+ 	for(g=0;g<func_num;g++)
 	{
 		
-		if(s->dnpc>=fun_buff[g].value&&s->dnpc<fun_buff[g].value+fun_buff[g].size)//read the next pc
+		if(s->dnpc>=symbol[g].value&&s->dnpc<symbol[g].value+symbol[g].size)//read the next pc
 		{
 		   if(strncmp(s->funbuf+24,ar1,4)==0&&strncmp(s->funbuf+12,ar2,5)==0)//ret or not ret 
 		   {
-		   for(f=0;f<fun_num;f++)
+		   for(f=0;f<func_num;f++)
 		   {
-		       if(s->pc>=fun_buff[f].value&&s->pc<fun_buff[f].size+fun_buff[f].value)	
+		       if(s->pc>=symbol[f].value&&s->pc<symbol[f].size+symbol[f].value)	
 		       {
 		          flat_ret=1;
 			  break;
@@ -141,7 +141,7 @@ if(pc!=0x80000000)
 		     	space_num--;
 		     }
 		     pr+=sprintf(pr,"0x%x:",s->pc);
-		     pr+=sprintf(pr,"---num: %d   ret [fun:%s  @%x]\n",space_num,fun_buff[f].name,fun_buff[f].value); 
+		     pr+=sprintf(pr,"---num: %d   ret [fun:%s  @%x]\n",space_num,symbol[f].name,symbol[f].value); 
 		     space_flat=1;
          print_flat=1;
 		     break;
@@ -153,13 +153,13 @@ if(pc!=0x80000000)
 		     	space_num++;
 		     }
 		     pr+=sprintf(pr,"0x%x:",s->pc);
-		     pr+=sprintf(pr,"---num: %d  call [fun:%s  @%x]\n",space_num,fun_buff[g].name,fun_buff[g].value);
+		     pr+=sprintf(pr,"---num: %d  call [fun:%s  @%x]\n",space_num,symbol[g].name,symbol[g].value);
 			space_flat=0;
       print_flat=1;
 			break;
 		   }
 		}
-		else if(g==fun_num-1)
+		else if(g==func_num-1)
 		{
 			printf("error no funcion\nsrc/cpu/cpu-exec.c:158:error\n");
 			
