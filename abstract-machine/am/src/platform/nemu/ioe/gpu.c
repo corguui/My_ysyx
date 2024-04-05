@@ -33,11 +33,12 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   int k=0;
   int w=ctl->w;
   int h=ctl->h;
+  uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   for(k=y;k<=h;k++)
   {
     for(i=x;i<=w;i++)
     {
-      *(uint32_t*)(ctl->pixels+(4*gpu_count))=inl(FB_ADDR+(4*gpu_count));
+      fb[gpu_count]=((uint32_t*)ctl->pixels)[gpu_count]; 
       gpu_count++;
     }
   }
