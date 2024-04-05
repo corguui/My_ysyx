@@ -39,7 +39,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   {
     for(i=x;i<w+x;i++)
     {
-      fb[WL*k+i]=pixels[WL*(k-y)+(i-x)]; 
+      fb[WL*k+i]=pixels[w*(k-y)+(i-x)]; 
     }
   }
   if (ctl->sync) {
