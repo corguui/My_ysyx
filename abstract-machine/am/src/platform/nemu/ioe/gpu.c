@@ -32,14 +32,14 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   int k=0;
   int w=ctl->w;
   int h=ctl->h;
-  uint32_t gpu_count=0;
-  uint32_t *fb = ((uint32_t *)(uintptr_t)FB_ADDR)+(x+y*32-32);
-  for(k=0;k<h;k++)
+  uint32_t WL=W;
+  uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
+  uint32_t *pixels=ctl->pixels;
+  for(k=y;k<h+y;k++)
   {
-    for(i=0;i<w;i++)
+    for(i=x;i<w+x;i++)
     {
-      fb[gpu_count]=((uint32_t*)ctl->pixels)[gpu_count]; 
-      gpu_count++;
+      fb[WL*k+i]=pixels[WL*(k-y)+(i-x)]; 
     }
   }
   if (ctl->sync) {
