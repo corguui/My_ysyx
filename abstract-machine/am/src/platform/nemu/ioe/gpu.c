@@ -2,7 +2,7 @@
 #include <nemu.h>
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
-# define W    inl(VGACTL_ADDR)<<16 
+# define W    inl(VGACTL_ADDR)>>16 
 # define H    inl(VGACTL_ADDR)&0x00FF
 
 void __am_gpu_init() {
