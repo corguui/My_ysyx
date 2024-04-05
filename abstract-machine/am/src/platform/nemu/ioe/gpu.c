@@ -5,7 +5,6 @@
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 # define W    inl(VGACTL_ADDR)>>16 
 # define H    (inl(VGACTL_ADDR)<<16)>>16
-uint32_t gpu_count=0;
 
 void __am_gpu_init() {
   /*
@@ -33,7 +32,8 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   int k=0;
   int w=ctl->w;
   int h=ctl->h;
-  uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
+  uint32_t gpu_count=0;
+  uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR+(x+y*32-32);
   for(k=y;k<=h;k++)
   {
     for(i=x;i<=w;i++)
@@ -44,7 +44,6 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   }
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
-    gpu_count=0;
   }
 }
 
