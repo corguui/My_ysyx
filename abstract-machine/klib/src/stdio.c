@@ -7,11 +7,10 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 #define NUM_LEN 32
-#define OSTRING_LEN 5120
 typedef uint32_t word_t;
 
 int printf(const char *fmt, ...) {
-  	char buff[4096];
+  	char buff[5120];
 	va_list arg;
 	va_start(arg,fmt);
 
