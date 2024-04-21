@@ -62,7 +62,7 @@ static char *__ptoa(void *p, char *buff)
 {
   static const char sym[] = "0123456789abcdef";
 
-  word_t num = (word_t)p;
+  word_t num = *(word_t*)p;
   char tmp[NUM_LEN];
 
   if (num == 0)
@@ -211,9 +211,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
         default:
         {
-          printf("print format is wrong!\n");
-          // Wrong format!!!
-          assert(0);
+		  panic("print format is wrong!\n");
         }
         }
       }
