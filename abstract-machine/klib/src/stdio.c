@@ -196,6 +196,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			out[len]='\n';
 			len++;
 			break;
+			case 'p':
+			panic("Not implemented");
+			break;
 			default:
 			  out[len]=*fmt;
 			  len++;
