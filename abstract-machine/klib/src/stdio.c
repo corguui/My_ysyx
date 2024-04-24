@@ -146,7 +146,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			       len++;
 			     }
 			     break;
-				case 'p':
 				case 'x':
 				unsigned int hexx;
 				int hxval=va_arg(ap,int); 
@@ -193,6 +192,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			}
 			break;
 
+			case 'p':
+			panic("Not implemented");
+			break;
 
 			case '\n':
 			out[len]='\n';
