@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
+static char NUM_CHAR[] = "0123456789ABCDEF";
 
 int printf(const char *fmt, ...) {
   	char buff[4096];
@@ -188,18 +189,36 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			       len++;
 			     }
 			     break;
+				case 'p':
+				int num_len;
+				char buf[1024];
+				out[len++] = '0'; out[len++] = 'x';
+				uint32_t address = va_arg(ap, uint32_t);
+				for(num_len = 0; address; address /= 16, num_len++)
+					buf[num_len] = NUM_CHAR[address % 16];
+				for(int i = num_len - 1; i >= 0; i--)
+					out[len++] = buf[i];
+				break;
+
+				case 'u':
+				int unum32_len = 0;
+				uint32_t unum32 = va_arg(ap, uint32_t);
+				if(unum32 == 0) 
+				out[len++] = '0';
+				else {
+					while(unum32 > 0) {
+					buf[unum32_len++] = '0' + (unum32 % 10);
+					unum32 /= 10;
+						}
+				}
+				for(int i = unum32_len - 1; i >= 0; i--)
+				out[len++] = buf[i];
+				break;
+
 
 			}
-			break;
 
-			case 'p':
-			panic("Not implemented");
-			break;
-
-			case 'u':
-			panic("Not implemented");
-			break;
-
+			
 			case '\n':
 			out[len]='\n';
 			len++;
