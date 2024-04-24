@@ -80,7 +80,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				 {
 					for(int y=0;y<(Out_num-plen);y++)
 					{
-					out[len]='0';
+					out[len]=' ';
 					len++;
 					}
 				 }
@@ -136,7 +136,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				 {
 					for(int y=0;y<(Out_num-qlen);y++)
 					{
-					out[len]='0';
+					out[len]=' ';
 					len++;
 					}
 				 }
@@ -178,7 +178,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				 {
 					for(int y=0;y<(Out_num-xlen);y++)
 					{
-					out[len]='0';
+					out[len]=' ';
 					len++;
 					}
 				 }				 
