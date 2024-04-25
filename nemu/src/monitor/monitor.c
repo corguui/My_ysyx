@@ -167,19 +167,11 @@ void init_monitor(int argc, char *argv[]) {
   init_sdb();
 
 #ifndef CONFIG_ISA_loongarch32r
-  IFDEF(CONFIG_ITRACE, init_disasm(
+  IFDEF(CONFIG_FTRACE, init_disasm(
     MUXDEF(CONFIG_ISA_x86,     "i686",
     MUXDEF(CONFIG_ISA_mips32,  "mipsel",
     MUXDEF(CONFIG_ISA_riscv,
-    MUXDEF(CONFIG_RV64,      "riscv64",
-                               "riscv32"),
-                               "bad"))) "-pc-linux-gnu"
-  ));
-    IFDEF(CONFIG_FTRACE, init_disasm(
-    MUXDEF(CONFIG_ISA_x86,     "i686",
-    MUXDEF(CONFIG_ISA_mips32,  "mipsel",
-    MUXDEF(CONFIG_ISA_riscv,
-    MUXDEF(CONFIG_RV64,      "riscv64",
+      MUXDEF(CONFIG_RV64,      "riscv64",
                                "riscv32"),
                                "bad"))) "-pc-linux-gnu"
   ));
