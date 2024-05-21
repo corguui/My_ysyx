@@ -35,6 +35,7 @@ module ysyx_23060111_top(
   wire [31:0] m_wmask;
   wire [31:0] m_rdata;
   wire [31:0] m_raddr;
+  wire [31:0] m_rmask;
   wire  m_wen; 
   wire  m_ren;
 
@@ -56,7 +57,7 @@ ysyx_23060111_EXU init_EXU (rout1,rout2,pc,dnpc,opcode,rd,funct3,rs1,rs2,funct7,
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr1,raddr2,wen,rout1,rout2);
 
 //init mem read and write
-ysyx_23060111_mem init_mem (clk,m_waddr,m_wdata,m_wmask,m_wen,m_raddr,m_ren,m_rdata);
+ysyx_23060111_mem init_mem (clk,m_waddr,m_wdata,m_wmask,m_wen,m_raddr,m_rmask,m_ren,m_rdata);
 
 
 
