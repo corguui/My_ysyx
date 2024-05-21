@@ -52,6 +52,7 @@ VM_USER_LDLIBS = \
 VM_USER_CLASSES = \
 	cpu \
 	dut \
+	device \
 	map \
 	mmio \
 	serial \
@@ -90,6 +91,8 @@ VPATH += $(VM_USER_DIR)
 cpu.o: csrc/cpu/cpu.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 dut.o: csrc/cpu/difftest/dut.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+device.o: csrc/device/device.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 map.o: csrc/device/map.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
