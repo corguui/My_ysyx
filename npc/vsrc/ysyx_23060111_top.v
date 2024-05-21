@@ -51,7 +51,7 @@ ysyx_23060111_IFU init_IFU (clk,pc,inst);
 ysyx_23060111_IDU init_IDU (inst,opcode,rd,funct3,rs1,rs2,funct7,imm,inv_flag);
 
  //init EXU 执行
-ysyx_23060111_EXU init_EXU (rout1,rout2,pc,dnpc,opcode,rd,funct3,rs1,rs2,funct7,imm,wdata,waddr,raddr1,raddr2,snpc,wen,m_waddr,m_wdata,m_wmask,m_wen,m_raddr,m_ren,m_rdata);
+ysyx_23060111_EXU init_EXU (rout1,rout2,pc,dnpc,opcode,rd,funct3,rs1,rs2,funct7,imm,wdata,waddr,raddr1,raddr2,snpc,wen,m_waddr,m_wdata,m_wmask,m_wen,m_raddr,m_rmask,m_ren,m_rdata);
 
 //init reg 
 ysyx_23060111_reg #(5,32) reg_$0(clk,wdata,waddr,raddr1,raddr2,wen,rout1,rout2);

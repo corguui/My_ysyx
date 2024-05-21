@@ -151,7 +151,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_init_sub__TOP__0(Vysyx_230
     tracep->declBus(c+20,"m_wmask", false,-1, 31,0);
     tracep->declBit(c+21,"m_wen", false,-1);
     tracep->declBus(c+90,"m_raddr", false,-1, 31,0);
-    tracep->declBus(c+131,"rmask", false,-1, 31,0);
+    tracep->declBus(c+131,"m_rmask", false,-1, 31,0);
     tracep->declBit(c+22,"m_ren", false,-1);
     tracep->declBus(c+89,"m_rdata", false,-1, 31,0);
     tracep->popNamePrefix(1);
