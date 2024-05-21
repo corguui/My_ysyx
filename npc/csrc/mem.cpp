@@ -85,14 +85,13 @@ uint32_t pmem_read(void* ad,int len)
 	case 2: return *(uint16_t *)addr;
 	case 4: return *(uint32_t *)addr;
 	default:
-	{ printf("%d pmem_read error\n",len); assert(0);    return 0;}
+	{ printf("pmem_read error\n"); assert(0);    return 0;}
 	}
 }
 //pmem read in mem.v
 extern "C" int vlg_pmem_read(int ad,int len)
 {
 	uint32_t addr=(uint32_t)ad;
-	printf("%d\n",len);
 	if(likely(check_mem(addr)))
 	{
 	uint32_t data=pmem_read(&addr, len);

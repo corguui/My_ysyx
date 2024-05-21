@@ -22,7 +22,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VL_OUT8(inv_flag,0,0);
     CData/*0:0*/ ysyx_23060111_top__DOT__wen;
     CData/*0:0*/ ysyx_23060111_top__DOT__m_wen;
-    CData/*0:0*/ ysyx_23060111_top__DOT____Vcellout__init_EXU____pinNumber24;
+    CData/*0:0*/ ysyx_23060111_top__DOT__m_ren;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_beq;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bge;
@@ -42,9 +42,7 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     IData/*31:0*/ ysyx_23060111_top__DOT__m_rdata;
     IData/*31:0*/ ysyx_23060111_top__DOT__m_raddr;
     IData/*31:0*/ ysyx_23060111_top__DOT__m_rmask;
-    IData/*31:0*/ ysyx_23060111_top__DOT____Vcellout__init_EXU____pinNumber23;
     VlWide<13>/*399:0*/ ysyx_23060111_top__DOT__init_IDU__DOT____Vcellinp__typeMux____pinNumber4;
-    IData/*31:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__m_rdata;
     IData/*31:0*/ __Vfunc_vlg_pmem_read__2__Vfuncout;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst;
