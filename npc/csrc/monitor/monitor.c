@@ -71,11 +71,6 @@ void init_monitor() {
 
     cpu_init();
 
-    #ifdef CONFIG_DEVICE
-    init_device();
-    #endif
-
-    
     #ifdef CONFIG_DIFFTEST
     if(diff_so_file!=NULL)
     {
@@ -93,6 +88,10 @@ void init_monitor() {
 
     #ifdef CONFIG_FTRACE
     elf_read(elf_file);
+    #endif
+
+    #ifdef CONFIG_DEVICE
+    init_device();
     #endif
 }
 
