@@ -74,7 +74,7 @@ static inline bool check_mem(uint32_t addr)
 
 uint32_t pc_read(uint32_t &pc)
 {
-	uint32_t val=pmem_read(pc,4);
+	uint32_t val=pmem_read(&pc,4);
 	return val;
 }
 uint32_t pmem_read(void* ad,int len)
