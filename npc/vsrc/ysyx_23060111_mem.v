@@ -8,7 +8,7 @@ module ysyx_23060111_mem(
     input [31:0] m_wmask,
     input m_wen,
     input [31:0] m_raddr,
-    input [31:0] rmask,
+    input [31:0] m_rmask,
     input m_ren,
     output reg [31:0] m_rdata
 
@@ -16,7 +16,7 @@ module ysyx_23060111_mem(
 
     always @(*) begin
         if(m_ren) begin
-            m_rdata=vlg_pmem_read(m_raddr,rmask);
+            m_rdata=vlg_pmem_read(m_raddr,m_rmask);
         end
         else begin
             m_rdata=32'b0;
