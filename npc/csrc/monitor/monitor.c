@@ -71,6 +71,10 @@ void init_monitor() {
 
     cpu_init();
 
+    #ifdef CONFIG_DEVICE
+    init_device();
+    #endif
+    
     #ifdef CONFIG_DIFFTEST
     if(diff_so_file!=NULL)
     {
