@@ -3,7 +3,7 @@
 
 #include <common.h>
 #include<cpu/cpu.h>
-#include <mmio.h>
+#include <device/mmio.h>
 #define CONFIG_MBASE 0x80000000
 #define CONFIG_MSIZE 0x8000000
 
