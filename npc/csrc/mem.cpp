@@ -72,14 +72,26 @@ static inline bool check_mem(uint32_t addr)
 }
 
 
+uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-0x80000000;}
+
+
+uint32_t pmem_read(uint32_t addr,int len)
+{
+	uint32_t ret = host_read(guest_to_host(addr),len);
+	return ret;
+}
+void pmem_write(paddr_t addr, int len, word_t data) {
+  host_write(guest_to_host(addr), len, data);
+}
+
+
 uint32_t pc_read(uint32_t &pc)
 {
-	uint32_t val=pmem_read(&pc,4);
+	uint32_t val=pmem_read(pc,4);
 	return val;
 }
-uint32_t pmem_read(void* ad,int len)
+uint32_t host_read(void* addr,int len)
 {
-    uint8_t *addr =pmem+(*(uint32_t*)ad)-0x80000000;
 	switch(len){
 	case 1: return *(uint8_t *)addr;
 	case 2: return *(uint16_t *)addr;
@@ -94,7 +106,7 @@ extern "C" int vlg_pmem_read(int ad,int len)
 	uint32_t addr=(uint32_t)ad;
 	if(likely(check_mem(addr)))
 	{
-	uint32_t data=pmem_read(&addr, len);
+	uint32_t data=pmem_read(addr, len);
 	#ifdef  CONFIG_MTRACE
 	 	read_buf[read_num]=addr;
 		read_data_buf[read_num]=data;
@@ -118,7 +130,7 @@ extern "C" int vlg_pc_read(int ad)
 	uint32_t pc=(uint32_t)ad;
 	if(likely(check_mem(pc)))
 	{
-	uint32_t data=pmem_read(&pc, 4);
+	uint32_t data=pmem_read(pc, 4);
 	return (int) data; 
 	}
 	printf("pc_read\n");
@@ -126,9 +138,10 @@ extern "C" int vlg_pc_read(int ad)
 	return 0;
 }
 
-void pmem_write(void* ad, int len, uint32_t data)
+
+
+void host_write(void* addr, int len, uint32_t data)
 {
-  	uint8_t *addr =pmem+(*(uint32_t*)ad)-0x80000000;
   	switch (len) {
           case 1: *(uint8_t  *)addr = data; return;
     	  case 2: *(uint16_t *)addr = data; return;
@@ -150,7 +163,7 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	write_data_buf[write_num]=data;
 	write_num++;
 	#endif
-	pmem_write(&addr,len,data);
+	pmem_write(addr,len,data);
 	return ;
 	}
 	#ifdef CONFIG_DEVICE
