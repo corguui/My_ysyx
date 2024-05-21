@@ -6,7 +6,6 @@
 #include<string.h>
 #include<unistd.h>
 #include<mem.h>
-#include<cpu/cpu.h>
 
 #ifdef CONFIG_MTRACE
 //memory tarce
