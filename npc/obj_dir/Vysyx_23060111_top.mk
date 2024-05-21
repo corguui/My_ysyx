@@ -52,6 +52,9 @@ VM_USER_LDLIBS = \
 VM_USER_CLASSES = \
 	cpu \
 	dut \
+	map \
+	mmio \
+	serial \
 	main \
 	mem \
 	monitor \
@@ -69,6 +72,7 @@ VM_USER_DIR = \
 	csrc \
 	csrc/cpu \
 	csrc/cpu/difftest \
+	csrc/device \
 	csrc/monitor \
 	csrc/monitor/sdb \
 	csrc/utils \
@@ -86,6 +90,12 @@ VPATH += $(VM_USER_DIR)
 cpu.o: csrc/cpu/cpu.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 dut.o: csrc/cpu/difftest/dut.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+map.o: csrc/device/map.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+mmio.o: csrc/device/mmio.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+serial.o: csrc/device/serial.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 main.o: csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
