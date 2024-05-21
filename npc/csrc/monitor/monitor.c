@@ -5,7 +5,7 @@
 void init_mem();
 void init_log(char * log_file);
 void init_sdb();
-Void init_device();
+void init_device();
 void cpu_init();
 void sdb_set_batch_mode();
 
