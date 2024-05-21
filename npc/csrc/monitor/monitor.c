@@ -90,9 +90,7 @@ void init_monitor() {
     elf_read(elf_file);
     #endif
 
-    #ifdef CONFIG_DEVICE
-    init_device();
-    #endif
+
 }
 
 //elf_file handle
