@@ -83,7 +83,7 @@ static int cmd_x(char *args)
   int i;
   for(i=0;i<num;i++)
   {
-	printf("0x%08x\n",pmem_read(&addr,4));
+	printf("0x%08x\n",pmem_read(addr,4));
 	addr=addr+4;
   }
   }
