@@ -85,7 +85,7 @@ uint32_t pmem_read(void* ad,int len)
 	case 2: return *(uint16_t *)addr;
 	case 4: return *(uint32_t *)addr;
 	default:
-	{ printf("pmem_read error\n"); assert(0);    return 0;}
+	{ printf("%d pmem_read error\n",len); assert(0);    return 0;}
 	}
 }
 //pmem read in mem.v
