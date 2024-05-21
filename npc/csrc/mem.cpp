@@ -104,6 +104,9 @@ extern "C" int vlg_pmem_read(int ad)
 	return (int) data; 
 	}
 	else {
+	#ifdef CONFIG_DEVICE
+		return mmio_read(addr,len);
+	#endif
 		return 0;
 	}
 	printf("read\n");
@@ -151,6 +154,9 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	pmem_write(addr,len,data);
 	return ;
 	}
+	#ifdef CONFIG_DEVICE
+		return mmio_write(addr,len,data);
+	#endif
 	printf("write\n");
 	out_of_bound(addr);
 }
