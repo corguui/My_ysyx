@@ -155,10 +155,6 @@ void host_write(void* addr, int len, uint32_t data)
 extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 {
 	uint32_t addr=(uint32_t)ad;
-	if(ad>0xa0000000)
-	{
-		printf("0x%08X\n",ad);
-	}
 	if(likely(check_mem(addr)))
 	{
 	uint32_t data=(uint32_t)wdata;
