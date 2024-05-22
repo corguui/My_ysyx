@@ -1,4 +1,3 @@
-#include <cstdio>
 #include <utils.h>
 #include <device/map.h>
 
@@ -8,7 +7,7 @@ static uint8_t *serial_base = NULL;
 
 
 static void serial_putc(char ch) {
-   printf("%c",ch);
+   putc(ch, stderr);
 }
 
 static void serial_io_handler(uint32_t offset, int len, bool is_write) {
