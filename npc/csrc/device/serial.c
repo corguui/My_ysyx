@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <utils.h>
 #include <device/map.h>
 
@@ -12,6 +13,7 @@ static void serial_putc(char ch) {
 
 static void serial_io_handler(uint32_t offset, int len, bool is_write) {
   assert(len == 1);
+  printf("ssssssssss\n");
   switch (offset) {
     /* We bind the serial port with the host stderr in NEMU. */
     case CH_OFFSET:
