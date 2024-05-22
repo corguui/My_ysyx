@@ -84,10 +84,6 @@ word_t paddr_read(paddr_t addr, int len) {
 }
 
 void paddr_write(paddr_t addr, int len, word_t data) {
-    if(addr>0xa0000000)
-	{
-		printf("0x%08X\n",addr);
-	}
   if (likely(in_pmem(addr))) { pmem_write(addr, len, data);
 #ifdef CONFIG_MTRACE
 	write_buf[write_num]=addr;
