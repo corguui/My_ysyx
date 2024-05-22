@@ -67,6 +67,10 @@ void init_mem() {
 }
 
 word_t paddr_read(paddr_t addr, int len) {
+  if(addr>0xa0000000)
+	{
+		printf("0x%08X\n",addr);
+	}
   if (likely(in_pmem(addr))){
     uint32_t data=pmem_read(addr, len);
 #ifdef CONFIG_MTRACE
