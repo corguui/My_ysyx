@@ -106,12 +106,12 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		s->pc=top->pc;
 		s->inst=top->rootp->ysyx_23060111_top__DOT__inst;
     	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
-		tfp->dump(main_time);
-		main_time++;
+		//tfp->dump(main_time);
+		//main_time++;
 		top->eval();
 		top->clk =1; top->eval();
-		tfp->dump(main_time);
-		main_time++;
+		//tfp->dump(main_time);
+		//main_time++;
 		top->eval();
 
 
