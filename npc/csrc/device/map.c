@@ -18,19 +18,17 @@ uint8_t* new_space(int size) {
   return p;
 }
 
-int  check_bound(IOMap *map, paddr_t addr) {
+static void check_bound(IOMap *map, paddr_t addr) {
   if (map == NULL) {
     log_write("address (" "0x%08x"  ") is out of bound at pc = " "0x%08x", addr, top->pc);
-    return 0;
-    //assert(map != NULL);
+    assert(map != NULL);
       }
   else {
     if((addr <= map->high && addr >= map->low)==0)
     {
     log_write("address (" "0x%08x" ") is out of bound {%s} [" "0x%08x" ", " "0x%08x" "] at pc = " "0x%08x",
         addr, map->name, map->low, map->high, top->pc);
-    //assert(addr <= map->high && addr >= map->low);
-    return 0;
+    assert(addr <= map->high && addr >= map->low);
     }
        }
 }
@@ -60,10 +58,7 @@ void Dtrace_write(paddr_t addr, int len, word_t data, IOMap *map)
 
 word_t map_read(paddr_t addr, int len, IOMap *map) {
   assert(len >= 1 && len <= 8);
-  int n=1;
-  n=check_bound(map, addr);
-  if(n==1)
-  {
+  check_bound(map, addr);
   paddr_t offset = addr - map->low;
   invoke_callback(map->callback, offset, len, false); // prepare data to read
   word_t ret = host_read((map->space + offset), len);
@@ -71,8 +66,6 @@ word_t map_read(paddr_t addr, int len, IOMap *map) {
   Dtrace_read(addr,ret,len,map);
   #endif
   return ret;
-  }
-  return 0;
 }
 
 void map_write(paddr_t addr, int len, word_t data, IOMap *map) {
