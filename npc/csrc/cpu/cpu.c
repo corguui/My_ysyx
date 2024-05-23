@@ -88,12 +88,12 @@ void cpu_init()
 {
 	top->rst=1;
 	top->clk =0; top->eval();
-	tfp->dump(main_time);
+	//tfp->dump(main_time);
 	main_time++;
 	top->eval();
 	top->clk =1; top->eval();
 	top->rst=0;
-	tfp->dump(main_time);
+	//tfp->dump(main_time);
 	main_time++;
 	top->eval();
 
@@ -107,11 +107,11 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		s->inst=top->rootp->ysyx_23060111_top__DOT__inst;
     	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 		//tfp->dump(main_time);
-		//main_time++;
+		main_time++;
 		top->eval();
 		top->clk =1; top->eval();
 		//tfp->dump(main_time);
-		//main_time++;
+		main_time++;
 		top->eval();
 
 
