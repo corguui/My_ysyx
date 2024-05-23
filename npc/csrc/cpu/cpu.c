@@ -71,6 +71,7 @@ static void trace_and_difftest(Decode *_this) {
   difftest_step(_this->pc, top->pc);
   #endif
 
+#ifdef CONFIG_CC_WATCHPOINT
 //watchpoint
   if(check_wp()!=true)
   {
@@ -78,6 +79,7 @@ static void trace_and_difftest(Decode *_this) {
   printf("error the npc stop\n");
   return ;
   }
+#endif
 }
 
 
