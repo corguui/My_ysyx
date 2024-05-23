@@ -4,7 +4,7 @@
 
 void init_map();
 void init_serial();
-void init_time();
+void init_timer();
 
 
 void device_update() {
@@ -27,7 +27,7 @@ void init_device() {
   #endif
 
   #ifdef CONFIG_HAS_TIMER
-  init_time();
+  init_timer();
   #endif
 
 }
