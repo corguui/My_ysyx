@@ -81,6 +81,6 @@ lint:$(Vfile)
 .PHONY:clean
 clean:
 	rm -rf obj_dir wave.vcd
-	rm -rf ./build 
+	rm -rf $(BUILD_DIR)
 	rm -rf $(NPC_LOG)
 include ../Makefile
