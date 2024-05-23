@@ -15,7 +15,7 @@
 #define CONFIG_SERIAL_MMIO 0xa00003f8 //串口
 #define CONFIG_HAS_SERIAL 1 //串口
 #define CONFIG_RTC_MMIO 0xa0000048 //时钟
-#define CONFIG_HAS_TIMER 1 //时钟
+//#define CONFIG_HAS_TIMER 1 //时钟
 
 #endif
 
