@@ -2,9 +2,11 @@
 #include <utils.h> 
 #include <device/alarm.h>
 
+#ifdef CONFIG_DEVICE
 void init_map();
 void init_serial();
 void init_timer();
+#endif
 
 
 void device_update() {
@@ -20,6 +22,7 @@ void sdl_clear_event_queue() {
 }
 
 void init_device() {
+
   init_map();
 
   #ifdef CONFIG_HAS_SERIAL
