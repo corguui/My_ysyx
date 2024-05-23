@@ -1,11 +1,10 @@
 #include <common.h>
 #include <utils.h> 
 #include <device/alarm.h>
-#include <device/timer.h>
 
 void init_map();
 void init_serial();
-
+void init_time();
 
 
 void device_update() {
@@ -28,7 +27,7 @@ void init_device() {
   #endif
 
   #ifdef CONFIG_HAS_TIMER
-  init_timer();
+  init_time();
   #endif
 
 }
