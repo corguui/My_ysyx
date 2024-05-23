@@ -101,7 +101,7 @@ uint32_t host_read(void* addr,int len)
 	}
 }
 //pmem read in mem.v
-extern "C" int vlg_pmem_read(unsigned int ad,int len)
+extern "C" int vlg_pmem_read(int ad,int len)
 {
 	uint32_t addr=(uint32_t)ad;
 	printf("%x %d\n",addr,len);
