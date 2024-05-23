@@ -120,8 +120,9 @@ extern "C" int vlg_pmem_read(int ad,int len)
 	#ifdef CONFIG_DEVICE
 		return mmio_read(addr,len);
 	#endif
-		return 0;
+
 	}
+	return 0;
 	printf("read\n");
 	out_of_bound(addr);
 	return 0;
