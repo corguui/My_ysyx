@@ -54,7 +54,7 @@ VM_USER_CLASSES = \
 	map \
 	mmio \
 	serial \
-	timer \
+	time \
 	main \
 	mem \
 	monitor \
@@ -100,7 +100,7 @@ mmio.o: csrc/device/mmio.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 serial.o: csrc/device/serial.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-timer.o: csrc/device/timer.c
+time.o: csrc/device/time.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 main.o: csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
