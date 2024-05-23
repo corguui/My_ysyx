@@ -180,8 +180,8 @@ begin
         3'b010:begin
            m_ren=1'b1;
            m_raddr = src1 + imm;
-           m_rmask =32'd4;
            wdata = $signed(m_rdata);            
+           m_rmask =32'd4;
            wen=1'b1;
         end
         //LBU
