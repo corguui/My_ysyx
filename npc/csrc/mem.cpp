@@ -1,3 +1,4 @@
+#include "config.h"
 #include "debug.h"
 #include "utils.h"
 #include <assert.h>
@@ -115,7 +116,7 @@ extern "C" int vlg_pmem_read(int ad,int len)
 	#endif
 	return (int) data; 
 	}
-	else {
+	else if(addr == CONFIG_RTC_MMIO || addr ==CONFIG_RTC_MMIO+4) {
 	#ifdef CONFIG_DEVICE
 		return mmio_read(addr,len);
 	#endif
