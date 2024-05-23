@@ -104,6 +104,7 @@ uint32_t host_read(void* addr,int len)
 extern "C" int vlg_pmem_read(int ad,int len)
 {
 	uint32_t addr=(uint32_t)ad;
+	printf("%x %d",ad,len);
 	if(likely(check_mem(addr)))
 	{
 	uint32_t data=pmem_read(addr, len);
