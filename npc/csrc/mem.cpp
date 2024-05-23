@@ -107,7 +107,7 @@ extern "C" int vlg_pmem_read(int ad,int len)
 	printf("%x %d\n",addr,len);
 	if(likely(check_mem(addr)))
 	{
-	uint32_t data=pmem_read(addr, len);
+	uint32_t data=pmem_read(addr, 4);
 	#ifdef  CONFIG_MTRACE
 	 	read_buf[read_num]=addr;
 		read_data_buf[read_num]=data;
@@ -117,7 +117,7 @@ extern "C" int vlg_pmem_read(int ad,int len)
 	}
 	else {
 	#ifdef CONFIG_DEVICE
-		return mmio_read(addr,len);
+		return mmio_read(addr,4);
 	#endif
 		return 0;
 	}
