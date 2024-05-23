@@ -20,9 +20,8 @@ uint8_t* new_space(int size) {
 
 static void check_bound(IOMap *map, paddr_t addr) {
   if (map == NULL) {
-    printf("address 0x%08X,PC 0x%08X",addr,top->pc);
     log_write("address (" "0x%08d"  ") is out of bound at pc = " "0x%08d", addr, top->pc);
-    assert(map != NULL);
+    assert(0);
       }
   else {
     if((addr <= map->high && addr >= map->low)==0)
