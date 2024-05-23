@@ -10,6 +10,9 @@ void set_npc_state(int state,int halt_ret);
 void invalid_inst();
 #define INV() invalid_inst()
 
+// ----------- timer -----------
+
+uint64_t get_time();
 
 // ----------- state -----------
 
@@ -22,10 +25,6 @@ typedef struct {
 
 extern NPCState npc_state;
  
-// ----------- timer -----------
-uint64_t get_time();
-
-
 // ----------- log -----------
  
 #define ANSI_FG_BLACK   "\33[1;30m"
