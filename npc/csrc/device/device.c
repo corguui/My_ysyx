@@ -21,10 +21,11 @@ void sdl_clear_event_queue() {
 
 void init_device() {
   init_map();
-  #ifdef CONFIG_HAS_SERIAL
-  init_serial();
-  #endif
   #ifdef CONFIG_HAS_TIMER
   init_timer();
   #endif
+  #ifdef CONFIG_HAS_SERIAL
+  init_serial();
+  #endif
+
 }
