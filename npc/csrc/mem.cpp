@@ -115,10 +115,6 @@ extern "C" int vlg_pmem_read(int ad,int len)
 	#endif
 	return (int) data; 
 	}
-	else if (addr>0xb0000000) {
-		return 0;
-	
-	}
 	else {
 	#ifdef CONFIG_DEVICE
 		return mmio_read(addr,len);
