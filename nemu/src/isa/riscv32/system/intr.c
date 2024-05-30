@@ -21,7 +21,6 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    */
   cpu.csr.mepc=epc;
   cpu.csr.mstatus=NO;
-  printf("%x\n%x\n",cpu.csr.mepc,cpu.csr.mstatus);
   return cpu.csr.mtvec;
 }
 
