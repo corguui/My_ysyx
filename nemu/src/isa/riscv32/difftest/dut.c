@@ -23,7 +23,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   {
   	if(ref_r->gpr[i]!=cpu.gpr[i])
 	{
-    printf("the No:%d nemu.gpr0x%x\n         spik.gpr0x%x\n",i,cpu.gpr[i],ref_r->gpr[i]);
+    printf("the No:%d nemu.gpr0x%x\n         spik.gpr0x%x\n",i+1,cpu.gpr[i],ref_r->gpr[i]);
 		return false;
 	}
   }
