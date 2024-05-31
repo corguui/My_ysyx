@@ -20,7 +20,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    * Then return the address of the interrupt/exception vector.
    */
   cpu.csr.mepc=epc;
-  printf("%x\n",NO);
+  printf("NO %x\n",NO);
   cpu.csr.mstatus=NO;
   return cpu.csr.mtvec;
 }
