@@ -78,7 +78,7 @@ void sim_t::diff_set_regs(void* diff_context) {
   state->pc = ctx->pc;
   state->mcause=ctx->mcause;
   state->mepc=ctx->mepc;
-  state->mstatus=ctx->status;
+  state->mstatus=ctx->mstatus;
   state->mtvec=ctx->mtvec;
 }
 
