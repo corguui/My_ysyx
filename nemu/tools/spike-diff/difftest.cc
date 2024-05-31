@@ -13,7 +13,6 @@
 * See the Mulan PSL v2 for more details.
 ***************************************************************************************/
 
-#include "isa-def.h"
 #include "mmu.h"
 #include "sim.h"
 #include "../../include/common.h"
