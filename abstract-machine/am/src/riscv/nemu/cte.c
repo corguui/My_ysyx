@@ -14,7 +14,7 @@ Context* __am_irq_handle(Context *c) {
 
     for(int i=0;i<32;i++)
     {
-    printf("%x\n",c->gpr[i]);
+    printf("NO i: %x\n",c->gpr[i]);
     }
     printf("cause %x state %x pc %x\n",c->mcause,c->mstatus,c->mepc);
 
