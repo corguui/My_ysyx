@@ -58,6 +58,7 @@ void init_map() {
 void Dtrace_read(paddr_t addr,word_t ret, int len, IOMap *map)
 {
     log_write("dtrace read: device %s read 0x%x at 0x%x  len is %d\n",map->name,ret,addr,len);
+    log_write("99999999999999999\n");
 }
 
 void Dtrace_write(paddr_t addr, int len, word_t data, IOMap *map)
