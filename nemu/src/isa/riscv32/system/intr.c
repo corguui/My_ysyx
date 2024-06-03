@@ -14,8 +14,6 @@
 ***************************************************************************************/
 
 #include <isa.h>
-void etrace();
-void isa_csr_display();
 word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * Then return the address of the interrupt/exception vector.
@@ -24,10 +22,6 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   cpu.csr.mcause=NO;
   #ifdef CONFIG_DIFFTEST
   printf("the isa intr.c isa_raise_intr error fix the mcause=NO or in isa riscv32 difftest dut.c let it pass the 0xb\n ");
-  #endif
-  #ifdef CONFIG_ETRACE 
-  etrace(); 
-  isa_csr_display();
   #endif
   return cpu.csr.mtvec;
 }
