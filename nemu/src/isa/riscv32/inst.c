@@ -19,7 +19,7 @@
 #include <cpu/ifetch.h>
 #include <cpu/decode.h>
 #include <pthread.h>
-#include "utils.h"
+
 
 #define R(i) gpr(i)
 #define CSR(i) csr(i)
@@ -32,15 +32,6 @@
 #define Mr vaddr_read
 #define Mw vaddr_write
 
-
-void etrace()
-{
-  log_write("dtrace read: device read 0xat 0x len is \n");
-  log_write("$mepc      --> 0x%x\n",cpu.csr.mepc);
-  log_write("$mcause    --> 0x%x\n",cpu.csr.mcause);
-  log_write("$mstatus   --> 0x%x\n",cpu.csr.mstatus);
-  log_write("$mtvec     --> 0x%x\n",cpu.csr.mtvec);
-}
 
 
 enum {
@@ -105,7 +96,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , I, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
   INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, R(rd) = CSR(imm); CSR(imm) = src1);
   INSTPAT("??????? ????? ????? 010 ????? 11100 11", csrrs  , I, R(rd) = CSR(imm);  CSR(imm) |= src1);
-  INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, ECALL(s->dnpc);etrace() );
+  INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, ECALL(s->dnpc); );
   INSTPAT("??????? ????? ????? 000 ????? 01000 11", sb     , S, Mw(src1 + imm, 1, src2));
   INSTPAT("??????? ????? ????? 001 ????? 01000 11", sh     , S, Mw(src1 + imm, 2, src2));
   INSTPAT("??????? ????? ????? 010 ????? 01000 11", sw     , S, Mw(src1 + imm, 4, src2));
