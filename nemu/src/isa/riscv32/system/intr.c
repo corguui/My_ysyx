@@ -18,10 +18,10 @@
 void etrace()
 {
   printf("aasdfasdfdsaf  \n");
-  log_write("$mepc      --> 0x%x\n",cpu.csr.mepc);
-  log_write("$mcause    --> 0x%x\n",cpu.csr.mcause);
-  log_write("$mstatus   --> 0x%x\n",cpu.csr.mstatus);
-  log_write("$mtvec     --> 0x%x\n",cpu.csr.mtvec);
+  log_write("mepc      --> 0x%x\n",cpu.csr.mepc);
+  log_write("mcause    --> 0x%x\n",cpu.csr.mcause);
+  log_write("mstatus   --> 0x%x\n",cpu.csr.mstatus);
+  log_write("mtvec     --> 0x%x\n",cpu.csr.mtvec);
 }
 
 word_t isa_raise_intr(word_t NO, vaddr_t epc) {
