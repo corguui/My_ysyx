@@ -33,7 +33,6 @@
 #define Mw vaddr_write
 
 
-#ifdef CONFIG_ETRACE
 void etrace()
 {
   log_write("dtrace read: device read 0xat 0x len is \n");
@@ -42,7 +41,6 @@ void etrace()
   log_write("$mstatus   --> 0x%x\n",cpu.csr.mstatus);
   log_write("$mtvec     --> 0x%x\n",cpu.csr.mtvec);
 }
-#endif
 
 
 enum {
