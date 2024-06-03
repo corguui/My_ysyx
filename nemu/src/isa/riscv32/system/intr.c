@@ -15,6 +15,7 @@
 
 #include <isa.h>
 void etrace();
+void isa_csr_display();
 word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * Then return the address of the interrupt/exception vector.
@@ -26,6 +27,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   #endif
   #ifdef CONFIG_ETRACE 
   etrace(); 
+  isa_csr_display();
   #endif
   return cpu.csr.mtvec;
 }
