@@ -19,7 +19,7 @@
 #include <cpu/ifetch.h>
 #include <cpu/decode.h>
 #include <pthread.h>
-#include <utils.h>
+#include "utils.h"
 
 #define R(i) gpr(i)
 #define CSR(i) csr(i)
