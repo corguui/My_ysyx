@@ -36,6 +36,7 @@
 #ifdef CONFIG_ETRACE
 void etrace()
 {
+  log_write("dtrace read: device read 0xat 0x len is \n");
   log_write("$mepc      --> 0x%x\n",cpu.csr.mepc);
   log_write("$mcause    --> 0x%x\n",cpu.csr.mcause);
   log_write("$mstatus   --> 0x%x\n",cpu.csr.mstatus);
