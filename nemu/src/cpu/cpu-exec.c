@@ -121,11 +121,6 @@ if(pc!=0x80000000)
 	int f,g;
  	for(g=0;g<func_num;g++)
 	{
-    if(g==func_num-1)
-    {
-      printf("%x\n",s->pc);
-      printf("%x\n",s->dnpc);
-    }
 		if(s->dnpc>=symbol[g].value&&s->dnpc<symbol[g].value+symbol[g].size)//read the next pc
 		{
 		   if(strncmp(s->funbuf+24,ar1,4)==0&&strncmp(s->funbuf+12,ar2,5)==0)//ret or not ret 
