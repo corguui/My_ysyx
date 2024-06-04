@@ -123,7 +123,7 @@ if(pc!=0x80000000)
 	{
     if(g==func_num-1)
     {
-      printf("%x\n",s->dnpc);
+      printf("%x\n",s->pc);
     }
 		if(s->dnpc>=symbol[g].value&&s->dnpc<symbol[g].value+symbol[g].size)//read the next pc
 		{
@@ -167,6 +167,13 @@ if(pc!=0x80000000)
 	}
   	if(g==func_num)
 		{
+      if(space_flat==1)
+      {
+        space_num--;
+      }
+      else {
+        space_num++;
+      }
 			printf("error no funcion\nsrc/cpu/cpu-exec.c:166:error\n");
       log_write("error no funcion\nsrc/cpu/cpu-exec.c:166:error\n");
 		}
