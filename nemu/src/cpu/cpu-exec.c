@@ -124,6 +124,7 @@ if(pc!=0x80000000)
     if(g==func_num-1)
     {
       printf("%x\n",s->pc);
+      printf("%x\n",s->dnpc);
     }
 		if(s->dnpc>=symbol[g].value&&s->dnpc<symbol[g].value+symbol[g].size)//read the next pc
 		{
