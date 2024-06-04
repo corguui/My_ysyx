@@ -19,6 +19,7 @@
 #include <locale.h>
 
 #include "../monitor/sdb/watchpoint.h"
+#include "utils.h"
 
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
@@ -167,7 +168,7 @@ if(pc!=0x80000000)
   	if(g==func_num)
 		{
 			printf("error no funcion\nsrc/cpu/cpu-exec.c:166:error\n");
-			
+      log_write("error no funcion\nsrc/cpu/cpu-exec.c:166:error\n");
 		}
  }
  
