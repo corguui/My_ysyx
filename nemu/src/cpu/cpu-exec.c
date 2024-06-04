@@ -118,14 +118,14 @@ if(pc!=0x80000000)
  {
  	int flat_ret=0;
 	int f,g;
- 	for(g=0;g<func_num;g++)
+ 	for(g=0;g<=func_num;g++)
 	{
 		
 		if(s->dnpc>=symbol[g].value&&s->dnpc<symbol[g].value+symbol[g].size)//read the next pc
 		{
 		   if(strncmp(s->funbuf+24,ar1,4)==0&&strncmp(s->funbuf+12,ar2,5)==0)//ret or not ret 
 		   {
-		   for(f=0;f<func_num;f++)
+		   for(f=0;f<=func_num;f++)
 		   {
 		       if(s->pc>=symbol[f].value&&s->pc<symbol[f].size+symbol[f].value)	
 		       {
@@ -159,12 +159,13 @@ if(pc!=0x80000000)
 			break;
 		   }
 		}
-		else if(g==func_num-1)
+
+	}
+  	if(g==func_num+1)
 		{
-			printf("error no funcion\nsrc/cpu/cpu-exec.c:158:error\n");
+			printf("error no funcion\nsrc/cpu/cpu-exec.c:166:error\n");
 			
 		}
-	}
  }
  
 #endif
