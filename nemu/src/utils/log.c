@@ -36,4 +36,5 @@ bool log_enable() {
   #endif
   return 1;
   #endif 
+  return 0;
   }
