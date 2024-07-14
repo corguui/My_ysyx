@@ -37,7 +37,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   Context *c = (Context*)kstack.end - 1;
   c->GPR4 = (uintptr_t)kstack.start;
   c->GPR3 = (uintptr_t)kstack.end;
-
+  c->mcause = EVENT_YIELD;
   c->GPR1 = (uintptr_t)arg;
   c->GPR2 = (uintptr_t)entry;  
   return NULL;
