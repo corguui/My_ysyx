@@ -39,7 +39,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   c->GPR3 = (uintptr_t)kstack.end;
   c->GPR1 = (uintptr_t)arg;
   c->GPR2 = (uintptr_t)entry;  
-  return NULL;
+  return c;
 }
 
 void yield() {
