@@ -38,7 +38,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   c->GPR2 = (uintptr_t)kstack.start;
   c->GPR3 = (uintptr_t)kstack.end;
   c->GPR4 = (uintptr_t)arg;
-  c->mepc = (uintptr_t)entry;  
+  c->GPR5 = (uintptr_t)entry;  
   return c;
 }
 
