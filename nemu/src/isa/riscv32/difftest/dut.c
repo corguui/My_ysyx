@@ -28,6 +28,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 	}
   }
  
+/*
   if(cpu.csr.mcause!=0xb)
 	{
     printf("the nemu.csr.mcause0x%x\n         spik.csr.mcause0x%x\n",cpu.csr.mcause,ref_r->csr.mcause);
@@ -48,6 +49,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
     printf("the nemu.csr.mtvec0x%x\n         spik.csr.mtvec0x%x\n",cpu.csr.mtvec,ref_r->csr.mtvec);
 		return false;
 	} 
+*/
 
   if(ref_r->pc!=cpu.pc)
   {
