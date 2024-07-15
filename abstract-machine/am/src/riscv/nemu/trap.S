@@ -58,7 +58,7 @@ __am_asm_trap:
   csrw mstatus, t1
 
   mv a0, sp
-  jal __am_irq_handle
+  jal __am_irq_handle  //切换上下文
 
   mv a3, sp //addi myself
 
