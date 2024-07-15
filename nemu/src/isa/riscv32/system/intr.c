@@ -22,7 +22,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    */
   cpu.csr.mepc=epc;
   cpu.csr.mcause=0xb;
-  printf("%x %X \r\n",epc ,cpu.csr.mepc);
+  printf("%x %x \r\n",epc ,cpu.csr.mtvec);
   #ifdef CONFIG_DIFFTEST
   printf("the isa intr.c isa_raise_intr error fix the mcause=NO or in isa riscv32 difftest dut.c let it pass the 0xb\n ");
   #endif
