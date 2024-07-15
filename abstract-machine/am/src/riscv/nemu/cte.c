@@ -37,6 +37,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   Context *c = (Context*)kstack.end ;
   //c->GPR0 = (uintptr_t)arg;
   c->mstatus = 0x1800;
+  c->mcause = EVENT_YIELD;
   c->mepc = (uintptr_t)entry;  
   return c;
 }
