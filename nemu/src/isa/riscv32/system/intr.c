@@ -25,7 +25,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   #ifdef CONFIG_DIFFTEST
   printf("the isa intr.c isa_raise_intr error fix the mcause=NO or in isa riscv32 difftest dut.c let it pass the 0xb\n ");
   #endif
-  return cpu.csr.mtvec;
+  return cpu.csr.mtvec+0x4;
 }
 
 word_t isa_query_intr() {
