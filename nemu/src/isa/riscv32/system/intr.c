@@ -21,9 +21,13 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    * Then return the address of the interrupt/exception vector.
    */
   cpu.csr.mepc=epc;
-  cpu.csr.mcause=0xb;
-  //#ifdef CONFIG_DIFFTEST
-  //#endif
+  cpu.csr.mcause=NO;
+ #ifdef CONFIG_DIFFTEST
+  //cpu.csr.mcause=0xb;
+  cpu.csr.mstatus=0x1800;
+ #else
+  cpu.csr.mcause=NO; 
+ #endif
   return cpu.csr.mtvec;
 }
 
