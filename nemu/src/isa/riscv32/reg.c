@@ -32,6 +32,7 @@ void isa_reg_display() {
 	{
 	printf("$%3s --> 0x%x \n",regs[i],cpu.gpr[i]);
 	}
+  printf("mstatus --> 0x%x \n",cpu.csr.mstatus);
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
