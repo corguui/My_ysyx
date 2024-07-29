@@ -23,7 +23,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   cpu.csr.mepc=epc;
  #ifdef CONFIG_DIFFTEST
   cpu.csr.mcause=0xb;
-  //cpu.csr.mstatus=0x1800;
+  cpu.csr.mstatus=0x1800;
  #else
   cpu.csr.mcause=NO; 
  #endif
