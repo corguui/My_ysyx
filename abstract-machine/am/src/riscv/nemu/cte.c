@@ -13,7 +13,7 @@ Context* __am_irq_handle(Context *c) {
       case  11:ev.event = EVENT_YIELD; break;
       default: ev.event = EVENT_ERROR; break;
     }
-
+    assert(c != NULL);
     c = user_handler(ev, c);
 
     assert(c != NULL);
@@ -35,7 +35,7 @@ bool cte_init(Context*(*handler)(Event, Context*)) {
 }
 
 Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
-  Context *c = (Context*)kstack.end-1 ;
+  Context *c = (Context*)kstack.end ;
   c->mstatus = 0x1800;
   c->mepc = (uintptr_t)entry;  
   return c;
