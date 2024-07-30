@@ -27,6 +27,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   //mret 导致mstatus变成0x1880 
  #else
   cpu.csr.mcause=NO; 
+  printf("%x\r\n",cpu.csr.mcause);
  #endif
   return cpu.csr.mtvec;
 }
