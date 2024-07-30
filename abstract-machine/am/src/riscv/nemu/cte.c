@@ -39,6 +39,10 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   Context *c = (Context*)kstack.end;
   c->mstatus = 0x1800;
   c->mepc = (uintptr_t)entry;  
+  if(c==NULL)
+  {
+    assert(0);
+  }
   return c;
 }
 
