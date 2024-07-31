@@ -266,6 +266,8 @@ void cpu_exec(uint64_t n) {
 	  print_ringbuf();
 	  else if(nemu_state.state==NEMU_ABORT)
 	  print_ringbuf();
+    else 
+    print_ringbuf();
 	#endif
 
 
