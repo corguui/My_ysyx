@@ -270,8 +270,7 @@ void cpu_exec(uint64_t n) {
 
 
       // fall through
-    case NEMU_QUIT: print_ringbuf(); 
-                   statistic();
+    case NEMU_QUIT: statistic();
 
   }
 }
