@@ -364,15 +364,19 @@ begin
                 csr_mepc_wdata=pc;
                 csr_mepc_wen=1'b1;
                 csr_mstatus_wen=1'b0;
+                csr_wen=1'b0;
                 dnpc=csrr_mtvec;
 
                 end
                 //mret
                 else if(csr_flag==2'd0)
                 begin
+                csr_mstatus_wdata |=((csrr_mstatus&32'h00000080)>>4)|32'h00000080;
+                csr_mstatus_wen=1'b1;
+                csr_mepc_wen=1'b0;
+                csr_mcause_wen=1'b0;
                 csr_wen=1'b0;
-                wen=1'b0;
-                dnpc=snpc;
+                dnpc=csrr_mepc;
                 end
                 else
                 begin
