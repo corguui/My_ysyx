@@ -90,23 +90,26 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     }
     if (VL_UNLIKELY((vlSelf->__Vm_traceActivity[1U] 
                      | vlSelf->__Vm_traceActivity[2U]))) {
-        bufp->chgIData(oldp+89,(vlSelf->ysyx_23060111_top__DOT__dnpc),32);
-        bufp->chgIData(oldp+90,(vlSelf->ysyx_23060111_top__DOT__wdata),32);
-        bufp->chgIData(oldp+91,(vlSelf->ysyx_23060111_top__DOT__rout1),32);
-        bufp->chgIData(oldp+92,(vlSelf->ysyx_23060111_top__DOT__rout2),32);
-        bufp->chgIData(oldp+93,(vlSelf->ysyx_23060111_top__DOT__csr_wdata),32);
-        bufp->chgIData(oldp+94,(vlSelf->ysyx_23060111_top__DOT__csr_rout),32);
-        bufp->chgIData(oldp+95,(vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata),32);
-        bufp->chgIData(oldp+96,(vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata),32);
-        bufp->chgIData(oldp+97,(vlSelf->ysyx_23060111_top__DOT__m_waddr),32);
-        bufp->chgIData(oldp+98,(vlSelf->ysyx_23060111_top__DOT__m_wdata),32);
-        bufp->chgIData(oldp+99,(vlSelf->ysyx_23060111_top__DOT__m_rdata),32);
-        bufp->chgIData(oldp+100,(vlSelf->ysyx_23060111_top__DOT__m_raddr),32);
-        bufp->chgBit(oldp+101,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_beq));
-        bufp->chgBit(oldp+102,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bge));
-        bufp->chgBit(oldp+103,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bgeu));
-        bufp->chgCData(oldp+104,((0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata)),5);
-        bufp->chgCData(oldp+105,((0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata)),5);
+        bufp->chgIData(oldp+89,(vlSelf->ysyx_23060111_top__DOT__rout1),32);
+        bufp->chgIData(oldp+90,(vlSelf->ysyx_23060111_top__DOT__rout2),32);
+        bufp->chgIData(oldp+91,(vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata),32);
+        bufp->chgIData(oldp+92,(vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata),32);
+        bufp->chgIData(oldp+93,(vlSelf->ysyx_23060111_top__DOT__m_wdata),32);
+        bufp->chgBit(oldp+94,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_beq));
+        bufp->chgBit(oldp+95,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bge));
+        bufp->chgBit(oldp+96,(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bgeu));
+        bufp->chgCData(oldp+97,((0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata)),5);
+        bufp->chgCData(oldp+98,((0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata)),5);
+    }
+    if (VL_UNLIKELY((vlSelf->__Vm_traceActivity[1U] 
+                     | vlSelf->__Vm_traceActivity[3U]))) {
+        bufp->chgIData(oldp+99,(vlSelf->ysyx_23060111_top__DOT__dnpc),32);
+        bufp->chgIData(oldp+100,(vlSelf->ysyx_23060111_top__DOT__wdata),32);
+        bufp->chgIData(oldp+101,(vlSelf->ysyx_23060111_top__DOT__csr_wdata),32);
+        bufp->chgIData(oldp+102,(vlSelf->ysyx_23060111_top__DOT__csr_rout),32);
+        bufp->chgIData(oldp+103,(vlSelf->ysyx_23060111_top__DOT__m_waddr),32);
+        bufp->chgIData(oldp+104,(vlSelf->ysyx_23060111_top__DOT__m_rdata),32);
+        bufp->chgIData(oldp+105,(vlSelf->ysyx_23060111_top__DOT__m_raddr),32);
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[2U])) {
         bufp->chgIData(oldp+106,(vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
@@ -159,6 +162,8 @@ void Vysyx_23060111_top___024root__trace_chg_sub_0(Vysyx_23060111_top___024root*
     bufp->chgIData(oldp+148,(vlSelf->pc),32);
     bufp->chgBit(oldp+149,(vlSelf->inv_flag));
     bufp->chgIData(oldp+150,(((IData)(4U) + vlSelf->pc)),32);
+    bufp->chgIData(oldp+151,(vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wdata),32);
+    bufp->chgCData(oldp+152,((0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wdata)),5);
 }
 
 void Vysyx_23060111_top___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
@@ -171,4 +176,5 @@ void Vysyx_23060111_top___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /
     vlSymsp->TOP.__Vm_traceActivity[0U] = 0U;
     vlSymsp->TOP.__Vm_traceActivity[1U] = 0U;
     vlSymsp->TOP.__Vm_traceActivity[2U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[3U] = 0U;
 }
