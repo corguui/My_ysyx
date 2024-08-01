@@ -42,12 +42,11 @@ wire cond_bgeu;
 wire [31:0] src1;
 wire [31:0] src2;
 wire [31:0] csr;
-reg [31:0]mstatus;
 
 assign cond_beq = (rout1==rout2);
 assign cond_bge = ($signed(rout1) >= $signed(rout2));
 assign cond_bgeu = rout1 >= rout2;
-assign mstatus=((csrr_mstatus&32'h00000080)>>4)|32'h00000080;
+reg [31:0]mstatus=((csrr_mstatus&32'h00000080)>>4)|32'h00000080;
 
 assign src1 = rout1;
 assign src2 = rout2;
