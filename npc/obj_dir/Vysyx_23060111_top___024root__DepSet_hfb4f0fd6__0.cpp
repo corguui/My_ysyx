@@ -463,7 +463,6 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_comb__TOP__0(Vysyx_2306011
                     vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wen = 0U;
                 } else if ((2U & vlSelf->ysyx_23060111_top__DOT__inst)) {
                     if ((1U & vlSelf->ysyx_23060111_top__DOT__inst)) {
-                        vlSelf->ysyx_23060111_top__DOT__m_ren = 0U;
                         vlSelf->ysyx_23060111_top__DOT__m_wen = 0U;
                         if ((1U == (7U & (vlSelf->ysyx_23060111_top__DOT__inst 
                                           >> 0xcU)))) {

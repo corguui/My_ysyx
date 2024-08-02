@@ -332,7 +332,7 @@ begin
 
     //csr
     7'b1110011:begin
-        //m_ren=1'b0;
+        m_ren=1'b0;
         m_wen=1'b0;
         case(funct3)
             //csrrw
@@ -363,12 +363,10 @@ begin
                 //ecall
                 if(csr_flag==2'd1)
                 begin
-                $display("csr_a5 %x\n",csr_a5);
                 csr_mcause_wdata=csr_a5;
-                //$display("csr_mcause %x\n",csr_mcause_wdata);
-                //$display("pc %x\n",pc);
+                $display("csr_mcause %x\n",csr_mcause_wdata);
+                $display("pc %x\n",pc);
                 csr_mepc_wdata=pc;
-                //$display("csr_mepc %x\n",csr_mepc_wdata);
                 csr_mcause_wen=1'b1;
                 csr_mepc_wen=1'b1;
                 csr_mstatus_wen=1'b0;
