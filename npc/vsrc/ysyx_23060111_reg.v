@@ -29,7 +29,7 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   //CSR
   reg [DATA_WIDTH-1:0] csr [3:0];
 
-  assign csr_a5=rf[2**ADDR_WIDTH-17];
+  assign csr_a5=rf[2**ADDR_WIDTH-15];
   assign csrr_mtvec=csr[3];
   assign csrr_mepc=csr[0];
   assign csrr_mstatus=csr[2];
