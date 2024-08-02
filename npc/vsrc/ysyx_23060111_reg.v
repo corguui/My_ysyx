@@ -39,6 +39,8 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   assign rout1=rf[raddr1];
   assign rout2=rf[raddr2];
 
+
+
   always @(posedge clk) begin
     if (wen&&waddr!=0)begin
        rf[waddr] <= wdata;

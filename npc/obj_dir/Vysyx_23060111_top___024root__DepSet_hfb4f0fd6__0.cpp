@@ -463,6 +463,7 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_comb__TOP__0(Vysyx_2306011
                     vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wen = 0U;
                 } else if ((2U & vlSelf->ysyx_23060111_top__DOT__inst)) {
                     if ((1U & vlSelf->ysyx_23060111_top__DOT__inst)) {
+                        vlSelf->ysyx_23060111_top__DOT__m_ren = 0U;
                         vlSelf->ysyx_23060111_top__DOT__m_wen = 0U;
                         if ((1U == (7U & (vlSelf->ysyx_23060111_top__DOT__inst 
                                           >> 0xcU)))) {
@@ -494,12 +495,11 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_comb__TOP__0(Vysyx_2306011
                         } else if ((0U == (7U & (vlSelf->ysyx_23060111_top__DOT__inst 
                                                  >> 0xcU)))) {
                             if (VL_UNLIKELY((1U == (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag)))) {
-                                VL_WRITEF("csr_a5 %x\n\n",
-                                          32,vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
-                                          [0xfU]);
                                 vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata 
                                     = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
                                     [0xfU];
+                                VL_WRITEF("csr_mcause %x\n\n",
+                                          32,vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata);
                                 vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata 
                                     = vlSelf->pc;
                                 vlSelf->ysyx_23060111_top__DOT__csr_mcause_wen = 1U;
@@ -509,6 +509,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___act_comb__TOP__0(Vysyx_2306011
                                 vlSelf->ysyx_23060111_top__DOT__dnpc 
                                     = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__csr
                                     [3U];
+                                VL_WRITEF("pc %x\n\n",
+                                          32,vlSelf->pc);
                             } else if ((0U == (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
                                 vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wdata 
                                     = (0x80U | (vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__csr
