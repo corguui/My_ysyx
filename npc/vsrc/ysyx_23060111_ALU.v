@@ -334,6 +334,7 @@ begin
     7'b1110011:begin
         m_ren=1'b0;
         m_wen=1'b0;
+        csr_wen=1'b0;
         case(funct3)
             //csrrw
             3'b001:begin
@@ -363,12 +364,12 @@ begin
                 //ecall
                 if(csr_flag==2'd1)
                 begin
+                csr_wen=1'b0;
                 csr_mcause_wen=1'b1;
                 csr_mepc_wen=1'b1;
                 csr_mcause_wdata=csr_a5;
                 csr_mepc_wdata=pc;
                 csr_mstatus_wen=1'b0;
-                csr_wen=1'b0;
                 dnpc=csrr_mtvec;
 
                 end

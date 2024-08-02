@@ -25,10 +25,8 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
                                       != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber6));
     vlSelf->__VactTriggered.at(3U) = ((IData)(vlSelf->ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber7) 
                                       != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber7));
-    vlSelf->__VactTriggered.at(4U) = ((((IData)(vlSelf->clk) 
-                                        & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clk))) 
-                                       | ((IData)(vlSelf->ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber6) 
-                                          != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber6))) 
+    vlSelf->__VactTriggered.at(4U) = (((IData)(vlSelf->clk) 
+                                       & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clk))) 
                                       | ((IData)(vlSelf->ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber7) 
                                          != (IData)(vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber7)));
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
@@ -112,6 +110,11 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__5(Vysyx_2306
         vlSelf->__Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v0 = 1U;
         vlSelf->__Vdlyvdim0__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v0 
             = vlSelf->ysyx_23060111_top__DOT__csr_waddr;
+    }
+    if (vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wen) {
+        vlSelf->__Vdlyvval__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v1 
+            = (0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wdata);
+        vlSelf->__Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v1 = 1U;
     }
     Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(vlSelf->pc, vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout);
     vlSelf->ysyx_23060111_top__DOT__inst = vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout;

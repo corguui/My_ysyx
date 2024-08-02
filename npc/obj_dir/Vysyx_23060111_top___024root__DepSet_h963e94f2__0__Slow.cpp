@@ -151,7 +151,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__act(Vysyx_230601
         VL_DBG_MSGF("         'act' region trigger index 3 is active: @([changed] ysyx_23060111_top.__Vcellinp__reg_$0____pinNumber7)\n");
     }
     if (vlSelf->__VactTriggered.at(4U)) {
-        VL_DBG_MSGF("         'act' region trigger index 4 is active: @(posedge clk or [changed] ysyx_23060111_top.__Vcellinp__reg_$0____pinNumber6 or [changed] ysyx_23060111_top.__Vcellinp__reg_$0____pinNumber7)\n");
+        VL_DBG_MSGF("         'act' region trigger index 4 is active: @(posedge clk or [changed] ysyx_23060111_top.__Vcellinp__reg_$0____pinNumber7)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -178,7 +178,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__nba(Vysyx_230601
         VL_DBG_MSGF("         'nba' region trigger index 3 is active: @([changed] ysyx_23060111_top.__Vcellinp__reg_$0____pinNumber7)\n");
     }
     if (vlSelf->__VnbaTriggered.at(4U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 4 is active: @(posedge clk or [changed] ysyx_23060111_top.__Vcellinp__reg_$0____pinNumber6 or [changed] ysyx_23060111_top.__Vcellinp__reg_$0____pinNumber7)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 4 is active: @(posedge clk or [changed] ysyx_23060111_top.__Vcellinp__reg_$0____pinNumber7)\n");
     }
 }
 #endif  // VL_DEBUG
