@@ -20,8 +20,8 @@ void isa_reg_display() {
 	}
   printf ("$mepc --> 0x%x \n",cpu.csr[0]);
   printf("$mcause --> 0x%x \n",cpu.csr[1]);
-  printf("mstatus --> 0x%x \n",cpu.csr[2]);
-  printf("mtvec --> 0x%x \n",cpu.csr[3]);
+  printf("$mstatus --> 0x%x \n",cpu.csr[2]);
+  printf("$mtvec --> 0x%x \n",cpu.csr[3]);
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
