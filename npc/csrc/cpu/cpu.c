@@ -91,13 +91,13 @@ static void trace_and_difftest(Decode *_this) {
 void cpu_init()
 {
 	top->rst=1;
-	top->clk =0; top->eval();
+	top->clk =1; top->eval();
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
 	#endif
 	main_time++;
 	top->eval();
-	top->clk =1; top->eval();
+	top->clk =0; top->eval();
 	top->rst=0;
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
@@ -110,7 +110,7 @@ void cpu_init()
 void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
-		top->clk =0; top->eval();
+		top->clk =1; top->eval();
 		s->pc=top->pc;
 		s->inst=top->rootp->ysyx_23060111_top__DOT__inst;
     	s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
@@ -119,7 +119,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		#endif
 		main_time++;
 		top->eval();
-		top->clk =1; top->eval();
+		top->clk =0; top->eval();
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
