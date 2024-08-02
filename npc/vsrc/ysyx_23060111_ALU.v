@@ -215,7 +215,6 @@ begin
            m_rmask =32'd4;
            wen=1'b1;
            wdata = $signed(m_rdata);            
-           wen=1'b0;
         end
         //LBU
         3'b100:begin
