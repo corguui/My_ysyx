@@ -198,7 +198,6 @@ begin
            m_raddr = src1 + imm;
            m_rmask =32'd1;
            wdata = $signed({{24{m_rdata[7]}},m_rdata[7:0]});
-           m_ren=1'b0;
            wen=1'b1;
         end
         //LH
@@ -207,7 +206,6 @@ begin
            m_raddr = src1 + imm;
            m_rmask =32'd2;
            wdata = $signed({{16{m_rdata[15]}},m_rdata[15:0]});
-           m_ren=1'b0;
            wen=1'b1;
         end
         //LW
@@ -216,7 +214,6 @@ begin
            m_raddr = src1 + imm;
            m_rmask =32'd4;
            wdata = $signed(m_rdata);            
-           m_ren=1'b0;
            wen=1'b1;
         end
         //LBU
@@ -225,7 +222,6 @@ begin
            m_raddr = src1 + imm;
            m_rmask =32'd1;
            wdata = {24'b0,m_rdata[7:0]};
-           m_ren=1'b0;
            wen=1'b1;
         end
         //LHU
@@ -234,7 +230,6 @@ begin
            m_raddr = src1 + imm;
            m_rmask = 32'd2;
            wdata = {16'b0,m_rdata[15:0]};
-           m_ren=1'b0;
            wen=1'b1;
         end
         default:begin
@@ -339,7 +334,6 @@ begin
     7'b1110011:begin
         m_ren=1'b0;
         m_wen=1'b0;
-        $display("%x",pc);
         case(funct3)
             //csrrw
             3'b001:begin
@@ -369,10 +363,10 @@ begin
                 //ecall
                 if(csr_flag==2'd1)
                 begin
-                csr_mcause_wdata=csr_a5;
-                csr_mepc_wdata=pc;
                 csr_mcause_wen=1'b1;
                 csr_mepc_wen=1'b1;
+                csr_mcause_wdata=csr_a5;
+                csr_mepc_wdata=pc;
                 csr_mstatus_wen=1'b0;
                 csr_wen=1'b0;
                 dnpc=csrr_mtvec;
