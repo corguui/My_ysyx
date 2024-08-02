@@ -18,27 +18,25 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
 
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
+    CData/*0:0*/ ysyx_23060111_top__DOT__csr_mepc_wen;
+    CData/*0:0*/ ysyx_23060111_top__DOT__csr_mcause_wen;
     VL_IN8(rst,0,0);
     VL_OUT8(inv_flag,0,0);
     CData/*0:0*/ ysyx_23060111_top__DOT__wen;
     CData/*1:0*/ ysyx_23060111_top__DOT__csr_waddr;
     CData/*1:0*/ ysyx_23060111_top__DOT__csr_raddr;
     CData/*0:0*/ ysyx_23060111_top__DOT__csr_wen;
-    CData/*0:0*/ ysyx_23060111_top__DOT__csr_mepc_wen;
-    CData/*0:0*/ ysyx_23060111_top__DOT__csr_mcause_wen;
     CData/*0:0*/ ysyx_23060111_top__DOT__csr_mstatus_wen;
     CData/*0:0*/ ysyx_23060111_top__DOT__m_wen;
     CData/*0:0*/ ysyx_23060111_top__DOT__m_ren;
-    CData/*4:0*/ ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber7;
-    CData/*4:0*/ ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber6;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit;
     CData/*1:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_beq;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bge;
     CData/*0:0*/ ysyx_23060111_top__DOT__init_EXU__DOT__ALU_init__DOT__cond_bgeu;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
-    CData/*4:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber6;
-    CData/*4:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber7;
+    CData/*0:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__csr_mcause_wen;
+    CData/*0:0*/ __Vtrigrprev__TOP__ysyx_23060111_top__DOT__csr_mepc_wen;
     CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
     VL_OUT(pc,31,0);

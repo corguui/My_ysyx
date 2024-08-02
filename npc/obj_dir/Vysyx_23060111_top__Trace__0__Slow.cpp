@@ -419,8 +419,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root__trace_full_sub_0(Vysyx_23060111_
     bufp->fullQData(oldp+138,(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__data_list[9]),33);
     bufp->fullQData(oldp+140,(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__lut_out),33);
     bufp->fullBit(oldp+142,(vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__hit));
-    bufp->fullCData(oldp+143,(vlSelf->ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber6),5);
-    bufp->fullCData(oldp+144,(vlSelf->ysyx_23060111_top__DOT____Vcellinp__reg___0240____pinNumber7),5);
+    bufp->fullCData(oldp+143,((0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata)),5);
+    bufp->fullCData(oldp+144,((0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata)),5);
     bufp->fullIData(oldp+145,(vlSelf->ysyx_23060111_top__DOT__dnpc),32);
     bufp->fullIData(oldp+146,(vlSelf->ysyx_23060111_top__DOT__wdata),32);
     bufp->fullIData(oldp+147,(vlSelf->ysyx_23060111_top__DOT__csr_wdata),32);
