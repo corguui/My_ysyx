@@ -55,10 +55,10 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
     if (csr_mepc_wen!=0)begin
        csr[0] <= csr_mepc_wdata;
     end
+    */
     if (csrr_mstatus_wen!=0)begin
        csr[2] <= csr_mstatus_wdata;
     end
-    */
   end
 
   always @(csr_mcause_wdata) begin
@@ -69,11 +69,6 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   always @(csr_mepc_wdata) begin
        if (csr_mepc_wen!=0)begin
        csr[0] <= csr_mepc_wdata;
-    end
-  end
-  always @(csr_mcause_wdata) begin
-       if (csrr_mstatus_wen!=0)begin
-       csr[2] <= csr_mstatus_wdata;
     end
   end
 endmodule
