@@ -783,8 +783,14 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
                                                  == (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
                                                 vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata 
                                                     = 
-                                                    vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
-                                                    [0xfU];
+                                                    ((0xffffffffU 
+                                                      == 
+                                                      vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
+                                                      [0xfU])
+                                                      ? 0U
+                                                      : 
+                                                     vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
+                                                     [0xfU]);
                                                 vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata 
                                                     = vlSelf->pc;
                                             }
