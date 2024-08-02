@@ -363,7 +363,7 @@ begin
                 //ecall
                 if(csr_flag==2'd1)
                 begin
-                //$display("csr_a5 %x\n",csr_a5);
+                $display("csr_a5 %x\n",csr_a5);
                 csr_mcause_wdata=csr_a5;
                 //$display("csr_mcause %x\n",csr_mcause_wdata);
                 //$display("pc %x\n",pc);
