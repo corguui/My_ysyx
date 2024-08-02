@@ -332,7 +332,7 @@ begin
 
     //csr
     7'b1110011:begin
-        m_ren=1'b0;
+        //m_ren=1'b0;
         m_wen=1'b0;
         case(funct3)
             //csrrw
