@@ -36,17 +36,9 @@ VM_MODPREFIX = Vysyx_23060111_top
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-I/home/corgi/ysyx-workbench/npc/include \
-	-I/usr/lib/llvm-14/include \
-	-std=c++17 \
-	-fno-exceptions \
-	-fPIE \
-	-L/home/corgi/ysyx-workbench/nemu/build/ \
-	-lriscv32-nemu-interpreter-so \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
-	-lLLVM-14 \
-	-lreadline \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
@@ -64,7 +56,6 @@ VM_USER_CLASSES = \
 	sdb \
 	watchpoint \
 	reg \
-	disasm \
 	log \
 	logo \
 	state \
@@ -117,8 +108,6 @@ sdb.o: csrc/monitor/sdb/sdb.c
 watchpoint.o: csrc/monitor/sdb/watchpoint.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 reg.o: csrc/reg.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-disasm.o: csrc/utils/disasm.cc
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 log.o: csrc/utils/log.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<

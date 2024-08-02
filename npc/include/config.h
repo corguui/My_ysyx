@@ -5,8 +5,8 @@
 //0 --batch 1 --log  
 //#define CONFIG_VCD 1
 //#define CONFIG_CC_WATCHPOINT 1
-//#define CONFIG_ITRACE 1
-//#define CONFIG_IQUEUE 1
+#define CONFIG_ITRACE 1
+#define CONFIG_IQUEUE 1
 #define CONFIG_TARGET_NATIVE_ELF 1
 #define __GUEST_ISA__ "riscv32" 
 #define CONFIG_FTRACE 1
