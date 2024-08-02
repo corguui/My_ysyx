@@ -334,6 +334,7 @@ begin
     7'b1110011:begin
         m_ren=1'b0;
         m_wen=1'b0;
+        $display("%x",pc);
         case(funct3)
             //csrrw
             3'b001:begin
