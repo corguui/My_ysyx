@@ -167,10 +167,13 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	pmem_write(addr,len,data);
 	return ;
 	}
+	else if (addr == CONFIG_RTC_MMIO || addr ==CONFIG_RTC_MMIO+4)
+	{
 	#ifdef CONFIG_DEVICE
 	uint32_t data=(uint32_t)wdata;
 		return mmio_write(addr,len,data);
 	#endif
+	}
 	printf("write\n");
 	out_of_bound(addr);
 }
