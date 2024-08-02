@@ -784,7 +784,7 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
                                                 vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata 
                                                     = 
                                                     vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
-                                                    [0xfU];
+                                                    [0x11U];
                                                 vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata 
                                                     = vlSelf->pc;
                                             }
