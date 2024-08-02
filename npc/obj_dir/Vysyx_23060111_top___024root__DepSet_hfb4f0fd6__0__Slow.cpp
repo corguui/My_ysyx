@@ -154,14 +154,12 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
                                                           >> 0x14U)))) 
                                       << 1U);
     vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag 
-        = ((0U == (0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
-                            >> 0x14U))) ? 1U : ((2U 
-                                                 == 
-                                                 (0x1fU 
-                                                  & (vlSelf->ysyx_23060111_top__DOT__inst 
-                                                     >> 0x14U)))
-                                                 ? 2U
-                                                 : 0U));
+        = ((0x73U == (0x7fU & vlSelf->ysyx_23060111_top__DOT__inst))
+            ? ((0U == (0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
+                                >> 0x14U))) ? 1U : 
+               ((2U == (0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
+                                 >> 0x14U))) ? 2U : 0U))
+            : 0U);
     vlSelf->ysyx_23060111_top__DOT__rout2 = vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
         [(0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                    >> 0x14U))];
