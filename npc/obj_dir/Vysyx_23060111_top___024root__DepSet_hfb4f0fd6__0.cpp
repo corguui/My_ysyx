@@ -107,6 +107,8 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__0(Vysyx_2306
             = (0x1fU & (vlSelf->ysyx_23060111_top__DOT__inst 
                         >> 7U));
     }
+    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
+                   : vlSelf->ysyx_23060111_top__DOT__dnpc);
     if (__Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v0) {
         vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__csr[__Vdlyvdim0__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v0] 
             = __Vdlyvval__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v0;
@@ -146,14 +148,9 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___nba_sequent__TOP__2\n"); );
-    // Init
-    IData/*31:0*/ __Vfunc_vlg_pc_read__0__Vfuncout;
-    __Vfunc_vlg_pc_read__0__Vfuncout = 0;
     // Body
-    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(vlSelf->pc, __Vfunc_vlg_pc_read__0__Vfuncout);
-    vlSelf->ysyx_23060111_top__DOT__inst = __Vfunc_vlg_pc_read__0__Vfuncout;
-    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
-                   : vlSelf->ysyx_23060111_top__DOT__dnpc);
+    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(vlSelf->pc, vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout);
+    vlSelf->ysyx_23060111_top__DOT__inst = vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout;
     vlSelf->ysyx_23060111_top__DOT__csr_wen = (IData)(
                                                       ((0x73U 
                                                         == 
@@ -780,12 +777,12 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_2306
                                                >> 0xcU)))) {
                                             if ((1U 
                                                  == (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
+                                                vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata 
+                                                    = vlSelf->pc;
                                                 vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata 
                                                     = 
                                                     vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
                                                     [0xfU];
-                                                vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata 
-                                                    = vlSelf->pc;
                                             }
                                             if ((1U 
                                                  != (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
