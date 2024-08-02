@@ -17,18 +17,16 @@ void Vysyx_23060111_top___024root___eval_triggers__act(Vysyx_23060111_top___024r
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_triggers__act\n"); );
     // Body
-    vlSelf->__VactTriggered.at(0U) = ((~ (IData)(vlSelf->clk)) 
-                                      & (IData)(vlSelf->__Vtrigrprev__TOP__clk));
-    vlSelf->__VactTriggered.at(1U) = ((IData)(vlSelf->clk) 
+    vlSelf->__VactTriggered.at(0U) = ((IData)(vlSelf->clk) 
                                       & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clk)));
-    vlSelf->__VactTriggered.at(2U) = (vlSelf->ysyx_23060111_top__DOT__inst 
+    vlSelf->__VactTriggered.at(1U) = (vlSelf->ysyx_23060111_top__DOT__inst 
                                       != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst);
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst 
         = vlSelf->ysyx_23060111_top__DOT__inst;
     if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->__VactDidInit))))) {
         vlSelf->__VactDidInit = 1U;
-        vlSelf->__VactTriggered.at(2U) = 1U;
+        vlSelf->__VactTriggered.at(1U) = 1U;
     }
 #ifdef VL_DEBUG
     if (VL_UNLIKELY(vlSymsp->_vm_contextp__->debug())) {
@@ -1423,10 +1421,6 @@ VL_INLINE_OPT void Vysyx_23060111_top___024root___nba_sequent__TOP__1(Vysyx_2306
     if (vlSelf->ysyx_23060111_top__DOT__m_wen) {
         Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_write_TOP____024unit(vlSelf->ysyx_23060111_top__DOT__m_waddr, vlSelf->ysyx_23060111_top__DOT__m_wdata, vlSelf->ysyx_23060111_top__DOT__m_wmask);
     }
-    VL_WRITEF("%x %x %x\n",5,(0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata),
-              5,(0x1fU & vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata),
-              32,vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
-              [0xfU]);
     __Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v0 = 0U;
     __Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v1 = 0U;
     __Vdlyvset__ysyx_23060111_top__DOT__reg___0240__DOT__csr__v2 = 0U;

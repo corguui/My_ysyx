@@ -73,8 +73,8 @@ class Vysyx_23060111_top___024root final : public VerilatedModule {
     VlUnpacked<IData/*31:0*/, 4> ysyx_23060111_top__DOT__reg___0240__DOT__csr;
     VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<3> __VactTriggered;
-    VlTriggerVec<3> __VnbaTriggered;
+    VlTriggerVec<2> __VactTriggered;
+    VlTriggerVec<2> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vysyx_23060111_top__Syms* const vlSymsp;
