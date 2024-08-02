@@ -5,7 +5,7 @@ module ysyx_23060111_IFU(
     output reg [31:0] inst
 );
     always@(posedge clk) begin
-            inst=vlg_pc_read(pc);
+            inst<=vlg_pc_read(pc);
     end
 
 
