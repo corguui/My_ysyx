@@ -18,14 +18,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_triggers__stl(Vysyx_230601
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_triggers__stl\n"); );
     // Body
     vlSelf->__VstlTriggered.at(0U) = (0U == vlSelf->__VstlIterCount);
-    vlSelf->__VstlTriggered.at(1U) = (vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wdata 
-                                      != vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__csr_mstatus_wdata);
-    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__csr_mstatus_wdata 
-        = vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wdata;
-    if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->__VstlDidInit))))) {
-        vlSelf->__VstlDidInit = 1U;
-        vlSelf->__VstlTriggered.at(1U) = 1U;
-    }
 #ifdef VL_DEBUG
     if (VL_UNLIKELY(vlSymsp->_vm_contextp__->debug())) {
         Vysyx_23060111_top___024root___dump_triggers__stl(vlSelf);
@@ -666,6 +658,14 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
                                              (7U & 
                                               (vlSelf->ysyx_23060111_top__DOT__inst 
                                                >> 0xcU)))) {
+                                            if ((1U 
+                                                 != (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
+                                                if (
+                                                    (0U 
+                                                     == (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
+                                                    vlSelf->ysyx_23060111_top__DOT__csr_mstatus_wdata = 0x1880U;
+                                                }
+                                            }
                                             if ((1U 
                                                  == (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
                                                 vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata 
