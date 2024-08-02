@@ -60,12 +60,12 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
     end
     */
   end
-  always @(csr_mcause_wdata) begin
+  always @(csr_mcause_wen) begin
       if (csr_mcause_wen!=0)begin
       csr[1] = csr_mcause_wdata;
     end
   end
-   always @(csr_mepc_wdata) begin
+   always @(csr_mepc_wen) begin
       if(csr_mepc_wen!=0)begin
       csr[0] = csr_mepc_wdata;
       end
