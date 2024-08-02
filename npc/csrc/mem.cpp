@@ -167,7 +167,6 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	pmem_write(addr,len,data);
 	return ;
 	}
-	printf("%x\r\n",top->pc);
 	#ifdef CONFIG_DEVICE
 	uint32_t data=(uint32_t)wdata;
 		return mmio_write(addr,len,data);

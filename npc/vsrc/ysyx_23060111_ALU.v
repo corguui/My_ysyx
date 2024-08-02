@@ -375,7 +375,7 @@ begin
                 //mret
                 else if(csr_flag==2'd0)
                 begin
-                csr_mstatus_wdata =mstatus;//32'h00001880;
+                csr_mstatus_wdata =32'h00001880;
                 csr_mstatus_wen=1'b1;
                 csr_mepc_wen=1'b0;
                 csr_mcause_wen=1'b0;
