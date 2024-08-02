@@ -23,7 +23,7 @@ f(30) f(31)
 #define NR_REGS 32
 #else
 #define REGS_HI16(f)
-#define NR_REGS 32 
+#define NR_REGS 16 
 #endif
 
 #define REGS(f) REGS_LO16(f) REGS_HI16(f)
