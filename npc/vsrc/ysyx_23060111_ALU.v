@@ -58,7 +58,6 @@ assign csr  = csr_rout;
 
 always @(*) 
 begin
-    wen=1'b0;
     case(opcode)
     //R
     7'b0110011:begin
