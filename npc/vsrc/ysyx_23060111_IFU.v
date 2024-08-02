@@ -4,8 +4,8 @@ module ysyx_23060111_IFU(
     input [31:0] pc,
     output reg [31:0] inst
 );
-    always@(posedge clk) begin
-            inst<=vlg_pc_read(pc);
+    always@(*) begin
+            inst=vlg_pc_read(pc);
     end
 
 
