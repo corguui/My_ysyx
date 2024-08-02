@@ -57,6 +57,5 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
     if (csrr_mstatus_wen!=0)begin
        csr[2] <= csr_mstatus_wdata;
     end
-   $display ("%x %x %x",csr_mepc_wdata , csr_mcause_wdata,csr_a5);
   end
 endmodule
