@@ -21,19 +21,12 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial(Vysyx_23060111_top
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_initial\n"); );
     // Body
     Vysyx_23060111_top___024root___eval_initial__TOP(vlSelf);
-    vlSelf->__Vm_traceActivity[5U] = 1U;
-    vlSelf->__Vm_traceActivity[4U] = 1U;
-    vlSelf->__Vm_traceActivity[3U] = 1U;
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst 
         = vlSelf->ysyx_23060111_top__DOT__inst;
-    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__csr_mcause_wen 
-        = vlSelf->ysyx_23060111_top__DOT__csr_mcause_wen;
-    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__csr_mepc_wen 
-        = vlSelf->ysyx_23060111_top__DOT__csr_mepc_wen;
 }
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_initial__TOP(Vysyx_23060111_top___024root* vlSelf) {
@@ -111,7 +104,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__stl(Vysyx_230601
 }
 #endif  // VL_DEBUG
 
-VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060111_top___024root* vlSelf);
+void Vysyx_23060111_top___024root___nba_sequent__TOP__2(Vysyx_23060111_top___024root* vlSelf);
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_stl(Vysyx_23060111_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -119,10 +112,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_stl(Vysyx_23060111_top___0
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___eval_stl\n"); );
     // Body
     if (vlSelf->__VstlTriggered.at(0U)) {
-        Vysyx_23060111_top___024root___stl_sequent__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[5U] = 1U;
-        vlSelf->__Vm_traceActivity[4U] = 1U;
-        vlSelf->__Vm_traceActivity[3U] = 1U;
+        Vysyx_23060111_top___024root___nba_sequent__TOP__2(vlSelf);
         vlSelf->__Vm_traceActivity[2U] = 1U;
         vlSelf->__Vm_traceActivity[1U] = 1U;
         vlSelf->__Vm_traceActivity[0U] = 1U;
@@ -144,12 +134,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__act(Vysyx_230601
     if (vlSelf->__VactTriggered.at(1U)) {
         VL_DBG_MSGF("         'act' region trigger index 1 is active: @([changed] ysyx_23060111_top.inst)\n");
     }
-    if (vlSelf->__VactTriggered.at(2U)) {
-        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([changed] ysyx_23060111_top.csr_mcause_wen)\n");
-    }
-    if (vlSelf->__VactTriggered.at(3U)) {
-        VL_DBG_MSGF("         'act' region trigger index 3 is active: @([changed] ysyx_23060111_top.csr_mepc_wen)\n");
-    }
 }
 #endif  // VL_DEBUG
 
@@ -167,12 +151,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___dump_triggers__nba(Vysyx_230601
     }
     if (vlSelf->__VnbaTriggered.at(1U)) {
         VL_DBG_MSGF("         'nba' region trigger index 1 is active: @([changed] ysyx_23060111_top.inst)\n");
-    }
-    if (vlSelf->__VnbaTriggered.at(2U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([changed] ysyx_23060111_top.csr_mcause_wen)\n");
-    }
-    if (vlSelf->__VnbaTriggered.at(3U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @([changed] ysyx_23060111_top.csr_mepc_wen)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -243,10 +221,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___ctor_var_reset(Vysyx_23060111_t
     vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vtrigrprev__TOP__clk = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__inst = VL_RAND_RESET_I(32);
-    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__csr_mcause_wen = VL_RAND_RESET_I(1);
-    vlSelf->__Vtrigrprev__TOP__ysyx_23060111_top__DOT__csr_mepc_wen = VL_RAND_RESET_I(1);
     vlSelf->__VactDidInit = 0;
-    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
     }
 }
