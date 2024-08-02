@@ -198,6 +198,7 @@ begin
            m_raddr = src1 + imm;
            m_rmask =32'd1;
            wdata = $signed({{24{m_rdata[7]}},m_rdata[7:0]});
+           m_ren=1'b0;
            wen=1'b1;
         end
         //LH
@@ -206,6 +207,7 @@ begin
            m_raddr = src1 + imm;
            m_rmask =32'd2;
            wdata = $signed({{16{m_rdata[15]}},m_rdata[15:0]});
+           m_ren=1'b0;
            wen=1'b1;
         end
         //LW
@@ -214,6 +216,7 @@ begin
            m_raddr = src1 + imm;
            m_rmask =32'd4;
            wdata = $signed(m_rdata);            
+           m_ren=1'b0;
            wen=1'b1;
         end
         //LBU
@@ -222,6 +225,7 @@ begin
            m_raddr = src1 + imm;
            m_rmask =32'd1;
            wdata = {24'b0,m_rdata[7:0]};
+           m_ren=1'b0;
            wen=1'b1;
         end
         //LHU
@@ -230,6 +234,7 @@ begin
            m_raddr = src1 + imm;
            m_rmask = 32'd2;
            wdata = {16'b0,m_rdata[15:0]};
+           m_ren=1'b0;
            wen=1'b1;
         end
         default:begin
