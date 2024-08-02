@@ -10,7 +10,7 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   input [1:0] csr_raddr,
   input [ADDR_WIDTH-1:0] raddr1,
   input [ADDR_WIDTH-1:0] raddr2,
-  output reg wen,
+  input wen,
   input csr_wen,
   input csr_mcause_wen,
   input csr_mepc_wen,
@@ -44,7 +44,6 @@ module ysyx_23060111_reg #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   always @(posedge clk) begin
     if (wen&&waddr!=0)begin
        rf[waddr] <= wdata;
-       wen=1'b0;
     end
     if (csr_wen!=0)begin
        csr[csr_waddr] <= csr_wdata;

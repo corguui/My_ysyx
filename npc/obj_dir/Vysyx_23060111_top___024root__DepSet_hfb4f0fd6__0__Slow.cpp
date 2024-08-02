@@ -25,6 +25,7 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___eval_triggers__stl(Vysyx_230601
 #endif
 }
 
+void Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(IData/*31:0*/ pc, IData/*31:0*/ &vlg_pc_read__Vfuncrtn);
 void Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(IData/*31:0*/ m_raddr, IData/*31:0*/ rmask, IData/*31:0*/ &vlg_pmem_read__Vfuncrtn);
 
 VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060111_top___024root* vlSelf) {
@@ -32,6 +33,8 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
     Vysyx_23060111_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_23060111_top___024root___stl_sequent__TOP__0\n"); );
     // Body
+    Vysyx_23060111_top___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(vlSelf->pc, vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout);
+    vlSelf->ysyx_23060111_top__DOT__inst = vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout;
     vlSelf->ysyx_23060111_top__DOT__csr_wen = (IData)(
                                                       ((0x73U 
                                                         == 
@@ -337,7 +340,6 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
         = (0xce00000000ULL | vlSelf->__VdfgTmp_hc90cd392__0);
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__pair_list[6U] 
         = (0x2600000000ULL | vlSelf->__VdfgTmp_hc90cd392__0);
-    vlSelf->ysyx_23060111_top__DOT__wen = 0U;
     vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__lut_out 
         = ((- (QData)((IData)(((0x7fU & vlSelf->ysyx_23060111_top__DOT__inst) 
                                == vlSelf->ysyx_23060111_top__DOT__init_IDU__DOT__typeMux__DOT__i0__DOT__key_list
@@ -663,12 +665,12 @@ VL_ATTR_COLD void Vysyx_23060111_top___024root___stl_sequent__TOP__0(Vysyx_23060
                                                >> 0xcU)))) {
                                             if ((1U 
                                                  == (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
-                                                vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata 
-                                                    = vlSelf->pc;
                                                 vlSelf->ysyx_23060111_top__DOT__csr_mcause_wdata 
                                                     = 
                                                     vlSelf->ysyx_23060111_top__DOT__reg___0240__DOT__rf
                                                     [0x11U];
+                                                vlSelf->ysyx_23060111_top__DOT__csr_mepc_wdata 
+                                                    = vlSelf->pc;
                                             }
                                             if ((1U 
                                                  != (IData)(vlSelf->ysyx_23060111_top__DOT__init_EXU__DOT__csr_flag))) {
