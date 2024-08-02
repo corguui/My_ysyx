@@ -366,7 +366,7 @@ begin
                 csr_wen=1'b0;
                 csr_mcause_wen=1'b1;
                 csr_mepc_wen=1'b1;
-                csr_mcause_wdata=csr_a5;
+                csr_mcause_wdata=(csr_a5==32'hffffffff)?32'h0:csr_a5;
                 csr_mepc_wdata=pc;
                 csr_mstatus_wen=1'b0;
                 dnpc=csrr_mtvec;
