@@ -334,30 +334,29 @@ begin
     7'b1110011:begin
         m_ren=1'b0;
         m_wen=1'b0;
-        csr_wen=1'b0;
         case(funct3)
             //csrrw
             3'b001:begin
+            csr_mepc_wen=1'b0;
+            csr_mcause_wen=1'b0;
+            csr_mstatus_wen=1'b0;
             dnpc=snpc;
             wdata=csr;
             wen=1'b1;
             csr_wdata=src1;
             csr_wen=1'b1;
-            csr_mepc_wen=1'b0;
-            csr_mcause_wen=1'b0;
-            csr_mstatus_wen=1'b0;
 
             end
             //csrrs
             3'b010:begin
+            csr_mepc_wen=1'b0;
+            csr_mcause_wen=1'b0;
+            csr_mstatus_wen=1'b0;
             dnpc=snpc;
             wdata=csr;
             wen=1'b1;
             csr_wdata=src1|csr;
             csr_wen=1'b1;
-            csr_mepc_wen=1'b0;
-            csr_mcause_wen=1'b0;
-            csr_mstatus_wen=1'b0;
 
             end
             3'b000:begin
