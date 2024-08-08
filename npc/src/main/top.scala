@@ -9,7 +9,7 @@ class top extends Module {
   val moduleA = Module(new a)
   moduleA.io.src1 := 0x2345.U
   moduleA.io.src0 := 0x1234.U
-  out := moduleA.io.result
+  io.out := moduleA.io.result
   println(s"out = ${io.out}")
 }
 
