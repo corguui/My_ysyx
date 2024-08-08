@@ -1,4 +1,14 @@
 BUILD_DIR = ./build
+Vfile=$(wildcard ./build/*.sv)
+Cfile=$(wildcard ./src/csrc/*.cpp)
+Cfile +=$(shell find -L ./src/csrc -name "*.c")
+Wavefile=$(wildcard ./*.vcd)
+TOPfile=./build/top.sv
+TOPname=top
+
+VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint $^
+
+NPC_SIM_RUN = ./obj_dir/Vtop 
 
 PRJ = playground
 
@@ -30,9 +40,12 @@ clean:
 
 .PHONY: test verilog help reformat checkformat clean
 
-sim:
+sim:$(TOPfile) $(Cfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "Write this Makefile by yourself."
-	@echo "Write "
+	verilator $(VLTFLAGS) 
+	$(NPC_SIM_RUN) 
+
+wave:$(Wavefile)
+	gtkwave $(Wavefile)
 
 -include ../Makefile
