@@ -25,17 +25,15 @@ int main(int argc, char** argv, char** env)
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
 
-  	top->clk =0; top->eval();
-    top->rst=1;
-	top->clk =1; top->eval();
+  	top->clock =0; top->eval();
+	top->clock =1; top->eval();
     tfp->dump(main_time);
     main_time++;
 
     for(int i=0;i<10;i++)
     {
-    top->clk =0; top->eval();
-    top->rst=1;
-	top->clk =1; top->eval();
+    top->clock =0; top->eval();
+	top->clock =1; top->eval();
     tfp->dump(main_time);
     main_time++;
     }
