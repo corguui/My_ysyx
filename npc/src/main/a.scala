@@ -11,10 +11,3 @@ class a extends Module {
 	io.result := io.src0 + io.src1
 }
 
-test(new a) { c=>
-    c.io.src0.poke(0x1234.U)
-    c.io.src1.poke(0x1234.U)
-    c.clock.step(1)
-    c.io.result.expect(0x2468.U)
-}
-println("success")

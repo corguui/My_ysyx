@@ -32,7 +32,7 @@ class Toptest extends AnyFreeSpec with Matchers {
     }
     print("Top module testing passed")
   }
-  "a moduele testing should produce the correct result" in { 
+ 
     simulate(new a) { dut =>
       dut.io.src0.poke(0x1234.U)
       dut.io.src1.poke(0x1234.U)
@@ -40,7 +40,6 @@ class Toptest extends AnyFreeSpec with Matchers {
       dut.io.result.expect(0x2468.U)
     }
     print("a module testing passed")
-  }
 }
 
 
