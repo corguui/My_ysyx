@@ -6,10 +6,9 @@ Wavefile=$(wildcard ./*.vcd)
 TOPfile=./build/top.sv
 TOPname=top
 
-VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint -top\
- $(TOPname) $(TOPfile) $(subst $(TOPfile),,$^) 
+VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint ($^)
 
-NPC_SIM_RUN = ./obj_dir/V$(basename $(subst build/,,$(TOPfile))) 
+NPC_SIM_RUN = ./obj_dir/Vtop 
 
 PRJ = playground
 
@@ -41,7 +40,7 @@ clean:
 
 .PHONY: test verilog help reformat checkformat clean
 
-sim:$(Vfile) $(Cfile) $(TOPfile) 
+sim:$(TOPfile) $(Cfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VLTFLAGS) 
 	$(NPC_SIM_RUN) 
