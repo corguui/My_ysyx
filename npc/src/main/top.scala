@@ -3,7 +3,7 @@ package npc
 import chisel3._
 
 class top extends Module {
-  val moduleA = Module(new a)
+  val moduleA = Module(new a())
 }
 
 
