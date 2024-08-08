@@ -1,4 +1,4 @@
-package main
+package gcd 
 
 import chisel3._
 
