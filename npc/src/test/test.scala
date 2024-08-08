@@ -24,13 +24,13 @@ import org.scalatest.matchers.must.Matchers
   * }}}
   */
 
-class Toptest extends AnyFreeSpec with Matchers {
+class test extends AnyFreeSpec with Matchers {
   "Top module testing should produce the correct result" in {
     simulate(new top) { dut =>
       dut.clock.step()
       dut.io.out.expect(0x3579.U)
     }
-    print("Top module testing passed")
+    print("Top module testing passed\n")
   }
  
     simulate(new a) { dut =>
@@ -39,7 +39,7 @@ class Toptest extends AnyFreeSpec with Matchers {
       dut.clock.step()
       dut.io.result.expect(0x2468.U)
     }
-    print("a module testing passed")
+    print("a module testing passed\n")
 }
 
 
