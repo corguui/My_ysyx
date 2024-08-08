@@ -1,5 +1,4 @@
-package gcd
-package main
+package npc 
 
 import chisel3._
 
