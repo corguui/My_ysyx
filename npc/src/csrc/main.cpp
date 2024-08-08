@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
  
-#include "top.h"  // create `multi_logic.v`,so use `Vmulti_logic.h`
+#include "Vtop.h"  // create `multi_logic.v`,so use `Vmulti_logic.h`
 #include "verilated.h"
  
 VerilatedContext* contextp=NULL; 
