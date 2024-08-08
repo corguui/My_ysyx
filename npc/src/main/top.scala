@@ -2,8 +2,8 @@ package npc
 
 import chisel3._
 
-class GCD extends Module {
-  val moduleA = Module(new ModuleA)
+class top extends Module {
+  val moduleA = Module(new a)
 }
 
 

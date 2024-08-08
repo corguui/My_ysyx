@@ -2,7 +2,7 @@ package npc
 
 import chisel3._
 
-class ModuleA extends Module {
+class a extends Module {
 	val io = IO(new Bundle{
 		val src0 = Input(UInt(64.W))
 		val src1 = Input(UInt(64.W))
