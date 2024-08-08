@@ -7,7 +7,7 @@
 #include "verilated_vcd_c.h"
  
 VerilatedContext* contextp=NULL; 
-top *top=NULL; 
+Vtop *top=NULL; 
 VerilatedVcdC* tfp=NULL;
 
 
