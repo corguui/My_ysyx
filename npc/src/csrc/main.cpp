@@ -29,6 +29,10 @@ int main(int argc, char** argv, char** env)
 	top->clock =1; top->eval();
     tfp->dump(main_time);
     main_time++;
+    top->clock =0; top->eval();
+	top->clock =1; top->eval();
+    tfp->dump(main_time);
+    main_time++;
 
     for(int i=0;i<10;i++)
     {
