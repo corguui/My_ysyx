@@ -15,7 +15,7 @@ int main_time=0;
 int main(int argc, char** argv, char** env) {
  	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
-	top = new top{contextp};
+	top = new Vtop{contextp};
 
     contextp->traceEverOn(true);
 	tfp=new VerilatedVcdC;
