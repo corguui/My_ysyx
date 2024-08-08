@@ -26,10 +26,8 @@ int main(int argc, char** argv, char** env)
 	tfp->open("wave.vcd");
 
   	top->clock =0; top->eval();
-	top->clock =1; top->eval();
     tfp->dump(main_time);
     main_time++;
-    top->clock =0; top->eval();
 	top->clock =1; top->eval();
     tfp->dump(main_time);
     main_time++;
@@ -37,6 +35,8 @@ int main(int argc, char** argv, char** env)
     for(int i=0;i<10;i++)
     {
     top->clock =0; top->eval();
+    tfp->dump(main_time);
+    main_time++;
 	top->clock =1; top->eval();
     tfp->dump(main_time);
     main_time++;
