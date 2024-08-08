@@ -1,5 +1,5 @@
 BUILD_DIR = ./build
-Vfile=$(wildcard ./build/*.v)
+Vfile=$(wildcard ./build/*.sv)
 Cfile=$(wildcard ./src/csrc/*.cpp)
 Cfile +=$(shell find -L ./src/csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
