@@ -6,7 +6,7 @@ Wavefile=$(wildcard ./*.vcd)
 TOPfile=./build/top.sv
 TOPname=top
 
-VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint ($^)
+VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint $^
 
 NPC_SIM_RUN = ./obj_dir/Vtop 
 
