@@ -1,6 +1,6 @@
 // See README.md for license details.
 
-package gcd
+package npc 
 
 import chisel3._
 import chisel3.experimental.BundleLiterals._
@@ -23,6 +23,19 @@ import org.scalatest.matchers.must.Matchers
   * mill %NAME%.test.testOnly gcd.GCDSpec
   * }}}
   */
+
+class Toptest extends AnyFreeSpec with Matchers {
+  "Top module testing should produce the correct result" in {
+    simulate(new Top) { dut =>
+      dut.clock.step()
+      dut.io.out.expect(14169.U) 
+    }
+    print("Top module testing passed")
+  }
+}
+
+
+/*
 class GCDSpec extends AnyFreeSpec with Matchers {
   "Gcd should calculate proper greatest common denominator" in {
     simulate(new DecoupledGcd(16)) { dut =>
@@ -65,3 +78,4 @@ class GCDSpec extends AnyFreeSpec with Matchers {
     }
   }
 }
+*/
