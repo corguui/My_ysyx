@@ -10,7 +10,6 @@ class top extends Module {
   moduleA.io.src1 := 0x2345.U
   moduleA.io.src0 := 0x1234.U
   io.out := moduleA.io.result
-  println(s"Result: ${io.out}")
 }
 
 
