@@ -1,12 +1,17 @@
 package gcd
+package main
 
 import chisel3._
+
+class GCD extends Module {
+  val moduleA = Module(new ModuleA)
+}
+
 
 /**
   * Compute GCD using subtraction method.
   * Subtracts the smaller from the larger until register y is zero.
   * value in register x is then the GCD
-  */
 class GCD extends Module {
   val io = IO(new Bundle {
     val value1        = Input(UInt(16.W))
@@ -29,3 +34,4 @@ class GCD extends Module {
   io.outputGCD   := x
   io.outputValid := y === 0.U
 }
+*/
