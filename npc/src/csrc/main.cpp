@@ -4,6 +4,7 @@
 #include "Vtop.h"  
 #include "Vtop___024root.h"
 #include "verilated.h"
+#include "verilated_vcd_c.h"
  
 VerilatedContext* contextp=NULL; 
 top *top=NULL; 
@@ -13,7 +14,8 @@ VerilatedVcdC* tfp=NULL;
 int main_time=0; 
 
 
-int main(int argc, char** argv, char** env) {
+int main(int argc, char** argv, char** env)
+{
  	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new Vtop{contextp};
