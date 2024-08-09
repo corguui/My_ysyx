@@ -8,18 +8,31 @@
 #include "verilated.h"
 
 class Vtop__Syms;
+class Vtop___024unit;
+
 
 class Vtop___024root final : public VerilatedModule {
   public:
+    // CELLS
+    Vtop___024unit* __PVT____024unit;
 
     // DESIGN SPECIFIC STATE
     VL_IN8(clock,0,0);
     VL_IN8(reset,0,0);
+    VL_OUT8(io_inv_flag,0,0);
+    CData/*0:0*/ __Vtrigrprev__TOP__clock;
     CData/*0:0*/ __VactContinue;
+    VL_OUT(io_pc,31,0);
+    IData/*31:0*/ top__DOT___PC_io_snpc;
+    IData/*31:0*/ top__DOT__PC__DOT__data_pc_REG;
+    IData/*31:0*/ top__DOT__IFU__DOT__vlg_pc_read__DOT__inst;
+    IData/*31:0*/ __Vfunc_vlg_pc_read__0__Vfuncout;
+    IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VactIterCount;
-    VL_OUT64(io_out,63,0);
-    VlTriggerVec<0> __VactTriggered;
-    VlTriggerVec<0> __VnbaTriggered;
+    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
+    VlTriggerVec<1> __VstlTriggered;
+    VlTriggerVec<1> __VactTriggered;
+    VlTriggerVec<1> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;
