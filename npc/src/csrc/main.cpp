@@ -1,49 +1,68 @@
-#include <stdio.h>
-#include <stdlib.h>
- 
-#include "Vtop.h"  
+#include <cstdint>
+#include<stdio.h>
+//#include"svdpi.h"
+
+#include <cpu/cpu.h>
+#include <sdb.h>
 #include "Vtop___024root.h"
-#include "verilated.h"
-#include "verilated_vcd_c.h"
- 
+#include "mem.h"
+
 VerilatedContext* contextp=NULL; 
 Vtop *top=NULL; 
 VerilatedVcdC* tfp=NULL;
 
+void init_monitor();
+void init_mode();
+void parse_args(int argc,char *argv[]);
 
-int main_time=0; 
+int main_time=0;
 
 
-int main(int argc, char** argv, char** env)
+int main(int argc ,char** argv, char** env)
 {
- 	contextp = new VerilatedContext;
+	parse_args(argc, argv);
+	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new Vtop{contextp};
-
-    contextp->traceEverOn(true);
+	#ifdef CONFIG_VCD
+	contextp->traceEverOn(true);
 	tfp=new VerilatedVcdC;
+
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");
+	#endif
+	//init mode
+	init_mode();
 
-  	top->clock =0; top->eval();
-    tfp->dump(main_time);
-    main_time++;
-	top->clock =1; top->eval();
-    tfp->dump(main_time);
-    main_time++;
+	//init_monitor
+	init_monitor();
 
-    for(int i=0;i<10;i++)
-    {
-    top->clock =0; top->eval();
-    tfp->dump(main_time);
-    main_time++;
-	top->clock =1; top->eval();
-    tfp->dump(main_time);
-    main_time++;
-    }
-
-    tfp->close();
-    delete contextp;
-    return 0;
-
+	//(npc)   command
+	sdb_mainloop();
+	#ifdef CONFIG_VCD
+	tfp->close();
+	#endif
+	delete contextp;
+	#ifdef CONFIG_MTRACE
+	//print the mem read and write  ---logfile
+	pmem_out();
+	#endif
+	return is_exit_status_bad();
 }
+void ebreak (int inst)
+{
+	if(inst == 0x00100073 )
+	{
+	   //NPCTRAP(top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[10]);//ebreak
+	}
+	if(inst!=0&&top->inv_flag==1)
+	{
+		//INV();//can't find the command type
+	}
+	else if(inst==0&&top->inv_flag==1)
+	{
+		top->inv_flag=0;
+	}
+}
+
+

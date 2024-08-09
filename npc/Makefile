@@ -6,11 +6,54 @@ Wavefile=$(wildcard ./*.vcd)
 TOPfile=./build/top.sv
 TOPname=top
 
+#init
+IMG ?= 
 VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint $^
+RUN_FLAGS = $(IMG)
+
+INC_PATH = $(HOME)/ysyx-workbench/npc/src/include
+VLTFLAGS += -CFLAGS -I$(INC_PATH) 
 
 NPC_SIM_RUN = ./obj_dir/Vtop 
+NPC_GDB_RUN = obj_dir/Vtop
+
+#logfile
+NPC_LOG = ./npc-log.txt
+RUN_FLAGS +=  $(NPC_LOG)
+
+-include config.mk
+
+#ftrace
+ifdef CONFIG_FTRACE
+ELF =$(IMG:.bin=.elf)
+RUN_FLAGS += $(ELF)
+endif
+
+#itrace llvm--反汇编
+ifdef CONFIG_ITRACE
+Cfile += csrc/utils/disasm.cc
+VLTFLAGS += -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17\
+  -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
+VLTFLAGS += -LDFLAGS -lreadline
+endif
+
+#difftest  链接nemu-so动态库
+ifdef CONFIG_DIFFTEST
+LIB_PATH = $(HOME)/ysyx-workbench/nemu/build/
+LIB = $(HOME)/ysyx-workbench/nemu/build/riscv32-nemu-interpreter-so
+VLTFLAGS +=  -CFLAGS -L$(LIB_PATH) -CFLAGS -lriscv32-nemu-interpreter-so
+RUN_FLAGS += $(LIB)
+NPC_SIM_RUN := LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/11/libasan.so $(NPC_SIM_RUN)
+NPC_GDB_DIFF = -ex 'set env LD_PRELOAD /usr/lib/gcc/x86_64-linux-gnu/11/libasan.so' 
+endif
+#gdb
+NPC_GDB = -CFLAGS -g 
+
 
 PRJ = playground
+
+CONFIG: ./src/include/config.h 
+	@sed -e 's/^#define \(.*\) \(.*\)/\1=\2/' -e '/^#\(.*\)/d' -e '/^\/\(.*\)/d' -e '/^_\(.*\)/d' ./src/include/config.h > ./config.mk
 
 test:
 	mill -i $(PRJ).test
@@ -43,7 +86,13 @@ clean:
 sim:$(TOPfile) $(Cfile) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VLTFLAGS) 
-	$(NPC_SIM_RUN) 
+	$(NPC_SIM_RUN) $(RUN_FLAGS)
+	@ctags -R -u
+
+gdb:$(TOPfile)  $(Cfile)
+	verilator $(VLTFLAGS) $(NPC_GDB) 
+	gdb $(NPC_GDB_DIFF) --args $(NPC_GDB_RUN) $(RUN_FLAGS)
+	@ctags -R -u
 
 wave:$(Wavefile)
 	gtkwave $(Wavefile)
