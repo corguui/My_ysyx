@@ -19,7 +19,9 @@ class IFU extends Module {
 		s_wait_ready -> Mux(io.out.ready,s_idle,s_wait_ready)
 	))
 
+	val data = Wire(new IFUtoIDU)
+	data.inst := 1234.U
 	io.out.valid :=1.U
-	io.out.bits := 1.U 
+	io.out.bits := data  
 }
 
