@@ -2,11 +2,8 @@ package npc
 
 import chisel3._
 import chisel3.util._
-import chisel3.experimental.{IntParam, RawModule}
+import chisel3.experimental._
 
-// 声明DPI-C函数
-import chisel3.experimental.annotate
-import firrtl.transforms.DontTouchAnnotation
 
 class IFUtoIDU extends Bundle {
 	val inst = Output(UInt(32.W))
@@ -34,15 +31,27 @@ class IFU extends Module {
 		m_wait_valid -> Mux(io.in.valid,m_wait_valid,m_idle)
 	))
 
- 	// 声明DPI-C函数接口
-  	val vlg_pc_read = chisel3.experimental.ExtModule(
-    Map(
-      "vlg_pc_read" -> IntParam(0)
-    )
-  	) {
-    val pc = IO(Input(UInt(32.W)))
-    val inst = IO(Output(UInt(32.W)))
-  	}
+  // 声明DPI-C函数的BlackBox模块
+  class VlgPcRead extends BlackBox {
+    val io = IO(new Bundle {
+      val pc = Input(UInt(32.W))
+      val inst = Output(UInt(32.W))
+    })
+    // 使用setInline来直接嵌入Verilog代码
+    setInline("VlgPcRead.v",
+      """
+      |import "DPI-C" function int vlg_pc_read(input int pc);
+      |
+      |module VlgPcRead(
+      |    input  [31:0] pc,
+      |    output [31:0] inst
+      |);
+      |    assign inst = vlg_pc_read(pc);
+      |endmodule
+      """.stripMargin)
+  }
+
+  val vlg_pc_read = Module(new VlgPcRead)
 
 	val out_data =Wire(new IFUtoIDU)
 	val in_data =Wire(new PCtoIFU)
@@ -53,8 +62,8 @@ class IFU extends Module {
 	val lastinst = RegNext(out_data.inst,0.U)
 	io.in.ready := (lastpc =/= in_data.pc)
 
-	vlg_pc_read.pc := in_data.pc
-	out_data.inst := vlg_pc_read.inst 
+	vlg_pc_read.io.pc := in_data.pc
+	out_data.inst := vlg_pc_read.io.inst 
 
 	io.out.valid := (lastinst =/= out_data.inst)
 
