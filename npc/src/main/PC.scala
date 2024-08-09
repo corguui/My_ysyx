@@ -27,7 +27,7 @@ class PC extends Module {
 	val lastpc = RegNext(data.pc,0.U)
 
 	//更新pc
-	data.pc := RegNext(io.dnpc,0x80000000.U)
+	data.pc := RegNext(io.dnpc.asSInt, 0x80000000.S).asUInt
 	io.out.bits := data
 
 	//判断是否输出数据
