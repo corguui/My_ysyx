@@ -62,6 +62,7 @@ verilog:
 	$(call git_commit, "generate verilog")
 	mkdir -p $(BUILD_DIR)
 	mill -i $(PRJ).runMain Elaborate --target-dir $(BUILD_DIR)
+	sed -i '/^[^/].*\.v/d' ./build/top.sv
 
 help:
 	mill -i $(PRJ).runMain Elaborate --help
