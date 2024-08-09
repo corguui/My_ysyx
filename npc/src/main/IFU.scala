@@ -30,13 +30,13 @@ class IFU extends Module {
 		m_wait_valid -> Mux(io.in.valid,m_wait_valid,m_idle)
 	))
 
-  class VlgPcRead extends BlackBox with HasBlackBoxResource {
+  class VlgPcRead extends BlackBox with HasBlackBoxPath {
     val io = IO(new Bundle {
       val pc = Input(UInt(32.W))
       val inst = Output(UInt(32.W))
     })
 
-	addResource("/VlgPcRead.v")
+	addPath("./src/main/VlgPcRead.v")
   }
 
 
