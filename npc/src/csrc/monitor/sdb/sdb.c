@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-//#include <readline/readline.h>
-//#include <readline/history.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <sdb.h>
 
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0])) 
