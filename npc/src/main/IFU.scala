@@ -52,7 +52,6 @@ class IFU extends Module {
       """.stripMargin)
   }
 
-  }
   
   val vlg_pc_read = Module(new VlgPcRead)
 
