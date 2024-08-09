@@ -16,6 +16,6 @@ class IDU extends Module {
 		m_wait_valid -> Mux(io.in.valid,m_wait_valid,m_idle)
 	))
 
-    io.in.ready :=1
+    io.in.ready :=1.U
 
 }

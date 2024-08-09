@@ -19,7 +19,7 @@ class IFU extends Module {
 		s_wait_ready -> Mux(io.out.ready,s_idle,s_wait_ready)
 	))
 
-	io.out.valid :=1
+	io.out.valid :=1.U
 	val inst = RegInit(0.U)
 }
 
