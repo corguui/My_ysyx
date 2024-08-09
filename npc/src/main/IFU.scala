@@ -2,7 +2,7 @@ package npc
 
 import chisel3._
 
-class IFUtoIDU extends Module {
+class IFUtoIDU extends Bundle {
 	val inst = Output(UInt(32.W))
 }
 
