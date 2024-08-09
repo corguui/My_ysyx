@@ -17,5 +17,6 @@ class IDU extends Module {
 	))
 
     io.in.ready :=1.U
+    val inst = io.in.bits
 
 }
