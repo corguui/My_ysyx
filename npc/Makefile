@@ -12,7 +12,7 @@ VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint $^
 RUN_FLAGS = $(IMG)
 
 INC_PATH = $(HOME)/ysyx-workbench/npc/src/include
-INC_PATH += $(HOME)/usr/include/readline
+INC_PATH += /usr/include/readline
 VLTFLAGS += -CFLAGS -I$(INC_PATH) 
 
 NPC_SIM_RUN = ./obj_dir/Vtop 
