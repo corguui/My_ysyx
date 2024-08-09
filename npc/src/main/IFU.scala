@@ -20,6 +20,6 @@ class IFU extends Module {
 	))
 
 	io.out.valid :=1.U
-	io.out.bits := RegInit(0.U)
+	io.out.bits := 1.U 
 }
 
