@@ -8,10 +8,16 @@ class top extends Module {
     val pc = Output(UInt(32.W))
     val inv_flag = Output(Bool())
   })
+  val PC  = Module(new PC)
   val IFU = Module(new IFU)
   val IDU = Module(new IDU)
 
+  IFU.io.in <> PC.io.out
   IDU.io.in <> IFU.io.out
+
+  val pc_data = Wire(PCtoIFU)
+  pc_data := PC.io.out.bits
+  pc := pc_data.pc
 
 }
 

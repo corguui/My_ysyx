@@ -18,7 +18,7 @@ class IDU extends Module {
 	))
     val in_data = Wire(new IFUtoIDU) 
     in_data := io.in.bits
-    val lastinst = RegInit(.0.U)
+    val lastinst = RegInit(0.U)
     io.in.ready := (lastinst =/= in_data.inst)
 
 }
