@@ -19,7 +19,7 @@ class top extends Module {
   pc_data := PC.io.out.bits
   io.pc := pc_data.pc
 
-  io.inv_flah := 0.B
+  io.inv_flag := 0.B
 
 }
 
