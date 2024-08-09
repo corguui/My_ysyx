@@ -12,6 +12,7 @@ class top extends Module {
   val IFU = Module(new IFU)
   val IDU = Module(new IDU)
 
+  PC.io.out <> io.pc
   IFU.io.in <> PC.io.out
   IDU.io.in <> IFU.io.out
 
