@@ -37,7 +37,7 @@ class IFU extends Module {
       val pc = Input(UInt(32.W))
       val inst = Output(UInt(32.W))
     })
-    // 使用setInline来直接嵌入Verilog代码
+    // 使用Verilog字符串直接定义BlackBox的Verilog代码
     setInline("VlgPcRead.v",
       """
       |import "DPI-C" function int vlg_pc_read(input int pc);
