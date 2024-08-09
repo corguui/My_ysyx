@@ -19,6 +19,8 @@ class top extends Module {
   pc_data := PC.io.out.bits
   io.pc := pc_data.pc
 
+  val snpc = PC.io.snpc
+  val dnpc = snpc
   io.inv_flag := 0.B
 
 }
