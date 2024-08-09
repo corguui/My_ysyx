@@ -36,7 +36,7 @@ class IFU extends Module {
       val inst = Output(UInt(32.W))
     })
 
-	addPath("./VlgPcRead.v")
+	addPath("./src/main/VlgPcRead.v")
   }
 
 
