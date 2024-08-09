@@ -49,7 +49,7 @@ void init_mem()
 }
 static void out_of_bound(uint32_t addr)
 {
-	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->pc);
+	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->io_pc);
 	#ifdef CONFIG_MTRACE
 		log_write("----------write----------\n");
 		for(int i=0;i<write_num;i++)
