@@ -4,7 +4,6 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-
 class IFUtoIDU extends Bundle {
 	val inst = Output(UInt(32.W))
 }
@@ -31,24 +30,14 @@ class IFU extends Module {
 		m_wait_valid -> Mux(io.in.valid,m_wait_valid,m_idle)
 	))
 
-  // 声明DPI-C函数的BlackBox模块
+   // 声明DPI-C函数的BlackBox模块
   class VlgPcRead extends BlackBox {
     val io = IO(new Bundle {
       val pc = Input(UInt(32.W))
       val inst = Output(UInt(32.W))
     })
-    // 使用Verilog字符串直接定义BlackBox的Verilog代码
-    setInline("VlgPcRead.v",
-      """
-      |import "DPI-C" function int vlg_pc_read(input int pc);
-      |
-      |module VlgPcRead(
-      |    input  [31:0] pc,
-      |    output [31:0] inst
-      |);
-      |    assign inst = vlg_pc_read(pc);
-      |endmodule
-      """.stripMargin)
+    // 将外部的Verilog文件作为资源添加
+    addResource("/VlgPcRead.v")
   }
 
   val vlg_pc_read = Module(new VlgPcRead)
