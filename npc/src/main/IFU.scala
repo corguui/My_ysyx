@@ -37,7 +37,7 @@ class IFU extends Module {
       val inst = Output(UInt(32.W))
     })
 	// 使用setInline来直接嵌入Verilog代码
-    setInline(,
+    setInline("",
       """
       |import "DPI-C" function int vlg_pc_read(input int pc);
       |
