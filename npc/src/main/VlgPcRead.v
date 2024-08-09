@@ -2,7 +2,10 @@ import "DPI-C" function int vlg_pc_read(input int pc);
 
 module VlgPcRead(
     input  [31:0] pc,
-    output [31:0] inst
+    output reg [31:0] inst
 );
-    assign inst = vlg_pc_read(pc);
+      always@(*) begin
+            inst=vlg_pc_read(pc);
+    end
+
 endmodule
