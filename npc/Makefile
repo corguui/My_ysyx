@@ -31,7 +31,7 @@ endif
 
 #itrace llvm--反汇编
 ifdef CONFIG_ITRACE
-Cfile += csrc/utils/disasm.cc
+Cfile += src/csrc/utils/disasm.cc
 VLTFLAGS += -CFLAGS -I/usr/lib/llvm-14/include -CFLAGS -std=c++17\
   -CFLAGS -fno-exceptions  -CFLAGS -fPIE -LDFLAGS -lLLVM-14
 VLTFLAGS += -LDFLAGS -lreadline
