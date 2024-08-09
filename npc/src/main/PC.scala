@@ -33,7 +33,7 @@ class PC extends Module {
 	//判断是否输出数据
 	io.out.valid := (data.pc =/= lastpc)
 
-	snpc := data.pc + 4.U
+	io.snpc := data.pc + 4.U
 
 
 
