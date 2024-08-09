@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+//#include <readline/readline.h>
+//#include <readline/history.h>
 #include <sdb.h>
 
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0])) 
@@ -180,7 +180,7 @@ void sdb_mainloop() {
     if (cmd == NULL) { continue; }
 
     /* treat the remaining string as the arguments,
-     * which may need further parsing
+       which may need further parsing
      */
     char *args = cmd + strlen(cmd) + 1;
     if (args >= str_end) {
