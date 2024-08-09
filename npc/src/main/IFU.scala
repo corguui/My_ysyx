@@ -8,7 +8,7 @@ class IFUtoIDU extends Bundle {
 
 class IFU extends Module {
 	val io = IO(new Bundle{
-		val out = Decoupled(new IFUtoIDU)
+		val out = Decoupled(new IFUtoIDU())
 	})
 }
 
