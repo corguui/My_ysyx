@@ -33,10 +33,9 @@ class IFU extends Module {
    // 声明DPI-C函数的BlackBox模块
   class VlgPcRead extends BlackBox with HasBlackBoxResource {
     val io = IO(new Bundle {
-      val pc = Input(UInt(32.W))
+      val pc = Input(SInt(32.W))
       val inst = Output(UInt(32.W))
     })
-    // 将外部的Verilog文件作为资源添加
     addResource("/VlgPcRead.v")
   }
 
