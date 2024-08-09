@@ -20,7 +20,7 @@ class top extends Module {
   io.pc := pc_data.pc
 
   val snpc = PC.io.snpc
-  PC.io.dnpc = snpc
+  PC.io.dnpc := snpc
   io.inv_flag := 0.B
 
 }
