@@ -43,7 +43,7 @@ class IFU extends Module {
       |
       |module VlgPcRead(
       |    input  [31:0] pc,
-      |    output [31:0] inst
+      |    output reg [31:0] inst
       |);
 	  |    always @(*)begin
       |    		inst = vlg_pc_read(pc);
