@@ -7,7 +7,7 @@ class top extends Module {
   val IFU = Module(new IFU)
   val IDU = Module(new IDU)
 
-  IFU.io.out <> IDU.io.in
+  IDU.io.in <> IFU.io.out
 
 }
 
