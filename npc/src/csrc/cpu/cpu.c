@@ -37,7 +37,7 @@ static bool g_print_step = false;
 
 void cpu_read_reg()
 {
-	cpu.pc=top->pc;
+	cpu.pc=top->io_pc;
 	for(int i=0;i<32;i++)
 	{
 		//cpu.gpr[i]=top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
@@ -50,7 +50,7 @@ void cpu_read_reg()
 }
 void cpu_write_reg()
 {
-	top->pc=cpu.pc;
+	top->io_pc=cpu.pc;
 	for(int i=0;i<32;i++)
 	{
 		//top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]=cpu.gpr[i];
@@ -72,7 +72,7 @@ static void trace_and_difftest(Decode *_this) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
   //compare with the nemu
-  difftest_step(_this->pc, top->pc);
+  difftest_step(_this->pc, top->io_pc);
   #endif
 
 #ifdef CONFIG_CC_WATCHPOINT
@@ -90,21 +90,21 @@ static void trace_and_difftest(Decode *_this) {
 
 void cpu_init()
 {
-	top->clk =0; top->eval();
-	top->rst=1;
-	top->clk =1; top->eval();
+	top->clock =0; top->eval();
+	top->reset=1;
+	top->clock =1; top->eval();
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
 	#endif
 	main_time++;
-	top->clk =0; top->eval();
+	top->clock =0; top->eval();
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
 	#endif
 	main_time++;
 	top->eval();
-	top->clk =1; top->eval();
-	top->rst=0;
+	top->clock =1; top->eval();
+	top->reset=0;
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
 	#endif
@@ -117,8 +117,8 @@ void cpu_init()
 void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
-		top->clk =0; top->eval();
-		s->pc=top->pc;
+		top->clock =0; top->eval();
+		s->pc=top->io_pc;
 		//s->inst=top->rootp->ysyx_23060111_top__DOT__inst;
     	//s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
 		#ifdef CONFIG_VCD
@@ -126,7 +126,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		#endif
 		main_time++;
 		top->eval();
-		top->clk =1; top->eval();
+		top->clock =1; top->eval();
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
@@ -264,7 +264,7 @@ void cpu_exec(uint64_t n)
 
       Log("npc: %s at pc = 0x%x",
           (npc_state.state == NPC_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :
-           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :  ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))), top->pc);
+           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :  ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))), top->io_pc);
 
       #ifdef CONFIG_ITRACE
 	    //print the ringbuf

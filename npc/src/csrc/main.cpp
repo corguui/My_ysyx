@@ -55,13 +55,13 @@ void ebreak (int inst)
 	{
 	   //NPCTRAP(top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[10]);//ebreak
 	}
-	if(inst!=0&&top->inv_flag==1)
+	if(inst!=0&&top->io_inv_flag==1)
 	{
 		//INV();//can't find the command type
 	}
-	else if(inst==0&&top->inv_flag==1)
+	else if(inst==0&&top->io_inv_flag==1)
 	{
-		top->inv_flag=0;
+		top->io_inv_flag=0;
 	}
 }
 

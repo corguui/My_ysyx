@@ -11,14 +11,29 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     // Init
     const int c = vlSymsp->__Vm_baseCode;
     // Body
-    tracep->declBit(c+1,"clock", false,-1);
-    tracep->declBit(c+2,"reset", false,-1);
-    tracep->declQuad(c+3,"io_out", false,-1, 63,0);
+    tracep->declBit(c+4,"clock", false,-1);
+    tracep->declBit(c+5,"reset", false,-1);
+    tracep->declBus(c+6,"io_pc", false,-1, 31,0);
+    tracep->declBit(c+7,"io_inv_flag", false,-1);
     tracep->pushNamePrefix("top ");
-    tracep->declBit(c+1,"clock", false,-1);
-    tracep->declBit(c+2,"reset", false,-1);
-    tracep->declQuad(c+3,"io_out", false,-1, 63,0);
-    tracep->popNamePrefix(1);
+    tracep->declBit(c+4,"clock", false,-1);
+    tracep->declBit(c+5,"reset", false,-1);
+    tracep->declBus(c+6,"io_pc", false,-1, 31,0);
+    tracep->declBit(c+7,"io_inv_flag", false,-1);
+    tracep->pushNamePrefix("IFU ");
+    tracep->declBus(c+6,"io_in_bits_pc", false,-1, 31,0);
+    tracep->pushNamePrefix("vlg_pc_read ");
+    tracep->declBus(c+6,"pc", false,-1, 31,0);
+    tracep->declBus(c+1,"inst", false,-1, 31,0);
+    tracep->popNamePrefix(2);
+    tracep->pushNamePrefix("PC ");
+    tracep->declBit(c+4,"clock", false,-1);
+    tracep->declBit(c+5,"reset", false,-1);
+    tracep->declBus(c+2,"io_dnpc", false,-1, 31,0);
+    tracep->declBus(c+2,"io_snpc", false,-1, 31,0);
+    tracep->declBus(c+6,"io_out_bits_pc", false,-1, 31,0);
+    tracep->declBus(c+3,"data_pc_REG", false,-1, 31,0);
+    tracep->popNamePrefix(2);
 }
 
 VL_ATTR_COLD void Vtop___024root__trace_init_top(Vtop___024root* vlSelf, VerilatedVcd* tracep) {
@@ -61,7 +76,11 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode);
     // Body
-    bufp->fullBit(oldp+1,(vlSelf->clock));
-    bufp->fullBit(oldp+2,(vlSelf->reset));
-    bufp->fullQData(oldp+3,(vlSelf->io_out),64);
+    bufp->fullIData(oldp+1,(vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__inst),32);
+    bufp->fullIData(oldp+2,(((IData)(4U) + vlSelf->top__DOT__PC__DOT__data_pc_REG)),32);
+    bufp->fullIData(oldp+3,(vlSelf->top__DOT__PC__DOT__data_pc_REG),32);
+    bufp->fullBit(oldp+4,(vlSelf->clock));
+    bufp->fullBit(oldp+5,(vlSelf->reset));
+    bufp->fullIData(oldp+6,(vlSelf->io_pc),32);
+    bufp->fullBit(oldp+7,(vlSelf->io_inv_flag));
 }

@@ -23,9 +23,15 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
     // Body
-    bufp->chgBit(oldp+0,(vlSelf->clock));
-    bufp->chgBit(oldp+1,(vlSelf->reset));
-    bufp->chgQData(oldp+2,(vlSelf->io_out),64);
+    if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[1U])) {
+        bufp->chgIData(oldp+0,(vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__inst),32);
+        bufp->chgIData(oldp+1,(((IData)(4U) + vlSelf->top__DOT__PC__DOT__data_pc_REG)),32);
+        bufp->chgIData(oldp+2,(vlSelf->top__DOT__PC__DOT__data_pc_REG),32);
+    }
+    bufp->chgBit(oldp+3,(vlSelf->clock));
+    bufp->chgBit(oldp+4,(vlSelf->reset));
+    bufp->chgIData(oldp+5,(vlSelf->io_pc),32);
+    bufp->chgBit(oldp+6,(vlSelf->io_inv_flag));
 }
 
 void Vtop___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
@@ -33,11 +39,8 @@ void Vtop___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
     // Init
     Vtop___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vtop___024root*>(voidSelf);
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VlUnpacked<CData/*0:0*/, 1> __Vm_traceActivity;
-    for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
-        __Vm_traceActivity[__Vi0] = 0;
-    }
     // Body
     vlSymsp->__Vm_activity = false;
-    __Vm_traceActivity[0U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[0U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[1U] = 0U;
 }
