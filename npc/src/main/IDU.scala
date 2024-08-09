@@ -11,7 +11,7 @@ class IDU extends Module {
 
 	val m_idle :: m_wait_valid :: Nil = Enum(2)
 	val state = RegInit(m_idle)
-	state :=MuxLookUp(state,m_idle)(List(
+	state :=MuxLookup(state,m_idle)(List(
 		m_idle -> Mux(io.in.ready,m_idle,m_wait_valid),
 		m_wait_valid -> Mux(io.in.valid,m_wait_valid,m_idle)
 	))
