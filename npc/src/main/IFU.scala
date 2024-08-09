@@ -64,10 +64,13 @@ class IFU extends Module {
 	val lastinst = RegNext(out_data.inst,0.U)
 	io.in.ready := (lastpc =/= in_data.pc)
 
+    //取指令
 	vlg_pc_read.io.pc := in_data.pc
 	out_data.inst := vlg_pc_read.io.inst 
 
 	io.out.valid := (lastinst =/= out_data.inst)
+	//传到IDU
+	io.out.bits := out_data
 
 }
 
