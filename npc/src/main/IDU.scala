@@ -16,11 +16,11 @@ class IDU extends Module {
 	})
     
 	//IDU recive EXU
-	val EXU2s_idle :: EXU2s_wait_ready :: Nil = Enum(2)
-	val EXU2s_state = RegInit(EXU2s_idle)
-	EXU2s_state :=MuxLookup(EXU2s_state,EXU2s_idle)(List(
-		EXU2s_idle -> Mux(io.out.valid,EXU2s_wait_ready,EXU2s_idle),
-		EXU2s_wait_ready -> Mux(io.out.ready,EXU2s_idle,EXU2s_wait_ready)
+	val exu2s_idle :: exu2s_wait_ready :: Nil = Enum(2)
+	val exu2s_state = RegInit(exu2s_idle)
+	exu2s_state :=MuxLookup(exu2s_state,exu2s_idle)(List(
+		exu2s_idle -> Mux(io.out2EXU.valid,exu2s_wait_ready,exu2s_idle),
+		exu2s_wait_ready -> Mux(io.out2EXU.ready,exu2s_idle,exu2s_wait_ready)
 	))
 
 	val src1 = RegInit(0.U)
