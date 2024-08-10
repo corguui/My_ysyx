@@ -26,17 +26,17 @@ class IDU extends Module {
 	val src1 = RegInit(0.U)
 	val src2 = RegInit(0.U)
 	val alu_op = RegInit(0.U)
-	val lastsrc1 = RegNext(EXU_data.src1,1.U)
-	val lastsrc2 = RegNext(EXU_data.src2,1.U)
-	val lastalu_op = RegNext(EXU_data.alu_op,1.U)
+	val lastsrc1 = RegNext(exu_data.src1,1.U)
+	val lastsrc2 = RegNext(exu_data.src2,1.U)
+	val lastalu_op = RegNext(exu_data.alu_op,1.U)
 
-	val EXU_data = Wire(new IDUtoEXU)
-	io.out2EXU.bits := EXU_data
-	EXU_data.src1 := src1
-	EXU_data.src2 := src2
-	EXU_data.alu_op := alu_op
+	val exu_data = Wire(new IDUtoEXU)
+	io.out2EXU.bits := exu_data
+	exu_data.src1 := src1
+	exu_data.src2 := src2
+	exu_data.alu_op := alu_op
 
-	io.out2EXU.valid := (EXU_data.src1 =/= lastsrc1 ) | (EXU_data.src2 =/= lastsrc2 ) | (EXU_data.alu_op =/= lastalu_op )
+	io.out2EXU.valid := (exu_data.src1 =/= lastsrc1 ) | (exu_data.src2 =/= lastsrc2 ) | (exu_data.alu_op =/= lastalu_op )
 
 
 
