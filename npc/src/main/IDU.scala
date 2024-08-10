@@ -11,16 +11,16 @@ class IDUtoEXU extends Bundle{
 
 class IDU extends Module {
 	val io = IO(new Bundle{
-		val IFU2in = Flipped(Decoupled(new IFUtoIDU))
-		val out2EXU = Decoupled(new IDUtoEXU)
+		val ifu2in = Flipped(Decoupled(new IFUtoIDU))
+		val out2exu = Decoupled(new IDUtoEXU)
 	})
     
 	//IDU recive EXU
 	val exu2s_idle :: exu2s_wait_ready :: Nil = Enum(2)
 	val exu2s_state = RegInit(exu2s_idle)
 	exu2s_state :=MuxLookup(exu2s_state,exu2s_idle)(List(
-		exu2s_idle -> Mux(io.out2EXU.valid,exu2s_wait_ready,exu2s_idle),
-		exu2s_wait_ready -> Mux(io.out2EXU.ready,exu2s_idle,exu2s_wait_ready)
+		exu2s_idle -> Mux(io.out2exu.valid,exu2s_wait_ready,exu2s_idle),
+		exu2s_wait_ready -> Mux(io.out2exu.ready,exu2s_idle,exu2s_wait_ready)
 	))
 
 	val src1 = RegInit(0.U)
@@ -31,27 +31,27 @@ class IDU extends Module {
 	val lastalu_op = RegNext(exu_data.alu_op,1.U)
 
 	val exu_data = Wire(new IDUtoEXU)
-	io.out2EXU.bits := exu_data
 	exu_data.src1 := src1
 	exu_data.src2 := src2
 	exu_data.alu_op := alu_op
 
-	io.out2EXU.valid := (exu_data.src1 =/= lastsrc1 ) | (exu_data.src2 =/= lastsrc2 ) | (exu_data.alu_op =/= lastalu_op )
+	io.out2exu.valid := (exu_data.src1 =/= lastsrc1 ) | (exu_data.src2 =/= lastsrc2 ) | (exu_data.alu_op =/= lastalu_op )
 
-
+	io.out2exu.bits := exu_data
+	
 
     //IDU to IFU
 	val m2IFUidle :: m2IFUprocess :: Nil = Enum(2)
 	val state = RegInit(m2IFUidle)
 	state :=MuxLookup(state,m2IFUidle)(List(
-		m2IFUidle -> Mux(io.IFU2in.valid,m2IFUprocess,m2IFUidle),
-		m2IFUprocess -> Mux(io.IFU2in.ready,m2IFUidle,m2IFUprocess)
+		m2IFUidle -> Mux(io.ifu2in.valid,m2IFUprocess,m2IFUidle),
+		m2IFUprocess -> Mux(io.ifu2in.ready,m2IFUidle,m2IFUprocess)
 	))
-	io.IFU2in.ready := (state === m2IFUidle)
+	io.ifu2in.ready := (state === m2IFUidle)
     val in_data = Wire(new IFUtoIDU) 
-    in_data := io.IFU2in.bits
+    in_data := io.ifu2in.bits
     //val lastinst = RegNext(in_data.inst,0.U)
-    //io.IFU2in.ready := (lastinst =/= in_data.inst)
+    //io.ifu2in.ready := (lastinst =/= in_data.inst)
 
 	val opcode = in_data.inst(6,0)
 	val rd = in_data.inst(11,7)

@@ -13,7 +13,7 @@ class EXUtoALU extends Bundle {
 
 class EXU extends Module {
     val io = IO(new Bundle {
-        val IDU2in = Flipped(Decoupled(new IDUtoEXU))
+        val idu2in = Flipped(Decoupled(new IDUtoEXU))
         val out2alu = Decoupled(new EXUtoALU)// 2 means to out to alu
     })
 
@@ -37,14 +37,14 @@ class EXU extends Module {
     val m2IDUidle :: m2IDUprocess :: Nil = Enum(2)
 	val m2IDUstate = RegInit(m2IDUidle)
 	m2IDUstate :=MuxLookup(m2IDUstate,m2IDUidle)(List(
-		m2IDUidle -> Mux(io.IDU2in.valid,m2IDUprocess,m2IDUidle),
-		m2IDUprocess -> Mux(io.IDU2in.ready,m2IDUidle,m2IDUprocess)
+		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
+		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
 
-    io.IDU2in.ready := ( m2IDUstate===m2IDUidle )
+    io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     when(m2IDUstate === m2IDUprocess)
     {
-        io.IDU2in.bits <> alu_data  
+        io.idu2in.bits <> alu_data  
     }
 
 }
