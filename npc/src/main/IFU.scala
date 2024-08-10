@@ -41,18 +41,19 @@ class IFU extends Module {
   	}
 
   
-  val vlg_pc_read = Module(new VlgPcRead)
-
+  	val vlg_pc_read = Module(new VlgPcRead)
 	val out_data =Wire(new IFUtoIDU)
 	val in_data =Wire(new PCtoIFU)
 	in_data := io.in.bits
 
 	//取指令和生成ready,valid信号
-	val lastinst = RegNext(out_data.inst,0.U)
+	val lastinst = RegNext(out_data.inst,1.U)
 	io.in.ready := (m2PCstate === m2PCidle)
 	io.out.valid := (lastinst =/= out_data.inst)
 
     //取指令
+	out_data.inst := 0.U
+	vlg_pc_read.io.pc := 0.U
 	when(m2PCstate === m2PCprocess)
 	{
 	vlg_pc_read.io.pc := in_data.pc

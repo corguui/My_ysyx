@@ -24,8 +24,11 @@ class EXU extends Module {
 		alu2s_idle -> Mux(io.out2alu.valid,alu2s_wait_ready,alu2s_idle),
 		alu2s_wait_ready -> Mux(io.out2alu.ready,alu2s_idle,alu2s_wait_ready)
 	))
-    
+
     val alu_data = Wire(new EXUtoALU)
+    alu_data.src1 := 0.U
+    alu_data.src2 := 0.U
+    alu_data.alu_op := 0.U
     val lastsrc1 = RegNext(alu_data.src1,1.U)
 	val lastsrc2 = RegNext(alu_data.src2,1.U)
 	val lastalu_op = RegNext(alu_data.alu_op,1.U)

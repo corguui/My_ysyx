@@ -59,6 +59,8 @@ class IDU extends Module {
 	val csr = in_data.inst(31,20)
 	val imm = Wire(UInt(32.W))
 
+	imm := 0.U
+
 	when(state === m2IFUprocess )
 	{
 	//译码
