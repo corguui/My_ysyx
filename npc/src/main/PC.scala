@@ -15,11 +15,11 @@ class PC extends Module {
 	})
 
 	//PC recive IFU
-	val ifu2s_idle :: IFU2swait_ready :: Nil = Enum(2)
+	val ifu2s_idle :: ifu2s_wait_ready :: Nil = Enum(2)
 	val state = RegInit(ifu2s_idle)
 	state :=MuxLookup(state,ifu2s_idle)(List(
-		ifu2s_idle -> Mux(io.out.valid,IFU2swait_ready,ifu2s_idle),
-		IFU2swait_ready -> Mux(io.out.ready,ifu2s_idle,IFU2swait_ready)
+		ifu2s_idle -> Mux(io.out.valid,ifu2s_wait_ready,ifu2s_idle),
+		ifu2s_wait_ready -> Mux(io.out.ready,ifu2s_idle,ifu2s_wait_ready)
 	))
 
 	val data = Wire(new PCtoIFU)
