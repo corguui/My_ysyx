@@ -23,17 +23,11 @@ class IDU extends Module {
 		exu2s_wait_ready -> Mux(io.out2exu.ready,exu2s_idle,exu2s_wait_ready)
 	))
 
-	val src1 = RegInit(0.U)
-	val src2 = RegInit(0.U)
-	val alu_op = RegInit(0.U)
 	val lastsrc1 = RegNext(exu_data.src1,1.U)
 	val lastsrc2 = RegNext(exu_data.src2,1.U)
 	val lastalu_op = RegNext(exu_data.alu_op,1.U)
 
 	val exu_data = Wire(new IDUtoEXU)
-	exu_data.src1 := src1
-	exu_data.src2 := src2
-	exu_data.alu_op := alu_op
 
 	io.out2exu.valid := (exu_data.src1 =/= lastsrc1 ) | (exu_data.src2 =/= lastsrc2 ) | (exu_data.alu_op =/= lastalu_op )
 
