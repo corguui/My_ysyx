@@ -63,7 +63,6 @@ class IDU extends Module {
 	{
 	//译码
 	switch(opcode){
-		/*
 		//R-Type
 		is("b0110011".U){
 
@@ -124,10 +123,8 @@ class IDU extends Module {
 				}
 			}	
 		}
-		*/
 
 		//I-Type
-		/*
 		is("b0010011".U){
 			imm := in_data.inst(31,20).asSInt.asUInt
 			switch(funct3){
@@ -182,10 +179,8 @@ class IDU extends Module {
 
 			}
 		}
-		*/
 
 		//IL-Type 		
-		/*
 		is("b0000011".U){
 			imm := in_data.inst(31,20).asSInt.asUInt
 			switch(funct3){
@@ -216,10 +211,8 @@ class IDU extends Module {
 			}
 
 		}
-		*/
 
 		//S-Type
-		/*
 		is("b0100011".U){
 			imm := Cat(in_data.inst(31,25),in_data.inst(11,7)).asSInt.asUInt
 			switch(funct3){
@@ -239,7 +232,6 @@ class IDU extends Module {
 				}
 			}
 		}
-		*/
 
 		//B-Type
 		is("b1100011".U){
@@ -299,7 +291,7 @@ class IDU extends Module {
 		}
 
 		//CSR
-		is("b1100011".U){
+		is("b1110011".U){
 
 		}
 
