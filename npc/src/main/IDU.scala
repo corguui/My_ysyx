@@ -3,23 +3,55 @@ package npc
 import chisel3._
 import chisel3.util._
 
+class IDUtoEXU extends Bundle{
+    val src1 = Output(UInt(32.W))
+    val src2 = Output(UInt(32.W))
+    val alu_op = Output(UInt(4.W))
+}
 
 class IDU extends Module {
 	val io = IO(new Bundle{
-		val in = Flipped(Decoupled(new IFUtoIDU))
+		val IFU2in = Flipped(Decoupled(new IFUtoIDU))
+		val out2EXU = Decoupled(new IDUtoEXU)
 	})
     
-    //IDU to IFU
-	val m_idle :: m_wait_valid :: Nil = Enum(2)
-	val state = RegInit(m_idle)
-	state :=MuxLookup(state,m_idle)(List(
-		m_idle -> Mux(io.in.ready,m_idle,m_wait_valid),
-		m_wait_valid -> Mux(io.in.valid,m_wait_valid,m_idle)
+	//IDU recive EXU
+	val EXU2s_idle :: EXU2s_wait_ready :: Nil = Enum(2)
+	val EXU2s_state = RegInit(EXU2s_idle)
+	EXU2s_state :=MuxLookup(EXU2s_state,EXU2s_idle)(List(
+		EXU2s_idle -> Mux(io.out.valid,EXU2s_wait_ready,EXU2s_idle),
+		EXU2s_wait_ready -> Mux(io.out.ready,EXU2s_idle,EXU2s_wait_ready)
 	))
+
+	val src1 = RegInit(0.U)
+	val src2 = RegInit(0.U)
+	val alu_op = RegInit(0.U)
+	val lastsrc1 = RegNext(EXU_data.src1,1.U)
+	val lastsrc2 = RegNext(EXU_data.src2,1.U)
+	val lastalu_op = RegNext(EXU_data.alu_op,1.U)
+
+	val EXU_data = Wire(new IDUtoEXU)
+	io.out2EXU.bits := EXU_data
+	EXU_data.src1 := src1
+	EXU_data.src2 := src2
+	EXU_data.alu_op := alu_op
+
+	io.out2EXU.valid := (EXU_data.src1 =/= lastsrc1 ) | (EXU_data.src2 =/= lastsrc2 ) | (EXU_data.alu_op =/= lastalu_op )
+
+
+
+    //IDU to IFU
+	val m2IFUidle :: m2IFUwait_valid :: Nil = Enum(2)
+	val state = RegInit(m2IFUidle)
+	state :=MuxLookup(state,m2IFUidle)(List(
+		m2IFUidle -> Mux(io.IFU2in.valid,m2IFUwait_valid,m2IFUidle),
+		m2IFUwait_valid -> Mux(io.IFU2in.ready,m2IFUidle,m2IFUwait_valid)
+	))
+	io.IFU2in.ready := (state === m2IFUidle)
     val in_data = Wire(new IFUtoIDU) 
-    in_data := io.in.bits
-    val lastinst = RegInit(0.U)
-    io.in.ready := (lastinst =/= in_data.inst)
+    in_data := io.IFU2in.bits
+    //val lastinst = RegNext(in_data.inst,0.U)
+    //io.IFU2in.ready := (lastinst =/= in_data.inst)
 
 	val opcode = in_data.inst(6,0)
 	val rd = in_data.inst(11,7)
@@ -30,6 +62,7 @@ class IDU extends Module {
 	val csr = in_data.inst(31,20)
 	val imm = Wire(UInt(32.W))
 
+	when(state === )
 	//译码
 	switch(opcode){
 		//R-Type
