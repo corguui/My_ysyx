@@ -15,11 +15,11 @@ class IFU extends Module {
 	})
 
 	//IFU recive IDU 
-	val IDU2s_idle :: IDU2s_wait_ready :: Nil = Enum(2)
-	val IDU2s_state = RegInit(IDU2s_idle)
-	IDU2s_state :=MuxLookup(IDU2s_state,IDU2s_idle)(List(
-		IDU2s_idle -> Mux(io.out.valid,IDU2s_wait_ready,IDU2s_idle),
-		IDU2s_wait_ready -> Mux(io.out.ready,IDU2s_idle,IDU2s_wait_ready)
+	val idu2s_idle :: idu2s_wait_ready :: Nil = Enum(2)
+	val idu2s_state = RegInit(idu2s_idle)
+	idu2s_state :=MuxLookup(idu2s_state,idu2s_idle)(List(
+		idu2s_idle -> Mux(io.out.valid,idu2s_wait_ready,idu2s_idle),
+		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
 
 	//IFU to PC
