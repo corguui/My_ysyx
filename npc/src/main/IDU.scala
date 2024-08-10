@@ -64,66 +64,7 @@ class IDU extends Module {
 	//译码
 	switch(opcode){
 		//R-Type
-		is("b0110011".U){
-
-			switch(funct3){
-				//ADD or SUB
-				is("b000".U){
-					//ADD
-					when(funct7 === 0.U){
-
-					}
-					//SUB
-					.otherwise{
-
-					}
-
-				}
-
-				//XOR
-				is("b100".U){
-
-				}
-
-				//OR
-				is("b110".U){
-
-				}
-
-				//AND
-				is("b111".U){
-
-				}
-
-				//SLL
-				is("b001".U){
-
-				}
-
-				//SRL or SRA
-				is("b101".U){
-					//SRL
-					when(funct7 === 0.U){
-
-					}
-					//SRA
-					.otherwise{
-
-					}
-				}
-
-				//SLT
-				is("b010".U){
-
-				}
-
-				//SLTU
-				is("b011".U){
-
-				}
-			}	
-		}
-
+		
 		//I-Type
 		is("b0010011".U){
 			imm := in_data.inst(31,20).asSInt.asUInt
