@@ -21,8 +21,8 @@ class EXU extends Module {
 	val alu2s_idle :: alu2s_wait_ready :: Nil = Enum(2)
 	val alu2s_state = RegInit(alu2s_idle)
 	alu2s_state :=MuxLookup(alu2s_state,alu2s_idle)(List(
-		alu2s_idle -> Mux(io.out.valid,alu2s_wait_ready,alu2s_idle),
-		alu2s_wait_ready -> Mux(io.out.ready,alu2s_idle,alu2s_wait_ready)
+		alu2s_idle -> Mux(io.out2alu.valid,alu2s_wait_ready,alu2s_idle),
+		alu2s_wait_ready -> Mux(io.out2alu.ready,alu2s_idle,alu2s_wait_ready)
 	))
 
     val lastsrc1 = RegNext(alu_data.src1,1.U)
