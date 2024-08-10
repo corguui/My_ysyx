@@ -242,7 +242,6 @@ class IDU extends Module {
 		*/
 
 		//B-Type
-		/*
 		is("b1100011".U){
 			imm := Cat(in_data.inst(31),in_data.inst(7),in_data.inst(30,25),in_data.inst(11,8),0.U(1.W)).asSInt.asUInt
 			switch(funct3){
@@ -277,7 +276,6 @@ class IDU extends Module {
 				}
 			}
 		}
-		*/
 
 		//U-Type lui
 		is("b0110111".U){
