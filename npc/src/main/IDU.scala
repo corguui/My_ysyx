@@ -185,7 +185,7 @@ class IDU extends Module {
 
 		//IL-Type 		
 		is("b0000011".U){
-			imm := imm := in_data.inst(31,20).asSInt.asUInt
+			imm := in_data.inst(31,20).asSInt.asUInt
 			switch(funct3){
 				//LB
 				is("b000".U){
