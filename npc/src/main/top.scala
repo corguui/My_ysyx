@@ -15,7 +15,7 @@ class top extends Module {
 
   IFU.io.in <> PC.io.out
   IDU.io.ifu2in <> IFU.io.out
-  EXU.io.idu2in <> IDU.io.out2EXU
+  EXU.io.idu2in <> IDU.io.out2exu
 
   val pc_data = Wire(new PCtoIFU)
   pc_data := PC.io.out.bits
