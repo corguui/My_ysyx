@@ -38,10 +38,24 @@ static bool g_print_step = false;
 void cpu_read_reg()
 {
 	cpu.pc=top->io_pc;
-	for(int i=0;i<32;i++)
-	{
-		//cpu.gpr[i]=top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i];
-	}
+	cpu.gpr[0]=top->rootp->top__DOT__Reg__DOT__reg_0;
+	cpu.gpr[1]=top->rootp->top__DOT__Reg__DOT__reg_1;
+	cpu.gpr[2]=top->rootp->top__DOT__Reg__DOT__reg_2;
+	cpu.gpr[3]=top->rootp->top__DOT__Reg__DOT__reg_3;
+	cpu.gpr[4]=top->rootp->top__DOT__Reg__DOT__reg_4;
+	cpu.gpr[5]=top->rootp->top__DOT__Reg__DOT__reg_5;
+	cpu.gpr[6]=top->rootp->top__DOT__Reg__DOT__reg_6;
+	cpu.gpr[7]=top->rootp->top__DOT__Reg__DOT__reg_7;
+	cpu.gpr[8]=top->rootp->top__DOT__Reg__DOT__reg_8;
+	cpu.gpr[9]=top->rootp->top__DOT__Reg__DOT__reg_9;
+	cpu.gpr[10]=top->rootp->top__DOT__Reg__DOT__reg_10;
+	cpu.gpr[11]=top->rootp->top__DOT__Reg__DOT__reg_11;
+	cpu.gpr[12]=top->rootp->top__DOT__Reg__DOT__reg_12;
+	cpu.gpr[13]=top->rootp->top__DOT__Reg__DOT__reg_13;
+	cpu.gpr[14]=top->rootp->top__DOT__Reg__DOT__reg_14;
+	cpu.gpr[15]=top->rootp->top__DOT__Reg__DOT__reg_15;
+	cpu.gpr[16]=top->rootp->top__DOT__Reg__DOT__reg_16;
+
 	for(int i=0;i<4;i++)
 	{
 		//cpu.csr[i]=top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__csr[i];
@@ -51,10 +65,24 @@ void cpu_read_reg()
 void cpu_write_reg()
 {
 	top->io_pc=cpu.pc;
-	for(int i=0;i<32;i++)
-	{
-		//top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__rf[i]=cpu.gpr[i];
-	}
+	top->rootp->top__DOT__Reg__DOT__reg_0=cpu.gpr[0];
+	top->rootp->top__DOT__Reg__DOT__reg_1=cpu.gpr[1];
+	top->rootp->top__DOT__Reg__DOT__reg_2=cpu.gpr[2];
+	top->rootp->top__DOT__Reg__DOT__reg_3=cpu.gpr[3];
+	top->rootp->top__DOT__Reg__DOT__reg_4=cpu.gpr[4];
+	top->rootp->top__DOT__Reg__DOT__reg_5=cpu.gpr[5];
+	top->rootp->top__DOT__Reg__DOT__reg_6=cpu.gpr[6];
+	top->rootp->top__DOT__Reg__DOT__reg_7=cpu.gpr[7];
+	top->rootp->top__DOT__Reg__DOT__reg_8=cpu.gpr[8];
+	top->rootp->top__DOT__Reg__DOT__reg_9=cpu.gpr[9];
+	top->rootp->top__DOT__Reg__DOT__reg_10=cpu.gpr[10];
+	top->rootp->top__DOT__Reg__DOT__reg_11=cpu.gpr[11];
+	top->rootp->top__DOT__Reg__DOT__reg_12=cpu.gpr[12];
+	top->rootp->top__DOT__Reg__DOT__reg_13=cpu.gpr[13];
+	top->rootp->top__DOT__Reg__DOT__reg_14=cpu.gpr[14];
+	top->rootp->top__DOT__Reg__DOT__reg_15=cpu.gpr[15];
+	top->rootp->top__DOT__Reg__DOT__reg_16=cpu.gpr[16];
+
 }
 
 #ifdef CONFIG_DIFFTEST
@@ -119,8 +147,8 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		s->pc=top->io_pc;
-		//s->inst=top->rootp->ysyx_23060111_top__DOT__inst;
-    	//s->dnpc=top->rootp->ysyx_23060111_top__DOT__dnpc;
+		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
+    	s->dnpc=top->rootp->top__DOT___EXU_io_dnpc;
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
