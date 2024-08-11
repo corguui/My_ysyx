@@ -53,7 +53,7 @@ void ebreak (int inst)
 {
 	if(inst == 0x00100073 )
 	{
-		//reg 1o
+		//reg 10
 	   NPCTRAP(top->rootp->top__DOT__Reg__DOT__reg_10);//ebreak
 	}
 	if(inst!=0&&top->io_inv_flag==1)
