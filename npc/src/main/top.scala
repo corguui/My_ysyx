@@ -12,7 +12,6 @@ class top extends Module {
   val IFU = Module(new IFU)
   val IDU = Module(new IDU)
   val EXU = Module(new EXU)
-  val ALU = Module(new ALU)
   val Reg = Module(new Reg)
 
   IDU.io.ifu2in <> IFU.io.out
