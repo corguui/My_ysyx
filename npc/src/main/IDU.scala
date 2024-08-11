@@ -260,7 +260,7 @@ class IDU extends Module {
 			exu_data.inst_type := 4.U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,25),in_data.inst(11,7)).asUInt
 			exu_data.mem_wen := true.B
-			exu_data.alu_op := 0.U
+			exu_data.alu_op := "b0000".U
 			switch(funct3){
 				//SB
 				is("b000".U){
@@ -329,6 +329,7 @@ class IDU extends Module {
 		is("b0010111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 7.U
+			exu_data.alu_op :="b0000".U
 			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W)).asUInt
 			exu_data.reg_wen := true.B
 		}
@@ -337,6 +338,7 @@ class IDU extends Module {
 		is("b1101111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 8.U
+			exu_data.alu_op :="b0000".U
 			exu_data.imm := Cat(Fill(11,in_data.inst(31)),in_data.inst(19,12),in_data.inst(20),in_data.inst(30,21),0.U(1.W)).asUInt
 			exu_data.reg_wen := true.B
 		}
@@ -345,6 +347,7 @@ class IDU extends Module {
 		is("b1100111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 9.U
+			exu_data.alu_op :="b0000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt			
 			exu_data.reg_wen := true.B
 		}

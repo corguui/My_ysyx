@@ -143,19 +143,28 @@ class EXU extends Module {
             }
             //upc type
             is(7.U){
-                io.reg_wdata := io.idu2in.bits.imm+io.pc
+                alu.io.src1 := io.idu2in.bits.imm
+                alu.io.src2 := io.pc
+                alu.io.alu_op := io.idu2in.bits.alu_op
+                io.reg_wdata := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
             }
             //j type
             is(8.U){
                 io.reg_wdata := io.snpc
-                io.dnpc := io.idu2in.bits.imm+io.pc
+                alu.io.src1 := io.idu2in.bits.imm
+                alu.io.src2 := io.pc
+                alu.io.alu_op := io.idu2in.bits.alu_op
+                io.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
             }
             //jr type
             is(9.U){
                 io.reg_wdata := io.snpc
-                io.dnpc := io.idu2in.bits.imm+io.idu2in.bits.src1
+                alu.io.src1 := io.idu2in.bits.imm
+                alu.io.src2 := io.idu2in.bits.src1
+                alu.io.alu_op := io.idu2in.bits.alu_op
+                io.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
             }
         }

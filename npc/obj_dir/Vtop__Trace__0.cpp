@@ -80,7 +80,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                & (((IData)(vlSelf->top__DOT__EXU__DOT___GEN_4) 
                                    | ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_8)) 
                                       & ((IData)(vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0) 
-                                         | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_14)))) 
+                                         | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_15)))) 
                                   & (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_reg_wen)))));
         bufp->chgCData(oldp+50,(vlSelf->top__DOT___EXU_io_reg_waddr),5);
         bufp->chgBit(oldp+51,(vlSelf->top__DOT__EXU__DOT__m2IDUstate));
@@ -129,7 +129,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                            != (IData)(vlSelf->top__DOT__IDU__DOT__lastalu_op))));
     bufp->chgIData(oldp+74,(((1U & ((~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)) 
                                     | ((1U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type)) 
-                                       | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_9))))
+                                       | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_10))))
                               ? ((IData)(4U) + vlSelf->top__DOT__PC__DOT__io_pc_REG)
                               : ((5U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type))
                                   ? ((1U == vlSelf->top__DOT__EXU__DOT__alu__DOT__casez_tmp)
