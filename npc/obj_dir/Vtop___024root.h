@@ -40,18 +40,19 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT__m2IDUstate;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_2;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_4;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_5;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_12;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_13;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_14;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_15;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_16;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_17;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_18;
         CData/*3:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op;
         CData/*4:0*/ top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0;
         CData/*0:0*/ top__DOT__Reg__DOT___GEN;
         CData/*0:0*/ __VdfgTmp_h7344b924__0;
-        CData/*0:0*/ __VdfgTmp_ha44a2961__0;
+        CData/*0:0*/ __VdfgTmp_ha198de55__0;
         CData/*0:0*/ __Vdly__top__DOT__EXU__DOT__m2IDUstate;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __Vtrigrprev__TOP__top__DOT__EXU__DOT__mem__DOT__clk;
@@ -82,9 +83,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_8;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_9;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_10;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_11;
     };
     struct {
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_11;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_12;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_13;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_14;

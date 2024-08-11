@@ -351,12 +351,11 @@ class IDU extends Module {
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt			
 			exu_data.reg_wen := true.B
 		}
-		/*
-		//CSR
+		//CSR and ebrak
 		is("b1110011".U){
+			io.inv_flag := false.B
 
 		}
-		*/
 
 	}
 	}
