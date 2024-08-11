@@ -976,14 +976,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     } else {
         vlSelf->top__DOT__EXU__DOT___mem_m_rdata = 0U;
     }
-    vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6e12e19d__0 
-        = (((- (IData)((1U & (vlSelf->top__DOT__EXU__DOT___mem_m_rdata 
-                              >> 7U)))) << 8U) | (0xffU 
-                                                  & vlSelf->top__DOT__EXU__DOT___mem_m_rdata));
-    vlSelf->top__DOT__EXU__DOT____VdfgTmp_he4777b8d__0 
-        = (((- (IData)((1U & (vlSelf->top__DOT__EXU__DOT___mem_m_rdata 
-                              >> 0xfU)))) << 0x10U) 
-           | (0xffffU & vlSelf->top__DOT__EXU__DOT___mem_m_rdata));
     vlSelf->top__DOT___EXU_io_reg_wdata = ((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)
                                             ? ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_2)
                                                 ? vlSelf->top__DOT__EXU__DOT__alu__DOT__casez_tmp
@@ -994,22 +986,40 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                                    (((~ (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_il_us)) 
                                                      & (1U 
                                                         == vlSelf->top__DOT___IDU_io_out2exu_bits_m_rmask))
-                                                     ? vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6e12e19d__0
+                                                     ? 
+                                                    (((- (IData)(
+                                                                 (1U 
+                                                                  & (vlSelf->top__DOT__EXU__DOT___mem_m_rdata 
+                                                                     >> 7U)))) 
+                                                      << 8U) 
+                                                     | (0xffU 
+                                                        & vlSelf->top__DOT__EXU__DOT___mem_m_rdata))
                                                      : 
                                                     (((~ (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_il_us)) 
                                                       & (2U 
                                                          == vlSelf->top__DOT___IDU_io_out2exu_bits_m_rmask))
-                                                      ? vlSelf->top__DOT__EXU__DOT____VdfgTmp_he4777b8d__0
+                                                      ? 
+                                                     (((- (IData)(
+                                                                  (1U 
+                                                                   & (vlSelf->top__DOT__EXU__DOT___mem_m_rdata 
+                                                                      >> 0xfU)))) 
+                                                       << 0x10U) 
+                                                      | (0xffffU 
+                                                         & vlSelf->top__DOT__EXU__DOT___mem_m_rdata))
                                                       : 
                                                      (((1U 
                                                         == vlSelf->top__DOT___IDU_io_out2exu_bits_m_rmask) 
                                                        & (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_il_us))
-                                                       ? vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6e12e19d__0
+                                                       ? 
+                                                      (0xffU 
+                                                       & vlSelf->top__DOT__EXU__DOT___mem_m_rdata)
                                                        : 
                                                       (((2U 
                                                          == vlSelf->top__DOT___IDU_io_out2exu_bits_m_rmask) 
                                                         & (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_il_us))
-                                                        ? vlSelf->top__DOT__EXU__DOT____VdfgTmp_he4777b8d__0
+                                                        ? 
+                                                       (0xffffU 
+                                                        & vlSelf->top__DOT__EXU__DOT___mem_m_rdata)
                                                         : vlSelf->top__DOT__EXU__DOT___mem_m_rdata))))
                                                     : 
                                                    ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_15)

@@ -177,8 +177,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_src2 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_src1 = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6e12e19d__0 = 0;
-    vlSelf->top__DOT__EXU__DOT____VdfgTmp_he4777b8d__0 = 0;
     vlSelf->top__DOT__EXU__DOT__alu__DOT__casez_tmp = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0 = 0;
     vlSelf->top__DOT__Reg__DOT__reg_0 = VL_RAND_RESET_I(32);
