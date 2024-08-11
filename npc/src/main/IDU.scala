@@ -35,7 +35,7 @@ class IDU extends Module {
 
 
 	val exu_data = Wire(new IDUtoEXU)
-
+	
 
 	val lastalu_op = RegNext(exu_data.alu_op,0.U)
 
@@ -68,10 +68,7 @@ class IDU extends Module {
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
 	exu_data.reg_waddr := rd
-
-	when(state === m2IFUprocess )
-	{
-	//译码
+	
 	exu_data.mem_wen := false.B
 	exu_data.mem_ren := false.B
 	exu_data.m_rmask := 0.U
@@ -82,6 +79,10 @@ class IDU extends Module {
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.imm :=  0.U
+
+	when(state === m2IFUprocess )
+	{
+	//译码
 	io.inv_flag := true.B
 	switch(opcode){
 		//R-Type
