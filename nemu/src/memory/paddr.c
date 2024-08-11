@@ -92,7 +92,7 @@ void paddr_write(paddr_t addr, int len, word_t data) {
 #endif
   return; }
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
-  if(addr==0xa00003f8)
+  if(addr==0xa00003f8 ||addr==0xa00003fc)
   {
     printf("reeturn\n");
     return;
