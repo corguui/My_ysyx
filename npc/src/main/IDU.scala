@@ -244,12 +244,12 @@ class IDU extends Module {
 
 				//LBU
 				is("b100".U){
-					exu_data.m_rmask := 1.U
+					exu_data.m_rmask := 5.U
 				}
 
 				//LHU
 				is("b101".U){
-					exu_data.m_rmask := 2.U
+					exu_data.m_rmask := 6.U
 				}
 			}
 

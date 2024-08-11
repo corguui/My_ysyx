@@ -114,6 +114,14 @@ class EXU extends Module {
                 }.elsewhen(io.idu2in.bits.m_rmask===2.U)
                 {
                 io.reg_wdata := ((Cat(Fill(16,mem.io.m_rdata(15)),mem.io.m_rdata(15,0))).asSInt).asUInt
+                }.elsewhen(io.idu2in.bits.m_rmask===5.U)
+                {
+                io.reg_wdata := ((Cat(Fill(24,mem.io.m_rdata(7)),mem.io.m_rdata(7,0)))).asUInt
+                io.idu2in.bits.m_rmask := 1.U
+                }elsewhen(io.idu2in.bits.m_rmask===6.U)
+                {
+                io.reg_wdata := ((Cat(Fill(16,mem.io.m_rdata(15)),mem.io.m_rdata(15,0)))).asUInt
+                io.idu2in.bits.m_rmask := 2.U
                 }.otherwise
                 {
                 io.reg_wdata := (mem.io.m_rdata.asSInt).asUInt
