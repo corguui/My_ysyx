@@ -31,8 +31,6 @@ class ALU extends Module{
         is("b01011".U){ io.result := (io.src1 >= io.src2).asUInt } //bgeu
         is("b01100".U){ io.result := (io.src1.asSInt >= io.src2.asSInt).asUInt } //bge
         is("b01101".U){ io.result := (io.src1 =/= io.src2).asUInt } //bne
-        is("b01110".U){ io.result := (io.src1.asSInt < io.src2.asSInt).asUInt } //blt
-        is("b01111".U){ io.result := (io.src1 < io.src2).asUInt } //bltu
     }
 
 }

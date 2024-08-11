@@ -142,7 +142,7 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.src2
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                io.dnpc :=  Mux((alu.io.result===1.U),io.pc+io.idu2in.bits.imm,io.snpc)
+                io.dnpc :=  Mux((alu.io.result===1.U),(io.pc+io.idu2in.bits.imm),io.snpc)
             }
             //u type
             is(6.U){

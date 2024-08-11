@@ -302,7 +302,7 @@ class IDU extends Module {
 
 				//blt
 				is("b100".U){
-					exu_data.alu_op := "b01110".U
+					exu_data.alu_op := "b01000".U
 				}
 
 				//bge
@@ -312,7 +312,7 @@ class IDU extends Module {
 
 				//bltu
 				is("b110".U){
-					exu_data.alu_op := "b01111".U
+					exu_data.alu_op := "b01001".U
 				}
 
 				//bgeu
