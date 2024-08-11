@@ -339,7 +339,7 @@ class IDU extends Module {
 			io.inv_flag := false.B
 			exu_data.inst_type := 8.U
 			exu_data.alu_op :="b0000".U
-			exu_data.imm := Cat(Fill(11,in_data.inst(31)),in_data.inst(19,12),in_data.inst(20),in_data.inst(30,21),0.U(1.W)).asUInt
+			exu_data.imm := Cat(Fill(11,in_data.inst(31)),in_data.inst(19,12),in_data.inst(20),in_data.inst(30,21),0.U(1.W)).asSInt
 			exu_data.reg_wen := true.B
 		}
 
