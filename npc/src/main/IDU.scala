@@ -168,7 +168,7 @@ class IDU extends Module {
 			switch(funct3){
 				//ADDI
 				is("b000".U){
-					exu_data.alu_op := 0.U
+					exu_data.alu_op := "b0000".U
 				}
 
 				//XORI
