@@ -320,8 +320,8 @@ class IDU extends Module {
 		is("b0110111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 6.U
-			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W))asUInt
-			exu_data.reg_wen := 1.U
+			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W)).asUInt
+			exu_data.reg_wen := true.B
 		}
 
 		//UPC-Type auipc
