@@ -36,9 +36,15 @@ VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-I/home/corgi/ysyx-workbench/npc/src/include \
+	-I/usr/lib/llvm-14/include \
+	-std=c++17 \
+	-fno-exceptions \
+	-fPIE \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
+	-lLLVM-14 \
+	-lreadline \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
@@ -56,6 +62,7 @@ VM_USER_CLASSES = \
 	sdb \
 	watchpoint \
 	reg \
+	disasm \
 	log \
 	logo \
 	state \
@@ -108,6 +115,8 @@ sdb.o: src/csrc/monitor/sdb/sdb.c
 watchpoint.o: src/csrc/monitor/sdb/watchpoint.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 reg.o: src/csrc/reg.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+disasm.o: src/csrc/utils/disasm.cc
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 log.o: src/csrc/utils/log.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
