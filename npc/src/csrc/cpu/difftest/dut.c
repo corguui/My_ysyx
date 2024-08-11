@@ -79,6 +79,7 @@ bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
 static void checkregs(NPC_CPU_state *ref, uint32_t pc) {
   if (!isa_difftest_checkregs(ref, pc)) {
     npc_state.state = NPC_ABORT;
+    tfp->close();
     isa_reg_display();
   }
 }
