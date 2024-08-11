@@ -148,7 +148,7 @@ class EXU extends Module {
             //j type
             is(8.U){
                 io.reg_wdata := io.snpc
-                io.dnpc := io.idu2in.bits.imm+io.pc
+                io.dnpc := io.idu2in.bits.imm.asUInt+io.pc
                 io.reg_wen := io.idu2in.bits.reg_wen
             }
             //jr type
