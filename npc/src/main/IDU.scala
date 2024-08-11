@@ -86,7 +86,7 @@ class IDU extends Module {
 	exu_data.m_wmask := 0.U
 	exu_data.inst_type := 0.U
 	exu_data.reg_wen := false.B
-	exu_data.alu_op := 15.U
+	exu_data.alu_op := "b0000".U
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.imm :=  0.U
@@ -222,6 +222,7 @@ class IDU extends Module {
 		is("b0000011".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 3.U
+			exu_data.alu_op := "b0000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 			exu_data.reg_wen := true.B
 			exu_data.mem_ren := true.B
