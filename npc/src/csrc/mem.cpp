@@ -108,6 +108,7 @@ extern "C" int vlg_pmem_read(int ad,int len)
 	if(likely(check_mem(addr)))
 	{
 	uint32_t data=pmem_read(addr, len);
+	printf("read ad %x data %x\n",ad,data);
 	#ifdef  CONFIG_MTRACE
 	 	read_buf[read_num]=addr;
 		read_data_buf[read_num]=data;
@@ -137,7 +138,6 @@ extern "C" int vlg_pc_read(int ad)
 	if(likely(check_mem(pc)))
 	{
 	uint32_t data=pmem_read(pc, 4);
-	printf("data %x\n",data);
 	return (int) data; 
 	}
 	printf("pc_read\n");
@@ -161,7 +161,7 @@ void host_write(void* addr, int len, uint32_t data)
 extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 {
 	uint32_t addr=(uint32_t)ad;
-	printf("data %x\n",wdata);
+	printf("write ad %x data %x\n",ad,wdata);
 	if(likely(check_mem(addr)))
 	{
 	uint32_t data=(uint32_t)wdata;
