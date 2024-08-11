@@ -25,7 +25,7 @@ class IDU extends Module {
 		val inv_flag = Outputput(Bool())
 	})
     
-
+	inv_flag := false.B
 	val exu2s_idle :: exu2s_wait_ready :: Nil = Enum(2)
 	val exu2s_state = RegInit(exu2s_idle)
 	exu2s_state :=MuxLookup(exu2s_state,exu2s_idle)(List(
@@ -66,8 +66,8 @@ class IDU extends Module {
 	val csr = in_data.inst(31,20)
 	val imm = Wire(UInt(32.W))
 
-	io.reg_data.addr1 := rs1
-	io.reg_data.addr2 := rs2
+	io.reg_data.raddr1 := rs1
+	io.reg_data.raddr2 := rs2
 	exu_data.reg_waddr := rd
 
 	when(state === m2IFUprocess )
