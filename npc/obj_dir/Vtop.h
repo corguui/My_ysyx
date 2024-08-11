@@ -29,7 +29,6 @@ class Vtop VL_NOT_FINAL : public VerilatedModel {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clock,0,0);
-    VL_IN8(&io_clock,0,0);
     VL_IN8(&reset,0,0);
     VL_OUT8(&io_inv_flag,0,0);
     VL_OUT(&io_pc,31,0);

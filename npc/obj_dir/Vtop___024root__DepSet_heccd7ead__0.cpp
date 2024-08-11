@@ -266,7 +266,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                     Vtop___024root___dump_triggers__act(vlSelf);
 #endif
-                    VL_FATAL_MT("build/top.sv", 868, "", "Active region did not converge.");
+                    VL_FATAL_MT("build/top.sv", 866, "", "Active region did not converge.");
                 }
                 vlSelf->__VactIterCount = ((IData)(1U) 
                                            + vlSelf->__VactIterCount);
@@ -281,7 +281,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__nba(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 868, "", "NBA region did not converge.");
+                VL_FATAL_MT("build/top.sv", 866, "", "NBA region did not converge.");
             }
             __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
             Vtop___024root___eval_nba(vlSelf);
@@ -299,7 +299,5 @@ void Vtop___024root___eval_debug_assertions(Vtop___024root* vlSelf) {
         Verilated::overWidthError("clock");}
     if (VL_UNLIKELY((vlSelf->reset & 0xfeU))) {
         Verilated::overWidthError("reset");}
-    if (VL_UNLIKELY((vlSelf->io_clock & 0xfeU))) {
-        Verilated::overWidthError("io_clock");}
 }
 #endif  // VL_DEBUG

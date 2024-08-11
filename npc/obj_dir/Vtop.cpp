@@ -13,7 +13,6 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vtop__Syms(contextp(), _vcname__, this)}
     , clock{vlSymsp->TOP.clock}
-    , io_clock{vlSymsp->TOP.io_clock}
     , reset{vlSymsp->TOP.reset}
     , io_inv_flag{vlSymsp->TOP.io_inv_flag}
     , io_pc{vlSymsp->TOP.io_pc}
