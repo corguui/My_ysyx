@@ -81,7 +81,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   NPC_CPU_state ref_r;
 
   if (skip_dut_nr_inst > 0) {
-    ref_difftest_regcpy(ref_r.gpr,&ref_r.pc,, DIFFTEST_TO_DUT);
+    ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
       skip_dut_nr_inst = 0;
       checkregs(&ref_r, npc);
@@ -89,7 +89,8 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     }
     skip_dut_nr_inst --;
     if (skip_dut_nr_inst == 0)
-      panic("can not catch up with ref.pc = " FMT_WORD " at pc = " FMT_WORD, ref_r.pc, pc);
+      printf("can not catch up with ref.pc = " FMT_WORD " at pc = " FMT_WORD, ref_r.pc, pc);
+      assert(0);
     return;
   }
 
