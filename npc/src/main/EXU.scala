@@ -123,6 +123,7 @@ class EXU extends Module {
             is(4.U){
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
+                alu.io.alu_op := io.idu2in.bits.alu_op
                 mem.io.m_waddr := alu.io.result
                 mem.io.m_wdata := io.idu2in.bits.src2
                 mem.io.m_wmask := io.idu2in.bits.m_wmask
@@ -148,7 +149,7 @@ class EXU extends Module {
             //j type
             is(8.U){
                 io.reg_wdata := io.snpc
-                io.dnpc := io.idu2in.bits.imm.asUInt+io.pc
+                io.dnpc := io.idu2in.bits.imm+io.pc
                 io.reg_wen := io.idu2in.bits.reg_wen
             }
             //jr type

@@ -260,6 +260,7 @@ class IDU extends Module {
 			exu_data.inst_type := 4.U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,25),in_data.inst(11,7)).asUInt
 			exu_data.mem_wen := true.B
+			exu_data.alu_op := 0.U
 			switch(funct3){
 				//SB
 				is("b000".U){
