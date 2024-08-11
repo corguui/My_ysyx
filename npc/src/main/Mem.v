@@ -1,6 +1,5 @@
 import "DPI-C" function int vlg_pmem_read(input int m_raddr,input int rmask);
-import "DPI-C" function void vlg_pmem_write(
-  input int waddr, input int wdata, input int wmask);
+import "DPI-C" function void vlg_pmem_write(input int waddr, input int wdata, input int wmask);
 module Mem(
     input clk,
     input [31:0] m_waddr,
