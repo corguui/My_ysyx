@@ -92,6 +92,10 @@ void paddr_write(paddr_t addr, int len, word_t data) {
 #endif
   return; }
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
+  if(addr==0xa00003f8)
+  {
+    return;
+  }
   printf("nemu write\n");
   out_of_bound(addr);
 }
