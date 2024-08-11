@@ -86,7 +86,7 @@ class IDU extends Module {
 	exu_data.m_wmask := 0.U
 	exu_data.inst_type := 0.U
 	exu_data.reg_wen := false.B
-	exu_data.alu_op := "b1111".U
+	//exu_data.alu_op := "b1111".U
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.imm :=  0.U
