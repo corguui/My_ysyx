@@ -247,8 +247,8 @@ class IDU extends Module {
 			io.inv_flag := false.B
 			exu_data.inst_type := 4.U
 			exu_data.imm := Cat(in_data.inst(31,25),in_data.inst(11,7)).asSInt.asUInt
-			switch(funct3){
 			exu_data.mem_wen := true.B
+			switch(funct3){
 				//SB
 				is("b000".U){
 					exu_data.m_wmask := 1.U
