@@ -5,6 +5,7 @@ import chisel3.util._
 
 class top extends Module {
   val io = IO(new Bundle {
+    val clock = Input(Clock())
     val pc = Output(UInt(32.W))
     val inv_flag = Output(Bool())
   })
@@ -29,6 +30,7 @@ class top extends Module {
 
   io.pc := PC.io.pc
   io.inv_flag := IDU.io.inv_flag 
+  EXU.io.clock := io.clock
 
 }
 
