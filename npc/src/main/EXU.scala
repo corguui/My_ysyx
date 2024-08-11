@@ -28,6 +28,7 @@ class EXU extends Module {
 
     class Mem extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
+        val clock = Input(Clock())
         val m_waddr = Input(UInt(32.W))
         val m_wdata = Input(UInt(32.W))
         val m_wmask = Input(UInt(32.W))
