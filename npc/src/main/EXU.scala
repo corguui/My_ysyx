@@ -140,6 +140,7 @@ class EXU extends Module {
             is(6.U){
                 io.reg_wdata := io.idu2in.bits.imm
                 io.reg_wen := io.idu2in.bits.reg_wen
+                io.reg_waddr := io.idu2in.bits.reg_waddr
             }
             //upc type
             is(7.U){
@@ -148,6 +149,7 @@ class EXU extends Module {
                 alu.io.alu_op := io.idu2in.bits.alu_op
                 io.reg_wdata := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
+                io.reg_waddr := io.idu2in.bits.reg_waddr
             }
             //j type
             is(8.U){
@@ -157,6 +159,7 @@ class EXU extends Module {
                 alu.io.alu_op := io.idu2in.bits.alu_op
                 io.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
+                io.reg_waddr := io.idu2in.bits.reg_waddr
             }
             //jr type
             is(9.U){
@@ -166,6 +169,7 @@ class EXU extends Module {
                 alu.io.alu_op := io.idu2in.bits.alu_op
                 io.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
+                io.reg_waddr := io.idu2in.bits.reg_waddr
             }
         }
     }
