@@ -8,7 +8,6 @@ import chisel3.experimental._
 
 class EXU extends Module {
     val io = IO(new Bundle {
-        val clock = Input(Clock())
         val idu2in = Flipped(Decoupled(new IDUtoEXU))
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())

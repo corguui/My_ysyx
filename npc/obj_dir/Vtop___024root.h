@@ -20,7 +20,7 @@ class Vtop___024root final : public VerilatedModule {
     // Anonymous structures to workaround compiler member-count bugs
     struct {
         VL_IN8(clock,0,0);
-        CData/*0:0*/ top__DOT__EXU__DOT__mem__DOT__clock;
+        VL_IN8(io_clock,0,0);
         VL_IN8(reset,0,0);
         VL_OUT8(io_inv_flag,0,0);
         CData/*4:0*/ top__DOT___EXU_io_reg_waddr;
@@ -55,7 +55,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ __VdfgTmp_ha198de55__0;
         CData/*0:0*/ __Vdly__top__DOT__EXU__DOT__m2IDUstate;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
-        CData/*0:0*/ __Vtrigrprev__TOP__top__DOT__EXU__DOT__mem__DOT__clock;
+        CData/*0:0*/ __Vtrigrprev__TOP__io_clock;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
         VL_OUT(io_pc,31,0);

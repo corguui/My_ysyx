@@ -21,13 +21,12 @@ void Vtop___024root___eval_triggers__act(Vtop___024root* vlSelf) {
                                       & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clock)));
     vlSelf->__VactTriggered.at(1U) = (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
                                       != vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT___vlg_pc_read_inst);
-    vlSelf->__VactTriggered.at(2U) = ((IData)(vlSelf->top__DOT__EXU__DOT__mem__DOT__clock) 
-                                      & (~ (IData)(vlSelf->__Vtrigrprev__TOP__top__DOT__EXU__DOT__mem__DOT__clock)));
+    vlSelf->__VactTriggered.at(2U) = ((IData)(vlSelf->io_clock) 
+                                      & (~ (IData)(vlSelf->__Vtrigrprev__TOP__io_clock)));
     vlSelf->__Vtrigrprev__TOP__clock = vlSelf->clock;
     vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT___vlg_pc_read_inst 
         = vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst;
-    vlSelf->__Vtrigrprev__TOP__top__DOT__EXU__DOT__mem__DOT__clock 
-        = vlSelf->top__DOT__EXU__DOT__mem__DOT__clock;
+    vlSelf->__Vtrigrprev__TOP__io_clock = vlSelf->io_clock;
     if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->__VactDidInit))))) {
         vlSelf->__VactDidInit = 1U;
         vlSelf->__VactTriggered.at(1U) = 1U;
