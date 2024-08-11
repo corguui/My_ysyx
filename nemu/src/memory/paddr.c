@@ -13,7 +13,6 @@
 * See the Mulan PSL v2 for more details.
 ***************************************************************************************/
 
-#include <cstdio>
 #include <memory/host.h>
 #include <memory/paddr.h>
 #include <device/mmio.h>
@@ -92,13 +91,8 @@ void paddr_write(paddr_t addr, int len, word_t data) {
 	write_num++;
 #endif
   return; }
-  else if(addr==0xa00003f8  || addr==0xa0000048 ||addr==0xa000004c)
-  {
-    printf("reeturn\n");
-    IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
-    return;
-  }
-  printf("write--\n");
+  IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
+  printf("nemu write\n");
   out_of_bound(addr);
 }
 
