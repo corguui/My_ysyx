@@ -36,7 +36,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->io_pc = vlSelf->top__DOT__PC__DOT__io_pc_REG;
     Vtop___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(vlSelf->io_pc, vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout);
     vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst = vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout;
-    vlSelf->top__DOT__IDU__DOT___GEN_15 = ((0x37U == 
+    vlSelf->top__DOT__IDU__DOT___GEN_14 = ((0x37U == 
                                             (0x7fU 
                                              & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) 
                                            | ((0x17U 
@@ -208,7 +208,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                      & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)
                                                      ? vlSelf->top__DOT__Reg__DOT__reg_1
                                                      : vlSelf->top__DOT__Reg__DOT__reg_0)))));
-    vlSelf->top__DOT__IDU__DOT___GEN_6 = ((0x33U == 
+    vlSelf->top__DOT__IDU__DOT___GEN_5 = ((0x33U == 
                                            (0x7fU & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) 
                                           | (0x13U 
                                              == (0x7fU 
@@ -337,97 +337,10 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                        & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)
                                                        ? vlSelf->top__DOT__Reg__DOT__reg_1
                                                        : vlSelf->top__DOT__Reg__DOT__reg_0)))));
-    vlSelf->top__DOT___IDU_io_out2exu_bits_imm = ((1U 
-                                                   & ((~ (IData)(vlSelf->top__DOT__IDU__DOT__state)) 
-                                                      | (0x33U 
-                                                         == 
-                                                         (0x7fU 
-                                                          & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))))
-                                                   ? 0U
-                                                   : 
-                                                  (((0x13U 
-                                                     == 
-                                                     (0x7fU 
-                                                      & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) 
-                                                    | (3U 
-                                                       == 
-                                                       (0x7fU 
-                                                        & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)))
-                                                    ? 
-                                                   (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                    >> 0x14U)
-                                                    : 
-                                                   ((0x23U 
-                                                     == 
-                                                     (0x7fU 
-                                                      & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
-                                                     ? 
-                                                    ((0xfe0U 
-                                                      & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                         >> 0x14U)) 
-                                                     | (0x1fU 
-                                                        & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                           >> 7U)))
-                                                     : 
-                                                    ((0x63U 
-                                                      == 
-                                                      (0x7fU 
-                                                       & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
-                                                      ? 
-                                                     ((0x1000U 
-                                                       & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                          >> 0x13U)) 
-                                                      | ((0x800U 
-                                                          & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                             << 4U)) 
-                                                         | ((0x7e0U 
-                                                             & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                                >> 0x14U)) 
-                                                            | (0x1eU 
-                                                               & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                                  >> 7U)))))
-                                                      : 
-                                                     ((0x37U 
-                                                       == 
-                                                       (0x7fU 
-                                                        & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
-                                                       ? 
-                                                      (0xfffff000U 
-                                                       & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)
-                                                       : 
-                                                      ((0x17U 
-                                                        == 
-                                                        (0x7fU 
-                                                         & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
-                                                        ? 
-                                                       (0xfffff000U 
-                                                        & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)
-                                                        : 
-                                                       ((0x6fU 
-                                                         == 
-                                                         (0x7fU 
-                                                          & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
-                                                         ? 
-                                                        ((0x100000U 
-                                                          & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                             >> 0xbU)) 
-                                                         | ((0xff000U 
-                                                             & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst) 
-                                                            | ((0x800U 
-                                                                & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                                   >> 9U)) 
-                                                               | (0x7feU 
-                                                                  & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                                     >> 0x14U)))))
-                                                         : 
-                                                        ((0x67U 
-                                                          == 
-                                                          (0x7fU 
-                                                           & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
-                                                          ? 
-                                                         (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-                                                          >> 0x14U)
-                                                          : 0U))))))));
+    vlSelf->top__DOT__IDU__DOT____VdfgTmp_hfd042d21__0 
+        = (((- (IData)((vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                        >> 0x1fU))) << 0xcU) | (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                >> 0x14U));
     if (vlSelf->top__DOT__IDU__DOT__state) {
         if ((0x33U == (0x7fU & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))) {
             vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type = 1U;
@@ -480,21 +393,21 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type = 0U;
         vlSelf->top__DOT__IDU__DOT__exu_data_alu_op = 0xfU;
     }
-    vlSelf->__VdfgTmp_h7344b924__0 = ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_15) 
+    vlSelf->__VdfgTmp_h7344b924__0 = ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_14) 
                                       | (0x67U == (0x7fU 
                                                    & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)));
     vlSelf->top__DOT___IDU_io_out2exu_bits_mem_ren 
         = ((IData)(vlSelf->top__DOT__IDU__DOT__state) 
-           & ((~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_6)) 
+           & ((~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_5)) 
               & (3U == (0x7fU & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))));
-    vlSelf->top__DOT__IDU__DOT___GEN_8 = ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_6) 
+    vlSelf->top__DOT__IDU__DOT___GEN_7 = ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_5) 
                                           | (3U == 
                                              (0x7fU 
                                               & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)));
     vlSelf->top__DOT___IDU_io_out2exu_bits_m_rmask 
         = ((1U & ((~ (IData)(vlSelf->top__DOT__IDU__DOT__state)) 
                   | ((3U != (0x7fU & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) 
-                     | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_6))))
+                     | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_5))))
             ? 0U : ((0U == (7U & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
                                   >> 0xcU))) ? 1U : 
                     ((1U == (7U & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
@@ -506,9 +419,102 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                            : ((5U == (7U & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
                                             >> 0xcU))) 
                               << 1U))))));
-    vlSelf->top__DOT__EXU__DOT____VdfgTmp_h010edc33__0 
-        = (vlSelf->top__DOT___IDU_io_out2exu_bits_imm 
-           + vlSelf->top__DOT__PC__DOT__io_pc_REG);
+    vlSelf->top__DOT___IDU_io_out2exu_bits_imm = ((1U 
+                                                   & ((~ (IData)(vlSelf->top__DOT__IDU__DOT__state)) 
+                                                      | (0x33U 
+                                                         == 
+                                                         (0x7fU 
+                                                          & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))))
+                                                   ? 0U
+                                                   : 
+                                                  ((0x13U 
+                                                    == 
+                                                    (0x7fU 
+                                                     & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
+                                                    ? vlSelf->top__DOT__IDU__DOT____VdfgTmp_hfd042d21__0
+                                                    : 
+                                                   ((3U 
+                                                     == 
+                                                     (0x7fU 
+                                                      & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
+                                                     ? vlSelf->top__DOT__IDU__DOT____VdfgTmp_hfd042d21__0
+                                                     : 
+                                                    ((0x23U 
+                                                      == 
+                                                      (0x7fU 
+                                                       & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
+                                                      ? 
+                                                     (((- (IData)(
+                                                                  (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                                   >> 0x1fU))) 
+                                                       << 0xcU) 
+                                                      | ((0xfe0U 
+                                                          & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                             >> 0x14U)) 
+                                                         | (0x1fU 
+                                                            & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                               >> 7U))))
+                                                      : 
+                                                     ((0x63U 
+                                                       == 
+                                                       (0x7fU 
+                                                        & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
+                                                       ? 
+                                                      (((- (IData)(
+                                                                   (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                                    >> 0x1fU))) 
+                                                        << 0xcU) 
+                                                       | ((0x800U 
+                                                           & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                              << 4U)) 
+                                                          | ((0x7e0U 
+                                                              & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                                 >> 0x14U)) 
+                                                             | (0x1eU 
+                                                                & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                                   >> 7U)))))
+                                                       : 
+                                                      ((0x37U 
+                                                        == 
+                                                        (0x7fU 
+                                                         & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
+                                                        ? 
+                                                       (0xfffff000U 
+                                                        & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)
+                                                        : 
+                                                       ((0x17U 
+                                                         == 
+                                                         (0x7fU 
+                                                          & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
+                                                         ? 
+                                                        (0xfffff000U 
+                                                         & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)
+                                                         : 
+                                                        ((0x6fU 
+                                                          == 
+                                                          (0x7fU 
+                                                           & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
+                                                          ? 
+                                                         ((0x7ff00000U 
+                                                           & ((- (IData)(
+                                                                         (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                                          >> 0x1fU))) 
+                                                              << 0x14U)) 
+                                                          | ((0xff000U 
+                                                              & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst) 
+                                                             | ((0x800U 
+                                                                 & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                                    >> 9U)) 
+                                                                | (0x7feU 
+                                                                   & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
+                                                                      >> 0x14U)))))
+                                                          : 
+                                                         ((0x67U 
+                                                           == 
+                                                           (0x7fU 
+                                                            & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))
+                                                           ? vlSelf->top__DOT__IDU__DOT____VdfgTmp_hfd042d21__0
+                                                           : 0U)))))))));
     vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0 
         = ((6U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type)) 
            | (7U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type)));
@@ -524,19 +530,19 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                           | (2U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type)));
     vlSelf->top__DOT___IDU_io_out2exu_bits_mem_wen 
         = ((IData)(vlSelf->top__DOT__IDU__DOT__state) 
-           & ((~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_8)) 
+           & ((~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_7)) 
               & (0x23U == (0x7fU & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst))));
     vlSelf->top__DOT___IDU_io_out2exu_bits_m_wmask 
         = ((1U & ((~ (IData)(vlSelf->top__DOT__IDU__DOT__state)) 
                   | ((0x23U != (0x7fU & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) 
-                     | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_8))))
+                     | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_7))))
             ? 0U : ((0U == (7U & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
                                   >> 0xcU))) ? 1U : 
                     ((1U == (7U & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
                                    >> 0xcU))) ? 2U : 
                      ((2U == (7U & (vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
                                     >> 0xcU))) << 2U))));
-    vlSelf->io_inv_flag = ((~ ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_8) 
+    vlSelf->io_inv_flag = ((~ ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_7) 
                                | ((0x23U == (0x7fU 
                                              & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) 
                                   | ((0x63U == (0x7fU 
@@ -545,11 +551,14 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                            & (IData)(vlSelf->top__DOT__IDU__DOT__state));
     vlSelf->top__DOT___IDU_io_out2exu_bits_reg_wen 
         = ((IData)(vlSelf->top__DOT__IDU__DOT__state) 
-           & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_8) 
+           & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_7) 
               | ((~ ((0x23U == (0x7fU & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) 
                      | (0x63U == (0x7fU & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)))) 
                  & (IData)(vlSelf->__VdfgTmp_h7344b924__0))));
-    vlSelf->__VdfgTmp_h31eb6229__0 = ((1U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type))
+    vlSelf->top__DOT__EXU__DOT____VdfgTmp_h010edc33__0 
+        = (vlSelf->top__DOT___IDU_io_out2exu_bits_imm 
+           + vlSelf->top__DOT__PC__DOT__io_pc_REG);
+    vlSelf->__VdfgTmp_heeb5510b__0 = ((1U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type))
                                        ? vlSelf->top__DOT__Reg__DOT__casez_tmp_0
                                        : ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_9)
                                            ? vlSelf->top__DOT___IDU_io_out2exu_bits_imm
@@ -595,9 +604,9 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                   >> 7U)))));
     if (vlSelf->top__DOT__EXU__DOT__m2IDUstate) {
         vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_src2 
-            = vlSelf->__VdfgTmp_h31eb6229__0;
+            = vlSelf->__VdfgTmp_heeb5510b__0;
         vlSelf->top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0 
-            = (0x1fU & vlSelf->__VdfgTmp_h31eb6229__0);
+            = (0x1fU & vlSelf->__VdfgTmp_heeb5510b__0);
     } else {
         vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_src2 = 0U;
         vlSelf->top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0 = 0U;

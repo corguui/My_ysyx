@@ -33,10 +33,10 @@ class Vtop___024root final : public VerilatedModule {
         CData/*3:0*/ top__DOT__IDU__DOT__lastalu_op;
         CData/*0:0*/ top__DOT__IDU__DOT__state;
         CData/*3:0*/ top__DOT__IDU__DOT__casez_tmp;
-        CData/*0:0*/ top__DOT__IDU__DOT___GEN_6;
-        CData/*0:0*/ top__DOT__IDU__DOT___GEN_8;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_5;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_7;
         CData/*3:0*/ top__DOT__IDU__DOT__casez_tmp_0;
-        CData/*0:0*/ top__DOT__IDU__DOT___GEN_15;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_14;
         CData/*0:0*/ top__DOT__EXU__DOT__m2IDUstate;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_2;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
@@ -64,6 +64,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__PC__DOT__io_pc_REG;
         IData/*31:0*/ top__DOT__IFU__DOT___vlg_pc_read_inst;
         IData/*31:0*/ top__DOT__IFU__DOT__lastinst;
+        IData/*31:0*/ top__DOT__IDU__DOT____VdfgTmp_hfd042d21__0;
         IData/*31:0*/ top__DOT__EXU__DOT___mem_m_rdata;
         IData/*31:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_src2;
         IData/*31:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_src1;
@@ -82,9 +83,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_10;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_11;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_12;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_13;
     };
     struct {
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_13;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_14;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_15;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_16;
@@ -105,7 +106,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_31;
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp;
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_0;
-        IData/*31:0*/ __VdfgTmp_h31eb6229__0;
+        IData/*31:0*/ __VdfgTmp_heeb5510b__0;
         IData/*31:0*/ __Vfunc_vlg_pc_read__0__Vfuncout;
         IData/*31:0*/ __Vfunc_vlg_pmem_read__2__Vfuncout;
         IData/*31:0*/ __VstlIterCount;
