@@ -17,8 +17,6 @@ class top extends Module {
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
-  ALU.io.exu2in <> EXU.io.out2alu
-  EXU.io.alu2in <> ALU.io.out2exu
 
   Reg.io.reg_read <> IDU.io.reg_data
   Reg.io.wen := EXU.io.reg_wen

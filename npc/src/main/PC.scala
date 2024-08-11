@@ -7,15 +7,14 @@ import chisel3.util._
 
 class PC extends Module {
 	val io = IO(new Bundle{
-		val pc = Outputput(UInt(32.W))
+		val pc = Output(UInt(32.W))
 		val dnpc = Input(UInt(32.W))
 		val snpc = Output(UInt(32.W))
-		val out = Decoupled(new PCtoIFU)
 	})
 	//更新pc
-	PC.io.pc := RegNext(io.dnpc.asSInt, 0x80000000.S).asUInt
+	io.pc := RegNext(io.dnpc.asSInt, 0x80000000.S).asUInt
 
-	io.snpc := data.pc + 4.U
+	io.snpc := io.pc + 4.U
 
 
 
