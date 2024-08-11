@@ -108,10 +108,10 @@ class EXU extends Module {
                 mem.io.m_rmask := io.idu2in.bits.m_rmask
                 when(io.idu2in.bits.m_rmask===1.U)
                 {
-                io.reg_wdata := (Cat(Fill(24,m_rdata(7)),mem.io.m_rdata(7,0))).asSInt
+                io.reg_wdata := (Cat(Fill(24,mem.io.m_rdata(7)),mem.io.m_rdata(7,0))).asSInt
                 }.elsewhen(io.idu2in.bits.m_rmask===2.U)
                 {
-                io.reg_wdata := (Cat(Fill(16,m_rdata(15)),mem.io.m_rdata(15,0))).asSInt
+                io.reg_wdata := (Cat(Fill(16,mem.io.m_rdata(15)),mem.io.m_rdata(15,0))).asSInt
                 }.otherwise
                 {
                 io.reg_wdata := mem.io.m_rdata.asSInt
@@ -133,7 +133,7 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.src2
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                io.dnpc :=  Mux(alu.io.result===1,io.pc+io.idu2in.bits.imm,io.snpc)
+                io.dnpc :=  Mux(alu.io.result===1.U,io.pc+io.idu2in.bits.imm,io.snpc)
             }
             //u type
             is(6.U){

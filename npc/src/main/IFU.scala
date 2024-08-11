@@ -43,11 +43,8 @@ class IFU extends Module {
     //取指令
 	out_data.inst := 0.U
 	vlg_pc_read.io.pc := 0.U
-	when(m2PCstate === m2PCprocess)
-	{
 	vlg_pc_read.io.pc := io.pc
 	out_data.inst := vlg_pc_read.io.inst 
-	}
 
 	//传到IDU
 	io.out.bits := out_data
