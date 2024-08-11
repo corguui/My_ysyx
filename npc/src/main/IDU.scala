@@ -16,6 +16,7 @@ class IDUtoEXU extends Bundle{
 	val imm   = Output(UInt(32.W))
     val alu_op = Output(UInt(4.W))
 	val inst_type = Output(UInt(4.W))
+	val il_us = Output(Bool())
 }
 
 class IDU extends Module {
@@ -90,6 +91,7 @@ class IDU extends Module {
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.imm :=  0.U
+	exu_data.il_us   :=	false.B  //true is Uint  
 
 	when(state === m2IFUprocess )
 	{
@@ -244,12 +246,14 @@ class IDU extends Module {
 
 				//LBU
 				is("b100".U){
-					exu_data.m_rmask := 5.U
+					exu_data.il_us   :=	true.B  //true is Uint  
+					exu_data.m_rmask := 1.U
 				}
 
 				//LHU
 				is("b101".U){
-					exu_data.m_rmask := 6.U
+					exu_data.il_us   :=	true.B
+					exu_data.m_rmask := 2.U
 				}
 			}
 

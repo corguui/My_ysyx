@@ -108,20 +108,18 @@ class EXU extends Module {
                 mem.io.m_raddr := alu.io.result
                 mem.io.m_ren := io.idu2in.bits.mem_ren
                 mem.io.m_rmask := io.idu2in.bits.m_rmask
-                when(io.idu2in.bits.m_rmask===1.U)
+                when(io.idu2in.bits.m_rmask===1.U&&io.idu2in.bits.il_us===false.B)
                 {
                 io.reg_wdata := ((Cat(Fill(24,mem.io.m_rdata(7)),mem.io.m_rdata(7,0))).asSInt).asUInt
-                }.elsewhen(io.idu2in.bits.m_rmask===2.U)
+                }.elsewhen(io.idu2in.bits.m_rmask===2.U&&io.idu2in.bits.il_us===false.B)
                 {
                 io.reg_wdata := ((Cat(Fill(16,mem.io.m_rdata(15)),mem.io.m_rdata(15,0))).asSInt).asUInt
-                }.elsewhen(io.idu2in.bits.m_rmask===5.U)
+                }.elsewhen(io.idu2in.bits.m_rmask===1.U&&io.idu2in.bits.il_us===true.B)
                 {
                 io.reg_wdata := ((Cat(Fill(24,mem.io.m_rdata(7)),mem.io.m_rdata(7,0)))).asUInt
-                io.idu2in.bits.m_rmask := 1.U
-                }elsewhen(io.idu2in.bits.m_rmask===6.U)
+                }elsewhen(io.idu2in.bits.m_rmask===2.U&&io.idu2in.bits.il_us===true.B)
                 {
                 io.reg_wdata := ((Cat(Fill(16,mem.io.m_rdata(15)),mem.io.m_rdata(15,0)))).asUInt
-                io.idu2in.bits.m_rmask := 2.U
                 }.otherwise
                 {
                 io.reg_wdata := (mem.io.m_rdata.asSInt).asUInt
