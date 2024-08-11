@@ -14,6 +14,7 @@ class alu_io extends Bundle{
 class ALU extends Module{
     val io = IO(new alu_io)
 
+    io.result := 0.U
     switch(io.alu_op)
     {
         is("b0000".U){ io.result := io.src1 + io.src2 } //add

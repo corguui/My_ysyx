@@ -63,7 +63,6 @@ class IDU extends Module {
 	val rs2 = in_data.inst(24,20)
 	val funct7 = in_data.inst(31,25)
 	val csr = in_data.inst(31,20)
-	val imm = Wire(UInt(32.W))
 
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
