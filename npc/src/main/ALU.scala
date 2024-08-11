@@ -27,12 +27,12 @@ class ALU extends Module{
         is("b00111".U){ io.result := (io.src1.asSInt >> io.src2(4,0)).asUInt } //sra maybe error
         is("b01000".U){ io.result := (io.src1.asSInt < io.src2.asSInt).asUInt } //slt
         is("b01001".U){ io.result := (io.src1 < io.src2 ).asUInt } //sltu
-        is("b01010".U){ io.result := (io.src1 === io.src2) } //beq
-        is("b01011".U){ io.result := (io.src1 >= io.src2) } //bgeu
+        is("b01010".U){ io.result := (io.src1 === io.src2).asUInt } //beq
+        is("b01011".U){ io.result := (io.src1 >= io.src2).asUInt } //bgeu
         is("b01100".U){ io.result := (io.src1.asSInt >= io.src2.asSInt).asUInt } //bge
-        is("b01101".U){ io.result := (io.src1 =/= io.src2) } //bne
+        is("b01101".U){ io.result := (io.src1 =/= io.src2).asUInt } //bne
         is("b01110".U){ io.result := (io.src1.asSInt < io.src2.asSInt).asUInt } //blt
-        is("b01111".U){ io.result := (io.src1 < io.src2) } //be
+        is("b01111".U){ io.result := (io.src1 < io.src2).asUInt } //bltu
     }
 
 }
