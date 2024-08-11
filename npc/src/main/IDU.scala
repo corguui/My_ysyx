@@ -16,6 +16,7 @@ class IDUtoEXU extends Bundle{
 	val imm   = Output(UInt(32.W))
     val alu_op = Output(UInt(4.W))
 	val inst_type = Output(UInt(4.W))
+	val il_us = Output(Bool())
 }
 
 class IDU extends Module {
@@ -86,10 +87,11 @@ class IDU extends Module {
 	exu_data.m_wmask := 0.U
 	exu_data.inst_type := 0.U
 	exu_data.reg_wen := false.B
-	exu_data.alu_op := 15.U
+	exu_data.alu_op := "b1111".U
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.imm :=  0.U
+	exu_data.il_us   :=	false.B  //true is Uint  
 
 	when(state === m2IFUprocess )
 	{
@@ -168,7 +170,7 @@ class IDU extends Module {
 			switch(funct3){
 				//ADDI
 				is("b000".U){
-					exu_data.alu_op := 0.U
+					exu_data.alu_op := "b0000".U
 				}
 
 				//XORI
@@ -222,6 +224,7 @@ class IDU extends Module {
 		is("b0000011".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 3.U
+			exu_data.alu_op := "b0000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 			exu_data.reg_wen := true.B
 			exu_data.mem_ren := true.B
@@ -243,11 +246,13 @@ class IDU extends Module {
 
 				//LBU
 				is("b100".U){
+					exu_data.il_us   :=	true.B  //true is Uint  
 					exu_data.m_rmask := 1.U
 				}
 
 				//LHU
 				is("b101".U){
+					exu_data.il_us   :=	true.B
 					exu_data.m_rmask := 2.U
 				}
 			}

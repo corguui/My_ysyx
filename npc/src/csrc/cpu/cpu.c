@@ -55,6 +55,22 @@ void cpu_read_reg()
 	cpu.gpr[14]=top->rootp->top__DOT__Reg__DOT__reg_14;
 	cpu.gpr[15]=top->rootp->top__DOT__Reg__DOT__reg_15;
 	cpu.gpr[16]=top->rootp->top__DOT__Reg__DOT__reg_16;
+	cpu.gpr[17]=top->rootp->top__DOT__Reg__DOT__reg_17;
+	cpu.gpr[18]=top->rootp->top__DOT__Reg__DOT__reg_18;
+	cpu.gpr[19]=top->rootp->top__DOT__Reg__DOT__reg_19;
+	cpu.gpr[20]=top->rootp->top__DOT__Reg__DOT__reg_20;
+	cpu.gpr[21]=top->rootp->top__DOT__Reg__DOT__reg_21;
+	cpu.gpr[22]=top->rootp->top__DOT__Reg__DOT__reg_22;
+	cpu.gpr[23]=top->rootp->top__DOT__Reg__DOT__reg_23;
+	cpu.gpr[24]=top->rootp->top__DOT__Reg__DOT__reg_24;
+	cpu.gpr[25]=top->rootp->top__DOT__Reg__DOT__reg_25;
+	cpu.gpr[26]=top->rootp->top__DOT__Reg__DOT__reg_26;
+	cpu.gpr[27]=top->rootp->top__DOT__Reg__DOT__reg_27;
+	cpu.gpr[28]=top->rootp->top__DOT__Reg__DOT__reg_28;
+	cpu.gpr[29]=top->rootp->top__DOT__Reg__DOT__reg_29;
+	cpu.gpr[30]=top->rootp->top__DOT__Reg__DOT__reg_30;
+	cpu.gpr[31]=top->rootp->top__DOT__Reg__DOT__reg_31;
+	
 
 	for(int i=0;i<4;i++)
 	{
@@ -82,6 +98,22 @@ void cpu_write_reg()
 	top->rootp->top__DOT__Reg__DOT__reg_14=cpu.gpr[14];
 	top->rootp->top__DOT__Reg__DOT__reg_15=cpu.gpr[15];
 	top->rootp->top__DOT__Reg__DOT__reg_16=cpu.gpr[16];
+	top->rootp->top__DOT__Reg__DOT__reg_17=cpu.gpr[17];
+	top->rootp->top__DOT__Reg__DOT__reg_18=cpu.gpr[18];
+	top->rootp->top__DOT__Reg__DOT__reg_19=cpu.gpr[19];
+	top->rootp->top__DOT__Reg__DOT__reg_20=cpu.gpr[20];
+	top->rootp->top__DOT__Reg__DOT__reg_21=cpu.gpr[21];
+	top->rootp->top__DOT__Reg__DOT__reg_22=cpu.gpr[22];
+	top->rootp->top__DOT__Reg__DOT__reg_23=cpu.gpr[23];
+	top->rootp->top__DOT__Reg__DOT__reg_24=cpu.gpr[24];
+	top->rootp->top__DOT__Reg__DOT__reg_25=cpu.gpr[25];
+	top->rootp->top__DOT__Reg__DOT__reg_26=cpu.gpr[26];
+	top->rootp->top__DOT__Reg__DOT__reg_27=cpu.gpr[27];
+	top->rootp->top__DOT__Reg__DOT__reg_28=cpu.gpr[28];	
+	top->rootp->top__DOT__Reg__DOT__reg_29=cpu.gpr[29];
+	top->rootp->top__DOT__Reg__DOT__reg_30=cpu.gpr[30];
+	top->rootp->top__DOT__Reg__DOT__reg_31=cpu.gpr[31];
+
 
 }
 

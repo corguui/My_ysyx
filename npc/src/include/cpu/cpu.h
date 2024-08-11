@@ -12,7 +12,7 @@
 #include "Vtop___024root.h"
                          
 typedef struct {
-  uint32_t gpr[16];
+  uint32_t gpr[32];
   uint32_t csr[4];
   uint32_t pc;
 } NPC_CPU_state;

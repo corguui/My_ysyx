@@ -28,6 +28,7 @@ class EXU extends Module {
 
     class Mem extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
+        val clock = Input(Clock())
         val m_waddr = Input(UInt(32.W))
         val m_wdata = Input(UInt(32.W))
         val m_wmask = Input(UInt(32.W))
@@ -49,6 +50,7 @@ class EXU extends Module {
     mem.io.m_raddr :=0.U
     mem.io.m_rmask :=0.U
     mem.io.m_ren :=0.U
+    mem.io.clock := clock
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
@@ -106,12 +108,18 @@ class EXU extends Module {
                 mem.io.m_raddr := alu.io.result
                 mem.io.m_ren := io.idu2in.bits.mem_ren
                 mem.io.m_rmask := io.idu2in.bits.m_rmask
-                when(io.idu2in.bits.m_rmask===1.U)
+                when((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===false.B))
                 {
                 io.reg_wdata := ((Cat(Fill(24,mem.io.m_rdata(7)),mem.io.m_rdata(7,0))).asSInt).asUInt
-                }.elsewhen(io.idu2in.bits.m_rmask===2.U)
+                }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===false.B))
                 {
                 io.reg_wdata := ((Cat(Fill(16,mem.io.m_rdata(15)),mem.io.m_rdata(15,0))).asSInt).asUInt
+                }.elsewhen((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===true.B))
+                {
+                io.reg_wdata := ((Cat(0.U(24.W),mem.io.m_rdata(7,0)))).asUInt
+                }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===true.B))
+                {
+                io.reg_wdata := ((Cat(0.U(16.W),mem.io.m_rdata(15,0)))).asUInt
                 }.otherwise
                 {
                 io.reg_wdata := (mem.io.m_rdata.asSInt).asUInt
