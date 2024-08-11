@@ -151,6 +151,7 @@ class EXU extends Module {
                 io.dnpc := io.idu2in.bits.imm+io.pc
                 io.reg_wen := io.idu2in.bits.reg_wen
             }
+            //jr type
             is(9.U){
                 io.reg_wdata := io.snpc
                 io.dnpc := io.idu2in.bits.imm+io.idu2in.bits.src1

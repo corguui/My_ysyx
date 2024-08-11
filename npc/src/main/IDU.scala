@@ -163,7 +163,7 @@ class IDU extends Module {
 		is("b0010011".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 2.U
-			exu_data.imm := in_data.inst(31,20).asSInt.asUInt
+			exu_data.imm :=  Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt			
 			exu_data.reg_wen := true.B
 			switch(funct3){
 				//ADDI
@@ -222,7 +222,7 @@ class IDU extends Module {
 		is("b0000011".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 3.U
-			exu_data.imm := in_data.inst(31,20).asSInt.asUInt
+			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 			exu_data.reg_wen := true.B
 			exu_data.mem_ren := true.B
 			switch(funct3){
@@ -258,7 +258,7 @@ class IDU extends Module {
 		is("b0100011".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 4.U
-			exu_data.imm := Cat(in_data.inst(31,25),in_data.inst(11,7)).asSInt.asUInt
+			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,25),in_data.inst(11,7)).asUInt
 			exu_data.mem_wen := true.B
 			switch(funct3){
 				//SB
@@ -282,7 +282,7 @@ class IDU extends Module {
 		is("b1100011".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 5.U
-			exu_data.imm := Cat(in_data.inst(31),in_data.inst(7),in_data.inst(30,25),in_data.inst(11,8),0.U(1.W)).asSInt.asUInt
+			exu_data.imm := Cat(Fill(19,in_data.inst(31)),in_data.inst(31),in_data.inst(7),in_data.inst(30,25),in_data.inst(11,8),0.U(1.W)).asUInt
 			switch(funct3){
 				//beq
 				is("b000".U){
@@ -320,7 +320,7 @@ class IDU extends Module {
 		is("b0110111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 6.U
-			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W)).asSInt.asUInt
+			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W))asUInt
 			exu_data.reg_wen := true.B
 		}
 
@@ -328,7 +328,7 @@ class IDU extends Module {
 		is("b0010111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 7.U
-			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W)).asSInt.asUInt
+			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W)).asUInt
 			exu_data.reg_wen := true.B
 		}
 
@@ -336,7 +336,7 @@ class IDU extends Module {
 		is("b1101111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 8.U
-			exu_data.imm := Cat(in_data.inst(31),in_data.inst(19,12),in_data.inst(20),in_data.inst(30,21),0.U(1.W)).asSInt.asUInt
+			exu_data.imm := Cat(Fill(11,in_data.inst(31)),in_data.inst(19,12),in_data.inst(20),in_data.inst(30,21),0.U(1.W)).asUInt
 			exu_data.reg_wen := true.B
 		}
 
@@ -344,7 +344,7 @@ class IDU extends Module {
 		is("b1100111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 9.U
-			exu_data.imm := in_data.inst(31,20).asSInt.asUInt			
+			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt			
 			exu_data.reg_wen := true.B
 		}
 		/*

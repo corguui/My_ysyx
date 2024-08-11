@@ -20,6 +20,16 @@ VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(IData
     vlg_pc_read__Vfuncrtn = vlg_pc_read__Vfuncrtn__Vcvt;
 }
 
+extern "C" void ebreak(int inst);
+
+VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit(IData/*31:0*/ inst) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit\n"); );
+    // Body
+    int inst__Vcvt;
+    for (size_t inst__Vidx = 0; inst__Vidx < 1; ++inst__Vidx) inst__Vcvt = inst;
+    ebreak(inst__Vcvt);
+}
+
 extern "C" int vlg_pmem_read(int m_raddr, int rmask);
 
 VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(IData/*31:0*/ m_raddr, IData/*31:0*/ rmask, IData/*31:0*/ &vlg_pmem_read__Vfuncrtn) {
