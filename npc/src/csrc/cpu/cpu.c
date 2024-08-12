@@ -330,11 +330,15 @@ void cpu_exec(uint64_t n)
       #ifdef CONFIG_ITRACE
 	    //print the ringbuf
 	    if(npc_state.halt_ret !=0)
+		{
 		printf("npc ringbuf\n");
 	    print_ringbuf();
+		}
 	    else if(npc_state.state==NPC_ABORT)
+		{
 		printf("npc ringbuf\n");
 	    print_ringbuf();
+		}
 	    #endif
     }
 
