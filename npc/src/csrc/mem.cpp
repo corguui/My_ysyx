@@ -117,6 +117,7 @@ extern "C" int vlg_pmem_read(int ad,int len)
 	}
 	else if(addr == CONFIG_RTC_MMIO || addr ==CONFIG_RTC_MMIO+4) {
 	#ifdef CONFIG_DEVICE
+		printf("decive pc %x\n",top->io_pc);
 		return mmio_read(addr,len);
 	#endif
 
