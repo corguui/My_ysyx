@@ -22,9 +22,12 @@ static inline bool map_inside(IOMap *map, paddr_t addr) {
 
 static inline int find_mapid_by_addr(IOMap *maps, int size, paddr_t addr) {
   int i;
-  printf("%x\n", addr);
   for (i = 0; i < size; i ++) {
     if (map_inside(maps + i, addr)) {
+      if(addr==0xa000004c)
+      {
+      printf("sdfa\n");
+      }
       difftest_skip_ref();
       return i;
     }
