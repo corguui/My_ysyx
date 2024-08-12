@@ -31,7 +31,7 @@ int w=0;//ringbuf's write flag
 void iringbuf_put_char(char *p);
 void print_ringbuf();
 #endif
-
+uint32_t pc;
 NPC_CPU_state cpu{};
 static bool g_print_step = false;  
 
@@ -179,6 +179,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
 		top->clock =0; top->eval();
+		pc=top->io_pc;
 		s->pc=top->io_pc;
 		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
     	s->dnpc=top->rootp->top__DOT___EXU_io_dnpc;

@@ -99,6 +99,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
     cpu_read_reg();
+    //传入的pc 会加4
     ref_difftest_regcpy(cpu.gpr,&cpu.pc, DIFFTEST_TO_REF);
     is_skip_ref = false;
     wait=1;
