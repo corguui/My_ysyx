@@ -15,6 +15,7 @@ class IDUtoEXU extends Bundle{
 	val src2  = Output(UInt(32.W))
 	val csr   = Output(UInt(32.W))
 	val csr_a5 = Output(UInt(32.W))
+	val mstatus = Output(UInt(32.W))
 	val imm   = Output(UInt(32.W))
     val alu_op = Output(UInt(5.W))
 	val inst_type = Output(UInt(4.W))
@@ -92,12 +93,12 @@ class IDU extends Module {
 	exu_data.reg_wen := false.B
 	exu_data.alu_op := "b10000".U
 	exu_data.mstatus := io.reg_data.mstatus|(((io.reg_data.mstatus & 0x00000080.U)>>4.U) | 0x80000080.U) 
-	exu_data.csr_a5 := MUX((io.reg_data.csr_a5===0xffffffff.U),0.U,io.reg_data.csr_a5)
+	exu_data.csr_a5 := Mux((io.reg_data.csr_a5===0xffffffff.U),0.U,io.reg_data.csr_a5)
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.csr  := io.reg_data.csr_rdata
 	exu_data.imm :=  0.U
-	exu_data.csr_raddr := 0.U
+	io.reg_data.csr_raddr := 0.U
 	exu_data.il_us   :=	false.B  //true is Uint  
 
 	when(state === m2IFUprocess )
@@ -372,7 +373,7 @@ class IDU extends Module {
 				is("b001".U){
 				exu_data.inst_type := 10.U
 				exu_data.reg_wen := true.B
-				exu_data.csr_raddr := MuxLookup(exu_data.imm,4.U,Array(
+				io.reg_data.csr_raddr := MuxLookup(exu_data.imm,4.U,Array(
 						(0x341.U) -> 0.U,//mepc
 						(0x342.U) -> 1.U,//mcause
 						(0x300.U) -> 2.U,//mstatus
@@ -385,7 +386,7 @@ class IDU extends Module {
 				exu_data.inst_type := 11.U
 				exu_data.reg_wen := true.B
 				exu_data.alu_op := "b00011".U	
-				exu_data.csr_raddr := MuxLookup(exu_data.imm,4.U,Array(
+				io.reg_data.csr_raddr := MuxLookup(exu_data.imm,4.U,Array(
 						(0x341.U) -> 0.U,//mepc
 						(0x342.U) -> 1.U,//mcause
 						(0x300.U) -> 2.U,//mstatus
@@ -399,12 +400,12 @@ class IDU extends Module {
 					//ecall
 					when(rs2 === 0.U){
 						exu_data.inst_type := 12.U
-						exu_data.csr_raddr := 3.U //mtvec
+						io.reg_data.csr_raddr := 3.U //mtvec
 					}
 					//mret
 					.otherwise{
 						exu_data.inst_type := 13.U
-						exu_data.csr_raddr := 0.U //mepc
+						io.reg_data.csr_raddr := 0.U //mepc
 					}
 				}
 			}
