@@ -15,6 +15,12 @@ class EXU extends Module {
         val dnpc = Output(UInt(32.W))
         val snpc = Input(UInt(32.W))
         val pc   = Input(UInt(32.W))
+        val csr_waddr_1 = Output(UInt(2.W))
+        val csr_wdata_1 = Output(UInt(32.W))
+        val csr_wen_1 = Output(Bool())
+        val csr_waddr_2 = Output(UInt(2.W))
+        val csr_wdata_2 = Output(UInt(32.W))
+        val csr_wen_2 = Output(Bool())
     })
 
 
@@ -59,6 +65,12 @@ class EXU extends Module {
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
     io.reg_waddr := 0.U
+    io.csr_waddr_1 := 0.U
+    io.csr_wdata_1 := 0.U
+    io.csr_wen_1 := 0.U
+    io.csr_waddr_2 := 0.U
+    io.csr_wdata_2 := 0.U
+    io.csr_wen_2 := 0.U
     /*
     val data_all = Wire(new IDUtoEXU)
     data_all.alu_op := 15.U
@@ -178,6 +190,54 @@ class EXU extends Module {
                 io.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
+            }
+            //csrrw
+            is(10.U){
+                io.reg_wdata := io.idu2in.bits.csr
+                io.reg_wen := io.idu2in.bits.reg_wen
+                io.reg_waddr := io.idu2in.bits.reg_waddr
+                io.csr_wdata_1 := io.idu2in.bits.src1
+                io.csr_wen_1  := true.B 
+                switch(io.idu2in.bits.imm) {
+                is(0x341.U) { io.csr_waddr_1 := 0.U } // mepc
+                is(0x342.U) { io.csr_waddr_1 := 1.U } // mcause
+                is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
+                is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
+                }
+            }
+            //csrrs
+            is(11.U){
+                io.reg_wdata := io.idu2in.bits.csr
+                io.reg_wen := io.idu2in.bits.reg_wen
+                io.reg_waddr := io.idu2in.bits.reg_waddr
+                alu.io.src1 := io.idu2in.bits.csr
+                alu.io.src2 := io.idu2in.bits.src1
+                alu.io.alu_op := io.idu2in.bits.alu_op
+                io.csr_wdata_1 := alu.io.result
+                io.csr_wen_1  := true.B 
+                switch(io.idu2in.bits.imm) {
+                is(0x341.U) { io.csr_waddr_1 := 0.U } // mepc
+                is(0x342.U) { io.csr_waddr_1 := 1.U } // mcause
+                is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
+                is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
+                }
+            }
+            //ecall
+            is(12.U){
+                io.csr_wdata_1 := io.idu2in.bits.csr_a5    //mcause
+                io.csr_wen_1  := true.B 
+                io.csr_waddr_1 := 1.U
+                io.csr_wdata_2 := io.pc      //mepc
+                io.csr_wen_2  := true.B 
+                io.csr_waddr_2 := 0.U
+                io.dnpc := io.idu2in.bits.csr //mtvec
+            }
+            //mret
+            is(13.U){
+                io.csr_wdata_1 := io.idu2in.bits.mstatus    //mstaus
+                io.csr_wen_1  := true.B 
+                io.csr_waddr_1 := 2.U
+                io.dnpc := io.idu2in.bits.csr //mepc
             }
         }
     }

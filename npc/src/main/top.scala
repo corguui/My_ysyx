@@ -21,6 +21,13 @@ class top extends Module {
   Reg.io.wen := EXU.io.reg_wen
   Reg.io.waddr := EXU.io.reg_waddr
   Reg.io.wdata := EXU.io.reg_wdata
+  Reg.io.csr_wdata_1 := EXU.io.csr_wdata_1
+  Reg.io.csr_wdata_2 := EXU.io.csr_wdata_2
+  Reg.io.csr_waddr_1 := EXU.io.csr_waddr_1
+  Reg.io.csr_waddr_2 := EXU.io.csr_waddr_2
+  Reg.io.csr_wen_1 := EXU.io.csr_wen_1
+  Reg.io.csr_wen_2 := EXU.io.csr_wen_2
+
 
   IFU.io.pc := PC.io.pc
   EXU.io.snpc := PC.io.snpc

@@ -13,6 +13,9 @@ class IDUtoEXU extends Bundle{
 	val reg_wen = Output(Bool())
 	val src1  = Output(UInt(32.W))
 	val src2  = Output(UInt(32.W))
+	val csr   = Output(UInt(32.W))
+	val csr_a5 = Output(UInt(32.W))
+	val mstatus = Output(UInt(32.W))
 	val imm   = Output(UInt(32.W))
     val alu_op = Output(UInt(5.W))
 	val inst_type = Output(UInt(4.W))
@@ -88,9 +91,13 @@ class IDU extends Module {
 	exu_data.inst_type := 0.U
 	exu_data.reg_wen := false.B
 	exu_data.alu_op := "b10000".U
+	exu_data.mstatus := ( io.reg_data.mstatus | (((io.reg_data.mstatus & 0x00000080.U)>>4) | 0x00000080.U))
+	exu_data.csr_a5 := Mux((io.reg_data.csr_a5.asSInt === 0xffffffff.S),0.U,io.reg_data.csr_a5)
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
+	exu_data.csr  := io.reg_data.csr_rdata
 	exu_data.imm :=  0.U
+	io.reg_data.csr_raddr := 0.U
 	exu_data.il_us   :=	false.B  //true is Uint  
 
 	when(state === m2IFUprocess )
@@ -359,7 +366,46 @@ class IDU extends Module {
 		//CSR and ebrak
 		is("b1110011".U){
 			io.inv_flag := false.B
+			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
+			switch(funct3){
+				//csrrw
+				is("b001".U){
+				exu_data.inst_type := 10.U
+				exu_data.reg_wen := true.B
+		        switch(exu_data.imm) {
+                is(0x341.U) { io.reg_data.csr_raddr:= 0.U } // mepc
+                is(0x342.U) { io.reg_data.csr_raddr := 1.U } // mcause
+                is(0x300.U) { io.reg_data.csr_raddr := 2.U } // mstatus
+                is(0x305.U) { io.reg_data.csr_raddr := 3.U } // mtvec
+                }
+				}
 
+				//csrrs
+				is("b010".U){
+				exu_data.inst_type := 11.U
+				exu_data.reg_wen := true.B
+				exu_data.alu_op := "b00011".U	
+		        switch(exu_data.imm) {
+                is(0x341.U) { io.reg_data.csr_raddr:= 0.U } // mepc
+                is(0x342.U) { io.reg_data.csr_raddr := 1.U } // mcause
+                is(0x300.U) { io.reg_data.csr_raddr := 2.U } // mstatus
+                is(0x305.U) { io.reg_data.csr_raddr := 3.U } // mtvec
+     	        }
+				}
+				//ecall or mret
+				is("b000".U){
+					//ecall
+					when(rs2 === 0.U){
+						exu_data.inst_type := 12.U
+						io.reg_data.csr_raddr := 3.U //mtvec
+					}
+					//mret
+					.otherwise{
+						exu_data.inst_type := 13.U
+						io.reg_data.csr_raddr := 0.U //mepc
+					}
+				}
+			}
 		}
 
 	}
