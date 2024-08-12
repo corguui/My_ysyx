@@ -65,12 +65,12 @@ class EXU extends Module {
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
     io.reg_waddr := 0.U
-    csr_waddr_1 := 0.U
-    csr_wdata_1 := 0.U
-    csr_wen_1 := 0.U
-    csr_waddr_2 := 0.U
-    csr_wdata_2 := 0.U
-    csr_wen_2 := 0.U
+    io.csr_waddr_1 := 0.U
+    io.csr_wdata_1 := 0.U
+    io.csr_wen_1 := 0.U
+    io.csr_waddr_2 := 0.U
+    io.csr_wdata_2 := 0.U
+    io.csr_wen_2 := 0.U
     /*
     val data_all = Wire(new IDUtoEXU)
     data_all.alu_op := 15.U
@@ -198,7 +198,7 @@ class EXU extends Module {
                 io.reg_waddr := io.idu2in.bits.reg_waddr
                 io.csr_wdata_1 := io.idu2in.bits.src1
                 io.csr_wen_1  := true.B 
-                exu_data.csr_waddr_1 := MuxLookup(imm,4.U,Array(
+                exu_data.csr_waddr_1 := MuxLookup(io.idu2in.bits.imm,4.U,Array(
 						(0x341.U) -> 0.U,//mepc
 						(0x342.U) -> 1.U,//mcause
 						(0x300.U) -> 2.U,//mstatus
@@ -215,7 +215,7 @@ class EXU extends Module {
                 alu.io.alu_op := io.idu2in.bits.alu_op
                 io.csr_wdata_1 := alu.io.result
                 io.csr_wen_1  := true.B 
-                exu_data.csr_waddr_1 := MuxLookup(imm,4.U,Array(
+                exu_data.csr_waddr_1 := MuxLookup(io.idu2in.bits.imm,4.U,Array(
 						(0x341.U) -> 0.U,//mepc
 						(0x342.U) -> 1.U,//mcause
 						(0x300.U) -> 2.U,//mstatus

@@ -372,7 +372,7 @@ class IDU extends Module {
 				is("b001".U){
 				exu_data.inst_type := 10.U
 				exu_data.reg_wen := true.B
-				exu_data.csr_raddr := MuxLookup(imm,4.U,Array(
+				exu_data.csr_raddr := MuxLookup(exu_data.imm,4.U,Array(
 						(0x341.U) -> 0.U,//mepc
 						(0x342.U) -> 1.U,//mcause
 						(0x300.U) -> 2.U,//mstatus
@@ -385,7 +385,7 @@ class IDU extends Module {
 				exu_data.inst_type := 11.U
 				exu_data.reg_wen := true.B
 				exu_data.alu_op := "b00011".U	
-				exu_data.csr_raddr := MuxLookup(imm,4.U,Array(
+				exu_data.csr_raddr := MuxLookup(exu_data.imm,4.U,Array(
 						(0x341.U) -> 0.U,//mepc
 						(0x342.U) -> 1.U,//mcause
 						(0x300.U) -> 2.U,//mstatus
