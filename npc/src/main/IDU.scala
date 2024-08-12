@@ -82,7 +82,6 @@ class IDU extends Module {
 
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
-	io.reg_data.waddr := 0.U
 	exu_data.reg_waddr := rd
 	
 	exu_data.mem_wen := false.B
@@ -373,12 +372,12 @@ class IDU extends Module {
 				is("b001".U){
 				exu_data.inst_type := 10.U
 				exu_data.reg_wen := true.B
-				io.reg_data.csr_raddr := MuxLookup(exu_data.imm,4.U,Array(
-						(0x341.U) -> 0.U,//mepc
-						(0x342.U) -> 1.U,//mcause
-						(0x300.U) -> 2.U,//mstatus
-						(0x305.U) -> 3.U,//mtvec
-					))
+				io.reg_data.csr_raddr := MuxCase(4.U,Array(
+					(exu_data.imm===0x341.U) -> 0.U,//mepc
+					(exu_data.imm===0x342.U) -> 1.U,//mcause
+					(exu_data.imm===0x300.U) -> 2.U,//mstatus
+					(exu_data,imm===0x305.U) -> 3.U,//mtvec
+				))
 				}
 
 				//csrrs
