@@ -299,8 +299,8 @@ static void execute(uint64_t n)
 	Decode s;
 	for(;n>0;n--)
 	{
-		trace_and_difftest(&s); 
 		cpu_exec_once(tfp,&s);
+		trace_and_difftest(&s); 
 		if(npc_state.state !=NPC_RUNNING) break;
 		#ifdef CONFIG_DEVICE
 		device_update();
