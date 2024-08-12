@@ -8,6 +8,10 @@ class IO_reg_read extends Bundle {
     val rdata_1 = Output(UInt(32.W))
     val raddr_2 = Input(UInt(5.W))
     val rdata_2 = Output(UInt(32.W))
+    val csr_raddr = Input(UInt(2.W))
+    val csr_rdata = Output(UInt(32.W))
+    val csr_a5 = Output(UInt(32.W))
+    val mstatus = Output(UInt(32.W))
 }
 
 class Reg extends Module {
@@ -16,15 +20,32 @@ class Reg extends Module {
         val wen = Input(Bool())
         val waddr = Input(UInt(5.W))
         val wdata = Input(UInt(32.W))
+        val csr_wen_1 = Input(Bool())
+        val csr_waddr_1 = Input(UInt(2.W))
+        val csr_wdata_1 = Input(UInt(32.W))
+        val csr_wen_2 = Input(Bool())
+        val csr_waddr_2 = Input(UInt(2.W))
+        val csr_wdata_2 = Input(UInt(32.W))
+
     })
 
+    val csr =RegInit(VecInit(Seq.fill(4)(0.U(32.W))))
     val reg =RegInit(VecInit(Seq.fill(32)(0.U(32.W))))
 
     when(io.wen&&io.waddr=/=0.U) {
         reg(io.waddr) := io.wdata
     }
+    when(io.csr_wen_1&&io.csr_waddr_1=/=0.U) {
+        reg(io.csr_waddr_1) := io.csr_wdata_1
+    }
+    when(io.csr_wen_2&&io.csr_waddr_2=/=0.U) {
+        reg(io.csr_waddr_2) := io.csr_wdata_2
+    } 
 
     io.reg_read.rdata_1 := reg(io.reg_read.raddr_1)
     io.reg_read.rdata_2 := reg(io.reg_read.raddr_2)
+    io.reg_read.csr_rdata := csr(io.reg_read.csr_raddr)
+    io.reg_read.csr_a5 := reg(15.U) 
+    io.reg_read.mstatus := csr(2) 
 
 }
