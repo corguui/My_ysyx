@@ -52,13 +52,7 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
   else if(direction==DIFFTEST_TO_REF)
   {
     printf("pc %x\n",*pc);
-    if(*pc!=0x80000000)
-    {
-    cpu.pc=(*pc)+4;
-    }
-    else {
     cpu.pc=(*pc);
-    }
     for(int i = 0;i<32;i++ )
     {
       if(i==14)
