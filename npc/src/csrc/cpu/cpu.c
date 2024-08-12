@@ -193,7 +193,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		#endif
 		main_time++;
 		top->eval();
-		//cpu_read_reg();
+		cpu_read_reg();
 
 
 #ifdef CONFIG_ITRACE
