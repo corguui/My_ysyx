@@ -12,7 +12,7 @@ void isa_reg_display() {
 	int length=32;
 	int i;
   cpu_read_reg();
-  printf("$ pc --> 0x%x \n",pc);
+  
   printf("$ next->pc --> 0x%x \n",cpu.pc);
 	for(i=0;i<length;i++)
 	{
