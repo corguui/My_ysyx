@@ -132,7 +132,7 @@ static void trace_and_difftest(Decode *_this) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
   //compare with the nemu
-  printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
+  //printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
   difftest_step(_this->pc, top->io_pc);
   #endif
 
