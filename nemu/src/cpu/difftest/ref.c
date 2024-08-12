@@ -44,6 +44,7 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
   if(direction==DIFFTEST_TO_DUT)
   {
     *pc=cpu.pc;
+    printf("to dut pc%x\n",cpu.pc);
     for(int i = 0;i<32;i++ )
     {
       gpr[i]=cpu.gpr[i];
