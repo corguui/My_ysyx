@@ -179,6 +179,9 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
 		top->clock =0; top->eval();
+		s->pc=top->io_pc;
+		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
+    	s->dnpc=top->rootp->top__DOT___EXU_io_dnpc;
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
@@ -190,9 +193,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		#endif
 		main_time++;
 		top->eval();
-		s->pc=top->io_pc;
-		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
-    	s->dnpc=top->rootp->top__DOT___EXU_io_dnpc;
+
 
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
