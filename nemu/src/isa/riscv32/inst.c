@@ -78,7 +78,6 @@ static int decode_exec(Decode *s) {
   int rd = 0;
   word_t src1 = 0, src2 = 0, imm = 0;
   s->dnpc = s->snpc;
-  printf("nemu exu inst 0x%x\n",s->isa.inst.val);
   //printf("the dnpc=snpc the snpc== %x\n",s->snpc);
 
 #define INSTPAT_INST(s) ((s)->isa.inst.val)
