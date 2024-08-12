@@ -104,6 +104,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     wait=1;
     return;
   }
+  //等待npc多执行一次
   if(wait=1)
   {
     return;
