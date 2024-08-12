@@ -94,6 +94,10 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     return;
   }
 
+
+
+  ref_difftest_exec(1);
+  ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
     cpu_read_reg();
@@ -101,10 +105,6 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     is_skip_ref = false;
     return;
   }
-
-  ref_difftest_exec(1);
-  ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
-
   checkregs(&ref_r, npc);
 }
 
