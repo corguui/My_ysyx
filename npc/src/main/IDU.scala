@@ -385,13 +385,12 @@ class IDU extends Module {
 				exu_data.inst_type := 11.U
 				exu_data.reg_wen := true.B
 				exu_data.alu_op := "b00011".U	
-				io.reg_data.csr_raddr := MuxLookup(exu_data.imm,4.U,Array(
-						(0x341.U) -> 0.U,//mepc
-						(0x342.U) -> 1.U,//mcause
-						(0x300.U) -> 2.U,//mstatus
-						(0x305.U) -> 3.U,//mtvec
-					))
-
+				io.reg_data.csr_raddr := MuxCase(4.U,Array(
+					(exu_data.imm===0x341.U) -> 0.U,//mepc
+					(exu_data.imm===0x342.U) -> 1.U,//mcause
+					(exu_data.imm===0x300.U) -> 2.U,//mstatus
+					(exu_data.imm===0x305.U) -> 3.U,//mtvec
+				))
 				}
 
 				//ecall or mret
