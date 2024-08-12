@@ -372,12 +372,12 @@ class IDU extends Module {
 				is("b001".U){
 				exu_data.inst_type := 10.U
 				exu_data.reg_wen := true.B
-				io.reg_data.csr_raddr := MuxCase(4.U,Array(
-					(exu_data.imm===0x341.U) -> 0.U,//mepc
-					(exu_data.imm===0x342.U) -> 1.U,//mcause
-					(exu_data.imm===0x300.U) -> 2.U,//mstatus
-					(exu_data.imm===0x305.U) -> 3.U,//mtvec
-				))
+		        switch(exu_data.imm) {
+                is(0x341.U) { io.reg_data.csr_raddr:= 0.U } // mepc
+                is(0x342.U) { io.reg_data.csr_raddr := 1.U } // mcause
+                is(0x300.U) { io.reg_data.csr_raddr := 2.U } // mstatus
+                is(0x305.U) { io.reg_data.csr_raddr := 3.U } // mtvec
+                }
 				}
 
 				//csrrs
@@ -385,12 +385,12 @@ class IDU extends Module {
 				exu_data.inst_type := 11.U
 				exu_data.reg_wen := true.B
 				exu_data.alu_op := "b00011".U	
-				io.reg_data.csr_raddr := MuxCase(4.U,Array(
-					(exu_data.imm===0x341.U) -> 0.U,//mepc
-					(exu_data.imm===0x342.U) -> 1.U,//mcause
-					(exu_data.imm===0x300.U) -> 2.U,//mstatus
-					(exu_data.imm===0x305.U) -> 3.U,//mtvec
-				))
+		        switch(exu_data.imm) {
+                is(0x341.U) { io.reg_data.csr_raddr:= 0.U } // mepc
+                is(0x342.U) { io.reg_data.csr_raddr := 1.U } // mcause
+                is(0x300.U) { io.reg_data.csr_raddr := 2.U } // mstatus
+                is(0x305.U) { io.reg_data.csr_raddr := 3.U } // mtvec
+                }
 				}
 
 				//ecall or mret

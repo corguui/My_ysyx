@@ -36,10 +36,10 @@ class Reg extends Module {
         reg(io.waddr) := io.wdata
     }
     when(io.csr_wen_1&&io.csr_waddr_1=/=0.U) {
-        reg(io.csr_waddr_1) := io.csr_wdata_1
+        csr(io.csr_waddr_1) := io.csr_wdata_1
     }
     when(io.csr_wen_2&&io.csr_waddr_2=/=0.U) {
-        reg(io.csr_waddr_2) := io.csr_wdata_2
+        csr(io.csr_waddr_2) := io.csr_wdata_2
     } 
 
     io.reg_read.rdata_1 := reg(io.reg_read.raddr_1)

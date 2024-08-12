@@ -198,12 +198,12 @@ class EXU extends Module {
                 io.reg_waddr := io.idu2in.bits.reg_waddr
                 io.csr_wdata_1 := io.idu2in.bits.src1
                 io.csr_wen_1  := true.B 
-                io.csr_waddr_1 := MuxCase(4.U,Array(
-					(io.idu2in.bits.imm===0x341.U) -> 0.U,//mepc
-					(io.idu2in.bits.imm===0x342.U) -> 1.U,//mcause
-					(io.idu2in.bits.imm===0x300.U) -> 2.U,//mstatus
-					(io.idu2in.bits.imm===0x305.U) -> 3.U,//mtvec
-				))
+                switch(io.idu2in.bits.imm) {
+                is(0x341.U) { io.csr_waddr_1 := 0.U } // mepc
+                is(0x342.U) { io.csr_waddr_1 := 1.U } // mcause
+                is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
+                is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
+                }
             }
             //csrrs
             is(11.U){
@@ -215,12 +215,12 @@ class EXU extends Module {
                 alu.io.alu_op := io.idu2in.bits.alu_op
                 io.csr_wdata_1 := alu.io.result
                 io.csr_wen_1  := true.B 
-				io.csr_waddr_1 := MuxCase(4.U,Array(
-					(io.idu2in.bits.imm===0x341.U) -> 0.U,//mepc
-					(io.idu2in.bits.imm===0x342.U) -> 1.U,//mcause
-					(io.idu2in.bits.imm===0x300.U) -> 2.U,//mstatus
-					(io.idu2in.bits.imm===0x305.U) -> 3.U,//mtvec
-				))
+                switch(io.idu2in.bits.imm) {
+                is(0x341.U) { io.csr_waddr_1 := 0.U } // mepc
+                is(0x342.U) { io.csr_waddr_1 := 1.U } // mcause
+                is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
+                is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
+                }
             }
             //ecall
             is(12.U){
