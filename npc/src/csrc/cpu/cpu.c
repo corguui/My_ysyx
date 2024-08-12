@@ -300,7 +300,7 @@ static void execute(uint64_t n)
 	Decode s;
 	for(;n>0;n--)
 	{
-		cpu_exec_once(&s);
+		cpu_exec_once(tfp,&s);
 		printf("-----pc: 0x%x\n",s.pc);
 		trace_and_difftest(&s); 
 		if(npc_state.state !=NPC_RUNNING) break;
