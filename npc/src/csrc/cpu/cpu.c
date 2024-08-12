@@ -72,10 +72,11 @@ void cpu_read_reg()
 	cpu.gpr[31]=top->rootp->top__DOT__Reg__DOT__reg_31;
 	
 
-	for(int i=0;i<4;i++)
-	{
-		//cpu.csr[i]=top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__csr[i];
-	}
+	cpu.csr[0]=top->rootp->top__DOT__Reg__DOT__csr_0;
+	cpu.csr[1]=top->rootp->top__DOT__Reg__DOT__csr_1;
+	cpu.csr[2]=top->rootp->top__DOT__Reg__DOT__csr_2;
+	cpu.csr[3]=top->rootp->top__DOT__Reg__DOT__csr_3;
+	
 
 }
 void cpu_write_reg()
@@ -171,7 +172,7 @@ void cpu_init()
 	#endif
 	main_time++;
 	top->eval();
-	//top->rootp->ysyx_23060111_top__DOT__reg___0240__DOT__csr[2]=0x1800;
+	top->rootp->top__DOT__Reg__DOT__csr_2=0x1800;
 
 	
 }
