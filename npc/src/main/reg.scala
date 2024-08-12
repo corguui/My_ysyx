@@ -16,6 +16,9 @@ class IO_reg_read extends Bundle {
 
 class Reg extends Module {
     val io = IO(new Bundle{
+        val csr_wen_2 = Input(Bool())
+        val csr_waddr_2 = Input(UInt(2.W))
+        val csr_wdata_2 = Input(UInt(32.W))
         val reg_read = (new IO_reg_read)
         val wen = Input(Bool())
         val waddr = Input(UInt(5.W))
@@ -23,9 +26,7 @@ class Reg extends Module {
         val csr_wen_1 = Input(Bool())
         val csr_waddr_1 = Input(UInt(2.W))
         val csr_wdata_1 = Input(UInt(32.W))
-        val csr_wen_2 = Input(Bool())
-        val csr_waddr_2 = Input(UInt(2.W))
-        val csr_wdata_2 = Input(UInt(32.W))
+
 
     })
 
