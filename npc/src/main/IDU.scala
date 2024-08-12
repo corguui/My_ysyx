@@ -376,7 +376,7 @@ class IDU extends Module {
 					(exu_data.imm===0x341.U) -> 0.U,//mepc
 					(exu_data.imm===0x342.U) -> 1.U,//mcause
 					(exu_data.imm===0x300.U) -> 2.U,//mstatus
-					(exu_data,imm===0x305.U) -> 3.U,//mtvec
+					(exu_data.imm===0x305.U) -> 3.U,//mtvec
 				))
 				}
 
