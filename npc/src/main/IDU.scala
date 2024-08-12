@@ -390,9 +390,8 @@ class IDU extends Module {
                 is(0x342.U) { io.reg_data.csr_raddr := 1.U } // mcause
                 is(0x300.U) { io.reg_data.csr_raddr := 2.U } // mstatus
                 is(0x305.U) { io.reg_data.csr_raddr := 3.U } // mtvec
-                }
+     	        }
 				}
-
 				//ecall or mret
 				is("b000".U){
 					//ecall
