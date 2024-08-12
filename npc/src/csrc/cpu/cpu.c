@@ -182,7 +182,6 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		s->pc=top->io_pc;
 		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
     	s->dnpc=top->rootp->top__DOT___EXU_io_dnpc;
-		cpu_read_reg();
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif

@@ -17,6 +17,7 @@ enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
+int wait=0;
 
 void difftest_skip_ref() {
   is_skip_ref = true;
@@ -97,9 +98,14 @@ void difftest_step(uint32_t pc, uint32_t npc) {
 
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
-    //cpu_read_reg();
+    cpu_read_reg();
     ref_difftest_regcpy(cpu.gpr,&cpu.pc, DIFFTEST_TO_REF);
     is_skip_ref = false;
+    wait=1;
+    return;
+  }
+  if(wait=1)
+  {
     return;
   }
 
