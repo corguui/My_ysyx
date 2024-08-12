@@ -24,6 +24,7 @@ class Vtop___024root final : public VerilatedModule {
         VL_OUT8(io_inv_flag,0,0);
         CData/*4:0*/ top__DOT___EXU_io_reg_waddr;
         CData/*1:0*/ top__DOT___EXU_io_csr_waddr_1;
+        CData/*0:0*/ top__DOT___EXU_io_csr_wen_1;
         CData/*0:0*/ top__DOT___IDU_io_out2exu_bits_mem_wen;
         CData/*0:0*/ top__DOT___IDU_io_out2exu_bits_mem_ren;
         CData/*0:0*/ top__DOT___IDU_io_out2exu_bits_reg_wen;
@@ -54,17 +55,16 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_21;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_22;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_23;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_26;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_25;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_27;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_28;
         CData/*4:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0;
         CData/*4:0*/ top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0;
         CData/*0:0*/ top__DOT__Reg__DOT___GEN;
-        CData/*0:0*/ top__DOT__Reg__DOT___GEN_0;
         CData/*1:0*/ __VdfgTmp_h6d538c99__0;
         CData/*0:0*/ __VdfgTmp_h78afaf50__0;
-        CData/*1:0*/ __VdfgTmp_h8d3e2449__0;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
