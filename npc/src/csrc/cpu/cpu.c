@@ -31,7 +31,7 @@ int w=0;//ringbuf's write flag
 void iringbuf_put_char(char *p);
 void print_ringbuf();
 #endif
-
+uint32_t pc;
 NPC_CPU_state cpu{};
 static bool g_print_step = false;  
 
@@ -132,6 +132,7 @@ static void trace_and_difftest(Decode *_this) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
   //compare with the nemu
+  //printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
   difftest_step(_this->pc, top->io_pc);
   #endif
 
@@ -178,6 +179,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
 		top->clock =0; top->eval();
+		pc=top->io_pc;
 		s->pc=top->io_pc;
 		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
     	s->dnpc=top->rootp->top__DOT___EXU_io_dnpc;
@@ -329,9 +331,15 @@ void cpu_exec(uint64_t n)
       #ifdef CONFIG_ITRACE
 	    //print the ringbuf
 	    if(npc_state.halt_ret !=0)
+		{
+		printf("npc ringbuf\n");
 	    print_ringbuf();
+		}
 	    else if(npc_state.state==NPC_ABORT)
+		{
+		printf("npc ringbuf\n");
 	    print_ringbuf();
+		}
 	    #endif
     }
 

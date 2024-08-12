@@ -14,7 +14,7 @@ class IDUtoEXU extends Bundle{
 	val src1  = Output(UInt(32.W))
 	val src2  = Output(UInt(32.W))
 	val imm   = Output(UInt(32.W))
-    val alu_op = Output(UInt(4.W))
+    val alu_op = Output(UInt(5.W))
 	val inst_type = Output(UInt(4.W))
 	val il_us = Output(Bool())
 }
@@ -87,7 +87,7 @@ class IDU extends Module {
 	exu_data.m_wmask := 0.U
 	exu_data.inst_type := 0.U
 	exu_data.reg_wen := false.B
-	exu_data.alu_op := "b1111".U
+	exu_data.alu_op := "b10000".U
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.imm :=  0.U
@@ -119,44 +119,44 @@ class IDU extends Module {
 
 				//XOR
 				is("b100".U){
-					exu_data.alu_op := "b0100".U
+					exu_data.alu_op := "b00100".U
 				}
 
 				//OR
 				is("b110".U){
-					exu_data.alu_op := "b0011".U
+					exu_data.alu_op := "b00011".U
 				}
 
 				//AND
 				is("b111".U){
-					exu_data.alu_op := "b0010".U
+					exu_data.alu_op := "b00010".U
 				}
 
 				//SLL
 				is("b001".U){
-					exu_data.alu_op := "b0101".U
+					exu_data.alu_op := "b00101".U
 				}
 
 				//SRL or SRA
 				is("b101".U){
 					//SRL
 					when(funct7 === 0.U){
-						exu_data.alu_op := "b0110".U
+						exu_data.alu_op := "b00110".U
 					}
 					//SRA
 					.otherwise{
-						exu_data.alu_op := "b0111".U
+						exu_data.alu_op := "b00111".U
 					}
 				}
 
 				//SLT
 				is("b010".U){
-					exu_data.alu_op := "b1000".U
+					exu_data.alu_op := "b01000".U
 				}
 
 				//SLTU
 				is("b011".U){
-					exu_data.alu_op := "b1001".U
+					exu_data.alu_op := "b01001".U
 				}
 			}	
 		}
@@ -170,50 +170,50 @@ class IDU extends Module {
 			switch(funct3){
 				//ADDI
 				is("b000".U){
-					exu_data.alu_op := "b0000".U
+					exu_data.alu_op := "b00000".U
 				}
 
 				//XORI
 				is("b100".U){
-					exu_data.alu_op := "b0100".U
+					exu_data.alu_op := "b00100".U
 				}
 
 				//ORI
 				is("b110".U){
-					exu_data.alu_op := "b0011".U
+					exu_data.alu_op := "b00011".U
 				}
 
 				//ANDI
 				is("b111".U){
-					exu_data.alu_op := "b0010".U
+					exu_data.alu_op := "b00010".U
 				}
 
 				//SLLI
 				is("b001".U){
-					exu_data.alu_op := "b0101".U
+					exu_data.alu_op := "b00101".U
 				}
 
 				//SRLI or SRAI
 				is("b101".U){
 					//SRLI
 					when(funct7 === 0.U){
-						exu_data.alu_op := "b0110".U
+						exu_data.alu_op := "b00110".U
 					}
 					//SRAI
 					.otherwise{
-						exu_data.alu_op := "b0111".U
+						exu_data.alu_op := "b00111".U
 					}
 
 				}
 
 				//SLTI
 				is("b010".U){
-					exu_data.alu_op := "b1000".U
+					exu_data.alu_op := "b01000".U
 				}
 
 				//SLTIU
 				is("b011".U){
-					exu_data.alu_op := "b1001".U
+					exu_data.alu_op := "b01001".U
 				}
 
 
@@ -224,7 +224,7 @@ class IDU extends Module {
 		is("b0000011".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 3.U
-			exu_data.alu_op := "b0000".U
+			exu_data.alu_op := "b00000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 			exu_data.reg_wen := true.B
 			exu_data.mem_ren := true.B
@@ -265,7 +265,7 @@ class IDU extends Module {
 			exu_data.inst_type := 4.U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,25),in_data.inst(11,7)).asUInt
 			exu_data.mem_wen := true.B
-			exu_data.alu_op := "b0000".U
+			exu_data.alu_op := "b00000".U
 			switch(funct3){
 				//SB
 				is("b000".U){
@@ -292,32 +292,32 @@ class IDU extends Module {
 			switch(funct3){
 				//beq
 				is("b000".U){
-					exu_data.alu_op := "b1010".U
+					exu_data.alu_op := "b01010".U
 				}
 
 				//bne
 				is("b001".U){
-					exu_data.alu_op := "b1101".U
+					exu_data.alu_op := "b01101".U
 				}
 
 				//blt
 				is("b100".U){
-					exu_data.alu_op := "b1110".U
+					exu_data.alu_op := "b01000".U
 				}
 
 				//bge
 				is("b101".U){
-					exu_data.alu_op := "b1100".U
+					exu_data.alu_op := "b01100".U
 				}
 
 				//bltu
 				is("b110".U){
-					exu_data.alu_op := "b1111".U
+					exu_data.alu_op := "b01001".U
 				}
 
 				//bgeu
 				is("b111".U){
-					exu_data.alu_op := "b1011".U
+					exu_data.alu_op := "b01011".U
 				}
 			}
 		}
@@ -334,7 +334,7 @@ class IDU extends Module {
 		is("b0010111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 7.U
-			exu_data.alu_op :="b0000".U
+			exu_data.alu_op :="b00000".U
 			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W)).asUInt
 			exu_data.reg_wen := true.B
 		}
@@ -343,7 +343,7 @@ class IDU extends Module {
 		is("b1101111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 8.U
-			exu_data.alu_op :="b0000".U
+			exu_data.alu_op :="b00000".U
 			exu_data.imm := Cat(Fill(12,in_data.inst(31)),in_data.inst(19,12),in_data.inst(20),in_data.inst(30,21),0.U(1.W)).asUInt
 			exu_data.reg_wen := true.B
 		}
@@ -352,7 +352,7 @@ class IDU extends Module {
 		is("b1100111".U){
 			io.inv_flag := false.B
 			exu_data.inst_type := 9.U
-			exu_data.alu_op :="b0000".U
+			exu_data.alu_op :="b00000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt			
 			exu_data.reg_wen := true.B
 		}
