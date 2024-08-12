@@ -44,16 +44,8 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
   if(direction==DIFFTEST_TO_DUT)
   {
     *pc=cpu.pc;
-    if(cpu.pc==0x800011d0)
-    {
-    printf("to dut pc%x\n",cpu.pc);
-    }
     for(int i = 0;i<32;i++ )
     {
-      if(cpu.pc==0x800011d0)
-      {
-        printf("num reg %d 0x%x\n",i,cpu.gpr[i]);
-      }
       gpr[i]=cpu.gpr[i];
     }
   }
@@ -66,13 +58,8 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
     else {
     cpu.pc=(*pc)+0x4;
     }
-    printf("ref pc %x\n",cpu.pc);
     for(int i = 0;i<32;i++ )
     {
-      if(i==14)
-      {
-        printf("gpr[14] %x\n",gpr[i]);
-      }
       cpu.gpr[i]=gpr[i];
     }
   }
