@@ -43,7 +43,6 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
   uint32_t* gpr=(uint32_t*) dut;
   if(direction==DIFFTEST_TO_DUT)
   {
-    printf("nemu pc %x\n",cpu.pc);
     *pc=cpu.pc;
     for(int i = 0;i<32;i++ )
     {
@@ -52,7 +51,6 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
   }
   else if(direction==DIFFTEST_TO_REF)
   {
-    printf("npc pc %x\n",*pc);
       cpu.pc=*pc;
     for(int i = 0;i<32;i++ )
     {
