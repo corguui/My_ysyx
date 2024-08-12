@@ -43,7 +43,6 @@ void difftest_skip_dut(int nr_ref, int nr_dut) {
     ref_difftest_exec(1);
   }
 }
-long size;
 
 void init_difftest(char *ref_so_file, long img_size, int port) {
   assert(ref_so_file != NULL);
@@ -71,7 +70,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   Log("The result of every instruction will be compared with %s. "
       "This will help you a lot for debugging, but also significantly reduce the performance. "
       "If it is not necessary, you can turn it off in menuconfig.", ref_so_file);
-  size=img_size;
+      
   ref_difftest_init(port);
   ref_difftest_memcpy(0x80000000, NPC_guest_to_host(0x80000000), img_size, DIFFTEST_TO_REF);
   cpu_read_reg();
@@ -98,7 +97,6 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
     cpu_read_reg();
-    ref_difftest_memcpy(0x80000000, NPC_guest_to_host(0x80000000), size, DIFFTEST_TO_REF);
     ref_difftest_regcpy(cpu.gpr,&cpu.pc, DIFFTEST_TO_REF);
     is_skip_ref = false;
     return;
