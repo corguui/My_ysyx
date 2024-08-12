@@ -91,7 +91,7 @@ class IDU extends Module {
 	exu_data.inst_type := 0.U
 	exu_data.reg_wen := false.B
 	exu_data.alu_op := "b10000".U
-	exu_data.mstatus := io.reg_data.mstatus|(((io.reg_data.mstatus & 0x00000080.U)>>4) | 0x80000080.U) 
+	exu_data.mstatus := (io.reg_data.mstatus | (((io.reg_data.mstatus & 0x00000080.U)>>4.U) | 0x00000080.U))
 	exu_data.csr_a5 := Mux((io.reg_data.csr_a5===0xffffffff.U),0.U,io.reg_data.csr_a5)
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
