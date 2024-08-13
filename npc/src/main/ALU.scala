@@ -34,19 +34,40 @@ class ALU extends Module{
         is("b01101".U){ io.result := (io.src1 =/= io.src2).asUInt } //bne
     }
     */
-// 使用 Mux 语句来处理每种情况
-  io.result := Mux(io.alu_op === "b00000".U, io.src1 + io.src2, io.result) // add
-  io.result := Mux(io.alu_op === "b00001".U, io.src1 - io.src2, io.result) // sub
-  io.result := Mux(io.alu_op === "b00010".U, io.src1 & io.src2, io.result) // and
-  io.result := Mux(io.alu_op === "b00011".U, io.src1 | io.src2, io.result) // or
-  io.result := Mux(io.alu_op === "b00100".U, io.src1 ^ io.src2, io.result) // xor
-  io.result := Mux(io.alu_op === "b00101".U, io.src1 << io.src2(4,0), io.result) // sll
-  io.result := Mux(io.alu_op === "b00110".U, io.src1 >> io.src2(4,0), io.result) // srl
-  io.result := Mux(io.alu_op === "b00111".U, (io.src1.asSInt >> io.src2(4,0)).asUInt, io.result) // sra
-  io.result := Mux(io.alu_op === "b01000".U, (io.src1.asSInt < io.src2.asSInt).asUInt, io.result) // slt
-  io.result := Mux(io.alu_op === "b01001".U, (io.src1 < io.src2).asUInt, io.result) // sltu
-  io.result := Mux(io.alu_op === "b01010".U, (io.src1 === io.src2).asUInt, io.result) // beq
-  io.result := Mux(io.alu_op === "b01011".U, (io.src1 >= io.src2).asUInt, io.result) // bgeu
-  io.result := Mux(io.alu_op === "b01100".U, (io.src1.asSInt >= io.src2.asSInt).asUInt, io.result) // bge
-  io.result := Mux(io.alu_op === "b01101".U, (io.src1 =/= io.src2).asUInt, io.result) // bne
+    
+  io.result := 0.U
+
+  when(io.alu_op === "b00000".U) {
+    io.result := io.src1 + io.src2 // add
+  } .elsewhen(io.alu_op === "b00001".U) {
+    io.result := io.src1 - io.src2 // sub
+  } .elsewhen(io.alu_op === "b00010".U) {
+    io.result := io.src1 & io.src2 // and
+  } .elsewhen(io.alu_op === "b00011".U) {
+    io.result := io.src1 | io.src2 // or
+  } .elsewhen(io.alu_op === "b00100".U) {
+    io.result := io.src1 ^ io.src2 // xor
+  } .elsewhen(io.alu_op === "b00101".U) {
+    io.result := io.src1 << io.src2(4,0) // sll
+  } .elsewhen(io.alu_op === "b00110".U) {
+    io.result := io.src1 >> io.src2(4,0) // srl
+  } .elsewhen(io.alu_op === "b00111".U) {
+    io.result := (io.src1.asSInt >> io.src2(4,0)).asUInt // sra
+  } .elsewhen(io.alu_op === "b01000".U) {
+    io.result := Mux(io.src1.asSInt < io.src2.asSInt, 1.U, 0.U) // slt
+  } .elsewhen(io.alu_op === "b01001".U) {
+    io.result := Mux(io.src1 < io.src2, 1.U, 0.U) // sltu
+  } .elsewhen(io.alu_op === "b01010".U) {
+    io.result := Mux(io.src1 === io.src2, 1.U, 0.U) // beq
+  } .elsewhen(io.alu_op === "b01011".U) {
+    io.result := Mux(io.src1 >= io.src2, 1.U, 0.U) // bgeu
+  } .elsewhen(io.alu_op === "b01100".U) {
+    io.result := Mux(io.src1.asSInt >= io.src2.asSInt, 1.U, 0.U) // bge
+  } .elsewhen(io.alu_op === "b01101".U) {
+    io.result := Mux(io.src1 =/= io.src2, 1.U, 0.U) // bne
+  } .otherwise {
+    io.result := 0.U // 默认情况
+  }
+
+
 }
