@@ -4,6 +4,21 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
+class pcreadmem extends Module{
+	val io = IO(new Bundle{
+		val pc = Input(UInt(32.W))
+		val inst = Output(UInt(32.W))
+	})
+
+	val mem_raddr = RegInit(0.U(8.W))
+	mem_raddr := io.pc - 0x80000000.U
+	val mem = Mem(256,UInt(32.W))
+
+	val mem_rdata = mem(mem_raddr)
+	
+}
+
+
 class IFUtoIDU extends Bundle {
 	val inst = Output(UInt(32.W))
 }
@@ -21,7 +36,7 @@ class IFU extends Module {
 		idu2s_idle -> Mux(io.out.valid,idu2s_wait_ready,idu2s_idle),
 		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
-
+/*
 	// 声明DPI-C函数的BlackBox模块
   	class VlgPcRead extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
@@ -31,9 +46,10 @@ class IFU extends Module {
 
 		addPath("./src/main/VlgPcRead.v")
   	}
+	*/
 
   
-  	val vlg_pc_read = Module(new VlgPcRead)
+  	val vlg_pc_read = Module(new pcreadmem)
 	val out_data =Wire(new IFUtoIDU)
 
 	//取指令和生成ready,valid信号
