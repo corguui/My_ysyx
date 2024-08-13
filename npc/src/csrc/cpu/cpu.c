@@ -183,7 +183,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		pc=top->io_pc;
 		s->pc=top->io_pc;
 		s->inst=top->rootp->top__DOT___IFU_io_out_bits_inst;
-    	s->dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
+    	s->dnpc=top->rootp->top__DOT___EXU_io_out2ifu_bits_dnpc;
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
