@@ -61,7 +61,7 @@ class IFU extends Module {
 	io.out.valid := (lastinst =/= out_data.inst)
 
     //取指令
-	vlg_pc_read.io.pc_en := io.out.valid
+	vlg_pc_read.io.pc_en :=1.U 
 	vlg_pc_read.io.pc := io.pc
 	out_data.inst := vlg_pc_read.io.inst 
 
