@@ -30,7 +30,7 @@ class top extends Module {
   Reg.io.csr_wen_2 := EXU.io.csr_wen_2
 
 
-  io.pc := IFU.io.out.pc 
+  io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 
 
 }

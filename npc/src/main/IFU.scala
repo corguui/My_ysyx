@@ -49,7 +49,7 @@ class IFU extends Module {
 	//IFU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
 	val m2EXUstate = RegInit(m2EXUidle)
-	m2EXUstate :=MuxLookup(m2EXUstate,m2EXUidle)(Lis(
+	m2EXUstate :=MuxLookup(m2EXUstate,m2EXUidle)(List(
 		m2EXUidle -> Mux(io.exu2in.valid,m2EXUprocess,m2EXUidle),
 		m2EXUprocess -> Mux(io.exu2in.ready,m2EXUidle,m2EXUprocess)
 	))

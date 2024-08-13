@@ -75,7 +75,7 @@ class EXU extends Module {
 
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
-    io.out2ifu.valid := (lastdnpc =/= outdata.dnpc)
+    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
     io.out2ifu.bits := ifu_outdata
 
 
