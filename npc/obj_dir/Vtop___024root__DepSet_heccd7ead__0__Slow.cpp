@@ -18,6 +18,8 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
+    vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__vlg_pc_read__DOT__clk 
+        = vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__clk;
     vlSelf->__Vtrigrprev__TOP__clock = vlSelf->clock;
     vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT___vlg_pc_read_inst 
         = vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst;
@@ -53,7 +55,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1015, "", "Settle region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1017, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -102,10 +104,13 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VactTriggered.at(0U)) {
-        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clock)\n");
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge top.IFU.vlg_pc_read.clk)\n");
     }
     if (vlSelf->__VactTriggered.at(1U)) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @([changed] top.IFU._vlg_pc_read_inst)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge clock)\n");
+    }
+    if (vlSelf->__VactTriggered.at(2U)) {
+        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([changed] top.IFU._vlg_pc_read_inst)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -120,10 +125,13 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__nba(Vtop___024root* vlSelf) {
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VnbaTriggered.at(0U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clock)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge top.IFU.vlg_pc_read.clk)\n");
     }
     if (vlSelf->__VnbaTriggered.at(1U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @([changed] top.IFU._vlg_pc_read_inst)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge clock)\n");
+    }
+    if (vlSelf->__VnbaTriggered.at(2U)) {
+        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([changed] top.IFU._vlg_pc_read_inst)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -154,6 +162,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__PC__DOT__io_pc_REG = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT__lastinst = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__IFU__DOT__io_out_valid_0 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__clk = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IDU__DOT__exu_data_alu_op = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__IDU__DOT__lastalu_op = VL_RAND_RESET_I(5);
@@ -234,7 +243,8 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__VdfgTmp_h6d538c99__0 = 0;
     vlSelf->__VdfgTmp_h78afaf50__0 = 0;
     vlSelf->__VdfgTmp_hdd1fa857__0 = 0;
-    vlSelf->__Vfunc_vlg_pc_read__0__Vfuncout = 0;
+    vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout = 0;
+    vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__vlg_pc_read__DOT__clk = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__clock = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT___vlg_pc_read_inst = VL_RAND_RESET_I(32);
     vlSelf->__VactDidInit = 0;
