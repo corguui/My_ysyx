@@ -33,11 +33,11 @@ class Memory extends Module {
 
     when(io.m_wen) {
         when(io.m_wmask ===1.U) {
-        io.m_wdata := (mem.write(waddr.asUInt)  & 0x000000ff.U)                 
+        mem.write(waddr.asUInt, io.m_wdata & 0x000000ff.U)                 
     }.elsewhen(io.m_wmask ===2.U) {
-        io.m_wdata := (mem.write(waddr.asUInt)  & 0x0000ffff.U)
+        mem.write(waddr.asUInt, io.m_wdata & 0x0000ffff.U)
     }.otherwise {
-        io.m_wdata := (mem.write(waddr.asUInt)  & 0xffffffff.U)
+        mem.write(waddr.asUInt, io.m_wdata & 0xffffffff.U)
     }
     }
 
