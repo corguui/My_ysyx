@@ -8,7 +8,6 @@ class top extends Module {
     val pc = Output(UInt(32.W))
     val inv_flag = Output(Bool())
   })
-  val PC  = Module(new PC)
   val IFU = Module(new IFU)
   val IDU = Module(new IDU)
   val EXU = Module(new EXU)
