@@ -5,6 +5,47 @@ import chisel3.util._
 import chisel3.experimental._
 
 
+class Memory extends Module {
+    val io = IO(new Bundle {
+        val m_raddr = Input(UInt(32.W))
+        val m_rdata = Output(UInt(32.W))
+        val m_waddr = Input(UInt(32.W))
+        val m_wdata = Input(UInt(32.W))
+        val m_wmask = Input(UInt(3.W))
+        val m_wen = Input(Bool())
+        val m_ren = Input(Bool())
+        val m_rmask = Input(UInt(3.W))
+    })
+
+    val mem = Mem(256, UInt(32.W))
+    val raddr = io.m_raddr(7,0)  
+    val waddr = io.m_waddr(7,0) 
+
+    io.m_rdata := 0.U
+
+    when(io.m_wen) {
+    when(io.m_rmask ===1.U) {
+        io.m_rdata := (mem.read(raddr.asUInt)  & 0x000000ff.U)                 
+    }.elsewhen(io.m_rmask ===2.U) {
+        io.m_rdata := (mem.read(raddr.asUInt)  & 0x0000ffff.U)
+    }.otherwise {
+        io.m_rdata := mem.read(raddr.asUInt) 
+    }
+    }
+
+    when(io.m_wen) {
+        when(io.m_wmask ===1.U) {
+        mem.write(waddr.asUInt, io.m_wdata & 0x000000ff.U)                 
+    }.elsewhen(io.m_wmask ===2.U) {
+        mem.write(waddr.asUInt, io.m_wdata & 0x0000ffff.U)
+    }.otherwise {
+        mem.write(waddr.asUInt, io.m_wdata )
+    }
+    }
+
+
+}
+
 
 class EXU extends Module {
     val io = IO(new Bundle {
@@ -32,6 +73,7 @@ class EXU extends Module {
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
 
+    /*
     class Mem extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
         val clock = Input(Clock())
@@ -47,8 +89,9 @@ class EXU extends Module {
 
 		addPath("./src/main/Mem.v")
   	}
+    */
 
-    val mem = Module(new Mem)
+    val mem = Module(new Memory)
     mem.io.m_waddr :=0.U
     mem.io.m_wdata :=0.U
     mem.io.m_wmask :=0.U
@@ -56,7 +99,7 @@ class EXU extends Module {
     mem.io.m_raddr :=0.U
     mem.io.m_rmask :=0.U
     mem.io.m_ren :=0.U
-    mem.io.clock := clock
+    //mem.io.clock := clock
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U

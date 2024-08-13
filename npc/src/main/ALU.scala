@@ -15,6 +15,7 @@ class ALU extends Module{
     val io = IO(new alu_io)
 
     io.result := 0.U
+    
     switch(io.alu_op)
     {
         is("b00000".U){ io.result := io.src1 + io.src2 } //add
@@ -32,5 +33,6 @@ class ALU extends Module{
         is("b01100".U){ io.result := (io.src1.asSInt >= io.src2.asSInt).asUInt } //bge
         is("b01101".U){ io.result := (io.src1 =/= io.src2).asUInt } //bne
     }
+
 
 }
