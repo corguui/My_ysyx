@@ -1,4 +1,3 @@
-/*
 object Elaborate extends App {
   val firtoolOptions = Array("--lowering-options=" + List(
     // make yosys happy
@@ -6,14 +5,7 @@ object Elaborate extends App {
     //"emittedLineLength=900",
     "disallowLocalVariables",
     "disallowPackedArrays",
-    "locationInfoStyle=wrapInAtSquareBracket"
-  ).reduce(_ + "," + _))
-  circt.stage.ChiselStage.emitSystemVerilogFile(new npc.top(), args, firtoolOptions)
-}
-*/
-
-object Elaborate extends App {
-  val firtoolOptions = Array("--lowering-options=" + List(
+    "disallowMuxInlining",
     "locationInfoStyle=wrapInAtSquareBracket"
   ).reduce(_ + "," + _))
   circt.stage.ChiselStage.emitSystemVerilogFile(new npc.top(), args, firtoolOptions)
