@@ -18,8 +18,8 @@ class Memory extends Module {
     })
 
     val mem = Mem(256, UInt(32.W))
-    val raddr = io.m_raddr - 0x80000000.U 
-    val waddr = io.m_waddr - 0x80000000.U
+    val raddr = io.m_raddr(7,0)  
+    val waddr = io.m_waddr(7,0) 
 
     when(io.m_wen) {
     when(io.m_rmask ===1.U) {
