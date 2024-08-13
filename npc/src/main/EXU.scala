@@ -27,7 +27,7 @@ class Memory extends Module {
     }.elsewhen(io.m_rmask ===2.U) {
         io.m_rdata := (mem.read(raddr.asUInt)  & 0x0000ffff.U)
     }.otherwise {
-        io.m_rdata := (mem.read(raddr.asUInt)  & 0xffffffff.U)
+        io.m_rdata := mem.read(raddr.asUInt) 
     }
     }
 
@@ -37,7 +37,7 @@ class Memory extends Module {
     }.elsewhen(io.m_wmask ===2.U) {
         mem.write(waddr.asUInt, io.m_wdata & 0x0000ffff.U)
     }.otherwise {
-        mem.write(waddr.asUInt, io.m_wdata & 0xffffffff.U)
+        mem.write(waddr.asUInt, io.m_wdata )
     }
     }
 
