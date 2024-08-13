@@ -4,7 +4,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-
+/*
 class Memory extends Module {
     val io = IO(new Bundle {
         val m_raddr = Input(UInt(32.W))
@@ -45,6 +45,7 @@ class Memory extends Module {
 
 
 }
+*/
 
 
 class EXU extends Module {
@@ -73,7 +74,6 @@ class EXU extends Module {
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
 
-    /*
     class Mem extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
         val clock = Input(Clock())
@@ -89,9 +89,9 @@ class EXU extends Module {
 
 		addPath("./src/main/Mem.v")
   	}
-    */
 
-    val mem = Module(new Memory)
+    //val mem = Module(new Memory)   //yosys
+    val mem = Module(new Mem)
     mem.io.m_waddr :=0.U
     mem.io.m_wdata :=0.U
     mem.io.m_wmask :=0.U
@@ -99,7 +99,7 @@ class EXU extends Module {
     mem.io.m_raddr :=0.U
     mem.io.m_rmask :=0.U
     mem.io.m_ren :=0.U
-    //mem.io.clock := clock
+    mem.io.clock := clock  //yosys 要注释
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U

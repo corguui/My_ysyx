@@ -4,6 +4,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
+/*
 class pcreadmem extends Module{
 	val io = IO(new Bundle{
 		val pc = Input(UInt(32.W))
@@ -17,6 +18,7 @@ class pcreadmem extends Module{
 	io.inst := mem(mem_raddr.asUInt)
 	
 }
+*/
 
 
 class IFUtoIDU extends Bundle {
@@ -36,7 +38,7 @@ class IFU extends Module {
 		idu2s_idle -> Mux(io.out.valid,idu2s_wait_ready,idu2s_idle),
 		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
-/*
+
 	// 声明DPI-C函数的BlackBox模块
   	class VlgPcRead extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
@@ -46,10 +48,10 @@ class IFU extends Module {
 
 		addPath("./src/main/VlgPcRead.v")
   	}
-	*/
 
   
-  	val vlg_pc_read = Module(new pcreadmem)
+  	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
+	val vlg_pc_read = Module(new VlgPcRead)
 	val out_data =Wire(new IFUtoIDU)
 
 	//取指令和生成ready,valid信号
