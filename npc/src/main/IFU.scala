@@ -76,7 +76,7 @@ class IFU extends Module {
 	//取指令和生成ready,valid信号
 	val lastinst = RegNext(out_data.inst,0.U)
 	io.out.valid := (lastinst =/= out_data.inst)
-	vlg_pc_read.io.clock := clock
+	vlg_pc_read.io.clk := clock
 
 	vlg_pc_read.io.pc_en :=0.U 
 	vlg_pc_read.io.pc := 0.U
