@@ -90,7 +90,7 @@ class IFU extends Module {
 		 
 	}
 
-	io.out.valid := vlg_pc_read.io.pc_en
+	io.out.valid := (vlg_pc_read.io.pc_en === 0.U)
 	//传到IDU
 	io.out.bits := out_data
 
