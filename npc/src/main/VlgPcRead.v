@@ -7,9 +7,13 @@ module VlgPcRead(
 );
     always@(posedge clk) begin
         if(pc_en)
+        begin
             inst=vlg_pc_read(pc);
+        end
         else
+        begin
             inst=0;
+        end
     end
 
 
