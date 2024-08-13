@@ -17,20 +17,16 @@ void Vtop___024root___eval_triggers__act(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_triggers__act\n"); );
     // Body
-    vlSelf->__VactTriggered.at(0U) = ((IData)(vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__clk) 
-                                      & (~ (IData)(vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__vlg_pc_read__DOT__clk)));
-    vlSelf->__VactTriggered.at(1U) = ((IData)(vlSelf->clock) 
+    vlSelf->__VactTriggered.at(0U) = ((IData)(vlSelf->clock) 
                                       & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clock)));
-    vlSelf->__VactTriggered.at(2U) = (vlSelf->top__DOT__IFU__DOT__out_data_inst 
+    vlSelf->__VactTriggered.at(1U) = (vlSelf->top__DOT__IFU__DOT__out_data_inst 
                                       != vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__out_data_inst);
-    vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__vlg_pc_read__DOT__clk 
-        = vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__clk;
     vlSelf->__Vtrigrprev__TOP__clock = vlSelf->clock;
     vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__out_data_inst 
         = vlSelf->top__DOT__IFU__DOT__out_data_inst;
     if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->__VactDidInit))))) {
         vlSelf->__VactDidInit = 1U;
-        vlSelf->__VactTriggered.at(2U) = 1U;
+        vlSelf->__VactTriggered.at(1U) = 1U;
     }
 #ifdef VL_DEBUG
     if (VL_UNLIKELY(vlSymsp->_vm_contextp__->debug())) {

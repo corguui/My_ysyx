@@ -128,7 +128,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+54,"lastinst", false,-1, 31,0);
     tracep->declBus(c+55,"out_data_pc_REG", false,-1, 31,0);
     tracep->pushNamePrefix("vlg_pc_read ");
-    tracep->declBit(c+96,"clk", false,-1);
+    tracep->declBit(c+91,"clk", false,-1);
     tracep->declBus(c+56,"pc", false,-1, 31,0);
     tracep->declBit(c+53,"pc_en", false,-1);
     tracep->declBus(c+95,"inst", false,-1, 31,0);
@@ -411,5 +411,4 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullIData(oldp+93,(vlSelf->io_pc),32);
     bufp->fullBit(oldp+94,(vlSelf->io_inv_flag));
     bufp->fullIData(oldp+95,(vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst),32);
-    bufp->fullBit(oldp+96,(vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__clk));
 }

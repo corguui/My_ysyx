@@ -20,7 +20,6 @@ class Vtop___024root final : public VerilatedModule {
     // Anonymous structures to workaround compiler member-count bugs
     struct {
         VL_IN8(clock,0,0);
-        CData/*0:0*/ top__DOT__IFU__DOT__vlg_pc_read__DOT__clk;
         VL_IN8(reset,0,0);
         VL_OUT8(io_inv_flag,0,0);
         CData/*4:0*/ top__DOT___EXU_io_reg_waddr;
@@ -74,7 +73,6 @@ class Vtop___024root final : public VerilatedModule {
         CData/*1:0*/ __VdfgTmp_hf4fc35c0__0;
         CData/*0:0*/ __VdfgTmp_hd5680bdc__0;
         CData/*0:0*/ __VdfgTmp_he4da6003__0;
-        CData/*0:0*/ __Vtrigrprev__TOP__top__DOT__IFU__DOT__vlg_pc_read__DOT__clk;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
@@ -83,10 +81,10 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT___EXU_io_csr_wdata_1;
         IData/*31:0*/ top__DOT___IDU_io_out2exu_bits_m_rmask;
         IData/*31:0*/ top__DOT__IFU__DOT__out_data_inst;
-    };
-    struct {
         IData/*31:0*/ top__DOT__IFU__DOT___vlg_pc_read_inst;
         IData/*31:0*/ top__DOT__IFU__DOT__lastinst;
+    };
+    struct {
         IData/*31:0*/ top__DOT__IFU__DOT__out_data_pc_REG;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_imm;
         IData/*31:0*/ top__DOT__IDU__DOT____VdfgTmp_hfd042d21__0;
@@ -143,8 +141,8 @@ class Vtop___024root final : public VerilatedModule {
         VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<3> __VactTriggered;
-    VlTriggerVec<3> __VnbaTriggered;
+    VlTriggerVec<2> __VactTriggered;
+    VlTriggerVec<2> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;
