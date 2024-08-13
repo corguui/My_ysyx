@@ -44,6 +44,7 @@ class IFU extends Module {
     	val io = IO(new Bundle {
       	val pc = Input(UInt(32.W))
       	val inst = Output(UInt(32.W))
+		val pc_en = Input(Bool())
       })
 
 		addPath("./src/main/VlgPcRead.v")
@@ -53,14 +54,14 @@ class IFU extends Module {
   	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
 	val vlg_pc_read = Module(new VlgPcRead)
 	val out_data =Wire(new IFUtoIDU)
+	
 
 	//取指令和生成ready,valid信号
 	val lastinst = RegNext(out_data.inst,0.U)
 	io.out.valid := (lastinst =/= out_data.inst)
 
     //取指令
-	out_data.inst := 0.U
-	vlg_pc_read.io.pc := 0.U
+	vlg_pc_read.io.pc_en := !io.out.valid
 	vlg_pc_read.io.pc := io.pc
 	out_data.inst := vlg_pc_read.io.inst 
 
