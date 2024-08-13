@@ -58,6 +58,7 @@ class IFU extends Module {
 	// 声明DPI-C函数的BlackBox模块
   	class VlgPcRead extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
+		val clock = Input(Clock())
       	val pc = Input(UInt(32.W))
       	val inst = Output(UInt(32.W))
 		val pc_en = Input(Bool())
@@ -75,6 +76,7 @@ class IFU extends Module {
 	//取指令和生成ready,valid信号
 	val lastinst = RegNext(out_data.inst,0.U)
 	io.out.valid := (lastinst =/= out_data.inst)
+	val vlg_pc_read.io.clock := clock
 
 	vlg_pc_read.io.pc_en :=0.U 
 	vlg_pc_read.io.pc := 0.U
