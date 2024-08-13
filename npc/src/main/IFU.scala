@@ -11,7 +11,7 @@ class pcreadmem extends Module{
 	})
 
 	val mem_raddr = RegInit(0.U(8.W))
-	mem_raddr := (io.pc - 0x80000000.U)(7,0)
+	mem_raddr := io.pc(7,0)
 	val mem = Mem(256,UInt(32.W))
 
 	val mem_rdata = mem(mem_raddr.asUInt)
