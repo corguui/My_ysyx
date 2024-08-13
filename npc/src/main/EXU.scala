@@ -23,21 +23,21 @@ class Memory extends Module {
 
     when(io.m_wen) {
     when(io.m_rmask ===1.U) {
-        io.m_rdata := (mem.read(raddr)  & 0x000000ff.U)                 
+        io.m_rdata := (mem.read(raddr.asUInt)  & 0x000000ff.U)                 
     }.elsewhen(io.m_rmask ===2.U) {
-        io.m_rdata := (mem.read(raddr)  & 0x0000ffff.U)
+        io.m_rdata := (mem.read(raddr.asUInt)  & 0x0000ffff.U)
     }.otherwise {
-        io.m_rdata := (mem.read(raddr)  & 0xffffffff.U)
+        io.m_rdata := (mem.read(raddr.asUInt)  & 0xffffffff.U)
     }
     }
 
     when(io.m_wen) {
         when(io.m_wmask ===1.U) {
-        io.m_wdata := (mem.write(waddr)  & 0x000000ff.U)                 
+        io.m_wdata := (mem.write(waddr.asUInt)  & 0x000000ff.U)                 
     }.elsewhen(io.m_wmask ===2.U) {
-        io.m_wdata := (mem.write(waddr)  & 0x0000ffff.U)
+        io.m_wdata := (mem.write(waddr.asUInt)  & 0x0000ffff.U)
     }.otherwise {
-        io.m_wdata := (mem.write(waddr)  & 0xffffffff.U)
+        io.m_wdata := (mem.write(waddr.asUInt)  & 0xffffffff.U)
     }
     }
 
