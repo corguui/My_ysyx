@@ -29,8 +29,6 @@ class IFUtoIDU extends Bundle {
 
 class IFU extends Module {
 	val io = IO(new Bundle{
-		val pc = Output(UInt(32.W))
-		val dnpc = Input(UInt(32.W))
 		val snpc = Output(UInt(32.W))
 		val out = Decoupled(new IFUtoIDU)
 		val exu2in = Flipped(Decoupled(new EXUtoIFU))
@@ -84,11 +82,11 @@ class IFU extends Module {
 	out_data.inst := 0.U
 
 	when(m2EXUstate === m2EXUprocess){
-		io.pc := RegNext(io.dnpc.asSInt, 0x80000000.S).asUInt
-		io.snpc := io.pc + 4.U
+		out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
+		out_data.snpc := out_data.pc + 4.U
     	//取指令
 		vlg_pc_read.io.pc_en := 1.U
-		vlg_pc_read.io.pc := io.pc
+		vlg_pc_read.io.pc := out_data.pc
 		out_data.inst := vlg_pc_read.io.inst 
 	}
 
