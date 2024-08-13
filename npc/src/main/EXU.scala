@@ -47,7 +47,7 @@ class Memory extends Module {
 }
 */
 class EXUtoIFU extends Bundle {
-    val dnpc = Output(Uint(32.W))
+    val dnpc = Output(UInt(32.W))
 }
 
 class EXU extends Module {
