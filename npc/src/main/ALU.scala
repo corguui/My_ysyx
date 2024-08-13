@@ -13,7 +13,7 @@ class alu_io extends Bundle{
 
 class ALU extends Module{
     val io = IO(new alu_io)
-
+    /*
     io.result := 0.U
     switch(io.alu_op)
     {
@@ -32,5 +32,22 @@ class ALU extends Module{
         is("b01100".U){ io.result := (io.src1.asSInt >= io.src2.asSInt).asUInt } //bge
         is("b01101".U){ io.result := (io.src1 =/= io.src2).asUInt } //bne
     }
+    */
+    io.result := MuxLookup(io.alu_op, 0.U, Seq(
+    0.U  -> (io.src1 + io.src2),
+    1.U  -> (io.src1 - io.src2),
+    2.U  -> (io.src1 & io.src2),
+    3.U  -> (io.src1 | io.src2),
+    4.U  -> (io.src1 ^ io.src2),
+    5.U  -> ((io.src1 << io.src2(4, 0))(31, 0)),  // SLL
+    6.U  -> (io.src1 >> io.src2(4, 0)),            // SRL
+    7.U  -> (io.src1.asSInt >> io.src2(4, 0)).asUInt, // SRA
+    8.U  -> (io.src1.asSInt < io.src2.asSInt).asUInt, // SLT
+    9.U  -> (io.src1 < io.src2).asUInt,              // SLTU
+    10.U -> (io.src1 === io.src2).asUInt,            // EQ
+    11.U -> (io.src1 >= io.src2).asUInt,             // GEU
+    12.U -> (io.src1.asSInt >= io.src2.asSInt).asUInt, // GE
+    13.U -> (io.src1 =/= io.src2).asUInt             // NE
+  ))
 
 }
