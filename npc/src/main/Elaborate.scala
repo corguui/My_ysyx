@@ -2,6 +2,7 @@ object Elaborate extends App {
   val firtoolOptions = Array("--lowering-options=" + List(
     // make yosys happy
     // see https://github.com/llvm/circt/blob/main/docs/VerilogGeneration.md
+    "emittedLineLength=300",
     "disallowLocalVariables",
     "disallowPackedArrays",
     "locationInfoStyle=wrapInAtSquareBracket"
