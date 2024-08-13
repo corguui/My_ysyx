@@ -55,7 +55,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1023, "", "Settle region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1022, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -251,7 +251,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__VdfgTmp_hd5680bdc__0 = 0;
     vlSelf->__VdfgTmp_h2e2aee8c__0 = 0;
     vlSelf->__VdfgTmp_he4da6003__0 = 0;
-    vlSelf->__VdfgTmp_h2d0c1b22__0 = 0;
+    vlSelf->__VdfgTmp_h909f8c1d__0 = 0;
     vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__vlg_pc_read__DOT__clk = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__clock = VL_RAND_RESET_I(1);
