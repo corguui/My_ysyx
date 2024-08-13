@@ -80,10 +80,9 @@ class IFU extends Module {
 	vlg_pc_read.io.pc := 0.U
 	out_data.inst := 0.U
 	out_data.snpc := 0.U
-	out_data.pc := 0.U
+	out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
 
 	when(m2EXUstate === m2EXUprocess){
-		out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
 		out_data.snpc := out_data.pc + 4.U
     	//取指令
 		vlg_pc_read.io.pc_en := 1.U
