@@ -21,8 +21,8 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__vlg_pc_read__DOT__clk 
         = vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__clk;
     vlSelf->__Vtrigrprev__TOP__clock = vlSelf->clock;
-    vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT___vlg_pc_read_inst 
-        = vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst;
+    vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__out_data_inst 
+        = vlSelf->top__DOT__IFU__DOT__out_data_inst;
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_final(Vtop___024root* vlSelf) {
@@ -55,7 +55,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1016, "", "Settle region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1024, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -110,7 +110,7 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
         VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge clock)\n");
     }
     if (vlSelf->__VactTriggered.at(2U)) {
-        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([changed] top.IFU._vlg_pc_read_inst)\n");
+        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([changed] top.IFU.out_data_inst)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -131,7 +131,7 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__nba(Vtop___024root* vlSelf) {
         VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge clock)\n");
     }
     if (vlSelf->__VnbaTriggered.at(2U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([changed] top.IFU._vlg_pc_read_inst)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([changed] top.IFU.out_data_inst)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -147,21 +147,22 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->io_inv_flag = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___EXU_io_reg_wdata = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___EXU_io_reg_waddr = VL_RAND_RESET_I(5);
-    vlSelf->top__DOT___EXU_io_dnpc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___EXU_io_csr_waddr_1 = VL_RAND_RESET_I(2);
     vlSelf->top__DOT___EXU_io_csr_wdata_1 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___EXU_io_csr_wen_1 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT___IDU_io_out2exu_bits_mem_wen = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___IDU_io_out2exu_bits_mem_ren = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___IDU_io_out2exu_bits_m_rmask = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT___IDU_io_out2exu_bits_m_wmask = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT___IDU_io_out2exu_bits_reg_wen = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT___IDU_io_out2exu_bits_reg_waddr = VL_RAND_RESET_I(5);
     vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type = VL_RAND_RESET_I(4);
     vlSelf->top__DOT___IDU_io_out2exu_bits_il_us = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT___IDU_io_reg_data_raddr_1 = VL_RAND_RESET_I(5);
+    vlSelf->top__DOT___IDU_io_reg_data_raddr_2 = VL_RAND_RESET_I(5);
     vlSelf->top__DOT___IDU_io_reg_data_csr_raddr = VL_RAND_RESET_I(2);
-    vlSelf->top__DOT__PC__DOT__io_pc_REG = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__IFU__DOT__out_data_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__IFU__DOT__m2EXUstate = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__lastinst = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__IFU__DOT__out_data_pc_REG = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT__vlg_pc_read__DOT__clk = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IDU__DOT__exu_data_alu_op = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__IDU__DOT__lastalu_op = VL_RAND_RESET_I(5);
@@ -176,8 +177,14 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__IDU__DOT__exu_data_imm = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IDU__DOT___GEN_19 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IDU__DOT____VdfgTmp_hfd042d21__0 = 0;
+    vlSelf->top__DOT__IDU__DOT____VdfgTmp_h60c96407__0 = 0;
+    vlSelf->top__DOT__IDU__DOT____VdfgTmp_hf12b015b__0 = 0;
+    vlSelf->top__DOT__IDU__DOT____VdfgTmp_hf0d3b6fe__0 = 0;
+    vlSelf->top__DOT__IDU__DOT____VdfgTmp_hf084048e__0 = 0;
+    vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___alu_io_result = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__EXU__DOT___mem_m_rdata = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__EXU__DOT__lastdnpc = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__m2IDUstate = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_2 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_3 = VL_RAND_RESET_I(1);
@@ -196,6 +203,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_src2 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_src1 = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__EXU__DOT____VdfgTmp_haca7adaf__0 = 0;
     vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0 = 0;
     vlSelf->top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0 = 0;
     vlSelf->top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0 = 0;
@@ -239,13 +247,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__Reg__DOT__casez_tmp_0 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Reg__DOT__casez_tmp_1 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Reg__DOT___GEN = VL_RAND_RESET_I(1);
-    vlSelf->__VdfgTmp_h6d538c99__0 = 0;
-    vlSelf->__VdfgTmp_h78afaf50__0 = 0;
-    vlSelf->__VdfgTmp_hdd1fa857__0 = 0;
+    vlSelf->__VdfgTmp_hf4fc35c0__0 = 0;
+    vlSelf->__VdfgTmp_hd5680bdc__0 = 0;
+    vlSelf->__VdfgTmp_h2e2aee8c__0 = 0;
+    vlSelf->__VdfgTmp_he4da6003__0 = 0;
+    vlSelf->__VdfgTmp_h2d0c1b22__0 = 0;
     vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__vlg_pc_read__DOT__clk = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__clock = VL_RAND_RESET_I(1);
-    vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT___vlg_pc_read_inst = VL_RAND_RESET_I(32);
+    vlSelf->__Vtrigrprev__TOP__top__DOT__IFU__DOT__out_data_inst = VL_RAND_RESET_I(32);
     vlSelf->__VactDidInit = 0;
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
