@@ -34,38 +34,19 @@ class ALU extends Module{
         is("b01101".U){ io.result := (io.src1 =/= io.src2).asUInt } //bne
     }
     */
-  // 使用中间变量来避免位拼接
-  val addResult = io.src1 + io.src2
-  val subResult = io.src1 - io.src2
-  val andResult = io.src1 & io.src2
-  val orResult = io.src1 | io.src2
-  val xorResult = io.src1 ^ io.src2
-  val sllResult = io.src1 << io.src2(4,0)
-  val srlResult = io.src1 >> io.src2(4,0)
-  val sraResult = (io.src1.asSInt >> io.src2(4,0)).asUInt
-  val sltResult = (io.src1.asSInt < io.src2.asSInt)
-  val sltuResult = (io.src1 < io.src2)
-  val beqResult = (io.src1 === io.src2)
-  val bgeuResult = (io.src1 >= io.src2)
-  val bgeResult = (io.src1.asSInt >= io.src2.asSInt)
-  val bneResult = (io.src1 =/= io.src2)
-
-  // 使用 switch-case 语句来分配 io.result
-  switch(io.alu_op) {
-    is("b00000".U) { io.result := addResult } // add
-    is("b00001".U) { io.result := subResult } // sub
-    is("b00010".U) { io.result := andResult } // and
-    is("b00011".U) { io.result := orResult } // or
-    is("b00100".U) { io.result := xorResult } // xor
-    is("b00101".U) { io.result := sllResult } // sll
-    is("b00110".U) { io.result := srlResult } // srl
-    is("b00111".U) { io.result := sraResult } // sra
-    is("b01000".U) { io.result := sltResult.asUInt } // slt
-    is("b01001".U) { io.result := sltuResult.asUInt } // sltu
-    is("b01010".U) { io.result := beqResult.asUInt } // beq
-    is("b01011".U) { io.result := bgeuResult.asUInt } // bgeu
-    is("b01100".U) { io.result := bgeResult.asUInt } // bge
-    is("b01101".U) { io.result := bneResult.asUInt } // bne
-  }
-
+// 使用 Mux 语句来处理每种情况
+  io.result := Mux(io.alu_op === "b00000".U, io.src1 + io.src2, io.result) // add
+  io.result := Mux(io.alu_op === "b00001".U, io.src1 - io.src2, io.result) // sub
+  io.result := Mux(io.alu_op === "b00010".U, io.src1 & io.src2, io.result) // and
+  io.result := Mux(io.alu_op === "b00011".U, io.src1 | io.src2, io.result) // or
+  io.result := Mux(io.alu_op === "b00100".U, io.src1 ^ io.src2, io.result) // xor
+  io.result := Mux(io.alu_op === "b00101".U, io.src1 << io.src2(4,0), io.result) // sll
+  io.result := Mux(io.alu_op === "b00110".U, io.src1 >> io.src2(4,0), io.result) // srl
+  io.result := Mux(io.alu_op === "b00111".U, (io.src1.asSInt >> io.src2(4,0)).asUInt, io.result) // sra
+  io.result := Mux(io.alu_op === "b01000".U, (io.src1.asSInt < io.src2.asSInt).asUInt, io.result) // slt
+  io.result := Mux(io.alu_op === "b01001".U, (io.src1 < io.src2).asUInt, io.result) // sltu
+  io.result := Mux(io.alu_op === "b01010".U, (io.src1 === io.src2).asUInt, io.result) // beq
+  io.result := Mux(io.alu_op === "b01011".U, (io.src1 >= io.src2).asUInt, io.result) // bgeu
+  io.result := Mux(io.alu_op === "b01100".U, (io.src1.asSInt >= io.src2.asSInt).asUInt, io.result) // bge
+  io.result := Mux(io.alu_op === "b01101".U, (io.src1 =/= io.src2).asUInt, io.result) // bne
 }
