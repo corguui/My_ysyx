@@ -21,6 +21,8 @@ class Memory extends Module {
     val raddr = io.m_raddr(7,0)  
     val waddr = io.m_waddr(7,0) 
 
+    io.m_rdata := 0.U
+
     when(io.m_wen) {
     when(io.m_rmask ===1.U) {
         io.m_rdata := (mem.read(raddr.asUInt)  & 0x000000ff.U)                 
