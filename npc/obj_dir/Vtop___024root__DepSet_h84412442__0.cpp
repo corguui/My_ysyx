@@ -50,15 +50,8 @@ VL_INLINE_OPT void Vtop___024root___act_sequent__TOP__0(Vtop___024root* vlSelf) 
     IData/*31:0*/ __Vfunc_vlg_pc_read__0__Vfuncout;
     __Vfunc_vlg_pc_read__0__Vfuncout = 0;
     // Body
-    if (vlSelf->top__DOT__IFU__DOT__io_out_valid_0) {
-        vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst = 0U;
-    } else {
-        Vtop___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(vlSelf->io_pc, __Vfunc_vlg_pc_read__0__Vfuncout);
-        vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst 
-            = __Vfunc_vlg_pc_read__0__Vfuncout;
-    }
-    vlSelf->top__DOT__IFU__DOT__io_out_valid_0 = (vlSelf->top__DOT__IFU__DOT__lastinst 
-                                                  != vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst);
+    Vtop___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(vlSelf->io_pc, __Vfunc_vlg_pc_read__0__Vfuncout);
+    vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst = __Vfunc_vlg_pc_read__0__Vfuncout;
     if ((0x4000U & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) {
         if ((0x2000U & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) {
             if ((0x1000U & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) {
@@ -1067,7 +1060,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
     if (vlSelf->reset) {
         __Vdly__top__DOT__EXU__DOT__m2IDUstate = 0U;
         __Vdly__top__DOT__IDU__DOT__state = 0U;
-        vlSelf->top__DOT__IFU__DOT__lastinst = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_1 = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_3 = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_2 = 0U;
@@ -1105,6 +1097,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Reg__DOT__reg_15 = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_0 = 0U;
         vlSelf->top__DOT__IDU__DOT__lastalu_op = 0U;
+        vlSelf->top__DOT__IFU__DOT__lastinst = 0U;
         vlSelf->top__DOT__PC__DOT__io_pc_REG = 0x80000000U;
     } else {
         if ((1U & (~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)))) {
@@ -1113,9 +1106,9 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
                    != (IData)(vlSelf->top__DOT__IDU__DOT__lastalu_op));
         }
         if ((1U & (~ (IData)(vlSelf->top__DOT__IDU__DOT__state)))) {
-            __Vdly__top__DOT__IDU__DOT__state = vlSelf->top__DOT__IFU__DOT__io_out_valid_0;
+            __Vdly__top__DOT__IDU__DOT__state = (vlSelf->top__DOT__IFU__DOT__lastinst 
+                                                 != vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst);
         }
-        vlSelf->top__DOT__IFU__DOT__lastinst = vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst;
         if (((IData)(vlSelf->top__DOT___EXU_io_csr_wen_1) 
              & (1U == (IData)(vlSelf->top__DOT___EXU_io_csr_waddr_1)))) {
             vlSelf->top__DOT__Reg__DOT__csr_1 = vlSelf->top__DOT___EXU_io_csr_wdata_1;
@@ -1271,6 +1264,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__Reg__DOT__csr_0 = vlSelf->top__DOT___EXU_io_csr_wdata_1;
         }
         vlSelf->top__DOT__IDU__DOT__lastalu_op = vlSelf->top__DOT__IDU__DOT__exu_data_alu_op;
+        vlSelf->top__DOT__IFU__DOT__lastinst = vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst;
         vlSelf->top__DOT__PC__DOT__io_pc_REG = vlSelf->top__DOT___EXU_io_dnpc;
     }
     vlSelf->top__DOT__IDU__DOT__state = __Vdly__top__DOT__IDU__DOT__state;
@@ -1347,8 +1341,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
                                                             : 0U)))
                                                          : 0U))))))))))
             : 0U);
-    vlSelf->top__DOT__IFU__DOT__io_out_valid_0 = (vlSelf->top__DOT__IFU__DOT__lastinst 
-                                                  != vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst);
     vlSelf->top__DOT__Reg__DOT__casez_tmp_0 = ((0x1000000U 
                                                 & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)
                                                 ? (

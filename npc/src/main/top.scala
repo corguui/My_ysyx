@@ -16,6 +16,7 @@ class top extends Module {
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
+  IFU.io.exu2in <> EXU.io.out2ifu
 
   Reg.io.reg_read <> IDU.io.reg_data
   Reg.io.wen := EXU.io.reg_wen
@@ -29,12 +30,7 @@ class top extends Module {
   Reg.io.csr_wen_2 := EXU.io.csr_wen_2
 
 
-  IFU.io.pc := PC.io.pc
-  EXU.io.snpc := PC.io.snpc
-  EXU.io.pc := PC.io.pc
-  PC.io.dnpc := EXU.io.dnpc
-
-  io.pc := PC.io.pc
+  io.pc := IFU.io.out.pc 
   io.inv_flag := IDU.io.inv_flag 
 
 }

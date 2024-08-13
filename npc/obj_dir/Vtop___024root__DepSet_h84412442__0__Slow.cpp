@@ -33,8 +33,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__0\n"); );
     // Body
     vlSelf->io_pc = vlSelf->top__DOT__PC__DOT__io_pc_REG;
-    vlSelf->top__DOT__IFU__DOT__io_out_valid_0 = (vlSelf->top__DOT__IFU__DOT__lastinst 
-                                                  != vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst);
     if ((0x4000U & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) {
         if ((0x2000U & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) {
             if ((0x1000U & vlSelf->top__DOT__IFU__DOT___vlg_pc_read_inst)) {

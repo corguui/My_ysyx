@@ -5,6 +5,8 @@ import chisel3.util._
 import chisel3.experimental._
 
 class IDUtoEXU extends Bundle{
+	val snpc = Output(UInt(32.W))
+	val pc = Output(UInt(32.W))
 	val mem_wen = Output(Bool())
 	val mem_ren = Output(Bool())
 	val m_rmask = Output(UInt(32.W))
@@ -82,6 +84,9 @@ class IDU extends Module {
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
 	exu_data.reg_waddr := rd
+
+	exu_data.snpc := in_data.snpc
+	exu_data.pc := in_data.pc
 	
 	exu_data.mem_wen := false.B
 	exu_data.mem_ren := false.B
