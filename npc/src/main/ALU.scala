@@ -44,13 +44,12 @@ class ALU extends Module{
     is("b00101".U) { io.result := io.src1 << io.src2(4,0) } // sll
     is("b00110".U) { io.result := io.src1 >> io.src2(4,0) } // srl
     is("b00111".U) { io.result := (io.src1.asSInt >> io.src2(4,0)).asUInt } // sra
-    is("b01000".U) { io.result := (io.src1.asSInt < io.src2.asSInt).asUInt } // slt
-    is("b01001".U) { io.result := (io.src1 < io.src2).asUInt } // sltu
-    is("b01010".U) { io.result := Mux(io.src1 === io.src2, 1.U, 0.U) } // beq
-    is("b01011".U) { io.result := Mux(io.src1 >= io.src2, 1.U, 0.U) } // bgeu
-    is("b01100".U) { io.result := Mux(io.src1.asSInt >= io.src2.asSInt, 1.U, 0.U) } // bge
-    is("b01101".U) { io.result := Mux(io.src1 =/= io.src2, 1.U, 0.U) } // bne
+    is("b01000".U) { io.result := Cat(0.U(31.W), (io.src1.asSInt < io.src2.asSInt)) } // slt
+    is("b01001".U) { io.result := Cat(0.U(31.W), (io.src1 < io.src2)) } // sltu
+    is("b01010".U) { io.result := Cat(0.U(31.W), (io.src1 === io.src2)) } // beq
+    is("b01011".U) { io.result := Cat(0.U(31.W), (io.src1 >= io.src2)) } // bgeu
+    is("b01100".U) { io.result := Cat(0.U(31.W), (io.src1.asSInt >= io.src2.asSInt)) } // bge
+    is("b01101".U) { io.result := Cat(0.U(31.W), (io.src1 =/= io.src2)) } // bne
   }
-
 
 }
