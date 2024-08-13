@@ -5,7 +5,7 @@ object Elaborate extends App {
     //"emittedLineLength=900",
     "disallowLocalVariables",
     "disallowPackedArrays",
-    "disallowMuxInlining",
+    //"disallowMuxInlining",
     "locationInfoStyle=wrapInAtSquareBracket"
   ).reduce(_ + "," + _))
   circt.stage.ChiselStage.emitSystemVerilogFile(new npc.top(), args, firtoolOptions)
