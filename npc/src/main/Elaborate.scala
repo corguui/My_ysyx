@@ -4,7 +4,8 @@ object Elaborate extends App {
     // see https://github.com/llvm/circt/blob/main/docs/VerilogGeneration.md
     //"emittedLineLength=900",
     "disallowLocalVariables",
-    "disallowPackedArrays=true",
+    "disallowPackedArrays",
+    "disallowPackedStructAssignments",
     "locationInfoStyle=wrapInAtSquareBracket"
   ).reduce(_ + "," + _))
   circt.stage.ChiselStage.emitSystemVerilogFile(new npc.top(), args, firtoolOptions)
