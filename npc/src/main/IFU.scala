@@ -45,7 +45,7 @@ class IFU extends Module {
 
 	//IFU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
-	val m2EXUstate = RegInit(m2EXUprocess)
+	val m2EXUstate = RegInit(m2EXUidle)
 	m2EXUstate :=MuxLookup(m2EXUstate,m2EXUidle)(List(
 		m2EXUidle -> Mux(io.exu2in.valid,m2EXUprocess,m2EXUidle),
 		m2EXUprocess -> Mux(io.exu2in.ready,m2EXUidle,m2EXUprocess)
@@ -79,18 +79,15 @@ class IFU extends Module {
 	vlg_pc_read.io.clk := clock
 
 	vlg_pc_read.io.pc_en :=0.U 
-	vlg_pc_read.io.pc := 0.U
-	out_data.inst := 0.U
-	out_data.snpc := 0.U
-	out_data.pc := 0.U
+	out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
+	out_data.snpc := out_data.pc + 4.U
+	vlg_pc_read.io.pc := out_data.pc
+	out_data.inst := vlg_pc_read.io.inst
 
 	when(m2EXUstate === m2EXUprocess){
-		out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
-		out_data.snpc := out_data.pc + 4.U
     	//取指令
 		vlg_pc_read.io.pc_en := 1.U
-		vlg_pc_read.io.pc := out_data.pc
-		out_data.inst := vlg_pc_read.io.inst 
+		 
 	}
 
 
