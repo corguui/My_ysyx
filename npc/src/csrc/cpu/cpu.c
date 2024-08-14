@@ -152,7 +152,6 @@ static void trace_and_difftest(Decode *_this) {
 
 void cpu_init()
 {
-	/*
 	top->clock =0; top->eval();
 	top->reset=1;
 	top->clock =1; top->eval();
@@ -160,7 +159,6 @@ void cpu_init()
 	tfp->dump(main_time);
 	#endif
 	main_time++;
-	*/
 	top->clock =0; top->eval();
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
