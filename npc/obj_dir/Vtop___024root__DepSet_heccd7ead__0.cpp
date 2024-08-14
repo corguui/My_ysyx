@@ -17,9 +17,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___nba_sequent__TOP__2\n"); );
-    // Init
-    CData/*0:0*/ top__DOT__IDU__DOT___GEN_14;
-    top__DOT__IDU__DOT___GEN_14 = 0;
     // Body
     if (vlSelf->reset) {
         vlSelf->__Vdly__top__DOT__IFU__DOT__m2EXUstate = 0U;
@@ -378,19 +375,22 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     vlSelf->io_pc = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
                       ? vlSelf->top__DOT__IFU__DOT__out_data_pc_REG
                       : vlSelf->top__DOT__IFU__DOT__lastpc);
-    top__DOT__IDU__DOT___GEN_14 = ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_19) 
-                                   | ((0x23U == (0x7fU 
-                                                 & vlSelf->top__DOT__IFU__DOT__lastinst)) 
-                                      | ((0x63U == 
-                                          (0x7fU & vlSelf->top__DOT__IFU__DOT__lastinst)) 
-                                         | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_13))));
+    vlSelf->top__DOT__IDU__DOT___GEN_14 = ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_19) 
+                                           | ((0x23U 
+                                               == (0x7fU 
+                                                   & vlSelf->top__DOT__IFU__DOT__lastinst)) 
+                                              | ((0x63U 
+                                                  == 
+                                                  (0x7fU 
+                                                   & vlSelf->top__DOT__IFU__DOT__lastinst)) 
+                                                 | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_13))));
     vlSelf->io_inv_flag = ((IData)(vlSelf->top__DOT__IDU__DOT__state) 
-                           & ((~ (IData)(top__DOT__IDU__DOT___GEN_14)) 
+                           & ((~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_14)) 
                               & (0x73U != (0x7fU & vlSelf->top__DOT__IFU__DOT__lastinst))));
     vlSelf->top__DOT___IDU_io_reg_data_csr_raddr = 
         ((1U & ((~ (IData)(vlSelf->top__DOT__IDU__DOT__state)) 
                 | ((0x73U != (0x7fU & vlSelf->top__DOT__IFU__DOT__lastinst)) 
-                   | (IData)(top__DOT__IDU__DOT___GEN_14))))
+                   | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_14))))
           ? 0U : (3U & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_15)
                          ? (IData)(vlSelf->__VdfgTmp_h8a0b1431__0)
                          : (- (IData)((IData)((0U == 
