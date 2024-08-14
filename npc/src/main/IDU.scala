@@ -88,21 +88,21 @@ class IDU extends Module {
 	exu_data.snpc := in_data.snpc
 	exu_data.pc := in_data.pc
 	
-	exu_data.mem_wen := false.B
-	io.mem_ren := false.B
-	exu_data.m_rmask := 0.U
-	exu_data.m_wmask := 0.U
-	exu_data.inst_type := 0.U
-	exu_data.reg_wen := false.B
-	exu_data.alu_op := "b10000".U
+	//exu_data.mem_wen := false.B
+	//io.mem_ren := false.B
+	//exu_data.m_rmask := 0.U
+	//exu_data.m_wmask := 0.U
+	//exu_data.inst_type := 0.U
+	//exu_data.reg_wen := false.B
+	//exu_data.alu_op := "b10000".U
 	exu_data.mstatus := ( io.reg_data.mstatus | (((io.reg_data.mstatus & 0x00000080.U)>>4) | 0x00000080.U))
 	exu_data.csr_a5 := Mux((io.reg_data.csr_a5.asSInt === 0xffffffff.S),0.U,io.reg_data.csr_a5)
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.csr  := io.reg_data.csr_rdata
-	exu_data.imm :=  0.U
-	io.reg_data.csr_raddr := 0.U
-	exu_data.il_us   :=	false.B  //true is Uint  
+	//exu_data.imm :=  0.U
+	//io.reg_data.csr_raddr := 0.U
+	//exu_data.il_us   :=	false.B  //true is Uint  
 
 	when(state === m2IFUprocess )
 	{
