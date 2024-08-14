@@ -66,7 +66,7 @@ class IDU extends Module {
 		m2IFUprocess -> Mux(io.ifu2in.ready,m2IFUidle,m2IFUprocess)
 	))
 	io.ifu2in.ready := (state === m2IFUidle)
-    val in_data = Wire(new IFUtoIDU) 
+    val in_data = Reg(new IFUtoIDU) 
     in_data := io.ifu2in.bits
    
 
