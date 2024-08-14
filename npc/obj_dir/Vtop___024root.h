@@ -26,7 +26,6 @@ class Vtop___024root final : public VerilatedModule {
         CData/*1:0*/ top__DOT___EXU_io_csr_waddr_1;
         CData/*0:0*/ top__DOT___EXU_io_csr_wen_1;
         CData/*1:0*/ top__DOT___IDU_io_reg_data_csr_raddr;
-        CData/*0:0*/ top__DOT___IDU_io_mem_ren;
         CData/*0:0*/ top__DOT__IFU__DOT__m2EXUstate;
         CData/*0:0*/ top__DOT__IFU__DOT__lasten;
         CData/*0:0*/ top__DOT__IDU__DOT__exu_data_mem_wen;
@@ -37,12 +36,13 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__IDU__DOT__exu_data_il_us;
         CData/*4:0*/ top__DOT__IDU__DOT__lastaluop;
         CData/*0:0*/ top__DOT__IDU__DOT__state;
+        CData/*0:0*/ top__DOT__IDU__DOT__lastmem_ren;
         CData/*4:0*/ top__DOT__IDU__DOT__casez_tmp;
-        CData/*0:0*/ top__DOT__IDU__DOT___GEN_5;
         CData/*4:0*/ top__DOT__IDU__DOT__casez_tmp_0;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_12;
         CData/*0:0*/ top__DOT__IDU__DOT___GEN_13;
-        CData/*0:0*/ top__DOT__IDU__DOT___GEN_14;
-        CData/*0:0*/ top__DOT__IDU__DOT___GEN_16;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_15;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_19;
         CData/*0:0*/ top__DOT__IDU__DOT___GEN_20;
         CData/*0:0*/ top__DOT__EXU__DOT__m2IDUstate;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_2;
