@@ -37,7 +37,15 @@ class LSU_mem extends Module {
   	}
 
     val m = Module(new Mem)
-    m.io<>io.mem 
+    m.io.clock := clock
+    m.io.m_waddr := io.mem.m_waddr
+    m.io.m_wdata := io.mem.m_wdata
+    m.io.m_wmask := io.mem.m_wmask
+    m.io.m_wen := io.mem.m_wen
+    m.io.m_raddr := io.mem.m_raddr
+    io.mem.m_rdata := m.io.m_rdata
+    m.io.m_rmask := io.mem.m_rmask
+    m.io.m_ren := io.mem.m_ren
 
 
 }
