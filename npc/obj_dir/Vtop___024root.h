@@ -38,6 +38,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__IDU__DOT__lastreg_wen;
         CData/*4:0*/ top__DOT__IDU__DOT__casez_tmp;
         CData/*4:0*/ top__DOT__IDU__DOT__casez_tmp_0;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_19;
         CData/*0:0*/ top__DOT__IDU__DOT__exu_data_reg_wen;
         CData/*0:0*/ top__DOT__EXU__DOT__m2IDUstate;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
@@ -65,6 +66,10 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__IFU__DOT__out_data_pc_REG;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_imm;
         IData/*31:0*/ top__DOT__IDU__DOT__lastimm;
+        IData/*31:0*/ top__DOT__IDU__DOT___exu_data_imm_T_3;
+        IData/*31:0*/ top__DOT__IDU__DOT___exu_data_imm_T_12;
+        IData/*31:0*/ top__DOT__IDU__DOT___exu_data_imm_T_19;
+        IData/*31:0*/ top__DOT__IDU__DOT___exu_data_imm_T_29;
         IData/*31:0*/ top__DOT__EXU__DOT__ifu_outdata_dnpc;
         IData/*31:0*/ top__DOT__EXU__DOT___alu_io_result;
         IData/*31:0*/ top__DOT__EXU__DOT__lastdnpc;
@@ -78,13 +83,13 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_1;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_2;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_3;
+    };
+    struct {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_4;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_5;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_6;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_7;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_8;
-    };
-    struct {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_9;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_10;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_11;
