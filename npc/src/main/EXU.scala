@@ -117,7 +117,7 @@ class EXU extends Module {
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
     alu.io.alu_op :=15.U
-    ifu_outdata.dnpc := 0x80000000.S.asUInt
+    ifu_outdata.dnpc := 0x80000004.S.asUInt
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
     io.reg_waddr := 0.U
