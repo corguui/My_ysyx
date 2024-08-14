@@ -53,7 +53,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1021, "", "Settle region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1022, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -142,6 +142,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT___EXU_io_csr_waddr_1 = VL_RAND_RESET_I(2);
     vlSelf->top__DOT___EXU_io_csr_wdata_1 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___EXU_io_csr_wen_1 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT___IDU_io_out2exu_bits_snpc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___IDU_io_out2exu_bits_mem_wen = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___IDU_io_out2exu_bits_mem_ren = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___IDU_io_out2exu_bits_m_rmask = VL_RAND_RESET_I(32);
@@ -152,8 +153,8 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT___IDU_io_reg_data_csr_raddr = VL_RAND_RESET_I(2);
     vlSelf->top__DOT___IFU_io_out_bits_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT__m2EXUstate = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__IFU__DOT__out_data_pc_REG = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT__lasten = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__IFU__DOT__out_data_pc_REG = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IDU__DOT__exu_data_alu_op = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__IDU__DOT__lastalu_op = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__IDU__DOT__state = VL_RAND_RESET_I(1);
@@ -234,7 +235,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__Reg__DOT___GEN = VL_RAND_RESET_I(1);
     vlSelf->__VdfgTmp_h2978fbdd__0 = 0;
     vlSelf->__VdfgTmp_he84b757b__0 = 0;
-    vlSelf->__VdfgTmp_hc4b8f828__0 = 0;
+    vlSelf->__VdfgTmp_h97fe1a3d__0 = 0;
     vlSelf->__Vfunc_vlg_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vtrigrprev__TOP__clock = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__top__DOT___IFU_io_out_bits_inst = VL_RAND_RESET_I(32);
