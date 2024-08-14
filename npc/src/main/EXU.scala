@@ -147,6 +147,7 @@ class EXU extends Module {
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     when(m2IDUstate === m2IDUprocess)
     {
+        m2IDUstate := m2IDUidle
         ifu_outdata.dnpc := io.idu2in.bits.snpc 
         //io.idu2in.bits <> data_all  
         switch(io.idu2in.bits.inst_type)

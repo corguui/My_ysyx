@@ -107,6 +107,7 @@ class IDU extends Module {
 	when(state === m2IFUprocess )
 	{
 	//译码
+	state := m2IFUidle
 	io.inv_flag := true.B
 	switch(opcode){
 		//R-Type
