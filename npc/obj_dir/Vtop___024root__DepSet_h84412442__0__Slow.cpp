@@ -903,7 +903,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                     | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_16)))
                               ? vlSelf->top__DOT___IDU_io_out2exu_bits_snpc
                               : vlSelf->top__DOT__Reg__DOT__casez_tmp_1)))))
-          : 0x80000000U);
+          : 0x80000004U);
     if (((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
          & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_2)) 
             & ((3U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type)) 
