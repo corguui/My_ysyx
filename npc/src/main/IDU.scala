@@ -44,7 +44,7 @@ class IDU extends Module {
 	val exu_data = Wire(new IDUtoEXU)
 	
 
-	val lastalu_op = RegNext(exu_data.alu_op,0.U)
+	val lastalu_op = RegNext(exu_data.alu_op,"b10000".U)
 
 	io.out2exu.valid := (exu_data.alu_op =/= lastalu_op )
 	io.out2exu.bits := exu_data
