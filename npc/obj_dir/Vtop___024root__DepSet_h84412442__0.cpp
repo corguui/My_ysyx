@@ -1102,7 +1102,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
                    != vlSelf->top__DOT__IDU__DOT__lastimm);
         }
         if ((1U & (~ (IData)(vlSelf->top__DOT__IDU__DOT__state)))) {
-            __Vdly__top__DOT__IDU__DOT__state = vlSelf->top__DOT__IFU__DOT__lasten;
+            __Vdly__top__DOT__IDU__DOT__state = ((IData)(vlSelf->top__DOT__IFU__DOT__lasten) 
+                                                 != (IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate));
         }
         if (((IData)(vlSelf->top__DOT___EXU_io_csr_wen_1) 
              & (1U == (IData)(vlSelf->top__DOT___EXU_io_csr_waddr_1)))) {

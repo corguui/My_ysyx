@@ -87,12 +87,13 @@ class IFU extends Module {
 		out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
 		out_data.snpc := out_data.pc + 4.U
 		vlg_pc_read.io.pc_en := true.B
+		m2EXUstate := m2EXUidle
 	}
 
 	vlg_pc_read.io.pc := out_data.pc
 	out_data.inst := vlg_pc_read.io.inst
 
-	io.out.valid := (lasten =/= vlg_pc_read.io.pc_en)
+	io.out.valid := lasten
 	//传到IDU
 	io.out.bits := out_data
 
