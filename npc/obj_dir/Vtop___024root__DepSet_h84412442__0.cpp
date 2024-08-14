@@ -915,7 +915,7 @@ VL_INLINE_OPT void Vtop___024root___act_sequent__TOP__0(Vtop___024root* vlSelf) 
                                     | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_16)))
                               ? vlSelf->top__DOT___IDU_io_out2exu_bits_snpc
                               : vlSelf->top__DOT__Reg__DOT__casez_tmp_1)))))
-          : 0x80000004U);
+          : 0x80000000U);
     if (((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
          & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_2)) 
             & ((3U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type)) 
@@ -2118,7 +2118,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                     | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_16)))
                               ? vlSelf->top__DOT___IDU_io_out2exu_bits_snpc
                               : vlSelf->top__DOT__Reg__DOT__casez_tmp_1)))))
-          : 0x80000004U);
+          : 0x80000000U);
     if (((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
          & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_2)) 
             & ((3U == (IData)(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type)) 
