@@ -34,6 +34,7 @@ void print_ringbuf();
 uint32_t pc;
 NPC_CPU_state cpu{};
 static bool g_print_step = false;  
+int valid_flag=0;
 
 void cpu_read_reg()
 {
@@ -180,10 +181,15 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
 		top->clock =0; top->eval();
+		valid_flag=0;
+		if(pc!=0x80000000 || pc!=top->io_pc)
+		{
+		valid_flag =1;
 		pc=top->io_pc;
 		s->pc=top->io_pc;
 		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
     	s->dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
+		}
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
@@ -195,6 +201,9 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		#endif
 		main_time++;
 		top->eval();
+
+if(valid_flag==1)
+{
 
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
@@ -294,6 +303,8 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 	}
  }
 #endif
+}
+
 }
 
 static void execute(uint64_t n)
