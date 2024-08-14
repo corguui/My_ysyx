@@ -117,7 +117,7 @@ class EXU extends Module {
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
     alu.io.alu_op :=15.U
-    ifu_outdata.dnpc := io.idu2in.bits.snpc 
+    ifu_outdata.dnpc := 0x80000000.S.asUInt
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
     io.reg_waddr := 0.U
@@ -147,6 +147,7 @@ class EXU extends Module {
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     when(m2IDUstate === m2IDUprocess)
     {
+        ifu_outdata.dnpc := io.idu2in.bits.snpc 
         //io.idu2in.bits <> data_all  
         switch(io.idu2in.bits.inst_type)
         {

@@ -1091,7 +1091,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Reg__DOT__reg_15 = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_0 = 0U;
         vlSelf->top__DOT__IDU__DOT__lastalu_op = 0U;
-        __Vdly__top__DOT__IFU__DOT__m2EXUstate = 1U;
+        __Vdly__top__DOT__IFU__DOT__m2EXUstate = 0U;
         vlSelf->top__DOT__IFU__DOT__lasten = 0U;
         vlSelf->top__DOT__EXU__DOT__lastdnpc = 0U;
     } else {
