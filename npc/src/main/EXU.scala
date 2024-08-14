@@ -95,6 +95,7 @@ class EXU extends Module {
     io.mem.m_wdata :=0.U
     io.mem.m_wmask :=0.U
     io.mem.m_wen :=0.U
+    io.mem.m_ren :=0.U
     io.mem.m_raddr :=0.U
     io.mem.m_rmask :=0.U
     val alu = Module(new ALU)
@@ -158,6 +159,7 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
+                io.mem.m_ren := io.idu2in.bits.mem_ren
                 io.mem.m_raddr := alu.io.result
                 io.mem.m_rmask := io.idu2in.bits.m_rmask
                 when((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===false.B))
