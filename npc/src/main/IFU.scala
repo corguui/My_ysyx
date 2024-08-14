@@ -77,18 +77,19 @@ class IFU extends Module {
 	//val lastinst = RegNext(out_data.inst,0.U)
 	//io.out.valid := (lastinst =/= out_data.inst)
 	vlg_pc_read.io.clk := clock
-
-	out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
-	out_data.snpc := out_data.pc + 4.U
-	vlg_pc_read.io.pc := out_data.pc
-	out_data.inst := vlg_pc_read.io.inst
+	out_data.pc := 0.U
 	val lasten = RegNext(vlg_pc_read.io.pc_en,false.B)
 	vlg_pc_read.io.pc_en := false.B
 
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
+		out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
+		out_data.snpc := out_data.pc + 4.U
 		vlg_pc_read.io.pc_en := true.B
 	}
+
+	vlg_pc_read.io.pc := out_data.pc
+	out_data.inst := vlg_pc_read.io.inst
 
 	io.out.valid := lasten
 	//传到IDU
