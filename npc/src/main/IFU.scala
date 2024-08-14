@@ -45,7 +45,7 @@ class IFU extends Module {
 
 	//IFU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
-	val m2EXUstate = RegInit(m2EXUidle)
+	val m2EXUstate = RegInit(m2EXUprocess)
 	m2EXUstate :=MuxLookup(m2EXUstate,m2EXUidle)(List(
 		m2EXUidle -> Mux(io.exu2in.valid,m2EXUprocess,m2EXUidle),
 		m2EXUprocess -> Mux(io.exu2in.ready,m2EXUidle,m2EXUprocess)
@@ -61,6 +61,7 @@ class IFU extends Module {
 		val clk = Input(Clock())
       	val pc = Input(UInt(32.W))
       	val inst = Output(UInt(32.W))
+		val pc_en = Input(Bool())
       })
 
 		addPath("./src/main/VlgPcRead.v")
@@ -73,20 +74,23 @@ class IFU extends Module {
 	
 
 	//取指令和生成ready,valid信号
-	val lastinst = RegNext(out_data.inst,0.U)
-	io.out.valid := (lastinst =/= out_data.inst)
+	//val lastinst = RegNext(out_data.inst,0.U)
+	//io.out.valid := (lastinst =/= out_data.inst)
 	vlg_pc_read.io.clk := clock
 
 	out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
 	out_data.snpc := out_data.pc + 4.U
 	vlg_pc_read.io.pc := out_data.pc
 	out_data.inst := vlg_pc_read.io.inst
+	val lasten = RegNext(vlg_pc_read.io.pc_en,false.B)
+	vlg_pc_read.io.pc_en := false.B
 
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
-		 
+		vlg_pc_read.io.pc_en := true.B
 	}
 
+	io.out.valid := lasten
 	//传到IDU
 	io.out.bits := out_data
 
