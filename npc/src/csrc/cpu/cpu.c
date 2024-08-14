@@ -126,10 +126,10 @@ int fl=0;
 static void trace_and_difftest(Decode *_this) {
 #ifdef CONFIG_ITRACE
 //print the command in log_file
-  if (CONFIG_ITRACE) { log_write("%s\n", _this->logbuf); }
+  if (CONFIG_ITRACE&&valid_flag) { log_write("%s\n", _this->logbuf); }
 #endif
 #ifdef CONFIG_FTRACE
-  if (CONFIG_FTRACE&&print_flat==1) { print_flat=0; log_write("%s\n", _this->fun_printf_buf); }
+  if (CONFIG_FTRACE&&print_flat==1&&valid_flag) { print_flat=0; log_write("%s\n", _this->fun_printf_buf); }
 #endif
   if (g_print_step&&valid_flag) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
