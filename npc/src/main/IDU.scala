@@ -81,10 +81,13 @@ class IDU extends Module {
 	val funct7 = in_data.inst(31,25)
 	val csr = in_data.inst(31,20)
 
+	val lastmem_ren = RegNext(mem_ren,false.B)
 
+	val mem_ren = Wire(Bool())
+	mem_ren := false.B
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
-	io.mem_ren := false.B
+	io.mem_ren := lastmem_ren 
 	io.reg_data.csr_raddr := 0.U
 
 
@@ -240,7 +243,7 @@ class IDU extends Module {
 			exu_data.alu_op := "b00000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 			exu_data.reg_wen := true.B
-			io.mem_ren := true.B
+			mem_ren := true.B
 			switch(funct3){
 				//LB
 				is("b000".U){
