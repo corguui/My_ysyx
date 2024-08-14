@@ -98,14 +98,14 @@ class IDU extends Module {
 	exu_data.src1 := io.reg_data.rdata_1
 	exu_data.src2 := io.reg_data.rdata_2
 	exu_data.csr  := io.reg_data.csr_rdata
-	//exu_data.mem_wen := false.B
-	//exu_data.m_rmask := 0.U
-	//exu_data.m_wmask := 0.U
-	//exu_data.inst_type := 0.U
-	//exu_data.reg_wen := false.B
-	//exu_data.alu_op := "b10000".U
-	//exu_data.imm :=  0.U
-	//exu_data.il_us   :=	false.B  //true is Uint 
+	exu_data.mem_wen := false.B
+	exu_data.m_rmask := 0.U
+	exu_data.m_wmask := 0.U
+	exu_data.inst_type := 0.U
+	exu_data.reg_wen := false.B
+	exu_data.alu_op := "b10000".U
+	exu_data.imm :=  0.U
+	exu_data.il_us   :=	false.B  //true is Uint 
 	//译码
 	state := m2IFUidle
 	io.inv_flag := true.B
