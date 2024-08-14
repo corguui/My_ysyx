@@ -131,7 +131,7 @@ static void trace_and_difftest(Decode *_this) {
 #ifdef CONFIG_FTRACE
   if (CONFIG_FTRACE&&print_flat==1) { print_flat=0; log_write("%s\n", _this->fun_printf_buf); }
 #endif
-  if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
+  if (g_print_step&&valid_flag) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
   //compare with the nemu
   //printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
@@ -182,12 +182,12 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
-		if(pc!=0x80000000 || pc!=top->io_pc)
+		if(top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc!==0x80000000)
 		{
 		valid_flag =1;
 		pc=top->io_pc;
 		s->pc=top->io_pc;
-		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
+		s->inst=top->rootp->top__DOT__IFU__DOT__lastinst;
     	s->dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
 		}
 		#ifdef CONFIG_VCD
