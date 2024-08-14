@@ -81,7 +81,7 @@ class IFU extends Module {
 	out_data.pc := lastpc 
 	out_data.snpc := lastsnpc
 	val lasten = RegNext(vlg_pc_read.io.pc_en,false.B)
-	val lastinst = RegEnable(vlg_pc_read.io.inst,0.U,lasten)
+	val lastinst = RegEnable(vlg_pc_read.io.inst,0.U,vlg_pc_read.io.pc_en)
 	vlg_pc_read.io.pc_en := false.B
 
 	when(m2EXUstate === m2EXUprocess){

@@ -65,6 +65,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Reg__DOT___GEN;
         CData/*1:0*/ __VdfgTmp_h89e3f83c__0;
         CData/*0:0*/ __VdfgTmp_h14724db5__0;
+        CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__m2EXUstate;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
@@ -75,16 +76,16 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT___IDU_io_out2exu_bits_m_rmask;
         IData/*31:0*/ top__DOT___IDU_io_out2exu_bits_m_wmask;
         IData/*31:0*/ top__DOT__IFU__DOT___vlg_pc_read_inst;
-        IData/*31:0*/ top__DOT__IFU__DOT__lastinst;
         IData/*31:0*/ top__DOT__IFU__DOT__lastpc;
         IData/*31:0*/ top__DOT__IFU__DOT__lastsnpc;
+        IData/*31:0*/ top__DOT__IFU__DOT__lastinst;
         IData/*31:0*/ top__DOT__IFU__DOT__out_data_pc_REG;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_imm;
         IData/*31:0*/ top__DOT__IDU__DOT__lastimm;
         IData/*31:0*/ top__DOT__IDU__DOT____VdfgTmp_hfd042d21__0;
-        IData/*31:0*/ top__DOT__EXU__DOT__ifu_outdata_dnpc;
     };
     struct {
+        IData/*31:0*/ top__DOT__EXU__DOT__ifu_outdata_dnpc;
         IData/*31:0*/ top__DOT__EXU__DOT___alu_io_result;
         IData/*31:0*/ top__DOT__EXU__DOT___mem_m_rdata;
         IData/*31:0*/ top__DOT__EXU__DOT__lastdnpc;
