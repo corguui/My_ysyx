@@ -5,6 +5,8 @@ import chisel3.util._
 import chisel3.experimental._
 
 class IDUtoEXU extends Bundle{
+	val snpc = Output(UInt(32.W))
+	val pc = Output(UInt(32.W))
 	val mem_wen = Output(Bool())
 	val mem_ren = Output(Bool())
 	val m_rmask = Output(UInt(32.W))
@@ -41,13 +43,12 @@ class IDU extends Module {
 
 	val exu_data = Wire(new IDUtoEXU)
 	
+	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
+	val lastimm = RegNext(exu_data.imm,0.U)
 
-	val lastalu_op = RegNext(exu_data.alu_op,0.U)
-
-	io.out2exu.valid := (exu_data.alu_op =/= lastalu_op )
+	io.out2exu.valid := (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 	io.out2exu.bits := exu_data
 	
-	/*
     class npc_break extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
 			val inst = Input(UInt(32.W))
@@ -55,7 +56,6 @@ class IDU extends Module {
 
 		addPath("./src/main/npc_break.v")
   	}
-	*/
 
 
     //IDU to IFU
@@ -68,13 +68,10 @@ class IDU extends Module {
 	io.ifu2in.ready := (state === m2IFUidle)
     val in_data = Wire(new IFUtoIDU) 
     in_data := io.ifu2in.bits
-    //val lastinst = RegNext(in_data.inst,0.U)
-    //io.ifu2in.ready := (lastinst =/= in_data.inst)
+   
 
-	/*
 	val npc_break = Module(new npc_break)
 	npc_break.io.inst := in_data.inst
-	*/
 
 	val opcode = in_data.inst(6,0)
 	val rd = in_data.inst(11,7)
@@ -87,6 +84,9 @@ class IDU extends Module {
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
 	exu_data.reg_waddr := rd
+
+	exu_data.snpc := in_data.snpc
+	exu_data.pc := in_data.pc
 	
 	exu_data.mem_wen := false.B
 	exu_data.mem_ren := false.B
@@ -107,6 +107,7 @@ class IDU extends Module {
 	when(state === m2IFUprocess )
 	{
 	//译码
+	state := m2IFUidle
 	io.inv_flag := true.B
 	switch(opcode){
 		//R-Type

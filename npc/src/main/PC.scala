@@ -16,6 +16,4 @@ class PC extends Module {
 
 	io.snpc := io.pc + 4.U
 
-
-
 }

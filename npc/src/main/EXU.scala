@@ -4,7 +4,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-
+/*
 class Memory extends Module {
     val io = IO(new Bundle {
         val m_raddr = Input(UInt(32.W))
@@ -45,17 +45,18 @@ class Memory extends Module {
 
 
 }
-
+*/
+class EXUtoIFU extends Bundle {
+    val dnpc = Output(UInt(32.W))
+}
 
 class EXU extends Module {
     val io = IO(new Bundle {
         val idu2in = Flipped(Decoupled(new IDUtoEXU))
+        val out2ifu = Decoupled(new EXUtoIFU)
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
-        val dnpc = Output(UInt(32.W))
-        val snpc = Input(UInt(32.W))
-        val pc   = Input(UInt(32.W))
         val csr_waddr_1 = Output(UInt(2.W))
         val csr_wdata_1 = Output(UInt(32.W))
         val csr_wen_1 = Output(Bool())
@@ -63,6 +64,19 @@ class EXU extends Module {
         val csr_wdata_2 = Output(UInt(32.W))
         val csr_wen_2 = Output(Bool())
     })
+
+    //EXU receive IFU
+    val ifu2s_idle :: ifu2s_wait_ready :: Nil = Enum(2)
+	val ifu2s_state = RegInit(ifu2s_idle)
+	ifu2s_state :=MuxLookup(ifu2s_state,ifu2s_idle)(List(
+		ifu2s_idle -> Mux(io.out2ifu.valid,ifu2s_wait_ready,ifu2s_idle),
+		ifu2s_wait_ready -> Mux(io.out2ifu.ready,ifu2s_idle,ifu2s_wait_ready)
+	))
+
+    val ifu_outdata = Wire(new EXUtoIFU)
+    val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
+    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
+    io.out2ifu.bits := ifu_outdata
 
 
     //EXU to IDU
@@ -73,7 +87,6 @@ class EXU extends Module {
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
 
-    /*
     class Mem extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
         val clock = Input(Clock())
@@ -89,9 +102,9 @@ class EXU extends Module {
 
 		addPath("./src/main/Mem.v")
   	}
-    */
 
-    val mem = Module(new Memory)
+    //val mem = Module(new Memory)   //yosys
+    val mem = Module(new Mem)
     mem.io.m_waddr :=0.U
     mem.io.m_wdata :=0.U
     mem.io.m_wmask :=0.U
@@ -99,12 +112,12 @@ class EXU extends Module {
     mem.io.m_raddr :=0.U
     mem.io.m_rmask :=0.U
     mem.io.m_ren :=0.U
-    //mem.io.clock := clock
+    mem.io.clock := clock  //yosys 要注释
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
     alu.io.alu_op :=15.U
-    io.dnpc := io.snpc 
+    ifu_outdata.dnpc := 0x80000000.S.asUInt
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
     io.reg_waddr := 0.U
@@ -134,6 +147,8 @@ class EXU extends Module {
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     when(m2IDUstate === m2IDUprocess)
     {
+        m2IDUstate := m2IDUidle
+        ifu_outdata.dnpc := io.idu2in.bits.snpc 
         //io.idu2in.bits <> data_all  
         switch(io.idu2in.bits.inst_type)
         {
@@ -197,7 +212,7 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.src2
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                io.dnpc :=  Mux((alu.io.result===1.U),(io.pc+io.idu2in.bits.imm),io.snpc)
+                ifu_outdata.dnpc :=  Mux((alu.io.result===1.U),(io.idu2in.bits.pc+io.idu2in.bits.imm),io.idu2in.bits.snpc)
             }
             //u type
             is(6.U){
@@ -208,7 +223,7 @@ class EXU extends Module {
             //upc type
             is(7.U){
                 alu.io.src1 := io.idu2in.bits.imm
-                alu.io.src2 := io.pc
+                alu.io.src2 := io.idu2in.bits.pc
                 alu.io.alu_op := io.idu2in.bits.alu_op
                 io.reg_wdata := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
@@ -216,21 +231,21 @@ class EXU extends Module {
             }
             //j type
             is(8.U){
-                io.reg_wdata := io.snpc
+                io.reg_wdata := io.idu2in.bits.snpc
                 alu.io.src1 := io.idu2in.bits.imm
-                alu.io.src2 := io.pc
+                alu.io.src2 := io.idu2in.bits.pc
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                io.dnpc := alu.io.result 
+                ifu_outdata.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
             }
             //jr type
             is(9.U){
-                io.reg_wdata := io.snpc
+                io.reg_wdata := io.idu2in.bits.snpc
                 alu.io.src1 := io.idu2in.bits.imm
                 alu.io.src2 := io.idu2in.bits.src1
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                io.dnpc := alu.io.result 
+                ifu_outdata.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
             }
@@ -270,17 +285,17 @@ class EXU extends Module {
                 io.csr_wdata_1 := io.idu2in.bits.csr_a5    //mcause
                 io.csr_wen_1  := true.B 
                 io.csr_waddr_1 := 1.U
-                io.csr_wdata_2 := io.pc      //mepc
+                io.csr_wdata_2 := io.idu2in.bits.pc      //mepc
                 io.csr_wen_2  := true.B 
                 io.csr_waddr_2 := 0.U
-                io.dnpc := io.idu2in.bits.csr //mtvec
+                ifu_outdata.dnpc := io.idu2in.bits.csr //mtvec
             }
             //mret
             is(13.U){
                 io.csr_wdata_1 := io.idu2in.bits.mstatus    //mstaus
                 io.csr_wen_1  := true.B 
                 io.csr_waddr_1 := 2.U
-                io.dnpc := io.idu2in.bits.csr //mepc
+                ifu_outdata.dnpc := io.idu2in.bits.csr //mepc
             }
         }
     }
