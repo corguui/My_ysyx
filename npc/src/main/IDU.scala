@@ -81,8 +81,8 @@ class IDU extends Module {
 	val funct7 = in_data.inst(31,25)
 	val csr = in_data.inst(31,20)
 
-	io.reg_data.raddr_0 := rs1
-	io.reg_data.raddr_1 := rs2
+	io.reg_data.raddr_1 := rs1
+	io.reg_data.raddr_2 := rs2
 	io.mem_ren := false.B
 	io.reg_data.csr_raddr := 0.U
 
