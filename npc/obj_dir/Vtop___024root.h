@@ -91,6 +91,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_mstatus;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_imm;
         IData/*31:0*/ top__DOT__IDU__DOT__lastimm;
+        IData/*31:0*/ top__DOT__IDU__DOT__in_data_snpc;
+        IData/*31:0*/ top__DOT__IDU__DOT__in_data_pc;
+        IData/*31:0*/ top__DOT__IDU__DOT__in_data_inst;
         IData/*31:0*/ top__DOT__IDU__DOT__casez_tmp_0;
         IData/*31:0*/ top__DOT__EXU__DOT__ifu_outdata_dnpc;
         IData/*31:0*/ top__DOT__EXU__DOT___alu_io_result;
@@ -137,7 +140,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_0;
         IData/*31:0*/ __VdfgTmp_h570e6332__0;
         IData/*31:0*/ __VstlIterCount;
-        IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__IFU__DOT__lastinst;
+        IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__IDU__DOT__in_data_inst;
         IData/*31:0*/ __VactIterCount;
         VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     };
