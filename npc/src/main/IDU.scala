@@ -103,7 +103,7 @@ class IDU extends Module {
 	exu_data.inst_type := 0.U
 	exu_data.reg_wen := lastreg_wen 
 	exu_data.alu_op := "b10000".U
-	exu_data.imm :=  0.U
+	exu_data.imm :=  lastimm 
 	exu_data.il_us   :=	false.B  //true is Uint 
 
 	when(state === m2IFUprocess )
