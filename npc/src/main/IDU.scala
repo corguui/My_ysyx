@@ -82,8 +82,10 @@ class IDU extends Module {
 	val csr = in_data.inst(31,20)
 
 
-	val mem_ren = false.B 
+	val mem_ren = Wire(Bool())
+	mem_ren := false.B
 	val lastmem_ren = RegNext(mem_ren,false.B)
+
 
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
