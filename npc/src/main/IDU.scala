@@ -30,7 +30,6 @@ class IDU extends Module {
 		val out2exu = Decoupled(new IDUtoEXU)
 		val reg_data = Flipped(new IO_reg_read)
 		val inv_flag = Output(Bool())
-		val mem_ren = Output(Bool())
 	})
     
 	io.inv_flag := false.B
