@@ -135,7 +135,10 @@ static void trace_and_difftest(Decode *_this) {
   #ifdef CONFIG_DIFFTEST 
   //compare with the nemu
   //printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
+  if(valid_flag)
+  {
   difftest_step(_this->pc, top->io_pc);
+  }
   #endif
 
 #ifdef CONFIG_CC_WATCHPOINT
