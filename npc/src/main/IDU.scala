@@ -41,7 +41,7 @@ class IDU extends Module {
 	))
 
 
-	val exu_data = Wire(new IDUtoEXU)
+	val exu_data = Reg(new IDUtoEXU)
 	
 	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
 	val lastimm = RegNext(exu_data.imm,0.U)
@@ -81,13 +81,15 @@ class IDU extends Module {
 	val funct7 = in_data.inst(31,25)
 	val csr = in_data.inst(31,20)
 
-	val lastreg_wen = RegNext(exu_data.reg_wen,false.B)	
 
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
 	io.mem_ren := false.B
 	io.reg_data.csr_raddr := 0.U
 
+
+	when(state === m2IFUprocess )
+	{
 	exu_data.reg_waddr := rd
 	exu_data.snpc := in_data.snpc
 	exu_data.pc := in_data.pc
@@ -101,15 +103,10 @@ class IDU extends Module {
 	exu_data.m_rmask := 0.U
 	exu_data.m_wmask := 0.U
 	exu_data.inst_type := 0.U
-	exu_data.reg_wen := lastreg_wen 
+	exu_data.reg_wen := false.B 
 	exu_data.alu_op := "b10000".U
-	exu_data.imm :=  lastimm 
+	exu_data.imm :=  0.U 
 	exu_data.il_us   :=	false.B  //true is Uint 
-
-	when(state === m2IFUprocess )
-	{
-
-
 	//译码
 	state := m2IFUidle
 	io.inv_flag := true.B
