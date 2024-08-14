@@ -34,6 +34,7 @@ void print_ringbuf();
 uint32_t pc;
 NPC_CPU_state cpu{};
 static bool g_print_step = false;  
+int valid_flag=0;
 
 void cpu_read_reg()
 {
@@ -125,16 +126,19 @@ int fl=0;
 static void trace_and_difftest(Decode *_this) {
 #ifdef CONFIG_ITRACE
 //print the command in log_file
-  if (CONFIG_ITRACE) { log_write("%s\n", _this->logbuf); }
+  if (CONFIG_ITRACE&&valid_flag) { log_write("%s\n", _this->logbuf); }
 #endif
 #ifdef CONFIG_FTRACE
-  if (CONFIG_FTRACE&&print_flat==1) { print_flat=0; log_write("%s\n", _this->fun_printf_buf); }
+  if (CONFIG_FTRACE&&print_flat==1&&valid_flag) { print_flat=0; log_write("%s\n", _this->fun_printf_buf); }
 #endif
-  if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
+  if (g_print_step&&valid_flag) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
   //compare with the nemu
   //printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
+  if(valid_flag)
+  {
   difftest_step(_this->pc, top->io_pc);
+  }
   #endif
 
 #ifdef CONFIG_CC_WATCHPOINT
@@ -180,10 +184,15 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
 		top->clock =0; top->eval();
+		valid_flag=0;
+		if(top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc!=0x80000000)
+		{
+		valid_flag =1;
 		pc=top->io_pc;
 		s->pc=top->io_pc;
-		s->inst=top->rootp->top__DOT__IFU__DOT___vlg_pc_read_inst;
+		s->inst=top->rootp->top__DOT__IFU__DOT__lastinst;
     	s->dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
+		}
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
@@ -195,6 +204,9 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		#endif
 		main_time++;
 		top->eval();
+
+if(valid_flag==1)
+{
 
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
@@ -294,6 +306,8 @@ if(strncmp(s->funbuf+24,ar,3)==0)
 	}
  }
 #endif
+}
+
 }
 
 static void execute(uint64_t n)

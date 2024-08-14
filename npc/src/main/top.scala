@@ -12,6 +12,7 @@ class top extends Module {
   val IDU = Module(new IDU)
   val EXU = Module(new EXU)
   val Reg = Module(new Reg)
+  val Mem = Module(new LSU_mem)
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
@@ -28,6 +29,7 @@ class top extends Module {
   Reg.io.csr_wen_1 := EXU.io.csr_wen_1
   Reg.io.csr_wen_2 := EXU.io.csr_wen_2
 
+  Mem.io.mem <> EXU.io.mem
 
   io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 

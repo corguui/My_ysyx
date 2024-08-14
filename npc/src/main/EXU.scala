@@ -54,6 +54,7 @@ class EXU extends Module {
     val io = IO(new Bundle {
         val idu2in = Flipped(Decoupled(new IDUtoEXU))
         val out2ifu = Decoupled(new EXUtoIFU)
+        val mem = Flipped(new IO_mem)
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
@@ -87,32 +88,16 @@ class EXU extends Module {
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
 
-    class Mem extends BlackBox with HasBlackBoxPath {
-    	val io = IO(new Bundle {
-        val clock = Input(Clock())
-        val m_waddr = Input(UInt(32.W))
-        val m_wdata = Input(UInt(32.W))
-        val m_wmask = Input(UInt(32.W))
-        val m_wen = Input(Bool())
-        val m_raddr = Input(UInt(32.W))
-        val m_rdata = Output(UInt(32.W))
-        val m_rmask = Input(UInt(32.W))
-        val m_ren = Input(Bool())
-      })
 
-		addPath("./src/main/Mem.v")
-  	}
 
     //val mem = Module(new Memory)   //yosys
-    val mem = Module(new Mem)
-    mem.io.m_waddr :=0.U
-    mem.io.m_wdata :=0.U
-    mem.io.m_wmask :=0.U
-    mem.io.m_wen :=0.U
-    mem.io.m_raddr :=0.U
-    mem.io.m_rmask :=0.U
-    mem.io.m_ren :=0.U
-    mem.io.clock := clock  //yosys 要注释
+    io.mem.m_waddr :=0.U
+    io.mem.m_wdata :=0.U
+    io.mem.m_wmask :=0.U
+    io.mem.m_wen :=0.U
+    io.mem.m_ren :=0.U
+    io.mem.m_raddr :=0.U
+    io.mem.m_rmask :=0.U
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
@@ -147,7 +132,6 @@ class EXU extends Module {
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     when(m2IDUstate === m2IDUprocess)
     {
-        m2IDUstate := m2IDUidle
         ifu_outdata.dnpc := io.idu2in.bits.snpc 
         //io.idu2in.bits <> data_all  
         switch(io.idu2in.bits.inst_type)
@@ -175,24 +159,24 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                mem.io.m_raddr := alu.io.result
-                mem.io.m_ren := io.idu2in.bits.mem_ren
-                mem.io.m_rmask := io.idu2in.bits.m_rmask
+                io.mem.m_ren := io.idu2in.bits.mem_ren
+                io.mem.m_raddr := alu.io.result
+                io.mem.m_rmask := io.idu2in.bits.m_rmask
                 when((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===false.B))
                 {
-                io.reg_wdata := ((Cat(Fill(24,mem.io.m_rdata(7)),mem.io.m_rdata(7,0))).asSInt).asUInt
+                io.reg_wdata := ((Cat(Fill(24,io.mem.m_rdata(7)),io.mem.m_rdata(7,0))).asSInt).asUInt
                 }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===false.B))
                 {
-                io.reg_wdata := ((Cat(Fill(16,mem.io.m_rdata(15)),mem.io.m_rdata(15,0))).asSInt).asUInt
+                io.reg_wdata := ((Cat(Fill(16,io.mem.m_rdata(15)),io.mem.m_rdata(15,0))).asSInt).asUInt
                 }.elsewhen((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===true.B))
                 {
-                io.reg_wdata := ((Cat(0.U(24.W),mem.io.m_rdata(7,0)))).asUInt
+                io.reg_wdata := ((Cat(0.U(24.W),io.mem.m_rdata(7,0)))).asUInt
                 }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===true.B))
                 {
-                io.reg_wdata := ((Cat(0.U(16.W),mem.io.m_rdata(15,0)))).asUInt
+                io.reg_wdata := ((Cat(0.U(16.W),io.mem.m_rdata(15,0)))).asUInt
                 }.otherwise
                 {
-                io.reg_wdata := (mem.io.m_rdata.asSInt).asUInt
+                io.reg_wdata := (io.mem.m_rdata.asSInt).asUInt
                 }
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
@@ -202,10 +186,10 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                mem.io.m_waddr := alu.io.result
-                mem.io.m_wdata := io.idu2in.bits.src2
-                mem.io.m_wmask := io.idu2in.bits.m_wmask
-                mem.io.m_wen := io.idu2in.bits.mem_wen
+                io.mem.m_waddr := alu.io.result
+                io.mem.m_wdata := io.idu2in.bits.src2
+                io.mem.m_wmask := io.idu2in.bits.m_wmask
+                io.mem.m_wen := io.idu2in.bits.mem_wen
             }
             //b type
             is(5.U){
