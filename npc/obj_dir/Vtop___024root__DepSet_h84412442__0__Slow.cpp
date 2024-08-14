@@ -201,7 +201,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     } else {
         vlSelf->io_pc = vlSelf->top__DOT__IFU__DOT__lastpc;
         vlSelf->top__DOT___IDU_io_out2exu_bits_snpc 
-            = vlSelf->top__DOT__IFU__DOT__lastpc;
+            = vlSelf->top__DOT__IFU__DOT__lastsnpc;
     }
     vlSelf->top__DOT__IDU__DOT___GEN_16 = ((0x17U == 
                                             (0x7fU 
