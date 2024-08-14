@@ -41,7 +41,7 @@ class IDU extends Module {
 	))
 
 
-	val exu_data = Wire(new IDUtoEXU)
+	val exu_data = Reg(new IDUtoEXU)
 	
 	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
 	val lastimm = RegNext(exu_data.imm,0.U)
@@ -66,7 +66,7 @@ class IDU extends Module {
 		m2IFUprocess -> Mux(io.ifu2in.ready,m2IFUidle,m2IFUprocess)
 	))
 	io.ifu2in.ready := (state === m2IFUidle)
-    val in_data = Reg(new IFUtoIDU) 
+    val in_data = Wire(new IFUtoIDU) 
     in_data := io.ifu2in.bits
    
 

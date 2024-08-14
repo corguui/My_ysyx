@@ -54,7 +54,6 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT___Mem_io_mem_m_rdata;
         IData/*31:0*/ top__DOT___EXU_io_reg_wdata;
         IData/*31:0*/ top__DOT___EXU_io_csr_wdata_1;
-        IData/*31:0*/ top__DOT___IDU_io_out2exu_bits_snpc;
         IData/*31:0*/ top__DOT___IDU_io_out2exu_bits_m_rmask;
         IData/*31:0*/ top__DOT___IDU_io_out2exu_bits_m_wmask;
         IData/*31:0*/ top__DOT__IFU__DOT___vlg_pc_read_inst;
@@ -64,6 +63,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__IFU__DOT__out_data_pc_REG;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_imm;
         IData/*31:0*/ top__DOT__IDU__DOT__lastimm;
+        IData/*31:0*/ top__DOT__IDU__DOT__in_data_snpc;
+        IData/*31:0*/ top__DOT__IDU__DOT__in_data_pc;
+        IData/*31:0*/ top__DOT__IDU__DOT__in_data_inst;
         IData/*31:0*/ top__DOT__EXU__DOT__ifu_outdata_dnpc;
         IData/*31:0*/ top__DOT__EXU__DOT___alu_io_result;
         IData/*31:0*/ top__DOT__EXU__DOT__lastdnpc;
@@ -81,10 +83,10 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_5;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_6;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_7;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_8;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_9;
     };
     struct {
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_8;
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_9;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_10;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_11;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_12;
@@ -111,7 +113,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_0;
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_1;
         IData/*31:0*/ __VstlIterCount;
-        IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__IFU__DOT__lastinst;
+        IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__IDU__DOT__in_data_inst;
         IData/*31:0*/ __VactIterCount;
         VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     };
