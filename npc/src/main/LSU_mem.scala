@@ -39,6 +39,6 @@ class LSU_mem extends Module {
 
     val m = Module(new Mem)
     io.mem <> m.io
-    io.mem.m_ren := io.m_ren
+    io.m_ren := m.m_ren
 
 }
