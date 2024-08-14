@@ -81,7 +81,6 @@ class IDU extends Module {
 	val funct7 = in_data.inst(31,25)
 	val csr = in_data.inst(31,20)
 
-	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
 	val lastreg_wen = RegNext(exu_data.reg_wen,false.B)
 
 	io.reg_data.raddr_1 := rs1
