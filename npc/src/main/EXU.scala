@@ -97,7 +97,6 @@ class EXU extends Module {
     io.mem.m_wen :=0.U
     io.mem.m_raddr :=0.U
     io.mem.m_rmask :=0.U
-    io.mem.clock := clock  //yosys 要注释
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
