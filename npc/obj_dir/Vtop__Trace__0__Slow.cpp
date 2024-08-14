@@ -105,12 +105,11 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+48,"io_reg_data_csr_a5", false,-1, 31,0);
     tracep->declBus(c+49,"io_reg_data_mstatus", false,-1, 31,0);
     tracep->declBit(c+91,"io_inv_flag", false,-1);
-    tracep->declBus(c+17,"exu_data_alu_op", false,-1, 4,0);
-    tracep->declBus(c+50,"lastalu_op", false,-1, 4,0);
+    tracep->declBus(c+16,"exu_data_imm", false,-1, 31,0);
+    tracep->declBus(c+50,"lastimm", false,-1, 31,0);
     tracep->declBit(c+51,"state", false,-1);
     tracep->declBus(c+5,"casez_tmp", false,-1, 4,0);
     tracep->declBus(c+6,"casez_tmp_0", false,-1, 4,0);
-    tracep->declBus(c+16,"exu_data_imm", false,-1, 31,0);
     tracep->pushNamePrefix("npc_break ");
     tracep->declBus(c+2,"inst", false,-1, 31,0);
     tracep->popNamePrefix(2);
@@ -243,8 +242,8 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                                       >> 0x14U))),5);
     bufp->fullCData(oldp+5,(vlSelf->top__DOT__IDU__DOT__casez_tmp),5);
     bufp->fullCData(oldp+6,(vlSelf->top__DOT__IDU__DOT__casez_tmp_0),5);
-    bufp->fullBit(oldp+7,(((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_alu_op) 
-                           != (IData)(vlSelf->top__DOT__IDU__DOT__lastalu_op))));
+    bufp->fullBit(oldp+7,((vlSelf->top__DOT__IDU__DOT__exu_data_imm 
+                           != vlSelf->top__DOT__IDU__DOT__lastimm)));
     bufp->fullBit(oldp+8,(vlSelf->top__DOT___IDU_io_out2exu_bits_mem_wen));
     bufp->fullBit(oldp+9,(vlSelf->top__DOT___IDU_io_out2exu_bits_mem_ren));
     bufp->fullIData(oldp+10,(vlSelf->top__DOT___IDU_io_out2exu_bits_m_rmask),32);
@@ -254,7 +253,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullIData(oldp+14,(vlSelf->top__DOT__Reg__DOT__casez_tmp_0),32);
     bufp->fullIData(oldp+15,(vlSelf->top__DOT__Reg__DOT__casez_tmp_1),32);
     bufp->fullIData(oldp+16,(vlSelf->top__DOT__IDU__DOT__exu_data_imm),32);
-    bufp->fullCData(oldp+17,(vlSelf->top__DOT__IDU__DOT__exu_data_alu_op),5);
+    bufp->fullCData(oldp+17,(vlSelf->top__DOT___IDU_io_out2exu_bits_alu_op),5);
     bufp->fullCData(oldp+18,(vlSelf->top__DOT___IDU_io_out2exu_bits_inst_type),4);
     bufp->fullBit(oldp+19,(vlSelf->top__DOT___IDU_io_out2exu_bits_il_us));
     bufp->fullBit(oldp+20,((vlSelf->top__DOT__EXU__DOT__lastdnpc 
@@ -317,7 +316,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+47,(vlSelf->top__DOT__IFU__DOT__lasten));
     bufp->fullIData(oldp+48,(vlSelf->top__DOT__Reg__DOT__reg_15),32);
     bufp->fullIData(oldp+49,(vlSelf->top__DOT__Reg__DOT__csr_2),32);
-    bufp->fullCData(oldp+50,(vlSelf->top__DOT__IDU__DOT__lastalu_op),5);
+    bufp->fullIData(oldp+50,(vlSelf->top__DOT__IDU__DOT__lastimm),32);
     bufp->fullBit(oldp+51,(vlSelf->top__DOT__IDU__DOT__state));
     bufp->fullBit(oldp+52,(vlSelf->top__DOT__IFU__DOT__m2EXUstate));
     bufp->fullIData(oldp+53,(vlSelf->top__DOT__IFU__DOT__out_data_pc_REG),32);

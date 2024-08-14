@@ -92,7 +92,7 @@ class IFU extends Module {
 	vlg_pc_read.io.pc := out_data.pc
 	out_data.inst := vlg_pc_read.io.inst
 
-	io.out.valid := lasten
+	io.out.valid := (lasten =/= vlg_pc_read.io.pc_en)
 	//传到IDU
 	io.out.bits := out_data
 
