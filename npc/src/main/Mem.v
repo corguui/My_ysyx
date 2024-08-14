@@ -13,7 +13,7 @@ module Mem(
 
 ); 
 
-    always @(*) begin
+    always @(posedge clock) begin
         if(m_ren) begin
             m_rdata=vlg_pmem_read(m_raddr,m_rmask);
         end

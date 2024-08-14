@@ -8,7 +8,6 @@ class IDUtoEXU extends Bundle{
 	val snpc = Output(UInt(32.W))
 	val pc = Output(UInt(32.W))
 	val mem_wen = Output(Bool())
-	val mem_ren = Output(Bool())
 	val m_rmask = Output(UInt(32.W))
 	val m_wmask = Output(UInt(32.W))
 	val reg_waddr = Output(UInt(5.W))
@@ -30,6 +29,7 @@ class IDU extends Module {
 		val out2exu = Decoupled(new IDUtoEXU)
 		val reg_data = Flipped(new IO_reg_read)
 		val inv_flag = Output(Bool())
+		val mem_ren = Output(Bool())
 	})
     
 	io.inv_flag := false.B
@@ -89,7 +89,7 @@ class IDU extends Module {
 	exu_data.pc := in_data.pc
 	
 	exu_data.mem_wen := false.B
-	exu_data.mem_ren := false.B
+	io.mem_ren := false.B
 	exu_data.m_rmask := 0.U
 	exu_data.m_wmask := 0.U
 	exu_data.inst_type := 0.U
@@ -239,7 +239,7 @@ class IDU extends Module {
 			exu_data.alu_op := "b00000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 			exu_data.reg_wen := true.B
-			exu_data.mem_ren := true.B
+			io.mem_ren := true.B
 			switch(funct3){
 				//LB
 				is("b000".U){
