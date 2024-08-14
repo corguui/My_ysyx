@@ -109,6 +109,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelf->top__DOT__IDU__DOT__state = ((~ (IData)(vlSelf->reset)) 
                                          & ((~ (IData)(vlSelf->top__DOT__IDU__DOT__state)) 
                                             & (IData)(vlSelf->top__DOT__IFU__DOT__lasten)));
+    vlSelf->top__DOT__IDU__DOT__lastreg_wen = ((~ (IData)(vlSelf->reset)) 
+                                               & (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen));
     if (vlSelf->reset) {
         vlSelf->top__DOT__Reg__DOT__csr_1 = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_3 = 0U;
