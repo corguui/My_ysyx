@@ -77,7 +77,7 @@ class IFU extends Module {
 	//val lastinst = RegNext(out_data.inst,0.U)
 	//io.out.valid := (lastinst =/= out_data.inst)
 	vlg_pc_read.io.clk := clock
-	out_data.pc := 0.U
+	out_data.pc := 0x80000000.S.asUInt
 	out_data.snpc := 0.U
 	val lasten = RegNext(vlg_pc_read.io.pc_en,false.B)
 	vlg_pc_read.io.pc_en := false.B
