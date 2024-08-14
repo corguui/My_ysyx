@@ -80,7 +80,7 @@ class IFU extends Module {
 	val lastsnpc = RegNext(out_data.snpc,0.U)
 	vlg_pc_read.io.clk := clock
 	out_data.pc := lastpc 
-	out_data.snpc := lastpc
+	out_data.snpc := lastnpc
 	val lasten = RegNext(vlg_pc_read.io.pc_en,false.B)
 	vlg_pc_read.io.pc_en := false.B
 
