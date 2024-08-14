@@ -126,7 +126,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp;
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_0;
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_1;
-        IData/*31:0*/ __VdfgTmp_h97fe1a3d__0;
+        IData/*31:0*/ __VdfgTmp_hadfe1a3d__0;
         IData/*31:0*/ __Vfunc_vlg_pmem_read__2__Vfuncout;
         IData/*31:0*/ __VstlIterCount;
         IData/*31:0*/ __Vtrigrprev__TOP__top__DOT___IFU_io_out_bits_inst;
