@@ -135,7 +135,7 @@ static void trace_and_difftest(Decode *_this) {
   #ifdef CONFIG_DIFFTEST 
   if(valid_flag)
   {
-	printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
+  printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
   difftest_step(_this->pc, top->io_pc);
   }
   #endif

@@ -106,7 +106,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     return;
   }
   //等待npc多执行一次
-  if(ref_skip_wait==1)
+  if(ref_skip_wait=1)
   {
     return;
   }
