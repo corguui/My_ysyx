@@ -185,7 +185,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
-		if(cmp_dnpc!=0&&cmp_dnpc!=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc)
+		if(cmp_dnpc!=0&&cmp_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc)
 		{
 		valid_flag =1;
 		pc=top->io_pc;
