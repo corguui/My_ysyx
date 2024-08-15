@@ -110,6 +110,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   {
     return;
   }
+  printf("ref begin\r\n");
   ref_difftest_exec(1);
   printf("ref exec\r\n");
   ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
