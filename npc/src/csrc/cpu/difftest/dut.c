@@ -122,12 +122,14 @@ bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
   cpu_read_reg();
   for(int i=0;i<num;i++)
   {
+    printf("the No:%d npc-gpr:%x\n        nmeu-gpr:%x\n",i,cpu.gpr[i],ref_r->gpr[i]);
   if(ref_r->gpr[i]!=cpu.gpr[i])
 	{
     printf("the No:%d npc-gpr:%x\n        nmeu-gpr:%x\n",i,cpu.gpr[i],ref_r->gpr[i]);
 		return false;
 	}
   }
+    printf("npc-pc:%x\nnemu-pc:%x\n",cpu.pc,ref_r->pc);
   if(ref_r->pc!=pc)
   {
     printf(" npc-pc:%x\nnemu-pc:%x\n",pc,ref_r->pc);
