@@ -57,6 +57,8 @@ class LSU_mem extends Module {
     io.r_mem_exu.rdata := 0.U
     io.r_mem_exu.rvalid := false.B
 
+    io.w_exu_mem.wready := false.B
+
     val lastraddr = RegNext(io.r_exu_mem.raddr,0.U)
     val lastwaddr = RegNext(io.w_exu_mem.waddr,0.U)
 
