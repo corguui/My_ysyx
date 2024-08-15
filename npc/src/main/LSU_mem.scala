@@ -58,7 +58,7 @@ class LSU_mem extends Module {
     io.r_mem_exu.rvalid := false.B
 
     val lastraddr = RegNext(io.r_exu_mem.raddr,0.U)
-    val lastwaddr = RegNext(io.r_exu_mem.waddr,0.U)
+    val lastwaddr = RegNext(io.w_exu_mem.waddr,0.U)
 
     when(io.r_exu_mem.arvalid &(io.r_exu_mem.raddr =/= lastraddr)){ 
         io.r_exu_mem.arready := true.B

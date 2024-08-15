@@ -151,7 +151,7 @@ class EXU extends Module {
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,reg_ens_en)
     val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,reg_ens_en)
 
-    val memwen_reg_en = wire(Bool())
+    val memwen_reg_en = Wire(Bool())
     memwen_reg_en := false.B
     val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,memwen_reg_en)
 
@@ -261,7 +261,7 @@ class EXU extends Module {
                 io.w_exu_mem.wdata := io.idu2in.bits.src2
                 io.w_exu_mem.wmask := io.idu2in.bits.m_wmask
                 io.w_exu_mem.wvalid := Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
-                when(io.w_exu_mem.bready === 1.U)
+                when(io.w_exu_mem.wready === 1.U)
                 {
                     io.w_exu_mem.wvalid := 0.U
                 }.otherwise{
