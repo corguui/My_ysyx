@@ -185,9 +185,9 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                io.reg_wen := reg_wen_reg 
+                //io.reg_wen := reg_wen_reg 
                 //io.reg_waddr := reg_waddr_reg 
-                //io.reg_wen := Mux(io.idu2in.bits.reg_wen === 1,io.idu2in.bits.reg_wen,reg_wen_reg)
+                io.reg_wen := Mux(io.idu2in.bits.reg_wen === 1,io.idu2in.bits.reg_wen,reg_wen_reg)
                 //io.reg_waddr := Mux(io.idu2in.bits.reg_waddr === 0,reg_waddr_reg,io.idu2in.bits.reg_waddr)
                 //io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
