@@ -52,6 +52,13 @@ class EXUtoMem extends Bundle {
     val arvalid = Output(Bool())
     val arready = Input(Bool())
 }
+class EXUtoMem_w extends Bundle {
+    val waddr = Output(UInt(32.W))
+    val wdata = Output(UInt(32.W))
+    val wmask = Output(UInt(3.W))
+    val wvalid = Output(Bool())
+    val wready = Input(Bool())
+}
 
 
 class EXUtoIFU extends Bundle {
@@ -62,9 +69,9 @@ class EXU extends Module {
     val io = IO(new Bundle {
         val idu2in = Flipped(Decoupled(new IDUtoEXU))
         val out2ifu = Decoupled(new EXUtoIFU)
-        val mem = Flipped(new IO_mem)
         val r_exu_mem = (new EXUtoMem)
         val r_mem_exu = Flipped(new MemtoEXU)
+        val w_exu_mem = (new EXUtoMem_w)
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
@@ -109,10 +116,7 @@ class EXU extends Module {
     
 
     //val mem = Module(new Memory)   //yosys
-    io.mem.m_waddr :=0.U
-    io.mem.m_wdata :=0.U
-    io.mem.m_wmask :=0.U
-    io.mem.m_wen :=0.U
+
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
@@ -133,10 +137,19 @@ class EXU extends Module {
     io.r_exu_mem.raddr := 0.U
     io.r_mem_exu.rready := 0.U
 
+    io.w_exu_mem.waddr := 0.U
+    io.w_exu_mem.wdata := 0.U
+    io.w_exu_mem.wmask := 0.U
+    io.w_exu_mem.wvalid := 0.U
+
     val reg_ens_en = Wire(Bool())
     reg_ens_en := false.B
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,reg_ens_en)
     val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,reg_ens_en)
+
+    val memwen_reg_en = Wire(Bool())
+    memwen_reg_en := false.B
+    val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,memwen_reg_en)
 
     /*
     val data_all = Wire(new IDUtoEXU)
@@ -239,10 +252,13 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                io.mem.m_waddr := alu.io.result
-                io.mem.m_wdata := io.idu2in.bits.src2
-                io.mem.m_wmask := io.idu2in.bits.m_wmask
-                io.mem.m_wen := io.idu2in.bits.mem_wen
+
+                io.w_exu_mem.waddr := alu.io.result
+                io.w_exu_mem.wdata := io.idu2in.bits.src2
+                io.w_exu_mem.wmask := io.idu2in.bits.m_wmask
+                io.w_exu_mem.wvalid := Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
+                memwen_reg_en := true.B
+
             }
             //b type
             is(5.U){

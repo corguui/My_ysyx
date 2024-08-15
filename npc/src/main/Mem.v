@@ -9,7 +9,8 @@ module Mem(
     input [31:0] m_raddr,
     input [31:0] m_rmask,
     input m_ren,
-    output reg [31:0] m_rdata
+    output reg [31:0] m_rdata,
+    output m_wready
 
 ); 
 
@@ -26,8 +27,11 @@ module Mem(
     begin
         if(m_wen)
         begin
+            m_wready=1'b1;
             vlg_pmem_write(m_waddr,m_wdata,m_wmask);
         end
+        else
+            m_wready=1'b0;
     end
 
 endmodule
