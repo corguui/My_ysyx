@@ -84,7 +84,7 @@ class EXU extends Module {
 		ifu2s_wait_ready -> Mux(io.out2ifu.ready,ifu2s_idle,ifu2s_wait_ready)
 	))
 
-    val lastrdata = RegNext(io.r_mem_exu.rdata,1.U)
+    val lastrdata = RegEnable(io.r_mem_exu.rdata,0.U,io.r_mem_exu.rready)
 
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)

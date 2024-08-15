@@ -523,7 +523,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__IFU__DOT__lastinst = 0U;
         vlSelf->top__DOT__EXU__DOT__lastdnpc = 0U;
         vlSelf->top__DOT__IFU__DOT__out_data_pc_REG = 0x80000000U;
-        vlSelf->top__DOT__EXU__DOT__lastrdata = 0U;
+        vlSelf->top__DOT__EXU__DOT__lastrdata = 1U;
     } else {
         vlSelf->__Vdly__top__DOT__IFU__DOT__m2EXUstate 
             = ((~ (IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)) 
