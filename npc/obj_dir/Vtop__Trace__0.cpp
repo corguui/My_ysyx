@@ -147,21 +147,22 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                           >> 0x14U))),5);
         bufp->chgIData(oldp+87,(vlSelf->top__DOT__Reg__DOT__casez_tmp_0),32);
         bufp->chgCData(oldp+88,(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr),2);
-        bufp->chgCData(oldp+89,(vlSelf->top__DOT__IDU__DOT__casez_tmp),5);
-        bufp->chgCData(oldp+90,(vlSelf->top__DOT__IDU__DOT__casez_tmp_0),5);
-        bufp->chgBit(oldp+91,(vlSelf->top__DOT__IFU__DOT__m2EXUstate));
-        bufp->chgIData(oldp+92,(vlSelf->top__DOT__IFU__DOT__lastpc),32);
-        bufp->chgIData(oldp+93,(vlSelf->top__DOT__IFU__DOT__lastsnpc),32);
-        bufp->chgIData(oldp+94,(vlSelf->top__DOT__IFU__DOT__out_data_pc_REG),32);
+        bufp->chgIData(oldp+89,(vlSelf->top__DOT__IDU__DOT__csr_imm),32);
+        bufp->chgCData(oldp+90,(vlSelf->top__DOT__IDU__DOT__casez_tmp),5);
+        bufp->chgCData(oldp+91,(vlSelf->top__DOT__IDU__DOT__casez_tmp_0),5);
+        bufp->chgBit(oldp+92,(vlSelf->top__DOT__IFU__DOT__m2EXUstate));
+        bufp->chgIData(oldp+93,(vlSelf->top__DOT__IFU__DOT__lastpc),32);
+        bufp->chgIData(oldp+94,(vlSelf->top__DOT__IFU__DOT__lastsnpc),32);
+        bufp->chgIData(oldp+95,(vlSelf->top__DOT__IFU__DOT__out_data_pc_REG),32);
     }
-    bufp->chgBit(oldp+95,(vlSelf->clock));
-    bufp->chgBit(oldp+96,(vlSelf->reset));
-    bufp->chgIData(oldp+97,(vlSelf->io_pc),32);
-    bufp->chgBit(oldp+98,(vlSelf->io_inv_flag));
-    bufp->chgIData(oldp+99,(((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
-                              ? ((IData)(4U) + vlSelf->io_pc)
-                              : vlSelf->top__DOT__IFU__DOT__lastsnpc)),32);
-    bufp->chgIData(oldp+100,(((0U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
+    bufp->chgBit(oldp+96,(vlSelf->clock));
+    bufp->chgBit(oldp+97,(vlSelf->reset));
+    bufp->chgIData(oldp+98,(vlSelf->io_pc),32);
+    bufp->chgBit(oldp+99,(vlSelf->io_inv_flag));
+    bufp->chgIData(oldp+100,(((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
+                               ? ((IData)(4U) + vlSelf->io_pc)
+                               : vlSelf->top__DOT__IFU__DOT__lastsnpc)),32);
+    bufp->chgIData(oldp+101,(((0U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
                                ? vlSelf->top__DOT__Reg__DOT__csr_0
                                : ((1U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
                                    ? vlSelf->top__DOT__Reg__DOT__csr_1
