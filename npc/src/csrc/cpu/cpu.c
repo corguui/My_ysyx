@@ -133,14 +133,10 @@ static void trace_and_difftest(Decode *_this) {
 #endif
   if (g_print_step&&valid_flag) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   #ifdef CONFIG_DIFFTEST 
-  //compare with the nemu
-  //printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
   if(valid_flag)
   {
-	printf("difftest_step:%x %x\n",_this->pc,_this->dnpc);
-  //difftest_step(_this->pc, top->io_pc);
-	difftest_step(_this->pc, _this->dnpc);
-
+	printf("difftest_step:%x %x\n",_this->pc,top->io_pc);
+  difftest_step(_this->pc, top->io_pc);
   }
   #endif
 
@@ -319,7 +315,10 @@ static void execute(uint64_t n)
 	for(;n>0;n--)
 	{
 		cpu_exec_once(tfp,&s);
+		if(valid_flag)
+		{
 		trace_and_difftest(&s); 
+		}
 		if(npc_state.state !=NPC_RUNNING) break;
 		#ifdef CONFIG_DEVICE
 		device_update();
