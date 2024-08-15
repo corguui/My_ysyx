@@ -64,6 +64,7 @@ class LSU_mem extends Module {
         io.r_mem_exu.rdata := m.io.m_rdata
         io.r_mem_exu.rvalid := true.B
     }.elsewhen(io.r_mem_exu.rready){
+        io.r_exu_mem.arready := false.B
         io.r_mem_exu.rvalid := false.B
     }
 
