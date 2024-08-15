@@ -35,6 +35,7 @@ uint32_t pc;
 NPC_CPU_state cpu{};
 static bool g_print_step = false;  
 int valid_flag=0;
+uint32_t cmp_dnpc;
 
 void cpu_read_reg()
 {
@@ -184,7 +185,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
-		if(top->rootp->top__DOT__IFU__DOT__m2EXUstate==1)
+		if(cmp_dnpc!=0&&cmp_dncp!=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc)
 		{
 		valid_flag =1;
 		pc=top->io_pc;
@@ -192,6 +193,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		s->inst=top->rootp->top__DOT__IFU__DOT__lastinst;
     	s->dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
 		}
+		cmp_dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
