@@ -22,11 +22,9 @@ class Vtop___024root final : public VerilatedModule {
         VL_IN8(clock,0,0);
         VL_IN8(reset,0,0);
         VL_OUT8(io_inv_flag,0,0);
-        CData/*0:0*/ top__DOT___EXU_io_r_exu_mem_arvalid;
         CData/*4:0*/ top__DOT___EXU_io_reg_waddr;
         CData/*1:0*/ top__DOT___EXU_io_csr_waddr_1;
         CData/*0:0*/ top__DOT___EXU_io_csr_wen_1;
-        CData/*0:0*/ top__DOT___IDU_io_out2exu_valid;
         CData/*1:0*/ top__DOT___IDU_io_reg_data_csr_raddr;
         CData/*0:0*/ top__DOT__IFU__DOT__m2EXUstate;
         CData/*0:0*/ top__DOT__IFU__DOT__lasten;
@@ -50,6 +48,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT__reg_wen_reg;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_2;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
+        CData/*0:0*/ top__DOT__EXU__DOT__io_r_exu_mem_arvalid_0;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_6;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_15;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_16;
@@ -83,9 +82,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__IFU__DOT__lastsnpc;
         IData/*31:0*/ top__DOT__IFU__DOT__lastinst;
         IData/*31:0*/ top__DOT__IFU__DOT__out_data_pc_REG;
+        IData/*31:0*/ top__DOT__IDU__DOT__exu_data_snpc;
     };
     struct {
-        IData/*31:0*/ top__DOT__IDU__DOT__exu_data_snpc;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_pc;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_m_rmask;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_m_wmask;

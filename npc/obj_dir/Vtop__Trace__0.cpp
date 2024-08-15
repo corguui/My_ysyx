@@ -24,7 +24,10 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
     // Body
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[1U])) {
-        bufp->chgBit(oldp+0,(vlSelf->top__DOT___IDU_io_out2exu_valid));
+        bufp->chgBit(oldp+0,(((vlSelf->top__DOT__IDU__DOT__exu_data_imm 
+                               != vlSelf->top__DOT__IDU__DOT__lastimm) 
+                              | ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_alu_op) 
+                                 != (IData)(vlSelf->top__DOT__IDU__DOT__lastaluop)))));
         bufp->chgIData(oldp+1,(vlSelf->top__DOT__IDU__DOT__exu_data_snpc),32);
         bufp->chgIData(oldp+2,(vlSelf->top__DOT__IDU__DOT__exu_data_pc),32);
         bufp->chgBit(oldp+3,(vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren));
@@ -142,7 +145,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                    != vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc))));
         bufp->chgIData(oldp+71,(vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc),32);
         bufp->chgIData(oldp+72,(vlSelf->top__DOT___EXU_io_r_exu_mem_raddr),32);
-        bufp->chgBit(oldp+73,(vlSelf->top__DOT___EXU_io_r_exu_mem_arvalid));
+        bufp->chgBit(oldp+73,(vlSelf->top__DOT__EXU__DOT__io_r_exu_mem_arvalid_0));
         bufp->chgBit(oldp+74,(vlSelf->top__DOT__Mem__DOT__io_r_mem_exu_rvalid_0));
         bufp->chgIData(oldp+75,(((IData)(vlSelf->top__DOT__Mem__DOT__io_r_mem_exu_rvalid_0)
                                   ? vlSelf->top__DOT__Mem__DOT___m_m_rdata
@@ -179,7 +182,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                    ? vlSelf->top__DOT___EXU_io_r_exu_mem_raddr
                                    : 0U)),32);
         bufp->chgBit(oldp+102,(((IData)(vlSelf->top__DOT__Mem__DOT__io_r_mem_exu_rvalid_0) 
-                                & (IData)(vlSelf->top__DOT___EXU_io_r_exu_mem_arvalid))));
+                                & (IData)(vlSelf->top__DOT__EXU__DOT__io_r_exu_mem_arvalid_0))));
         bufp->chgIData(oldp+103,(vlSelf->top__DOT__Mem__DOT___m_m_rdata),32);
     }
     bufp->chgBit(oldp+104,(vlSelf->clock));
