@@ -102,7 +102,6 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     ref_difftest_regcpy(cpu.gpr,&cpu.pc, DIFFTEST_TO_REF);
     is_skip_ref = false;
     ref_skip_wait=1;
-    printf("skip_ref\n");
     return;
   }
   //等待npc多执行一次
