@@ -69,7 +69,6 @@ class EXU extends Module {
     val io = IO(new Bundle {
         val idu2in = Flipped(Decoupled(new IDUtoEXU))
         val out2ifu = Decoupled(new EXUtoIFU)
-        val mem = Flipped(new IO_mem)
         val r_exu_mem = (new EXUtoMem)
         val r_mem_exu = Flipped(new MemtoEXU)
         val w_exu_mem = (new EXUtoMem_w)
@@ -117,10 +116,7 @@ class EXU extends Module {
     
 
     //val mem = Module(new Memory)   //yosys
-    io.mem.m_waddr :=0.U
-    io.mem.m_wdata :=0.U
-    io.mem.m_wmask :=0.U
-    io.mem.m_wen :=0.U
+
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
