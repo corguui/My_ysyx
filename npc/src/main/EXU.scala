@@ -140,6 +140,7 @@ class EXU extends Module {
             is(1.U){
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.src2
+                //alu.io.src2 := io.idu2in.bits.imm // error difftest test
                 alu.io.alu_op := io.idu2in.bits.alu_op
                 io.reg_wdata := alu.io.result
                 io.reg_wen := io.idu2in.bits.reg_wen
