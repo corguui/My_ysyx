@@ -134,8 +134,9 @@ class EXU extends Module {
     io.r_mem_exu.rready := 0.U
 
     val reg_wen_en = Wire(Bool())
-    reg_wen_en := false.B
+    reg_ens_en := false.B
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,reg_wen_en)
+    val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,reg_wen_en)
 
     /*
     val data_all = Wire(new IDUtoEXU)
@@ -193,7 +194,7 @@ class EXU extends Module {
                 //只有一次,如果发送后接收不到再次发送应该是0.U了
                 io.r_exu_mem.rmask := io.idu2in.bits.m_rmask
                 io.r_exu_mem.raddr := alu.io.result 
-                io.r_exu_mem.arvalid := io.idu2in.bits.mem_ren               
+                io.r_exu_mem.arvalid := Mux(io.idu2in.bits.mem_ren ===1.U,io.idu2in.bits.mem_ren,mem_ren_reg)               
                 when(io.r_exu_mem.arready === 1.U)
                 {
                     when(io.r_mem_exu.rvalid === 1.U)
@@ -226,7 +227,7 @@ class EXU extends Module {
                        */
                     }
                 }.otherwise{
-                   reg_wen_en := true.B
+                   reg_ens_en := true.B
                 }
 
 
