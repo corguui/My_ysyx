@@ -108,7 +108,9 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                & ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_2)
                                    ? (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen)
                                    : ((3U == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))
-                                       ? (IData)(vlSelf->top__DOT__EXU__DOT__reg_wen_reg)
+                                       ? ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen)
+                                           ? (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen)
+                                           : (IData)(vlSelf->top__DOT__EXU__DOT__reg_wen_reg))
                                        : ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_17)) 
                                           & ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_18) 
                                              & (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen))))))));

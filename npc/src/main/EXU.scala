@@ -135,7 +135,7 @@ class EXU extends Module {
     
 
     //当为IL类型指令时可以保存数据
-    val  reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
+    val  reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.r_exu_mem.arvalid)
 
     /*
     val data_all = Wire(new IDUtoEXU)
