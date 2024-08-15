@@ -39,7 +39,8 @@ uint32_t cmp_dnpc;
 
 void cpu_read_reg()
 {
-	cpu.pc=top->io_pc;
+	//cpu.pc=top->io_pc;
+	cpu.pc= pc;
 	cpu.gpr[0]=top->rootp->top__DOT__Reg__DOT__reg_0;
 	cpu.gpr[1]=top->rootp->top__DOT__Reg__DOT__reg_1;
 	cpu.gpr[2]=top->rootp->top__DOT__Reg__DOT__reg_2;
