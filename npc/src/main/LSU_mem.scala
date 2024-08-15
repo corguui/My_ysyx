@@ -10,17 +10,9 @@ class MemtoEXU extends Bundle {
     val rready = Input(Bool())
 }
 
-class IO_mem extends Bundle {
-
-    val m_waddr = Input(UInt(32.W))
-    val m_wdata = Input(UInt(32.W))
-    val m_wmask = Input(UInt(32.W))
-    val m_wen = Input(Bool())
-}
 
 class LSU_mem extends Module {
     val io = IO(new Bundle {
-        val mem = (new IO_mem)
         val r_exu_mem = Flipped(new EXUtoMem) 
         val r_mem_exu = (new MemtoEXU)
         val w_exu_mem = Flipped(new EXUtoMem_w) 
