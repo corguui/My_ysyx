@@ -81,6 +81,7 @@ class IDU extends Module {
 	val funct7 = in_data.inst(31,25)
 	val csr = in_data.inst(31,20)
 
+	val csr_imm = Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 
 
 
@@ -379,7 +380,7 @@ class IDU extends Module {
 				is("b001".U){
 				exu_data.inst_type := 10.U
 				exu_data.reg_wen := true.B
-		        switch(exu_data.imm) {
+		        switch(csr_imm) {
                 is(0x341.U) { io.reg_data.csr_raddr:= 0.U } // mepc
                 is(0x342.U) { io.reg_data.csr_raddr := 1.U } // mcause
                 is(0x300.U) { io.reg_data.csr_raddr := 2.U } // mstatus
@@ -392,7 +393,7 @@ class IDU extends Module {
 				exu_data.inst_type := 11.U
 				exu_data.reg_wen := true.B
 				exu_data.alu_op := "b00011".U	
-		        switch(exu_data.imm) {
+		        switch(csr_imm) {
                 is(0x341.U) { io.reg_data.csr_raddr:= 0.U } // mepc
                 is(0x342.U) { io.reg_data.csr_raddr := 1.U } // mcause
                 is(0x300.U) { io.reg_data.csr_raddr := 2.U } // mstatus
