@@ -135,8 +135,8 @@ class EXU extends Module {
     
 
     //当为IL类型指令时可以保存数据
-    //val  reg_wen_reg = RegEbable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
-    //val  reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
+    val  reg_wen_reg = RegEbable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
+    val  reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
     /*
     val data_all = Wire(new IDUtoEXU)
@@ -186,10 +186,10 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                //io.reg_wen := reg_wen_reg 
-                //io.reg_waddr := reg_waddr_reg 
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
+                io.reg_wen := reg_wen_reg 
+                io.reg_waddr := reg_waddr_reg 
+                //io.reg_wen := Mux(io.idu2in.bits.reg_wen === 1,io.idu2in.bits.reg_wen,reg_wen_reg)
+                //io.reg_waddr := Mux(io.idu2in.bits.reg_waddr === 0,reg_waddr_reg,io.idu2in.bits.reg_waddr)
 
                 //只有一次,如果发送后接收不到再次发送应该是0.U了
                 io.r_exu_mem.rmask := io.idu2in.bits.m_rmask
