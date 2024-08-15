@@ -129,7 +129,7 @@ class EXU extends Module {
     io.csr_wdata_2 := 0.U
     io.csr_wen_2 := 0.U
 
-    io.r_exu_mem.arvalid := 0.U
+    io.r_exu_mem.arvalid := false.B
     io.r_exu_mem.rmask := 0.U
     io.r_exu_mem.raddr := 0.U
     io.r_mem_exu.rready := 0.U
