@@ -195,8 +195,8 @@ class EXU extends Module {
                 {
                 //只有一次,如果发送后接收不到再次发送应该是0.U了
                 io.r_exu_mem.rmask := io.idu2in.bits.m_rmask
-                io.r_exu_mem.arvalid := io.idu2in.bits.mem_ren                io.r_exu_mem.rmask := io.idu2in.bits.m_rmask
                 io.r_exu_mem.raddr := alu.io.result 
+                io.r_exu_mem.arvalid := io.idu2in.bits.mem_ren               
                 }.elsewhen(io.r_exu_mem.arready === 1.U)
                 {
                     when((io.r_mem_exu.rvalid === 1.U)&(io.r_mem_exu.rdata =/= lastrdata))
