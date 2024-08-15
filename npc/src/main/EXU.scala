@@ -49,8 +49,8 @@ class Memory extends Module {
 class EXUtoMem extends Bundle {
     val raddr = Input(UInt(32.W))
     val rmask = Input(UInt(3.W))
-    val arvalid = Input(Bool())
-    val arready = Output(Bool())
+    val arvalid = Output(Bool())
+    val arready = Input(Bool())
 }
 
 
