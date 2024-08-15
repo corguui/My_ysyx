@@ -82,7 +82,6 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
 void difftest_step(uint32_t pc, uint32_t npc) {
   NPC_CPU_state ref_r;
 
-  printf("skip_dut_nr_inst:%d\n",skip_dut_nr_inst);
   if (skip_dut_nr_inst > 0) {
     ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
@@ -96,7 +95,6 @@ void difftest_step(uint32_t pc, uint32_t npc) {
       assert(0);
     return;
   }
-  printf("is_skip_ref:%d\n",is_skip_ref);
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
     cpu_read_reg();
@@ -106,6 +104,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     wait=1;
     return;
   }
+  printf("%d\n",wait);
   //等待npc多执行一次
   if(wait=1)
   {
