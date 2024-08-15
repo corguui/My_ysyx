@@ -47,6 +47,9 @@ class LSU_mem extends Module {
     m.io.m_wdata := io.mem.m_wdata
     m.io.m_wmask := io.mem.m_wmask
     m.io.m_wen := io.mem.m_wen
+    m.io.m_raddr := 0.U
+    m.io.m_rmask := 0.U
+    m.io.m_ren := false.B
 
     io.r_exu_mem.arready := false.B
     io.r_mem_exu.rdata := 0.U
