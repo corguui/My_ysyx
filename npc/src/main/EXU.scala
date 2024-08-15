@@ -46,6 +46,14 @@ class Memory extends Module {
 
 }
 */
+class EXUtoMem extends Bundle {
+    val raddr = Output(UInt(32.W))
+    val rmask = Output(UInt(3.W))
+    val arvalid = Output(Bool())
+    val arready = Input(Bool())
+}
+
+
 class EXUtoIFU extends Bundle {
     val dnpc = Output(UInt(32.W))
 }
@@ -55,6 +63,8 @@ class EXU extends Module {
         val idu2in = Flipped(Decoupled(new IDUtoEXU))
         val out2ifu = Decoupled(new EXUtoIFU)
         val mem = Flipped(new IO_mem)
+        val r_exu_mem = (new EXUtoMem)
+        val r_mem_exu = Flipped(new MemtoEXU)
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
@@ -74,9 +84,16 @@ class EXU extends Module {
 		ifu2s_wait_ready -> Mux(io.out2ifu.ready,ifu2s_idle,ifu2s_wait_ready)
 	))
 
+
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
+    when(io.idu2in.bits.inst_type =/= 3.U)
+    {
     io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
+    }.otherwise
+    {
+    io.out2ifu.valid :=  io.r_mem_exu.rready
+    }
     io.out2ifu.bits := ifu_outdata
 
 
@@ -89,15 +106,13 @@ class EXU extends Module {
 	))
 
 
+    
 
     //val mem = Module(new Memory)   //yosys
     io.mem.m_waddr :=0.U
     io.mem.m_wdata :=0.U
     io.mem.m_wmask :=0.U
     io.mem.m_wen :=0.U
-    io.mem.m_ren :=0.U
-    io.mem.m_raddr :=0.U
-    io.mem.m_rmask :=0.U
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
@@ -112,6 +127,17 @@ class EXU extends Module {
     io.csr_waddr_2 := 0.U
     io.csr_wdata_2 := 0.U
     io.csr_wen_2 := 0.U
+
+    io.r_exu_mem.arvalid := false.B
+    io.r_exu_mem.rmask := 0.U
+    io.r_exu_mem.raddr := 0.U
+    io.r_mem_exu.rready := 0.U
+    
+
+    //当为IL类型指令时可以保存数据
+    //val  reg_wen_reg = RegEbable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
+    //val  reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
+
     /*
     val data_all = Wire(new IDUtoEXU)
     data_all.alu_op := 15.U
@@ -127,17 +153,16 @@ class EXU extends Module {
     data_all.mem_wen := 0.U
     */
 
-
+   
 
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     when(m2IDUstate === m2IDUprocess)
     {
-        ifu_outdata.dnpc := io.idu2in.bits.snpc 
-        //io.idu2in.bits <> data_all  
         switch(io.idu2in.bits.inst_type)
         {
             //R type
             is(1.U){
+                ifu_outdata.dnpc := io.idu2in.bits.snpc 
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.src2
                 //alu.io.src2 := io.idu2in.bits.imm // error difftest test
@@ -148,6 +173,7 @@ class EXU extends Module {
             }
             //I type
             is(2.U){
+                ifu_outdata.dnpc := io.idu2in.bits.snpc
                 alu.io.src1 := io.idu2in.bits.src1 
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
@@ -160,30 +186,54 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                io.mem.m_ren := io.idu2in.bits.mem_ren
-                io.mem.m_raddr := alu.io.result
-                io.mem.m_rmask := io.idu2in.bits.m_rmask
-                when((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===false.B))
-                {
-                io.reg_wdata := ((Cat(Fill(24,io.mem.m_rdata(7)),io.mem.m_rdata(7,0))).asSInt).asUInt
-                }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===false.B))
-                {
-                io.reg_wdata := ((Cat(Fill(16,io.mem.m_rdata(15)),io.mem.m_rdata(15,0))).asSInt).asUInt
-                }.elsewhen((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===true.B))
-                {
-                io.reg_wdata := ((Cat(0.U(24.W),io.mem.m_rdata(7,0)))).asUInt
-                }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===true.B))
-                {
-                io.reg_wdata := ((Cat(0.U(16.W),io.mem.m_rdata(15,0)))).asUInt
-                }.otherwise
-                {
-                io.reg_wdata := (io.mem.m_rdata.asSInt).asUInt
-                }
+                //io.reg_wen := reg_wen_reg 
+                //io.reg_waddr := reg_waddr_reg 
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
+
+                //只有一次,如果发送后接收不到再次发送应该是0.U了
+                io.r_exu_mem.rmask := io.idu2in.bits.m_rmask
+                io.r_exu_mem.raddr := alu.io.result 
+                io.r_exu_mem.arvalid := io.idu2in.bits.mem_ren               
+                when(io.r_exu_mem.arready === 1.U)
+                {
+                    when(io.r_mem_exu.rvalid === 1.U)
+                    {
+                       io.r_mem_exu.rready := 1.U
+                       when(io.idu2in.bits.il_us === false.B)
+                       {
+                        io.reg_wdata := io.r_mem_exu.rdata.asSInt.asUInt
+                       }.otherwise{
+                        io.reg_wdata := io.r_mem_exu.rdata.asUInt
+                       }
+                       ifu_outdata.dnpc := io.idu2in.bits.snpc
+                       /*
+                       when((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===false.B))
+                       {
+                       io.reg_wdata := ((Cat(Fill(24,io.mem.m_rdata(7)),io.mem.m_rdata(7,0))).asSInt).asUInt
+                       }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===false.B))
+                       {
+                       io.reg_wdata := ((Cat(Fill(16,io.mem.m_rdata(15)),io.mem.m_rdata(15,0))).asSInt).asUInt
+                       }.elsewhen((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===true.B))
+                       {
+                       io.reg_wdata := ((Cat(0.U(24.W),io.mem.m_rdata(7,0)))).asUInt
+                       }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===true.B))
+                       {
+                       io.reg_wdata := ((Cat(0.U(16.W),io.mem.m_rdata(15,0)))).asUInt
+                       }.otherwise
+                       {
+                       io.reg_wdata := (io.mem.m_rdata.asSInt).asUInt
+                       }
+                       */
+                    }
+                }
+
+
+                
             }
             //s type
             is(4.U){
+                ifu_outdata.dnpc := io.idu2in.bits.snpc
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
@@ -201,12 +251,14 @@ class EXU extends Module {
             }
             //u type
             is(6.U){
+                ifu_outdata.dnpc := io.idu2in.bits.snpc
                 io.reg_wdata := io.idu2in.bits.imm
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
             }
             //upc type
             is(7.U){
+                ifu_outdata.dnpc := io.idu2in.bits.snpc
                 alu.io.src1 := io.idu2in.bits.imm
                 alu.io.src2 := io.idu2in.bits.pc
                 alu.io.alu_op := io.idu2in.bits.alu_op
@@ -236,6 +288,7 @@ class EXU extends Module {
             }
             //csrrw
             is(10.U){
+                ifu_outdata.dnpc := io.idu2in.bits.snpc
                 io.reg_wdata := io.idu2in.bits.csr
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
@@ -250,6 +303,7 @@ class EXU extends Module {
             }
             //csrrs
             is(11.U){
+                ifu_outdata.dnpc := io.idu2in.bits.snpc
                 io.reg_wdata := io.idu2in.bits.csr
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
