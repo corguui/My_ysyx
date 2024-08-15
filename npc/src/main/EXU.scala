@@ -133,6 +133,7 @@ class EXU extends Module {
     io.r_exu_mem.rmask := 0.U
     io.r_exu_mem.raddr := 0.U
     io.r_mem_exu.rready := 0.U
+    
 
     //当为IL类型指令时可以保存数据
     //val  reg_wen_reg = RegEbable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
