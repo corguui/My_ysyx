@@ -191,6 +191,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		s->pc=top->io_pc;
 		s->inst=top->rootp->top__DOT__IFU__DOT__lastinst;
     	s->dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
+  		cpu_read_reg();
 		}
 		cmp_dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
 		#ifdef CONFIG_VCD
