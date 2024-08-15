@@ -31,9 +31,7 @@ module Mem(
             vlg_pmem_write(m_waddr,m_wdata,m_wmask);
         end
         else
-        {
             wready=1'b0;
-        }
     end
 
 endmodule
