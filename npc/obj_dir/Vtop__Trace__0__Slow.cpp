@@ -340,33 +340,33 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullIData(oldp+58,(vlSelf->top__DOT__Reg__DOT__reg_31),32);
     bufp->fullIData(oldp+59,(((1U & ((~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)) 
                                      | ((4U != (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
-                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_6))))
+                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_7))))
                                ? 0U : vlSelf->top__DOT__EXU__DOT___alu_io_result)),32);
     bufp->fullIData(oldp+60,(((1U & ((~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)) 
                                      | ((4U != (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
-                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_6))))
+                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_7))))
                                ? 0U : vlSelf->top__DOT__IDU__DOT__exu_data_src2)),32);
     bufp->fullIData(oldp+61,(((1U & ((~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)) 
                                      | ((4U != (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
-                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_6))))
+                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_7))))
                                ? 0U : vlSelf->top__DOT__IDU__DOT__exu_data_m_wmask)),32);
     bufp->fullBit(oldp+62,(((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
-                            & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_6)) 
+                            & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_7)) 
                                & ((4U == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
                                   & (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_mem_wen))))));
     bufp->fullCData(oldp+63,(((IData)(vlSelf->top__DOT__EXU__DOT___GEN_3)
                                ? 0U : (7U & vlSelf->top__DOT__IDU__DOT__exu_data_m_rmask))),3);
     bufp->fullBit(oldp+64,(((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
-                            & (((IData)(vlSelf->top__DOT__EXU__DOT___GEN_6) 
-                                | ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_17)) 
-                                   & (IData)(vlSelf->top__DOT__EXU__DOT___GEN_18))) 
+                            & (((IData)(vlSelf->top__DOT__EXU__DOT___GEN_7) 
+                                | ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_18)) 
+                                   & (IData)(vlSelf->top__DOT__EXU__DOT___GEN_19))) 
                                & (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen)))));
     bufp->fullIData(oldp+65,(((1U & ((~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)) 
                                      | ((0xcU != (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
-                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_23))))
+                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_24))))
                                ? 0U : vlSelf->top__DOT__IDU__DOT__exu_data_pc)),32);
     bufp->fullBit(oldp+66,(((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
-                            & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_23)) 
+                            & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_24)) 
                                & (0xcU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))))));
     bufp->fullIData(oldp+67,(((0U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
                                ? vlSelf->top__DOT__Reg__DOT__csr_0

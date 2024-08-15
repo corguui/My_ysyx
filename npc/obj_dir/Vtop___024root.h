@@ -49,17 +49,18 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_2;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_4;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_6;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_15;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_5;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_7;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_16;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_17;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_18;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_19;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_20;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_21;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_23;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_25;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_22;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_24;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_26;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_27;
         CData/*4:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0;
@@ -82,9 +83,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__IFU__DOT__lastsnpc;
         IData/*31:0*/ top__DOT__IFU__DOT__lastinst;
         IData/*31:0*/ top__DOT__IFU__DOT__out_data_pc_REG;
-        IData/*31:0*/ top__DOT__IDU__DOT__exu_data_snpc;
     };
     struct {
+        IData/*31:0*/ top__DOT__IDU__DOT__exu_data_snpc;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_pc;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_m_rmask;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_m_wmask;
@@ -144,9 +145,12 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Mem__DOT__lastraddr;
         IData/*31:0*/ __VdfgTmp_h570e6332__0;
         IData/*31:0*/ __Vfunc_vlg_pmem_read__2__Vfuncout;
+        IData/*31:0*/ __Vdly__top__DOT__EXU__DOT__lastrdata;
         IData/*31:0*/ __VstlIterCount;
         IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__IFU__DOT__lastinst;
         IData/*31:0*/ __VactIterCount;
+    };
+    struct {
         VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;

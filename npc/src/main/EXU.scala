@@ -84,7 +84,6 @@ class EXU extends Module {
 		ifu2s_wait_ready -> Mux(io.out2ifu.ready,ifu2s_idle,ifu2s_wait_ready)
 	))
 
-    val lastrdata = RegEnable(io.r_mem_exu.rdata,0.U,io.r_mem_exu.rready)
 
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
@@ -93,7 +92,7 @@ class EXU extends Module {
     io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
     }.otherwise
     {
-    io.out2ifu.valid := (lastrdata =/= io.r_mem_exu.rdata) 
+    io.out2ifu.valid :=  io.r_mem_exu.rready
     }
     io.out2ifu.bits := ifu_outdata
 
@@ -198,7 +197,7 @@ class EXU extends Module {
                 io.r_exu_mem.arvalid := io.idu2in.bits.mem_ren               
                 when(io.r_exu_mem.arready === 1.U)
                 {
-                    when((io.r_mem_exu.rvalid === 1.U)&(io.r_mem_exu.rdata =/= lastrdata))
+                    when(io.r_mem_exu.rvalid === 1.U)
                     {
                        io.r_mem_exu.rready := 1.U
                        when(io.idu2in.bits.il_us === false.B)
