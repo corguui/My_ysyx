@@ -51,6 +51,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT__m2IDUstate;
         CData/*0:0*/ top__DOT__EXU__DOT__reg_wen_reg;
         CData/*0:0*/ top__DOT__EXU__DOT__mem_ren_reg;
+        CData/*0:0*/ top__DOT__EXU__DOT__mem_wen_reg;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_5;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_6;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_8;
@@ -82,9 +83,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
-        VL_OUT(io_pc,31,0);
     };
     struct {
+        VL_OUT(io_pc,31,0);
         IData/*31:0*/ top__DOT___EXU_io_ar_exu_mem_raddr;
         IData/*31:0*/ top__DOT___EXU_io_w_exu_mem_wdata;
         IData/*31:0*/ top__DOT___EXU_io_aw_exu_mem_awaddr;
@@ -148,9 +149,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_29;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_30;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_31;
-        IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp;
     };
     struct {
+        IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp;
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_0;
         IData/*31:0*/ top__DOT__Mem__DOT___m_m_rdata;
         IData/*31:0*/ top__DOT__Mem__DOT__lastraddr;
