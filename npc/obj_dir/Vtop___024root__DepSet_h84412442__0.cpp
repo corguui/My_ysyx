@@ -69,8 +69,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
          & (IData)(vlSelf->top__DOT___EXU_io_w_exu_mem_wvalid))) {
         vlSelf->top__DOT__Mem__DOT___m_m_wready = 1U;
         Vtop___024unit____Vdpiimwrap_vlg_pmem_write_TOP____024unit(
-                                                                   ((((IData)(vlSelf->top__DOT__EXU__DOT__memwen_reg_en) 
-                                                                      & (IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg)) 
+                                                                   (((IData)(vlSelf->top__DOT___EXU_io_w_exu_mem_wvalid) 
                                                                      & (vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr 
                                                                         != vlSelf->top__DOT__Mem__DOT__lastawaddr))
                                                                      ? vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr
@@ -469,7 +468,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     }
     if (vlSelf->reset) {
         vlSelf->top__DOT__Mem__DOT__lastawaddr = 0U;
-        vlSelf->top__DOT__EXU__DOT__mem_wen_reg = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_1 = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_2 = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_3 = 0U;
@@ -477,10 +475,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Reg__DOT__csr_0 = 0U;
     } else {
         vlSelf->top__DOT__Mem__DOT__lastawaddr = vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr;
-        if (vlSelf->top__DOT__EXU__DOT__memwen_reg_en) {
-            vlSelf->top__DOT__EXU__DOT__mem_wen_reg 
-                = vlSelf->top__DOT__IDU__DOT__exu_data_mem_wen;
-        }
         if (((IData)(vlSelf->top__DOT___EXU_io_csr_wen_1) 
              & (1U == (IData)(vlSelf->top__DOT___EXU_io_csr_waddr_1)))) {
             vlSelf->top__DOT__Reg__DOT__csr_1 = vlSelf->top__DOT___EXU_io_csr_wdata_1;
