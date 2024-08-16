@@ -89,7 +89,7 @@ class LSU_mem extends Module {
             io.r_mem_exu.rresp := 0.U
         }
     }.elsewhen(io.r_mem_exu.rready){
-        io.r_exu_mem.arready := false.B
+        io.ar_exu_mem.arready := false.B
         io.r_mem_exu.rvalid := false.B
     }
     when(io.aw_exu_mem.awvalid&(io.aw_exu_mem.awaddr =/= lastawaddr)){
@@ -97,7 +97,7 @@ class LSU_mem extends Module {
         m.io.m_waddr := io.aw_exu_mem.awaddr
         
     }
-    when(io.w_mem_exu.wvalid&(io.w_exu_mem.wdata =/= lastwdata)){
+    when(io.w_exu_mem.wvalid&(io.w_exu_mem.wdata =/= lastwdata)){
         io.w_exu_mem.wready := m.io.m_wready
         m.io.m_wdata := io.w_exu_mem.wdata
         m.io.m_wmask := io.w_exu_mem.wmask
