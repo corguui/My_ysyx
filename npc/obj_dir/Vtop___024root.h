@@ -53,10 +53,10 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT__reg_wen_reg;
         CData/*4:0*/ top__DOT__EXU__DOT__reg_waddr_reg;
         CData/*0:0*/ top__DOT__EXU__DOT__mem_ren_reg;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_4;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_5;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_6;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_7;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_8;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_9;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_17;
@@ -75,12 +75,12 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0;
         CData/*4:0*/ top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0;
         CData/*0:0*/ top__DOT__Reg__DOT___GEN;
-        CData/*0:0*/ top__DOT__Mem__DOT___m_m_wready;
         CData/*0:0*/ top__DOT__Mem__DOT__rvalid_reg;
         CData/*1:0*/ top__DOT__Mem__DOT__rresp_reg;
         CData/*0:0*/ top__DOT__Mem__DOT___GEN_1;
         CData/*0:0*/ top__DOT__Mem__DOT___GEN_2;
         CData/*0:0*/ top__DOT__Mem__DOT___GEN_3;
+        CData/*0:0*/ top__DOT__Mem__DOT__m__DOT__m_wready;
         CData/*4:0*/ __VdfgTmp_hd76c6d79__0;
         CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__m2EXUstate;
     };
