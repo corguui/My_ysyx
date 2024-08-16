@@ -64,6 +64,8 @@ class LSU_mem extends Module {
     io.b_mem_exu.bresp := 0.U
     io.b_mem_exu.bvalid := false.B
 
+    io.r_mem_exu.rresp := 0.U
+
     val lastraddr = RegNext(io.ar_exu_mem.raddr,0.U)
     val lastawaddr = RegNext(io.aw_exu_mem.awaddr,0.U)
     val lastwdata = RegNext(io.w_exu_mem.wdata,0.U)
@@ -114,9 +116,9 @@ class LSU_mem extends Module {
             }.otherwise{
                 io.b_mem_exu.bresp := 0.U
             }
-            }.otherwise{
+        }.otherwise{
                 io.b_mem_exu.bresp := 0.U
-        }
+                
     }
 
 

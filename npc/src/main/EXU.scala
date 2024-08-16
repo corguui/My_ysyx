@@ -152,6 +152,8 @@ class EXU extends Module {
     io.w_exu_mem.wmask := 0.U
     io.w_exu_mem.wvalid := 0.U
 
+    io.b_mem_exu.bready := 0.U
+
     val reg_ens_en = Wire(Bool())
     reg_ens_en := false.B
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,reg_ens_en)
