@@ -82,7 +82,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ __VdfgTmp_hd76c6d79__0;
         CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__m2EXUstate;
         CData/*3:0*/ __Vdly__top__DOT__IDU__DOT__exu_data_inst_type;
-        CData/*0:0*/ __Vdly__top__DOT__IDU__DOT__exu_data_mem_ren;
+        CData/*0:0*/ __Vdly__top__DOT__EXU__DOT__rready_reg;
     };
     struct {
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
