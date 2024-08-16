@@ -103,10 +103,14 @@ class EXU extends Module {
     when(io.idu2in.bits.inst_type === 3.U)
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
-    }.elsewhen(io.idu2in.bits.inst_type === 4.U)
+    }.
+    /*
+    elsewhen(io.idu2in.bits.inst_type === 4.U)
     {
     io.out2ifu.valid :=  io.b_mem_exu.bready
-    }.otherwise
+    }
+    */
+    .otherwise
     {
     io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
     }
