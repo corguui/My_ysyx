@@ -16,13 +16,13 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at build/top.sv:1445:30
+    // DPI import at build/top.sv:1441:30
     extern void ebreak(int inst);
-    // DPI import at build/top.sv:1424:29
+    // DPI import at build/top.sv:1420:29
     extern int vlg_pc_read(int pc);
-    // DPI import at build/top.sv:1459:29
+    // DPI import at build/top.sv:1455:29
     extern int vlg_pmem_read(int m_raddr, int rmask);
-    // DPI import at build/top.sv:1458:30
+    // DPI import at build/top.sv:1454:30
     extern void vlg_pmem_write(int waddr, int wdata, int wmask);
 
 #ifdef __cplusplus
