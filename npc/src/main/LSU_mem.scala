@@ -118,8 +118,8 @@ class LSU_mem extends Module {
             }
         }.otherwise{
                 io.b_mem_exu.bresp := 0.U
+        }
                 
     }
-
 
 }
