@@ -54,25 +54,25 @@ class LSU_mem extends Module {
     m.io.m_rmask := 0.U
     m.io.m_ren := false.B
 
-    io.r_exu_mem.arready := false.B
+    io.ar_exu_mem.arready := false.B
     io.r_mem_exu.rdata := 0.U
     io.r_mem_exu.rvalid := false.B
 
     io.w_exu_mem.wready := false.B
     io.aw_exu_mem.awready := false.B
 
-    io.w_mem_exu.bresp := 0.U
-    io.w_mem_exu.bvalid := false.B
+    io.b_mem_exu.bresp := 0.U
+    io.b_mem_exu.bvalid := false.B
 
-    val lastraddr = RegNext(io.r_exu_mem.raddr,0.U)
+    val lastraddr = RegNext(io.ar_exu_mem.raddr,0.U)
     val lastawaddr = RegNext(io.aw_exu_mem.awaddr,0.U)
     val lastwdata = RegNext(io.w_exu_mem.wdata,0.U)
 
-    when(io.r_exu_mem.arvalid &(io.r_exu_mem.raddr =/= lastraddr)){ 
-        io.r_exu_mem.arready := true.B
-        m.io.m_raddr := io.r_exu_mem.raddr
-        m.io.m_rmask := io.r_exu_mem.rmask
-        m.io.m_ren := io.r_exu_mem.arvalid
+    when(io.ar_exu_mem.arvalid &(io.ar_exu_mem.raddr =/= lastraddr)){ 
+        io.ar_exu_mem.arready := true.B
+        m.io.m_raddr := io.ar_exu_mem.raddr
+        m.io.m_rmask := io.ar_exu_mem.rmask
+        m.io.m_ren := io.ar_exu_mem.arvalid
         io.r_mem_exu.rdata := m.io.m_rdata
         io.r_mem_exu.rvalid := true.B
         when((m.io.m_raddr >= 0x80000000.U)&(m.io.m_raddr < 0x8fffffff.U)){
