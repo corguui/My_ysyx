@@ -77,6 +77,7 @@ class EXU extends Module {
         val r_mem_exu = Flipped(new MemtoEXU_r)
         val w_exu_mem = (new EXUtoMem_w)
         val aw_exu_mem = (new EXUtoMem_aw)
+        val b_mem_exu = Flipped(new MemtoEXU_b)
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
