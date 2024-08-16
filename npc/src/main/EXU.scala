@@ -153,12 +153,12 @@ class EXU extends Module {
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
-    val mem_ren_reg_en = Wire(Bool())
-    mem_ren_reg_en := false.B
+    //val mem_ren_reg_en = Wire(Bool())
+    //mem_ren_reg_en := false.B
 
     val mem_raddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
     val mem_rmask_reg = RegEnable(io.idu2in.bits.m_rmask,0.U,io.idu2in.valid)
-    val mem_ren_reg = RegNext(mem_ren_reg_en,0.U)
+    val mem_ren_reg = RegNext(io.idu2in.bits.mem_ren,0.U)
     val rready_reg = RegInit(0.U)
 
     rready_reg := 0.U
@@ -205,7 +205,7 @@ class EXU extends Module {
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
 
-                mem_ren_reg_en := io.idu2in.bits.mem_ren
+                //mem_ren_reg_en := io.idu2in.bits.mem_ren
                 when((io.ar_exu_mem.arready)&(io.ar_exu_mem.arvalid))
                 {                    
                     io.ar_exu_mem.rmask := mem_rmask_reg
