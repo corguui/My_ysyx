@@ -150,7 +150,6 @@ class EXU extends Module {
 
     io.b_mem_exu.bready := 0.U
 
-    val 
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
