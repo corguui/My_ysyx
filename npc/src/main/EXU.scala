@@ -159,7 +159,8 @@ class EXU extends Module {
     val mem_ren_reg = RegInit(0.U)
     val rready_reg = RegInit(0.U)
 
-    //rready_reg := 0.U
+    rready_reg := 0.U
+    mem_ren_reg := 0.U
 
     io.ar_exu_mem.rmask := 0.U
     io.ar_exu_mem.raddr := 0.U 
@@ -204,6 +205,7 @@ class EXU extends Module {
                 alu.io.alu_op := io.idu2in.bits.alu_op
 
                 mem_ren_reg := io.idu2in.bits.mem_ren
+
                 when((io.ar_exu_mem.arready)&(io.ar_exu_mem.arvalid))
                 {                    
                     io.ar_exu_mem.rmask := mem_rmask_reg
@@ -212,7 +214,6 @@ class EXU extends Module {
                     when(io.r_mem_exu.rvalid === 1.U)
                     {
                        rready_reg  := 1.U
-                       mem_ren_reg := 0.U
                        when(io.r_mem_exu.rresp === 1.U)
                        {
                        io.reg_wen := reg_wen_reg
