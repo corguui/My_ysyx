@@ -101,6 +101,7 @@ class LSU_mem extends Module {
         when((io.r_mem_exu.rready)&(io.r_mem_exu.rvalid)){
             io.r_mem_exu.rdata := rdata_reg 
             io.r_mem_exu.rresp := rresp_reg 
+            rvalid_en := false.B
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
             io.r_mem_exu.rresp := 0.U
