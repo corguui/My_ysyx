@@ -150,12 +150,16 @@ class EXU extends Module {
 
     io.b_mem_exu.bready := 0.U
 
+    val 
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
+
     val mem_raddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
     val mem_rmask_reg = RegEnable(io.idu2in.bits.m_rmask,0.U,io.idu2in.valid)
     val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,io.idu2in.valid)
     val rready_reg = RegInit(0.U)
+
+    rready_reg := 0.U
 
     io.ar_exu_mem.rmask := 0.U
     io.ar_exu_mem.raddr := 0.U 
