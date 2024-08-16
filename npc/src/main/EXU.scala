@@ -211,7 +211,7 @@ class EXU extends Module {
                     when(io.r_mem_exu.rvalid === 1.U)
                     {
                        rready_reg  := 1.U
-                       io.ar_exu_mem.arvalid := 0.U
+                       mem_ren_reg := 0.U
                        when(io.r_mem_exu.rresp === 1.U)
                        {
                        io.reg_wen := reg_wen_reg
