@@ -206,7 +206,7 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                mem_ren_reg := io.idu2in.bits.mem_ren 
+                mem_ren_reg := true.B 
                 when((io.ar_exu_mem.arready)&(io.ar_exu_mem.arvalid))
                 {                    
                     io.ar_exu_mem.rmask := mem_rmask_reg
@@ -217,6 +217,7 @@ class EXU extends Module {
                        rready_reg  := 1.U
                        when(io.r_mem_exu.rresp === 1.U)
                        {
+                       mem_ren_reg := false.B
                        io.reg_wen := reg_wen_reg
                        io.reg_waddr := reg_waddr_reg
                        when(io.idu2in.bits.il_us === false.B)
@@ -227,6 +228,7 @@ class EXU extends Module {
                        }
                        ifu_outdata.dnpc := io.idu2in.bits.snpc
                        }.otherwise{
+                        mem_ren_reg := false.B
                         ifu_outdata.dnpc := 0x00000004.S.asUInt
                        }
                     }.otherwise{
