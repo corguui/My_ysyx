@@ -46,18 +46,22 @@ class Memory extends Module {
 
 }
 */
-class EXUtoMem extends Bundle {
+class EXUtoMem_ar extends Bundle {
     val raddr = Output(UInt(32.W))
     val rmask = Output(UInt(3.W))
     val arvalid = Output(Bool())
     val arready = Input(Bool())
 }
 class EXUtoMem_w extends Bundle {
-    val waddr = Output(UInt(32.W))
     val wdata = Output(UInt(32.W))
     val wmask = Output(UInt(3.W))
     val wvalid = Output(Bool())
     val wready = Input(Bool())
+}
+class EXUtoMem_aw extends Bundle {
+    val awaddr = Output(UInt(32.W))
+    val awvalid = Output(Bool())
+    val awready = Input(Bool())
 }
 
 
@@ -69,9 +73,10 @@ class EXU extends Module {
     val io = IO(new Bundle {
         val idu2in = Flipped(Decoupled(new IDUtoEXU))
         val out2ifu = Decoupled(new EXUtoIFU)
-        val r_exu_mem = (new EXUtoMem)
-        val r_mem_exu = Flipped(new MemtoEXU)
+        val ar_exu_mem = (new EXUtoMem_ar)
+        val r_mem_exu = Flipped(new MemtoEXU_r)
         val w_exu_mem = (new EXUtoMem_w)
+        val aw_exu_mem = (new EXUtoMem_aw)
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
@@ -97,6 +102,9 @@ class EXU extends Module {
     when(io.idu2in.bits.inst_type =/= 3.U)
     {
     io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
+    }.elsewhen(io.idu2in.bits.inst_type === 4.U)
+    {
+    io.out2ifu.valid :=  io.b_mem_exu.rready
     }.otherwise
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
@@ -132,12 +140,13 @@ class EXU extends Module {
     io.csr_wdata_2 := 0.U
     io.csr_wen_2 := 0.U
 
-    io.r_exu_mem.arvalid := false.B
-    io.r_exu_mem.rmask := 0.U
-    io.r_exu_mem.raddr := 0.U
+    io.ar_exu_mem.arvalid := false.B
+    io.ar_exu_mem.rmask := 0.U
+    io.ar_exu_mem.raddr := 0.U
     io.r_mem_exu.rready := 0.U
 
-    io.w_exu_mem.waddr := 0.U
+    io.aw_exu_mem.awaddr := 0.U
+    io.aw_exu_mem.awvalid := 0.U
     io.w_exu_mem.wdata := 0.U
     io.w_exu_mem.wmask := 0.U
     io.w_exu_mem.wvalid := 0.U
@@ -151,22 +160,6 @@ class EXU extends Module {
     memwen_reg_en := false.B
     val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,memwen_reg_en)
 
-    /*
-    val data_all = Wire(new IDUtoEXU)
-    data_all.alu_op := 15.U
-    data_all.inst_type := 0.U
-    data_all.imm := 0.U
-    data_all.src1 := 0.U
-    data_all.src2 := 0.U
-    data_all.reg_wen := 0.U
-    data_all.reg_waddr := 0.U
-    data_all.m_wmask := 0.U
-    data_all.m_rmask := 0.U
-    data_all.mem_ren := 0.U
-    data_all.mem_wen := 0.U
-    */
-
-   
 
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     when(m2IDUstate === m2IDUprocess)
@@ -205,12 +198,12 @@ class EXU extends Module {
                 io.reg_waddr := io.idu2in.bits.reg_waddr
 
                 //只有一次,如果发送后接收不到再次发送应该是0.U了
-                io.r_exu_mem.rmask := io.idu2in.bits.m_rmask
-                io.r_exu_mem.raddr := alu.io.result 
-                io.r_exu_mem.arvalid := Mux(io.idu2in.bits.mem_ren ===1.U,io.idu2in.bits.mem_ren,mem_ren_reg)               
-                when(io.r_exu_mem.arready === 1.U)
+                io.ar_exu_mem.rmask := io.idu2in.bits.m_rmask
+                io.ar_exu_mem.raddr := alu.io.result 
+                io.ar_exu_mem.arvalid := Mux(io.idu2in.bits.mem_ren ===1.U,io.idu2in.bits.mem_ren,mem_ren_reg)               
+                when(io.ar_exu_mem.arready === 1.U)
                 {
-                    when(io.r_mem_exu.rvalid === 1.U)
+                    when((io.r_mem_exu.rvalid === 1.U)&(io.r_mem_exu.rresp === 1.U))
                     {
                        io.r_mem_exu.rready := 1.U
                        when(io.idu2in.bits.il_us === false.B)
@@ -238,6 +231,8 @@ class EXU extends Module {
                        io.reg_wdata := (io.mem.m_rdata.asSInt).asUInt
                        }
                        */
+                    }.otherwise{
+                        io.r_mem_exu.rready := 0.U
                     }
                 }.otherwise{
                    reg_ens_en := true.B
@@ -253,11 +248,18 @@ class EXU extends Module {
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
 
-                io.w_exu_mem.waddr := alu.io.result
+                io.aw_exu_mem.awaddr := alu.io.result
+                io.aw_exu_mem.awvalid := Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
                 io.w_exu_mem.wdata := io.idu2in.bits.src2
                 io.w_exu_mem.wmask := io.idu2in.bits.m_wmask
                 io.w_exu_mem.wvalid := Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
                 memwen_reg_en := true.B
+                when(io.b_mem_exu.bvalid === 1.U)
+                {
+                    io.b_mem_exu.bready := 1.U
+                }.otherwise{
+                    io.b_mem_exu.bready := 0.U              
+                }
 
             }
             //b type
