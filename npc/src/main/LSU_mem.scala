@@ -75,7 +75,7 @@ class LSU_mem extends Module {
         m.io.m_ren := io.ar_exu_mem.arvalid
         io.r_mem_exu.rdata := m.io.m_rdata
         io.r_mem_exu.rvalid := true.B
-        when((m.io.m_raddr >= 0x80000000.U)&(m.io.m_raddr < 0x8fffffff.U)){
+        when((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)){
             when(m.io.m_rmask === 1.U){
             io.r_mem_exu.rresp := Mux((io.r_mem_exu.rdata(31,8) === 0.U),1.U,0.U)
             }.elsewhen(m.io.m_rmask === 2.U){
@@ -103,7 +103,8 @@ class LSU_mem extends Module {
         m.io.m_wmask := io.w_exu_mem.wmask
         m.io.m_wen := io.w_exu_mem.wvalid
         io.b_mem_exu.bvalid := Mux(io.w_exu_mem.wready === 1.U , 1.U, 0.U)
-        when(io.aw_exu_mem.awaddr >= 0x80000000.U & io.aw_exu_mem.awaddr < 0x8fffffff.U){
+        when(io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt & io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt){
+
             when(io.w_exu_mem.wmask === 1.U){
                 io.b_mem_exu.bresp := Mux((io.w_exu_mem.wdata(31,8) === 0.U),1.U,0.U)
             }.elsewhen(io.w_exu_mem.wmask === 2.U){
