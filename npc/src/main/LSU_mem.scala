@@ -68,7 +68,7 @@ class LSU_mem extends Module {
     val resp = Wire(UInt(2.W))
     resp := 0.U
     val rvalid_en = Wire(Bool())
-    rvalid_en := false.B
+    //rvalid_en := false.B
     val rdata_reg = RegEnable(m.io.m_rdata,0.U,io.ar_exu_mem.arvalid)
     val rvalid_reg = RegEnable(rvalid_en,0.U,io.ar_exu_mem.arvalid)   
     val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
