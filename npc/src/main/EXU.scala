@@ -103,7 +103,7 @@ class EXU extends Module {
     when(io.idu2in.bits.inst_type === 3.U)
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
-    }.
+    }
     /*
     elsewhen(io.idu2in.bits.inst_type === 4.U)
     {
