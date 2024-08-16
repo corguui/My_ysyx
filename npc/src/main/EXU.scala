@@ -244,7 +244,7 @@ class EXU extends Module {
                 alu.io.alu_op := io.idu2in.bits.alu_op
 
                 io.aw_exu_mem.awaddr := alu.io.result
-                io.aw_exu_mem.awvalid := mem_wen_reg//Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
+                io.aw_exu_mem.awvalid := Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
                 io.w_exu_mem.wdata := io.idu2in.bits.src2
                 io.w_exu_mem.wmask := io.idu2in.bits.m_wmask
                 io.w_exu_mem.wvalid := Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
