@@ -54,46 +54,59 @@ class LSU_mem extends Module {
     m.io.m_rmask := 0.U
     m.io.m_ren := false.B
 
-    io.ar_exu_mem.arready := false.B
-    io.r_mem_exu.rdata := 0.U
-    io.r_mem_exu.rvalid := false.B
-
     io.w_exu_mem.wready := false.B
     io.aw_exu_mem.awready := false.B
 
     io.b_mem_exu.bresp := 0.U
     io.b_mem_exu.bvalid := false.B
 
-    io.r_mem_exu.rresp := 0.U
 
-    val lastraddr = RegNext(io.ar_exu_mem.raddr,0.U)
+    //val lastraddr = RegNext(io.ar_exu_mem.raddr,0.U)
     val lastawaddr = RegNext(io.aw_exu_mem.awaddr,0.U)
     val lastwdata = RegNext(io.w_exu_mem.wdata,0.U)
 
-    when(io.ar_exu_mem.arvalid &(io.ar_exu_mem.raddr =/= lastraddr)){ 
-        io.ar_exu_mem.arready := true.B
+    val resp = Wire(UInt(2.W))
+    resp := 0.U
+    val rvalid_en = Wire(Bool())
+    rvalid_en := false.B
+    val rdata_reg = RegEnable(m.io.m_rdata,0.U,io.ar_exu_mem.arvalid)
+    val rvalid_reg = RegEnable(rvalid_en,0.U,io.ar_exu_mem.arvalid)   
+    val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
+
+    io.ar_exu_mem.arready := true.B
+    io.r_mem_exu.rdata := 0.U 
+    io.r_mem_exu.rvalid := 0.U 
+    io.r_mem_exu.rresp := 0.U
+
+
+
+    when(io.ar_exu_mem.arvalid){ 
         m.io.m_raddr := io.ar_exu_mem.raddr
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
-        io.r_mem_exu.rdata := m.io.m_rdata
-        io.r_mem_exu.rvalid := true.B
+        rvalid_en := true.B
         when((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)){
             when(m.io.m_rmask === 1.U){
-            io.r_mem_exu.rresp := Mux((io.r_mem_exu.rdata(31,8) === 0.U),1.U,0.U)
+            resp := Mux((m.io.m_rdata(31,8) === 0.U),1.U,0.U)
             }.elsewhen(m.io.m_rmask === 2.U){
-            io.r_mem_exu.rresp := Mux((io.r_mem_exu.rdata(31,16) === 0.U),1.U,0.U)
+            resp := Mux((m.io.m_rdata(31,16) === 0.U),1.U,0.U)
             }.elsewhen(m.io.m_rmask === 4.U){
-            io.r_mem_exu.rresp := 1.U
+            resp := 1.U
             }.otherwise{
-            io.r_mem_exu.rresp := 0.U
+            resp := 0.U
             }
         }.otherwise{
-            io.r_mem_exu.rresp := 0.U
+            resp := 0.U
         }
-    }.elsewhen(io.r_mem_exu.rready){
-        io.ar_exu_mem.arready := false.B
-        io.r_mem_exu.rvalid := false.B
+        when((io.r_mem_exu.rready)&(io.r_mem_exu.rvalid)){
+            io.r_mem_exu.rdata := rdata_reg 
+            io.r_mem_exu.rvalid := rvalid_reg 
+            io.r_mem_exu.rresp := rresp_reg 
+        }
+    }.otherwise{
+        rvalid_en := false.B   
     }
+
     when(io.aw_exu_mem.awvalid&(io.aw_exu_mem.awaddr =/= lastawaddr)){
         io.aw_exu_mem.awready := 1.U  
         m.io.m_waddr := io.aw_exu_mem.awaddr

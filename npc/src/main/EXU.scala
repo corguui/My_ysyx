@@ -141,10 +141,6 @@ class EXU extends Module {
     io.csr_wdata_2 := 0.U
     io.csr_wen_2 := 0.U
 
-    io.ar_exu_mem.arvalid := false.B
-    io.ar_exu_mem.rmask := 0.U
-    io.ar_exu_mem.raddr := 0.U
-    io.r_mem_exu.rready := 0.U
 
     io.aw_exu_mem.awaddr := 0.U
     io.aw_exu_mem.awvalid := 0.U
@@ -154,10 +150,17 @@ class EXU extends Module {
 
     io.b_mem_exu.bready := 0.U
 
-    val reg_ens_en = Wire(Bool())
-    reg_ens_en := false.B
-    val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,reg_ens_en)
-    val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,reg_ens_en)
+    val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
+    val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
+    val mem_raddr_reg = RegEnable(io.idu2in.bits.mem_raddr,0.U,io.idu2in.valid)
+    val mem_rmask_reg = RegEnable(io.idu2in.bits.m_rmask,0.U,io.idu2in.valid)
+    val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,io.idu2in.valid)
+    val rready_reg = RegInit(0.U)
+
+    io.ar_exu_mem.rmask := 0.U
+    io.ar_exu_mem.raddr := 0.U 
+    io.r_mem_exu.rready := rready_reg 
+    io.ar_exu_mem.arvalid := mem_ren_reg           
 
     val memwen_reg_en = Wire(Bool())
     memwen_reg_en := false.B
@@ -195,20 +198,22 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-                //io.reg_wen := reg_wen_reg 
-                io.reg_wen := Mux(io.idu2in.bits.reg_wen === 1.U,io.idu2in.bits.reg_wen,reg_wen_reg)
-                //io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
 
-                //只有一次,如果发送后接收不到再次发送应该是0.U了
-                io.ar_exu_mem.rmask := io.idu2in.bits.m_rmask
-                io.ar_exu_mem.raddr := alu.io.result 
-                io.ar_exu_mem.arvalid := Mux(io.idu2in.bits.mem_ren ===1.U,io.idu2in.bits.mem_ren,mem_ren_reg)               
-                when(io.ar_exu_mem.arready === 1.U)
-                {
-                    when((io.r_mem_exu.rvalid === 1.U)&(io.r_mem_exu.rresp === 1.U))
+    
+                when((io.ar_exu_mem.arready)&(io.ar_exu_mem.arvalid))
+                {                    
+                    io.ar_exu_mem.rmask := mem_rmask_reg
+                    io.ar_exu_mem.raddr := mem_raddr_reg 
+                    
+                    when(io.r_mem_exu.rvalid === 1.U)
                     {
-                       io.r_mem_exu.rready := 1.U
+                       rready_reg  := 1.U
+                       
+                       when(io.r_mem_exu.rresp === 1.U)
+                       {
+                       io.reg_wen := reg_wen_reg
+                       io.reg_waddr := reg_waddr_reg
+
                        when(io.idu2in.bits.il_us === false.B)
                        {
                         io.reg_wdata := io.r_mem_exu.rdata.asSInt.asUInt
@@ -216,29 +221,12 @@ class EXU extends Module {
                         io.reg_wdata := io.r_mem_exu.rdata.asUInt
                        }
                        ifu_outdata.dnpc := io.idu2in.bits.snpc
-                       /*
-                       when((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===false.B))
-                       {
-                       io.reg_wdata := ((Cat(Fill(24,io.mem.m_rdata(7)),io.mem.m_rdata(7,0))).asSInt).asUInt
-                       }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===false.B))
-                       {
-                       io.reg_wdata := ((Cat(Fill(16,io.mem.m_rdata(15)),io.mem.m_rdata(15,0))).asSInt).asUInt
-                       }.elsewhen((io.idu2in.bits.m_rmask===1.U)&&(io.idu2in.bits.il_us===true.B))
-                       {
-                       io.reg_wdata := ((Cat(0.U(24.W),io.mem.m_rdata(7,0)))).asUInt
-                       }.elsewhen((io.idu2in.bits.m_rmask===2.U)&&(io.idu2in.bits.il_us===true.B))
-                       {
-                       io.reg_wdata := ((Cat(0.U(16.W),io.mem.m_rdata(15,0)))).asUInt
-                       }.otherwise
-                       {
-                       io.reg_wdata := (io.mem.m_rdata.asSInt).asUInt
+                       }.otherwise{
+                        ifu_outdata.dnpc := 0x00000004.S.asUInt
                        }
-                       */
                     }.otherwise{
-                        io.r_mem_exu.rready := 0.U
+                        rready_reg := 0.U
                     }
-                }.otherwise{
-                   reg_ens_en := true.B
                 }
 
 
