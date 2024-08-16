@@ -157,10 +157,11 @@ class EXU extends Module {
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
-
+    val mem_ren_reg_en = Wire(Bool())
+    mem_ren_reg_en := false.B
     val mem_raddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
     val mem_rmask_reg = RegEnable(io.idu2in.bits.m_rmask,0.U,io.idu2in.valid)
-    val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,io.idu2in.valid)
+    val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,mem_ren_reg_en)
     val rready_reg = RegInit(0.U)
 
     //rready_reg := 0.U
@@ -206,7 +207,7 @@ class EXU extends Module {
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-
+                mem_ren_reg_en := true.B
                 when((io.ar_exu_mem.arready)&(io.ar_exu_mem.arvalid))
                 {                    
                     io.ar_exu_mem.rmask := mem_rmask_reg
@@ -217,9 +218,9 @@ class EXU extends Module {
                        rready_reg  := 1.U
                        when(io.r_mem_exu.rresp === 1.U)
                        {
+                       mem_ren_reg_en := false.B
                        io.reg_wen := reg_wen_reg
                        io.reg_waddr := reg_waddr_reg
-                       mem_ren_reg := 0.U
                        when(io.idu2in.bits.il_us === false.B)
                        {
                         io.reg_wdata := io.r_mem_exu.rdata.asSInt.asUInt
@@ -228,7 +229,7 @@ class EXU extends Module {
                        }
                        ifu_outdata.dnpc := io.idu2in.bits.snpc
                        }.otherwise{
-                        mem_ren_reg := 0.U
+                        mem_ren_reg_en := false.B
                         ifu_outdata.dnpc := 0x00000004.S.asUInt
                        }
                     }.otherwise{
