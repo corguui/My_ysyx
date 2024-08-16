@@ -68,16 +68,15 @@ class LSU_mem extends Module {
     val resp = Wire(UInt(2.W))
     resp := 0.U
     val rvalid_en = Wire(Bool())
-    //rvalid_en := false.B
+    rvalid_en := false.B
     val rdata_reg = RegEnable(m.io.m_rdata,0.U,io.ar_exu_mem.arvalid)
     val rvalid_reg = RegEnable(rvalid_en,0.U,io.ar_exu_mem.arvalid)   
     val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
 
     io.ar_exu_mem.arready := true.B
     io.r_mem_exu.rdata := 0.U 
-    io.r_mem_exu.rvalid := 0.U 
     io.r_mem_exu.rresp := 0.U
-
+    io.r_mem_exu.rvalid := rvalid_reg 
 
 
     when(io.ar_exu_mem.arvalid){ 
@@ -100,11 +99,9 @@ class LSU_mem extends Module {
         }
         when((io.r_mem_exu.rready)&(io.r_mem_exu.rvalid)){
             io.r_mem_exu.rdata := rdata_reg 
-            io.r_mem_exu.rvalid := rvalid_reg 
             io.r_mem_exu.rresp := rresp_reg 
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
-            io.r_mem_exu.rvalid := 0.U 
             io.r_mem_exu.rresp := 0.U
         }
     }.otherwise{
