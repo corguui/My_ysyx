@@ -54,7 +54,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ top__DOT__EXU__DOT__reg_waddr_reg;
         CData/*0:0*/ top__DOT__EXU__DOT__mem_ren_reg;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_4;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_5;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_6;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_7;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_8;
@@ -70,6 +70,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_27;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_28;
         CData/*4:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op;
+        CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h3a32f024__0;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0;
         CData/*4:0*/ top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0;
@@ -82,11 +83,12 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Mem__DOT___GEN_3;
         CData/*4:0*/ __VdfgTmp_hd76c6d79__0;
         CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__m2EXUstate;
-        CData/*3:0*/ __Vdly__top__DOT__IDU__DOT__exu_data_inst_type;
     };
     struct {
+        CData/*3:0*/ __Vdly__top__DOT__IDU__DOT__exu_data_inst_type;
         CData/*0:0*/ __Vdly__top__DOT__IDU__DOT__exu_data_mem_ren;
         CData/*0:0*/ __Vdly__top__DOT__EXU__DOT__m2IDUstate;
+        CData/*0:0*/ __Vdly__top__DOT__EXU__DOT__mem_ren_reg;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
@@ -147,10 +149,10 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_21;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_22;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_23;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_24;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_25;
     };
     struct {
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_24;
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_25;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_26;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_27;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_28;

@@ -159,8 +159,7 @@ class EXU extends Module {
     val mem_ren_reg = RegInit(0.U)
     val rready_reg = RegInit(0.U)
 
-    rready_reg := 0.U
-    mem_ren_reg := 0.U
+    //rready_reg := 0.U
 
     io.ar_exu_mem.rmask := 0.U
     io.ar_exu_mem.raddr := 0.U 
