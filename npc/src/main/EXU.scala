@@ -217,7 +217,6 @@ class EXU extends Module {
                        rready_reg  := 1.U
                        when(io.r_mem_exu.rresp === 1.U)
                        {
-                       mem_ren_reg := false.B
                        io.reg_wen := reg_wen_reg
                        io.reg_waddr := reg_waddr_reg
                        when(io.idu2in.bits.il_us === false.B)
@@ -228,7 +227,6 @@ class EXU extends Module {
                        }
                        ifu_outdata.dnpc := io.idu2in.bits.snpc
                        }.otherwise{
-                        mem_ren_reg := false.B
                         ifu_outdata.dnpc := 0x00000004.S.asUInt
                        }
                     }.otherwise{
