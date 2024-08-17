@@ -29,9 +29,11 @@ class top extends Module {
   Reg.io.csr_wen_1 := EXU.io.csr_wen_1
   Reg.io.csr_wen_2 := EXU.io.csr_wen_2
 
-  Mem.io.r_exu_mem <> EXU.io.r_exu_mem
+  Mem.io.ar_exu_mem <> EXU.io.ar_exu_mem
   EXU.io.r_mem_exu <> Mem.io.r_mem_exu
   Mem.io.w_exu_mem <> EXU.io.w_exu_mem
+  Mem.io.aw_exu_mem <> EXU.io.aw_exu_mem
+  EXU.io.b_mem_exu <> Mem.io.b_mem_exu
 
   io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 

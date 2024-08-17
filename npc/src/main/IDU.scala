@@ -46,7 +46,7 @@ class IDU extends Module {
 	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
 	val lastimm = RegNext(exu_data.imm,0.U)
 
-	io.out2exu.valid := (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
+	//io.out2exu.valid := mem_ren | mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 	io.out2exu.bits := exu_data
 	
     class npc_break extends BlackBox with HasBlackBoxPath {
@@ -92,6 +92,10 @@ class IDU extends Module {
 	exu_data.mem_ren := false.B
 	exu_data.mem_wen := false.B
 	exu_data.reg_wen := false.B 
+
+	//imm 在 lw sw 时可能为0 导致出问题要加入 mem ren  wen
+	io.out2exu.valid := exu_data.mem_ren | exu_data.mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
+
 	when(state === m2IFUprocess )
 	{
 	exu_data.reg_waddr := rd
@@ -111,6 +115,7 @@ class IDU extends Module {
 	exu_data.il_us   :=	false.B  //true is Uint 
 	//译码
 	state := m2IFUidle
+
 	io.inv_flag := true.B
 	switch(opcode){
 		//R-Type
