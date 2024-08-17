@@ -113,7 +113,7 @@ class IDU extends Module {
 	state := m2IFUidle
 
 	//imm 在 lw sw 时可能为0 导致出问题要加入 mem ren  wen
-	io.out2exu.valid := mem_ren | mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
+	io.out2exu.valid := exu_data.mem_ren | exu_data.mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 
 	io.inv_flag := true.B
 	switch(opcode){
