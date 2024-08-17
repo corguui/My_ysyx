@@ -901,10 +901,12 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                             (0x7fU 
                                              & vlSelf->top__DOT__IFU__DOT__lastinst)) 
                                            | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_12));
-    vlSelf->top__DOT___IDU_io_out2exu_valid = ((vlSelf->top__DOT__IDU__DOT__exu_data_imm 
-                                                != vlSelf->top__DOT__IDU__DOT__lastimm) 
-                                               | ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_alu_op) 
-                                                  != (IData)(vlSelf->top__DOT__IDU__DOT__lastaluop)));
+    vlSelf->top__DOT___IDU_io_out2exu_valid = ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren) 
+                                               | ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_mem_wen) 
+                                                  | ((vlSelf->top__DOT__IDU__DOT__exu_data_imm 
+                                                      != vlSelf->top__DOT__IDU__DOT__lastimm) 
+                                                     | ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_alu_op) 
+                                                        != (IData)(vlSelf->top__DOT__IDU__DOT__lastaluop)))));
     vlSelf->top__DOT__EXU__DOT__m2IDUstate = vlSelf->__Vdly__top__DOT__EXU__DOT__m2IDUstate;
     vlSelf->top__DOT__IDU__DOT__exu_data_inst_type 
         = vlSelf->__Vdly__top__DOT__IDU__DOT__exu_data_inst_type;
