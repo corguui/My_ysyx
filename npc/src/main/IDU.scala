@@ -46,7 +46,7 @@ class IDU extends Module {
 	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
 	val lastimm = RegNext(exu_data.imm,0.U)
 
-	io.out2exu.valid := (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
+	io.out2exu.valid := mem_ren | mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 	io.out2exu.bits := exu_data
 	
     class npc_break extends BlackBox with HasBlackBoxPath {
