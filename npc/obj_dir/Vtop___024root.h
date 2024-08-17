@@ -51,7 +51,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT__reg_wen_reg;
         CData/*4:0*/ top__DOT__EXU__DOT__reg_waddr_reg;
         CData/*0:0*/ top__DOT__EXU__DOT__mem_ren_reg;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_2;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_4;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_5;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_7;
