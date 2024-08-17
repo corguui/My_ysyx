@@ -234,6 +234,7 @@ class EXU extends Module {
                 }.otherwise{
                     io.ar_exu_mem.rmask := 0.U 
                     io.ar_exu_mem.raddr := 0.U 
+                    rready_reg := 0.U
                     
                 }
 
