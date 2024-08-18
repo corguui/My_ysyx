@@ -107,7 +107,7 @@ class EXU extends Module {
 
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
-    val state_reg = RegNext(m2IDUstate,m2EXUprocess)
+    val state_reg = RegNext(m2IDUstate,1.U)
     when(io.idu2in.bits.inst_type === 3.U)
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
