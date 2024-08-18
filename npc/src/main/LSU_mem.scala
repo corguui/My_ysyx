@@ -43,7 +43,7 @@ class LSU_mem extends Module {
 
 		addPath("./src/main/Mem.v")
   	}
-    //Mem init
+
     val m = Module(new Mem)
     m.io.clock := clock
     m.io.m_waddr := 0.U
@@ -54,7 +54,13 @@ class LSU_mem extends Module {
     m.io.m_rmask := 0.U
     m.io.m_ren := false.B
 
-    //AXI-lite read member
+    io.w_exu_mem.wready := false.B
+    io.aw_exu_mem.awready := false.B
+
+    io.b_mem_exu.bresp := 0.U
+    io.b_mem_exu.bvalid := false.B
+
+
     val resp = Wire(UInt(2.W))
     resp := 0.U
     val rvalid_en = Wire(Bool())
@@ -68,7 +74,6 @@ class LSU_mem extends Module {
     io.r_mem_exu.rresp := 0.U
     io.r_mem_exu.rvalid := rvalid_reg 
 
-    //AXI-lite write member
     val bresp = Wire(UInt(2.W))
     bresp := 0.U
     val bvalid_en = Wire(Bool())
@@ -80,7 +85,7 @@ class LSU_mem extends Module {
     io.b_mem_exu.bresp := 0.U
     io.b_mem_exu.bvalid := bvalid_reg
 
-    //AXI-lite read part
+
     when(io.ar_exu_mem.arvalid){ 
         m.io.m_raddr := io.ar_exu_mem.raddr
         m.io.m_rmask := io.ar_exu_mem.rmask
@@ -109,7 +114,7 @@ class LSU_mem extends Module {
     }.otherwise{
         rvalid_en := false.B   
     }
-    //AXI-lite write part
+
     when(io.aw_exu_mem.awvalid){
         m.io.m_waddr := io.aw_exu_mem.awaddr
     }.otherwise{

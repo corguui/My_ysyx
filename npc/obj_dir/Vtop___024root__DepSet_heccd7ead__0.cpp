@@ -15,18 +15,23 @@ void Vtop___024root___eval_act(Vtop___024root* vlSelf) {
 
 void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf);
 void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf);
+void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf);
 
 void Vtop___024root___eval_nba(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_nba\n"); );
     // Body
-    if (vlSelf->__VnbaTriggered.at(1U)) {
+    if (vlSelf->__VnbaTriggered.at(0U)) {
         Vtop___024root___nba_sequent__TOP__0(vlSelf);
+        vlSelf->__Vm_traceActivity[1U] = 1U;
+    }
+    if (vlSelf->__VnbaTriggered.at(1U)) {
+        Vtop___024root___nba_sequent__TOP__1(vlSelf);
     }
     if (vlSelf->__VnbaTriggered.at(0U)) {
-        Vtop___024root___nba_sequent__TOP__1(vlSelf);
-        vlSelf->__Vm_traceActivity[1U] = 1U;
+        Vtop___024root___nba_sequent__TOP__2(vlSelf);
+        vlSelf->__Vm_traceActivity[2U] = 1U;
     }
 }
 
@@ -63,7 +68,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                     Vtop___024root___dump_triggers__act(vlSelf);
 #endif
-                    VL_FATAL_MT("build/top.sv", 1323, "", "Active region did not converge.");
+                    VL_FATAL_MT("build/top.sv", 1272, "", "Active region did not converge.");
                 }
                 vlSelf->__VactIterCount = ((IData)(1U) 
                                            + vlSelf->__VactIterCount);
@@ -78,7 +83,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__nba(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1323, "", "NBA region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1272, "", "NBA region did not converge.");
             }
             __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
             Vtop___024root___eval_nba(vlSelf);
