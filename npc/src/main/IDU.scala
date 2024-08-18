@@ -43,8 +43,8 @@ class IDU extends Module {
 
 	val exu_data = Reg(new IDUtoEXU)
 	
-	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
-	val lastimm = RegNext(exu_data.imm,0.U)
+	//val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
+	//val lastimm = RegNext(exu_data.imm,0.U)
 
 	//io.out2exu.valid := mem_ren | mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 	io.out2exu.bits := exu_data
@@ -68,7 +68,7 @@ class IDU extends Module {
 	io.ifu2in.ready := (state === m2IFUidle)
     val in_data = Wire(new IFUtoIDU) 
     in_data := io.ifu2in.bits
-   
+	val state_reg = RegNext(state,m2IFUidle)
 
 	val npc_break = Module(new npc_break)
 	npc_break.io.inst := in_data.inst
@@ -83,19 +83,17 @@ class IDU extends Module {
 
 	val csr_imm = Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 
-
-
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
 	io.reg_data.csr_raddr := 0.U
 
-	exu_data.mem_ren := false.B
-	exu_data.mem_wen := false.B
-	exu_data.reg_wen := false.B 
+
 
 	//imm 在 lw sw 时可能为0 导致出问题要加入 mem ren  wen
-	io.out2exu.valid := exu_data.mem_ren | exu_data.mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
-
+	//io.out2exu.valid := exu_data.mem_ren | exu_data.mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
+	io.out2exu.valid := (state_reg === m2IFUprocess)
+	exu_data.mem_ren := false.B
+	exu_data.mem_wen := false.B
 	when(state === m2IFUprocess )
 	{
 	exu_data.reg_waddr := rd
@@ -113,6 +111,7 @@ class IDU extends Module {
 	exu_data.alu_op := "b10000".U
 	exu_data.imm :=  0.U 
 	exu_data.il_us   :=	false.B  //true is Uint 
+	exu_data.reg_wen := false.B 
 	//译码
 	state := m2IFUidle
 

@@ -97,9 +97,18 @@ class EXU extends Module {
 		ifu2s_wait_ready -> Mux(io.out2ifu.ready,ifu2s_idle,ifu2s_wait_ready)
 	))
 
+    //EXU to IDU
+    val m2IDUidle :: m2IDUprocess :: Nil = Enum(2)
+	//val m2IDUstate = RegInit(m2IDUidle)
+    val m2IDUstate = RegInit(m2IDUidle)
+	m2IDUstate :=MuxLookup(m2IDUstate,m2IDUidle)(List(
+		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
+		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
+	))
 
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
+    val state_reg = RegNext(m2IDUstate,1.U)
     when(io.idu2in.bits.inst_type === 3.U)
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
@@ -110,19 +119,9 @@ class EXU extends Module {
     }
     .otherwise
     {
-    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
+    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc) //& (m2IDUstate === m2IDUprocess)
     }
     io.out2ifu.bits := ifu_outdata
-
-
-    //EXU to IDU
-    val m2IDUidle :: m2IDUprocess :: Nil = Enum(2)
-	val m2IDUstate = RegInit(m2IDUidle)
-	m2IDUstate :=MuxLookup(m2IDUstate,m2IDUidle)(List(
-		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
-		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
-	))
-
 
     //val mem = Module(new Memory)   //yosys
 
@@ -143,6 +142,7 @@ class EXU extends Module {
     io.csr_wen_2 := 0.U
 
     //Mem read member
+    val valid_reg = RegNext(io.idu2in.valid,false.B)
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
@@ -158,7 +158,7 @@ class EXU extends Module {
 
     //Mem write member
     val bready_reg = RegInit(0.U)
-    val mem_awaddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
+    val mem_awaddr_reg = RegEnable(alu.io.result,0.U,valid_reg)//io.idu2in.valid)
     val mem_wmask_reg = RegEnable(io.idu2in.bits.m_wmask,0.U,io.idu2in.valid)
     val mem_wdata_reg = RegEnable(io.idu2in.bits.src2,0.U,io.idu2in.valid)
     val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,(io.idu2in.valid | io.b_mem_exu.bready))
@@ -186,6 +186,7 @@ class EXU extends Module {
                 io.reg_wdata := alu.io.result
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
+                //m2IDUstate := m2IDUidle
             }
             //I type
             is(2.U){
@@ -196,6 +197,7 @@ class EXU extends Module {
                 io.reg_wdata := alu.io.result
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
+                //m2IDUstate := m2IDUidle
             }
             //IL type
             is(3.U){
@@ -210,6 +212,7 @@ class EXU extends Module {
                     when(io.r_mem_exu.rvalid === 1.U)
                     {
                        rready_reg  := 1.U
+                       //m2IDUstate := m2IDUidle
                        when(io.r_mem_exu.rresp === 1.U)
                        {
                        io.reg_wen := reg_wen_reg
@@ -261,6 +264,7 @@ class EXU extends Module {
                 when(io.w_exu_mem.wvalid & io.w_exu_mem.wready & io.aw_exu_mem.awready & io.aw_exu_mem.awvalid & io.b_mem_exu.bvalid) 
                 {
                     bready_reg := 1.U
+                    //m2IDUstate := m2IDUidle
                     when(io.b_mem_exu.bresp === 1.U)
                     {
                         ifu_outdata.dnpc := io.idu2in.bits.snpc
@@ -277,6 +281,7 @@ class EXU extends Module {
                 alu.io.src2 := io.idu2in.bits.src2
                 alu.io.alu_op := io.idu2in.bits.alu_op
                 ifu_outdata.dnpc :=  Mux((alu.io.result===1.U),(io.idu2in.bits.pc+io.idu2in.bits.imm),io.idu2in.bits.snpc)
+                //m2IDUstate := m2IDUidle
             }
             //u type
             is(6.U){
@@ -284,6 +289,7 @@ class EXU extends Module {
                 io.reg_wdata := io.idu2in.bits.imm
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
+                //m2IDUstate := m2IDUidle
             }
             //upc type
             is(7.U){
@@ -294,6 +300,7 @@ class EXU extends Module {
                 io.reg_wdata := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
+                //m2IDUstate := m2IDUidle
             }
             //j type
             is(8.U){
@@ -304,6 +311,7 @@ class EXU extends Module {
                 ifu_outdata.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
+                //m2IDUstate := m2IDUidle
             }
             //jr type
             is(9.U){
@@ -314,6 +322,7 @@ class EXU extends Module {
                 ifu_outdata.dnpc := alu.io.result 
                 io.reg_wen := io.idu2in.bits.reg_wen
                 io.reg_waddr := io.idu2in.bits.reg_waddr
+                //m2IDUstate := m2IDUidle
             }
             //csrrw
             is(10.U){
@@ -329,6 +338,7 @@ class EXU extends Module {
                 is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
                 is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
                 }
+                //m2IDUstate := m2IDUidle
             }
             //csrrs
             is(11.U){
@@ -347,6 +357,7 @@ class EXU extends Module {
                 is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
                 is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
                 }
+                //m2IDUstate := m2IDUidle
             }
             //ecall
             is(12.U){
@@ -357,6 +368,7 @@ class EXU extends Module {
                 io.csr_wen_2  := true.B 
                 io.csr_waddr_2 := 0.U
                 ifu_outdata.dnpc := io.idu2in.bits.csr //mtvec
+                //m2IDUstate := m2IDUidle
             }
             //mret
             is(13.U){
@@ -364,6 +376,7 @@ class EXU extends Module {
                 io.csr_wen_1  := true.B 
                 io.csr_waddr_1 := 2.U
                 ifu_outdata.dnpc := io.idu2in.bits.csr //mepc
+                //m2IDUstate := m2IDUidle
             }
         }
     }
