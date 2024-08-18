@@ -146,7 +146,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_r = 0x80000000U;
         vlSelf->top__DOT__IFU__DOT__exu2in_reg = vlSelf->top__DOT___EXU_io_out2ifu_valid;
         vlSelf->top__DOT__EXU__DOT__mem_wen_reg = 0U;
-        __Vdly__top__DOT__EXU__DOT__m2IDUstate = 0U;
+        __Vdly__top__DOT__EXU__DOT__m2IDUstate = 1U;
         __Vdly__top__DOT__EXU__DOT__rready_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__bready_reg = 0U;
     } else {
