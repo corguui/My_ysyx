@@ -150,11 +150,11 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT___IDU_io_reg_data_raddr_2 = VL_RAND_RESET_I(5);
     vlSelf->top__DOT___IDU_io_reg_data_csr_raddr = VL_RAND_RESET_I(2);
     vlSelf->top__DOT___IFU_io_out_bits_inst = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__IFU__DOT__m2EXUstate = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__IFU__DOT__arvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__rready_reg = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__IFU__DOT__m2EXUstate = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__ardata_reg = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT__exu2in_reg = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__IFU__DOT__arvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT__arvalid_en = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT____VdfgTmp_h5e3af682__0 = 0;

@@ -54,7 +54,7 @@ class Inst_fetch extends Module {
         vlg_pc_read.io.pc_en := true.B
         vlg_pc_read.io.pc := io.axi_ar.pc
         resp := 1.U
-        when(io.axi_r.rready & io.axi_r.rvalid) {
+        when((io.axi_r.rready) & (io.axi_r.rvalid)) {
             io.axi_r.inst := rdata_reg
             io.axi_r.rresp := rresp_reg
         }.otherwise{

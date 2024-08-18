@@ -87,6 +87,7 @@ class IFU extends Module {
 				io.out.bits.snpc := io.out.bits.pc + 4.U
 				rready_reg := true.B
 				arvalid_en := false.B
+				m2EXUstate := m2EXUidle
 				//arvalid_en:= delay(!rready_reg)
 				when(io.axi_r.rresp === 1.U){
 					io.out.bits.inst := io.axi_r.inst
@@ -100,7 +101,7 @@ class IFU extends Module {
 			io.axi_ar.pc := 0.U
 			rready_reg := false.B
 		}
-		//m2EXUstate := m2EXUidle
+
 	}
 
 	
