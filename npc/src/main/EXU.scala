@@ -118,7 +118,7 @@ class EXU extends Module {
     }
     .otherwise
     {
-    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc) & (state_reg === m2IDUprocess)
+    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc) //& (state_reg === m2IDUprocess)
     }
     io.out2ifu.bits := ifu_outdata
 

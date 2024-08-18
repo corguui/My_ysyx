@@ -100,7 +100,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                               & (IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg));
     if (vlSelf->reset) {
         vlSelf->top__DOT__EXU__DOT__lastdnpc = 0U;
-        vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_r = 0x80000000U;
         vlSelf->top__DOT__Reg__DOT__reg_23 = 0U;
         vlSelf->top__DOT__Reg__DOT__reg_22 = 0U;
         vlSelf->top__DOT__Reg__DOT__reg_21 = 0U;
@@ -144,6 +143,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Mem__DOT__bresp_reg = 0U;
         vlSelf->top__DOT__IFU__DOT__ardata_reg = 0U;
         vlSelf->__Vdly__top__DOT__IFU__DOT__arvalid_reg = 0U;
+        vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_r = 0x80000000U;
         vlSelf->top__DOT__IFU__DOT__exu2in_reg = vlSelf->top__DOT___EXU_io_out2ifu_valid;
         vlSelf->top__DOT__EXU__DOT__mem_wen_reg = 0U;
         __Vdly__top__DOT__EXU__DOT__m2IDUstate = 0U;
@@ -152,10 +152,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__EXU__DOT__bready_reg = 0U;
     } else {
         vlSelf->top__DOT__EXU__DOT__lastdnpc = vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc;
-        if (vlSelf->top__DOT___EXU_io_out2ifu_valid) {
-            vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_r 
-                = vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc;
-        }
         if (((IData)(vlSelf->top__DOT__Reg__DOT___GEN) 
              & (0x17U == (IData)(vlSelf->top__DOT___EXU_io_reg_waddr)))) {
             vlSelf->top__DOT__Reg__DOT__reg_23 = vlSelf->top__DOT___EXU_io_reg_wdata;
@@ -331,6 +327,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         if (vlSelf->top__DOT__IFU__DOT__exu2in_reg) {
             vlSelf->top__DOT__IFU__DOT__ardata_reg 
                 = vlSelf->io_pc;
+            vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_r 
+                = vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc;
         }
         if (((IData)(vlSelf->top__DOT__IFU__DOT__rready_reg) 
              | (IData)(vlSelf->top__DOT__IFU__DOT__exu2in_reg))) {
