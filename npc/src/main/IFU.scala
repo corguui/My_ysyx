@@ -64,8 +64,13 @@ class IFU extends Module {
 	val inst = Wire(UInt(32.W))
 	inst := 0.U
 	val exu2in_reg = RegNext(io.exu2in.valid)
+	val indata 	= Reg(new EXUtoIFU)
+	when(io.exu2in.valid & (io.exu2in.valid =/= exu2in_reg )){	
+		indata := io.exu2in.bits
+	}
+	
 	val rready_reg = RegInit(false.B)
-	val ardata_reg = RegEnable(io.out.bits.pc,0.U,exu2in_reg)
+	val ardata_reg = RegEnable(indata.dnpc,0.U,exu2in_reg)
 	val inst_reg 	= RegEnable(inst,0.U,io.axi_ar.arvalid)
 	//val arvalid_reg = RegEnable(arvalid_en,false.B,(io.axi_r.rready & io.exu2in.valid))
 	def delay(x:Bool)={RegNext(x)}
@@ -78,11 +83,6 @@ class IFU extends Module {
 	io.out.bits.snpc := io.out.bits.pc + 4.U
 	io.out.bits.inst := inst_reg 
 
-	val indata 	= Reg(new EXUtoIFU)
-	when(io.exu2in.valid & (io.exu2in.valid =/= exu2in_reg )){	
-		indata := io.exu2in.bits
-	}
-	
 
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
