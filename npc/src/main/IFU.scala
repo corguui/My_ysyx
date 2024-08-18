@@ -67,7 +67,7 @@ class IFU extends Module {
 	val ardata_reg = RegEnable(io.out.bits.pc,0.U,arvalid_en)
 	//val arvalid_reg = RegEnable(arvalid_en,false.B,(io.axi_r.rready & io.exu2in.valid))
 	val arvalid_reg = RegNext(arvalid_en,false.B)
-	def delay(x:UInt)={RegNext(x)}
+	def delay(x:UInt)={RegEnable(x,0.U,rready_reg)}
 	val delay_arvalid = delay(delay(!rready_reg))
 	io.axi_ar.pc := 0.U
 	io.axi_ar.arvalid :=  arvalid_reg

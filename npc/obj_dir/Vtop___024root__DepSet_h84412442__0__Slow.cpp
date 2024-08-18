@@ -35,14 +35,14 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->io_pc = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
                       ? vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG
                       : 0U);
-    vlSelf->top__DOT__IFU__DOT___GEN = ((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
-                                        & (IData)(vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg));
     vlSelf->top__DOT___IDU_io_out2exu_valid = ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren) 
                                                | ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_mem_wen) 
                                                   | ((vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                                                       != vlSelf->top__DOT__IDU__DOT__lastimm) 
                                                      | ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_alu_op) 
                                                         != (IData)(vlSelf->top__DOT__IDU__DOT__lastaluop)))));
+    vlSelf->top__DOT__IFU__DOT___GEN = ((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
+                                        & (IData)(vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg));
     vlSelf->top__DOT__EXU__DOT___GEN_8 = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg) 
                                           & (IData)(vlSelf->top__DOT__Mem__DOT__bvalid_reg));
     vlSelf->top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0 
@@ -72,8 +72,9 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__Inst_fetch__DOT___GEN = ((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
                                                & ((IData)(vlSelf->top__DOT__IFU__DOT__rready_reg) 
                                                   & (IData)(vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg)));
-    vlSelf->top__DOT__IFU__DOT__arvalid_en = ((~ (IData)(vlSelf->top__DOT__IFU__DOT___GEN)) 
-                                              & (IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate));
+    vlSelf->top__DOT__IFU__DOT__arvalid_en = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate) 
+                                              & ((~ (IData)(vlSelf->top__DOT__IFU__DOT___GEN)) 
+                                                 | (IData)(vlSelf->top__DOT__IFU__DOT__delay_arvalid)));
     vlSelf->top__DOT__EXU__DOT___GEN_19 = ((IData)(vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0) 
                                            | ((8U == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
                                               | ((9U 
