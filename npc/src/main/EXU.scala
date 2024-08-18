@@ -67,7 +67,7 @@ class EXUtoMem_aw extends Bundle {
 
 class EXUtoIFU extends Bundle {
     val dnpc = Output(UInt(32.W))
-    val dncp_en = Output(Bool())
+    val dnpc_en = Output(Bool())
 }
 
 class EXU extends Module {
@@ -101,7 +101,7 @@ class EXU extends Module {
 
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
-    dncp_en := 0.U
+    dnpc_en := 0.U
     when(io.idu2in.bits.inst_type === 3.U)
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
@@ -115,7 +115,7 @@ class EXU extends Module {
     .otherwise
     {
     io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
-    dncp_en := 1.U
+    dnpc_en := 1.U
     }
     io.out2ifu.bits := ifu_outdata
 
