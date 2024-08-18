@@ -80,7 +80,7 @@ class IFU extends Module {
 
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
-		io.out.bits.pc := RegEnable(io.exu2in.bits.dnpc.asSInt, 0x80000000.S,io.exu2in_reg).asUInt
+		io.out.bits.pc := RegEnable(io.exu2in.bits.dnpc.asSInt, 0x80000000.S,exu2in_reg).asUInt
 		when(io.axi_ar.arready & io.axi_ar.arvalid){
 			io.axi_ar.pc := ardata_reg 
 			when(io.axi_r.rvalid){
