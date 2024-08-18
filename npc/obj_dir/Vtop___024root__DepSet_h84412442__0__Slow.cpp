@@ -116,9 +116,8 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                            == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))))
                                                      ? vlSelf->top__DOT__IDU__DOT__exu_data_src1
                                                      : 0U))))));
-    vlSelf->top__DOT__IFU__DOT____VdfgTmp_h5e3af682__0 
-        = ((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0) 
-           & (IData)(vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg));
+    vlSelf->top__DOT__IFU__DOT___GEN = ((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0) 
+                                        & (IData)(vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg));
     vlSelf->top__DOT__EXU__DOT___GEN_5 = (1U & ((~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)) 
                                                 | ((~ 
                                                     ((3U 
@@ -138,7 +137,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                 | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_18)))
                                                ? 0U
                                                : (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_reg_waddr))));
-    vlSelf->__VdfgTmp_h88198790__0 = ((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_h5e3af682__0) 
+    vlSelf->__VdfgTmp_h88198790__0 = ((IData)(vlSelf->top__DOT__IFU__DOT___GEN) 
                                       & (1U == ((IData)(vlSelf->top__DOT__Inst_fetch__DOT___GEN)
                                                  ? (IData)(vlSelf->top__DOT__Inst_fetch__DOT__rresp_reg)
                                                  : 0U)));

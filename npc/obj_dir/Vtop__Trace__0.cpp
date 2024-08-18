@@ -203,7 +203,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     bufp->chgBit(oldp+130,(vlSelf->reset));
     bufp->chgIData(oldp+131,(vlSelf->io_pc),32);
     bufp->chgBit(oldp+132,(vlSelf->io_inv_flag));
-    bufp->chgIData(oldp+133,(((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_h5e3af682__0)
+    bufp->chgIData(oldp+133,(((IData)(vlSelf->top__DOT__IFU__DOT___GEN)
                                ? ((IData)(4U) + vlSelf->io_pc)
                                : 0U)),32);
 }
