@@ -142,7 +142,6 @@ class EXU extends Module {
     io.csr_wen_2 := 0.U
 
     //Mem read member
-    val valid_reg = RegNext(io.idu2in.valid)
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
@@ -158,10 +157,10 @@ class EXU extends Module {
 
     //Mem write member
     val bready_reg = RegInit(0.U)
-    val mem_awaddr_reg = RegEnable(alu.io.result,0.U,valid_reg)//io.idu2in.valid)
-    val mem_wmask_reg = RegEnable(io.idu2in.bits.m_wmask,0.U,valid_reg)//io.idu2in.valid)
-    val mem_wdata_reg = RegEnable(io.idu2in.bits.src2,0.U,valid_reg)//io.idu2in.valid)
-    val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,(valid_reg | io.b_mem_exu.bready))
+    val mem_awaddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
+    val mem_wmask_reg = RegEnable(io.idu2in.bits.m_wmask,0.U,io.idu2in.valid)
+    val mem_wdata_reg = RegEnable(io.idu2in.bits.src2,0.U,io.idu2in.valid)
+    val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,(io.idu2in.valid | io.b_mem_exu.bready))
     io.aw_exu_mem.awaddr := 0.U
     io.aw_exu_mem.awvalid := mem_wen_reg 
     io.w_exu_mem.wdata := 0.U
