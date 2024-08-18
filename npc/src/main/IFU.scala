@@ -19,6 +19,11 @@ class pcreadmem extends Module{
 	
 }
 */
+class AXI_ar extends Bundle{
+	val pc 	= Output(UInt(32.W))
+	val arvalid = Output(Bool())
+	val arready = Input(Bool())
+}
 
 
 class IFUtoIDU extends Bundle {
@@ -31,9 +36,9 @@ class IFU extends Module {
 	val io = IO(new Bundle{
 		val out = Decoupled(new IFUtoIDU)
 		val exu2in = Flipped(Decoupled(new EXUtoIFU))
+		val axi_ar = (new AXI_ar)
+		val axi_r = Flipped(new AXI_r)
 	})
-
-	
 
 	//IFU recive IDU 
 	val idu2s_idle :: idu2s_wait_ready :: Nil = Enum(2)
@@ -43,6 +48,8 @@ class IFU extends Module {
 		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
 
+	io.out.valid := io.axi_r.rready
+
 	//IFU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
 	val m2EXUstate = RegInit(m2EXUidle)
@@ -50,54 +57,46 @@ class IFU extends Module {
 		m2EXUidle -> Mux(io.exu2in.valid,m2EXUprocess,m2EXUidle),
 		m2EXUprocess -> Mux(io.exu2in.ready,m2EXUidle,m2EXUprocess)
 	))
+
 	io.exu2in.ready := (m2EXUstate === m2EXUidle)
-	
 
-
-
-	// 声明DPI-C函数的BlackBox模块
-  	class VlgPcRead extends BlackBox with HasBlackBoxPath {
-    	val io = IO(new Bundle {
-		val clk = Input(Clock())
-      	val pc = Input(UInt(32.W))
-      	val inst = Output(UInt(32.W))
-		val pc_en = Input(Bool())
-      })
-
-		addPath("./src/main/VlgPcRead.v")
-  	}
-
-  
   	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
-	val vlg_pc_read = Module(new VlgPcRead)
-	val out_data =Wire(new IFUtoIDU)
-	
+	val arvalid_en = Wire(Bool())
+	arvalid_en := 0.U
+	val rready_reg = RegInit(false.B)
+	val ardata_reg = RegEnable(io.exu2in.bits.dnpc,0.U,io.exu2in.bits.valid)
+	val arvalid_reg = RegEnable(arvalid_en,false.B,(io.axi_r.rready & io.exu2in.valid))
 
-	//取指令和生成ready,valid信号
-	//io.out.valid := (lastinst =/= out_data.inst)
-	val lastpc = RegNext(out_data.pc,0.U)
-	val lastsnpc = RegNext(out_data.snpc,0.U)
-	vlg_pc_read.io.clk := clock
-	out_data.pc := lastpc 
-	out_data.snpc := lastsnpc
-	val lasten = RegNext(vlg_pc_read.io.pc_en,false.B)
-	val lastinst = RegEnable(vlg_pc_read.io.inst,0.U,vlg_pc_read.io.pc_en)
-	vlg_pc_read.io.pc_en := false.B
+	io.axi_ar.pc := 0.U
+	io.axi_ar.arvalid :=  arvbalid_reg
+	io.axi_r.rready := rready_reg
 
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
-		out_data.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
-		out_data.snpc := out_data.pc + 4.U
-		vlg_pc_read.io.pc_en := true.B
-		m2EXUstate := m2EXUidle
+		arvalid_en := true.B
+		when(io.axi_ar.arready & io.axi_ar.arvalid){
+			io.axi_ar.pc := ardata_reg 
+			when(io.axi_r.rvalid){
+				io.out.bits.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
+				io.out.bist.snpc := io.out.bist.pc + 4.U
+				rready_reg := true.B
+				arvalid_en := false.B
+				when(io.axi_r.rresp === 1.U){
+					io.out.bist.inst := io.axi_r.inst
+				}.otherwise{
+					io.out.bist.inst := 0.U
+				}
+			}.otherwise{
+				rready_reg := false.B
+			}
+		}.otherwise{
+			io.axi_ar.pc := 0.U
+			rready_reg := false.B
+		}
+		//m2EXUstate := m2EXUidle
 	}
 
-	vlg_pc_read.io.pc := out_data.pc
-	out_data.inst := lastinst 
-
-	io.out.valid := lasten
-	//传到IDU
-	io.out.bits := out_data
+	
 
 }
 
