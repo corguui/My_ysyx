@@ -13,6 +13,7 @@ class top extends Module {
   val EXU = Module(new EXU)
   val Reg = Module(new Reg)
   val Mem = Module(new LSU_mem)
+  val Inst_fetch = Module(new Inst_fetch)
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
@@ -34,6 +35,9 @@ class top extends Module {
   Mem.io.w_exu_mem <> EXU.io.w_exu_mem
   Mem.io.aw_exu_mem <> EXU.io.aw_exu_mem
   EXU.io.b_mem_exu <> Mem.io.b_mem_exu
+
+  Inst_fetch.io.axi_ar <> IFU.io.axi_ar
+  IFU.io.axi_r <> Inst_fetch.io.axi_r
 
   io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 
