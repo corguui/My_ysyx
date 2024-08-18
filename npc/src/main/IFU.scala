@@ -71,6 +71,10 @@ class IFU extends Module {
 	io.axi_ar.arvalid :=  arvalid_reg
 	io.axi_r.rready := rready_reg
 
+	io.out.bits.pc := 0.U
+	io.out.bits.snpc := 0.U
+	io.out.bits.inst := 0.U
+
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
 		arvalid_en := true.B
