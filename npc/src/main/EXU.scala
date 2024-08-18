@@ -222,7 +222,7 @@ class EXU extends Module {
                        }
                        ifu_outdata.dnpc := io.idu2in.bits.snpc
                        }.otherwise{
-                        ifu_outdata.dnpc := 0x00000004.S.asUInt
+                        ifu_outdata.dnpc := 0x80000000.S.asUInt
                        }
                     }.otherwise{
                         rready_reg := 0.U
@@ -265,7 +265,7 @@ class EXU extends Module {
                     {
                         ifu_outdata.dnpc := io.idu2in.bits.snpc
                     }.otherwise{
-                        ifu_outdata.dnpc := 0x00000004.S.asUInt
+                        ifu_outdata.dnpc := 0x80000000.S.asUInt
                     }
                 }.otherwise{
                     bready_reg := 0.U
