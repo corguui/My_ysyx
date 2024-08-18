@@ -106,7 +106,7 @@ class EXU extends Module {
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
 
-    val indata = (new IDUtoEXU)
+    val indata = Wire(new IDUtoEXU)
     when(io.idu2in.valid)
     {
         indata := io.idu2in.bits
