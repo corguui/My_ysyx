@@ -104,12 +104,10 @@ class EXU extends Module {
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
     }
-    /*
     .elsewhen(io.idu2in.bits.inst_type === 4.U)
     {
     io.out2ifu.valid :=  io.b_mem_exu.bready
     }
-    */
     .otherwise
     {
     io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
@@ -126,10 +124,9 @@ class EXU extends Module {
 	))
 
 
-    
-
     //val mem = Module(new Memory)   //yosys
 
+    //alu dnpc csr member init
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
@@ -145,15 +142,7 @@ class EXU extends Module {
     io.csr_wdata_2 := 0.U
     io.csr_wen_2 := 0.U
 
-
-    io.aw_exu_mem.awaddr := 0.U
-    io.aw_exu_mem.awvalid := 0.U
-    io.w_exu_mem.wdata := 0.U
-    io.w_exu_mem.wmask := 0.U
-    io.w_exu_mem.wvalid := 0.U
-
-    io.b_mem_exu.bready := 0.U
-
+    //Mem read member
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
@@ -161,18 +150,25 @@ class EXU extends Module {
     val mem_raddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
     val mem_rmask_reg = RegEnable(io.idu2in.bits.m_rmask,0.U,io.idu2in.valid)
     val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,(io.idu2in.valid | io.r_mem_exu.rready))
-    //val mem_ren_reg = RegInit(0.U)
-
-    //rready_reg := 0.U
 
     io.ar_exu_mem.rmask := 0.U
     io.ar_exu_mem.raddr := 0.U 
     io.r_mem_exu.rready := rready_reg 
     io.ar_exu_mem.arvalid := mem_ren_reg           
 
-    val memwen_reg_en = Wire(Bool())
-    memwen_reg_en := false.B
-    val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,memwen_reg_en)
+    //Mem write member
+    val bready_reg = RegInit(0.U)
+    val mem_awaddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
+    val mem_wmask_reg = RegEnable(io.idu2in.bits.m_wmask,0.U,io.idu2in.valid)
+    val mem_wdata_reg = RegEnable(io.idu2in.bits.src2,0.U,io.idu2in.valid)
+    val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,(io.idu2in.valid | io.b_mem_exu.bready))
+    io.aw_exu_mem.awaddr := 0.U
+    io.aw_exu_mem.awvalid := mem_wen_reg 
+    io.w_exu_mem.wdata := 0.U
+    io.w_exu_mem.wmask := 0.U
+    io.w_exu_mem.wvalid := mem_wen_reg 
+
+    io.b_mem_exu.bready := bready_reg
 
 
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
@@ -243,24 +239,37 @@ class EXU extends Module {
             }
             //s type
             is(4.U){
-                ifu_outdata.dnpc := io.idu2in.bits.snpc
                 alu.io.src1 := io.idu2in.bits.src1
                 alu.io.src2 := io.idu2in.bits.imm
                 alu.io.alu_op := io.idu2in.bits.alu_op
-
-                io.aw_exu_mem.awaddr := alu.io.result
-                io.aw_exu_mem.awvalid := Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
-                io.w_exu_mem.wdata := io.idu2in.bits.src2
-                io.w_exu_mem.wmask := io.idu2in.bits.m_wmask
-                io.w_exu_mem.wvalid := Mux(io.idu2in.bits.mem_wen === 1.U,io.idu2in.bits.mem_wen,memwen_reg_en)
-                memwen_reg_en := true.B
-                when(io.b_mem_exu.bvalid === 1.U)
+                when(io.aw_exu_mem.awready & io.aw_exu_mem.awvalid)
                 {
-                    io.b_mem_exu.bready := 1.U
+                    io.aw_exu_mem.awaddr := mem_awaddr_reg 
                 }.otherwise{
-                    io.b_mem_exu.bready := 0.U              
+                    io.aw_exu_mem.awaddr := 0.U
+                    bready_reg := 0.U
                 }
-
+                when(io.w_exu_mem.wready & io.w_exu_mem.wvalid)
+                {
+                    io.w_exu_mem.wdata := mem_wdata_reg 
+                    io.w_exu_mem.wmask := mem_wmask_reg 
+                }.otherwise{
+                    io.w_exu_mem.wdata := 0.U
+                    io.w_exu_mem.wmask := 0.U
+                    bready_reg := 0.U
+                }
+                when(io.w_exu_mem.wvalid & io.w_exu_mem.wready & io.aw_exu_mem.awready & io.aw_exu_mem.awvalid & io.b_mem_exu.bvalid) 
+                {
+                    bready_reg := 1.U
+                    when(io.b_mem_exu.bresp === 1.U)
+                    {
+                        ifu_outdata.dnpc := io.idu2in.bits.snpc
+                    }.otherwise{
+                        ifu_outdata.dnpc := 0x00000004.S.asUInt
+                    }
+                }.otherwise{
+                    bready_reg := 0.U
+                }
             }
             //b type
             is(5.U){

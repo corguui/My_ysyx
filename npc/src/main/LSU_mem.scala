@@ -61,10 +61,6 @@ class LSU_mem extends Module {
     io.b_mem_exu.bvalid := false.B
 
 
-    //val lastraddr = RegNext(io.ar_exu_mem.raddr,0.U)
-    val lastawaddr = RegNext(io.aw_exu_mem.awaddr,0.U)
-    val lastwdata = RegNext(io.w_exu_mem.wdata,0.U)
-
     val resp = Wire(UInt(2.W))
     resp := 0.U
     val rvalid_en = Wire(Bool())
@@ -77,6 +73,17 @@ class LSU_mem extends Module {
     io.r_mem_exu.rdata := 0.U 
     io.r_mem_exu.rresp := 0.U
     io.r_mem_exu.rvalid := rvalid_reg 
+
+    val bresp = Wire(UInt(2.W))
+    bresp := 0.U
+    val bvalid_en = Wire(Bool())
+    bvalid_en := false.B
+    val bvalid_reg = RegNext(bvalid_en,0.U)
+    val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
+    io.aw_exu_mem.awready := true.B
+    io.w_exu_mem.wready := true.B
+    io.b_mem_exu.bresp := 0.U
+    io.b_mem_exu.bvalid := bvalid_reg
 
 
     when(io.ar_exu_mem.arvalid){ 
@@ -108,32 +115,42 @@ class LSU_mem extends Module {
         rvalid_en := false.B   
     }
 
-    when(io.aw_exu_mem.awvalid&(io.aw_exu_mem.awaddr =/= lastawaddr)){
-        io.aw_exu_mem.awready := 1.U  
+    when(io.aw_exu_mem.awvalid){
         m.io.m_waddr := io.aw_exu_mem.awaddr
-        
+    }.otherwise{
+        m.io.m_waddr := 0.U
     }
-    when(io.w_exu_mem.wvalid&(io.w_exu_mem.wdata =/= lastwdata)){
-        io.w_exu_mem.wready := m.io.m_wready
+    when(io.w_exu_mem.wvalid){
         m.io.m_wdata := io.w_exu_mem.wdata
         m.io.m_wmask := io.w_exu_mem.wmask
-        m.io.m_wen := io.w_exu_mem.wvalid
-        io.b_mem_exu.bvalid := Mux(io.w_exu_mem.wready === 1.U , 1.U, 0.U)
+    }.otherwise{
+        m.io.m_wdata := 0.U
+        m.io.m_wmask := 0.U
+    }
+    when(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid){
+        m.io.m_wen := true.B
+        bvalid_en := true.B
         when(io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt & io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt){
-
             when(io.w_exu_mem.wmask === 1.U){
-                io.b_mem_exu.bresp := Mux((io.w_exu_mem.wdata(31,8) === 0.U),1.U,0.U)
+                bresp := Mux((io.w_exu_mem.wdata(31,8) === 0.U),1.U,0.U)
             }.elsewhen(io.w_exu_mem.wmask === 2.U){
-                io.b_mem_exu.bresp := Mux((io.w_exu_mem.wdata(31,16) === 0.U),1.U,0.U)
+                bresp := Mux((io.w_exu_mem.wdata(31,16) === 0.U),1.U,0.U)
             }.elsewhen(io.w_exu_mem.wmask === 4.U){
-                io.b_mem_exu.bresp := 1.U
+                bresp := 1.U
             }.otherwise{
-                io.b_mem_exu.bresp := 0.U
+                bresp := 0.U
             }
         }.otherwise{
-                io.b_mem_exu.bresp := 0.U
+                bresp := 0.U
         }
-                
-    }
+        when(io.b_mem_exu.bready & io.b_mem_exu.bvalid){
+            io.b_mem_exu.bresp := bresp_reg
+        }.otherwise{
+            io.b_mem_exu.bresp := 0.U
+        }
+    }.otherwise{
+        m.io.m_wen := false.B
+        bvalid_en := false.B
+    } 
 
 }
