@@ -162,7 +162,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBit(c+55,"rready_reg", false,-1);
     tracep->declBus(c+77,"ardata_reg", false,-1, 31,0);
     tracep->declBit(c+72,"arvalid_reg", false,-1);
-    tracep->declBit(c+78,"delay_arvalid_REG", false,-1);
+    tracep->declBit(c+78,"delay_arvalid_r", false,-1);
     tracep->declBit(c+79,"delay_arvalid", false,-1);
     tracep->declBus(c+80,"io_out_bits_pc_REG", false,-1, 31,0);
     tracep->declBus(c+132,"io_out_bits_pc_0", false,-1, 31,0);
@@ -440,7 +440,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+75,(vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg));
     bufp->fullBit(oldp+76,(vlSelf->top__DOT__IFU__DOT__m2EXUstate));
     bufp->fullIData(oldp+77,(vlSelf->top__DOT__IFU__DOT__ardata_reg),32);
-    bufp->fullBit(oldp+78,(vlSelf->top__DOT__IFU__DOT__delay_arvalid_REG));
+    bufp->fullBit(oldp+78,(vlSelf->top__DOT__IFU__DOT__delay_arvalid_r));
     bufp->fullBit(oldp+79,(vlSelf->top__DOT__IFU__DOT__delay_arvalid));
     bufp->fullIData(oldp+80,(vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG),32);
     bufp->fullBit(oldp+81,(vlSelf->top__DOT__IFU__DOT__arvalid_en));

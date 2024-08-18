@@ -33,7 +33,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__IFU__DOT__m2EXUstate;
         CData/*0:0*/ top__DOT__IFU__DOT__rready_reg;
         CData/*0:0*/ top__DOT__IFU__DOT__arvalid_reg;
-        CData/*0:0*/ top__DOT__IFU__DOT__delay_arvalid_REG;
+        CData/*0:0*/ top__DOT__IFU__DOT__delay_arvalid_r;
         CData/*0:0*/ top__DOT__IFU__DOT__delay_arvalid;
         CData/*0:0*/ top__DOT__IFU__DOT___GEN;
         CData/*0:0*/ top__DOT__IFU__DOT__arvalid_en;
