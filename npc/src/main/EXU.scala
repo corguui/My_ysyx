@@ -142,7 +142,7 @@ class EXU extends Module {
     io.csr_wen_2 := 0.U
 
     //Mem read member
-    val valid_reg = RegNext(io.idu2in.valid,0.U)
+    val valid_reg = RegNext(io.idu2in.valid)
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
