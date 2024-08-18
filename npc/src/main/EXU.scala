@@ -112,7 +112,26 @@ class EXU extends Module {
         indata := io.idu2in.bits
     }.otherwise
     {
-        indata := 0.U
+        indata.snpc := 0.U
+        indata.pc := 0.U
+        indata.mem_ren := 0.U
+        indata.mem_wen := 0.U
+        indata.reg_wen := 0.U
+        indata.reg_waddr := 0.U
+        indata.m_rmask := 0.U
+        indata.m_wmask := 0.U
+        indata.src1 := 0.U
+        indata.src2 := 0.U
+        indata.inst_type := 0.U
+        indata.csr := 0.U
+        indata.csr_a5 := 0.U
+        indata.mstatus := 0.U
+        indata.imm := 0.U
+        indata.imm := 0.U
+        indata.alu_op := 0.U
+        indata.inst_type := 0.U
+        indata.il_us := 0.U
+
     }
 
     val ifu_outdata = Wire(new EXUtoIFU)
