@@ -85,7 +85,7 @@ class IFU extends Module {
 			when(io.axi_r.rvalid){
 				io.out.bits.snpc := io.out.bits.pc + 4.U
 				rready_reg := true.B
-				io.axi_ar.arvalid := arvalid_delay
+				arvalid_en := arvalid_delay
 				when(io.axi_r.rresp === 1.U){
 					io.out.bits.inst := io.axi_r.inst
 				}.otherwise{
