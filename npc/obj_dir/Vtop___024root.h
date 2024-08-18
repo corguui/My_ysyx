@@ -22,7 +22,6 @@ class Vtop___024root final : public VerilatedModule {
         VL_IN8(clock,0,0);
         VL_IN8(reset,0,0);
         VL_OUT8(io_inv_flag,0,0);
-        CData/*0:0*/ top__DOT___EXU_io_out2ifu_valid;
         CData/*2:0*/ top__DOT___EXU_io_w_exu_mem_wmask;
         CData/*4:0*/ top__DOT___EXU_io_reg_waddr;
         CData/*1:0*/ top__DOT___EXU_io_csr_waddr_1;
@@ -34,6 +33,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__IFU__DOT__m2EXUstate;
         CData/*0:0*/ top__DOT__IFU__DOT__rready_reg;
         CData/*0:0*/ top__DOT__IFU__DOT__arvalid_reg;
+        CData/*0:0*/ top__DOT__IFU__DOT__arvalid_en;
         CData/*0:0*/ top__DOT__IFU__DOT____VdfgTmp_h5e3af682__0;
         CData/*0:0*/ top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0;
         CData/*0:0*/ top__DOT__IDU__DOT__exu_data_mem_ren;
