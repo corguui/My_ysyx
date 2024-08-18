@@ -74,7 +74,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                   & (IData)(vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg)));
     vlSelf->top__DOT__IFU__DOT__arvalid_en = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate) 
                                               & ((~ (IData)(vlSelf->top__DOT__IFU__DOT___GEN)) 
-                                                 | (IData)(vlSelf->top__DOT__IFU__DOT__delay_arvalid)));
+                                                 | (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_en_REG)));
     vlSelf->top__DOT__EXU__DOT___GEN_19 = ((IData)(vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0) 
                                            | ((8U == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
                                               | ((9U 
