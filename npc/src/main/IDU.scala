@@ -43,10 +43,11 @@ class IDU extends Module {
 
 	val exu_data = Reg(new IDUtoEXU)
 	
-	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
-	val lastimm = RegNext(exu_data.imm,0.U)
+	//val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
+	//val lastimm = RegNext(exu_data.imm,0.U)
+	val lastaluop =RegEnable(exu_data.alu_op,"b10000".U,state)
+	val lastimm = RegEnable(exu_data.imm,0.U,state)
 
-	//io.out2exu.valid := mem_ren | mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 	io.out2exu.bits := exu_data
 	
     class npc_break extends BlackBox with HasBlackBoxPath {
@@ -95,6 +96,7 @@ class IDU extends Module {
 
 	//imm 在 lw sw 时可能为0 导致出问题要加入 mem ren  wen
 	io.out2exu.valid := exu_data.mem_ren | exu_data.mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
+
 	exu_data.alu_op := "b10000".U
 	when(state === m2IFUprocess )
 	{
@@ -113,8 +115,9 @@ class IDU extends Module {
 	//exu_data.alu_op := "b10000".U
 	exu_data.imm :=  0.U 
 	exu_data.il_us   :=	false.B  //true is Uint 
-	//译码
-	state := m2IFUidle
+
+	//lastimm lastaluop 靠state驱动 这个屏蔽了就会一直拉高
+	state := m2IFUidle 
 
 	io.inv_flag := true.B
 	switch(opcode){

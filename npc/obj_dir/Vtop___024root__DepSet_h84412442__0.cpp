@@ -68,7 +68,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         Vtop___024unit____Vdpiimwrap_vlg_pc_read_TOP____024unit(
                                                                 ((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg)
                                                                   ? 
-                                                                 ((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0)
+                                                                 (((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
+                                                                   & (IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate))
                                                                    ? vlSelf->top__DOT__IFU__DOT__ardata_reg
                                                                    : 0U)
                                                                   : 0U), __Vfunc_vlg_pc_read__3__Vfuncout);
@@ -339,8 +340,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelf->top__DOT__IFU__DOT__exu2in_reg = vlSelf->top__DOT___EXU_io_out2ifu_valid;
     if (vlSelf->top__DOT__IDU__DOT__state) {
         vlSelf->top__DOT__IDU__DOT__exu_data_snpc = 
-            ((IData)(vlSelf->top__DOT__IFU__DOT___GEN)
-              ? ((IData)(4U) + vlSelf->io_pc) : 0U);
+            ((IData)(4U) + vlSelf->io_pc);
         __Vdly__top__DOT__IDU__DOT__exu_data_pc = vlSelf->io_pc;
         vlSelf->top__DOT__IDU__DOT__exu_data_m_rmask 
             = (((IData)(vlSelf->top__DOT__IDU__DOT___GEN_17) 

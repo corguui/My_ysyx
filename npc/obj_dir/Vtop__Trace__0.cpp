@@ -186,9 +186,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     bufp->chgBit(oldp+123,(vlSelf->reset));
     bufp->chgIData(oldp+124,(vlSelf->io_pc),32);
     bufp->chgBit(oldp+125,(vlSelf->io_inv_flag));
-    bufp->chgIData(oldp+126,(((IData)(vlSelf->top__DOT__IFU__DOT___GEN)
-                               ? ((IData)(4U) + vlSelf->io_pc)
-                               : 0U)),32);
+    bufp->chgIData(oldp+126,(((IData)(4U) + vlSelf->io_pc)),32);
     bufp->chgIData(oldp+127,(((0U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
                                ? vlSelf->top__DOT__Reg__DOT__csr_0
                                : ((1U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
@@ -196,11 +194,13 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                    : ((2U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
                                        ? vlSelf->top__DOT__Reg__DOT__csr_2
                                        : vlSelf->top__DOT__Reg__DOT__csr_3)))),32);
-    bufp->chgIData(oldp+128,(((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0)
+    bufp->chgIData(oldp+128,((((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
+                               & (IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate))
                                ? vlSelf->top__DOT__IFU__DOT__ardata_reg
                                : 0U)),32);
     bufp->chgIData(oldp+129,(((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg)
-                               ? ((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0)
+                               ? (((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
+                                   & (IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate))
                                    ? vlSelf->top__DOT__IFU__DOT__ardata_reg
                                    : 0U) : 0U)),32);
 }

@@ -156,6 +156,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBit(c+118,"io_axi_ar_arvalid", false,-1);
     tracep->declBus(c+119,"io_axi_r_inst", false,-1, 31,0);
     tracep->declBit(c+120,"io_axi_r_rvalid", false,-1);
+    tracep->declBus(c+125,"io_out_bits_pc_0", false,-1, 31,0);
     tracep->declBit(c+121,"m2EXUstate", false,-1);
     tracep->declBit(c+59,"exu2in_reg", false,-1);
     tracep->declBit(c+108,"rready_reg", false,-1);
@@ -163,7 +164,6 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+109,"inst_reg", false,-1, 31,0);
     tracep->declBit(c+118,"arvalid_reg", false,-1);
     tracep->declBus(c+61,"io_out_bits_pc_REG", false,-1, 31,0);
-    tracep->declBus(c+125,"io_out_bits_pc_0", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("Inst_fetch ");
     tracep->declBit(c+123,"clock", false,-1);
@@ -476,9 +476,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+124,(vlSelf->reset));
     bufp->fullIData(oldp+125,(vlSelf->io_pc),32);
     bufp->fullBit(oldp+126,(vlSelf->io_inv_flag));
-    bufp->fullIData(oldp+127,(((IData)(vlSelf->top__DOT__IFU__DOT___GEN)
-                                ? ((IData)(4U) + vlSelf->io_pc)
-                                : 0U)),32);
+    bufp->fullIData(oldp+127,(((IData)(4U) + vlSelf->io_pc)),32);
     bufp->fullIData(oldp+128,(((0U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
                                 ? vlSelf->top__DOT__Reg__DOT__csr_0
                                 : ((1U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
@@ -486,11 +484,13 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                                     : ((2U == (IData)(vlSelf->top__DOT___IDU_io_reg_data_csr_raddr))
                                         ? vlSelf->top__DOT__Reg__DOT__csr_2
                                         : vlSelf->top__DOT__Reg__DOT__csr_3)))),32);
-    bufp->fullIData(oldp+129,(((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0)
+    bufp->fullIData(oldp+129,((((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
+                                & (IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate))
                                 ? vlSelf->top__DOT__IFU__DOT__ardata_reg
                                 : 0U)),32);
     bufp->fullIData(oldp+130,(((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg)
-                                ? ((IData)(vlSelf->top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0)
+                                ? (((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
+                                    & (IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate))
                                     ? vlSelf->top__DOT__IFU__DOT__ardata_reg
                                     : 0U) : 0U)),32);
 }
