@@ -33,7 +33,8 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__IFU__DOT__m2EXUstate;
         CData/*0:0*/ top__DOT__IFU__DOT__rready_reg;
         CData/*0:0*/ top__DOT__IFU__DOT__arvalid_reg;
-        CData/*0:0*/ top__DOT__IFU__DOT____VdfgTmp_h5e3af682__0;
+        CData/*0:0*/ top__DOT__IFU__DOT___GEN;
+        CData/*0:0*/ top__DOT__IFU__DOT__arvalid_en;
         CData/*0:0*/ top__DOT__IFU__DOT____VdfgTmp_haf7782c8__0;
         CData/*0:0*/ top__DOT__IDU__DOT__exu_data_mem_ren;
         CData/*0:0*/ top__DOT__IDU__DOT__exu_data_mem_wen;
@@ -82,9 +83,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ top__DOT__EXU__DOT__alu__DOT____VdfgTmp_hdb870149__0;
         CData/*0:0*/ top__DOT__Reg__DOT___GEN;
         CData/*0:0*/ top__DOT__Mem__DOT__rvalid_reg;
-        CData/*1:0*/ top__DOT__Mem__DOT__rresp_reg;
     };
     struct {
+        CData/*1:0*/ top__DOT__Mem__DOT__rresp_reg;
         CData/*0:0*/ top__DOT__Mem__DOT__bvalid_reg;
         CData/*1:0*/ top__DOT__Mem__DOT__bresp_reg;
         CData/*0:0*/ top__DOT__Mem__DOT___GEN_1;
@@ -92,7 +93,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Inst_fetch__DOT__rvalid_reg;
         CData/*1:0*/ top__DOT__Inst_fetch__DOT__rresp_reg;
         CData/*0:0*/ top__DOT__Inst_fetch__DOT___GEN;
-        CData/*0:0*/ __VdfgTmp_h88198790__0;
+        CData/*0:0*/ __VdfgTmp_h25b32d56__0;
         CData/*4:0*/ __VdfgTmp_h29d0e493__0;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
@@ -148,9 +149,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_14;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_15;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_16;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_17;
     };
     struct {
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_17;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_18;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_19;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_20;
