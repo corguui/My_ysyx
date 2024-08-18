@@ -153,7 +153,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__IFU__DOT__m2EXUstate = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__rready_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__ardata_reg = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__IFU__DOT__arvalid_reg_REG = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__IFU__DOT__exu2in_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__arvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT__arvalid_en = VL_RAND_RESET_I(1);
