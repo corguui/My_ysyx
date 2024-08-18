@@ -61,14 +61,14 @@ class IFU extends Module {
 	io.exu2in.ready := (m2EXUstate === m2EXUidle)
 
   	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
-	val arvalid_en = Wire(Bool())
-	arvalid_en := 0.U
+	//val arvalid_en = Wire(Bool())
+	//arvalid_en := 0.U
 	val rready_reg = RegInit(false.B)
 	val ardata_reg = RegEnable(io.out.bits.pc,0.U,arvalid_en)
 	//val arvalid_reg = RegEnable(arvalid_en,false.B,(io.axi_r.rready & io.exu2in.valid))
 	def delay(x:Bool)={RegNext(x)}
 	val exu2in_reg = RegNext(io.exu2in.valid)
-	val arvalid_reg = RegEnable(arvalid_en,false.B,(io.axi_r.rready | exu2in_reg ))
+	val arvalid_reg = RegEnable(io.exu2in.bits.dnpc_en,false.B,(io.axi_r.rready | exu2in_reg ))
 	io.axi_ar.pc := 0.U
 	io.axi_ar.arvalid :=  arvalid_reg
 	io.axi_r.rready := rready_reg
@@ -80,13 +80,13 @@ class IFU extends Module {
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
 		io.out.bits.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
-		arvalid_en := true.B
+		//arvalid_en := true.B
 		when(io.axi_ar.arready & io.axi_ar.arvalid){
 			io.axi_ar.pc := ardata_reg 
 			when(io.axi_r.rvalid){
 				io.out.bits.snpc := io.out.bits.pc + 4.U
 				rready_reg := true.B
-				arvalid_en := false.B
+				//arvalid_en := false.B
 				when(io.axi_r.rresp === 1.U){
 					io.out.bits.inst := io.axi_r.inst
 				}.otherwise{
