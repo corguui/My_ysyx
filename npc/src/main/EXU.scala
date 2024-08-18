@@ -99,7 +99,8 @@ class EXU extends Module {
 
     //EXU to IDU
     val m2IDUidle :: m2IDUprocess :: Nil = Enum(2)
-	val m2IDUstate = RegInit(m2IDUidle)
+	//val m2IDUstate = RegInit(m2IDUidle)
+    val m2IDUstate = RegInit(m2IDUprocess)
 	m2IDUstate :=MuxLookup(m2IDUstate,m2IDUidle)(List(
 		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
