@@ -43,11 +43,6 @@ class IDU extends Module {
 
 	val exu_data = Reg(new IDUtoEXU)
 	
-	//val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
-	//val lastimm = RegNext(exu_data.imm,0.U)
-	val lastaluop =RegEnable(exu_data.alu_op,"b10000".U,state)
-	val lastimm = RegEnable(exu_data.imm,0.U,state)
-
 	io.out2exu.bits := exu_data
 	
     class npc_break extends BlackBox with HasBlackBoxPath {
@@ -70,6 +65,10 @@ class IDU extends Module {
     val in_data = Wire(new IFUtoIDU) 
     in_data := io.ifu2in.bits
    
+	//val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
+	//val lastimm = RegNext(exu_data.imm,0.U)
+	val lastaluop =RegEnable(exu_data.alu_op,"b10000".U,state)
+	val lastimm = RegEnable(exu_data.imm,0.U,state)
 
 	val npc_break = Module(new npc_break)
 	npc_break.io.inst := in_data.inst
