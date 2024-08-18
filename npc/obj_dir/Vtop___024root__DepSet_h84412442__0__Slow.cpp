@@ -749,7 +749,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                     == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))
                                                     ? (IData)(vlSelf->top__DOT__EXU__DOT__bready_reg)
                                                     : 
-                                                   ((vlSelf->top__DOT__EXU__DOT__lastdnpc 
-                                                     != vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc) 
-                                                    & (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate))));
+                                                   (vlSelf->top__DOT__EXU__DOT__lastdnpc 
+                                                    != vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc)));
 }

@@ -53,9 +53,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                                     == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))
                                                     ? (IData)(vlSelf->top__DOT__EXU__DOT__bready_reg)
                                                     : 
-                                                   ((vlSelf->top__DOT__EXU__DOT__lastdnpc 
-                                                     != vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc) 
-                                                    & (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate))));
+                                                   (vlSelf->top__DOT__EXU__DOT__lastdnpc 
+                                                    != vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc)));
     vlSelf->io_pc = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
                       ? vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG
                       : 0U);
