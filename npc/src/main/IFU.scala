@@ -78,9 +78,15 @@ class IFU extends Module {
 	io.out.bits.snpc := io.out.bits.pc + 4.U
 	io.out.bits.inst := inst_reg 
 
+	val indata 	= Reg(new EXUtoIFU)
+	when(io.exu2in.valid & (io.exu2in.valid =/= exu2in_reg )){	
+		indata := io.exu2in.bits
+	}
+	
+
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
-		io.out.bits.pc := RegEnable(io.exu2in.bits.dnpc.asSInt, 0x80000000.S,io.exu2in.valid).asUInt
+		io.out.bits.pc := RegNext(indata.dnpc.asSInt, 0x80000000.S).asUInt
 		when(io.axi_ar.arready & io.axi_ar.arvalid){
 			io.axi_ar.pc := ardata_reg 
 			when(io.axi_r.rvalid){
