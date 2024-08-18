@@ -78,7 +78,7 @@ class IFU extends Module {
 			io.axi_ar.pc := ardata_reg 
 			when(io.axi_r.rvalid){
 				io.out.bits.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
-				io.out.bits.snpc := io.out.bist.pc + 4.U
+				io.out.bits.snpc := io.out.bits.pc + 4.U
 				rready_reg := true.B
 				arvalid_en := false.B
 				when(io.axi_r.rresp === 1.U){
