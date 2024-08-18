@@ -58,7 +58,7 @@ class Inst_fetch extends Module {
             io.axi_r.inst := rdata_reg
             io.axi_r.rresp := rresp_reg
         }.otherwise{
-            io.axi_r.inst := 0.U 
+            io.axi_r.inst := rdata_reg 
             io.axi_r.rresp := 0.U 
         }
     }.otherwise {

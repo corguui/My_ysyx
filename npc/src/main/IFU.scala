@@ -90,7 +90,7 @@ class IFU extends Module {
 				when(io.axi_r.rresp === 1.U){
 					io.out.bits.inst := io.axi_r.inst
 				}.otherwise{
-					io.out.bits.inst := 0.U
+					io.out.bits.inst := io.axi_r.inst
 				}
 			}.otherwise{
 				rready_reg := false.B
