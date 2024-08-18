@@ -67,8 +67,8 @@ class IDU extends Module {
    
 	//val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
 	//val lastimm = RegNext(exu_data.imm,0.U)
-	val lastaluop =RegEnable(exu_data.alu_op,"b10000".U,state)
-	val lastimm = RegEnable(exu_data.imm,0.U,state)
+	val lastaluop =RegEnable(exu_data.alu_op,"b10000".U,(state === m2EXUprocess))
+	val lastimm = RegEnable(exu_data.imm,0.U,(state === m2EXUprocess))
 
 	val npc_break = Module(new npc_break)
 	npc_break.io.inst := in_data.inst
