@@ -43,8 +43,9 @@ class IDU extends Module {
 
 	val exu_data = Reg(new IDUtoEXU)
 	
-	val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
-	val lastimm = RegNext(exu_data.imm,0.U)
+	//val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
+	//val lastimm = RegNext(exu_data.imm,0.U)
+
 
 	//io.out2exu.valid := mem_ren | mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 	io.out2exu.bits := exu_data
@@ -68,7 +69,10 @@ class IDU extends Module {
 	io.ifu2in.ready := (state === m2IFUidle)
     val in_data = Wire(new IFUtoIDU) 
     in_data := io.ifu2in.bits
-   
+	val state_reg = RegNext(state,0.U)
+
+	val lastaluop =RegEnable(exu_data.alu_op,"b10000".U,(state_reg===m2IFUprocess))
+	val lastimm = RegEnable(exu_data.imm,0.U,(state_reg===m2IFUprocess))
 
 	val npc_break = Module(new npc_break)
 	npc_break.io.inst := in_data.inst
@@ -114,7 +118,6 @@ class IDU extends Module {
 	//exu_data.alu_op := "b10000".U
 	exu_data.imm :=  0.U 
 	exu_data.il_us   :=	false.B  //true is Uint 
-
 	//lastimm lastaluop 靠state驱动 这个屏蔽了就会一直拉高
 	state := m2IFUidle 
 	io.inv_flag := true.B
