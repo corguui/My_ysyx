@@ -97,9 +97,17 @@ class EXU extends Module {
 		ifu2s_wait_ready -> Mux(io.out2ifu.ready,ifu2s_idle,ifu2s_wait_ready)
 	))
 
+    //EXU to IDU
+    val m2IDUidle :: m2IDUprocess :: Nil = Enum(2)
+	val m2IDUstate = RegInit(m2IDUidle)
+	m2IDUstate :=MuxLookup(m2IDUstate,m2IDUidle)(List(
+		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
+		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
+	))
 
     val ifu_outdata = Wire(new EXUtoIFU)
-    val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
+    //val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
+    val state_reg = RegNext(m2IDUstate,0.U)
     when(io.idu2in.bits.inst_type === 3.U)
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
@@ -110,19 +118,9 @@ class EXU extends Module {
     }
     .otherwise
     {
-    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
+    io.out2ifu.valid := state_reg//(lastdnpc =/= ifu_outdata.dnpc)
     }
     io.out2ifu.bits := ifu_outdata
-
-
-    //EXU to IDU
-    val m2IDUidle :: m2IDUprocess :: Nil = Enum(2)
-	val m2IDUstate = RegInit(m2IDUidle)
-	m2IDUstate :=MuxLookup(m2IDUstate,m2IDUidle)(List(
-		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
-		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
-	))
-
 
     //val mem = Module(new Memory)   //yosys
 
