@@ -147,7 +147,7 @@ class EXU extends Module {
     }
     .otherwise
     {
-    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc) & (m2IDUstate === m2IDUprocess)
+    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc) //& (m2IDUstate === m2IDUprocess)
     }
     io.out2ifu.bits := ifu_outdata
 
@@ -213,7 +213,7 @@ class EXU extends Module {
                 io.reg_wdata := alu.io.result
                 io.reg_wen := indata.reg_wen
                 io.reg_waddr := indata.reg_waddr
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //I type
             is(2.U){
@@ -224,7 +224,7 @@ class EXU extends Module {
                 io.reg_wdata := alu.io.result
                 io.reg_wen := indata.reg_wen
                 io.reg_waddr := indata.reg_waddr
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //IL type
             is(3.U){
@@ -308,7 +308,7 @@ class EXU extends Module {
                 alu.io.src2 := indata.src2
                 alu.io.alu_op := indata.alu_op
                 ifu_outdata.dnpc :=  Mux((alu.io.result===1.U),(indata.pc+indata.imm),indata.snpc)
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //u type
             is(6.U){
@@ -316,7 +316,7 @@ class EXU extends Module {
                 io.reg_wdata := indata.imm
                 io.reg_wen := indata.reg_wen
                 io.reg_waddr := indata.reg_waddr
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //upc type
             is(7.U){
@@ -327,7 +327,7 @@ class EXU extends Module {
                 io.reg_wdata := alu.io.result 
                 io.reg_wen := indata.reg_wen
                 io.reg_waddr := indata.reg_waddr
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //j type
             is(8.U){
@@ -338,7 +338,7 @@ class EXU extends Module {
                 ifu_outdata.dnpc := alu.io.result 
                 io.reg_wen := indata.reg_wen
                 io.reg_waddr := indata.reg_waddr
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //jr type
             is(9.U){
@@ -349,7 +349,7 @@ class EXU extends Module {
                 ifu_outdata.dnpc := alu.io.result 
                 io.reg_wen := indata.reg_wen
                 io.reg_waddr := indata.reg_waddr
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //csrrw
             is(10.U){
@@ -365,7 +365,7 @@ class EXU extends Module {
                 is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
                 is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
                 }
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //csrrs
             is(11.U){
@@ -384,7 +384,7 @@ class EXU extends Module {
                 is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
                 is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
                 }
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //ecall
             is(12.U){
@@ -395,7 +395,7 @@ class EXU extends Module {
                 io.csr_wen_2  := true.B 
                 io.csr_waddr_2 := 0.U
                 ifu_outdata.dnpc := indata.csr //mtvec
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
             //mret
             is(13.U){
@@ -403,7 +403,7 @@ class EXU extends Module {
                 io.csr_wen_1  := true.B 
                 io.csr_waddr_1 := 2.U
                 ifu_outdata.dnpc := indata.csr //mepc
-                m2IDUstate := m2IDUidle
+                //m2IDUstate := m2IDUidle
             }
         }
     }
