@@ -39,8 +39,8 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__IDU__DOT__exu_data_reg_wen;
         CData/*4:0*/ top__DOT__IDU__DOT__exu_data_alu_op;
         CData/*3:0*/ top__DOT__IDU__DOT__exu_data_inst_type;
-        CData/*4:0*/ top__DOT__IDU__DOT__lastaluop;
         CData/*0:0*/ top__DOT__IDU__DOT__state;
+        CData/*4:0*/ top__DOT__IDU__DOT__lastaluop;
         CData/*4:0*/ top__DOT__IDU__DOT__casez_tmp;
         CData/*4:0*/ top__DOT__IDU__DOT__casez_tmp_0;
         CData/*0:0*/ top__DOT__IDU__DOT___GEN_12;
