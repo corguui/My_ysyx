@@ -63,11 +63,11 @@ class IFU extends Module {
   	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
 	//val arvalid_en = Wire(Bool())
 	//arvalid_en := 0.U
+	val exu2in_reg = RegNext(io.exu2in.valid)
 	val rready_reg = RegInit(false.B)
-	val ardata_reg = RegEnable(io.out.bits.pc,0.U,arvalid_en)
+	val ardata_reg = RegEnable(io.out.bits.pc,0.U,exu2in_reg)
 	//val arvalid_reg = RegEnable(arvalid_en,false.B,(io.axi_r.rready & io.exu2in.valid))
 	def delay(x:Bool)={RegNext(x)}
-	val exu2in_reg = RegNext(io.exu2in.valid)
 	val arvalid_reg = RegEnable(io.exu2in.bits.dnpc_en,false.B,(io.axi_r.rready | exu2in_reg ))
 	io.axi_ar.pc := 0.U
 	io.axi_ar.arvalid :=  arvalid_reg
