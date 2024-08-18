@@ -114,7 +114,7 @@ class IDU extends Module {
 	exu_data.imm :=  0.U 
 	exu_data.il_us   :=	false.B  //true is Uint 
 	//译码
-	//state := m2IFUidle
+	state := m2IFUidle
 
 	io.inv_flag := true.B
 	switch(opcode){
