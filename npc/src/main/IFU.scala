@@ -48,7 +48,7 @@ class IFU extends Module {
 		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
 
-	io.out.valid := io.axi_r.rready
+	io.out.valid := io.axi_r.rready & io.axi_ar.arvalid 
 
 	//IFU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)

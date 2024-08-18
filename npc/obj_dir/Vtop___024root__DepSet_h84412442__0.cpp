@@ -158,7 +158,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__IDU__DOT__lastimm = 0U;
     } else {
         if (((IData)(vlSelf->top__DOT__IFU__DOT__rready_reg) 
-             & (IData)(vlSelf->top__DOT__IFU__DOT__exu2in_reg))) {
+             | (IData)(vlSelf->top__DOT__IFU__DOT__exu2in_reg))) {
             __Vdly__top__DOT__IFU__DOT__arvalid_reg 
                 = vlSelf->top__DOT__IFU__DOT__arvalid_en;
         }
