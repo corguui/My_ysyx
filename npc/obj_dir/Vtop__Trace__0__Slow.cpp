@@ -163,7 +163,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+59,"ardata_reg", false,-1, 31,0);
     tracep->declBus(c+108,"inst_reg", false,-1, 31,0);
     tracep->declBit(c+117,"arvalid_reg", false,-1);
-    tracep->declBus(c+60,"io_out_bits_pc_REG", false,-1, 31,0);
+    tracep->declBus(c+60,"io_out_bits_pc_r", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("Inst_fetch ");
     tracep->declBit(c+122,"clock", false,-1);
@@ -399,7 +399,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+57,(vlSelf->top__DOT__IDU__DOT__state));
     bufp->fullBit(oldp+58,(vlSelf->top__DOT__IFU__DOT__exu2in_reg));
     bufp->fullIData(oldp+59,(vlSelf->top__DOT__IFU__DOT__ardata_reg),32);
-    bufp->fullIData(oldp+60,(vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG),32);
+    bufp->fullIData(oldp+60,(vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_r),32);
     bufp->fullIData(oldp+61,(vlSelf->top__DOT__Inst_fetch__DOT___vlg_pc_read_inst),32);
     bufp->fullIData(oldp+62,(vlSelf->top__DOT__Mem__DOT__rdata_reg),32);
     bufp->fullCData(oldp+63,(vlSelf->top__DOT__Mem__DOT__rresp_reg),2);
