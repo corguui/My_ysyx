@@ -101,21 +101,21 @@ class EXU extends Module {
 
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
-    dnpc_en := 0.U
+    io.out2ifu.dnpc_en := 0.U
     when(io.idu2in.bits.inst_type === 3.U)
     {
     io.out2ifu.valid :=  io.r_mem_exu.rready
-    dnpc_en := 1.U
+    io.out2ifu.dnpc_en := 1.U
     }
     .elsewhen(io.idu2in.bits.inst_type === 4.U)
     {
     io.out2ifu.valid :=  io.b_mem_exu.bready
-    dnpc_en := 1.U
+    io.out2ifu.dnpc_en := 1.U
     }
     .otherwise
     {
     io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc)
-    dnpc_en := 1.U
+    io.out2ifu.dnpc_en := 1.U
     }
     io.out2ifu.bits := ifu_outdata
 
