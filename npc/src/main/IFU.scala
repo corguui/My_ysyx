@@ -64,7 +64,7 @@ class IFU extends Module {
 	val arvalid_en = Wire(Bool())
 	arvalid_en := 0.U
 	val rready_reg = RegInit(false.B)
-	val ardata_reg = RegEnable(io.exu2in.bits.dnpc,0.U,io.exu2in.valid)
+	val ardata_reg = RegEnable(io.out.bits.pc,0.U,io.exu2in.valid)
 	val arvalid_reg = RegEnable(arvalid_en,false.B,(io.axi_r.rready & io.exu2in.valid))
 
 	io.axi_ar.pc := 0.U
@@ -77,11 +77,11 @@ class IFU extends Module {
 
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
+		io.out.bits.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
 		arvalid_en := true.B
 		when(io.axi_ar.arready & io.axi_ar.arvalid){
 			io.axi_ar.pc := ardata_reg 
 			when(io.axi_r.rvalid){
-				io.out.bits.pc := RegNext(io.exu2in.bits.dnpc.asSInt, 0x80000000.S).asUInt
 				io.out.bits.snpc := io.out.bits.pc + 4.U
 				rready_reg := true.B
 				arvalid_en := false.B
