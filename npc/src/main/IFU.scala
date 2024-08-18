@@ -75,7 +75,7 @@ class IFU extends Module {
 	io.axi_r.rready := rready_reg
 
 	io.out.bits.pc := 0.U
-	io.out.bits.snpc := 0.U
+	io.out.bits.snpc := io.out.bits.pc + 4.U
 	io.out.bits.inst := inst_reg 
 
 	when(m2EXUstate === m2EXUprocess){
@@ -84,7 +84,6 @@ class IFU extends Module {
 		when(io.axi_ar.arready & io.axi_ar.arvalid){
 			io.axi_ar.pc := ardata_reg 
 			when(io.axi_r.rvalid){
-				io.out.bits.snpc := io.out.bits.pc + 4.U
 				rready_reg := true.B
 				when(io.axi_r.rresp === 1.U){
 					inst := io.axi_r.inst
