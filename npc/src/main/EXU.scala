@@ -110,6 +110,9 @@ class EXU extends Module {
     when(io.idu2in.valid)
     {
         indata := io.idu2in.bits
+    }.otherwise
+    {
+        indata := 0.U
     }
 
     val ifu_outdata = Wire(new EXUtoIFU)
