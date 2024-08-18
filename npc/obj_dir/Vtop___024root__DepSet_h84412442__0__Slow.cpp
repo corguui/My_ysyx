@@ -32,16 +32,9 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__0\n"); );
     // Body
-    if (vlSelf->top__DOT__IFU__DOT__m2EXUstate) {
-        vlSelf->io_pc = vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG;
-        vlSelf->top__DOT__IFU__DOT__arvalid_en = (1U 
-                                                  & (~ 
-                                                     ((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
-                                                      & (IData)(vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg))));
-    } else {
-        vlSelf->io_pc = 0U;
-        vlSelf->top__DOT__IFU__DOT__arvalid_en = 0U;
-    }
+    vlSelf->io_pc = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
+                      ? vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG
+                      : 0U);
     vlSelf->top__DOT___IDU_io_out2exu_valid = ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren) 
                                                | ((IData)(vlSelf->top__DOT__IDU__DOT__exu_data_mem_wen) 
                                                   | ((vlSelf->top__DOT__IDU__DOT__exu_data_imm 
