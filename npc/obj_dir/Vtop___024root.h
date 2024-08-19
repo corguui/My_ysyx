@@ -165,7 +165,6 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Mem__DOT___m_m_rdata;
         IData/*31:0*/ top__DOT__Mem__DOT__rdata_reg;
         IData/*31:0*/ top__DOT__Mem__DOT__waddr_reg;
-        IData/*31:0*/ top__DOT__Mem__DOT__wdata_reg;
         IData/*31:0*/ top__DOT__Mem__DOT___GEN;
         IData/*31:0*/ top__DOT__Mem__DOT___GEN_0;
         IData/*31:0*/ top__DOT__Inst_fetch__DOT___vlg_pc_read_inst;
