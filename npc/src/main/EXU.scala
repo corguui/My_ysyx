@@ -216,7 +216,7 @@ class EXU extends Module {
                        {
                        io.reg_wen := reg_wen_reg
                        io.reg_waddr := reg_waddr_reg
-                       when(io.idu2in.bits.il_us === ture.B)
+                       when(io.idu2in.bits.il_us === true.B)
                        {
                         io.reg_wdata := io.r_mem_exu.rdata.asUInt
                        }.otherwise{
