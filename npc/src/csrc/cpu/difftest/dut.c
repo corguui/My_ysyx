@@ -17,7 +17,7 @@ enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
-int ref_skip_wait=1;
+int ref_skip_wait=0;
 
 void difftest_skip_ref() {
   is_skip_ref = true;
