@@ -348,8 +348,10 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                                : 0U)),2);
     bufp->fullBit(oldp+24,(vlSelf->top__DOT__Mem__DOT__rvalid_reg));
     bufp->fullBit(oldp+25,(vlSelf->top__DOT__EXU__DOT__rready_reg));
-    bufp->fullIData(oldp+26,(vlSelf->top__DOT___EXU_io_w_exu_mem_wdata),32);
-    bufp->fullCData(oldp+27,(vlSelf->top__DOT___EXU_io_w_exu_mem_wmask),3);
+    bufp->fullIData(oldp+26,(((IData)(vlSelf->top__DOT__EXU__DOT___GEN_7)
+                               ? 0U : vlSelf->top__DOT__EXU__DOT__mem_wdata_reg)),32);
+    bufp->fullCData(oldp+27,(((IData)(vlSelf->top__DOT__EXU__DOT___GEN_7)
+                               ? 0U : (7U & vlSelf->top__DOT__EXU__DOT__mem_wmask_reg))),3);
     bufp->fullBit(oldp+28,(vlSelf->top__DOT__EXU__DOT__mem_wen_reg));
     bufp->fullIData(oldp+29,(vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr),32);
     bufp->fullCData(oldp+30,((((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg) 
@@ -408,10 +410,12 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                                ? vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr
                                : 0U)),32);
     bufp->fullIData(oldp+66,(((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg)
-                               ? vlSelf->top__DOT___EXU_io_w_exu_mem_wdata
+                               ? ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_7)
+                                   ? 0U : vlSelf->top__DOT__EXU__DOT__mem_wdata_reg)
                                : 0U)),32);
     bufp->fullIData(oldp+67,(((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg)
-                               ? (IData)(vlSelf->top__DOT___EXU_io_w_exu_mem_wmask)
+                               ? ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_7)
+                                   ? 0U : (7U & vlSelf->top__DOT__EXU__DOT__mem_wmask_reg))
                                : 0U)),32);
     bufp->fullIData(oldp+68,(vlSelf->top__DOT__Mem__DOT___GEN),32);
     bufp->fullIData(oldp+69,(vlSelf->top__DOT__Mem__DOT___GEN_0),32);

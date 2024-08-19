@@ -77,7 +77,7 @@ class LSU_mem extends Module {
     val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
     io.aw_exu_mem.awready := true.B
     io.w_exu_mem.wready := true.B
-    io.b_mem_exu.bresp := 0.U 
+    io.b_mem_exu.bresp := bresp_reg 
     io.b_mem_exu.bvalid := bvalid_reg
 
     //AXI-lite read part
@@ -125,8 +125,9 @@ class LSU_mem extends Module {
     when(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid){
         m.io.m_wen := true.B
         bvalid_en := true.B
+        when(io.b_mem_exu.bready & io.b_mem_exu.bvalid){
+            //io.b_mem_exu.bresp := bresp_reg
         when((io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt) &( io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt) &( io.aw_exu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa00003ff.S.asUInt) &( io.aw_exu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa000004f.S.asUInt)){
-            /*
             when(io.w_exu_mem.wmask === 1.U){
                 bresp := Mux((io.w_exu_mem.wdata(31,8) === 0.U),1.U,0.U)
             }.elsewhen(io.w_exu_mem.wmask === 2.U){
@@ -136,15 +137,12 @@ class LSU_mem extends Module {
             }.otherwise{
                 bresp := 0.U
             }
-            */
-            bresp := 1.U
         }.otherwise{
                 bresp := 0.U
         }
-        when(io.b_mem_exu.bready & io.b_mem_exu.bvalid){
-            io.b_mem_exu.bresp := bresp_reg
         }.otherwise{
-            io.b_mem_exu.bresp := 0.U
+            //io.b_mem_exu.bresp := 0.U
+            bresp := 0.U
         }
     }.otherwise{
         m.io.m_wen := false.B
