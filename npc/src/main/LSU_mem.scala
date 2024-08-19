@@ -86,7 +86,7 @@ class LSU_mem extends Module {
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
         rvalid_en := true.B
-        when((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)){
+        when((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)&(m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)&(m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt)){
             when(m.io.m_rmask === 1.U){
             resp := Mux((m.io.m_rdata(31,8) === 0.U),1.U,0.U)
             }.elsewhen(m.io.m_rmask === 2.U){
@@ -125,7 +125,7 @@ class LSU_mem extends Module {
     when(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid){
         m.io.m_wen := true.B
         bvalid_en := true.B
-        when(io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt & io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt){
+        when((io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt) &( io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt) &( io.aw_exu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa00003ff.S.asUInt) &( io.aw_exu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa000004f.S.asUInt)){
             when(io.w_exu_mem.wmask === 1.U){
                 bresp := Mux((io.w_exu_mem.wdata(31,8) === 0.U),1.U,0.U)
             }.elsewhen(io.w_exu_mem.wmask === 2.U){
