@@ -75,6 +75,9 @@ class LSU_mem extends Module {
     bvalid_en := false.B
     val bvalid_reg = RegNext(bvalid_en,0.U)
     val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
+    val waddr_reg = RegNext(io.aw_exu_mem.awaddr,0.U)
+    val wdata_reg = RegNext(io.w_exu_mem.wdata,0.U)
+    val wmask_reg = RegNext(io.w_exu_mem.wmask,0.U)
     io.aw_exu_mem.awready := true.B
     io.w_exu_mem.wready := true.B
     io.b_mem_exu.bresp :=  3.U 
@@ -123,7 +126,7 @@ class LSU_mem extends Module {
         m.io.m_wmask := 0.U
     }
     when(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid){
-        m.io.m_wen := true.B
+        m.io.m_wen := Mux((io.w_exu_mem.wmask =/= wmask_reg) & (io.aw_exu_mem.awaddr =/= waddr_reg) & (io.w_exu_mem.wdata =/= wdata_reg),true.B,false.B)
         bvalid_en := true.B
         when(((io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt) & ( io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa00003ff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa000004f.S.asUInt))){
             when(io.w_exu_mem.wmask === 1.U){
