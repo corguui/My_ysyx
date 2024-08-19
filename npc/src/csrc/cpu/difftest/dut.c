@@ -112,13 +112,13 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   ref_difftest_exec(1);
   ref_difftest_regcpy(ref_r.gpr,&ref_r.pc, DIFFTEST_TO_DUT);
 
-   //checkregs(&ref_r, pc);
-  checkregs(&ref_r, npc);
+  checkregs(&ref_r, pc);
+  //checkregs(&ref_r, npc);
 }
 
 bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
   int num=32;
-  //cpu_read_reg();
+  cpu_read_reg();
   for(int i=0;i<num;i++)
   {
   if(ref_r->gpr[i]!=cpu.gpr[i])
