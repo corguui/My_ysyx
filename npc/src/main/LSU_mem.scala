@@ -129,15 +129,7 @@ class LSU_mem extends Module {
         m.io.m_wen := Mux((io.w_exu_mem.wmask =/= wmask_reg) & (io.aw_exu_mem.awaddr =/= waddr_reg) ,true.B,false.B)
         bvalid_en := true.B
         when(((io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt) & ( io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa00003ff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa000004f.S.asUInt))){
-            when(io.w_exu_mem.wmask === 1.U){
-                bresp := Mux((io.w_exu_mem.wdata(31,8) === 0.U),1.U,0.U)
-            }.elsewhen(io.w_exu_mem.wmask === 2.U){
-                bresp := Mux((io.w_exu_mem.wdata(31,16) === 0.U),1.U,0.U)
-            }.elsewhen(io.w_exu_mem.wmask === 4.U){
                 bresp := 1.U
-            }.otherwise{
-                bresp := 0.U
-            }
         }.otherwise{
                 bresp := 0.U
         }
