@@ -131,8 +131,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Reg__DOT__reg_29 = 0U;
         vlSelf->top__DOT__Reg__DOT__reg_30 = 0U;
         vlSelf->top__DOT__Reg__DOT__reg_31 = 0U;
-        vlSelf->top__DOT__EXU__DOT__mem_raddr_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_awaddr_reg = 0U;
+        vlSelf->top__DOT__EXU__DOT__mem_raddr_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_wmask_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_rmask_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__reg_wen_reg = 0U;
@@ -270,13 +270,11 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
              & (0x1fU == (IData)(vlSelf->top__DOT___EXU_io_reg_waddr)))) {
             vlSelf->top__DOT__Reg__DOT__reg_31 = vlSelf->top__DOT___EXU_io_reg_wdata;
         }
-        if (vlSelf->top__DOT__EXU__DOT__valid_reg) {
-            vlSelf->top__DOT__EXU__DOT__mem_raddr_reg 
-                = vlSelf->top__DOT__EXU__DOT___alu_io_result;
+        if (vlSelf->top__DOT__IDU__DOT__state_reg) {
             vlSelf->top__DOT__EXU__DOT__mem_awaddr_reg 
                 = vlSelf->top__DOT__EXU__DOT___alu_io_result;
-        }
-        if (vlSelf->top__DOT__IDU__DOT__state_reg) {
+            vlSelf->top__DOT__EXU__DOT__mem_raddr_reg 
+                = vlSelf->top__DOT__EXU__DOT___alu_io_result;
             vlSelf->top__DOT__EXU__DOT__mem_wmask_reg 
                 = vlSelf->top__DOT__IDU__DOT__exu_data_m_wmask;
             vlSelf->top__DOT__EXU__DOT__mem_rmask_reg 
@@ -337,8 +335,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             != (IData)(vlSelf->top__DOT__IFU__DOT__exu2in_reg)))) {
         vlSelf->top__DOT__IFU__DOT__indata_dnpc = vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc;
     }
-    vlSelf->top__DOT__EXU__DOT__valid_reg = ((~ (IData)(vlSelf->reset)) 
-                                             & (IData)(vlSelf->top__DOT__IDU__DOT__state_reg));
     vlSelf->top__DOT__IFU__DOT__exu2in_reg = vlSelf->top__DOT___EXU_io_out2ifu_valid;
     if (vlSelf->reset) {
         vlSelf->top__DOT__EXU__DOT__mem_wen_reg = 0U;
