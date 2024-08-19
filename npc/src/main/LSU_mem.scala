@@ -65,7 +65,7 @@ class LSU_mem extends Module {
 
     io.ar_exu_mem.arready := true.B
     io.r_mem_exu.rdata := 0.U 
-    io.r_mem_exu.rresp := 0.U
+    io.r_mem_exu.rresp := 3.U
     io.r_mem_exu.rvalid := rvalid_reg 
 
     //AXI-lite write member
@@ -104,7 +104,7 @@ class LSU_mem extends Module {
             io.r_mem_exu.rresp := rresp_reg 
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
-            io.r_mem_exu.rresp := 0.U
+            io.r_mem_exu.rresp := 2.U
         }
     }.otherwise{
         rvalid_en := false.B   
