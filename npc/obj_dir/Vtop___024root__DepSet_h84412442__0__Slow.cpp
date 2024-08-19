@@ -97,6 +97,9 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                   & vlSelf->top__DOT__IFU__DOT__inst_reg))));
     vlSelf->top__DOT__EXU__DOT___GEN_8 = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg) 
                                           & (IData)(vlSelf->top__DOT__Mem__DOT__bvalid_reg));
+    vlSelf->top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0 
+        = ((0xcU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
+           | (0xdU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)));
     vlSelf->top__DOT__Reg__DOT__casez_tmp = ((0x80000U 
                                               & vlSelf->top__DOT__IFU__DOT__inst_reg)
                                               ? ((0x40000U 
@@ -343,9 +346,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                        & vlSelf->top__DOT__IFU__DOT__inst_reg)
                                                        ? vlSelf->top__DOT__Reg__DOT__reg_1
                                                        : vlSelf->top__DOT__Reg__DOT__reg_0)))));
-    vlSelf->top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0 
-        = ((0xcU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
-           | (0xdU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)));
     vlSelf->top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0 
         = ((6U == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
            | (7U == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)));
@@ -509,9 +509,17 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     } else {
         vlSelf->top__DOT__Mem__DOT___m_m_rdata = 0U;
     }
-    vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr = ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_7)
-                                                    ? 0U
-                                                    : vlSelf->top__DOT__EXU__DOT__mem_awaddr_reg);
+    if (vlSelf->top__DOT__EXU__DOT___GEN_7) {
+        vlSelf->top__DOT___EXU_io_w_exu_mem_wdata = 0U;
+        vlSelf->top__DOT___EXU_io_w_exu_mem_wmask = 0U;
+        vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr = 0U;
+    } else {
+        vlSelf->top__DOT___EXU_io_w_exu_mem_wdata = vlSelf->top__DOT__EXU__DOT__mem_wdata_reg;
+        vlSelf->top__DOT___EXU_io_w_exu_mem_wmask = 
+            (7U & vlSelf->top__DOT__EXU__DOT__mem_wmask_reg);
+        vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr 
+            = vlSelf->top__DOT__EXU__DOT__mem_awaddr_reg;
+    }
     vlSelf->top__DOT__EXU__DOT___GEN_24 = ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_22) 
                                            | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_19));
     vlSelf->top__DOT__EXU__DOT___GEN_26 = ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_22) 
@@ -660,11 +668,8 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
             vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc 
                 = ((4U == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))
                     ? (((IData)(vlSelf->top__DOT__EXU__DOT___GEN_8) 
-                        & (1U == (((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg) 
-                                   & ((IData)(vlSelf->top__DOT__EXU__DOT__bready_reg) 
-                                      & (IData)(vlSelf->top__DOT__Mem__DOT__bvalid_reg)))
-                                   ? (IData)(vlSelf->top__DOT__Mem__DOT__bresp_reg)
-                                   : 0U))) ? vlSelf->top__DOT__IDU__DOT__exu_data_snpc
+                        & (1U == (IData)(vlSelf->top__DOT__Mem__DOT__bresp_reg)))
+                        ? vlSelf->top__DOT__IDU__DOT__exu_data_snpc
                         : 0x80000000U) : ((5U == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))
                                            ? ((1U == vlSelf->top__DOT__EXU__DOT___alu_io_result)
                                                ? (vlSelf->top__DOT__IDU__DOT__exu_data_imm 
