@@ -399,7 +399,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             ((IData)(4U) + vlSelf->io_pc);
         __Vdly__top__DOT__IDU__DOT__exu_data_pc = vlSelf->io_pc;
         vlSelf->top__DOT__IDU__DOT__exu_data_m_rmask 
-            = (((IData)(vlSelf->top__DOT__IDU__DOT___GEN_17) 
+            = (((IData)(vlSelf->top__DOT__IDU__DOT___GEN_19) 
                 | (3U != (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)))
                 ? 0U : ((0U == (7U & (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                       >> 0xcU))) ? 1U
@@ -419,7 +419,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                        >> 0xcU))) 
                                                   << 1U))))));
         vlSelf->top__DOT__IDU__DOT__exu_data_m_wmask 
-            = (((IData)(vlSelf->top__DOT__IDU__DOT___GEN_18) 
+            = (((IData)(vlSelf->top__DOT__IDU__DOT___GEN_20) 
                 | (0x23U != (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)))
                 ? 0U : ((0U == (7U & (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                       >> 0xcU))) ? 1U
@@ -613,20 +613,44 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     }
     vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren = 
         (((IData)(vlSelf->top__DOT__IDU__DOT__state) 
-          & (~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_17))) 
+          & (~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_19))) 
          & (3U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)));
     vlSelf->top__DOT__IDU__DOT__exu_data_mem_wen = 
         (((IData)(vlSelf->top__DOT__IDU__DOT__state) 
-          & (~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_18))) 
+          & (~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_20))) 
          & (0x23U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)));
     vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen = 
         ((IData)(vlSelf->top__DOT__IDU__DOT__state) 
-         & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_18) 
+         & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_20) 
             | ((~ ((0x23U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)) 
                    | (0x63U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)))) 
                & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_13) 
                   | ((0x73U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)) 
                      & (IData)(vlSelf->top__DOT__IDU__DOT___GEN_15))))));
+    if ((1U & (~ (((~ (IData)(vlSelf->top__DOT__IDU__DOT__state)) 
+                   | (IData)(vlSelf->top__DOT__IDU__DOT___GEN_19)) 
+                  | (3U != (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)))))) {
+        vlSelf->top__DOT__IDU__DOT__exu_data_il_us 
+            = ((~ (((0U == (7U & (vlSelf->top__DOT__IFU__DOT__inst_reg 
+                                  >> 0xcU))) | (1U 
+                                                == 
+                                                (7U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__inst_reg 
+                                                    >> 0xcU)))) 
+                   | (2U == (7U & (vlSelf->top__DOT__IFU__DOT__inst_reg 
+                                   >> 0xcU))))) & (
+                                                   ((4U 
+                                                     == 
+                                                     (7U 
+                                                      & (vlSelf->top__DOT__IFU__DOT__inst_reg 
+                                                         >> 0xcU))) 
+                                                    | (5U 
+                                                       == 
+                                                       (7U 
+                                                        & (vlSelf->top__DOT__IFU__DOT__inst_reg 
+                                                           >> 0xcU)))) 
+                                                   | (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_il_us)));
+    }
     vlSelf->top__DOT__EXU__DOT___GEN_3 = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
                                           & ((IData)(vlSelf->top__DOT__Mem__DOT__rvalid_reg) 
                                              & (1U 

@@ -216,12 +216,20 @@ class EXU extends Module {
                        {
                        io.reg_wen := reg_wen_reg
                        io.reg_waddr := reg_waddr_reg
-                       dontTouch(io.idu2in.bits.il_us)
                        when(io.idu2in.bits.il_us === true.B)
                        {
                         io.reg_wdata := io.r_mem_exu.rdata.asUInt
                        }.otherwise{
-                        io.reg_wdata := (io.r_mem_exu.rdata.asSInt).asUInt
+                        when(mem_rmask_reg===1.U)
+                        {
+                            io.reg_wdata := (io.r_mem_exu.rdata(7,0).asSInt).asUInt
+                        }.elsewhen(mem_rmask_reg === 2.U)
+                        {
+                            io.reg_wdata := (io.r_mem_exu.rdata(15,0).asSInt).asUInt
+                        }.otherwise
+                        {
+                            io.reg_wdata := (io.r_mem_exu.rdata.asSInt).asUInt
+                        }
                        }
                        ifu_outdata.dnpc := io.idu2in.bits.snpc
                        }.otherwise{
