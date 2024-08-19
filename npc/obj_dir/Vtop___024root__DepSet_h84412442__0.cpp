@@ -289,9 +289,14 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         if (vlSelf->top__DOT__EXU__DOT__mem_ren_reg) {
             vlSelf->top__DOT__Mem__DOT__rdata_reg = vlSelf->top__DOT__Mem__DOT___m_m_rdata;
             vlSelf->top__DOT__Mem__DOT__rresp_reg = 
-                ((((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
-                   & (vlSelf->top__DOT__Mem__DOT___GEN 
-                      >> 0x1fU)) & (0x8fffffffU > vlSelf->top__DOT__Mem__DOT___GEN))
+                ((((((((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
+                       & (vlSelf->top__DOT__Mem__DOT___GEN 
+                          >> 0x1fU)) & (0x8fffffffU 
+                                        > vlSelf->top__DOT__Mem__DOT___GEN)) 
+                     & (0xa00003f7U < vlSelf->top__DOT__Mem__DOT___GEN)) 
+                    & (0xa0000400U > vlSelf->top__DOT__Mem__DOT___GEN)) 
+                   & (0xa0000047U < vlSelf->top__DOT__Mem__DOT___GEN)) 
+                  & (0xa0000050U > vlSelf->top__DOT__Mem__DOT___GEN))
                   ? ((1U == (7U & vlSelf->top__DOT__Mem__DOT___GEN_0))
                       ? (0U == (vlSelf->top__DOT__Mem__DOT___m_m_rdata 
                                 >> 8U)) : ((2U == (7U 
@@ -306,9 +311,14 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         }
         if (vlSelf->top__DOT__EXU__DOT__mem_wen_reg) {
             vlSelf->top__DOT__Mem__DOT__bresp_reg = 
-                ((((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg) 
-                   & (vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr 
-                      >> 0x1fU)) & (0x8fffffffU > vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr))
+                ((((((((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg) 
+                       & (vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr 
+                          >> 0x1fU)) & (0x8fffffffU 
+                                        > vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr)) 
+                     & (0xa00003f7U < vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr)) 
+                    & (0xa0000400U > vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr)) 
+                   & (0xa0000047U < vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr)) 
+                  & (0xa0000050U > vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr))
                   ? ((1U == (IData)(vlSelf->top__DOT___EXU_io_w_exu_mem_wmask))
                       ? (0U == (vlSelf->top__DOT___EXU_io_w_exu_mem_wdata 
                                 >> 8U)) : ((2U == (IData)(vlSelf->top__DOT___EXU_io_w_exu_mem_wmask))

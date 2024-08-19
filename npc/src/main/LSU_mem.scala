@@ -77,7 +77,7 @@ class LSU_mem extends Module {
     val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
     io.aw_exu_mem.awready := true.B
     io.w_exu_mem.wready := true.B
-    io.b_mem_exu.bresp := 0.U
+    io.b_mem_exu.bresp := 3.U 
     io.b_mem_exu.bvalid := bvalid_reg
 
     //AXI-lite read part
@@ -141,7 +141,7 @@ class LSU_mem extends Module {
         when(io.b_mem_exu.bready & io.b_mem_exu.bvalid){
             io.b_mem_exu.bresp := bresp_reg
         }.otherwise{
-            io.b_mem_exu.bresp := 0.U
+            io.b_mem_exu.bresp := 2.U
         }
     }.otherwise{
         m.io.m_wen := false.B
