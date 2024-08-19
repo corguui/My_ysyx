@@ -65,7 +65,7 @@ class LSU_mem extends Module {
 
     io.ar_exu_mem.arready := true.B
     io.r_mem_exu.rdata := 0.U 
-    io.r_mem_exu.rresp := 3.U
+    //io.r_mem_exu.rresp := 3.U
     io.r_mem_exu.rvalid := rvalid_reg 
 
     //AXI-lite write member
@@ -77,7 +77,7 @@ class LSU_mem extends Module {
     val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
     io.aw_exu_mem.awready := true.B
     io.w_exu_mem.wready := true.B
-    io.b_mem_exu.bresp := 3.U 
+    //io.b_mem_exu.bresp := 3.U 
     io.b_mem_exu.bvalid := bvalid_reg
 
     //AXI-lite read part
@@ -104,7 +104,7 @@ class LSU_mem extends Module {
             io.r_mem_exu.rresp := rresp_reg 
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
-            io.r_mem_exu.rresp := 2.U
+            io.r_mem_exu.rresp := 0.U
         }
     }.otherwise{
         rvalid_en := false.B   
@@ -141,7 +141,7 @@ class LSU_mem extends Module {
         when(io.b_mem_exu.bready & io.b_mem_exu.bvalid){
             io.b_mem_exu.bresp := bresp_reg
         }.otherwise{
-            io.b_mem_exu.bresp := 2.U
+            io.b_mem_exu.bresp := 0.U
         }
     }.otherwise{
         m.io.m_wen := false.B
