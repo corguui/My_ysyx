@@ -85,7 +85,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Inst_fetch__DOT__rvalid_reg;
     };
     struct {
-        CData/*4:0*/ __VdfgTmp_hbb158697__0;
+        CData/*4:0*/ __VdfgTmp_h29d0e493__0;
         CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__m2EXUstate;
         CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__arvalid_reg;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
