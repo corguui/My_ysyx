@@ -220,12 +220,12 @@ class EXU extends Module {
                        {
                         io.reg_wdata := io.r_mem_exu.rdata.asUInt
                        }.otherwise{
-                        when(mem_rmask_reg===1.U)
+                        when(mem_rmask_reg === 1.U)
                         {
-                            io.reg_wdata := (io.r_mem_exu.rdata(7,0).asSInt).asUInt
+                            io.reg_wdata := Cat(Fill(24,io.r_mem_exu.rdata(7)),(io.r_mem_exu.rdata(7,0)).asSInt).asUInt
                         }.elsewhen(mem_rmask_reg === 2.U)
                         {
-                            io.reg_wdata := (io.r_mem_exu.rdata(15,0).asSInt).asUInt
+                            io.reg_wdata := Cat(Fill(16,io.r_mem_exu.rdata(15)),(io.r_mem_exu.rdata(15,0)).asSInt).asUInt
                         }.otherwise
                         {
                             io.reg_wdata := (io.r_mem_exu.rdata.asSInt).asUInt
