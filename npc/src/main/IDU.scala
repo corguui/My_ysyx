@@ -109,7 +109,6 @@ class IDU extends Module {
 	exu_data.inst_type := 0.U
 	exu_data.alu_op := "b10000".U
 	exu_data.imm :=  0.U 
-	exu_data.il_us   :=	false.B  //true is Uint 
 	
 	//译码
 	state := m2IFUidle
@@ -250,16 +249,19 @@ class IDU extends Module {
 				//LB
 				is("b000".U){
 					exu_data.m_rmask := 1.U	
+					exu_data.il_us   :=	false.B  //true is Uint 
 				}
 
 				//LH
 				is("b001".U){
 					exu_data.m_rmask := 2.U
+					exu_data.il_us   :=	false.B  //true is Uint 
 				}
 
 				//LW
 				is("b010".U){
 					exu_data.m_rmask := 4.U
+					exu_data.il_us   :=	false.B  //true is Uint 
 				}
 
 				//LBU
