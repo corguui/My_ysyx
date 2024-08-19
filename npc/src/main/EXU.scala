@@ -147,7 +147,7 @@ class EXU extends Module {
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
     val rready_reg = RegInit(0.U)
-    val mem_raddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
+    val mem_raddr_reg = RegEnable(alu.io.result,0.U,valid_reg)
     val mem_rmask_reg = RegEnable(io.idu2in.bits.m_rmask,0.U,io.idu2in.valid)
     val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,(io.idu2in.valid | io.r_mem_exu.rready))
 
