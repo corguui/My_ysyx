@@ -420,13 +420,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__IDU__DOT__exu_data_reg_waddr 
             = (0x1fU & (vlSelf->top__DOT__IFU__DOT__inst_reg 
                         >> 7U));
-        vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen 
-            = ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_18) 
-               | ((~ ((0x23U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)) 
-                      | (0x63U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)))) 
-                  & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_13) 
-                     | ((0x73U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)) 
-                        & (IData)(vlSelf->top__DOT__IDU__DOT___GEN_15)))));
         vlSelf->top__DOT__IDU__DOT__exu_data_src1 = vlSelf->top__DOT__Reg__DOT__casez_tmp;
         vlSelf->top__DOT__IDU__DOT__exu_data_src2 = vlSelf->top__DOT__Reg__DOT__casez_tmp_0;
         vlSelf->top__DOT__IDU__DOT__exu_data_csr = 
@@ -615,6 +608,14 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         (((IData)(vlSelf->top__DOT__IDU__DOT__state) 
           & (~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_18))) 
          & (0x23U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)));
+    vlSelf->top__DOT__IDU__DOT__exu_data_reg_wen = 
+        ((IData)(vlSelf->top__DOT__IDU__DOT__state) 
+         & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_18) 
+            | ((~ ((0x23U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)) 
+                   | (0x63U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)))) 
+               & ((IData)(vlSelf->top__DOT__IDU__DOT___GEN_13) 
+                  | ((0x73U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)) 
+                     & (IData)(vlSelf->top__DOT__IDU__DOT___GEN_15))))));
     vlSelf->top__DOT__EXU__DOT___GEN_3 = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
                                           & ((IData)(vlSelf->top__DOT__Mem__DOT__rvalid_reg) 
                                              & (1U 
