@@ -220,7 +220,7 @@ class EXU extends Module {
                        {
                         io.reg_wdata := io.r_mem_exu.rdata.asUInt
                        }.otherwise{
-                        io.reg_wdata := io.r_mem_exu.rdata.asSInt.asUInt
+                        io.reg_wdata := (io.r_mem_exu.rdata.asSInt).asUInt
                        }
                        ifu_outdata.dnpc := io.idu2in.bits.snpc
                        }.otherwise{
