@@ -517,11 +517,9 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__Mem__DOT___m_m_rdata = 0U;
     }
     if (vlSelf->top__DOT__EXU__DOT___GEN_7) {
-        vlSelf->top__DOT___EXU_io_w_exu_mem_wdata = 0U;
         vlSelf->top__DOT___EXU_io_w_exu_mem_wmask = 0U;
         vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr = 0U;
     } else {
-        vlSelf->top__DOT___EXU_io_w_exu_mem_wdata = vlSelf->top__DOT__EXU__DOT__mem_wdata_reg;
         vlSelf->top__DOT___EXU_io_w_exu_mem_wmask = 
             (7U & vlSelf->top__DOT__EXU__DOT__mem_wmask_reg);
         vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr 
