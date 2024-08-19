@@ -137,7 +137,7 @@ static void trace_and_difftest(Decode *_this) {
   if(valid_flag)
   {
   difftest_step(_this->pc, top->io_pc);
-  printf("pc %x npc %x \n",_this->pc,top->io_pc);
+  //printf("pc %x npc %x \n",_this->pc,top->io_pc);
   }
   #endif
 
