@@ -542,8 +542,12 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                              & ((~ (IData)(vlSelf->top__DOT__Mem__DOT___GEN_1)) 
                                                 & ((vlSelf->top__DOT__Mem__DOT___m_m_rdata 
                                                     != vlSelf->top__DOT__Mem__DOT__rdata_reg) 
-                                                   | (0U 
-                                                      != vlSelf->top__DOT__Mem__DOT___m_m_rdata))));
+                                                   | ((0U 
+                                                       != vlSelf->top__DOT__Mem__DOT___m_m_rdata) 
+                                                      | ((0U 
+                                                          == vlSelf->top__DOT__Mem__DOT___m_m_rdata) 
+                                                         & (0xbU 
+                                                            == vlSelf->top__DOT__Mem__DOT__rdata_reg))))));
     vlSelf->top__DOT___EXU_io_csr_wen_1 = ((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
                                            & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_26)) 
                                               & ((IData)(vlSelf->top__DOT__EXU__DOT___GEN_16) 
