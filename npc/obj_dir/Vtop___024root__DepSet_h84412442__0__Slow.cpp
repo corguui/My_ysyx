@@ -381,7 +381,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                 & ((vlSelf->top__DOT__Mem__DOT__m_rdata_delay 
                                                     != vlSelf->top__DOT__Mem__DOT__rdata_reg) 
                                                    & (0U 
-                                                      != vlSelf->top__DOT__Mem__DOT__rdata_reg))));
+                                                      == vlSelf->top__DOT__Mem__DOT__rdata_reg))));
     vlSelf->top__DOT__EXU__DOT___GEN_3 = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
                                           & ((IData)(vlSelf->top__DOT__Mem__DOT__rvalid_reg) 
                                              & (1U 
