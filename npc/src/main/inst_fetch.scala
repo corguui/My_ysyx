@@ -19,7 +19,7 @@ class Inst_fetch extends Module {
     val io = IO(new Bundle {
         val axi_r = (new AXI_r)
         val axi_ar = Flipped(new AXI_ar)
-        val axi_b = Flipped(new AXI_b)
+        val axi_b = (new AXI_b)
         val axi_aw = Flipped(new AXI_aw)
         val axi_w = Flipped(new AXI_w)
     })
