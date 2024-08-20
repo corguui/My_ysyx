@@ -10,25 +10,12 @@ class AXI_r extends Bundle {
     val rvalid = Output(Bool())
     val rready = Input(Bool())
 }
-class AXI_b extends Bundle {
-    val bvalid = Output(Bool())
-    val bready = Input(Bool())
-}
 
 class Inst_fetch extends Module {
     val io = IO(new Bundle {
         val axi_r = (new AXI_r)
         val axi_ar = Flipped(new AXI_ar)
-        val axi_b = (new AXI_b)
-        val axi_aw = Flipped(new AXI_aw)
-        val axi_w = Flipped(new AXI_w)
     })
-
-    io.axi_aw.awready := false.B
-    assert(io.axi_aw.awvalid === false.B, "axi_w.awvalid should be false")
-    io.axi_w.wready := false.B
-    assert(io.axi_w.wvalid === false.B, "axi_w.wvalid should be false")
-    io.axi_b.bvalid := false.B
 
 	// 声明DPI-C函数的BlackBox模块
   	class VlgPcRead extends BlackBox with HasBlackBoxPath {

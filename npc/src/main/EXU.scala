@@ -142,7 +142,6 @@ class EXU extends Module {
     io.csr_wen_2 := 0.U
 
     //Mem read member
-    val valid_reg = RegNext(io.idu2in.valid,false.B)
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
     val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
 
@@ -158,7 +157,7 @@ class EXU extends Module {
 
     //Mem write member
     val bready_reg = RegInit(0.U)
-    val mem_awaddr_reg = RegEnable(alu.io.result,0.U,valid_reg)//io.idu2in.valid)
+    val mem_awaddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
     val mem_wmask_reg = RegEnable(io.idu2in.bits.m_wmask,0.U,io.idu2in.valid)
     val mem_wdata_reg = RegEnable(io.idu2in.bits.src2,0.U,io.idu2in.valid)
     val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,(io.idu2in.valid | io.b_mem_exu.bready))
@@ -217,11 +216,20 @@ class EXU extends Module {
                        {
                        io.reg_wen := reg_wen_reg
                        io.reg_waddr := reg_waddr_reg
-                       when(io.idu2in.bits.il_us === false.B)
+                       when(io.idu2in.bits.il_us === true.B)
                        {
-                        io.reg_wdata := io.r_mem_exu.rdata.asSInt.asUInt
-                       }.otherwise{
                         io.reg_wdata := io.r_mem_exu.rdata.asUInt
+                       }.otherwise{
+                        when(mem_rmask_reg === 1.U)
+                        {
+                            io.reg_wdata := Cat(Fill(24,io.r_mem_exu.rdata(7)),(io.r_mem_exu.rdata(7,0)).asSInt).asUInt
+                        }.elsewhen(mem_rmask_reg === 2.U)
+                        {
+                            io.reg_wdata := Cat(Fill(16,io.r_mem_exu.rdata(15)),(io.r_mem_exu.rdata(15,0)).asSInt).asUInt
+                        }.otherwise
+                        {
+                            io.reg_wdata := (io.r_mem_exu.rdata.asSInt).asUInt
+                        }
                        }
                        ifu_outdata.dnpc := io.idu2in.bits.snpc
                        }.otherwise{
