@@ -123,7 +123,7 @@ class LSU_mem extends Module {
             io.r_mem_exu.rdata := rdata_reg 
             io.r_mem_exu.rresp := rresp_reg 
             rvalid_en := false.B
-            rdata_mask := Mux(rdata_reg === 0.U,1.U,0.U)
+            rdata_mask := Mux(rdata_reg === 0.U,0xffffffff.S.U,0.U)
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
             io.r_mem_exu.rresp := 0.U
