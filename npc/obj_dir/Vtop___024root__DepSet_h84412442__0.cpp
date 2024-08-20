@@ -160,8 +160,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                 (vlSelf->top__DOT__Mem__DOT___m_m_rdata 
                  | (((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
                      & (IData)(vlSelf->top__DOT__Mem__DOT___GEN_1))
-                     ? (0U == vlSelf->top__DOT__Mem__DOT__rdata_reg)
-                     : 0U));
+                     ? ((0U == vlSelf->top__DOT__Mem__DOT__rdata_reg)
+                         ? 0xffff00U : 0U) : 0U));
             vlSelf->top__DOT__Mem__DOT__rresp_reg = 
                 (((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
                   & ((((vlSelf->top__DOT__Mem__DOT___GEN 
