@@ -60,17 +60,18 @@ class LSU_mem extends Module {
     val rvalid_en = Wire(Bool())
     rvalid_en := false.B
 
-    //val rdata_reg = RegEnable(m.io.m_rdata,0.U,io.ar_exu_mem.arvalid)
-
     val rdata_mask = Wire(UInt(32.W))
     rdata_mask := 0.U
+    val rdata_reg = RegEnable(m.io.m_rdata | rdata_mask ,0.U,io.ar_exu_mem.arvalid)
     //test delay 
+    /*
     val delaycycles = 5 
     val m_rdata_delay = ShiftRegister(m.io.m_rdata,delaycycles,0.U,io.ar_exu_mem.arvalid)
     val rdata_reg = RegEnable(m_rdata_delay | rdata_mask ,0.U,io.ar_exu_mem.arvalid)
+    */
     //tes delay 
 
-    //val rvalid_reg = RegNext(rvalid_en,0.U)//io.ar_exu_mem.arvalid)   
+    val rvalid_reg = RegNext(rvalid_en,0.U)//io.ar_exu_mem.arvalid)   
     val rvalid_reg = RegEnable(rvalid_en,0.U, (rvalid_en | io.r_mem_exu.rready))
     val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
 
@@ -99,11 +100,11 @@ class LSU_mem extends Module {
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
         //特例0 可以通过但是可能存在bug
-        //rvalid_en := Mux(((m.io.m_rdata =/= rdata_reg ) | ((m.io.m_rdata === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
+        rvalid_en := Mux((m.io.m_rdata =/= rdata_reg )  , true.B, false.B)
 
         //delay
         //rvalid_en := Mux((((m_rdata_delay =/= rdata_reg) & (rdata_reg>=1.U)) | ((m_rdata_delay === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
-        rvalid_en := Mux(((m_rdata_delay =/= rdata_reg)), true.B, false.B)
+        //rvalid_en := Mux(((m_rdata_delay =/= rdata_reg)), true.B, false.B)
         //delay
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
