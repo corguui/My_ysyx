@@ -53,7 +53,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1354, "", "Settle region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1330, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -137,8 +137,8 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->reset = VL_RAND_RESET_I(1);
     vlSelf->io_pc = VL_RAND_RESET_I(32);
     vlSelf->io_inv_flag = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT___Mem_io_r_mem_exu_rdata = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___EXU_io_out2ifu_valid = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT___EXU_io_w_exu_mem_wdata = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___EXU_io_w_exu_mem_wmask = VL_RAND_RESET_I(3);
     vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___EXU_io_reg_wdata = VL_RAND_RESET_I(32);
@@ -171,7 +171,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__IDU__DOT__exu_data_imm = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IDU__DOT__exu_data_alu_op = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = VL_RAND_RESET_I(4);
-    vlSelf->top__DOT__IDU__DOT__exu_data_il_us = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IDU__DOT__state = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IDU__DOT__state_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IDU__DOT__csr_imm = VL_RAND_RESET_I(32);
@@ -181,14 +180,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__IDU__DOT___GEN_13 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IDU__DOT___GEN_14 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__IDU__DOT___GEN_15 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__IDU__DOT___GEN_19 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__IDU__DOT___GEN_20 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__IDU__DOT___GEN_17 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__IDU__DOT___GEN_18 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__EXU__DOT__bready_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__rready_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___alu_io_result = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__EXU__DOT__m2IDUstate = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__lastdnpc = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__EXU__DOT__valid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__reg_wen_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__reg_waddr_reg = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__EXU__DOT__mem_raddr_reg = VL_RAND_RESET_I(32);
@@ -265,8 +265,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__Mem__DOT__rresp_reg = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__Mem__DOT__bvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__Mem__DOT__bresp_reg = VL_RAND_RESET_I(2);
-    vlSelf->top__DOT__Mem__DOT__waddr_reg = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__Mem__DOT__wmask_reg = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__Mem__DOT___GEN = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Mem__DOT___GEN_0 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Mem__DOT___GEN_1 = VL_RAND_RESET_I(1);
@@ -274,7 +272,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__Inst_fetch__DOT___vlg_pc_read_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Inst_fetch__DOT__rdata_reg = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg = VL_RAND_RESET_I(1);
-    vlSelf->__VdfgTmp_he9709539__0 = 0;
+    vlSelf->__VdfgTmp_h29d0e493__0 = 0;
     vlSelf->__VdfgTmp_h570e6332__0 = 0;
     vlSelf->__Vfunc_vlg_pmem_read__1__Vfuncout = 0;
     vlSelf->__Vdly__top__DOT__IFU__DOT__m2EXUstate = VL_RAND_RESET_I(1);

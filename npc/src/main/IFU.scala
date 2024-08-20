@@ -24,6 +24,14 @@ class AXI_ar extends Bundle{
 	val arvalid = Output(Bool())
 	val arready = Input(Bool())
 }
+class AXI_aw extends Bundle{
+	val awvalid = Output(Bool())
+	val awready = Input(Bool())
+}
+class AXI_w extends Bundle{
+	val wvalid = Output(Bool())
+	val wready = Input(Bool())
+}
 
 
 class IFUtoIDU extends Bundle {
@@ -38,7 +46,15 @@ class IFU extends Module {
 		val exu2in = Flipped(Decoupled(new EXUtoIFU))
 		val axi_ar = (new AXI_ar)
 		val axi_r = Flipped(new AXI_r)
+		val axi_aw = (new AXI_aw)
+		val axi_w = (new AXI_w)
+		val axi_b = Flipped(new AXI_b)
 	})
+
+	axi_aw.awvalid := false.B
+	axi_w.wvalid := false.B
+	axi_b.bready := false.B
+	assert(axi_b.bvalid === false.B, "axi_b.bvalid must be false")
 
 	//IFU recive IDU 
 	val idu2s_idle :: idu2s_wait_ready :: Nil = Enum(2)
