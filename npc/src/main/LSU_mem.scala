@@ -123,6 +123,7 @@ class LSU_mem extends Module {
             io.r_mem_exu.rdata := rdata_reg 
             io.r_mem_exu.rresp := rresp_reg 
             rvalid_en := false.B
+            //0x00ffff00 是一个随机掩码如果下一个m.rdata与他相同则会出问题 rvalid拉不高
             rdata_mask := Mux(rdata_reg === 0.U,0x00ffff00.S.asUInt,0.U)
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
