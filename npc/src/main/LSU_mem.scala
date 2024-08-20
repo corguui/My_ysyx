@@ -62,7 +62,7 @@ class LSU_mem extends Module {
 
     val rdata_mask = Wire(UInt(32.W))
     rdata_mask := 0.U
-    val rdata_reg = RegEnable(m.io.m_rdata | rdata_mask ,0.U,io.ar_exu_mem.arvalid)
+    val rdata_reg = RegEnable(m.io.m_rdata | rdata_mask ,11.U,io.ar_exu_mem.arvalid)
     //test delay 
     /*
     val delaycycles = 5 
@@ -98,8 +98,8 @@ class LSU_mem extends Module {
         m.io.m_raddr := io.ar_exu_mem.raddr
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
-        //特例0 可以通过但是可能存在bug
-        rvalid_en := Mux((m.io.m_rdata =/= rdata_reg ) | (m.io.m_rdata =/=0.U)  , true.B, false.B)
+        rvalid_en := Mux((m.io.m_rdata =/= rdata_reg ) | (m.io.m_rdata =/=0.U) | (m.io.m_rdata === 0.U & rdata_reg === 11.U)  , true.B, false.B)
+
 
         //delay
         //rvalid_en := Mux((((m_rdata_delay =/= rdata_reg) & (rdata_reg>=1.U)) | ((m_rdata_delay === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
@@ -123,7 +123,7 @@ class LSU_mem extends Module {
             io.r_mem_exu.rdata := rdata_reg 
             io.r_mem_exu.rresp := rresp_reg 
             rvalid_en := false.B
-            //0x000010 是一个随机掩码如果下一个m.rdata与他相同则会出问题 rvalid拉不高
+            //0x000010 是一个随机掩码
             rdata_mask := Mux(rdata_reg === 0.U,0x00000010.S.asUInt,0.U)
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
