@@ -64,8 +64,8 @@ class LSU_mem extends Module {
     val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
 
     io.ar_exu_mem.arready := true.B
-    io.r_mem_exu.rdata := 0.U 
-    io.r_mem_exu.rresp := 0.U
+    io.r_mem_exu.rdata := 2.U 
+    io.r_mem_exu.rresp := 3.U
     io.r_mem_exu.rvalid := rvalid_reg 
 
     //AXI-lite write member
@@ -75,9 +75,11 @@ class LSU_mem extends Module {
     bvalid_en := false.B
     val bvalid_reg = RegNext(bvalid_en,0.U)
     val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
+    val waddr_reg = RegNext(io.aw_exu_mem.awaddr,0.U)
+    val wmask_reg = RegNext(io.w_exu_mem.wmask,0.U)
     io.aw_exu_mem.awready := true.B
     io.w_exu_mem.wready := true.B
-    io.b_mem_exu.bresp := 0.U
+    io.b_mem_exu.bresp :=  3.U 
     io.b_mem_exu.bvalid := bvalid_reg
 
     //AXI-lite read part
@@ -86,7 +88,7 @@ class LSU_mem extends Module {
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
         rvalid_en := true.B
-        when((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)){
+        when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
             when(m.io.m_rmask === 1.U){
             resp := Mux((m.io.m_rdata(31,8) === 0.U),1.U,0.U)
             }.elsewhen(m.io.m_rmask === 2.U){
@@ -123,18 +125,11 @@ class LSU_mem extends Module {
         m.io.m_wmask := 0.U
     }
     when(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid){
-        m.io.m_wen := true.B
+        //不要重复进行写操作  wdata可能为0不加入限制
+        m.io.m_wen := Mux((io.w_exu_mem.wmask =/= wmask_reg) & (io.aw_exu_mem.awaddr =/= waddr_reg) ,true.B,false.B)
         bvalid_en := true.B
-        when(io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt & io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt){
-            when(io.w_exu_mem.wmask === 1.U){
-                bresp := Mux((io.w_exu_mem.wdata(31,8) === 0.U),1.U,0.U)
-            }.elsewhen(io.w_exu_mem.wmask === 2.U){
-                bresp := Mux((io.w_exu_mem.wdata(31,16) === 0.U),1.U,0.U)
-            }.elsewhen(io.w_exu_mem.wmask === 4.U){
+        when(((io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt) & ( io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa00003ff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa000004f.S.asUInt))){
                 bresp := 1.U
-            }.otherwise{
-                bresp := 0.U
-            }
         }.otherwise{
                 bresp := 0.U
         }

@@ -137,6 +137,7 @@ static void trace_and_difftest(Decode *_this) {
   if(valid_flag)
   {
   difftest_step(_this->pc, top->io_pc);
+  //printf("pc %x npc %x \n",_this->pc,top->io_pc);
   }
   #endif
 
@@ -184,7 +185,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
-		if(top->io_pc!=0&&cmp_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc)
+		if(top->io_pc!=0&&top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc)
 		{
 		valid_flag =1;
 		pc=top->io_pc;
@@ -192,7 +193,21 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		s->inst=top->rootp->top__DOT__IFU__DOT__inst_reg;
     	s->dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
 		//printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);
-		cpu_read_reg(); 
+		#ifdef CONFIG_VCD
+		tfp->dump(main_time);
+		#endif
+		main_time++;
+		top->eval();
+
+		top->clock =1; top->eval();
+		#ifdef CONFIG_VCD
+		tfp->dump(main_time);
+		#endif
+		main_time++;
+		top->eval();
+
+		top->clock =0; top->eval();
+		//cpu_read_reg(); 
 		}
 		cmp_dnpc=top->rootp->top__DOT__EXU__DOT__ifu_outdata_dnpc;
 		#ifdef CONFIG_VCD

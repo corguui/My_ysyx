@@ -38,9 +38,6 @@ class top extends Module {
 
   Inst_fetch.io.axi_ar <> IFU.io.axi_ar
   IFU.io.axi_r <> Inst_fetch.io.axi_r
-  Inst_fetch.io.axi_aw <> IFU.io.axi_aw
-  Inst_fetch.io.axi_w <> IFU.io.axi_w
-  IFU.io.axi_b <> Inst_fetch.io.axi_b
 
   io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 
