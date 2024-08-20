@@ -98,12 +98,12 @@ class LSU_mem extends Module {
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
         //或的最后一个条件是为了防止第一个rdata为0
-        //rvalid_en := Mux((m.io.m_rdata =/= rdata_reg & rdata_reg =/= 11.U ) | (m.io.m_rdata =/=0.U) | (m.io.m_rdata === 0.U & rdata_reg === 11.U)  , true.B, false.B)
+        //rvalid_en := Mux((m.io.m_rdata =/= rdata_reg  ) | (m.io.m_rdata =/=0.U) | (m.io.m_rdata === 0.U & rdata_reg === 11.U)  , true.B, false.B)
 
 
         //delay
         //rvalid_en := Mux((((m_rdata_delay =/= rdata_reg) & (rdata_reg>=1.U)) | ((m_rdata_delay === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
-        rvalid_en := Mux((m_rdata_delay =/= rdata_reg & rdata_reg =/= 11.U) | (m_rdata_delay =/= 0.U ) , true.B, false.B)
+        rvalid_en := Mux((m_rdata_delay =/= rdata_reg & rdata_reg =/= 11.U) | (m_rdata_delay =/= 0.U & m_rdata_delay =/= rdata_reg ) , true.B, false.B)
         //delay
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
