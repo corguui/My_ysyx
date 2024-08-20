@@ -63,7 +63,7 @@ class LSU_mem extends Module {
     //val rdata_reg = RegEnable(m.io.m_rdata,0.U,io.ar_exu_mem.arvalid)
 
     //test delay 
-    val delaycycles = 5.Int 
+    val delaycycles = 5 
     val m_rdata_delay = ShiftRegister(m.io.m_rdata,delaycycles,1.U,io.ar_exu_mem.arvalid)
     val rdata_reg = RegEnable(m_rdata_delay,1.U,io.ar_exu_mem.arvalid)
     //tes delay 
