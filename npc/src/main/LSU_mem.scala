@@ -71,7 +71,6 @@ class LSU_mem extends Module {
     */
     //tes delay 
 
-    val rvalid_reg = RegNext(rvalid_en,0.U)//io.ar_exu_mem.arvalid)   
     val rvalid_reg = RegEnable(rvalid_en,0.U, (rvalid_en | io.r_mem_exu.rready))
     val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
 
