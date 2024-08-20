@@ -25,9 +25,9 @@ class Inst_fetch extends Module {
     })
 
     io.axi_aw.awready := false.B
-    assert(io.axi_aw.awvalid == false.B, "AXI_AW should not be valid")
+    assert(io.axi_aw.awvalid === false.B, "AXI_AW should not be valid")
     io.axi_w.wready := false.B
-    assert(io.axi_w.wvalid == false.B, "AXI_W should not be valid")
+    assert(io.axi_w.wvalid === false.B, "AXI_W should not be valid")
     io.axi_b.bvalid := false.B
 
 
