@@ -99,7 +99,7 @@ class LSU_mem extends Module {
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
         //特例0 可以通过但是可能存在bug
-        rvalid_en := Mux((m.io.m_rdata =/= rdata_reg ) | (m.io.m_rdata===0.U & rdata_reg === 0.U) , true.B, false.B)
+        rvalid_en := Mux((m.io.m_rdata =/= rdata_reg ) | (m.io.m_rdata =/=0.U)  , true.B, false.B)
 
         //delay
         //rvalid_en := Mux((((m_rdata_delay =/= rdata_reg) & (rdata_reg>=1.U)) | ((m_rdata_delay === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
