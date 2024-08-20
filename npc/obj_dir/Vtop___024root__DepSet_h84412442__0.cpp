@@ -310,7 +310,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                (7U 
                                                 & vlSelf->top__DOT__Mem__DOT___GEN_0))))
                   : 0U);
-            vlSelf->top__DOT__Mem__DOT__rdata_reg = vlSelf->top__DOT__Mem__DOT__m_rdata_delay;
         }
         if (vlSelf->top__DOT__EXU__DOT__mem_wen_reg) {
             vlSelf->top__DOT__Mem__DOT__bresp_reg = 
@@ -321,6 +320,12 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                         & (0xa0000400U > vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr))) 
                     | ((0xa0000047U < vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr) 
                        & (0xa0000050U > vlSelf->top__DOT___EXU_io_aw_exu_mem_awaddr))));
+        }
+        if (((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
+             & (IData)(vlSelf->top__DOT__Mem__DOT___GEN_1))) {
+            vlSelf->top__DOT__Mem__DOT__rdata_reg = 0U;
+        } else if (vlSelf->top__DOT__EXU__DOT__mem_ren_reg) {
+            vlSelf->top__DOT__Mem__DOT__rdata_reg = vlSelf->top__DOT__Mem__DOT__m_rdata_delay;
         }
         if (vlSelf->top__DOT__IFU__DOT__exu2in_reg) {
             vlSelf->top__DOT__IFU__DOT__ardata_reg 
@@ -676,8 +681,10 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     }
     vlSelf->top__DOT__Mem__DOT__rvalid_en = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
                                              & ((~ (IData)(vlSelf->top__DOT__Mem__DOT___GEN_1)) 
-                                                & ((vlSelf->top__DOT__Mem__DOT__m_rdata_delay 
-                                                    != vlSelf->top__DOT__Mem__DOT__rdata_reg) 
+                                                & (((vlSelf->top__DOT__Mem__DOT__m_rdata_delay 
+                                                     != vlSelf->top__DOT__Mem__DOT__rdata_reg) 
+                                                    & (0U 
+                                                       != vlSelf->top__DOT__Mem__DOT__rdata_reg)) 
                                                    | ((0U 
                                                        == vlSelf->top__DOT__Mem__DOT__m_rdata_delay) 
                                                       & (0U 

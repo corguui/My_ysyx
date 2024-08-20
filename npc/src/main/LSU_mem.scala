@@ -100,7 +100,7 @@ class LSU_mem extends Module {
         //rvalid_en := Mux(((m.io.m_rdata =/= rdata_reg ) | ((m.io.m_rdata === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
 
         //delay
-        rvalid_en := Mux((((m_rdata_delay =/= rdata_reg) & rdata_reg>=1.U) | ((m_rdata_delay === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
+        rvalid_en := Mux((((m_rdata_delay =/= rdata_reg) & (rdata_reg>=1.U)) | ((m_rdata_delay === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
         //delay
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
