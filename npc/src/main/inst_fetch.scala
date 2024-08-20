@@ -25,10 +25,10 @@ class Inst_fetch extends Module {
     })
 
     io.axi_aw.awready := false.B
-    asset(io.axi_aw.awvalid == false.B, "AXI_AW should not be valid")
+    assert(io.axi_aw.awvalid == false.B, "AXI_AW should not be valid")
     io.axi_w.wready := false.B
-    asset(io.axi_w.wvalid == false.B, "AXI_W should not be valid")
-    io.axi_bvalid := false.B
+    assert(io.axi_w.wvalid == false.B, "AXI_W should not be valid")
+    io.axi_b.bvalid := false.B
 
 
 	// 声明DPI-C函数的BlackBox模块
