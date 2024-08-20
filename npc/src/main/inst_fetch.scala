@@ -24,11 +24,11 @@ class Inst_fetch extends Module {
         val axi_w = Flipped(new AXI_w)
     })
 
-    axi_aw.awready := false.B
-    assert(axi_w.awvalid === false.B, "axi_w.awvalid should be false")
-    axi_w.wready := false.B
-    assert(axi_w.wvalid === false.B, "axi_w.wvalid should be false")
-    axi_b.bvalid := false.B
+    io.axi_aw.awready := false.B
+    assert(io.axi_w.awvalid === false.B, "axi_w.awvalid should be false")
+    io.axi_w.wready := false.B
+    assert(io.axi_w.wvalid === false.B, "axi_w.wvalid should be false")
+    io.axi_b.bvalid := false.B
 
 	// 声明DPI-C函数的BlackBox模块
   	class VlgPcRead extends BlackBox with HasBlackBoxPath {

@@ -51,10 +51,10 @@ class IFU extends Module {
 		val axi_b = Flipped(new AXI_b)
 	})
 
-	axi_aw.awvalid := false.B
-	axi_w.wvalid := false.B
-	axi_b.bready := false.B
-	assert(axi_b.bvalid === false.B, "axi_b.bvalid must be false")
+	io.axi_aw.awvalid := false.B
+	io.axi_w.wvalid := false.B
+	io.axi_b.bready := false.B
+	assert(io.axi_b.bvalid === false.B, "axi_b.bvalid must be false")
 
 	//IFU recive IDU 
 	val idu2s_idle :: idu2s_wait_ready :: Nil = Enum(2)
