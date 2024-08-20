@@ -66,7 +66,7 @@ class LSU_mem extends Module {
     //val rdata_reg = RegEnable(m.io.m_rdata | rdata_mask ,11.U,io.ar_exu_mem.arvalid)
     //test delay 
     val delaycycles = 5 
-    val m_rdata_delay = ShiftRegister(m.io.m_rdata,delaycycles,11.U,io.ar_exu_mem.arvalid)
+    val m_rdata_delay = ShiftRegister(m.io.m_rdata,delaycycles,0.U,io.ar_exu_mem.arvalid)
     val rdata_reg = RegEnable(m_rdata_delay | rdata_mask ,11.U,io.ar_exu_mem.arvalid)
     //tes delay 
 
@@ -103,7 +103,7 @@ class LSU_mem extends Module {
 
         //delay
         //rvalid_en := Mux((((m_rdata_delay =/= rdata_reg) & (rdata_reg>=1.U)) | ((m_rdata_delay === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
-        rvalid_en := Mux((m_rdata_delay =/= rdata_reg) | (m_rdata_delay =/= 0.U & rdata_reg =/= 11.U) | (m_rdata_delay === 0.U & rdata_reg === 11.U), true.B, false.B)
+        rvalid_en := Mux((m_rdata_delay =/= rdata_reg) | (m_rdata_delay =/= 0.U ) , true.B, false.B)
         //delay
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
