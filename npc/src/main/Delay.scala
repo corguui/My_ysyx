@@ -12,42 +12,32 @@ class DelayModule extends Module {
     val delayDone = Output(Bool())
   })
 
-  // LFSR 配置
-  val lfsrWidth = 5         // LFSR 寄存器宽度，决定了随机数的范围
-  val seed = 1.U(lfsrWidth.W)  // LFSR 的初始值
-  val taps = Seq(0, 2)      // 反馈抽头位置，决定了随机序列的质量
+  val lfsrWidth = 2  // 用2位宽的LFSR，足够表示4个状态
+  val lfsrReg = RegInit(1.U(lfsrWidth.W))
+  val taps = Seq(1, 2)  // 设置反馈抽头，这里简单使用第2位和第1位异或
+  val nextLfsrValue = (lfsrReg(0) ^ lfsrReg(1)) ## lfsrReg(lfsrWidth-1, 1)
+  lfsrReg := nextLfsrValue
 
-  // 创建 LFSR 寄存器
-  val lfsrReg = RegInit(seed)
-  val updateLFSR = Wire(Bool())
-  updateLFSR := false.B
-
-  when(updateLFSR) {
-    lfsrReg := lfsrReg(lfsrWidth - 1, 1) ## (taps.map(lfsrReg(_)).reduce(_ ^ _))
-  }
-
-  // 使用 LFSR 生成的值来确定延迟周期，范围为 5 到 20
-  val randomDelay = 5.U + (lfsrReg(lfsrWidth-1, 0) % 16.U)
+  // 根据LFSR的状态决定延迟周期
+  val delays = VecInit(5.U, 10.U, 15.U, 20.U)
+  val delayCycles = delays(lfsrReg)
 
   val counter = RegInit(0.U(5.W))
-  val dataReg = Reg(UInt(32.W)) // 存储输出数据
+  val dataReg = Reg(UInt(32.W))
 
   // 初始设置
-  io.delayDone := false.B
   io.outData := dataReg
+  io.delayDone := false.B
 
   // 数据处理逻辑
   when(io.inValid && counter === 0.U) {
-    // 当输入有效且计数器为0时，接受新数据并设置延迟
     dataReg := io.inData
-    counter := randomDelay
-    updateLFSR := true.B
+    counter := delayCycles
   }.otherwise {
-    updateLFSR := false.B
     when(counter > 0.U) {
       counter := counter - 1.U
       when(counter === 1.U) {
-        io.delayDone := true.B // 延迟完成
+        io.delayDone := true.B
       }
     }
   }
