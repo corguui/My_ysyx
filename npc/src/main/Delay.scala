@@ -19,14 +19,18 @@ class DelayModule extends Module {
 
   // 创建 LFSR 寄存器
   val lfsrReg = RegInit(seed)
-  lfsrReg := lfsrReg(lfsrWidth - 1, 1) ## (taps.map(lfsrReg(_)).reduce(_ ^ _))
+  val updateLFSR = Wire(Bool())
+  updateLFSR := false.B
+
+  when(updateLFSR) {
+    lfsrReg := lfsrReg(lfsrWidth - 1, 1) ## (taps.map(lfsrReg(_)).reduce(_ ^ _))
+  }
 
   // 使用 LFSR 生成的值来确定延迟周期，范围为 5 到 20
   val randomDelay = 5.U + (lfsrReg(lfsrWidth-1, 0) % 16.U)
 
   val counter = RegInit(0.U(5.W))
   val dataReg = Reg(UInt(32.W)) // 存储输出数据
-  val validReg = RegInit(false.B) // 延迟完成信号寄存器
 
   // 初始设置
   io.delayDone := false.B
@@ -37,8 +41,9 @@ class DelayModule extends Module {
     // 当输入有效且计数器为0时，接受新数据并设置延迟
     dataReg := io.inData
     counter := randomDelay
-    validReg := true.B
+    updateLFSR := true.B
   }.otherwise {
+    updateLFSR := false.B
     when(counter > 0.U) {
       counter := counter - 1.U
       when(counter === 1.U) {
