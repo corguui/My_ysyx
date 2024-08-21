@@ -12,7 +12,9 @@ class DelayModule extends Module {
     val delayDone = Output(Bool())
   })
 
-  val randomDelay = 5 //+ chisel3.util.random.nextInt(16) // 随机延迟周期, 5到20周期
+  val shiftReg = RegInit(1.U(5.W))
+  val randomDelay = Wire(UInt(5.W))
+  randomDelay := 4.U + shiftReg // 随机延迟周期, 5到20周期
   val counter = RegInit(0.U(5.W))
   val dataReg = Reg(UInt(32.W)) // 存储输出数据
   val validReg = RegInit(false.B) // 延迟完成信号寄存器
@@ -24,7 +26,8 @@ class DelayModule extends Module {
   when(io.inValid && counter === 0.U) {
     // 当输入有效且计数器为0时，接受新数据并设置延迟
     dataReg := io.inData
-    counter := randomDelay.U
+    counter := randomDelay
+    shiftReg := Cat(shiftReg(3,0),shiftReg(4) )
     validReg := true.B
   }.otherwise {
     when(counter > 0.U) {
