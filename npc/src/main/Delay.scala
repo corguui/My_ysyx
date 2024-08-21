@@ -22,7 +22,7 @@ class DelayModule extends Module {
   // 初始设置
   io.delayDone := false.B
   io.outData := 0.U
-  when(counter === 0.U && io.inValid =/= 1.U) 
+  when(counter === 0.U)
   {
     io.outData := dataReg
   }
