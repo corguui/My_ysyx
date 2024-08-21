@@ -371,11 +371,11 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__EXU__DOT__io_aw_exu_mem_awvalid_0 
         = ((0U == (IData)(vlSelf->top__DOT__EXU__DOT__delay_aw__DOT__counter)) 
            & (vlSelf->top__DOT__EXU__DOT__delay_aw__DOT__dataReg 
-              & (IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg)));
+              & (IData)(vlSelf->top__DOT__EXU__DOT__m_wen_reg_delay)));
     vlSelf->top__DOT__EXU__DOT__io_w_exu_mem_wvalid_0 
         = ((0U == (IData)(vlSelf->top__DOT__EXU__DOT__delay_w__DOT__counter)) 
            & (vlSelf->top__DOT__EXU__DOT__delay_w__DOT__dataReg 
-              & (IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg)));
+              & (IData)(vlSelf->top__DOT__EXU__DOT__m_wen_reg_delay)));
     vlSelf->top__DOT__EXU__DOT__io_r_mem_exu_rready_0 
         = ((0U == (IData)(vlSelf->top__DOT__EXU__DOT__delay_r__DOT__counter)) 
            & (vlSelf->top__DOT__EXU__DOT__delay_r__DOT__dataReg 
