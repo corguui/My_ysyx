@@ -70,7 +70,7 @@ class Inst_fetch extends Module {
     io.axi_r.rvalid := rvalid_reg
 
     when(io.axi_ar.arvalid) {
-        rvalid_en := true.B
+        rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
         vlg_pc_read.io.pc_en := true.B
         vlg_pc_read.io.pc := io.axi_ar.pc
         delay.io.inData := vlg_pc_read.io.inst
