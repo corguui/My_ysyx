@@ -84,7 +84,7 @@ class LSU_mem extends Module {
     bresp := 0.U
     val bvalid_en = Wire(Bool())
     bvalid_en := false.B
-    val bvalid_reg = RegNext(bvalid_en,0.U)
+    val bvalid_reg = RegEnable(bvalid_en,0.U,(bvalid_en | io.b_mem_exu.bready))
     val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
     val waddr_reg = RegNext(io.aw_exu_mem.awaddr,0.U)
     val wmask_reg = RegNext(io.w_exu_mem.wmask,0.U)
