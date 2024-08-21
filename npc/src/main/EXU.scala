@@ -149,7 +149,7 @@ class EXU extends Module {
     val rready_reg = RegInit(0.U)
     val mem_raddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
     val mem_rmask_reg = RegEnable(io.idu2in.bits.m_rmask,0.U,io.idu2in.valid)
-    //val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,(io.idu2in.valid | io.r_mem_exu.rready))
+    val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,(io.idu2in.valid | io.r_mem_exu.rready))
 
     io.ar_exu_mem.rmask := 0.U
     io.ar_exu_mem.raddr := 0.U 
@@ -157,15 +157,17 @@ class EXU extends Module {
     //io.ar_exu_mem.arvalid := mem_ren_reg           
 
     //ar valid delay
+    val idu2in_valid = RegNext(io.idu2in.valid,0.U)
     val delay_ar = Module(new DelayModule)
     delay_ar.io.inData := 0.U 
     delay_ar.io.inValid := 0.U 
-    io.ar_exu_mem.arvalid := delay_ar.io.outData
+    io.ar_exu_mem.arvalid := delay_ar.io.outData & mem_ren_reg 
     when(io.idu2in.bits.inst_type === 3.U)
     {
-    delay_ar.io.inData := io.idu2in.bits.mem_ren//mem_ren_reg 
-    delay_ar.io.inValid := io.idu2in.valid 
+    delay_ar.io.inData := mem_ren_reg 
+    delay_ar.io.inValid := idu2in_valid 
     }
+   
 
 
     //Mem write member
