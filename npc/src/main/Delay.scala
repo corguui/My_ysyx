@@ -4,9 +4,6 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-import chisel3._
-import chisel3.util._
-
 class DelayModule extends Module {
   val io = IO(new Bundle {
     val inData = Input(UInt(32.W))
@@ -16,7 +13,7 @@ class DelayModule extends Module {
   })
 
   // 随机延迟周期, 5到20周期
-  val randomDelay = 5 + chisel3.util.random.nextInt(16)
+  val randomDelay = 5 //+ chisel3.util.random.nextInt(16)
   val counter = RegInit(0.U(5.W))
   val dataReg = Reg(UInt(32.W))
   val validReg = RegInit(false.B)     // 延迟完成信号寄存器
