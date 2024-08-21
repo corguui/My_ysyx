@@ -140,6 +140,7 @@ class EXU extends Module {
     io.csr_waddr_2 := 0.U
     io.csr_wdata_2 := 0.U
     io.csr_wen_2 := 0.U
+    
 
     //Mem read member
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
@@ -153,7 +154,13 @@ class EXU extends Module {
     io.ar_exu_mem.rmask := 0.U
     io.ar_exu_mem.raddr := 0.U 
     io.r_mem_exu.rready := rready_reg 
-    io.ar_exu_mem.arvalid := mem_ren_reg           
+    //io.ar_exu_mem.arvalid := mem_ren_reg           
+
+    //ar valid delay
+    val delay_ar = Module(new DelayMoudule)
+    delay_ar.io.inData := mem_ren_reg 
+    delay.io.inValid := io.idu2in.valid 
+    io.ar_exu_mem.arvalid := delay_ar.io.outData 
 
     //Mem write member
     val bready_reg = RegInit(0.U)
