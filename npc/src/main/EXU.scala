@@ -157,9 +157,9 @@ class EXU extends Module {
     //io.ar_exu_mem.arvalid := mem_ren_reg           
 
     //ar valid delay
-    val delay_ar = Module(new DelayMoudule)
+    val delay_ar = Module(new DelayModule)
     delay_ar.io.inData := mem_ren_reg 
-    delay.io.inValid := io.idu2in.valid 
+    delay_ar.io.inValid := io.idu2in.valid 
     io.ar_exu_mem.arvalid := delay_ar.io.outData 
 
     //Mem write member
