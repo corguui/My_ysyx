@@ -153,7 +153,7 @@ class EXU extends Module {
 
     io.ar_exu_mem.rmask := 0.U
     io.ar_exu_mem.raddr := 0.U 
-    io.r_mem_exu.rready := rready_reg 
+    //io.r_mem_exu.rready := rready_reg 
     //io.ar_exu_mem.arvalid := mem_ren_reg           
 
     //ar valid delay
@@ -167,7 +167,12 @@ class EXU extends Module {
     delay_ar.io.inData := mem_ren_reg 
     delay_ar.io.inValid := idu2in_valid 
     }
-   
+    //r ready delay
+    val delay_r = Module(new DelayModule)
+    delay_r.io.inData := 0.U
+    delay_r.io.inValid := 0.U
+    io.r_mem_exu.rready := delay_r.io.outData & rready_reg
+
 
 
     //Mem write member
@@ -227,6 +232,10 @@ class EXU extends Module {
                     {
                        rready_reg  := 1.U
                        //m2IDUstate := m2IDUidle
+                       //r delay
+                        delay_r.io.inData := 1.U
+                        delay_r.io.inValid := Mux(rvalid_reg =/= io.r_mem_exu.rvalid & io.r_mem_exu.rvalid === 1.U,0.U,1.U)  
+
                        when(io.r_mem_exu.rresp === 1.U)
                        {
                        io.reg_wen := reg_wen_reg
