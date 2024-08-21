@@ -142,19 +142,19 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelf->top__DOT__Mem__DOT__wvalid_reg = ((~ (IData)(vlSelf->reset)) 
                                               & (IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg));
     if (vlSelf->reset) {
-        __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg = 0U;
+        __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg = 1U;
         __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter = 0U;
         vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg 
             = __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg;
         vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter 
             = __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
-        __Vdly__top__DOT__Mem__DOT__delay_w__DOT__shiftReg = 0U;
+        __Vdly__top__DOT__Mem__DOT__delay_w__DOT__shiftReg = 1U;
         __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter = 0U;
         vlSelf->top__DOT__Mem__DOT__delay_w__DOT__shiftReg 
             = __Vdly__top__DOT__Mem__DOT__delay_w__DOT__shiftReg;
         vlSelf->top__DOT__Mem__DOT__delay_w__DOT__counter 
             = __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter;
-        __Vdly__top__DOT__Mem__DOT__delay__DOT__shiftReg = 0U;
+        __Vdly__top__DOT__Mem__DOT__delay__DOT__shiftReg = 1U;
         __Vdly__top__DOT__Mem__DOT__delay__DOT__counter = 0U;
         vlSelf->top__DOT__Mem__DOT__delay__DOT__shiftReg 
             = __Vdly__top__DOT__Mem__DOT__delay__DOT__shiftReg;
@@ -203,7 +203,9 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Mem__DOT__rdata_reg = 0U;
     } else {
         __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg 
-            = (1U | (0x1eU & (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg)));
+            = ((0x1eU & ((IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg) 
+                         << 1U)) | (1U & ((IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg) 
+                                          >> 4U)));
         if (vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT___GEN) {
             __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter 
                 = (0x1fU & ((IData)(4U) + (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__shiftReg)));
@@ -217,7 +219,9 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter 
             = __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
         __Vdly__top__DOT__Mem__DOT__delay_w__DOT__shiftReg 
-            = (1U | (0x1eU & (IData)(vlSelf->top__DOT__Mem__DOT__delay_w__DOT__shiftReg)));
+            = ((0x1eU & ((IData)(vlSelf->top__DOT__Mem__DOT__delay_w__DOT__shiftReg) 
+                         << 1U)) | (1U & ((IData)(vlSelf->top__DOT__Mem__DOT__delay_w__DOT__shiftReg) 
+                                          >> 4U)));
         if (vlSelf->top__DOT__Mem__DOT__delay_w__DOT___GEN) {
             __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter 
                 = (0x1fU & ((IData)(4U) + (IData)(vlSelf->top__DOT__Mem__DOT__delay_w__DOT__shiftReg)));
@@ -231,7 +235,9 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Mem__DOT__delay_w__DOT__counter 
             = __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter;
         __Vdly__top__DOT__Mem__DOT__delay__DOT__shiftReg 
-            = (1U | (0x1eU & (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__shiftReg)));
+            = ((0x1eU & ((IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__shiftReg) 
+                         << 1U)) | (1U & ((IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__shiftReg) 
+                                          >> 4U)));
         if (vlSelf->top__DOT__Mem__DOT__delay__DOT___GEN) {
             __Vdly__top__DOT__Mem__DOT__delay__DOT__counter 
                 = (0x1fU & ((IData)(4U) + (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__shiftReg)));
