@@ -79,6 +79,8 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                             << 0xcU) 
                                            | (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                               >> 0x14U));
+    vlSelf->top__DOT__Mem__DOT___rvalid_en_T_4 = (vlSelf->top__DOT__Mem__DOT__m_rdata_delay 
+                                                  != vlSelf->top__DOT__Mem__DOT__rdata_reg);
     vlSelf->top__DOT__IDU__DOT___GEN_19 = ((0x33U == 
                                             (0x7fU 
                                              & vlSelf->top__DOT__IFU__DOT__inst_reg)) 
@@ -378,12 +380,12 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                  | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_16))));
     vlSelf->top__DOT__Mem__DOT__rvalid_en = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
                                              & ((~ (IData)(vlSelf->top__DOT__Mem__DOT___GEN_1)) 
-                                                & (((vlSelf->top__DOT__Mem__DOT__m_rdata_delay 
-                                                     != vlSelf->top__DOT__Mem__DOT__rdata_reg) 
+                                                & (((IData)(vlSelf->top__DOT__Mem__DOT___rvalid_en_T_4) 
                                                     & (0xbU 
                                                        != vlSelf->top__DOT__Mem__DOT__rdata_reg)) 
-                                                   | (0U 
-                                                      != vlSelf->top__DOT__Mem__DOT__m_rdata_delay))));
+                                                   | ((0U 
+                                                       != vlSelf->top__DOT__Mem__DOT__m_rdata_delay) 
+                                                      & (IData)(vlSelf->top__DOT__Mem__DOT___rvalid_en_T_4)))));
     vlSelf->top__DOT__EXU__DOT___GEN_3 = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_ren_reg) 
                                           & ((IData)(vlSelf->top__DOT__Mem__DOT__rvalid_reg) 
                                              & (1U 

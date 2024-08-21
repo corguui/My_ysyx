@@ -54,22 +54,18 @@ class LSU_mem extends Module {
     m.io.m_rmask := 0.U
     m.io.m_ren := false.B
 
+    //delay
+    val delay = Module(new DelayModule)
+    delay.io.inData := 0
+
     //AXI-lite read member
     val resp = Wire(UInt(2.W))
     resp := 0.U
     val rvalid_en = Wire(Bool())
     rvalid_en := false.B
 
-    val rdata_mask = Wire(UInt(32.W))
-    rdata_mask := 0.U
-    //初值为11 是为了防止第一次rdata就为0
-    //val rdata_reg = RegEnable(m.io.m_rdata | rdata_mask ,11.U,io.ar_exu_mem.arvalid)
-    //test delay 
-    val delaycycles = 5 
-    val m_rdata_delay = ShiftRegister(m.io.m_rdata,delaycycles,0.U,io.ar_exu_mem.arvalid)
-    val rdata_reg = RegEnable(m_rdata_delay | rdata_mask ,11.U,io.ar_exu_mem.arvalid)
-    //tes delay 
-
+    val rdata_reg = RegEnable(delay.io.outData ,0.U,io.ar_exu_mem.arvalid)
+ 
     val rvalid_reg = RegEnable(rvalid_en,0.U, (rvalid_en | io.r_mem_exu.rready))
     val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
 
@@ -97,14 +93,8 @@ class LSU_mem extends Module {
         m.io.m_raddr := io.ar_exu_mem.raddr
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
-        //或的最后一个条件是为了防止第一个rdata为0
-        //rvalid_en := Mux((m.io.m_rdata =/= rdata_reg  ) | (m.io.m_rdata =/=0.U) | (m.io.m_rdata === 0.U & rdata_reg === 11.U)  , true.B, false.B)
-
-
-        //delay
-        //rvalid_en := Mux((((m_rdata_delay =/= rdata_reg) & (rdata_reg>=1.U)) | ((m_rdata_delay === 0.U) & (rdata_reg === 0.U))) , true.B, false.B)
-        rvalid_en := Mux((m_rdata_delay =/= rdata_reg & rdata_reg =/= 11.U) | (m_rdata_delay =/= 0.U & m_rdata_delay =/= rdata_reg ) , true.B, false.B)
-        //delay
+        delay.io.inData := m.io.m_rdata
+        rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
             when(m.io.m_rmask === 1.U){
@@ -123,8 +113,6 @@ class LSU_mem extends Module {
             io.r_mem_exu.rdata := rdata_reg 
             io.r_mem_exu.rresp := rresp_reg 
             rvalid_en := false.B
-            //0x000010 是一个随机掩码
-            rdata_mask := Mux(rdata_reg === 0.U,0x00000010.S.asUInt,0.U)
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
             io.r_mem_exu.rresp := 0.U
