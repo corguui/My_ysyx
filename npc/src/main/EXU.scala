@@ -206,8 +206,8 @@ class EXU extends Module {
     io.w_exu_mem.wvalid := delay_w.io.outData &  mem_wen_reg
     when(io.idu2in.bits.inst_type === 4.U)
     {
-        delay_aw.io.inData := mem_wen_reg
-        delay_aw.io.inValid := idu2in_valid
+        delay_w.io.inData := mem_wen_reg
+        delay_w.io.inValid := idu2in_valid
     }
     //b ready delay
     val bvalid_reg = RegNext(io.b_mem_exu.bvalid,0.U)
@@ -327,6 +327,7 @@ class EXU extends Module {
                     //b ready delay
                     delay_b.io.inData := 1.U
                     delay_b.io.inValid := Mux(bvalid_reg =/= io.b_mem_exu.bvalid & io.b_mem_exu.bvalid === 1.U,0.U,1.U)  
+
                     when(io.b_mem_exu.bresp === 1.U)
                     {
                         ifu_outdata.dnpc := io.idu2in.bits.snpc
