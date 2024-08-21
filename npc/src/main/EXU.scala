@@ -168,6 +168,7 @@ class EXU extends Module {
     delay_ar.io.inValid := idu2in_valid 
     }
     //r ready delay
+    val rvalid_reg =RegNext(io.r_mem_exu.rvalid,0.U)
     val delay_r = Module(new DelayModule)
     delay_r.io.inData := 0.U
     delay_r.io.inValid := 0.U
