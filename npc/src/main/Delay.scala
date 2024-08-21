@@ -12,8 +12,8 @@ class DelayModule extends Module {
     val delayDone = Output(Bool())
   })
 
-  val shiftReg = RegInit(0.U(5.W))
-  shiftReg := Cat(shiftReg(4,1), 1.U)
+  val shiftReg = RegInit(1.U(5.W))
+  shiftReg := Cat(shiftReg(3,0),shiftReg(4) )
   val randomDelay = Wire(UInt(5.W))
   randomDelay := 4.U + shiftReg // 随机延迟周期, 5到20周期
   val counter = RegInit(0.U(5.W))
