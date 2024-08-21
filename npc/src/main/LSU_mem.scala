@@ -54,13 +54,24 @@ class LSU_mem extends Module {
     m.io.m_rmask := 0.U
     m.io.m_ren := false.B
 
+    //read_delay
+    val delay = Module(new DelayModule)
+    delay.io.inData := 0.U
+    delay.io.inValid :=0.U
+    //write_delay
+    val delay_w = Module(new DelayModule)
+    delay_w.io.inData := 0.U
+    delay_w.io.inValid :=0.U
+    val wready_reg = RegEnable(m.io.m_wready,0.U,(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid))
+
     //AXI-lite read member
     val resp = Wire(UInt(2.W))
     resp := 0.U
     val rvalid_en = Wire(Bool())
     rvalid_en := false.B
-    val rdata_reg = RegEnable(m.io.m_rdata,0.U,io.ar_exu_mem.arvalid)
-    val rvalid_reg = RegNext(rvalid_en,0.U)//io.ar_exu_mem.arvalid)   
+
+    val rdata_reg = RegEnable(delay.io.outData ,0.U,io.ar_exu_mem.arvalid)
+    val rvalid_reg = RegEnable(rvalid_en,0.U, (rvalid_en | io.r_mem_exu.rready))
     val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
 
     io.ar_exu_mem.arready := true.B
@@ -73,7 +84,7 @@ class LSU_mem extends Module {
     bresp := 0.U
     val bvalid_en = Wire(Bool())
     bvalid_en := false.B
-    val bvalid_reg = RegNext(bvalid_en,0.U)
+    val bvalid_reg = RegEnable(bvalid_en,0.U,(bvalid_en | io.b_mem_exu.bready))
     val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
     val waddr_reg = RegNext(io.aw_exu_mem.awaddr,0.U)
     val wmask_reg = RegNext(io.w_exu_mem.wmask,0.U)
@@ -87,7 +98,10 @@ class LSU_mem extends Module {
         m.io.m_raddr := io.ar_exu_mem.raddr
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
-        rvalid_en := true.B
+        delay.io.inData := m.io.m_rdata
+        delay.io.inValid := io.ar_exu_mem.arvalid
+        rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
+
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
             when(m.io.m_rmask === 1.U){
             resp := Mux((m.io.m_rdata(31,8) === 0.U),1.U,0.U)
@@ -104,6 +118,7 @@ class LSU_mem extends Module {
         when((io.r_mem_exu.rready)&(io.r_mem_exu.rvalid)){
             io.r_mem_exu.rdata := rdata_reg 
             io.r_mem_exu.rresp := rresp_reg 
+            rvalid_en := false.B
         }.otherwise{
             io.r_mem_exu.rdata := 0.U 
             io.r_mem_exu.rresp := 0.U
@@ -126,8 +141,10 @@ class LSU_mem extends Module {
     }
     when(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid){
         //不要重复进行写操作  wdata可能为0不加入限制
+        delay_w.io.inData := m.io.m_wready
+        delay_w.io.inValid := io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid
         m.io.m_wen := Mux((io.w_exu_mem.wmask =/= wmask_reg) & (io.aw_exu_mem.awaddr =/= waddr_reg) ,true.B,false.B)
-        bvalid_en := true.B
+        bvalid_en := Mux(delay_w.io.delayDone,true.B,false.B)
         when(((io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt) & ( io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa00003ff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa000004f.S.asUInt))){
                 bresp := 1.U
         }.otherwise{
