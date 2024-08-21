@@ -160,12 +160,11 @@ class EXU extends Module {
     val delay_ar = Module(new DelayModule)
     delay_ar.io.inData := 0.U 
     delay_ar.io.inValid := 0.U 
-    io.ar_exu_mem.arvalid := 0.U 
+    io.ar_exu_mem.arvalid := delay_ar.io.outData
     when(io.idu2in.bits.inst_type === 3.U)
     {
     delay_ar.io.inData := io.idu2in.bits.mem_ren//mem_ren_reg 
     delay_ar.io.inValid := io.idu2in.valid 
-    io.ar_exu_mem.arvalid := delay_ar.io.outData 
     }
 
 
