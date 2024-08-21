@@ -46,10 +46,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     // Init
     IData/*31:0*/ __Vfunc_vlg_pc_read__3__Vfuncout;
     __Vfunc_vlg_pc_read__3__Vfuncout = 0;
-    IData/*31:0*/ __Vdly__top__DOT__IDU__DOT__exu_data_pc;
-    __Vdly__top__DOT__IDU__DOT__exu_data_pc = 0;
-    CData/*3:0*/ __Vdly__top__DOT__IDU__DOT__exu_data_inst_type;
-    __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 0;
     CData/*0:0*/ __Vdly__top__DOT__IDU__DOT__state;
     __Vdly__top__DOT__IDU__DOT__state = 0;
     CData/*0:0*/ __Vdly__top__DOT__EXU__DOT__m2IDUstate;
@@ -60,6 +56,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     __Vdly__top__DOT__EXU__DOT__delay_ar__DOT__shiftReg = 0;
     CData/*4:0*/ __Vdly__top__DOT__EXU__DOT__delay_ar__DOT__counter;
     __Vdly__top__DOT__EXU__DOT__delay_ar__DOT__counter = 0;
+    IData/*31:0*/ __Vdly__top__DOT__Reg__DOT__csr_0;
+    __Vdly__top__DOT__Reg__DOT__csr_0 = 0;
     CData/*4:0*/ __Vdly__top__DOT__Mem__DOT__delay__DOT__shiftReg;
     __Vdly__top__DOT__Mem__DOT__delay__DOT__shiftReg = 0;
     CData/*4:0*/ __Vdly__top__DOT__Mem__DOT__delay__DOT__counter;
@@ -94,9 +92,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelf->__Vdly__top__DOT__IFU__DOT__m2EXUstate 
         = vlSelf->top__DOT__IFU__DOT__m2EXUstate;
     __Vdly__top__DOT__IDU__DOT__state = vlSelf->top__DOT__IDU__DOT__state;
-    __Vdly__top__DOT__IDU__DOT__exu_data_pc = vlSelf->top__DOT__IDU__DOT__exu_data_pc;
-    __Vdly__top__DOT__IDU__DOT__exu_data_inst_type 
-        = vlSelf->top__DOT__IDU__DOT__exu_data_inst_type;
+    __Vdly__top__DOT__Reg__DOT__csr_0 = vlSelf->top__DOT__Reg__DOT__csr_0;
     __Vdly__top__DOT__EXU__DOT__rready_reg = vlSelf->top__DOT__EXU__DOT__rready_reg;
     __Vdly__top__DOT__EXU__DOT__m2IDUstate = vlSelf->top__DOT__EXU__DOT__m2IDUstate;
     if (vlSelf->top__DOT__IFU__DOT__arvalid_reg) {
@@ -175,6 +171,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             = __Vdly__top__DOT__Mem__DOT__delay__DOT__shiftReg;
         vlSelf->top__DOT__Mem__DOT__delay__DOT__counter 
             = __Vdly__top__DOT__Mem__DOT__delay__DOT__counter;
+        __Vdly__top__DOT__Reg__DOT__csr_0 = 0U;
         vlSelf->top__DOT__EXU__DOT__lastdnpc = 0U;
         vlSelf->top__DOT__Reg__DOT__reg_23 = 0U;
         vlSelf->top__DOT__Reg__DOT__reg_22 = 0U;
@@ -209,12 +206,11 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Reg__DOT__reg_31 = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_awaddr_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_raddr_reg = 0U;
+        vlSelf->top__DOT__Mem__DOT__rresp_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_wmask_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__reg_wen_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_rmask_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__reg_waddr_reg = 0U;
-        vlSelf->top__DOT__Mem__DOT__rresp_reg = 0U;
-        vlSelf->top__DOT__Mem__DOT__bvalid_reg = 0U;
         vlSelf->top__DOT__Mem__DOT__rdata_reg = 0U;
     } else {
         if (vlSelf->top__DOT__EXU__DOT__delay_ar__DOT___GEN) {
@@ -281,6 +277,20 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             = __Vdly__top__DOT__Mem__DOT__delay__DOT__shiftReg;
         vlSelf->top__DOT__Mem__DOT__delay__DOT__counter 
             = __Vdly__top__DOT__Mem__DOT__delay__DOT__counter;
+        if (((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
+             & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_24)) 
+                & (0xcU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))))) {
+            __Vdly__top__DOT__Reg__DOT__csr_0 = ((1U 
+                                                  & ((~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)) 
+                                                     | ((0xcU 
+                                                         != (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
+                                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_24))))
+                                                  ? 0U
+                                                  : vlSelf->top__DOT__IDU__DOT__exu_data_pc);
+        } else if (((IData)(vlSelf->top__DOT___EXU_io_csr_wen_1) 
+                    & (0U == (IData)(vlSelf->top__DOT___EXU_io_csr_waddr_1)))) {
+            __Vdly__top__DOT__Reg__DOT__csr_0 = vlSelf->top__DOT___EXU_io_csr_wdata_1;
+        }
         vlSelf->top__DOT__EXU__DOT__lastdnpc = vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc;
         if (((IData)(vlSelf->top__DOT__Reg__DOT___GEN) 
              & (0x17U == (IData)(vlSelf->top__DOT___EXU_io_reg_waddr)))) {
@@ -442,11 +452,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                   : 0U);
             vlSelf->top__DOT__Mem__DOT__rdata_reg = vlSelf->top__DOT__Mem__DOT__delay__DOT__dataReg;
         }
-        if (((IData)(vlSelf->top__DOT__Mem__DOT__bvalid_en) 
-             | (IData)(vlSelf->top__DOT__EXU__DOT__bready_reg))) {
-            vlSelf->top__DOT__Mem__DOT__bvalid_reg 
-                = vlSelf->top__DOT__Mem__DOT__bvalid_en;
-        }
     }
     if (vlSelf->top__DOT__Mem__DOT__delay__DOT___GEN) {
         vlSelf->top__DOT__Mem__DOT__delay__DOT__dataReg 
@@ -455,12 +460,18 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                 : 0U);
     }
     if (vlSelf->reset) {
+        vlSelf->top__DOT__Mem__DOT__bvalid_reg = 0U;
         vlSelf->top__DOT__Mem__DOT__bresp_reg = 0U;
         vlSelf->top__DOT__Mem__DOT__wmask_reg = 0U;
         vlSelf->top__DOT__Mem__DOT__waddr_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_wdata_reg = 0U;
         vlSelf->top__DOT__EXU__DOT__mem_wen_reg = 0U;
     } else {
+        if (((IData)(vlSelf->top__DOT__Mem__DOT__bvalid_en) 
+             | (IData)(vlSelf->top__DOT__EXU__DOT__bready_reg))) {
+            vlSelf->top__DOT__Mem__DOT__bvalid_reg 
+                = vlSelf->top__DOT__Mem__DOT__bvalid_en;
+        }
         if (vlSelf->top__DOT__EXU__DOT__mem_wen_reg) {
             vlSelf->top__DOT__Mem__DOT__bresp_reg = 
                 ((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg) 
@@ -521,37 +532,29 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     }
     vlSelf->top__DOT__EXU__DOT___GEN_8 = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg) 
                                           & (IData)(vlSelf->top__DOT__Mem__DOT__bvalid_reg));
+    vlSelf->top__DOT__EXU__DOT__m2IDUstate = __Vdly__top__DOT__EXU__DOT__m2IDUstate;
     if (vlSelf->top__DOT__EXU__DOT__delay_ar__DOT___GEN) {
         vlSelf->top__DOT__EXU__DOT__delay_ar__DOT__dataReg 
-            = vlSelf->top__DOT__EXU__DOT__mem_ren_reg;
+            = vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren;
     }
+    if (vlSelf->reset) {
+        vlSelf->top__DOT__Mem__DOT__rvalid_reg = 0U;
+    } else if (((IData)(vlSelf->top__DOT__Mem__DOT__rvalid_en) 
+                | (IData)(vlSelf->top__DOT__EXU__DOT__rready_reg))) {
+        vlSelf->top__DOT__Mem__DOT__rvalid_reg = vlSelf->top__DOT__Mem__DOT__rvalid_en;
+    }
+    vlSelf->top__DOT__EXU__DOT__rready_reg = __Vdly__top__DOT__EXU__DOT__rready_reg;
+    vlSelf->top__DOT__Mem__DOT___GEN_1 = ((IData)(vlSelf->top__DOT__EXU__DOT__rready_reg) 
+                                          & (IData)(vlSelf->top__DOT__Mem__DOT__rvalid_reg));
     vlSelf->top__DOT__Mem__DOT__delay__DOT___GEN = 
         ((vlSelf->top__DOT__EXU__DOT__delay_ar__DOT__dataReg 
           & ((IData)(vlSelf->top__DOT__Mem__DOT__arvalid_reg) 
              != (1U & vlSelf->top__DOT__EXU__DOT__delay_ar__DOT__dataReg))) 
          & (0U == (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__counter)));
-    if (vlSelf->reset) {
-        vlSelf->top__DOT__Mem__DOT__rvalid_reg = 0U;
-        vlSelf->top__DOT__EXU__DOT__mem_ren_reg = 0U;
-    } else {
-        if (((IData)(vlSelf->top__DOT__Mem__DOT__rvalid_en) 
-             | (IData)(vlSelf->top__DOT__EXU__DOT__rready_reg))) {
-            vlSelf->top__DOT__Mem__DOT__rvalid_reg 
-                = vlSelf->top__DOT__Mem__DOT__rvalid_en;
-        }
-        if (((IData)(vlSelf->top__DOT__IDU__DOT__state_reg) 
-             | (IData)(vlSelf->top__DOT__EXU__DOT__rready_reg))) {
-            vlSelf->top__DOT__EXU__DOT__mem_ren_reg 
-                = vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren;
-        }
-    }
-    vlSelf->top__DOT__EXU__DOT__rready_reg = __Vdly__top__DOT__EXU__DOT__rready_reg;
-    vlSelf->top__DOT__Mem__DOT___GEN_1 = ((IData)(vlSelf->top__DOT__EXU__DOT__rready_reg) 
-                                          & (IData)(vlSelf->top__DOT__Mem__DOT__rvalid_reg));
     if (vlSelf->top__DOT__IDU__DOT__state) {
         vlSelf->top__DOT__IDU__DOT__exu_data_snpc = 
             ((IData)(4U) + vlSelf->io_pc);
-        __Vdly__top__DOT__IDU__DOT__exu_data_pc = vlSelf->io_pc;
+        vlSelf->top__DOT__IDU__DOT__exu_data_pc = vlSelf->io_pc;
         vlSelf->top__DOT__IDU__DOT__exu_data_m_rmask 
             = (((IData)(vlSelf->top__DOT__IDU__DOT___GEN_19) 
                 | (3U != (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)))
@@ -611,7 +614,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                                 >> 0x19U))
                     : (IData)(vlSelf->top__DOT__IDU__DOT__casez_tmp));
-            __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 1U;
+            vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 1U;
         } else if ((0x13U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
             vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                 = (((- (IData)((vlSelf->top__DOT__IFU__DOT__inst_reg 
@@ -621,7 +624,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__IDU__DOT__exu_data_alu_op 
                 = ((0U == (7U & (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                  >> 0xcU))) ? 0U : (IData)(vlSelf->top__DOT__IDU__DOT__casez_tmp));
-            __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 2U;
+            vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 2U;
         } else {
             if ((3U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm 
@@ -629,7 +632,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                     >> 0x1fU))) << 0xcU) 
                        | (vlSelf->top__DOT__IFU__DOT__inst_reg 
                           >> 0x14U));
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 3U;
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 3U;
             } else if ((0x23U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                     = (((- (IData)((vlSelf->top__DOT__IFU__DOT__inst_reg 
@@ -638,7 +641,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                      >> 0x14U)) | (0x1fU 
                                                    & (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                                       >> 7U))));
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 4U;
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 4U;
             } else if ((0x63U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                     = (((- (IData)((vlSelf->top__DOT__IFU__DOT__inst_reg 
@@ -650,15 +653,15 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                 | (0x1eU 
                                                    & (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                                       >> 7U)))));
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 5U;
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 5U;
             } else if ((0x37U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                     = (0xfffff000U & vlSelf->top__DOT__IFU__DOT__inst_reg);
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 6U;
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 6U;
             } else if ((0x17U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                     = (0xfffff000U & vlSelf->top__DOT__IFU__DOT__inst_reg);
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 7U;
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 7U;
             } else if ((0x6fU == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                     = (((- (IData)((vlSelf->top__DOT__IFU__DOT__inst_reg 
@@ -668,21 +671,21 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                         >> 9U)) | (0x7feU 
                                                    & (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                                       >> 0x14U)))));
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 8U;
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 8U;
             } else if ((0x67U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                     = (((- (IData)((vlSelf->top__DOT__IFU__DOT__inst_reg 
                                     >> 0x1fU))) << 0xcU) 
                        | (vlSelf->top__DOT__IFU__DOT__inst_reg 
                           >> 0x14U));
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 9U;
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 9U;
             } else if ((0x73U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg))) {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm 
                     = (((- (IData)((vlSelf->top__DOT__IFU__DOT__inst_reg 
                                     >> 0x1fU))) << 0xcU) 
                        | (vlSelf->top__DOT__IFU__DOT__inst_reg 
                           >> 0x14U));
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type 
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type 
                     = ((1U == (7U & (vlSelf->top__DOT__IFU__DOT__inst_reg 
                                      >> 0xcU))) ? 0xaU
                         : ((2U == (7U & (vlSelf->top__DOT__IFU__DOT__inst_reg 
@@ -698,7 +701,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                        : 0U)));
             } else {
                 vlSelf->top__DOT__IDU__DOT__exu_data_imm = 0U;
-                __Vdly__top__DOT__IDU__DOT__exu_data_inst_type = 0U;
+                vlSelf->top__DOT__IDU__DOT__exu_data_inst_type = 0U;
             }
             vlSelf->top__DOT__IDU__DOT__exu_data_alu_op 
                 = (((3U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)) 
@@ -729,7 +732,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Reg__DOT__csr_2 = 0U;
         vlSelf->top__DOT__Reg__DOT__csr_3 = 0U;
         vlSelf->top__DOT__Reg__DOT__reg_15 = 0U;
-        vlSelf->top__DOT__Reg__DOT__csr_0 = 0U;
     } else {
         __Vdly__top__DOT__IDU__DOT__state = ((~ (IData)(vlSelf->top__DOT__IDU__DOT__state)) 
                                              & (IData)(vlSelf->top__DOT__IFU__DOT__rready_reg));
@@ -749,20 +751,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         if (((IData)(vlSelf->top__DOT__Reg__DOT___GEN) 
              & (0xfU == (IData)(vlSelf->top__DOT___EXU_io_reg_waddr)))) {
             vlSelf->top__DOT__Reg__DOT__reg_15 = vlSelf->top__DOT___EXU_io_reg_wdata;
-        }
-        if (((IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate) 
-             & ((~ (IData)(vlSelf->top__DOT__EXU__DOT___GEN_24)) 
-                & (0xcU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))))) {
-            vlSelf->top__DOT__Reg__DOT__csr_0 = ((1U 
-                                                  & ((~ (IData)(vlSelf->top__DOT__EXU__DOT__m2IDUstate)) 
-                                                     | ((0xcU 
-                                                         != (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
-                                                        | (IData)(vlSelf->top__DOT__EXU__DOT___GEN_24))))
-                                                  ? 0U
-                                                  : vlSelf->top__DOT__IDU__DOT__exu_data_pc);
-        } else if (((IData)(vlSelf->top__DOT___EXU_io_csr_wen_1) 
-                    & (0U == (IData)(vlSelf->top__DOT___EXU_io_csr_waddr_1)))) {
-            vlSelf->top__DOT__Reg__DOT__csr_0 = vlSelf->top__DOT___EXU_io_csr_wdata_1;
         }
     }
     vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren = 
@@ -805,13 +793,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                            >> 0xcU)))) 
                                                    | (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_il_us)));
     }
-    vlSelf->top__DOT__Mem__DOT__rvalid_en = (vlSelf->top__DOT__EXU__DOT__delay_ar__DOT__dataReg 
-                                             & ((~ (IData)(vlSelf->top__DOT__Mem__DOT___GEN_1)) 
-                                                & ((~ (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT___GEN)) 
-                                                   & ((0U 
-                                                       != (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__counter)) 
-                                                      & (1U 
-                                                         == (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__counter))))));
     vlSelf->top__DOT__EXU__DOT___GEN_3 = (vlSelf->top__DOT__EXU__DOT__delay_ar__DOT__dataReg 
                                           & ((IData)(vlSelf->top__DOT__Mem__DOT__rvalid_reg) 
                                              & (1U 
@@ -823,14 +804,18 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                    ? (IData)(vlSelf->top__DOT__Mem__DOT__rresp_reg)
                                                    : 0U)
                                                   : 3U))));
+    vlSelf->top__DOT__Mem__DOT__rvalid_en = (vlSelf->top__DOT__EXU__DOT__delay_ar__DOT__dataReg 
+                                             & ((~ (IData)(vlSelf->top__DOT__Mem__DOT___GEN_1)) 
+                                                & ((~ (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT___GEN)) 
+                                                   & ((0U 
+                                                       != (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__counter)) 
+                                                      & (1U 
+                                                         == (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__counter))))));
+    vlSelf->top__DOT__Reg__DOT__csr_0 = __Vdly__top__DOT__Reg__DOT__csr_0;
     vlSelf->top__DOT__IDU__DOT__state = __Vdly__top__DOT__IDU__DOT__state;
     vlSelf->top__DOT__EXU__DOT__delay_ar__DOT___GEN 
         = ((IData)(vlSelf->top__DOT__IDU__DOT__state_reg) 
            & (0U == (IData)(vlSelf->top__DOT__EXU__DOT__delay_ar__DOT__counter)));
-    vlSelf->top__DOT__IDU__DOT__exu_data_pc = __Vdly__top__DOT__IDU__DOT__exu_data_pc;
-    vlSelf->top__DOT__EXU__DOT__m2IDUstate = __Vdly__top__DOT__EXU__DOT__m2IDUstate;
-    vlSelf->top__DOT__IDU__DOT__exu_data_inst_type 
-        = __Vdly__top__DOT__IDU__DOT__exu_data_inst_type;
     vlSelf->top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0 
         = ((0xcU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)) 
            | (0xdU == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type)));
