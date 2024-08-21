@@ -73,6 +73,7 @@ class LSU_mem extends Module {
     val rdata_reg = RegEnable(delay.io.outData ,0.U,io.ar_exu_mem.arvalid)
     val rvalid_reg = RegEnable(rvalid_en,0.U, (rvalid_en | io.r_mem_exu.rready))
     val rresp_reg = RegEnable(resp,0.U,io.ar_exu_mem.arvalid)
+    val arvalid_reg =RegNext(io.ar_exu_mem.arvalid,0.U)
 
     io.ar_exu_mem.arready := true.B
     io.r_mem_exu.rdata := 2.U 
@@ -88,6 +89,8 @@ class LSU_mem extends Module {
     val bresp_reg = RegEnable(bresp,0.U,(io.w_exu_mem.wvalid | io.aw_exu_mem.awvalid))
     val waddr_reg = RegNext(io.aw_exu_mem.awaddr,0.U)
     val wmask_reg = RegNext(io.w_exu_mem.wmask,0.U)
+    val awvalid_reg =RegNext(io.aw_exu_mem.awvalid,0.U)
+    val wvalid_reg = RegNext(io.w_exu_mem.wvalid,0.U)
     io.aw_exu_mem.awready := true.B
     io.w_exu_mem.wready := true.B
     io.b_mem_exu.bresp :=  3.U 
@@ -99,7 +102,7 @@ class LSU_mem extends Module {
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
         delay.io.inData := m.io.m_rdata
-        delay.io.inValid := io.ar_exu_mem.arvalid
+        delay.io.inValid := Mux(arvalid_reg=/=io.ar_exu_mem.arvalid & io.ar_exu_mem.arvalid === 1.U,true.B,false.B)
         rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
@@ -142,7 +145,7 @@ class LSU_mem extends Module {
     when(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid){
         //不要重复进行写操作  wdata可能为0不加入限制
         delay_w.io.inData := m.io.m_wready
-        delay_w.io.inValid := io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid
+        delay_w.io.inValid :=Mux((io.w_exu_mem.wvalid =/= wvalid_reg & io.w_exu_mem.wvalid === 1.U & io.aw_exu_mem.awvalid =/= awvalid_reg & io.aw_exu_mem.awvalid === 1.U),true.B,false.B) 
         m.io.m_wen := Mux((io.w_exu_mem.wmask =/= wmask_reg) & (io.aw_exu_mem.awaddr =/= waddr_reg) ,true.B,false.B)
         bvalid_en := Mux(delay_w.io.delayDone,true.B,false.B)
         when(((io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt) & ( io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa00003ff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa000004f.S.asUInt))){

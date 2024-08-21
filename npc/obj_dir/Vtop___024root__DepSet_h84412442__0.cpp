@@ -63,10 +63,10 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     CData/*4:0*/ __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
     __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter = 0;
     // Body
-    __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter 
-        = vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter;
     __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter 
         = vlSelf->top__DOT__Mem__DOT__delay_w__DOT__counter;
+    __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter 
+        = vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter;
     __Vdly__top__DOT__Mem__DOT__delay__DOT__counter 
         = vlSelf->top__DOT__Mem__DOT__delay__DOT__counter;
     vlSelf->__Vdly__top__DOT__IFU__DOT__rready_reg 
@@ -115,6 +115,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     } else {
         vlSelf->top__DOT__Mem__DOT___m_m_wready = 0U;
     }
+    vlSelf->top__DOT__Inst_fetch__DOT__arvalid_reg 
+        = ((~ (IData)(vlSelf->reset)) & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg));
     if (vlSelf->top__DOT__Mem__DOT__delay_w__DOT___GEN) {
         vlSelf->top__DOT__Mem__DOT__delay_w__DOT__dataReg 
             = ((IData)(vlSelf->top__DOT__EXU__DOT__mem_wen_reg)
@@ -122,12 +124,12 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                 : 0U);
     }
     if (vlSelf->reset) {
-        __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter = 0U;
-        vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter 
-            = __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
         __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter = 0U;
         vlSelf->top__DOT__Mem__DOT__delay_w__DOT__counter 
             = __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter;
+        __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter = 0U;
+        vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter 
+            = __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
         __Vdly__top__DOT__Mem__DOT__delay__DOT__counter = 0U;
         vlSelf->top__DOT__Mem__DOT__delay__DOT__counter 
             = __Vdly__top__DOT__Mem__DOT__delay__DOT__counter;
@@ -173,15 +175,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Mem__DOT__bvalid_reg = 0U;
         vlSelf->top__DOT__Mem__DOT__rdata_reg = 0U;
     } else {
-        if (vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT___GEN) {
-            __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter = 5U;
-        } else if ((0U != (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter))) {
-            __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter 
-                = (0x1fU & ((IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter) 
-                            - (IData)(1U)));
-        }
-        vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter 
-            = __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
         if (vlSelf->top__DOT__Mem__DOT__delay_w__DOT___GEN) {
             __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter = 5U;
         } else if ((0U != (IData)(vlSelf->top__DOT__Mem__DOT__delay_w__DOT__counter))) {
@@ -191,6 +184,15 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         }
         vlSelf->top__DOT__Mem__DOT__delay_w__DOT__counter 
             = __Vdly__top__DOT__Mem__DOT__delay_w__DOT__counter;
+        if (vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT___GEN) {
+            __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter = 5U;
+        } else if ((0U != (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter))) {
+            __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter 
+                = (0x1fU & ((IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter) 
+                            - (IData)(1U)));
+        }
+        vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter 
+            = __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
         if (vlSelf->top__DOT__Mem__DOT__delay__DOT___GEN) {
             __Vdly__top__DOT__Mem__DOT__delay__DOT__counter = 5U;
         } else if ((0U != (IData)(vlSelf->top__DOT__Mem__DOT__delay__DOT__counter))) {
