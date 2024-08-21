@@ -22,7 +22,7 @@ class DelayModule extends Module {
   // 初始设置
   io.delayDone := false.B
   io.outData := 0.U
-  when(counter === 0.U)
+  when(counter === 0.U && io.inValid =/= 1.U) {
   {
     io.outData := dataReg
   }
@@ -30,7 +30,6 @@ class DelayModule extends Module {
   when(io.inValid && counter === 0.U) {
     // 当输入有效且计数器为0时，接受新数据并设置延迟
     dataReg := io.inData
-    io.outData := 0.U
     counter := randomDelay
     shiftReg := Cat(shiftReg(3,0),shiftReg(4) )
     validReg := true.B

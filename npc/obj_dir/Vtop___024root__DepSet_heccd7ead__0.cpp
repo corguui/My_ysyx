@@ -367,9 +367,9 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
         }
         if (vlSelf->top__DOT__IFU__DOT__arvalid_reg) {
             vlSelf->top__DOT__Inst_fetch__DOT__rdata_reg 
-                = ((0U == (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter))
-                    ? vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__dataReg
-                    : 0U);
+                = (((0U != (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)) 
+                    | (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT___GEN_0))
+                    ? 0U : vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__dataReg);
         }
     }
     vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter 
