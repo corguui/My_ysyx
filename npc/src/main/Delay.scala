@@ -12,7 +12,7 @@ class DelayModule extends Module {
     val delayDone = Output(Bool())
   })
 
-  val randomDelay = 5 //+ chisel3.util.random.nextInt(16) // 随机延迟周期, 5到20周期
+  val randomDelay = 5 + chisel3.util.random.nextInt(16) // 随机延迟周期, 5到20周期
   val counter = RegInit(0.U(5.W))
   val dataReg = Reg(UInt(32.W)) // 存储输出数据
   val validReg = RegInit(false.B) // 延迟完成信号寄存器
