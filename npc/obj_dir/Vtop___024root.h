@@ -82,12 +82,14 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Mem__DOT__bvalid_reg;
         CData/*1:0*/ top__DOT__Mem__DOT__bresp_reg;
         CData/*2:0*/ top__DOT__Mem__DOT__wmask_reg;
-        CData/*0:0*/ top__DOT__Mem__DOT___rvalid_en_T_4;
+        CData/*0:0*/ top__DOT__Mem__DOT___GEN_1;
     };
     struct {
-        CData/*0:0*/ top__DOT__Mem__DOT___GEN_1;
         CData/*0:0*/ top__DOT__Mem__DOT__rvalid_en;
         CData/*0:0*/ top__DOT__Mem__DOT__m__DOT__m_wready;
+        CData/*4:0*/ top__DOT__Mem__DOT__delay__DOT__counter;
+        CData/*0:0*/ top__DOT__Mem__DOT__delay__DOT___GEN;
+        CData/*0:0*/ top__DOT__Mem__DOT__delay__DOT____VdfgTmp_h508b22a1__0;
         CData/*0:0*/ top__DOT__Inst_fetch__DOT__rvalid_reg;
         CData/*4:0*/ __VdfgTmp_he9709539__0;
         CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__m2EXUstate;
@@ -147,10 +149,10 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_15;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_16;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_17;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_18;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_19;
     };
     struct {
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_18;
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_19;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_20;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_21;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_22;
@@ -166,15 +168,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp;
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_0;
         IData/*31:0*/ top__DOT__Mem__DOT___m_m_rdata;
-        IData/*31:0*/ top__DOT__Mem__DOT__m_rdata_delay_r;
-        IData/*31:0*/ top__DOT__Mem__DOT__m_rdata_delay_r_1;
-        IData/*31:0*/ top__DOT__Mem__DOT__m_rdata_delay_r_2;
-        IData/*31:0*/ top__DOT__Mem__DOT__m_rdata_delay_r_3;
-        IData/*31:0*/ top__DOT__Mem__DOT__m_rdata_delay;
         IData/*31:0*/ top__DOT__Mem__DOT__rdata_reg;
         IData/*31:0*/ top__DOT__Mem__DOT__waddr_reg;
         IData/*31:0*/ top__DOT__Mem__DOT___GEN;
         IData/*31:0*/ top__DOT__Mem__DOT___GEN_0;
+        IData/*31:0*/ top__DOT__Mem__DOT__delay__DOT__dataReg;
         IData/*31:0*/ top__DOT__Inst_fetch__DOT___vlg_pc_read_inst;
         IData/*31:0*/ top__DOT__Inst_fetch__DOT__rdata_reg;
         IData/*31:0*/ __VdfgTmp_h570e6332__0;

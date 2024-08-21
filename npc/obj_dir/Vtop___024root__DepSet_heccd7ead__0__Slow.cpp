@@ -53,7 +53,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1381, "", "Settle region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1414, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -260,11 +260,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__Reg__DOT__casez_tmp_0 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Reg__DOT___GEN = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__Mem__DOT___m_m_rdata = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__Mem__DOT__m_rdata_delay_r = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__Mem__DOT__m_rdata_delay_r_1 = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__Mem__DOT__m_rdata_delay_r_2 = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__Mem__DOT__m_rdata_delay_r_3 = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__Mem__DOT__m_rdata_delay = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Mem__DOT__rdata_reg = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Mem__DOT__rvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__Mem__DOT__rresp_reg = VL_RAND_RESET_I(2);
@@ -274,10 +269,13 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__Mem__DOT__wmask_reg = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__Mem__DOT___GEN = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Mem__DOT___GEN_0 = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__Mem__DOT___rvalid_en_T_4 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__Mem__DOT___GEN_1 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__Mem__DOT__rvalid_en = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__Mem__DOT__m__DOT__m_wready = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__Mem__DOT__delay__DOT__counter = VL_RAND_RESET_I(5);
+    vlSelf->top__DOT__Mem__DOT__delay__DOT__dataReg = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__Mem__DOT__delay__DOT___GEN = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__Mem__DOT__delay__DOT____VdfgTmp_h508b22a1__0 = 0;
     vlSelf->top__DOT__Inst_fetch__DOT___vlg_pc_read_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Inst_fetch__DOT__rdata_reg = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__Inst_fetch__DOT__rvalid_reg = VL_RAND_RESET_I(1);

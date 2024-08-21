@@ -57,7 +57,7 @@ class LSU_mem extends Module {
     //delay
     val delay = Module(new DelayModule)
     delay.io.inData := 0.U
-    delay.io.inValid := io.ar_exu_mem.arvalid
+    delay.io.inValid :=0.U
 
     //AXI-lite read member
     val resp = Wire(UInt(2.W))
@@ -95,6 +95,7 @@ class LSU_mem extends Module {
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
         delay.io.inData := m.io.m_rdata
+        delay.io.inValid := io.ar_exu_mem.arvalid
         rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
