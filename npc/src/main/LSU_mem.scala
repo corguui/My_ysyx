@@ -62,7 +62,7 @@ class LSU_mem extends Module {
     val delay_w = Module(new DelayModule)
     delay_w.io.inData := 0.U
     delay_w.io.inValid :=0.U
-    val wready_reg = RegEnable(m.io.m_wready,0.U,(io.w_exu_mem.wvalid & io.aw_exu_mem.wvalid))
+    val wready_reg = RegEnable(m.io.m_wready,0.U,(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid))
 
     //AXI-lite read member
     val resp = Wire(UInt(2.W))
