@@ -102,6 +102,7 @@ class LSU_mem extends Module {
         m.io.m_rmask := io.ar_exu_mem.rmask
         m.io.m_ren := io.ar_exu_mem.arvalid
         delay.io.inData := m.io.m_rdata
+        // invalid的限制是在w和aw拉高时拉高一周期而已
         delay.io.inValid := Mux(arvalid_reg=/=io.ar_exu_mem.arvalid & io.ar_exu_mem.arvalid === 1.U,true.B,false.B)
         rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
 
@@ -143,8 +144,8 @@ class LSU_mem extends Module {
         m.io.m_wmask := 0.U
     }
     when(io.w_exu_mem.wvalid & io.aw_exu_mem.awvalid){
-        //不要重复进行写操作  wdata可能为0不加入限制
         delay_w.io.inData := m.io.m_wready
+        // invalid的限制是在w和aw拉高时拉高一周期而已
         delay_w.io.inValid :=Mux((io.w_exu_mem.wvalid =/= wvalid_reg & io.w_exu_mem.wvalid === 1.U & io.aw_exu_mem.awvalid =/= awvalid_reg & io.aw_exu_mem.awvalid === 1.U),true.B,false.B) 
         m.io.m_wen := Mux((io.w_exu_mem.wmask =/= wmask_reg) & (io.aw_exu_mem.awaddr =/= waddr_reg) ,true.B,false.B)
         bvalid_en := Mux(delay_w.io.delayDone,true.B,false.B)

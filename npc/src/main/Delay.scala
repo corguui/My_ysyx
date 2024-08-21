@@ -12,33 +12,30 @@ class DelayModule extends Module {
     val delayDone = Output(Bool())
   })
 
-  val lfsrWidth = 2  // 使用2位LFSR
-  val lfsrReg = RegInit(1.U(lfsrWidth.W))
-  val taps = Seq(1, 2)  // 反馈抽头位置
-  val nextLfsrValue = ((lfsrReg(0) ^ lfsrReg(1)) ## lfsrReg(1))  // 更新LFSR逻辑以确保完整覆盖4种状态
-  lfsrReg := nextLfsrValue
-
-  // 将LFSR值映射到4个特定的延迟周期
-  val delays = VecInit(5.U, 10.U, 15.U, 20.U)
-  val delayCycles = delays(lfsrReg)
-
+  val shiftReg = RegInit(0.U(5.W))
+  shiftReg := Cat(shiftReg(4,1), 1.U)
+  val randomDelay = Wire(UInt(5.W))
+  randomDelay := 4.U + shiftReg // 随机延迟周期, 5到20周期
   val counter = RegInit(0.U(5.W))
-  val dataReg = Reg(UInt(32.W))
+  val dataReg = Reg(UInt(32.W)) // 存储输出数据
+  val validReg = RegInit(false.B) // 延迟完成信号寄存器
 
-  // 设置初始输出
-  io.outData := dataReg
+  // 初始设置
   io.delayDone := false.B
-
+  io.outData := dataReg
   // 数据处理逻辑
   when(io.inValid && counter === 0.U) {
+    // 当输入有效且计数器为0时，接受新数据并设置延迟
     dataReg := io.inData
-    counter := delayCycles
-  } .otherwise {
+    counter := randomDelay
+    validReg := true.B
+  }.otherwise {
     when(counter > 0.U) {
       counter := counter - 1.U
       when(counter === 1.U) {
-        io.delayDone := true.B
+        io.delayDone := true.B // 延迟完成
       }
     }
   }
+
 }

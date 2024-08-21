@@ -75,6 +75,7 @@ class Inst_fetch extends Module {
         vlg_pc_read.io.pc_en := true.B
         vlg_pc_read.io.pc := io.axi_ar.pc
         delay.io.inData := vlg_pc_read.io.inst
+        // invalid的限制是在w和aw拉高时拉高一周期而已
         delay.io.inValid := Mux(arvalid_reg=/=io.axi_ar.arvalid & io.axi_ar.arvalid === 1.U,true.B,false.B) 
         resp := 1.U
         when((io.axi_r.rready) & (io.axi_r.rvalid)) {
