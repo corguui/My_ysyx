@@ -183,12 +183,38 @@ class EXU extends Module {
     val mem_wdata_reg = RegEnable(io.idu2in.bits.src2,0.U,io.idu2in.valid)
     val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,(io.idu2in.valid | io.b_mem_exu.bready))
     io.aw_exu_mem.awaddr := 0.U
-    io.aw_exu_mem.awvalid := mem_wen_reg 
     io.w_exu_mem.wdata := 0.U
     io.w_exu_mem.wmask := 0.U
-    io.w_exu_mem.wvalid := mem_wen_reg 
+    //io.w_exu_mem.wvalid := mem_wen_reg 
+    //io.aw_exu_mem.awvalid := mem_wen_reg 
+    //io.b_mem_exu.bready := bready_reg
 
-    io.b_mem_exu.bready := bready_reg
+    //aw valid delay
+    val delay_aw = Module(new DelayModule)
+    delay_aw.io.inData := 0.U
+    delay_aw.io.inValid := 0.U
+    io.aw_exu_mem.awvalid := delay_aw.io.outData & mem_wen_reg
+    when(io.idu2in.bits.inst_type === 4.U)
+    {
+        delay_aw.io.inData := mem_wen_reg
+        delay_aw.io.inValid := idu2in_valid
+    }
+    //w valid delay
+    val delay_w = Module(new DelayModule)
+    delay_w.io.inData := 0.U
+    delay_w.io.inValid := 0.U
+    io.w_exu_mem.wvalid := delay_w.io.outData &  mem_wen_reg
+    when(io.idu2in.bits.inst_type === 4.U)
+    {
+        delay_aw.io.inData := mem_wen_reg
+        delay_aw.io.inValid := idu2in_valid
+    }
+    //b ready delay
+    val bvalid_reg = RegNext(io.b_mem_exu.bvalid,0.U)
+    val delay_b = Module(new DelayModule)
+    delay_b.io.inData := 0.U
+    delay_b.io.inValid := 0.U
+    io.b_mem_exu.bready := delay_b.io.outData & bready_reg
 
 
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
@@ -298,6 +324,9 @@ class EXU extends Module {
                 {
                     bready_reg := 1.U
                     //m2IDUstate := m2IDUidle
+                    //b ready delay
+                    delay_b.io.inData := 1.U
+                    delay_b.io.inValid := Mux(bvalid_reg =/= io.b_mem_exu.bvalid & io.b_mem_exu.bvalid === 1.U,0.U,1.U)  
                     when(io.b_mem_exu.bresp === 1.U)
                     {
                         ifu_outdata.dnpc := io.idu2in.bits.snpc
