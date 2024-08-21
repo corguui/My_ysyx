@@ -193,7 +193,7 @@ class EXU extends Module {
     val delay_aw = Module(new DelayModule)
     delay_aw.io.inData := 0.U
     delay_aw.io.inValid := 0.U
-    io.aw_exu_mem.awvalid := delay_aw.io.outData & io.b_mem_exu.bvalid//& mem_wen_reg
+    io.aw_exu_mem.awvalid := delay_aw.io.outData &  mem_wen_reg
     when(io.idu2in.bits.inst_type === 4.U)
     {
         delay_aw.io.inData := mem_wen_reg
@@ -203,7 +203,7 @@ class EXU extends Module {
     val delay_w = Module(new DelayModule)
     delay_w.io.inData := 0.U
     delay_w.io.inValid := 0.U
-    io.w_exu_mem.wvalid := delay_w.io.outData & io.b_mem_exu.bvalid //mem_wen_reg
+    io.w_exu_mem.wvalid := delay_w.io.outData & mem_wen_reg
     when(io.idu2in.bits.inst_type === 4.U)
     {
         delay_w.io.inData := mem_wen_reg
