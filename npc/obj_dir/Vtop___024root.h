@@ -80,11 +80,14 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Mem__DOT___m_m_wready;
         CData/*0:0*/ top__DOT__Mem__DOT__rvalid_reg;
         CData/*1:0*/ top__DOT__Mem__DOT__rresp_reg;
+        CData/*0:0*/ top__DOT__Mem__DOT__arvalid_reg;
         CData/*0:0*/ top__DOT__Mem__DOT__bvalid_reg;
         CData/*1:0*/ top__DOT__Mem__DOT__bresp_reg;
-        CData/*2:0*/ top__DOT__Mem__DOT__wmask_reg;
     };
     struct {
+        CData/*2:0*/ top__DOT__Mem__DOT__wmask_reg;
+        CData/*0:0*/ top__DOT__Mem__DOT__awvalid_reg;
+        CData/*0:0*/ top__DOT__Mem__DOT__wvalid_reg;
         CData/*0:0*/ top__DOT__Mem__DOT___GEN_1;
         CData/*0:0*/ top__DOT__Mem__DOT__rvalid_en;
         CData/*0:0*/ top__DOT__Mem__DOT__bvalid_en;
@@ -146,11 +149,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_6;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_7;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_8;
+    };
+    struct {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_9;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_10;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_11;
-    };
-    struct {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_12;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_13;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_14;
