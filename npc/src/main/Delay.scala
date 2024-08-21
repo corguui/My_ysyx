@@ -21,7 +21,11 @@ class DelayModule extends Module {
 
   // 初始设置
   io.delayDone := false.B
-  io.outData := dataReg
+  io.outData := 0.U
+  when(counter === 0.U)
+  {
+    io.outData := dataReg
+  }
   // 数据处理逻辑
   when(io.inValid && counter === 0.U) {
     // 当输入有效且计数器为0时，接受新数据并设置延迟

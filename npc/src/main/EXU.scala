@@ -140,6 +140,7 @@ class EXU extends Module {
     io.csr_waddr_2 := 0.U
     io.csr_wdata_2 := 0.U
     io.csr_wen_2 := 0.U
+    
 
     //Mem read member
     val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
@@ -152,8 +153,28 @@ class EXU extends Module {
 
     io.ar_exu_mem.rmask := 0.U
     io.ar_exu_mem.raddr := 0.U 
-    io.r_mem_exu.rready := rready_reg 
-    io.ar_exu_mem.arvalid := mem_ren_reg           
+    //io.r_mem_exu.rready := rready_reg 
+    //io.ar_exu_mem.arvalid := mem_ren_reg           
+
+    //ar valid delay
+    val idu2in_valid = RegNext(io.idu2in.valid,0.U)
+    val delay_ar = Module(new DelayModule)
+    delay_ar.io.inData := 0.U 
+    delay_ar.io.inValid := 0.U 
+    io.ar_exu_mem.arvalid := delay_ar.io.outData & mem_ren_reg 
+    when(io.idu2in.bits.inst_type === 3.U)
+    {
+    delay_ar.io.inData := mem_ren_reg 
+    delay_ar.io.inValid := idu2in_valid 
+    }
+    //r ready delay
+    val rvalid_reg =RegNext(io.r_mem_exu.rvalid,0.U)
+    val delay_r = Module(new DelayModule)
+    delay_r.io.inData := 0.U
+    delay_r.io.inValid := 0.U
+    io.r_mem_exu.rready := delay_r.io.outData & rready_reg
+
+
 
     //Mem write member
     val bready_reg = RegInit(0.U)
@@ -162,12 +183,41 @@ class EXU extends Module {
     val mem_wdata_reg = RegEnable(io.idu2in.bits.src2,0.U,io.idu2in.valid)
     val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,(io.idu2in.valid | io.b_mem_exu.bready))
     io.aw_exu_mem.awaddr := 0.U
-    io.aw_exu_mem.awvalid := mem_wen_reg 
     io.w_exu_mem.wdata := 0.U
     io.w_exu_mem.wmask := 0.U
-    io.w_exu_mem.wvalid := mem_wen_reg 
+    //io.w_exu_mem.wvalid := mem_wen_reg 
+    //io.aw_exu_mem.awvalid := mem_wen_reg 
+    //io.b_mem_exu.bready := bready_reg
 
-    io.b_mem_exu.bready := bready_reg
+    //aw valid delay
+    val m_wen_reg_delay = RegNext(mem_wen_reg,0.U)
+    val delay_aw = Module(new DelayModule)
+    delay_aw.io.inData := 0.U
+    delay_aw.io.inValid := 0.U
+    //得延迟m_wen_reg一个周期,不然会打印两次
+    io.aw_exu_mem.awvalid := delay_aw.io.outData &  m_wen_reg_delay
+    when(io.idu2in.bits.inst_type === 4.U)
+    {
+        delay_aw.io.inData := mem_wen_reg
+        delay_aw.io.inValid := idu2in_valid
+    }
+    //w valid delay
+    val delay_w = Module(new DelayModule)
+    delay_w.io.inData := 0.U
+    delay_w.io.inValid := 0.U
+    //得延迟m_wen_reg一个周期,不然会打印两次
+    io.w_exu_mem.wvalid := delay_w.io.outData & m_wen_reg_delay
+    when(io.idu2in.bits.inst_type === 4.U)
+    {
+        delay_w.io.inData := mem_wen_reg
+        delay_w.io.inValid := idu2in_valid
+    }
+    //b ready delay
+    val bvalid_reg = RegNext(io.b_mem_exu.bvalid,0.U)
+    val delay_b = Module(new DelayModule)
+    delay_b.io.inData := 0.U
+    delay_b.io.inValid := 0.U
+    io.b_mem_exu.bready := delay_b.io.outData & bready_reg
 
 
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
@@ -212,6 +262,10 @@ class EXU extends Module {
                     {
                        rready_reg  := 1.U
                        //m2IDUstate := m2IDUidle
+                       //r delay
+                        delay_r.io.inData := 1.U
+                        delay_r.io.inValid := Mux(rvalid_reg =/= io.r_mem_exu.rvalid & io.r_mem_exu.rvalid === 1.U,0.U,1.U)  
+
                        when(io.r_mem_exu.rresp === 1.U)
                        {
                        io.reg_wen := reg_wen_reg
@@ -273,6 +327,10 @@ class EXU extends Module {
                 {
                     bready_reg := 1.U
                     //m2IDUstate := m2IDUidle
+                    //b ready delay
+                    delay_b.io.inData := 1.U
+                    delay_b.io.inValid := Mux(bvalid_reg =/= io.b_mem_exu.bvalid & io.b_mem_exu.bvalid === 1.U,0.U,1.U)  
+
                     when(io.b_mem_exu.bresp === 1.U)
                     {
                         ifu_outdata.dnpc := io.idu2in.bits.snpc
