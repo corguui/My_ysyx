@@ -56,7 +56,7 @@ class LSU_mem extends Module {
 
     //delay
     val delay = Module(new DelayModule)
-    delay.io.inData := 0
+    delay.io.inData := 0.U
 
     //AXI-lite read member
     val resp = Wire(UInt(2.W))
