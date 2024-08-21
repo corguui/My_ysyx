@@ -98,7 +98,7 @@ uint32_t host_read(void* addr,int len)
 	case 2: return *(uint16_t *)addr;
 	case 4: return *(uint32_t *)addr;
 	default:
-	{ printf("pmem_read error\n"); assert(0);    return 0;}
+	{ printf("pmem_read error len is %d\n",len); assert(0);    return 0;}
 	}
 }
 //pmem read in mem.v
