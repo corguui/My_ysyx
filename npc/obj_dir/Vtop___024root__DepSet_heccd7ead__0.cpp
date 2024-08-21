@@ -367,8 +367,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
         }
         if (vlSelf->top__DOT__IFU__DOT__arvalid_reg) {
             vlSelf->top__DOT__Inst_fetch__DOT__rdata_reg 
-                = (((~ (IData)(vlSelf->top__DOT__Inst_fetch__DOT____Vcellinp__delay__io_inValid)) 
-                    & (0U == (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)))
+                = ((0U == (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter))
                     ? vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__dataReg
                     : 0U);
         }
@@ -475,14 +474,17 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     vlSelf->io_pc = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
                       ? vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG
                       : 0U);
-    vlSelf->top__DOT__Inst_fetch__DOT____Vcellinp__delay__io_inValid 
-        = ((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
-           & ((IData)(vlSelf->top__DOT__Inst_fetch__DOT__arvalid_reg) 
-              != (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg)));
-    vlSelf->top__DOT__IFU__DOT__exu2in_reg = vlSelf->top__DOT___EXU_io_out2ifu_valid;
     vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT___GEN_0 
-        = ((IData)(vlSelf->top__DOT__Inst_fetch__DOT____Vcellinp__delay__io_inValid) 
+        = (((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
+            & ((IData)(vlSelf->top__DOT__Inst_fetch__DOT__arvalid_reg) 
+               != (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg))) 
            & (0U == (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)));
+    vlSelf->top__DOT__IFU__DOT__exu2in_reg = vlSelf->top__DOT___EXU_io_out2ifu_valid;
+    vlSelf->top__DOT__Inst_fetch__DOT__rvalid_en = 
+        (((~ (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT___GEN_0)) 
+          & ((0U != (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)) 
+             & (1U == (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)))) 
+         & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg));
     vlSelf->top__DOT___EXU_io_out2ifu_valid = ((3U 
                                                 == (IData)(vlSelf->top__DOT__IDU__DOT__exu_data_inst_type))
                                                 ? (IData)(vlSelf->top__DOT__EXU__DOT__io_r_mem_exu_rready_0)
@@ -493,11 +495,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                                     : 
                                                    (vlSelf->top__DOT__EXU__DOT__lastdnpc 
                                                     != vlSelf->top__DOT__EXU__DOT__ifu_outdata_dnpc)));
-    vlSelf->top__DOT__Inst_fetch__DOT__rvalid_en = 
-        (((~ (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT___GEN_0)) 
-          & ((0U != (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)) 
-             & (1U == (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)))) 
-         & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg));
 }
 
 void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf);
