@@ -147,7 +147,7 @@ class LSU_mem extends Module {
         delay_w.io.inData := m.io.m_wready
         // invalid的限制是在w和aw拉高时拉高一周期而已
         delay_w.io.inValid :=Mux((io.w_exu_mem.wvalid =/= wvalid_reg & io.w_exu_mem.wvalid === 1.U & io.aw_exu_mem.awvalid =/= awvalid_reg & io.aw_exu_mem.awvalid === 1.U),true.B,false.B) 
-        m.io.m_wen := Mux((io.w_exu_mem.wmask =/= wmask_reg) & (io.aw_exu_mem.awaddr =/= waddr_reg) ,true.B,false.B)
+        m.io.m_wen := Mux((io.w_exu_mem.wmask =/= wmask_reg) & (io.aw_exu_mem.awaddr =/= waddr_reg) & io.aw_exu_mem.awaddr=/=0.U & io.w_exu_mem.wmask =/= 0.U ,true.B,false.B)
         bvalid_en := Mux(delay_w.io.delayDone,true.B,false.B)
         when(((io.aw_exu_mem.awaddr >= 0x80000000.S.asUInt) & ( io.aw_exu_mem.awaddr < 0x8fffffff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa00003ff.S.asUInt)) | (( io.aw_exu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_exu_mem.awaddr <= 0xa000004f.S.asUInt))){
                 bresp := 1.U
