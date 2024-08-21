@@ -47,15 +47,21 @@ class Inst_fetch extends Module {
     vlg_pc_read.io.clk := clock
     vlg_pc_read.io.pc := 0.U
     vlg_pc_read.io.pc_en := false.B
-
+    
+    //inst delay
+    val delay = Module(new DelayModule)
+    delay.io.inData := 0.U
+    delay.io.inValid := 0.U
 
 
     val resp = Wire(UInt(2.W))
     resp := 0.U
     val rvalid_en = Wire(Bool())
     rvalid_en := false.B
-    val rdata_reg = RegEnable(vlg_pc_read.io.inst,0.U,io.axi_ar.arvalid)
-    val rvalid_reg = RegNext(rvalid_en,false.B)
+    //val rdata_reg = RegEnable(vlg_pc_read.io.inst,0.U,io.axi_ar.arvalid)
+    val rdata_reg =RegEnable(delay.io.outData,0.U,io.axi_ar.arvalid)
+    //val rvalid_reg = RegNext(rvalid_en,false.B)
+    val rvalid_reg = RegEnable(rvalid_en,0.U,(rvalid_en | io.axi_r.rready))
     val rresp_reg = RegEnable(resp,0.U,io.axi_ar.arvalid)
 
     io.axi_ar.arready := true.B
@@ -67,6 +73,8 @@ class Inst_fetch extends Module {
         rvalid_en := true.B
         vlg_pc_read.io.pc_en := true.B
         vlg_pc_read.io.pc := io.axi_ar.pc
+        delay.io.inData := vlg_pc_read.io.inst
+        delay.io.inValid := io.axi_ar.arvalid
         resp := 1.U
         when((io.axi_r.rready) & (io.axi_r.rvalid)) {
             io.axi_r.inst := rdata_reg
