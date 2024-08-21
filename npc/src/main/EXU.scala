@@ -194,6 +194,7 @@ class EXU extends Module {
     val delay_aw = Module(new DelayModule)
     delay_aw.io.inData := 0.U
     delay_aw.io.inValid := 0.U
+    //得延迟m_wen_reg一个周期,不然会打印两次
     io.aw_exu_mem.awvalid := delay_aw.io.outData &  m_wen_reg_delay
     when(io.idu2in.bits.inst_type === 4.U)
     {
@@ -204,6 +205,7 @@ class EXU extends Module {
     val delay_w = Module(new DelayModule)
     delay_w.io.inData := 0.U
     delay_w.io.inValid := 0.U
+    //得延迟m_wen_reg一个周期,不然会打印两次
     io.w_exu_mem.wvalid := delay_w.io.outData & m_wen_reg_delay
     when(io.idu2in.bits.inst_type === 4.U)
     {
