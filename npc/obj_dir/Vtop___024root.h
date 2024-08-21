@@ -62,29 +62,30 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT__bready_reg;
         CData/*0:0*/ top__DOT__EXU__DOT__mem_wen_reg;
         CData/*0:0*/ top__DOT__EXU__DOT__io_aw_exu_mem_awvalid_0;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_2;
         CData/*0:0*/ top__DOT__EXU__DOT__io_w_exu_mem_wvalid_0;
         CData/*0:0*/ top__DOT__EXU__DOT__bvalid_reg;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_3;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_4;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_5;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_6;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_7;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_8;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_9;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_10;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_18;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_19;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_11;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_12;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_20;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_21;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_22;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_23;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_24;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_25;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_26;
         CData/*0:0*/ top__DOT__EXU__DOT___GEN_28;
-        CData/*0:0*/ top__DOT__EXU__DOT___GEN_29;
-        CData/*4:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_30;
+        CData/*0:0*/ top__DOT__EXU__DOT___GEN_31;
     };
     struct {
+        CData/*4:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h6f9fceee__0;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_h61894a5a__0;
         CData/*0:0*/ top__DOT__EXU__DOT____VdfgTmp_hc80ef2ab__0;
@@ -102,6 +103,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__EXU__DOT__delay_aw__DOT___GEN_0;
         CData/*4:0*/ top__DOT__EXU__DOT__delay_w__DOT__shiftReg;
         CData/*4:0*/ top__DOT__EXU__DOT__delay_w__DOT__counter;
+        CData/*0:0*/ top__DOT__EXU__DOT__delay_w__DOT___GEN_0;
         CData/*4:0*/ top__DOT__EXU__DOT__delay_b__DOT__shiftReg;
         CData/*4:0*/ top__DOT__EXU__DOT__delay_b__DOT__counter;
         CData/*0:0*/ top__DOT__EXU__DOT__delay_b__DOT___GEN_0;
@@ -147,10 +149,10 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__IFU__DOT__ardata_reg;
         IData/*31:0*/ top__DOT__IFU__DOT__inst_reg;
         IData/*31:0*/ top__DOT__IFU__DOT__io_out_bits_pc_REG;
-        IData/*31:0*/ top__DOT__IDU__DOT__exu_data_snpc;
-        IData/*31:0*/ top__DOT__IDU__DOT__exu_data_pc;
     };
     struct {
+        IData/*31:0*/ top__DOT__IDU__DOT__exu_data_snpc;
+        IData/*31:0*/ top__DOT__IDU__DOT__exu_data_pc;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_m_rmask;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_m_wmask;
         IData/*31:0*/ top__DOT__IDU__DOT__exu_data_src1;
@@ -168,6 +170,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__EXU__DOT__mem_awaddr_reg;
         IData/*31:0*/ top__DOT__EXU__DOT__mem_wmask_reg;
         IData/*31:0*/ top__DOT__EXU__DOT__mem_wdata_reg;
+        IData/*31:0*/ top__DOT__EXU__DOT___GEN_1;
         IData/*31:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_src2;
         IData/*31:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_src1;
         IData/*31:0*/ top__DOT__EXU__DOT__delay_ar__DOT__dataReg;
@@ -212,11 +215,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__reg_30;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_31;
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp;
+    };
+    struct {
         IData/*31:0*/ top__DOT__Reg__DOT__casez_tmp_0;
         IData/*31:0*/ top__DOT__Mem__DOT___m_m_rdata;
         IData/*31:0*/ top__DOT__Mem__DOT__rdata_reg;
-    };
-    struct {
         IData/*31:0*/ top__DOT__Mem__DOT__waddr_reg;
         IData/*31:0*/ top__DOT__Mem__DOT___GEN;
         IData/*31:0*/ top__DOT__Mem__DOT___GEN_0;

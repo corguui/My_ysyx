@@ -53,7 +53,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1541, "", "Settle region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1543, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -204,26 +204,28 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__EXU__DOT__mem_wdata_reg = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__EXU__DOT__mem_wen_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__io_aw_exu_mem_awvalid_0 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__EXU__DOT___GEN_1 = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__EXU__DOT___GEN_2 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__io_w_exu_mem_wvalid_0 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__bvalid_reg = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__EXU__DOT___GEN_3 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__EXU__DOT___GEN_4 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_5 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_6 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_7 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_8 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_9 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_10 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__EXU__DOT___GEN_18 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__EXU__DOT___GEN_19 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__EXU__DOT___GEN_11 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__EXU__DOT___GEN_12 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_20 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_21 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_22 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_23 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_24 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__EXU__DOT___GEN_25 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_26 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT___GEN_28 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__EXU__DOT___GEN_29 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__EXU__DOT___GEN_30 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__EXU__DOT___GEN_31 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_alu_op = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_src2 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__EXU__DOT____Vcellinp__alu__io_src1 = VL_RAND_RESET_I(32);
@@ -248,6 +250,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__EXU__DOT__delay_w__DOT__shiftReg = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__EXU__DOT__delay_w__DOT__counter = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__EXU__DOT__delay_w__DOT__dataReg = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__EXU__DOT__delay_w__DOT___GEN_0 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__EXU__DOT__delay_b__DOT__shiftReg = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__EXU__DOT__delay_b__DOT__counter = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__EXU__DOT__delay_b__DOT__dataReg = VL_RAND_RESET_I(32);
