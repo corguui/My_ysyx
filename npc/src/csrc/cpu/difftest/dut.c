@@ -97,7 +97,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
   }
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
-    //cpu_read_reg();
+    cpu_read_reg();
     //传入的pc 会加4 在nemu diff ref.c
     ref_difftest_regcpy(cpu.gpr,&cpu.pc, DIFFTEST_TO_REF);
     is_skip_ref = false;
@@ -118,7 +118,7 @@ void difftest_step(uint32_t pc, uint32_t npc) {
 
 bool isa_difftest_checkregs(NPC_CPU_state *ref_r, uint32_t pc) {
   int num=32;
-  cpu_read_reg();
+  //cpu_read_reg();
   for(int i=0;i<num;i++)
   {
   if(ref_r->gpr[i]!=cpu.gpr[i])
