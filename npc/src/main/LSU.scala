@@ -253,7 +253,7 @@ class LSU extends Module {
                 }
               }
               .otherwise{
-                m2exustate := m2exuidle
+                m2EXUstate := m2EXUidle
               }
             //}
         }
