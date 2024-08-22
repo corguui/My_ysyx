@@ -68,7 +68,7 @@ class LSU extends Module {
 		wbu2s_wait_ready -> Mux(io.out2wbu.ready,wbu2s_idle,wbu2s_wait_ready)
 	))
 
-    val pc_reg = RegNext(io.out2wbu.bits.pc,0.U)
+    //val pc_reg = RegNext(io.out2wbu.bits.pc,0.U)
     when(io.exu2in.bits.inst_type === 3.U)
     {
     io.out2wbu.valid :=  io.r_mem_exu.rready
@@ -79,7 +79,7 @@ class LSU extends Module {
     }
     .otherwise
     {
-    io.out2wbu.valid := (pc_reg =/= io.out2wbu.bits.pc)
+    io.out2wbu.valid := 1.U//(pc_reg =/= io.out2wbu.bits.pc)
     }
 
     //Mem read member
