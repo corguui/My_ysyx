@@ -104,7 +104,22 @@ class EXU extends Module {
     lsu_data.mem_wen := false.B
     when(m2IDUstate === m2IDUprocess)
     {
-        lsu_data<> io.idu2in.bits
+        lsu_data.snpc := io.idu2in.bits.snpc
+        lsu_data.pc := io.idu2in.bits.pc
+        lsu_mem_ren := io.idu2in.bits.mem_ren
+        lsu_mem_wen := io.idu2in.bits.mem_wen
+        lsu_data.m_rmask := io.idu2in.bits.m_rmask
+        lsu_data.m_wmask := io.idu2in.bits.m_wmask
+        lsu_data.reg_waddr := io.idu2in.bits.reg_waddr
+        lsu_data.reg_wen := io.idu2in.bits.reg_wen
+        lsu_data.src1 := io.idu2in.bits.src1
+        lsu_data.src2 := io.idu2in.bits.src2
+        lsu_data.csr := io.idu2in.bits.csr
+        lsu_data.csr_a5 := io.idu2in.bits.csr_a5
+        lsu_data.mstatus := io.idu2in.bits.mstatus
+        lsu_data.imm := io.idu2in.bits.imm
+        lsu_data.inst_type := io.idu2in.bits.inst_type
+        lsu_data.il_us := io.idu2in.bits.il_us
         switch(io.idu2in.bits.inst_type)
         {
             //R type

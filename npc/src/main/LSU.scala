@@ -162,7 +162,18 @@ class LSU extends Module {
     io.exu2in.ready := ( m2EXUstate===m2EXUidle )
     when(m2EXUstate === m2EXUprocess)
     {
-        wbu_data <> io.exu2in.bits
+        wbu_data.snpc := io.exu2in.bits.snpc
+        wbu_data.pc := io.exu2in.bits.pc
+        wbu_data.reg_waddr := io.exu2in.bits.reg_waddr
+        wbu_data.reg_wen := io.exu2in.bits.reg_wen
+        wbu_data.src1 := io.exu2in.bits.src1
+        wbu_data.src2 := io.exu2in.bits.src2
+        wbu_data.csr := io.exu2in.bits.csr
+        wbu_data.csr_a5 := io.exu2in.bits.csr_a5
+        wbu_data.mstatus := io.exu2in.bits.mstatus
+        wbu_data.imm := io.exu2in.bits.imm
+        wbu_data.inst_type := io.exu2in.bits.inst_type
+        wbu_data.alu_result := io.exu2in.bits.alu_result
         wbu_data.mem_rdata := 0.U 
         wbu_data.mem_rresp := 0.U 
         wbu_data.mem_bresp := 0.U
