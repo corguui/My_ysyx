@@ -1,5 +1,5 @@
 //import "DPI-C" function int vlg_pc_read(input int pc);
-import "DPI-C" function int vlg_pmem_read(input int m_raddr,input int rmask);
+//import "DPI-C" function int vlg_pmem_read(input int m_raddr,input int rmask);
 module VlgPcRead(
     input clk,
     input [31:0] pc,
