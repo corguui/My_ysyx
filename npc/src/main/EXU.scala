@@ -102,7 +102,7 @@ class EXU extends Module {
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     lsu_data.mem_ren := false.B
     lsu_data.mem_wen := false.B
-    when(m2IDUstate === m2IDUprocess)
+    when(io.out2lsu.valid)
     {
         lsu_data.snpc := io.idu2in.bits.snpc
         lsu_data.pc := io.idu2in.bits.pc
@@ -120,7 +120,11 @@ class EXU extends Module {
         lsu_data.imm := io.idu2in.bits.imm
         lsu_data.inst_type := io.idu2in.bits.inst_type
         lsu_data.il_us := io.idu2in.bits.il_us
-        
+        lsu_data.alu_result := alu.io.result
+    }
+    when(m2IDUstate === m2IDUprocess)
+    {
+
         m2IDUstate := m2IDUidle
         switch(io.idu2in.bits.inst_type)
         {
@@ -183,6 +187,5 @@ class EXU extends Module {
             //ecall
             //mret
         }
-        lsu_data.alu_result := alu.io.result
     }
 }

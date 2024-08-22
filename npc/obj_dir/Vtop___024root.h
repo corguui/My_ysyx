@@ -64,7 +64,6 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__LSU__DOT__io_b_mem_exu_bready_0;
         CData/*0:0*/ top__DOT__LSU__DOT__io_r_mem_exu_rready_0;
         CData/*0:0*/ top__DOT__LSU__DOT__m2EXUstate;
-        CData/*0:0*/ top__DOT__LSU__DOT__state_reg;
         CData/*0:0*/ top__DOT__LSU__DOT__rready_reg;
         CData/*0:0*/ top__DOT__LSU__DOT__mem_ren_reg;
         CData/*0:0*/ top__DOT__LSU__DOT__exu2in_valid;
@@ -83,9 +82,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*1:0*/ top__DOT__LSU__DOT__wbu_data_mem_bresp;
         CData/*1:0*/ top__DOT__LSU__DOT__wbu_data_mem_rresp;
         CData/*0:0*/ top__DOT__LSU__DOT___GEN_3;
+        CData/*0:0*/ top__DOT__LSU__DOT___GEN_4;
     };
     struct {
-        CData/*0:0*/ top__DOT__LSU__DOT___GEN_4;
         CData/*0:0*/ top__DOT__LSU__DOT___GEN_5;
         CData/*0:0*/ top__DOT__LSU__DOT___GEN_6;
         CData/*0:0*/ top__DOT__LSU__DOT___GEN_7;
@@ -149,9 +148,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
+        CData/*0:0*/ __VactContinue;
     };
     struct {
-        CData/*0:0*/ __VactContinue;
         VL_OUT(io_pc,31,0);
         IData/*31:0*/ top__DOT___Mem_io_r_mem_exu_rdata;
         IData/*31:0*/ top__DOT___WBU_io_reg_wdata;
@@ -186,6 +185,8 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__EXU__DOT__lsu_data_alu_result;
         IData/*31:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_src2;
         IData/*31:0*/ top__DOT__EXU__DOT____Vcellinp__alu__io_src1;
+        IData/*31:0*/ top__DOT__LSU__DOT__wbu_data_pc;
+        IData/*31:0*/ top__DOT__LSU__DOT__pc_reg;
         IData/*31:0*/ top__DOT__LSU__DOT__mem_raddr_reg;
         IData/*31:0*/ top__DOT__LSU__DOT__mem_rmask_reg;
         IData/*31:0*/ top__DOT__LSU__DOT__mem_awaddr_reg;
@@ -193,7 +194,6 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__LSU__DOT__mem_wdata_reg;
         IData/*31:0*/ top__DOT__LSU__DOT___GEN_1;
         IData/*31:0*/ top__DOT__LSU__DOT__wbu_data_snpc;
-        IData/*31:0*/ top__DOT__LSU__DOT__wbu_data_pc;
         IData/*31:0*/ top__DOT__LSU__DOT__wbu_data_src1;
         IData/*31:0*/ top__DOT__LSU__DOT__wbu_data_csr;
         IData/*31:0*/ top__DOT__LSU__DOT__wbu_data_csr_a5;

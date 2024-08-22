@@ -247,10 +247,11 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+75,"io_b_mem_exu_bresp", false,-1, 1,0);
     tracep->declBit(c+76,"io_b_mem_exu_bvalid", false,-1);
     tracep->declBit(c+77,"io_b_mem_exu_bready", false,-1);
+    tracep->declBus(c+50,"wbu_data_pc", false,-1, 31,0);
     tracep->declBit(c+77,"io_b_mem_exu_bready_0", false,-1);
     tracep->declBit(c+69,"io_r_mem_exu_rready_0", false,-1);
     tracep->declBit(c+78,"m2EXUstate", false,-1);
-    tracep->declBit(c+79,"state_reg", false,-1);
+    tracep->declBus(c+79,"pc_reg", false,-1, 31,0);
     tracep->declBit(c+80,"rready_reg", false,-1);
     tracep->declBus(c+81,"mem_raddr_reg", false,-1, 31,0);
     tracep->declBus(c+82,"mem_rmask_reg", false,-1, 31,0);
@@ -268,7 +269,6 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBit(c+72,"io_w_exu_mem_wvalid_0", false,-1);
     tracep->declBit(c+92,"bvalid_reg", false,-1);
     tracep->declBus(c+49,"wbu_data_snpc", false,-1, 31,0);
-    tracep->declBus(c+50,"wbu_data_pc", false,-1, 31,0);
     tracep->declBus(c+51,"wbu_data_reg_waddr", false,-1, 4,0);
     tracep->declBit(c+52,"wbu_data_reg_wen", false,-1);
     tracep->declBus(c+53,"wbu_data_src1", false,-1, 31,0);
@@ -584,7 +584,8 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                              ? (IData)(vlSelf->top__DOT__LSU__DOT__io_r_mem_exu_rready_0)
                              : ((4U == (IData)(vlSelf->top__DOT__EXU__DOT__lsu_data_inst_type))
                                  ? (IData)(vlSelf->top__DOT__LSU__DOT__io_b_mem_exu_bready_0)
-                                 : (IData)(vlSelf->top__DOT__LSU__DOT__state_reg)))));
+                                 : (vlSelf->top__DOT__LSU__DOT__pc_reg 
+                                    != vlSelf->top__DOT__LSU__DOT__wbu_data_pc)))));
     bufp->fullIData(oldp+49,(vlSelf->top__DOT__LSU__DOT__wbu_data_snpc),32);
     bufp->fullIData(oldp+50,(vlSelf->top__DOT__LSU__DOT__wbu_data_pc),32);
     bufp->fullCData(oldp+51,(vlSelf->top__DOT__LSU__DOT__wbu_data_reg_waddr),5);
@@ -627,7 +628,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+76,(vlSelf->top__DOT__Mem__DOT__bvalid_reg));
     bufp->fullBit(oldp+77,(vlSelf->top__DOT__LSU__DOT__io_b_mem_exu_bready_0));
     bufp->fullBit(oldp+78,(vlSelf->top__DOT__LSU__DOT__m2EXUstate));
-    bufp->fullBit(oldp+79,(vlSelf->top__DOT__LSU__DOT__state_reg));
+    bufp->fullIData(oldp+79,(vlSelf->top__DOT__LSU__DOT__pc_reg),32);
     bufp->fullBit(oldp+80,(vlSelf->top__DOT__LSU__DOT__rready_reg));
     bufp->fullIData(oldp+81,(vlSelf->top__DOT__LSU__DOT__mem_raddr_reg),32);
     bufp->fullIData(oldp+82,(vlSelf->top__DOT__LSU__DOT__mem_rmask_reg),32);
