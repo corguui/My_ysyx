@@ -45,7 +45,7 @@ class WBU extends Module {
     io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc) //& (m2LSUstate === m2LSUprocess)
     io.out2ifu.bits := ifu_outdata
 
-    io.idu2in.ready := ( m2LSUstate===m2LSUidle )
+    io.lsu2in.ready := ( m2LSUstate===m2LSUidle )
 
     ifu_outdata.dnpc := 0x80000000.S.asUInt
     io.reg_wdata := 0.U
@@ -82,8 +82,8 @@ class WBU extends Module {
             is(3.U){
                 when(io.lsu2in.bits.mem_rresp === 1.U)
                 {
-                    io.reg_wen := reg_wen_reg
-                    io.reg_waddr := reg_waddr_reg
+                    io.reg_wen := io.lsu2in.bits.reg_wen 
+                    io.reg_waddr := io.lsu2in.bits.reg_waddr 
                     io.reg_wdata := io.lsu2in.bits.mem_rdata 
                     ifu_outdata.dnpc := io.lsu2in.bits.snpc
                 }.otherwise{

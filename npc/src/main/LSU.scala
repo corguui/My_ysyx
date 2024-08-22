@@ -37,6 +37,7 @@ class LSUtoWBU extends Bundle {
     val mem_rdata = Output(UInt(32.W))
     val mem_bresp = Output(UInt(2.W))
     val mem_rresp = Output(UInt(2.W))
+    val alu_result = Output(UInt(32.W))
 }
 
 class LSU extends Module {
@@ -58,7 +59,7 @@ class LSU extends Module {
     {
     io.out2wbu.valid :=  io.b_mem_exu.bready
     }
-    .oteerwise
+    .otherwise
     {
     io.out2wbu.valid := 1.U
     }
@@ -180,7 +181,7 @@ class LSU extends Module {
                         delay_r.io.inData := 1.U
                         delay_r.io.inValid := Mux(rvalid_reg =/= io.r_mem_exu.rvalid & io.r_mem_exu.rvalid === 1.U,0.U,1.U)  
                         wbu_data.mem_rresp := io.r_mem_exu.rresp
-                        when(io.idu2in.bits.il_us === true.B)
+                        when(io.exu2in.bits.il_us === true.B)
                         {
                             wbu_data.mem_rdata := io.r_mem_exu.rdata.asUInt
                         }.otherwise{

@@ -101,7 +101,7 @@ class EXU extends Module {
     io.out2lsu.valid := (state_reg === m2IDUprocess)
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
     lsu_data.mem_ren := false.B
-    lus_data.mem_wen := false.B
+    lsu_data.mem_wen := false.B
     when(m2IDUstate === m2IDUprocess)
     {
         lsu_data<> io.idu2in.bits
@@ -166,6 +166,6 @@ class EXU extends Module {
             //ecall
             //mret
         }
-        lsu_data.alu_result := alu.io.alu_result
+        lsu_data.alu_result := alu.io.result
     }
 }
