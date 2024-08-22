@@ -165,10 +165,8 @@ class LSU extends Module {
     val mem_bresp = RegInit(0.U)
 
     io.exu2in.ready := ( m2EXUstate===m2EXUidle )
-    when(m2EXUstate === m2EXUprocess)
+    when(io.out2wbu.valid)
     {
-        when(io.out2wbu.valid)
-        {
         wbu_data.snpc := io.exu2in.bits.snpc
         wbu_data.pc := io.exu2in.bits.pc
         wbu_data.reg_waddr := io.exu2in.bits.reg_waddr
@@ -184,7 +182,9 @@ class LSU extends Module {
         wbu_data.mem_rdata :=  mem_rdata 
         wbu_data.mem_rresp :=  mem_rresp 
         wbu_data.mem_bresp :=  mem_bresp 
-        }
+    }
+    when(m2EXUstate === m2EXUprocess)
+    {
         //switch(io.exu2in.bits.inst_type){
             //IL type
             //is(3.U){
