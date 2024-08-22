@@ -71,7 +71,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                            : 0U);
     vlSelf->top__DOT__LSU__DOT__delay_ar__DOT___GEN_0 
         = (((3U == (IData)(vlSelf->top__DOT__EXU__DOT__lsu_data_inst_type)) 
-            & (IData)(vlSelf->top__DOT__LSU__DOT__exu2in_valid)) 
+            & (IData)(vlSelf->top__DOT__LSU__DOT__exu2in_valid_reg)) 
            & (0U == (IData)(vlSelf->top__DOT__LSU__DOT__delay_ar__DOT__counter)));
     vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT___GEN_0 
         = (((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
@@ -96,7 +96,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
            & (vlSelf->top__DOT__LSU__DOT__delay_b__DOT__dataReg 
               & (IData)(vlSelf->top__DOT__LSU__DOT__bready_reg)));
     vlSelf->top__DOT__LSU__DOT___GEN_2 = ((4U == (IData)(vlSelf->top__DOT__EXU__DOT__lsu_data_inst_type)) 
-                                          & (IData)(vlSelf->top__DOT__LSU__DOT__exu2in_valid));
+                                          & (IData)(vlSelf->top__DOT__LSU__DOT__exu2in_valid_reg));
     vlSelf->top__DOT__LSU__DOT____VdfgTmp_hd83711f5__0 
         = (1U & ((~ (IData)(vlSelf->top__DOT__LSU__DOT__m2EXUstate)) 
                  | (3U == (IData)(vlSelf->top__DOT__EXU__DOT__lsu_data_inst_type))));
