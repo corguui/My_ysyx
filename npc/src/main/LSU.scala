@@ -95,7 +95,7 @@ class LSU extends Module {
     //io.ar_exu_mem.arvalid := mem_ren_reg           
 
     //ar valid delay
-    
+    val exu2in_valid = RegNext(io.exu2in.valid,0.U)
     val delay_ar = Module(new DelayModule)
     delay_ar.io.inData := 0.U 
     delay_ar.io.inValid := 0.U 
