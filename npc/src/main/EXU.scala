@@ -188,6 +188,6 @@ class EXU extends Module {
             //ecall
             //mret
         }
-        alu_result_reg := alu.io.alu_result
+        alu_result_reg := alu.io.result
     }
 }
