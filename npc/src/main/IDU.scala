@@ -90,9 +90,7 @@ class IDU extends Module {
 	//imm 在 lw sw 时可能为0 导致出问题要加入 mem ren  wen
 	//io.out2exu.valid := exu_data.mem_ren | exu_data.mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 	io.out2exu.valid := (state_reg === m2IFUprocess)
-	exu_data.mem_ren := false.B
-	exu_data.reg_wen := false.B 
-	exu_data.mem_wen := false.B
+
 	when(state === m2IFUprocess )
 	{
 	exu_data.reg_waddr := rd
@@ -109,6 +107,9 @@ class IDU extends Module {
 	exu_data.inst_type := 0.U
 	exu_data.alu_op := "b10000".U
 	exu_data.imm :=  0.U 
+	exu_data.mem_ren := false.B
+	exu_data.mem_wen := false.B
+	exu_data.reg_wen := false.B
 	
 	//译码
 	state := m2IFUidle

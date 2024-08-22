@@ -46,11 +46,31 @@ class Memory extends Module {
 
 }
 */
+class EXUtoLSU extends Bundle {
+    val snpc = Output(UInt(32.W))
+	val pc = Output(UInt(32.W))
+	val mem_ren = Output(Bool())
+	val mem_wen = Output(Bool())
+	val m_rmask = Output(UInt(32.W))
+	val m_wmask = Output(UInt(32.W))
+	val reg_waddr = Output(UInt(5.W))
+	val reg_wen = Output(Bool())
+	val src1  = Output(UInt(32.W))
+	val src2  = Output(UInt(32.W))
+	val csr   = Output(UInt(32.W))
+	val csr_a5 = Output(UInt(32.W))
+	val mstatus = Output(UInt(32.W))
+	val imm   = Output(UInt(32.W))
+	val inst_type = Output(UInt(4.W))
+	val il_us = Output(Bool())
+    val alu_result = Output(UInt(32.W))
+}
 
 
 class EXU extends Module {
     val io = IO(new Bundle {
         val idu2in = Flipped(Decoupled(new IDUtoEXU))
+        val out2lsu = Decoupled(new EXUtoLSU)
     })
 
     //EXU to IDU
@@ -61,16 +81,52 @@ class EXU extends Module {
 		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
+    //EXU receive EXU
+	val lsu2s_idle :: lsu2s_wait_ready :: Nil = Enum(2)
+	val lsu2s_state = RegInit(lsu2s_idle)
+	lsu2s_state :=MuxLookup(lsu2s_state,lsu2s_idle)(List(
+		lsu2s_idle -> Mux(io.out2lsu.valid,lsu2s_wait_ready,lsu2s_idle),
+		lsu2s_wait_ready -> Mux(io.out2lsu.ready,lsu2s_idle,lsu2s_wait_ready)
+	))
 
+    val state_reg = RegNext(m2IDUstate,m2IDUidle)
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
     alu.io.alu_op :=15.U
+    val alu_result_reg = RegInit(0.U)
 
+    val lsu_data = Reg(new EXUtoLSU)
+    io.out2lsu.bits := lsu_data
 
+    io.out2lsu.valid := (state_reg === m2IDUprocess)
     io.idu2in.ready := ( m2IDUstate===m2IDUidle )
+    lsu_data.mem_ren := false.B
+    lsu_data.mem_wen := false.B
+    when(io.out2lsu.valid)
+    {
+        lsu_data.snpc := io.idu2in.bits.snpc
+        lsu_data.pc := io.idu2in.bits.pc
+        lsu_data.mem_ren := io.idu2in.bits.mem_ren
+        lsu_data.mem_wen := io.idu2in.bits.mem_wen
+        lsu_data.m_rmask := io.idu2in.bits.m_rmask
+        lsu_data.m_wmask := io.idu2in.bits.m_wmask
+        lsu_data.reg_waddr := io.idu2in.bits.reg_waddr
+        lsu_data.reg_wen := io.idu2in.bits.reg_wen
+        lsu_data.src1 := io.idu2in.bits.src1
+        lsu_data.src2 := io.idu2in.bits.src2
+        lsu_data.csr := io.idu2in.bits.csr
+        lsu_data.csr_a5 := io.idu2in.bits.csr_a5
+        lsu_data.mstatus := io.idu2in.bits.mstatus
+        lsu_data.imm := io.idu2in.bits.imm
+        lsu_data.inst_type := io.idu2in.bits.inst_type
+        lsu_data.il_us := io.idu2in.bits.il_us
+        lsu_data.alu_result := alu_result_reg 
+    }
     when(m2IDUstate === m2IDUprocess)
     {
+
+        m2IDUstate := m2IDUidle
         switch(io.idu2in.bits.inst_type)
         {
             //R type
@@ -132,5 +188,6 @@ class EXU extends Module {
             //ecall
             //mret
         }
+        alu_result_reg := alu.io.result
     }
 }

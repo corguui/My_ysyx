@@ -4,80 +4,13 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-/*
-class Memory extends Module {
-    val io = IO(new Bundle {
-        val m_raddr = Input(UInt(32.W))
-        val m_rdata = Output(UInt(32.W))
-        val m_waddr = Input(UInt(32.W))
-        val m_wdata = Input(UInt(32.W))
-        val m_wmask = Input(UInt(3.W))
-        val m_wen = Input(Bool())
-        val m_ren = Input(Bool())
-        val m_rmask = Input(UInt(3.W))
-    })
-
-    val mem = Mem(256, UInt(32.W))
-    val raddr = io.m_raddr(7,0)  
-    val waddr = io.m_waddr(7,0) 
-
-    io.m_rdata := 0.U
-
-    when(io.m_wen) {
-    when(io.m_rmask ===1.U) {
-        io.m_rdata := (mem.read(raddr.asUInt)  & 0x000000ff.U)                 
-    }.elsewhen(io.m_rmask ===2.U) {
-        io.m_rdata := (mem.read(raddr.asUInt)  & 0x0000ffff.U)
-    }.otherwise {
-        io.m_rdata := mem.read(raddr.asUInt) 
-    }
-    }
-
-    when(io.m_wen) {
-        when(io.m_wmask ===1.U) {
-        mem.write(waddr.asUInt, io.m_wdata & 0x000000ff.U)                 
-    }.elsewhen(io.m_wmask ===2.U) {
-        mem.write(waddr.asUInt, io.m_wdata & 0x0000ffff.U)
-    }.otherwise {
-        mem.write(waddr.asUInt, io.m_wdata )
-    }
-    }
-
-
-}
-*/
-class EXUtoMem_ar extends Bundle {
-    val raddr = Output(UInt(32.W))
-    val rmask = Output(UInt(3.W))
-    val arvalid = Output(Bool())
-    val arready = Input(Bool())
-}
-class EXUtoMem_w extends Bundle {
-    val wdata = Output(UInt(32.W))
-    val wmask = Output(UInt(3.W))
-    val wvalid = Output(Bool())
-    val wready = Input(Bool())
-}
-class EXUtoMem_aw extends Bundle {
-    val awaddr = Output(UInt(32.W))
-    val awvalid = Output(Bool())
-    val awready = Input(Bool())
-}
-
-
 class EXUtoIFU extends Bundle {
     val dnpc = Output(UInt(32.W))
 }
-
-class EXU extends Module {
+class WBU extends Module {
     val io = IO(new Bundle {
-        val idu2in = Flipped(Decoupled(new IDUtoEXU))
+        val lsu2in = Flipped(Decoupled(new LSUtoWBU))
         val out2ifu = Decoupled(new EXUtoIFU)
-        val ar_exu_mem = (new EXUtoMem_ar)
-        val r_mem_exu = Flipped(new MemtoEXU_r)
-        val w_exu_mem = (new EXUtoMem_w)
-        val aw_exu_mem = (new EXUtoMem_aw)
-        val b_mem_exu = Flipped(new MemtoEXU_b)
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
@@ -89,7 +22,7 @@ class EXU extends Module {
         val csr_wen_2 = Output(Bool())
     })
 
-    //EXU receive IFU
+    //WBU receive IFU
     val ifu2s_idle :: ifu2s_wait_ready :: Nil = Enum(2)
 	val ifu2s_state = RegInit(ifu2s_idle)
 	ifu2s_state :=MuxLookup(ifu2s_state,ifu2s_idle)(List(
@@ -97,39 +30,23 @@ class EXU extends Module {
 		ifu2s_wait_ready -> Mux(io.out2ifu.ready,ifu2s_idle,ifu2s_wait_ready)
 	))
 
-    //EXU to IDU
-    val m2IDUidle :: m2IDUprocess :: Nil = Enum(2)
-	//val m2IDUstate = RegInit(m2IDUidle)
-    val m2IDUstate = RegInit(m2IDUidle)
-	m2IDUstate :=MuxLookup(m2IDUstate,m2IDUidle)(List(
-		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
-		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
+    //WBU to IDU
+    val m2LSUidle :: m2LSUprocess :: Nil = Enum(2)
+	//val m2LSUstate = RegInit(m2LSUidle)
+    val m2LSUstate = RegInit(m2LSUidle)
+	m2LSUstate :=MuxLookup(m2LSUstate,m2LSUidle)(List(
+		m2LSUidle -> Mux(io.lsu2in.valid,m2LSUprocess,m2LSUidle),
+		m2LSUprocess -> Mux(io.lsu2in.ready,m2LSUidle,m2LSUprocess)
 	))
 
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
-    val state_reg = RegNext(m2IDUstate,1.U)
-    when(io.idu2in.bits.inst_type === 3.U)
-    {
-    io.out2ifu.valid :=  io.r_mem_exu.rready
-    }
-    .elsewhen(io.idu2in.bits.inst_type === 4.U)
-    {
-    io.out2ifu.valid :=  io.b_mem_exu.bready
-    }
-    .otherwise
-    {
-    io.out2ifu.valid := (lastdnpc =/= ifu_outdata.dnpc) //& (m2IDUstate === m2IDUprocess)
-    }
+    //或是为了让他第一次能够启动ifu
+    io.out2ifu.valid := ((lastdnpc =/= ifu_outdata.dnpc) & (ifu_outdata.dnpc =/= 0x80000000.S.asUInt)) | (lastdnpc =/= ifu_outdata.dnpc && lastdnpc===0.U)//& (m2LSUstate === m2LSUprocess)
     io.out2ifu.bits := ifu_outdata
 
-    //val mem = Module(new Memory)   //yosys
+    io.lsu2in.ready := ( m2LSUstate===m2LSUidle )
 
-    //alu dnpc csr member init
-    val alu = Module(new ALU)
-    alu.io.src1 :=0.U
-    alu.io.src2 :=0.U
-    alu.io.alu_op :=15.U
     ifu_outdata.dnpc := 0x80000000.S.asUInt
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
@@ -140,309 +57,136 @@ class EXU extends Module {
     io.csr_waddr_2 := 0.U
     io.csr_wdata_2 := 0.U
     io.csr_wen_2 := 0.U
-    
 
-    //Mem read member
-    val reg_wen_reg = RegEnable(io.idu2in.bits.reg_wen,0.U,io.idu2in.valid)
-    val reg_waddr_reg = RegEnable(io.idu2in.bits.reg_waddr,0.U,io.idu2in.valid)
-
-    val rready_reg = RegInit(0.U)
-    val mem_raddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
-    val mem_rmask_reg = RegEnable(io.idu2in.bits.m_rmask,0.U,io.idu2in.valid)
-    val mem_ren_reg = RegEnable(io.idu2in.bits.mem_ren,0.U,(io.idu2in.valid | io.r_mem_exu.rready))
-
-    io.ar_exu_mem.rmask := 0.U
-    io.ar_exu_mem.raddr := 0.U 
-    //io.r_mem_exu.rready := rready_reg 
-    //io.ar_exu_mem.arvalid := mem_ren_reg           
-
-    //ar valid delay
-    val idu2in_valid = RegNext(io.idu2in.valid,0.U)
-    val delay_ar = Module(new DelayModule)
-    delay_ar.io.inData := 0.U 
-    delay_ar.io.inValid := 0.U 
-    io.ar_exu_mem.arvalid := delay_ar.io.outData & mem_ren_reg 
-    when(io.idu2in.bits.inst_type === 3.U)
+    when(m2LSUstate === m2LSUprocess)
     {
-    delay_ar.io.inData := mem_ren_reg 
-    delay_ar.io.inValid := idu2in_valid 
-    }
-    //r ready delay
-    val rvalid_reg =RegNext(io.r_mem_exu.rvalid,0.U)
-    val delay_r = Module(new DelayModule)
-    delay_r.io.inData := 0.U
-    delay_r.io.inValid := 0.U
-    io.r_mem_exu.rready := delay_r.io.outData & rready_reg
-
-
-
-    //Mem write member
-    val bready_reg = RegInit(0.U)
-    val mem_awaddr_reg = RegEnable(alu.io.result,0.U,io.idu2in.valid)
-    val mem_wmask_reg = RegEnable(io.idu2in.bits.m_wmask,0.U,io.idu2in.valid)
-    val mem_wdata_reg = RegEnable(io.idu2in.bits.src2,0.U,io.idu2in.valid)
-    val mem_wen_reg = RegEnable(io.idu2in.bits.mem_wen,0.U,(io.idu2in.valid | io.b_mem_exu.bready))
-    io.aw_exu_mem.awaddr := 0.U
-    io.w_exu_mem.wdata := 0.U
-    io.w_exu_mem.wmask := 0.U
-    //io.w_exu_mem.wvalid := mem_wen_reg 
-    //io.aw_exu_mem.awvalid := mem_wen_reg 
-    //io.b_mem_exu.bready := bready_reg
-
-    //aw valid delay
-    val m_wen_reg_delay = RegNext(mem_wen_reg,0.U)
-    val delay_aw = Module(new DelayModule)
-    delay_aw.io.inData := 0.U
-    delay_aw.io.inValid := 0.U
-    //得延迟m_wen_reg一个周期,不然会打印两次
-    io.aw_exu_mem.awvalid := delay_aw.io.outData &  m_wen_reg_delay
-    when(io.idu2in.bits.inst_type === 4.U)
-    {
-        delay_aw.io.inData := mem_wen_reg
-        delay_aw.io.inValid := idu2in_valid
-    }
-    //w valid delay
-    val delay_w = Module(new DelayModule)
-    delay_w.io.inData := 0.U
-    delay_w.io.inValid := 0.U
-    //得延迟m_wen_reg一个周期,不然会打印两次
-    io.w_exu_mem.wvalid := delay_w.io.outData & m_wen_reg_delay
-    when(io.idu2in.bits.inst_type === 4.U)
-    {
-        delay_w.io.inData := mem_wen_reg
-        delay_w.io.inValid := idu2in_valid
-    }
-    //b ready delay
-    val bvalid_reg = RegNext(io.b_mem_exu.bvalid,0.U)
-    val delay_b = Module(new DelayModule)
-    delay_b.io.inData := 0.U
-    delay_b.io.inValid := 0.U
-    io.b_mem_exu.bready := delay_b.io.outData & bready_reg
-
-
-    io.idu2in.ready := ( m2IDUstate===m2IDUidle )
-    when(m2IDUstate === m2IDUprocess)
-    {
-        switch(io.idu2in.bits.inst_type)
+        switch(io.lsu2in.bits.inst_type)
         {
             //R type
             is(1.U){
-                ifu_outdata.dnpc := io.idu2in.bits.snpc 
-                alu.io.src1 := io.idu2in.bits.src1
-                alu.io.src2 := io.idu2in.bits.src2
-                //alu.io.src2 := io.idu2in.bits.imm // error difftest test
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                io.reg_wdata := alu.io.result
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
-                //m2IDUstate := m2IDUidle
+                ifu_outdata.dnpc := io.lsu2in.bits.snpc 
+                io.reg_wdata := io.lsu2in.bits.alu_result
+                io.reg_wen := io.lsu2in.bits.reg_wen
+                io.reg_waddr := io.lsu2in.bits.reg_waddr
+                //m2LSUstate := m2LSUidle
             }
             //I type
             is(2.U){
-                ifu_outdata.dnpc := io.idu2in.bits.snpc
-                alu.io.src1 := io.idu2in.bits.src1 
-                alu.io.src2 := io.idu2in.bits.imm
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                io.reg_wdata := alu.io.result
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
-                //m2IDUstate := m2IDUidle
+                ifu_outdata.dnpc := io.lsu2in.bits.snpc
+                io.reg_wdata := io.lsu2in.bits.alu_result
+                io.reg_wen := io.lsu2in.bits.reg_wen
+                io.reg_waddr := io.lsu2in.bits.reg_waddr
+                //m2LSUstate := m2LSUidle
             }
             //IL type
             is(3.U){
-                alu.io.src1 := io.idu2in.bits.src1
-                alu.io.src2 := io.idu2in.bits.imm
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                when((io.ar_exu_mem.arready)&(io.ar_exu_mem.arvalid))
-                {                    
-                    io.ar_exu_mem.rmask := mem_rmask_reg
-                    io.ar_exu_mem.raddr := mem_raddr_reg 
-                    
-                    when(io.r_mem_exu.rvalid === 1.U)
-                    {
-                       rready_reg  := 1.U
-                       //m2IDUstate := m2IDUidle
-                       //r delay
-                        delay_r.io.inData := 1.U
-                        delay_r.io.inValid := Mux(rvalid_reg =/= io.r_mem_exu.rvalid & io.r_mem_exu.rvalid === 1.U,0.U,1.U)  
-
-                       when(io.r_mem_exu.rresp === 1.U)
-                       {
-                       io.reg_wen := reg_wen_reg
-                       io.reg_waddr := reg_waddr_reg
-                       when(io.idu2in.bits.il_us === true.B)
-                       {
-                        io.reg_wdata := io.r_mem_exu.rdata.asUInt
-                       }.otherwise{
-                        when(mem_rmask_reg === 1.U)
-                        {
-                            io.reg_wdata := Cat(Fill(24,io.r_mem_exu.rdata(7)),(io.r_mem_exu.rdata(7,0)).asSInt).asUInt
-                        }.elsewhen(mem_rmask_reg === 2.U)
-                        {
-                            io.reg_wdata := Cat(Fill(16,io.r_mem_exu.rdata(15)),(io.r_mem_exu.rdata(15,0)).asSInt).asUInt
-                        }.otherwise
-                        {
-                            io.reg_wdata := (io.r_mem_exu.rdata.asSInt).asUInt
-                        }
-                       }
-                       ifu_outdata.dnpc := io.idu2in.bits.snpc
-                       }.otherwise{
-                        ifu_outdata.dnpc := 0x80000000.S.asUInt
-                       }
-                    }.otherwise{
-                        rready_reg := 0.U
-                    }
+                when(io.lsu2in.bits.mem_rresp === 1.U)
+                {
+                    io.reg_wen := io.lsu2in.bits.reg_wen 
+                    io.reg_waddr := io.lsu2in.bits.reg_waddr 
+                    io.reg_wdata := io.lsu2in.bits.mem_rdata 
+                    ifu_outdata.dnpc := io.lsu2in.bits.snpc
                 }.otherwise{
-                    io.ar_exu_mem.rmask := 0.U 
-                    io.ar_exu_mem.raddr := 0.U 
-                    rready_reg := 0.U
-                    
+                    ifu_outdata.dnpc := 0x80000000.S.asUInt
                 }
-
-
                 
             }
             //s type
             is(4.U){
-                alu.io.src1 := io.idu2in.bits.src1
-                alu.io.src2 := io.idu2in.bits.imm
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                when(io.aw_exu_mem.awready & io.aw_exu_mem.awvalid)
-                {
-                    io.aw_exu_mem.awaddr := mem_awaddr_reg 
-                }.otherwise{
-                    io.aw_exu_mem.awaddr := 0.U
-                    bready_reg := 0.U
-                }
-                when(io.w_exu_mem.wready & io.w_exu_mem.wvalid)
-                {
-                    io.w_exu_mem.wdata := mem_wdata_reg 
-                    io.w_exu_mem.wmask := mem_wmask_reg 
-                }.otherwise{
-                    io.w_exu_mem.wdata := 0.U
-                    io.w_exu_mem.wmask := 0.U
-                    bready_reg := 0.U
-                }
-                when(io.w_exu_mem.wvalid & io.w_exu_mem.wready & io.aw_exu_mem.awready & io.aw_exu_mem.awvalid & io.b_mem_exu.bvalid) 
-                {
-                    bready_reg := 1.U
-                    //m2IDUstate := m2IDUidle
-                    //b ready delay
-                    delay_b.io.inData := 1.U
-                    delay_b.io.inValid := Mux(bvalid_reg =/= io.b_mem_exu.bvalid & io.b_mem_exu.bvalid === 1.U,0.U,1.U)  
-
-                    when(io.b_mem_exu.bresp === 1.U)
+                    when(io.lsu2in.bits.mem_bresp === 1.U)
                     {
-                        ifu_outdata.dnpc := io.idu2in.bits.snpc
+                        ifu_outdata.dnpc := io.lsu2in.bits.snpc
                     }.otherwise{
                         ifu_outdata.dnpc := 0x80000000.S.asUInt
                     }
-                }.otherwise{
-                    bready_reg := 0.U
-                }
             }
             //b type
             is(5.U){
-                alu.io.src1 := io.idu2in.bits.src1
-                alu.io.src2 := io.idu2in.bits.src2
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                ifu_outdata.dnpc :=  Mux((alu.io.result===1.U),(io.idu2in.bits.pc+io.idu2in.bits.imm),io.idu2in.bits.snpc)
-                //m2IDUstate := m2IDUidle
+                ifu_outdata.dnpc :=  Mux((io.lsu2in.bits.alu_result===1.U),(io.lsu2in.bits.pc+io.lsu2in.bits.imm),io.lsu2in.bits.snpc)
+                //m2LSUstate := m2LSUidle
             }
             //u type
             is(6.U){
-                ifu_outdata.dnpc := io.idu2in.bits.snpc
-                io.reg_wdata := io.idu2in.bits.imm
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
-                //m2IDUstate := m2IDUidle
+                ifu_outdata.dnpc := io.lsu2in.bits.snpc
+                io.reg_wdata := io.lsu2in.bits.imm
+                io.reg_wen := io.lsu2in.bits.reg_wen
+                io.reg_waddr := io.lsu2in.bits.reg_waddr
+                //m2LSUstate := m2LSUidle
             }
             //upc type
             is(7.U){
-                ifu_outdata.dnpc := io.idu2in.bits.snpc
-                alu.io.src1 := io.idu2in.bits.imm
-                alu.io.src2 := io.idu2in.bits.pc
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                io.reg_wdata := alu.io.result 
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
-                //m2IDUstate := m2IDUidle
+                ifu_outdata.dnpc := io.lsu2in.bits.snpc
+                io.reg_wdata := io.lsu2in.bits.alu_result 
+                io.reg_wen := io.lsu2in.bits.reg_wen
+                io.reg_waddr := io.lsu2in.bits.reg_waddr
+                //m2LSUstate := m2LSUidle
             }
             //j type
             is(8.U){
-                io.reg_wdata := io.idu2in.bits.snpc
-                alu.io.src1 := io.idu2in.bits.imm
-                alu.io.src2 := io.idu2in.bits.pc
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                ifu_outdata.dnpc := alu.io.result 
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
-                //m2IDUstate := m2IDUidle
+                io.reg_wdata := io.lsu2in.bits.snpc
+                ifu_outdata.dnpc := io.lsu2in.bits.alu_result 
+                io.reg_wen := io.lsu2in.bits.reg_wen
+                io.reg_waddr := io.lsu2in.bits.reg_waddr
+                //m2LSUstate := m2LSUidle
             }
             //jr type
             is(9.U){
-                io.reg_wdata := io.idu2in.bits.snpc
-                alu.io.src1 := io.idu2in.bits.imm
-                alu.io.src2 := io.idu2in.bits.src1
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                ifu_outdata.dnpc := alu.io.result 
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
-                //m2IDUstate := m2IDUidle
+                io.reg_wdata := io.lsu2in.bits.snpc
+                ifu_outdata.dnpc := io.lsu2in.bits.alu_result 
+                io.reg_wen := io.lsu2in.bits.reg_wen
+                io.reg_waddr := io.lsu2in.bits.reg_waddr
+                //m2LSUstate := m2LSUidle
             }
             //csrrw
             is(10.U){
-                ifu_outdata.dnpc := io.idu2in.bits.snpc
-                io.reg_wdata := io.idu2in.bits.csr
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
-                io.csr_wdata_1 := io.idu2in.bits.src1
+                ifu_outdata.dnpc := io.lsu2in.bits.snpc
+                io.reg_wdata := io.lsu2in.bits.csr
+                io.reg_wen := io.lsu2in.bits.reg_wen
+                io.reg_waddr := io.lsu2in.bits.reg_waddr
+                io.csr_wdata_1 := io.lsu2in.bits.src1
                 io.csr_wen_1  := true.B 
-                switch(io.idu2in.bits.imm) {
+                switch(io.lsu2in.bits.imm) {
                 is(0x341.U) { io.csr_waddr_1 := 0.U } // mepc
                 is(0x342.U) { io.csr_waddr_1 := 1.U } // mcause
                 is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
                 is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
                 }
-                //m2IDUstate := m2IDUidle
+                //m2LSUstate := m2LSUidle
             }
             //csrrs
             is(11.U){
-                ifu_outdata.dnpc := io.idu2in.bits.snpc
-                io.reg_wdata := io.idu2in.bits.csr
-                io.reg_wen := io.idu2in.bits.reg_wen
-                io.reg_waddr := io.idu2in.bits.reg_waddr
-                alu.io.src1 := io.idu2in.bits.csr
-                alu.io.src2 := io.idu2in.bits.src1
-                alu.io.alu_op := io.idu2in.bits.alu_op
-                io.csr_wdata_1 := alu.io.result
+                ifu_outdata.dnpc := io.lsu2in.bits.snpc
+                io.reg_wdata := io.lsu2in.bits.csr
+                io.reg_wen := io.lsu2in.bits.reg_wen
+                io.reg_waddr := io.lsu2in.bits.reg_waddr
+                io.csr_wdata_1 := io.lsu2in.bits.alu_result
                 io.csr_wen_1  := true.B 
-                switch(io.idu2in.bits.imm) {
+                switch(io.lsu2in.bits.imm) {
                 is(0x341.U) { io.csr_waddr_1 := 0.U } // mepc
                 is(0x342.U) { io.csr_waddr_1 := 1.U } // mcause
                 is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
                 is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
                 }
-                //m2IDUstate := m2IDUidle
+                //m2LSUstate := m2LSUidle
             }
             //ecall
             is(12.U){
-                io.csr_wdata_1 := io.idu2in.bits.csr_a5    //mcause
+                io.csr_wdata_1 := io.lsu2in.bits.csr_a5    //mcause
                 io.csr_wen_1  := true.B 
                 io.csr_waddr_1 := 1.U
-                io.csr_wdata_2 := io.idu2in.bits.pc      //mepc
+                io.csr_wdata_2 := io.lsu2in.bits.pc      //mepc
                 io.csr_wen_2  := true.B 
                 io.csr_waddr_2 := 0.U
-                ifu_outdata.dnpc := io.idu2in.bits.csr //mtvec
-                //m2IDUstate := m2IDUidle
+                ifu_outdata.dnpc := io.lsu2in.bits.csr //mtvec
+                //m2LSUstate := m2LSUidle
             }
             //mret
             is(13.U){
-                io.csr_wdata_1 := io.idu2in.bits.mstatus    //mstaus
+                io.csr_wdata_1 := io.lsu2in.bits.mstatus    //mstaus
                 io.csr_wen_1  := true.B 
                 io.csr_waddr_1 := 2.U
-                ifu_outdata.dnpc := io.idu2in.bits.csr //mepc
-                //m2IDUstate := m2IDUidle
+                ifu_outdata.dnpc := io.lsu2in.bits.csr //mepc
+                //m2LSUstate := m2LSUidle
             }
         }
     }
