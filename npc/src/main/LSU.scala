@@ -68,6 +68,7 @@ class LSU extends Module {
 		wbu2s_wait_ready -> Mux(io.out2wbu.ready,wbu2s_idle,wbu2s_wait_ready)
 	))
 
+    val exu2in_valid = RegNext(io.exu2in.valid,0.U)
     //val pc_reg = RegNext(io.out2wbu.bits.pc,0.U)
     when(io.exu2in.bits.inst_type === 3.U)
     {
@@ -79,7 +80,7 @@ class LSU extends Module {
     }
     .otherwise
     {
-    io.out2wbu.valid := 1.U//(pc_reg =/= io.out2wbu.bits.pc)
+    io.out2wbu.valid := exu2in_valid //(pc_reg =/= io.out2wbu.bits.pc)
     }
 
     //Mem read member
@@ -94,7 +95,6 @@ class LSU extends Module {
     //io.ar_exu_mem.arvalid := mem_ren_reg           
 
     //ar valid delay
-    val exu2in_valid = RegNext(io.exu2in.valid,0.U)
     val delay_ar = Module(new DelayModule)
     delay_ar.io.inData := 0.U 
     delay_ar.io.inValid := 0.U 
