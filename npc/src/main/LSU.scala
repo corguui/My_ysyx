@@ -51,6 +51,7 @@ class LSU extends Module {
         val b_mem_exu = Flipped(new MemtoEXU_b)
     })
 
+    val state_reg = RegNext(m2EXUstate,m2EXUidle)
     when(io.exu2in.bits.inst_type === 3.U)
     {
     io.out2wbu.valid :=  io.r_mem_exu.rready
@@ -61,7 +62,7 @@ class LSU extends Module {
     }
     .otherwise
     {
-    io.out2wbu.valid := 1.U
+    io.out2wbu.valid := (state_reg === m2EXUprocess)
     }
     //LSU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
