@@ -45,9 +45,10 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ top__DOT__IDU__DOT__casez_tmp_0;
         CData/*0:0*/ top__DOT__IDU__DOT___GEN_12;
         CData/*0:0*/ top__DOT__IDU__DOT___GEN_13;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_14;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_15;
         CData/*0:0*/ top__DOT__IDU__DOT___GEN_17;
-        CData/*0:0*/ top__DOT__IDU__DOT___GEN_18;
-        CData/*0:0*/ top__DOT__IDU__DOT___GEN_19;
+        CData/*0:0*/ top__DOT__IDU__DOT___GEN_20;
         CData/*0:0*/ top__DOT__EXU__DOT__m2IDUstate;
         CData/*0:0*/ top__DOT__EXU__DOT__state_reg;
         CData/*0:0*/ top__DOT__EXU__DOT__lsu_data_mem_ren;
@@ -82,9 +83,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ top__DOT__LSU__DOT__wbu_data_reg_waddr;
         CData/*0:0*/ top__DOT__LSU__DOT__wbu_data_reg_wen;
         CData/*3:0*/ top__DOT__LSU__DOT__wbu_data_inst_type;
-        CData/*1:0*/ top__DOT__LSU__DOT__wbu_data_mem_bresp;
     };
     struct {
+        CData/*1:0*/ top__DOT__LSU__DOT__wbu_data_mem_bresp;
         CData/*1:0*/ top__DOT__LSU__DOT__wbu_data_mem_rresp;
         CData/*0:0*/ top__DOT__LSU__DOT___GEN_3;
         CData/*0:0*/ top__DOT__LSU__DOT___GEN_4;
@@ -148,9 +149,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__m2EXUstate;
         CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__rready_reg;
         CData/*4:0*/ __Vdly__top__DOT__Inst_fetch__DOT__delay__DOT__counter;
-        CData/*0:0*/ __Vtrigrprev__TOP__clock;
     };
     struct {
+        CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
         VL_OUT(io_pc,31,0);
@@ -214,9 +215,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__Reg__DOT__csr_1;
         IData/*31:0*/ top__DOT__Reg__DOT__csr_2;
         IData/*31:0*/ top__DOT__Reg__DOT__csr_3;
-        IData/*31:0*/ top__DOT__Reg__DOT__reg_0;
     };
     struct {
+        IData/*31:0*/ top__DOT__Reg__DOT__reg_0;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_1;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_2;
         IData/*31:0*/ top__DOT__Reg__DOT__reg_3;
