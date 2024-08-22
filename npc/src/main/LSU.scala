@@ -69,7 +69,7 @@ class LSU extends Module {
 	))
 
     //val pc_reg = RegNext(io.out2wbu.bits.pc,0.U)
-    val state_reg := RegNext(m2EXUstate,m2EXUidle)
+    val state_reg = RegNext(m2EXUstate,m2EXUidle)
     when(io.exu2in.bits.inst_type === 3.U)
     {
     io.out2wbu.valid :=  io.r_mem_exu.rready
