@@ -120,6 +120,8 @@ class EXU extends Module {
         lsu_data.imm := io.idu2in.bits.imm
         lsu_data.inst_type := io.idu2in.bits.inst_type
         lsu_data.il_us := io.idu2in.bits.il_us
+        
+        m2IDUstate := m2IDUidle
         switch(io.idu2in.bits.inst_type)
         {
             //R type

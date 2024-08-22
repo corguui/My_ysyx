@@ -386,7 +386,11 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             = __Vdly__top__DOT__LSU__DOT__delay_ar__DOT__counter;
         if ((1U & (~ (IData)(vlSelf->top__DOT__WBU__DOT__m2LSUstate)))) {
             __Vdly__top__DOT__WBU__DOT__m2LSUstate 
-                = vlSelf->top__DOT__LSU__DOT__state_reg;
+                = ((3U == (IData)(vlSelf->top__DOT__EXU__DOT__lsu_data_inst_type))
+                    ? (IData)(vlSelf->top__DOT__LSU__DOT__io_r_mem_exu_rready_0)
+                    : ((4U == (IData)(vlSelf->top__DOT__EXU__DOT__lsu_data_inst_type))
+                        ? (IData)(vlSelf->top__DOT__LSU__DOT__io_b_mem_exu_bready_0)
+                        : (IData)(vlSelf->top__DOT__LSU__DOT__state_reg)));
         }
         if (((IData)(vlSelf->top__DOT__WBU__DOT__m2LSUstate) 
              & ((~ (IData)(vlSelf->top__DOT__WBU__DOT___GEN_17)) 
