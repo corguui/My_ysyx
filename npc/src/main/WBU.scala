@@ -22,7 +22,7 @@ class WBU extends Module {
         val csr_wen_2 = Output(Bool())
     })
 
-    //EXU receive IFU
+    //WBU receive IFU
     val ifu2s_idle :: ifu2s_wait_ready :: Nil = Enum(2)
 	val ifu2s_state = RegInit(ifu2s_idle)
 	ifu2s_state :=MuxLookup(ifu2s_state,ifu2s_idle)(List(
@@ -30,13 +30,13 @@ class WBU extends Module {
 		ifu2s_wait_ready -> Mux(io.out2ifu.ready,ifu2s_idle,ifu2s_wait_ready)
 	))
 
-    //EXU to IDU
+    //WBU to IDU
     val m2LSUidle :: m2LSUprocess :: Nil = Enum(2)
 	//val m2LSUstate = RegInit(m2LSUidle)
     val m2LSUstate = RegInit(m2LSUidle)
 	m2LSUstate :=MuxLookup(m2LSUstate,m2LSUidle)(List(
-		m2LSUidle -> Mux(io.idu2in.valid,m2LSUprocess,m2LSUidle),
-		m2LSUprocess -> Mux(io.idu2in.ready,m2LSUidle,m2LSUprocess)
+		m2LSUidle -> Mux(io.lsu2in.valid,m2LSUprocess,m2LSUidle),
+		m2LSUprocess -> Mux(io.lsu2in.ready,m2LSUidle,m2LSUprocess)
 	))
 
     val ifu_outdata = Wire(new EXUtoIFU)

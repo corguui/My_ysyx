@@ -81,12 +81,12 @@ class EXU extends Module {
 		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
-
-	val wbu2s_idle :: wbu2s_wait_ready :: Nil = Enum(2)
-	val wbu2s_state = RegInit(wbu2s_idle)
-	wbu2s_state :=MuxLookup(wbu2s_state,wbu2s_idle)(List(
-		wbu2s_idle -> Mux(io.out2exu.valid,wbu2s_wait_ready,wbu2s_idle),
-		wbu2s_wait_ready -> Mux(io.out2exu.ready,wbu2s_idle,wbu2s_wait_ready)
+    //EXU receive EXU
+	val lsu2s_idle :: lsu2s_wait_ready :: Nil = Enum(2)
+	val lsu2s_state = RegInit(lsu2s_idle)
+	lsu2s_state :=MuxLookup(lsu2s_state,lsu2s_idle)(List(
+		lsu2s_idle -> Mux(io.out2lsu.valid,lsu2s_wait_ready,lsu2s_idle),
+		lsu2s_wait_ready -> Mux(io.out2lsu.ready,lsu2s_idle,lsu2s_wait_ready)
 	))
 
     val state_reg = RegNext(m2IDUstate,m2IDUidle)

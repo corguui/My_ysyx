@@ -62,14 +62,23 @@ class LSU extends Module {
     {
     io.out2wbu.valid := 1.U
     }
-
+    //LSU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
 	//val m2EXUstate = RegInit(m2EXUidle)
     val m2EXUstate = RegInit(m2EXUidle)
 	m2EXUstate :=MuxLookup(m2EXUstate,m2EXUidle)(List(
-		m2EXUidle -> Mux(io.idu2in.valid,m2EXUprocess,m2EXUidle),
-		m2EXUprocess -> Mux(io.idu2in.ready,m2EXUidle,m2EXUprocess)
+		m2EXUidle -> Mux(io.exu2in.valid,m2EXUprocess,m2EXUidle),
+		m2EXUprocess -> Mux(io.exu2in.ready,m2EXUidle,m2EXUprocess)
 	))
+
+	//LSU recive WBU 
+	val wbu2s_idle :: wbu2s_wait_ready :: Nil = Enum(2)
+	val wbu2s_state = RegInit(wbu2s_idle)
+	wbu2s_state :=MuxLookup(wbu2s_state,wbu2s_idle)(List(
+		wbu2s_idle -> Mux(io.out2wbu.valid,wbu2s_wait_ready,wbu2s_idle),
+		wbu2s_wait_ready -> Mux(io.out2wbu.ready,wbu2s_idle,wbu2s_wait_ready)
+	))
+
     val state_reg = RegNext(m2EXUstate,m2EXUidle)
     //Mem read member
     val rready_reg = RegInit(0.U)
