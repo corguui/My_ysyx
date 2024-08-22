@@ -51,19 +51,6 @@ class LSU extends Module {
         val b_mem_exu = Flipped(new MemtoEXU_b)
     })
 
-    val state_reg = RegNext(m2EXUstate,m2EXUidle)
-    when(io.exu2in.bits.inst_type === 3.U)
-    {
-    io.out2wbu.valid :=  io.r_mem_exu.rready
-    }
-    .elsewhen(io.exu2in.bits.inst_type === 4.U)
-    {
-    io.out2wbu.valid :=  io.b_mem_exu.bready
-    }
-    .otherwise
-    {
-    io.out2wbu.valid := (state_reg === m2EXUprocess)
-    }
     //LSU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
 	//val m2EXUstate = RegInit(m2EXUidle)
@@ -81,7 +68,20 @@ class LSU extends Module {
 		wbu2s_wait_ready -> Mux(io.out2wbu.ready,wbu2s_idle,wbu2s_wait_ready)
 	))
 
-    
+    val state_reg = RegNext(m2EXUstate,m2EXUidle)
+    when(io.exu2in.bits.inst_type === 3.U)
+    {
+    io.out2wbu.valid :=  io.r_mem_exu.rready
+    }
+    .elsewhen(io.exu2in.bits.inst_type === 4.U)
+    {
+    io.out2wbu.valid :=  io.b_mem_exu.bready
+    }
+    .otherwise
+    {
+    io.out2wbu.valid := (state_reg === m2EXUprocess)
+    }
+
     //Mem read member
     val rready_reg = RegInit(0.U)
     val mem_raddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,io.exu2in.valid)
