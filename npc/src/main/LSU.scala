@@ -213,6 +213,7 @@ class LSU extends Module {
                     rready_reg := 0.U
                     }
                 }
+            }
             //s type
             is(4.U){
                 when(io.aw_exu_mem.awready & io.aw_exu_mem.awvalid)
