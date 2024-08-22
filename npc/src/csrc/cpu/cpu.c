@@ -192,7 +192,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		s->pc=top->io_pc;
 		s->inst=top->rootp->top__DOT__IFU__DOT__inst_reg;
     	s->dnpc=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc;
-		//printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);
+		printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
