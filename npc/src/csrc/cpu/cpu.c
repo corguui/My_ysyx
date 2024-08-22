@@ -207,7 +207,7 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		top->eval();
 
 		top->clock =0; top->eval();
-		//cpu_read_reg(); 
+		cpu_read_reg(); 
 		}
 		cmp_dnpc=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc;
 		#ifdef CONFIG_VCD
