@@ -619,8 +619,10 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                 & (IData)(vlSelf->top__DOT__Mem__DOT__rvalid_reg))) 
             & (IData)(vlSelf->top__DOT__LSU__DOT___GEN_3)) 
            & (0U == (IData)(vlSelf->top__DOT__LSU__DOT__delay_r__DOT__counter)));
-    vlSelf->top__DOT___WBU_io_out2ifu_valid = (vlSelf->top__DOT__WBU__DOT__lastdnpc 
-                                               != vlSelf->top__DOT__WBU__DOT__ifu_outdata_dnpc);
+    vlSelf->top__DOT___WBU_io_out2ifu_valid = ((vlSelf->top__DOT__WBU__DOT__lastdnpc 
+                                                != vlSelf->top__DOT__WBU__DOT__ifu_outdata_dnpc) 
+                                               & (0x80000000U 
+                                                  != vlSelf->top__DOT__WBU__DOT__ifu_outdata_dnpc));
     vlSelf->top__DOT__WBU__DOT___GEN_17 = ((IData)(vlSelf->top__DOT__WBU__DOT____VdfgTmp_h43fa6f6f__0) 
                                            | (IData)(vlSelf->top__DOT__WBU__DOT___GEN_15));
     vlSelf->top__DOT__WBU__DOT___GEN_19 = ((IData)(vlSelf->top__DOT__WBU__DOT____VdfgTmp_h43fa6f6f__0) 

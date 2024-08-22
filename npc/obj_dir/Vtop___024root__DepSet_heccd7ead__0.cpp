@@ -476,8 +476,10 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
           & ((0U != (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)) 
              & (1U == (IData)(vlSelf->top__DOT__Inst_fetch__DOT__delay__DOT__counter)))) 
          & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg));
-    vlSelf->top__DOT___WBU_io_out2ifu_valid = (vlSelf->top__DOT__WBU__DOT__lastdnpc 
-                                               != vlSelf->top__DOT__WBU__DOT__ifu_outdata_dnpc);
+    vlSelf->top__DOT___WBU_io_out2ifu_valid = ((vlSelf->top__DOT__WBU__DOT__lastdnpc 
+                                                != vlSelf->top__DOT__WBU__DOT__ifu_outdata_dnpc) 
+                                               & (0x80000000U 
+                                                  != vlSelf->top__DOT__WBU__DOT__ifu_outdata_dnpc));
 }
 
 void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf);
@@ -534,7 +536,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                     Vtop___024root___dump_triggers__act(vlSelf);
 #endif
-                    VL_FATAL_MT("build/top.sv", 1831, "", "Active region did not converge.");
+                    VL_FATAL_MT("build/top.sv", 1832, "", "Active region did not converge.");
                 }
                 vlSelf->__VactIterCount = ((IData)(1U) 
                                            + vlSelf->__VactIterCount);
@@ -549,7 +551,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__nba(vlSelf);
 #endif
-                VL_FATAL_MT("build/top.sv", 1831, "", "NBA region did not converge.");
+                VL_FATAL_MT("build/top.sv", 1832, "", "NBA region did not converge.");
             }
             __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
             Vtop___024root___eval_nba(vlSelf);
