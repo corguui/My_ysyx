@@ -83,7 +83,8 @@ class LSU extends Module {
     io.out2wbu.valid := (state_reg === m2EXUprocess)//(pc_reg =/= io.out2wbu.bits.pc)
     }
 
-    val exu2in_valid = RegNext(io.exu2in.valid,0.U)
+    val exu2in_valid = RegNext(io.exu2in.valid,0.B)
+    val exu2in_valid_reg = RegNext(exu2in_valid,0.U)
     //Mem read member
     val rready_reg = RegInit(0.U)
     val mem_raddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
@@ -104,7 +105,7 @@ class LSU extends Module {
     when(io.exu2in.bits.inst_type === 3.U)
     {
     delay_ar.io.inData := mem_ren_reg 
-    delay_ar.io.inValid := exu2in_valid 
+    delay_ar.io.inValid := exu2in_valid_reg 
     }
     //r ready delay
     val rvalid_reg =RegNext(io.r_mem_exu.rvalid,0.U)
@@ -138,7 +139,7 @@ class LSU extends Module {
     when(io.exu2in.bits.inst_type === 4.U)
     {
         delay_aw.io.inData := mem_wen_reg
-        delay_aw.io.inValid := exu2in_valid
+        delay_aw.io.inValid := exu2in_valid_reg
     }
     //w valid delay
     val delay_w = Module(new DelayModule)
@@ -149,7 +150,7 @@ class LSU extends Module {
     when(io.exu2in.bits.inst_type === 4.U)
     {
         delay_w.io.inData := mem_wen_reg
-        delay_w.io.inValid := exu2in_valid
+        delay_w.io.inValid := exu2in_valid_reg
     }
     //b ready delay
     val bvalid_reg = RegNext(io.b_mem_exu.bvalid,0.U)
