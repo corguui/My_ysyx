@@ -106,8 +106,8 @@ class EXU extends Module {
     {
         lsu_data.snpc := io.idu2in.bits.snpc
         lsu_data.pc := io.idu2in.bits.pc
-        lsu_mem_ren := io.idu2in.bits.mem_ren
-        lsu_mem_wen := io.idu2in.bits.mem_wen
+        lsu_data.mem_ren := io.idu2in.bits.mem_ren
+        lsu_data.mem_wen := io.idu2in.bits.mem_wen
         lsu_data.m_rmask := io.idu2in.bits.m_rmask
         lsu_data.m_wmask := io.idu2in.bits.m_wmask
         lsu_data.reg_waddr := io.idu2in.bits.reg_waddr
