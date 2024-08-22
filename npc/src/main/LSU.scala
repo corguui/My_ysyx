@@ -246,7 +246,6 @@ class LSU extends Module {
               }
             }
         }
-    }
 }
 
 
