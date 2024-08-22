@@ -158,16 +158,17 @@ class LSU extends Module {
     io.b_mem_exu.bready := delay_b.io.outData & bready_reg
 
     val wbu_data = Reg(new LSUtoWBU)
-    val wbu_none = Reg(new LSUtoWBU)
-    io.out2wbu.bits := wbu_none 
-    when(io.out2wbu.valid)
-    {
     io.out2wbu.bits := wbu_data
-    }
+
+    val mem_rdata = RegInit(0.U)
+    val mem_rresp = RegInit(0.U)
+    val mem_bresp = RegInit(0.U)
 
     io.exu2in.ready := ( m2EXUstate===m2EXUidle )
     when(m2EXUstate === m2EXUprocess)
     {
+        when(io.out2wbu.valid)
+        {
         wbu_data.snpc := io.exu2in.bits.snpc
         wbu_data.pc := io.exu2in.bits.pc
         wbu_data.reg_waddr := io.exu2in.bits.reg_waddr
@@ -180,9 +181,10 @@ class LSU extends Module {
         wbu_data.imm := io.exu2in.bits.imm
         wbu_data.inst_type := io.exu2in.bits.inst_type
         wbu_data.alu_result := io.exu2in.bits.alu_result
-        wbu_data.mem_rdata := 0.U 
-        wbu_data.mem_rresp := 0.U 
-        wbu_data.mem_bresp := 0.U
+        wbu_data.mem_rdata :=  mem_rdata 
+        wbu_data.mem_rresp :=  mem_rresp 
+        wbu_data.mem_bresp :=  mem_bresp 
+        }
         //switch(io.exu2in.bits.inst_type){
             //IL type
             //is(3.U){
@@ -198,20 +200,20 @@ class LSU extends Module {
                         //r delay
                         delay_r.io.inData := 1.U
                         delay_r.io.inValid := Mux(rvalid_reg =/= io.r_mem_exu.rvalid & io.r_mem_exu.rvalid === 1.U,0.U,1.U)  
-                        wbu_data.mem_rresp := io.r_mem_exu.rresp
+                        mem_rresp := io.r_mem_exu.rresp
                         when(io.exu2in.bits.il_us === true.B)
                         {
-                            wbu_data.mem_rdata := io.r_mem_exu.rdata.asUInt
+                           mem_rdata := io.r_mem_exu.rdata.asUInt
                         }.otherwise{
                         when(mem_rmask_reg === 1.U)
                         {
-                            wbu_data.mem_rdata := Cat(Fill(24,io.r_mem_exu.rdata(7)),(io.r_mem_exu.rdata(7,0)).asSInt).asUInt
+                           mem_rdata := Cat(Fill(24,io.r_mem_exu.rdata(7)),(io.r_mem_exu.rdata(7,0)).asSInt).asUInt
                         }.elsewhen(mem_rmask_reg === 2.U)
                         {
-                            wbu_data.mem_rdata := Cat(Fill(16,io.r_mem_exu.rdata(15)),(io.r_mem_exu.rdata(15,0)).asSInt).asUInt
+                            mem_rdata := Cat(Fill(16,io.r_mem_exu.rdata(15)),(io.r_mem_exu.rdata(15,0)).asSInt).asUInt
                         }.otherwise
                         {
-                            wbu_data.mem_rdata := (io.r_mem_exu.rdata.asSInt).asUInt
+                            mem_rdata := (io.r_mem_exu.rdata.asSInt).asUInt
                         }
                         }
                     }.otherwise{
@@ -247,7 +249,7 @@ class LSU extends Module {
                     //b ready delay
                     delay_b.io.inData := 1.U
                     delay_b.io.inValid := Mux(bvalid_reg =/= io.b_mem_exu.bvalid & io.b_mem_exu.bvalid === 1.U,0.U,1.U)  
-                    wbu_data.mem_bresp := io.b_mem_exu.bresp 
+                    mem_bresp := io.b_mem_exu.bresp 
                 }.otherwise{
                     bready_reg := 0.U
                 }
