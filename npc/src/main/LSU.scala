@@ -81,7 +81,7 @@ class LSU extends Module {
 		wbu2s_wait_ready -> Mux(io.out2wbu.ready,wbu2s_idle,wbu2s_wait_ready)
 	))
 
-    val state_reg = RegNext(m2EXUstate,m2EXUidle)
+    
     //Mem read member
     val rready_reg = RegInit(0.U)
     val mem_raddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,io.exu2in.valid)
@@ -159,7 +159,6 @@ class LSU extends Module {
     val wbu_data = Reg(new LSUtoWBU)
     io.out2wbu.bits := wbu_data
 
-    io.out2wbu.valid := (state_reg === m2EXUprocess)
     io.exu2in.ready := ( m2EXUstate===m2EXUidle )
     when(m2EXUstate === m2EXUprocess)
     {
