@@ -94,6 +94,7 @@ class EXU extends Module {
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
     alu.io.alu_op :=15.U
+    val alu_result_reg = RegInit(0.U)
 
     val lsu_data = Reg(new EXUtoLSU)
     io.out2lsu.bits := lsu_data
@@ -120,7 +121,7 @@ class EXU extends Module {
         lsu_data.imm := io.idu2in.bits.imm
         lsu_data.inst_type := io.idu2in.bits.inst_type
         lsu_data.il_us := io.idu2in.bits.il_us
-        lsu_data.alu_result := alu.io.result
+        lsu_data.alu_result := alu_result_reg 
     }
     when(m2IDUstate === m2IDUprocess)
     {
@@ -187,5 +188,6 @@ class EXU extends Module {
             //ecall
             //mret
         }
+        alu_result_reg := alu.io.alu_result
     }
 }
