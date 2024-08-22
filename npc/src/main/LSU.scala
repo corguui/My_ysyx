@@ -157,6 +157,7 @@ class LSU extends Module {
     io.b_mem_exu.bready := delay_b.io.outData & bready_reg
 
     val wbu_data = Reg(new LSUtoWBU)
+    io.out2wbu.bits := 0.U 
     when(io.out2wbu.valid)
     {
     io.out2wbu.bits := wbu_data
