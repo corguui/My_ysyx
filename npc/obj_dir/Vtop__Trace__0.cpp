@@ -124,11 +124,11 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
         bufp->chgBit(oldp+75,(vlSelf->top__DOT__Mem__DOT__bvalid_reg));
         bufp->chgBit(oldp+76,(vlSelf->top__DOT__LSU__DOT__io_b_mem_exu_bready_0));
         bufp->chgBit(oldp+77,(vlSelf->top__DOT__LSU__DOT__m2EXUstate));
-        bufp->chgBit(oldp+78,(vlSelf->top__DOT__LSU__DOT__rready_reg));
-        bufp->chgIData(oldp+79,(vlSelf->top__DOT__LSU__DOT__mem_raddr_reg),32);
-        bufp->chgIData(oldp+80,(vlSelf->top__DOT__LSU__DOT__mem_rmask_reg),32);
-        bufp->chgBit(oldp+81,(vlSelf->top__DOT__LSU__DOT__mem_ren_reg));
-        bufp->chgBit(oldp+82,(vlSelf->top__DOT__LSU__DOT__exu2in_valid));
+        bufp->chgBit(oldp+78,(vlSelf->top__DOT__LSU__DOT__exu2in_valid));
+        bufp->chgBit(oldp+79,(vlSelf->top__DOT__LSU__DOT__rready_reg));
+        bufp->chgIData(oldp+80,(vlSelf->top__DOT__LSU__DOT__mem_raddr_reg),32);
+        bufp->chgIData(oldp+81,(vlSelf->top__DOT__LSU__DOT__mem_rmask_reg),32);
+        bufp->chgBit(oldp+82,(vlSelf->top__DOT__LSU__DOT__mem_ren_reg));
         bufp->chgBit(oldp+83,(vlSelf->top__DOT__LSU__DOT__rvalid_reg));
         bufp->chgBit(oldp+84,(vlSelf->top__DOT__LSU__DOT__bready_reg));
         bufp->chgIData(oldp+85,(vlSelf->top__DOT__LSU__DOT__mem_awaddr_reg),32);
