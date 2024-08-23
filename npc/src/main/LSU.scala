@@ -45,10 +45,10 @@ class LSU extends Module {
         val exu2in = Flipped(Decoupled(new EXUtoLSU))
         val out2wbu = Decoupled(new LSUtoWBU)
         val ar_lsu_mem = (new LSUtoMem_ar)
-        val r_mem_lsu = Flipped(new MemtoEXU_r)
+        val r_mem_lsu = Flipped(new MemtoLSU_r)
         val w_lsu_mem = (new LSUtoMem_w)
         val aw_lsu_mem = (new LSUtoMem_aw)
-        val b_mem_lsu = Flipped(new MemtoEXU_b)
+        val b_mem_lsu = Flipped(new MemtoLSU_b)
     })
 
     //LSU to EXU
