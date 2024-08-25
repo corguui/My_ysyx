@@ -85,6 +85,7 @@ class SRAM extends Module {
         val axi_aw = Flipped(new AXI_aw) 
         val axi_b = (new AXI_b)
     })
+    
 /*
     class Mem extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
@@ -103,6 +104,7 @@ class SRAM extends Module {
 		addPath("./src/main/Mem.v")
   	}
     */
+
     //Mem init
     //val m = Module(new Mem)
     val m = Module(new Memory)
