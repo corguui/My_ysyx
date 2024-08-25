@@ -9,7 +9,7 @@ module Mem(
     input [31:0] m_raddr,
     input [31:0] m_rmask,
     input m_ren,
-    output reg [31:0] m_rdata,
+    output reg [31:0] m_rdata
     //output m_wready
 
 ); 
