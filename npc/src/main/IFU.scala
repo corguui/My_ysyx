@@ -30,11 +30,11 @@ class IFU extends Module {
 	val io = IO(new Bundle{
 		val out = Decoupled(new IFUtoIDU)
 		val exu2in = Flipped(Decoupled(new EXUtoIFU))
-		val ifu_axi_ar = (new ifu_axi_ar)
-		val ifu_axi_r = Flipped(new ifu_axi_r)
-		val ifu_axi_aw = (new ifu_axi_aw)
-		val ifu_axi_w = (new ifu_axi_w)
-		val ifu_axi_b = Flipped(new ifu_axi_b)
+		val ifu_axi_ar = (new AXI_ar)
+		val ifu_axi_r = Flipped(new AXI_r)
+		val ifu_axi_aw = (new AXI_aw)
+		val ifu_axi_w = (new AXI_w)
+		val ifu_axi_b = Flipped(new AXI_b)
 		val ifu_sta = Output(Bool())
 	})
 	io.ifu_axi_aw.awvalid := false.B

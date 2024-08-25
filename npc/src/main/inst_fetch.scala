@@ -56,23 +56,23 @@ class Inst_fetch extends Module {
     val arvalid_reg = RegNext(io.axi_ar.arvalid,0.U)
 
     io.axi_ar.arready := true.B
-    io.axi_r.inst := 0.U 
+    io.axi_r.rdata := 0.U 
     io.axi_r.rresp := 0.U 
     io.axi_r.rvalid := rvalid_reg
 
     when(io.axi_ar.arvalid) {
         rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
         vlg_pc_read.io.pc_en := true.B
-        vlg_pc_read.io.pc := io.axi_ar.pc
+        vlg_pc_read.io.pc := io.axi_ar.raddr
         delay.io.inData := vlg_pc_read.io.inst
         // invalid的限制是在w和aw拉高时拉高一周期而已
         delay.io.inValid := Mux(arvalid_reg=/=io.axi_ar.arvalid & io.axi_ar.arvalid === 1.U,true.B,false.B) 
         resp := 1.U
         when((io.axi_r.rready) & (io.axi_r.rvalid)) {
-            io.axi_r.inst := rdata_reg
+            io.axi_r.rdata := rdata_reg
             io.axi_r.rresp := rresp_reg
         }.otherwise{
-            io.axi_r.inst := rdata_reg 
+            io.axi_r.rdata := rdata_reg 
             io.axi_r.rresp := 0.U 
         }
     }.otherwise {

@@ -20,10 +20,10 @@ class MemtoLSU_b extends Bundle {
 
 class LSU_mem extends Module {
     val io = IO(new Bundle {
-        val ar_lsu_mem = Flipped(new LSUtoMem_ar) 
+        val ar_lsu_mem = Flipped(new AXI_ar) 
         val r_mem_lsu = (new MemtoLSU_r)
-        val w_lsu_mem = Flipped(new LSUtoMem_w) 
-        val aw_lsu_mem = Flipped(new LSUtoMem_aw) 
+        val w_lsu_mem = Flipped(new AXI_w) 
+        val aw_lsu_mem = Flipped(new AXI_aw) 
         val b_mem_lsu = (new MemtoLSU_b)
     })
 
