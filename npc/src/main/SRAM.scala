@@ -4,7 +4,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-/*
+
 class Memory extends Module {
     val io = IO(new Bundle {
         val m_raddr = Input(UInt(32.W))
@@ -45,7 +45,7 @@ class Memory extends Module {
 
 
 }
-*/
+
 
 class AXI_r extends Bundle {
     val rdata = Output(UInt(32.W))
@@ -103,8 +103,8 @@ class SRAM extends Module {
 		addPath("./src/main/Mem.v")
   	}
     //Mem init
-    val m = Module(new Mem)
-    //val m = Module(new Memory)
+    //val m = Module(new Mem)
+    val m = Module(new Memory)
     m.io.clock := clock
     m.io.m_waddr := 0.U
     m.io.m_wdata := 0.U 
