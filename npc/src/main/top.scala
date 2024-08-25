@@ -14,8 +14,10 @@ class top extends Module {
   val LSU = Module(new LSU)
   val WBU = Module(new WBU)
   val Reg = Module(new Reg)
-  val Mem = Module(new LSU_mem)
-  val Inst_fetch = Module(new Inst_fetch)
+  val SRAM = Module(new SRAM)
+  val AXI_arbiter = Module(new AXI_arbiter)
+  //val Mem = Module(new LSU_mem)
+  //val Inst_fetch = Module(new Inst_fetch)
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
@@ -34,18 +36,25 @@ class top extends Module {
   Reg.io.csr_wen_1 := WBU.io.csr_wen_1
   Reg.io.csr_wen_2 := WBU.io.csr_wen_2
 
-  Mem.io.ar_lsu_mem <> LSU.io.ar_lsu_mem
-  LSU.io.r_mem_lsu <> Mem.io.r_mem_lsu
-  Mem.io.w_lsu_mem <> LSU.io.w_lsu_mem
-  Mem.io.aw_lsu_mem <> LSU.io.aw_lsu_mem
-  LSU.io.b_mem_lsu <> Mem.io.b_mem_lsu
+  AXI_arbiter.io.ifu_axi_ar <> IFU.io.axi_ar
+  AXI_arbiter.io.ifu_axi_aw <> IFU.io.axi_aw
+  AXI_arbiter.io.ifu_axi_w <> IFU.io.axi_w
+  IFU.io.axi_r <> AXI_arbiter.io.ifu_axi_r
+  IFU.io.axi_b <> AXI_arbiter.io.ifu_axi_b
+  AXI_arbiter.io.ifu_sta := IFU.io.ifu_sta
 
-  Inst_fetch.io.axi_ar <> IFU.io.axi_ar
-  IFU.io.axi_r <> Inst_fetch.io.axi_r
-  Inst_fetch.io.axi_aw <> IFU.io.axi_aw
-  Inst_fetch.io.axi_w <> IFU.io.axi_w
-  IFU.io.axi_b <> Inst_fetch.io.axi_b
-  
+  AXI_arbiter.io.lsu_axi_ar <> LSU.io.axi_ar
+  AXI_arbiter.io.lsu_axi_aw <> LSU.io.axi_aw
+  AXI_arbiter.io.lsu_axi_w <> LSU.io.axi_w
+  LSU.io.axi_r <> AXI_arbiter.io.lsu_axi_r
+  LSU.io.axi_b <> AXI_arbiter.io.lsu_axi_b
+  AXI_arbiter.io.lsu_sta := LSU.io.lsu_sta
+
+  SRAM.io.axi_ar <> AXI_arbiter.io.axi_ar
+  SRAM.io.axi_aw <> AXI_arbiter.io.axi_aw
+  SRAM.io.axi_w <> AXI_arbiter.io.axi_w
+  AXI_arbiter.io.axi_r <> SRAM.io.axi_r
+  AXI_arbiter.io.axi_b <> SRAM.io.axi_b
 
   io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 

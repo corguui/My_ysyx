@@ -19,20 +19,6 @@ class pcreadmem extends Module{
 	
 }
 */
-class AXI_ar extends Bundle{
-	val pc 	= Output(UInt(32.W))
-	val arvalid = Output(Bool())
-	val arready = Input(Bool())
-}
-class AXI_aw extends Bundle{
-	val awvalid = Output(Bool())
-	val awready = Input(Bool())
-}
-class AXI_w extends Bundle{
-	val wvalid = Output(Bool())
-	val wready = Input(Bool())
-}
-
 
 class IFUtoIDU extends Bundle {
 	val snpc = Output(UInt(32.W))
@@ -44,16 +30,17 @@ class IFU extends Module {
 	val io = IO(new Bundle{
 		val out = Decoupled(new IFUtoIDU)
 		val exu2in = Flipped(Decoupled(new EXUtoIFU))
-		val axi_ar = (new AXI_ar)
-		val axi_r = Flipped(new AXI_r)
-		val axi_aw = (new AXI_aw)
-		val axi_w = (new AXI_w)
-		val axi_b = Flipped(new AXI_b)
+		val ifu_axi_ar = (new ifu_axi_ar)
+		val ifu_axi_r = Flipped(new ifu_axi_r)
+		val ifu_axi_aw = (new ifu_axi_aw)
+		val ifu_axi_w = (new ifu_axi_w)
+		val ifu_axi_b = Flipped(new ifu_axi_b)
+		val ifu_sta = Output(Bool())
 	})
-	io.axi_aw.awvalid := false.B
-	io.axi_w.wvalid := false.B
-	io.axi_b.bready := false.B
-	assert(io.axi_b.bvalid === false.B, "axi_b.bvalid must be false")
+	io.ifu_axi_aw.awvalid := false.B
+	io.ifu_axi_w.wvalid := false.B
+	io.ifu_axi_b.bready := false.B
+	assert(io.ifu_axi_b.bvalid === false.B, "ifu_axi_b.bvalid must be false")
 
 	//IFU recive IDU 
 	val idu2s_idle :: idu2s_wait_ready :: Nil = Enum(2)
@@ -63,7 +50,7 @@ class IFU extends Module {
 		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
 
-	io.out.valid := io.axi_r.rready 
+	io.out.valid := io.ifu_axi_r.rready 
 
 	//IFU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
@@ -86,12 +73,14 @@ class IFU extends Module {
 	
 	val rready_reg = RegInit(false.B)
 	val ardata_reg = RegEnable(indata.dnpc,0.U,exu2in_reg)
-	val inst_reg 	= RegEnable(inst,0.U,io.axi_ar.arvalid)
+	val inst_reg 	= RegEnable(inst,0.U,io.ifu_axi_ar.arvalid)
 	//def delay(x:Bool)={RegNext(x)}
-	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.axi_r.rready | exu2in_reg ))
-	io.axi_ar.pc := 0.U
-	io.axi_ar.arvalid :=  arvalid_reg
-	io.axi_r.rready := rready_reg
+	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_r.rready | exu2in_reg ))
+	io.ifu_axi_ar.raddr := 0.U
+	io.ifu_axi_ar.rmask := 4.U
+	io.ifu_axi_ar.arvalid :=  arvalid_reg
+	io.ifu_sta := Mux(io.ifu_axi_ar.arvalid,true.B,false.B)
+	io.ifu_axi_r.rready := rready_reg
 
 	io.out.bits.pc := 0.U
 	io.out.bits.snpc := io.out.bits.pc + 4.U
@@ -101,20 +90,20 @@ class IFU extends Module {
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
 		io.out.bits.pc := RegNext(indata.dnpc.asSInt, 0x80000000.S).asUInt
-		when(io.axi_ar.arready & io.axi_ar.arvalid){
-			io.axi_ar.pc := ardata_reg 
-			when(io.axi_r.rvalid){
+		when(io.ifu_axi_ar.arready & io.ifu_axi_ar.arvalid){
+			io.ifu_axi_ar.raddr := ardata_reg 
+			when(io.ifu_axi_r.rvalid){
 				rready_reg := true.B
-				when(io.axi_r.rresp === 1.U){
-					inst := io.axi_r.inst
+				when(io.ifu_axi_r.rresp === 1.U){
+					inst := io.ifu_axi_r.inst
 				}.otherwise{
-					inst := io.axi_r.inst
+					inst := io.ifu_axi_r.inst
 				}
 			}.otherwise{
 				rready_reg := false.B
 			}
 		}.otherwise{
-			io.axi_ar.pc := 0.U
+			io.ifu_axi_ar.raddr := 0.U
 			rready_reg := false.B
 		}
 

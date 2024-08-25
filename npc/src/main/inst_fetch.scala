@@ -4,17 +4,6 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-class AXI_r extends Bundle {
-    val inst = Output(UInt(32.W))
-    val rresp = Output(UInt(2.W))
-    val rvalid = Output(Bool())
-    val rready = Input(Bool())
-}
-class AXI_b extends Bundle {
-    val bvalid = Output(Bool())
-    val bready = Input(Bool())
-}
-
 class Inst_fetch extends Module {
     val io = IO(new Bundle {
         val axi_r = (new AXI_r)
@@ -29,6 +18,7 @@ class Inst_fetch extends Module {
     io.axi_w.wready := false.B
     assert(io.axi_w.wvalid === false.B, "AXI_W should not be valid")
     io.axi_b.bvalid := false.B
+    io.axi_b.bresp := 0.U
 
 
 	// 声明DPI-C函数的BlackBox模块
