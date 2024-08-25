@@ -49,6 +49,7 @@ class IDU extends Module {
 	//io.out2exu.valid := mem_ren | mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
 	io.out2exu.bits := exu_data
 	
+	/*
     class npc_break extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
 			val inst = Input(UInt(32.W))
@@ -56,7 +57,7 @@ class IDU extends Module {
 
 		addPath("./src/main/npc_break.v")
   	}
-
+	*/
 
     //IDU to IFU
 	val m2IFUidle :: m2IFUprocess :: Nil = Enum(2)
@@ -70,8 +71,8 @@ class IDU extends Module {
     in_data := io.ifu2in.bits
 	val state_reg = RegNext(state,m2IFUidle)
 
-	val npc_break = Module(new npc_break)
-	npc_break.io.inst := in_data.inst
+	//val npc_break = Module(new npc_break)
+	//npc_break.io.inst := in_data.inst
 
 	val opcode = in_data.inst(6,0)
 	val rd = in_data.inst(11,7)
