@@ -4,7 +4,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-
+/*
 class Memory extends Module {
     val io = IO(new Bundle {
         val m_raddr = Input(UInt(32.W))
@@ -45,7 +45,7 @@ class Memory extends Module {
 
 
 }
-
+*/
 
 class AXI_r extends Bundle {
     val rdata = Output(UInt(32.W))
@@ -85,8 +85,7 @@ class SRAM extends Module {
         val axi_aw = Flipped(new AXI_aw) 
         val axi_b = (new AXI_b)
     })
-    
-/*
+
     class Mem extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
         val clock = Input(Clock())
@@ -103,12 +102,11 @@ class SRAM extends Module {
 
 		addPath("./src/main/Mem.v")
   	}
-    */
 
     //Mem init
-    //val m = Module(new Mem)
-    val m = Module(new Memory)
-    //m.io.clock := clock
+    val m = Module(new Mem)
+    //val m = Module(new Memory)
+    m.io.clock := clock
     m.io.m_waddr := 0.U
     m.io.m_wdata := 0.U 
     m.io.m_wmask := 0.U 
