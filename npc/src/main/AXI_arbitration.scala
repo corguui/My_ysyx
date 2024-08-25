@@ -35,6 +35,25 @@ class AXI_arbiter extends Module {
     io.axi_aw.awaddr := 0.U
     io.axi_aw.awvalid := false.B
     io.axi_b.bready := false.B
+
+    io.lsu_axi_ar.arready := false.B
+    io.lsu_axi_r.rdata := 0.U
+    io.lsu_axi_r.rresp := 0.U
+    io.lsu_axi_r.rvalid := false.B
+    io.lsu_axi_aw.awready := false.B
+    io.lsu_axi_w.wready := false.B
+    io.lsu_axi_b.bvalid := false.B
+    io.lsu_axi_b.bresp := 0.U
+
+    io.ifu_axi_ar.arready := false.B
+    io.ifu_axi_r.rdata := 0.U
+    io.ifu_axi_r.rresp := 0.U
+    io.ifu_axi_r.rvalid := false.B
+    io.ifu_axi_aw.awready := false.B
+    io.ifu_axi_w.wready := false.B
+    io.ifu_axi_b.bvalid := false.B
+    io.ifu_axi_b.bresp := 0.U
+
     
 
     when(io.ifu_sta) {
