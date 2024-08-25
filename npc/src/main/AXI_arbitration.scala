@@ -25,13 +25,17 @@ class AXI_arbiter extends Module {
         val ifu_sta = Input(Bool())
     })
     
-    val axi_ar_reg = Reg(new AXI_ar)
-    val axi_aw_reg = Reg(new AXI_aw)
-    val axi_w_reg = Reg(new AXI_w)
-
-    io.axi_ar <> axi_ar_reg
-    io.axi_aw <> axi_aw_reg
-    io.axi_w <> axi_w_reg
+    io.axi_ar.raddr := 0.U
+    io.axi_ar.rmask := 0.U
+    io.axi_ar.arvalid := false.B
+    io.axi_r.rready := false.B
+    io.axi_w.wdata := 0.U
+    io.axi_w.wmask := 0.U
+    io.axi_w.wvalid := false.B
+    io.axi_aw.awaddr := 0.U
+    io.axi_aw.awvalid := false.B
+    io.axi_b.bready := false.B
+    
 
     when(io.ifu_sta) {
         io.axi_ar <> io.ifu_axi_ar
@@ -45,9 +49,5 @@ class AXI_arbiter extends Module {
         io.axi_w <> io.lsu_axi_w
         io.lsu_axi_r <> io.axi_r
         io.lsu_axi_b <> io.axi_b
-    }.otherwise{
-        io.axi_ar <> axi_ar_reg
-        io.axi_aw <> axi_aw_reg
-        io.axi_w <> axi_w_reg
     }
 }
