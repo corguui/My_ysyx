@@ -4,27 +4,44 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-class MemtoLSU_r extends Bundle {
+
+class AXI_r extends Bundle {
     val rdata = Output(UInt(32.W))
     val rresp = Output(UInt(2.W))
     val rvalid = Output(Bool())
     val rready = Input(Bool())
 }
 
-class MemtoLSU_b extends Bundle {
+class AXI_b extends Bundle {
     val bresp = Output(UInt(2.W))
     val bvalid = Output(Bool())
     val bready = Input(Bool())
 }
+class AXI_ar extends Bundle {
+    val raddr = Output(UInt(32.W))
+    val rmask = Output(UInt(3.W))
+    val arvalid = Output(Bool())
+    val arready = Input(Bool())
+}
+class AXI_w extends Bundle {
+    val wdata = Output(UInt(32.W))
+    val wmask = Output(UInt(3.W))
+    val wvalid = Output(Bool())
+    val wready = Input(Bool())
+}
+class AXI_aw extends Bundle {
+    val awaddr = Output(UInt(32.W))
+    val awvalid = Output(Bool())
+    val awready = Input(Bool())
+}
 
-
-class LSU_mem extends Module {
+class SRAM extends Module {
     val io = IO(new Bundle {
-        val ar_lsu_mem = Flipped(new AXI_ar) 
-        val r_mem_lsu = (new MemtoLSU_r)
-        val w_lsu_mem = Flipped(new AXI_w) 
-        val aw_lsu_mem = Flipped(new AXI_aw) 
-        val b_mem_lsu = (new MemtoLSU_b)
+        val axi_ar = Flipped(new AXI_ar) 
+        val axi_r = (new AXI_r)
+        val axi_w = Flipped(new AXI_w) 
+        val axi_aw = Flipped(new AXI_aw) 
+        val axi_b = (new AXI_b)
     })
 
     class Mem extends BlackBox with HasBlackBoxPath {
@@ -62,7 +79,7 @@ class LSU_mem extends Module {
     val delay_w = Module(new DelayModule)
     delay_w.io.inData := 0.U
     delay_w.io.inValid :=0.U
-    val wready_reg = RegEnable(m.io.m_wready,0.U,(io.w_lsu_mem.wvalid & io.aw_lsu_mem.awvalid))
+    val wready_reg = RegEnable(m.io.m_wready,0.U,(io.axi_w.wvalid & io.axi_aw.awvalid))
 
     //AXI-lite read member
     val resp = Wire(UInt(2.W))
@@ -70,40 +87,40 @@ class LSU_mem extends Module {
     val rvalid_en = Wire(Bool())
     rvalid_en := false.B
 
-    val rdata_reg = RegEnable(delay.io.outData ,0.U,io.ar_lsu_mem.arvalid)
-    val rvalid_reg = RegEnable(rvalid_en,0.U, (rvalid_en | io.r_mem_lsu.rready))
-    val rresp_reg = RegEnable(resp,0.U,io.ar_lsu_mem.arvalid)
-    val arvalid_reg =RegNext(io.ar_lsu_mem.arvalid,0.U)
+    val rdata_reg = RegEnable(delay.io.outData ,0.U,io.axi_ar.arvalid)
+    val rvalid_reg = RegEnable(rvalid_en,0.U, (rvalid_en | io.axi_r.rready))
+    val rresp_reg = RegEnable(resp,0.U,io.axi_ar.arvalid)
+    val arvalid_reg =RegNext(io.axi_ar.arvalid,0.U)
 
-    io.ar_lsu_mem.arready := true.B
-    io.r_mem_lsu.rdata := 2.U 
-    io.r_mem_lsu.rresp := 3.U
-    io.r_mem_lsu.rvalid := rvalid_reg 
+    io.axi_ar.arready := true.B
+    io.axi_r.rdata := 2.U 
+    io.axi_r.rresp := 3.U
+    io.axi_r.rvalid := rvalid_reg 
 
     //AXI-lite write member
     val bresp = Wire(UInt(2.W))
     bresp := 0.U
     val bvalid_en = Wire(Bool())
     bvalid_en := false.B
-    val bvalid_reg = RegEnable(bvalid_en,0.U,(bvalid_en | io.b_mem_lsu.bready))
-    val bresp_reg = RegEnable(bresp,0.U,(io.w_lsu_mem.wvalid | io.aw_lsu_mem.awvalid))
-    val waddr_reg = RegNext(io.aw_lsu_mem.awaddr,0.U)
-    val wmask_reg = RegNext(io.w_lsu_mem.wmask,0.U)
-    val awvalid_reg =RegNext(io.aw_lsu_mem.awvalid,0.U)
-    val wvalid_reg = RegNext(io.w_lsu_mem.wvalid,0.U)
-    io.aw_lsu_mem.awready := true.B
-    io.w_lsu_mem.wready := true.B
-    io.b_mem_lsu.bresp :=  3.U 
-    io.b_mem_lsu.bvalid := bvalid_reg
+    val bvalid_reg = RegEnable(bvalid_en,0.U,(bvalid_en | io.axi_b.bready))
+    val bresp_reg = RegEnable(bresp,0.U,(io.axi_w.wvalid | io.axi_aw.awvalid))
+    val waddr_reg = RegNext(io.axi_aw.awaddr,0.U)
+    val wmask_reg = RegNext(io.axi_w.wmask,0.U)
+    val awvalid_reg =RegNext(io.axi_aw.awvalid,0.U)
+    val wvalid_reg = RegNext(io.axi_w.wvalid,0.U)
+    io.axi_aw.awready := true.B
+    io.axi_w.wready := true.B
+    io.axi_b.bresp :=  3.U 
+    io.axi_b.bvalid := bvalid_reg
 
     //AXI-lite read part
-    when(io.ar_lsu_mem.arvalid){ 
-        m.io.m_raddr := io.ar_lsu_mem.raddr
-        m.io.m_rmask := io.ar_lsu_mem.rmask
-        m.io.m_ren := io.ar_lsu_mem.arvalid
+    when(io.axi_ar.arvalid){ 
+        m.io.m_raddr := io.axi_ar.raddr
+        m.io.m_rmask := io.axi_ar.rmask
+        m.io.m_ren := io.axi_ar.arvalid
         delay.io.inData := m.io.m_rdata
         // invalid的限制是在w和aw拉高时拉高一周期而已
-        delay.io.inValid := Mux(arvalid_reg=/=io.ar_lsu_mem.arvalid & io.ar_lsu_mem.arvalid === 1.U,true.B,false.B)
+        delay.io.inValid := Mux(arvalid_reg=/=io.axi_ar.arvalid & io.axi_ar.arvalid === 1.U,true.B,false.B)
         rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa00003f8.S.asUInt)&(m.io.m_raddr <= 0xa00003ff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
@@ -119,45 +136,45 @@ class LSU_mem extends Module {
         }.otherwise{
             resp := 0.U
         }
-        when((io.r_mem_lsu.rready)&(io.r_mem_lsu.rvalid)){
-            io.r_mem_lsu.rdata := rdata_reg 
-            io.r_mem_lsu.rresp := rresp_reg 
+        when((io.axi_r.rready)&(io.axi_r.rvalid)){
+            io.axi_r.rdata := rdata_reg 
+            io.axi_r.rresp := rresp_reg 
             rvalid_en := false.B
         }.otherwise{
-            io.r_mem_lsu.rdata := 0.U 
-            io.r_mem_lsu.rresp := 0.U
+            io.axi_r.rdata := 0.U 
+            io.axi_r.rresp := 0.U
         }
     }.otherwise{
         rvalid_en := false.B   
     }
     //AXI-lite write part
-    when(io.aw_lsu_mem.awvalid){
-        m.io.m_waddr := io.aw_lsu_mem.awaddr
+    when(io.axi_aw.awvalid){
+        m.io.m_waddr := io.axi_aw.awaddr
     }.otherwise{
         m.io.m_waddr := 0.U
     }
-    when(io.w_lsu_mem.wvalid){
-        m.io.m_wdata := io.w_lsu_mem.wdata
-        m.io.m_wmask := io.w_lsu_mem.wmask
+    when(io.axi_w.wvalid){
+        m.io.m_wdata := io.axi_w.wdata
+        m.io.m_wmask := io.axi_w.wmask
     }.otherwise{
         m.io.m_wdata := 0.U
         m.io.m_wmask := 0.U
     }
-    when(io.w_lsu_mem.wvalid & io.aw_lsu_mem.awvalid){
+    when(io.axi_w.wvalid & io.axi_aw.awvalid){
         delay_w.io.inData := m.io.m_wready
         // invalid的限制是在w和aw拉高时拉高一周期而已
-        delay_w.io.inValid :=Mux((io.w_lsu_mem.wvalid =/= wvalid_reg & io.w_lsu_mem.wvalid === 1.U & io.aw_lsu_mem.awvalid =/= awvalid_reg & io.aw_lsu_mem.awvalid === 1.U),true.B,false.B) 
-        m.io.m_wen := Mux((io.w_lsu_mem.wmask =/= wmask_reg) & (io.aw_lsu_mem.awaddr =/= waddr_reg) ,true.B,false.B)
+        delay_w.io.inValid :=Mux((io.axi_w.wvalid =/= wvalid_reg & io.axi_w.wvalid === 1.U & io.axi_aw.awvalid =/= awvalid_reg & io.axi_aw.awvalid === 1.U),true.B,false.B) 
+        m.io.m_wen := Mux((io.axi_w.wmask =/= wmask_reg) & (io.axi_aw.awaddr =/= waddr_reg) ,true.B,false.B)
         bvalid_en := Mux(delay_w.io.delayDone,true.B,false.B)
-        when(((io.aw_lsu_mem.awaddr >= 0x80000000.S.asUInt) & ( io.aw_lsu_mem.awaddr < 0x8fffffff.S.asUInt)) | (( io.aw_lsu_mem.awaddr >= 0xa00003f8.S.asUInt) &( io.aw_lsu_mem.awaddr <= 0xa00003ff.S.asUInt)) | (( io.aw_lsu_mem.awaddr >= 0xa0000048.S.asUInt) &( io.aw_lsu_mem.awaddr <= 0xa000004f.S.asUInt))){
+        when(((io.axi_aw.awaddr >= 0x80000000.S.asUInt) & ( io.axi_aw.awaddr < 0x8fffffff.S.asUInt)) | (( io.axi_aw.awaddr >= 0xa00003f8.S.asUInt) &( io.axi_aw.awaddr <= 0xa00003ff.S.asUInt)) | (( io.axi_aw.awaddr >= 0xa0000048.S.asUInt) &( io.axi_aw.awaddr <= 0xa000004f.S.asUInt))){
                 bresp := 1.U
         }.otherwise{
                 bresp := 0.U
         }
-        when(io.b_mem_lsu.bready & io.b_mem_lsu.bvalid){
-            io.b_mem_lsu.bresp := bresp_reg
+        when(io.axi_b.bready & io.axi_b.bvalid){
+            io.axi_b.bresp := bresp_reg
         }.otherwise{
-            io.b_mem_lsu.bresp := 0.U
+            io.axi_b.bresp := 0.U
         }
     }.otherwise{
         m.io.m_wen := false.B

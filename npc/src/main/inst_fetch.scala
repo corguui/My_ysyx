@@ -4,17 +4,6 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-class AXI_r extends Bundle {
-    val inst = Output(UInt(32.W))
-    val rresp = Output(UInt(2.W))
-    val rvalid = Output(Bool())
-    val rready = Input(Bool())
-}
-class AXI_b extends Bundle {
-    val bvalid = Output(Bool())
-    val bready = Input(Bool())
-}
-
 class Inst_fetch extends Module {
     val io = IO(new Bundle {
         val axi_r = (new AXI_r)
@@ -29,6 +18,7 @@ class Inst_fetch extends Module {
     io.axi_w.wready := false.B
     assert(io.axi_w.wvalid === false.B, "AXI_W should not be valid")
     io.axi_b.bvalid := false.B
+    io.axi_b.bresp := 0.U
 
 
 	// 声明DPI-C函数的BlackBox模块
@@ -66,23 +56,23 @@ class Inst_fetch extends Module {
     val arvalid_reg = RegNext(io.axi_ar.arvalid,0.U)
 
     io.axi_ar.arready := true.B
-    io.axi_r.inst := 0.U 
+    io.axi_r.rdata := 0.U 
     io.axi_r.rresp := 0.U 
     io.axi_r.rvalid := rvalid_reg
 
     when(io.axi_ar.arvalid) {
         rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
         vlg_pc_read.io.pc_en := true.B
-        vlg_pc_read.io.pc := io.axi_ar.pc
+        vlg_pc_read.io.pc := io.axi_ar.raddr
         delay.io.inData := vlg_pc_read.io.inst
         // invalid的限制是在w和aw拉高时拉高一周期而已
         delay.io.inValid := Mux(arvalid_reg=/=io.axi_ar.arvalid & io.axi_ar.arvalid === 1.U,true.B,false.B) 
         resp := 1.U
         when((io.axi_r.rready) & (io.axi_r.rvalid)) {
-            io.axi_r.inst := rdata_reg
+            io.axi_r.rdata := rdata_reg
             io.axi_r.rresp := rresp_reg
         }.otherwise{
-            io.axi_r.inst := rdata_reg 
+            io.axi_r.rdata := rdata_reg 
             io.axi_r.rresp := 0.U 
         }
     }.otherwise {

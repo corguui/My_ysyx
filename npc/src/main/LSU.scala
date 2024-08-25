@@ -5,23 +5,6 @@ import chisel3.util._
 import chisel3.experimental._
 
 
-class LSUtoMem_ar extends Bundle {
-    val raddr = Output(UInt(32.W))
-    val rmask = Output(UInt(3.W))
-    val arvalid = Output(Bool())
-    val arready = Input(Bool())
-}
-class LSUtoMem_w extends Bundle {
-    val wdata = Output(UInt(32.W))
-    val wmask = Output(UInt(3.W))
-    val wvalid = Output(Bool())
-    val wready = Input(Bool())
-}
-class LSUtoMem_aw extends Bundle {
-    val awaddr = Output(UInt(32.W))
-    val awvalid = Output(Bool())
-    val awready = Input(Bool())
-}
 class LSUtoWBU extends Bundle {
     val snpc = Output(UInt(32.W))
 	val pc = Output(UInt(32.W))
@@ -44,11 +27,12 @@ class LSU extends Module {
     val io = IO(new Bundle {
         val exu2in = Flipped(Decoupled(new EXUtoLSU))
         val out2wbu = Decoupled(new LSUtoWBU)
-        val ar_lsu_mem = (new LSUtoMem_ar)
-        val r_mem_lsu = Flipped(new MemtoLSU_r)
-        val w_lsu_mem = (new LSUtoMem_w)
-        val aw_lsu_mem = (new LSUtoMem_aw)
-        val b_mem_lsu = Flipped(new MemtoLSU_b)
+        val lsu_axi_ar = (new AXI_ar)
+        val lsu_axi_r = Flipped(new AXI_r)
+        val lsu_axi_w = (new AXI_w)
+        val lsu_axi_aw = (new AXI_aw)
+        val lsu_axi_b = Flipped(new AXI_b)
+        val lsu_sta = Output(Bool())
     })
 
     //LSU to EXU
@@ -72,11 +56,11 @@ class LSU extends Module {
     val state_reg = RegNext(m2EXUstate,m2EXUidle)
     when(io.exu2in.bits.inst_type === 3.U)
     {
-    io.out2wbu.valid :=  io.r_mem_lsu.rready
+    io.out2wbu.valid :=  io.lsu_axi_r.rready
     }
     .elsewhen(io.exu2in.bits.inst_type === 4.U)
     {
-    io.out2wbu.valid :=  io.b_mem_lsu.bready
+    io.out2wbu.valid :=  io.lsu_axi_b.bready
     }
     .otherwise
     {
@@ -89,30 +73,30 @@ class LSU extends Module {
     val rready_reg = RegInit(0.U)
     val mem_raddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
     val mem_rmask_reg = RegEnable(io.exu2in.bits.m_rmask,0.U,exu2in_valid)
-    val mem_ren_reg = RegEnable(io.exu2in.bits.mem_ren,0.U,(exu2in_valid | io.r_mem_lsu.rready))
+    val mem_ren_reg = RegEnable(io.exu2in.bits.mem_ren,0.U,(exu2in_valid | io.lsu_axi_r.rready))
 
-    io.ar_lsu_mem.rmask := 0.U
-    io.ar_lsu_mem.raddr := 0.U 
-    //io.r_mem_lsu.rready := rready_reg 
-    //io.ar_lsu_mem.arvalid := mem_ren_reg           
+    io.lsu_axi_ar.rmask := 0.U
+    io.lsu_axi_ar.raddr := 0.U 
+    //io.lsu_axi_r.rready := rready_reg 
+    //io.lsu_axi_ar.arvalid := mem_ren_reg           
 
     //ar valid delay
     
     val delay_ar = Module(new DelayModule)
     delay_ar.io.inData := 0.U 
     delay_ar.io.inValid := 0.U 
-    io.ar_lsu_mem.arvalid := delay_ar.io.outData & mem_ren_reg 
+    io.lsu_axi_ar.arvalid := delay_ar.io.outData & mem_ren_reg 
     when(io.exu2in.bits.inst_type === 3.U)
     {
     delay_ar.io.inData := mem_ren_reg 
     delay_ar.io.inValid := exu2in_valid_reg 
     }
     //r ready delay
-    val rvalid_reg =RegNext(io.r_mem_lsu.rvalid,0.U)
+    val rvalid_reg =RegNext(io.lsu_axi_r.rvalid,0.U)
     val delay_r = Module(new DelayModule)
     delay_r.io.inData := 0.U
     delay_r.io.inValid := 0.U
-    io.r_mem_lsu.rready := delay_r.io.outData & rready_reg
+    io.lsu_axi_r.rready := delay_r.io.outData & rready_reg
 
 
 
@@ -121,13 +105,13 @@ class LSU extends Module {
     val mem_awaddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
     val mem_wmask_reg = RegEnable(io.exu2in.bits.m_wmask,0.U,exu2in_valid)
     val mem_wdata_reg = RegEnable(io.exu2in.bits.src2,0.U,exu2in_valid)
-    val mem_wen_reg = RegEnable(io.exu2in.bits.mem_wen,0.U,(exu2in_valid | io.b_mem_lsu.bready))
-    io.aw_lsu_mem.awaddr := 0.U
-    io.w_lsu_mem.wdata := 0.U
-    io.w_lsu_mem.wmask := 0.U
-    //io.w_lsu_mem.wvalid := mem_wen_reg 
-    //io.aw_lsu_mem.awvalid := mem_wen_reg 
-    //io.b_mem_lsu.bready := bready_reg
+    val mem_wen_reg = RegEnable(io.exu2in.bits.mem_wen,0.U,(exu2in_valid | io.lsu_axi_b.bready))
+    io.lsu_axi_aw.awaddr := 0.U
+    io.lsu_axi_w.wdata := 0.U
+    io.lsu_axi_w.wmask := 0.U
+    //io.lsu_axi_w.wvalid := mem_wen_reg 
+    //io.lsu_axi_aw.awvalid := mem_wen_reg 
+    //io.lsu_axi_b.bready := bready_reg
 
     //aw valid delay
     val m_wen_reg_delay = RegNext(mem_wen_reg,0.U)
@@ -135,7 +119,7 @@ class LSU extends Module {
     delay_aw.io.inData := 0.U
     delay_aw.io.inValid := 0.U
     //得延迟m_wen_reg一个周期,不然会打印两次
-    io.aw_lsu_mem.awvalid := delay_aw.io.outData &  m_wen_reg_delay
+    io.lsu_axi_aw.awvalid := delay_aw.io.outData &  m_wen_reg_delay
     when(io.exu2in.bits.inst_type === 4.U)
     {
         delay_aw.io.inData := mem_wen_reg
@@ -146,18 +130,18 @@ class LSU extends Module {
     delay_w.io.inData := 0.U
     delay_w.io.inValid := 0.U
     //得延迟m_wen_reg一个周期,不然会打印两次
-    io.w_lsu_mem.wvalid := delay_w.io.outData & m_wen_reg_delay
+    io.lsu_axi_w.wvalid := delay_w.io.outData & m_wen_reg_delay
     when(io.exu2in.bits.inst_type === 4.U)
     {
         delay_w.io.inData := mem_wen_reg
         delay_w.io.inValid := exu2in_valid_reg
     }
     //b ready delay
-    val bvalid_reg = RegNext(io.b_mem_lsu.bvalid,0.U)
+    val bvalid_reg = RegNext(io.lsu_axi_b.bvalid,0.U)
     val delay_b = Module(new DelayModule)
     delay_b.io.inData := 0.U
     delay_b.io.inValid := 0.U
-    io.b_mem_lsu.bready := delay_b.io.outData & bready_reg
+    io.lsu_axi_b.bready := delay_b.io.outData & bready_reg
 
     val wbu_data = Reg(new LSUtoWBU)
     io.out2wbu.bits := wbu_data
@@ -165,6 +149,8 @@ class LSU extends Module {
     //val mem_rdata = RegInit(0.U)
     //val mem_rresp = RegInit(0.U)
     //val mem_bresp = RegInit(0.U)
+
+    io.lsu_sta := Mux(io.lsu_axi_ar.arvalid | (io.lsu_axi_aw.awvalid && io.lsu_axi_w.wvalid) ,1.U,0.U)
 
     io.exu2in.ready := ( m2EXUstate===m2EXUidle )
     when(io.out2wbu.valid)
@@ -191,69 +177,69 @@ class LSU extends Module {
             //IL type
             //is(3.U){
             when(io.exu2in.bits.inst_type === 3.U){
-                when((io.ar_lsu_mem.arready)&(io.ar_lsu_mem.arvalid))
+                when((io.lsu_axi_ar.arready)&(io.lsu_axi_ar.arvalid))
                 {                    
-                    io.ar_lsu_mem.rmask := mem_rmask_reg
-                    io.ar_lsu_mem.raddr := mem_raddr_reg 
-                    when(io.r_mem_lsu.rvalid === 1.U)
+                    io.lsu_axi_ar.rmask := mem_rmask_reg
+                    io.lsu_axi_ar.raddr := mem_raddr_reg 
+                    when(io.lsu_axi_r.rvalid === 1.U)
                     {
                         rready_reg  := 1.U
                         //m2exustate := m2exuidle
                         //r delay
                         delay_r.io.inData := 1.U
-                        delay_r.io.inValid := Mux(rvalid_reg =/= io.r_mem_lsu.rvalid & io.r_mem_lsu.rvalid === 1.U,0.U,1.U)  
-                        wbu_data.mem_rresp := io.r_mem_lsu.rresp
+                        delay_r.io.inValid := Mux(rvalid_reg =/= io.lsu_axi_r.rvalid & io.lsu_axi_r.rvalid === 1.U,0.U,1.U)  
+                        wbu_data.mem_rresp := io.lsu_axi_r.rresp
                         when(io.exu2in.bits.il_us === true.B)
                         {
-                           wbu_data.mem_rdata := io.r_mem_lsu.rdata.asUInt
+                           wbu_data.mem_rdata := io.lsu_axi_r.rdata.asUInt
                         }.otherwise{
                         when(mem_rmask_reg === 1.U)
                         {
-                           wbu_data.mem_rdata := Cat(Fill(24,io.r_mem_lsu.rdata(7)),(io.r_mem_lsu.rdata(7,0)).asSInt).asUInt
+                           wbu_data.mem_rdata := Cat(Fill(24,io.lsu_axi_r.rdata(7)),(io.lsu_axi_r.rdata(7,0)).asSInt).asUInt
                         }.elsewhen(mem_rmask_reg === 2.U)
                         {
-                            wbu_data.mem_rdata := Cat(Fill(16,io.r_mem_lsu.rdata(15)),(io.r_mem_lsu.rdata(15,0)).asSInt).asUInt
+                            wbu_data.mem_rdata := Cat(Fill(16,io.lsu_axi_r.rdata(15)),(io.lsu_axi_r.rdata(15,0)).asSInt).asUInt
                         }.otherwise
                         {
-                            wbu_data.mem_rdata := (io.r_mem_lsu.rdata.asSInt).asUInt
+                            wbu_data.mem_rdata := (io.lsu_axi_r.rdata.asSInt).asUInt
                         }
                         }
                     }.otherwise{
                         rready_reg := 0.U
                     }
                 }.otherwise{
-                    io.ar_lsu_mem.rmask := 0.U 
-                    io.ar_lsu_mem.raddr := 0.U 
+                    io.lsu_axi_ar.rmask := 0.U 
+                    io.lsu_axi_ar.raddr := 0.U 
                     rready_reg := 0.U
                 }
             }
             //s type
             //is(4.U){
             .elsewhen(io.exu2in.bits.inst_type === 4.U){
-                when(io.aw_lsu_mem.awready & io.aw_lsu_mem.awvalid)
+                when(io.lsu_axi_aw.awready & io.lsu_axi_aw.awvalid)
                 {
-                    io.aw_lsu_mem.awaddr := mem_awaddr_reg 
+                    io.lsu_axi_aw.awaddr := mem_awaddr_reg 
                 }.otherwise{
-                    io.aw_lsu_mem.awaddr := 0.U
+                    io.lsu_axi_aw.awaddr := 0.U
                     bready_reg := 0.U
                 }
-                when(io.w_lsu_mem.wready & io.w_lsu_mem.wvalid)
+                when(io.lsu_axi_w.wready & io.lsu_axi_w.wvalid)
                 {
-                    io.w_lsu_mem.wdata := mem_wdata_reg 
-                    io.w_lsu_mem.wmask := mem_wmask_reg 
+                    io.lsu_axi_w.wdata := mem_wdata_reg 
+                    io.lsu_axi_w.wmask := mem_wmask_reg 
                 }.otherwise{
-                    io.w_lsu_mem.wdata := 0.U
-                    io.w_lsu_mem.wmask := 0.U
+                    io.lsu_axi_w.wdata := 0.U
+                    io.lsu_axi_w.wmask := 0.U
                     bready_reg := 0.U
                 }
-                when(io.w_lsu_mem.wvalid & io.w_lsu_mem.wready & io.aw_lsu_mem.awready & io.aw_lsu_mem.awvalid & io.b_mem_lsu.bvalid) 
+                when(io.lsu_axi_w.wvalid & io.lsu_axi_w.wready & io.lsu_axi_aw.awready & io.lsu_axi_aw.awvalid & io.lsu_axi_b.bvalid) 
                 {
                     bready_reg := 1.U
                     //m2exustate := m2exuidle
                     //b ready delay
                     delay_b.io.inData := 1.U
-                    delay_b.io.inValid := Mux(bvalid_reg =/= io.b_mem_lsu.bvalid & io.b_mem_lsu.bvalid === 1.U,0.U,1.U)  
-                    wbu_data.mem_bresp := io.b_mem_lsu.bresp 
+                    delay_b.io.inValid := Mux(bvalid_reg =/= io.lsu_axi_b.bvalid & io.lsu_axi_b.bvalid === 1.U,0.U,1.U)  
+                    wbu_data.mem_bresp := io.lsu_axi_b.bresp 
                 }.otherwise{
                     bready_reg := 0.U
                 }
