@@ -105,7 +105,7 @@ class SRAM extends Module {
     //Mem init
     //val m = Module(new Mem)
     val m = Module(new Memory)
-    m.io.clock := clock
+    //m.io.clock := clock
     m.io.m_waddr := 0.U
     m.io.m_wdata := 0.U 
     m.io.m_wmask := 0.U 
