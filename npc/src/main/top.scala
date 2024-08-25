@@ -36,18 +36,18 @@ class top extends Module {
   Reg.io.csr_wen_1 := WBU.io.csr_wen_1
   Reg.io.csr_wen_2 := WBU.io.csr_wen_2
 
-  AXI_arbiter.io.ifu_axi_ar <> IFU.io.axi_ar
-  AXI_arbiter.io.ifu_axi_aw <> IFU.io.axi_aw
-  AXI_arbiter.io.ifu_axi_w <> IFU.io.axi_w
-  IFU.io.axi_r <> AXI_arbiter.io.ifu_axi_r
-  IFU.io.axi_b <> AXI_arbiter.io.ifu_axi_b
+  AXI_arbiter.io.ifu_axi_ar <> IFU.io.ifu_axi_ar
+  AXI_arbiter.io.ifu_axi_aw <> IFU.io.ifu_axi_aw
+  AXI_arbiter.io.ifu_axi_w <> IFU.io.ifu_axi_w
+  IFU.io.ifu_axi_r <> AXI_arbiter.io.ifu_axi_r
+  IFU.io.ifu_axi_b <> AXI_arbiter.io.ifu_axi_b
   AXI_arbiter.io.ifu_sta := IFU.io.ifu_sta
 
-  AXI_arbiter.io.lsu_axi_ar <> LSU.io.axi_ar
-  AXI_arbiter.io.lsu_axi_aw <> LSU.io.axi_aw
-  AXI_arbiter.io.lsu_axi_w <> LSU.io.axi_w
-  LSU.io.axi_r <> AXI_arbiter.io.lsu_axi_r
-  LSU.io.axi_b <> AXI_arbiter.io.lsu_axi_b
+  AXI_arbiter.io.lsu_axi_ar <> LSU.io.lsu_axi_ar
+  AXI_arbiter.io.lsu_axi_aw <> LSU.io.lsu_axi_aw
+  AXI_arbiter.io.lsu_axi_w <> LSU.io.lsu_axi_w
+  LSU.io.lsu_axi_r <> AXI_arbiter.io.lsu_axi_r
+  LSU.io.lsu_axi_b <> AXI_arbiter.io.lsu_axi_b
   AXI_arbiter.io.lsu_sta := LSU.io.lsu_sta
 
   SRAM.io.axi_ar <> AXI_arbiter.io.axi_ar
