@@ -38,6 +38,9 @@ class IFU extends Module {
 		val ifu_sta = Output(Bool())
 	})
 	io.ifu_axi_aw.awvalid := false.B
+	io.ifu_axi_aw.awaddr := 0.U
+	io.ifu_axi_w.wdata := 0.U
+	io.ifu_axi_w.wmask := 0.U
 	io.ifu_axi_w.wvalid := false.B
 	io.ifu_axi_b.bready := false.B
 	assert(io.ifu_axi_b.bvalid === false.B, "ifu_axi_b.bvalid must be false")
