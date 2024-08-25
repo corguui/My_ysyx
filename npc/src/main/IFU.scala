@@ -95,9 +95,9 @@ class IFU extends Module {
 			when(io.ifu_axi_r.rvalid){
 				rready_reg := true.B
 				when(io.ifu_axi_r.rresp === 1.U){
-					inst := io.ifu_axi_r.inst
+					inst := io.ifu_axi_r.rdata
 				}.otherwise{
-					inst := io.ifu_axi_r.inst
+					inst := io.ifu_axi_r.rdata
 				}
 			}.otherwise{
 				rready_reg := false.B
