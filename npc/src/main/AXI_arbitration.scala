@@ -4,7 +4,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-class AXI_arbiter externds Module {
+class AXI_arbiter extends Module {
     val io = IO(new Bundle {
         val axi_ar = (new AXI_ar)
         val axi_r = Flipped(new AXI_r)
