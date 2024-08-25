@@ -4,6 +4,48 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
+/*
+class Memory extends Module {
+    val io = IO(new Bundle {
+        val m_raddr = Input(UInt(32.W))
+        val m_rdata = Output(UInt(32.W))
+        val m_waddr = Input(UInt(32.W))
+        val m_wdata = Input(UInt(32.W))
+        val m_wmask = Input(UInt(3.W))
+        val m_wen = Input(Bool())
+        val m_ren = Input(Bool())
+        val m_rmask = Input(UInt(3.W))
+    })
+
+    val mem = Mem(256, UInt(32.W))
+    val raddr = io.m_raddr(7,0)  
+    val waddr = io.m_waddr(7,0) 
+
+    io.m_rdata := 0.U
+
+    when(io.m_wen) {
+    when(io.m_rmask ===1.U) {
+        io.m_rdata := (mem.read(raddr.asUInt)  & 0x000000ff.U)                 
+    }.elsewhen(io.m_rmask ===2.U) {
+        io.m_rdata := (mem.read(raddr.asUInt)  & 0x0000ffff.U)
+    }.otherwise {
+        io.m_rdata := mem.read(raddr.asUInt) 
+    }
+    }
+
+    when(io.m_wen) {
+        when(io.m_wmask ===1.U) {
+        mem.write(waddr.asUInt, io.m_wdata & 0x000000ff.U)                 
+    }.elsewhen(io.m_wmask ===2.U) {
+        mem.write(waddr.asUInt, io.m_wdata & 0x0000ffff.U)
+    }.otherwise {
+        mem.write(waddr.asUInt, io.m_wdata )
+    }
+    }
+
+
+}
+*/
 
 class AXI_r extends Bundle {
     val rdata = Output(UInt(32.W))
@@ -55,13 +97,15 @@ class SRAM extends Module {
         val m_rdata = Output(UInt(32.W))
         val m_rmask = Input(UInt(32.W))
         val m_ren = Input(Bool())
-        val m_wready = Output(Bool())
+        //val m_wready = Output(Bool())
       })
 
 		addPath("./src/main/Mem.v")
   	}
+
     //Mem init
     val m = Module(new Mem)
+    //val m = Module(new Memory)
     m.io.clock := clock
     m.io.m_waddr := 0.U
     m.io.m_wdata := 0.U 
@@ -79,7 +123,7 @@ class SRAM extends Module {
     val delay_w = Module(new DelayModule)
     delay_w.io.inData := 0.U
     delay_w.io.inValid :=0.U
-    val wready_reg = RegEnable(m.io.m_wready,0.U,(io.axi_w.wvalid & io.axi_aw.awvalid))
+    //val wready_reg = RegEnable(m.io.m_wready,0.U,(io.axi_w.wvalid & io.axi_aw.awvalid))
 
     //AXI-lite read member
     val resp = Wire(UInt(2.W))
@@ -161,7 +205,7 @@ class SRAM extends Module {
         m.io.m_wmask := 0.U
     }
     when(io.axi_w.wvalid & io.axi_aw.awvalid){
-        delay_w.io.inData := m.io.m_wready
+        delay_w.io.inData := true.B //m.io.m_wready
         // invalid的限制是在w和aw拉高时拉高一周期而已
         delay_w.io.inValid :=Mux((io.axi_w.wvalid =/= wvalid_reg & io.axi_w.wvalid === 1.U & io.axi_aw.awvalid =/= awvalid_reg & io.axi_aw.awvalid === 1.U),true.B,false.B) 
         m.io.m_wen := Mux((io.axi_w.wmask =/= wmask_reg) & (io.axi_aw.awaddr =/= waddr_reg) ,true.B,false.B)

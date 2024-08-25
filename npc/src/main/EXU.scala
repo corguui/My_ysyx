@@ -4,48 +4,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-/*
-class Memory extends Module {
-    val io = IO(new Bundle {
-        val m_raddr = Input(UInt(32.W))
-        val m_rdata = Output(UInt(32.W))
-        val m_waddr = Input(UInt(32.W))
-        val m_wdata = Input(UInt(32.W))
-        val m_wmask = Input(UInt(3.W))
-        val m_wen = Input(Bool())
-        val m_ren = Input(Bool())
-        val m_rmask = Input(UInt(3.W))
-    })
 
-    val mem = Mem(256, UInt(32.W))
-    val raddr = io.m_raddr(7,0)  
-    val waddr = io.m_waddr(7,0) 
-
-    io.m_rdata := 0.U
-
-    when(io.m_wen) {
-    when(io.m_rmask ===1.U) {
-        io.m_rdata := (mem.read(raddr.asUInt)  & 0x000000ff.U)                 
-    }.elsewhen(io.m_rmask ===2.U) {
-        io.m_rdata := (mem.read(raddr.asUInt)  & 0x0000ffff.U)
-    }.otherwise {
-        io.m_rdata := mem.read(raddr.asUInt) 
-    }
-    }
-
-    when(io.m_wen) {
-        when(io.m_wmask ===1.U) {
-        mem.write(waddr.asUInt, io.m_wdata & 0x000000ff.U)                 
-    }.elsewhen(io.m_wmask ===2.U) {
-        mem.write(waddr.asUInt, io.m_wdata & 0x0000ffff.U)
-    }.otherwise {
-        mem.write(waddr.asUInt, io.m_wdata )
-    }
-    }
-
-
-}
-*/
 class EXUtoLSU extends Bundle {
     val snpc = Output(UInt(32.W))
 	val pc = Output(UInt(32.W))
