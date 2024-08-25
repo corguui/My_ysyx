@@ -34,11 +34,11 @@ class top extends Module {
   Reg.io.csr_wen_1 := WBU.io.csr_wen_1
   Reg.io.csr_wen_2 := WBU.io.csr_wen_2
 
-  Mem.io.ar_exu_mem <> LSU.io.ar_exu_mem
-  LSU.io.r_mem_exu <> Mem.io.r_mem_exu
-  Mem.io.w_exu_mem <> LSU.io.w_exu_mem
-  Mem.io.aw_exu_mem <> LSU.io.aw_exu_mem
-  LSU.io.b_mem_exu <> Mem.io.b_mem_exu
+  Mem.io.ar_lsu_mem <> LSU.io.ar_lsu_mem
+  LSU.io.r_mem_lsu <> Mem.io.r_mem_lsu
+  Mem.io.w_lsu_mem <> LSU.io.w_lsu_mem
+  Mem.io.aw_lsu_mem <> LSU.io.aw_lsu_mem
+  LSU.io.b_mem_lsu <> Mem.io.b_mem_lsu
 
   Inst_fetch.io.axi_ar <> IFU.io.axi_ar
   IFU.io.axi_r <> Inst_fetch.io.axi_r
