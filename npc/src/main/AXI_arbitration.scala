@@ -52,7 +52,6 @@ class AXI_arbiter extends Module {
     io.uart_axi_aw.awvalid := false.B
     io.uart_axi_b.bready := false.B
 
-    /*
     io.lsu_axi_ar.arready := false.B
     io.lsu_axi_r.rdata := 0.U
     io.lsu_axi_r.rresp := 0.U
@@ -61,34 +60,6 @@ class AXI_arbiter extends Module {
     io.lsu_axi_w.wready := false.B
     io.lsu_axi_b.bvalid := false.B
     io.lsu_axi_b.bresp := 0.U
-    */
-
-    val arready_reg = RegInit(false.B)
-    val rdata_reg = RegInit(0.U)
-    val rvalid_reg = RegInit(false.B)
-    val rresp_reg = RegInit(0.U)
-    val awready_reg = RegInit(false.B)
-    val wready_reg = RegInit(false.B)
-    val bvalid_reg = RegInit(false.B)
-    val bresp_reg = RegInit(0.U)
-
-    arready_reg := false.B
-    rdata_reg := 0.U
-    rvalid_reg := false.B
-    rresp_reg := 0.U
-    awready_reg := false.B
-    wready_reg := false.B
-    bvalid_reg := false.B
-    bresp_reg := 0.U
-
-    io.lsu_axi_ar.arready := arready_reg
-    io.lsu_axi_r.rdata := rdata_reg
-    io.lsu_axi_r.rresp := rresp_reg
-    io.lsu_axi_r.rvalid := rvalid_reg
-    io.lsu_axi_aw.awready := awready_reg
-    io.lsu_axi_w.wready := wready_reg
-    io.lsu_axi_b.bvalid := bvalid_reg
-    io.lsu_axi_b.bresp := bresp_reg
 
     io.ifu_axi_ar.arready := false.B
     io.ifu_axi_r.rdata := 0.U
@@ -124,24 +95,13 @@ class AXI_arbiter extends Module {
             io.lsu_axi_r <> io.axi_r
             io.lsu_axi_b <> io.axi_b
         }.otherwise{
-            /*
             io.lsu_axi_ar.arready := true.B
             io.lsu_axi_r.rdata := 0.U
-            io.lsu_axi_r.rvalid := true.B
             io.lsu_axi_r.rresp := 0.U
             io.lsu_axi_aw.awready := true.B
             io.lsu_axi_w.wready := true.B
             io.lsu_axi_b.bvalid := true.B
             io.lsu_axi_b.bresp := 0.U
-            */
-            arready_reg := true.B
-            rdata_reg := 0.U
-            rvalid_reg := true.B
-            rresp_reg := 0.U
-            awready_reg := true.B
-            wready_reg := true.B
-            bvalid_reg := true.B
-            bresp_reg := 0.U
         }
     }
 }
