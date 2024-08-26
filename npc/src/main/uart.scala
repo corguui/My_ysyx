@@ -22,7 +22,7 @@ class UART extends Module {
         val mask = Input(UInt(32.W))
       })
 
-		addPath("./src/main/uart.v")
+		addPath("./src/main/Uart.v")
   	}
 
     val uart = Module(new Uart)

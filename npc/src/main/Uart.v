@@ -1,5 +1,5 @@
 import "DPI-C" function void vlg_uart(int ad,int data,int mask);
-module uart(
+module Uart(
     input clock,
     input wen,
     input [31:0] addr,
