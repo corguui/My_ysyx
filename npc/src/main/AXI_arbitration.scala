@@ -97,6 +97,7 @@ class AXI_arbiter extends Module {
         }.otherwise{
             io.lsu_axi_ar.arready := true.B
             io.lsu_axi_r.rdata := 0.U
+            io.lsu_axi_r.rvalid := true.B
             io.lsu_axi_r.rresp := 0.U
             io.lsu_axi_aw.awready := true.B
             io.lsu_axi_w.wready := true.B
