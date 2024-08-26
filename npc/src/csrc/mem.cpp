@@ -229,7 +229,6 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 	if(offset==0 && mask != 0)
 	{
 		printf("%c",((uint32_t)data & 0x000000ff));
-		printf(">");	
 	}
 	else{
 		printf("do not support offset = %d\n the input addr is %x\n",offset,addr);
