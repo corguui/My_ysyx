@@ -16,7 +16,7 @@ static void serial_io_handler(uint32_t offset, int len, bool is_write) {
   switch (offset) {
     /* We bind the serial port with the host stderr in NEMU. */
     case CH_OFFSET:
-      printf(" %x %c",serial_base[0],serail_base[0]);
+      printf(" %x %c",serial_base[0],serial_base[0]);
       if (is_write) serial_putc(serial_base[0]);
       else{ printf("do not support read"); assert(0);}
       break;
