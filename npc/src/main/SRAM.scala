@@ -205,12 +205,12 @@ class SRAM extends Module {
         m.io.m_wmask := 0.U
     }
     when(io.axi_w.wvalid & io.axi_aw.awvalid){
-        delay_w.io.inData := true.B //m.io.m_wready
+        delay_w.io.inData := true.B
         // invalid的限制是在w和aw拉高时拉高一周期而已
         delay_w.io.inValid :=Mux((io.axi_w.wvalid =/= wvalid_reg & io.axi_w.wvalid === 1.U & io.axi_aw.awvalid =/= awvalid_reg & io.axi_aw.awvalid === 1.U),true.B,false.B) 
         m.io.m_wen := Mux((io.axi_w.wmask =/= wmask_reg) & (io.axi_aw.awaddr =/= waddr_reg) ,true.B,false.B)
         bvalid_en := Mux(delay_w.io.delayDone,true.B,false.B)
-        when(((io.axi_aw.awaddr >= 0x80000000.S.asUInt) & ( io.axi_aw.awaddr < 0x8fffffff.S.asUInt)) /* | (( io.axi_aw.awaddr >= 0xa00003f8.S.asUInt) &( io.axi_aw.awaddr <= 0xa00003ff.S.asUInt)) */| (( io.axi_aw.awaddr >= 0xa0000048.S.asUInt) &( io.axi_aw.awaddr <= 0xa000004f.S.asUInt))){
+        when(((io.axi_aw.awaddr >= 0x80000000.S.asUInt) & ( io.axi_aw.awaddr < 0x8fffffff.S.asUInt))  | (( io.axi_aw.awaddr >= 0xa00003f8.S.asUInt) &( io.axi_aw.awaddr <= 0xa00003ff.S.asUInt)) | (( io.axi_aw.awaddr >= 0xa0000048.S.asUInt) &( io.axi_aw.awaddr <= 0xa000004f.S.asUInt))){
                 bresp := 1.U
         }.otherwise{
                 bresp := 0.U
