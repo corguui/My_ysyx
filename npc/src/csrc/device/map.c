@@ -73,7 +73,6 @@ void map_write(paddr_t addr, int len, word_t data, IOMap *map) {
   check_bound(map, addr);
   paddr_t offset = addr - map->low;
   host_write((map->space + offset), len, data);
-  printf("%x\r\n",addr);
   invoke_callback(map->callback, offset, len, true);
   #ifdef CONFIG_DTRACE
   Dtrace_write(addr,len,data,map);
