@@ -79,7 +79,6 @@ class AXI_arbiter extends Module {
         io.ifu_axi_r <> io.axi_r
         io.ifu_axi_b <> io.axi_b
     }.elsewhen(io.lsu_sta&&(!io.ifu_sta)){
-        /*
         //uart
         when((io.lsu_axi_aw.awaddr >= 0xa00003f8.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0xa00003ff.S.asUInt)) {
             io.uart_axi_ar <> io.lsu_axi_ar
@@ -90,13 +89,11 @@ class AXI_arbiter extends Module {
         }
         //SRAM
         .elsewhen(((io.lsu_axi_ar.raddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.raddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
-        */
             io.axi_ar <> io.lsu_axi_ar
             io.axi_aw <> io.lsu_axi_aw
             io.axi_w <> io.lsu_axi_w
             io.lsu_axi_r <> io.axi_r
             io.lsu_axi_b <> io.axi_b
-            /*
         }.otherwise{
             io.lsu_axi_ar.arready := true.B
             io.lsu_axi_r.rdata := 0.U
@@ -106,7 +103,6 @@ class AXI_arbiter extends Module {
             io.lsu_axi_b.bvalid := true.B
             io.lsu_axi_b.bresp := 0.U
         }
-        */
     }
 }
 
