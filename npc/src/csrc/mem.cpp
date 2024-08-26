@@ -223,10 +223,10 @@ void pmem_out()
 }
 
 
-extern "C" void vlg_uart(int ad,int data){
+extern "C" void vlg_uart(int ad,int data,int mask){
 	uint32_t addr=(uint32_t)ad;
 	uint32_t offset=addr-CONFIG_SERIAL_MMIO;
-	if(offset==0)
+	if(offset==0 && mask != 0)
 	{
 		printf("%c",((uint32_t)data & 0x000000ff));
 	}
