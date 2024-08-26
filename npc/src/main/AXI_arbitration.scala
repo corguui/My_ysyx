@@ -94,6 +94,11 @@ class AXI_arbiter extends Module {
             io.axi_w <> io.lsu_axi_w
             io.lsu_axi_r <> io.axi_r
             io.lsu_axi_b <> io.axi_b
+        }.otherwise{
+            //io.lsu_axi_aw.awready := true.B
+            io.lsu_axi_w.wready := true.B
+            io.lsu_axi_b.bvalid := true.B
+            io.lsu_axi_b.bresp := 0.U
         }
     }
 }
