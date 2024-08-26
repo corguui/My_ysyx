@@ -16,6 +16,7 @@ class top extends Module {
   val Reg = Module(new Reg)
   val SRAM = Module(new SRAM)
   val AXI_arbiter = Module(new AXI_arbiter)
+  val UART = Module(new UART)
   //val Mem = Module(new LSU_mem)
   //val Inst_fetch = Module(new Inst_fetch)
 
@@ -55,6 +56,12 @@ class top extends Module {
   SRAM.io.axi_w <> AXI_arbiter.io.axi_w
   AXI_arbiter.io.axi_r <> SRAM.io.axi_r
   AXI_arbiter.io.axi_b <> SRAM.io.axi_b
+
+  UART.io.axi_ar <> AXI_arbiter.io.uart_axi_ar
+  UART.io.axi_aw <> AXI_arbiter.io.uart_axi_aw
+  UART.io.axi_w <> AXI_arbiter.io.uart_axi_w
+  AXI_arbiter.io.uart_axi_r <> UART.io.axi_r
+  AXI_arbiter.io.uart_axi_b <> UART.io.axi_b
 
   io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 

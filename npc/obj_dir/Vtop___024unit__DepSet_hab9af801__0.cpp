@@ -45,3 +45,17 @@ VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_vlg_pmem_read_TOP____024unit(IDa
     vlg_pmem_read__Vfuncrtn__Vcvt = vlg_pmem_read(m_raddr__Vcvt, rmask__Vcvt);
     vlg_pmem_read__Vfuncrtn = vlg_pmem_read__Vfuncrtn__Vcvt;
 }
+
+extern "C" void vlg_uart(int ad, int data, int mask);
+
+VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_vlg_uart_TOP____024unit(IData/*31:0*/ ad, IData/*31:0*/ data, IData/*31:0*/ mask) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        Vtop___024unit____Vdpiimwrap_vlg_uart_TOP____024unit\n"); );
+    // Body
+    int ad__Vcvt;
+    for (size_t ad__Vidx = 0; ad__Vidx < 1; ++ad__Vidx) ad__Vcvt = ad;
+    int data__Vcvt;
+    for (size_t data__Vidx = 0; data__Vidx < 1; ++data__Vidx) data__Vcvt = data;
+    int mask__Vcvt;
+    for (size_t mask__Vidx = 0; mask__Vidx < 1; ++mask__Vidx) mask__Vcvt = mask;
+    vlg_uart(ad__Vcvt, data__Vcvt, mask__Vcvt);
+}
