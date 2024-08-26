@@ -177,7 +177,7 @@ class LSU extends Module {
             //IL type
             //is(3.U){
             when(io.exu2in.bits.inst_type === 3.U){
-                when((io.lsu_axi_ar.arready)&(io.lsu_axi_ar.arvalid))
+                when(/*(io.lsu_axi_ar.arready)&*/(io.lsu_axi_ar.arvalid))
                 {                    
                     io.lsu_axi_ar.rmask := mem_rmask_reg
                     io.lsu_axi_ar.raddr := mem_raddr_reg 
@@ -216,14 +216,14 @@ class LSU extends Module {
             //s type
             //is(4.U){
             .elsewhen(io.exu2in.bits.inst_type === 4.U){
-                when(io.lsu_axi_aw.awready & io.lsu_axi_aw.awvalid)
+                when(/*io.lsu_axi_aw.awready &*/ io.lsu_axi_aw.awvalid)
                 {
                     io.lsu_axi_aw.awaddr := mem_awaddr_reg 
                 }.otherwise{
                     io.lsu_axi_aw.awaddr := 0.U
                     bready_reg := 0.U
                 }
-                when(io.lsu_axi_w.wready & io.lsu_axi_w.wvalid)
+                when(/*io.lsu_axi_w.wready &*/ io.lsu_axi_w.wvalid)
                 {
                     io.lsu_axi_w.wdata := mem_wdata_reg 
                     io.lsu_axi_w.wmask := mem_wmask_reg 
