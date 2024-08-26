@@ -676,8 +676,10 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
              | (IData)(vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awvalid))) {
             vlSelf->top__DOT__SRAM__DOT__bresp_reg 
                 = ((IData)(vlSelf->top__DOT__SRAM__DOT___GEN_2) 
-                   & (((vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr 
-                        >> 0x1fU) & (0x8fffffffU > vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr)) 
+                   & ((((vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr 
+                         >> 0x1fU) & (0x8fffffffU > vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr)) 
+                       | ((0xa00003f7U < vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr) 
+                          & (0xa0000400U > vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr))) 
                       | ((0xa0000047U < vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr) 
                          & (0xa0000050U > vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr))));
         }
