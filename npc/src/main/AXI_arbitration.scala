@@ -113,11 +113,11 @@ class AXI_arbiter extends Module {
         }
         //RTC CLINT
         .elsewhen(((io.lsu_axi_ar.raddr >= 0xa0000048.S.asUInt) & io.lsu_axi_ar.raddr <= 0xa000004f.S.asUInt)){
-            io.axi_ar <> io.rtc_axi_ar
-            io.axi_aw <> io.rtc_axi_aw
-            io.axi_w <> io.rtc_axi_w
-            io.rtc_axi_r <> io.axi_r
-            io.rtc_axi_b <> io.axi_b
+            io.rtc_axi_ar <> io.lsu_axi_ar
+            io.rtc_axi_aw <> io.lsu_axi_aw
+            io.rtc_axi_w <> io.lsu_axi_w
+            io.lsu_axi_r <> io.rtc_axi_r
+            io.lsu_axi_b <> io.rtc_axi_b
         }
         .otherwise{
             io.lsu_axi_ar.arready := true.B
