@@ -13,7 +13,7 @@ class CLINT extends Module {
         val axi_b = (new AXI_b)
     })
 
-    val mtime = RegInit(0.U(64.W)) 
+    val mtime = Reg(UInt(64.W)) 
     mtime := mtime + 1.U
 
     val rtc_raddr = Wire(UInt(32.W))
