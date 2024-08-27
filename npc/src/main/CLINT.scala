@@ -26,10 +26,10 @@ class CLINT extends Module {
     rtc_ren := false.B
 
     when(rtc_raddr === 0xa0000048.U && rtc_ren){
-        rtc_rdata := mtime(31,0)
+        rtc_rdata := mtime(31,0).asUInt
     }
     .elsewhen(rtc_raddr === 0xa000004c.U && rtc_ren){
-        rtc_rdata := mtime(63,32)
+        rtc_rdata := mtime(63,32).asUInt
     }
     .otherwise{
         rtc_rdata := 0.U
