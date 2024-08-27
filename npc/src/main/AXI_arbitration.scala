@@ -16,6 +16,11 @@ class AXI_arbiter extends Module {
         val uart_axi_aw = (new AXI_aw)
         val uart_axi_w = (new AXI_w)
         val uart_axi_b = Flipped(new AXI_b)
+        val rtc_axi_ar = (new AXI_ar)
+        val rtc_axi_r = Flipped(new AXI_r)
+        val rtc_axi_aw = (new AXI_aw)
+        val rtc_axi_w = (new AXI_w)
+        val rtc_axi_b = Flipped(new AXI_b)
         val lsu_axi_ar = Flipped(new AXI_ar)
         val lsu_axi_r = (new AXI_r)
         val lsu_axi_aw = Flipped(new AXI_aw)
@@ -51,6 +56,17 @@ class AXI_arbiter extends Module {
     io.uart_axi_aw.awaddr := 0.U
     io.uart_axi_aw.awvalid := false.B
     io.uart_axi_b.bready := false.B
+
+    io.rtc_axi_ar.raddr := 0.U
+    io.rtc_axi_ar.rmask := 0.U
+    io.rtc_axi_ar.arvalid := false.B
+    io.rtc_axi_r.rready := false.B
+    io.rtc_axi_w.wdata := 0.U
+    io.rtc_axi_w.wmask := 0.U
+    io.rtc_axi_w.wvalid := false.B
+    io.rtc_axi_aw.awaddr := 0.U
+    io.rtc_axi_aw.awvalid := false.B
+    io.rtc_axi_b.bready := false.B
 
     io.lsu_axi_ar.arready := false.B
     io.lsu_axi_r.rdata := 0.U
@@ -88,13 +104,22 @@ class AXI_arbiter extends Module {
             io.lsu_axi_b <> io.uart_axi_b
         }
         //SRAM
-        .elsewhen(((io.lsu_axi_ar.raddr >= 0xa0000048.S.asUInt) & io.lsu_axi_ar.raddr <= 0xa000004f.S.asUInt) | ((io.lsu_axi_ar.raddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.raddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
+        .elsewhen(((io.lsu_axi_ar.raddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.raddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
             io.axi_aw <> io.lsu_axi_aw
             io.axi_w <> io.lsu_axi_w
             io.lsu_axi_r <> io.axi_r
             io.lsu_axi_b <> io.axi_b
-        }.otherwise{
+        }
+        //RTC CLINT
+        .elsewhen(((io.lsu_axi_ar.raddr >= 0xa0000048.S.asUInt) & io.lsu_axi_ar.raddr <= 0xa000004f.S.asUInt)){
+            io.rtc_axi_ar <> io.lsu_axi_ar
+            io.rtc_axi_aw <> io.lsu_axi_aw
+            io.rtc_axi_w <> io.lsu_axi_w
+            io.lsu_axi_r <> io.rtc_axi_r
+            io.lsu_axi_b <> io.rtc_axi_b
+        }
+        .otherwise{
             io.lsu_axi_ar.arready := true.B
             io.lsu_axi_r.rdata := 0.U
             io.lsu_axi_r.rresp := 0.U

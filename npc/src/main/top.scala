@@ -17,6 +17,7 @@ class top extends Module {
   val SRAM = Module(new SRAM)
   val AXI_arbiter = Module(new AXI_arbiter)
   val UART = Module(new UART)
+  val RTC = Module(new CLINT)
   //val Mem = Module(new LSU_mem)
   //val Inst_fetch = Module(new Inst_fetch)
 
@@ -62,6 +63,12 @@ class top extends Module {
   UART.io.axi_w <> AXI_arbiter.io.uart_axi_w
   AXI_arbiter.io.uart_axi_r <> UART.io.axi_r
   AXI_arbiter.io.uart_axi_b <> UART.io.axi_b
+
+  RTC.io.axi_ar <> AXI_arbiter.io.rtc_axi_ar
+  RTC.io.axi_aw <> AXI_arbiter.io.rtc_axi_aw
+  RTC.io.axi_w <> AXI_arbiter.io.rtc_axi_w
+  AXI_arbiter.io.rtc_axi_r <> RTC.io.axi_r
+  AXI_arbiter.io.rtc_axi_b <> RTC.io.axi_b
 
   io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 
