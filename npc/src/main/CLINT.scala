@@ -13,7 +13,7 @@ class CLINT extends Module {
         val axi_b = (new AXI_b)
     })
 
-    val mtime = Reg(UInt(64.W)) 
+    val mtime = RegInit(0.S.asUInt(64.W)) 
     mtime := mtime + 1.U
 
     val rtc_raddr = Wire(UInt(32.W))
@@ -25,11 +25,11 @@ class CLINT extends Module {
     rtc_rmask := 0.U
     rtc_ren := false.B
 
-    when(rtc_raddr === 0xa0000048.U && rtc_ren){
-        rtc_rdata := mtime(31,0).asUInt
+    when(rtc_raddr === 0xa0000048.S.asUInt && rtc_ren){
+        rtc_rdata := mtime(31,0)
     }
-    .elsewhen(rtc_raddr === 0xa000004c.U && rtc_ren){
-        rtc_rdata := mtime(63,32).asUInt
+    .elsewhen(rtc_raddr === 0xa000004c.S.asUInt && rtc_ren){
+        rtc_rdata := mtime(63,32)
     }
     .otherwise{
         rtc_rdata := 0.U
