@@ -75,6 +75,10 @@ class AXI_aw extends Bundle {
     val awaddr = Output(UInt(32.W))
     val awvalid = Output(Bool())
     val awready = Input(Bool())
+    val awid = Output(UInt(4.W))
+    val awlen = Output(UInt(8.W))
+    val awsize = Output(UInt(3.W))
+    val awburst = Output(UInt(2.W))
 }
 
 class SRAM extends Module {

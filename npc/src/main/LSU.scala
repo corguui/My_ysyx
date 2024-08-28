@@ -107,6 +107,10 @@ class LSU extends Module {
     val mem_wdata_reg = RegEnable(io.exu2in.bits.src2,0.U,exu2in_valid)
     val mem_wen_reg = RegEnable(io.exu2in.bits.mem_wen,0.U,(exu2in_valid | io.lsu_axi_b.bready))
     io.lsu_axi_aw.awaddr := 0.U
+    io.lsu_axi_aw.awid := 0.U
+    io.lsu_axi_aw.awlen := 0.U
+    io.lsu_axi_aw.awsize := 0.U
+    io.lsu_axi_aw.awburst := 0.U
     io.lsu_axi_w.wdata := 0.U
     io.lsu_axi_w.wmask := 0.U
     //io.lsu_axi_w.wvalid := mem_wen_reg 

@@ -155,7 +155,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     }
     if (VL_UNLIKELY(((~ (IData)(vlSelf->reset)) & ((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
                                                    & (IData)(vlSelf->top__DOT__SRAM__DOT__bvalid_reg))))) {
-        VL_WRITEF("[%0t] %%Error: top.sv:97: Assertion failed in %Ntop.IFU: Assertion failed: ifu_axi_b.bvalid must be false\n    at IFU.scala:46 assert(io.ifu_axi_b.bvalid === false.B, \"ifu_axi_b.bvalid must be false\")\n\n",
+        VL_WRITEF("[%0t] %%Error: top.sv:97: Assertion failed in %Ntop.IFU: Assertion failed: ifu_axi_b.bvalid must be false\n    at IFU.scala:50 assert(io.ifu_axi_b.bvalid === false.B, \"ifu_axi_b.bvalid must be false\")\n\n",
                   64,VL_TIME_UNITED_Q(1),-12,vlSymsp->name());
         VL_STOP_MT("build/top.sv", 97, "");
         VL_WRITEF("[%0t] %%Error: top.sv:99: Assertion failed in %Ntop.IFU\n",

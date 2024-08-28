@@ -39,6 +39,10 @@ class IFU extends Module {
 	})
 	io.ifu_axi_aw.awvalid := false.B
 	io.ifu_axi_aw.awaddr := 0.U
+	io.ifu_axi_aw.awid := 0.U
+	io.ifu_axi_aw.awsize := 0.U
+	io.ifu_axi_aw.awlen := 0.U
+	io.ifu_axi_aw.awburst := 0.U
 	io.ifu_axi_w.wdata := 0.U
 	io.ifu_axi_w.wmask := 0.U
 	io.ifu_axi_w.wvalid := false.B
