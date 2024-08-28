@@ -55,7 +55,7 @@ class AXI_arbiter extends Module {
     axi_b_null.bvalid := false.B
 
     val axi_ar_null = Wire(new AXI_ar)
-    axi_ar_null.raddr := 0.U
+    axi_ar_null.araddr := 0.U
     axi_ar_null.arvalid := false.B
     axi_ar_null.arid := 0.U
     axi_ar_null.arlen := 0.U
