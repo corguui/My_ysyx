@@ -54,7 +54,7 @@ class AXI_arbiter extends Module {
     axi_b_null.bresp := 0.U
     axi_b_null.bvalid := false.B
 
-    io.axi_ar.araddr := 0.U
+    io.axi_ar.raddr := 0.U
     io.axi_ar.rmask := 0.U
     io.axi_ar.arvalid := false.B
     io.axi_r.rready := false.B
