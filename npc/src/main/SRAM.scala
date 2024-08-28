@@ -11,7 +11,7 @@ class Memory extends Module {
         val m_rdata = Output(UInt(32.W))
         val m_waddr = Input(UInt(32.W))
         val m_wdata = Input(UInt(32.W))
-        val m_wmask = Input(UInt(3.W))
+        val m_wstrb = Input(UInt(3.W))
         val m_wen = Input(Bool())
         val m_ren = Input(Bool())
         val m_rmask = Input(UInt(3.W))
@@ -34,9 +34,9 @@ class Memory extends Module {
     }
 
     when(io.m_wen) {
-        when(io.m_wmask ===1.U) {
+        when(io.m_wstrb ===1.U) {
         mem.write(waddr.asUInt, io.m_wdata & 0x000000ff.U)                 
-    }.elsewhen(io.m_wmask ===2.U) {
+    }.elsewhen(io.m_wstrb ===2.U) {
         mem.write(waddr.asUInt, io.m_wdata & 0x0000ffff.U)
     }.otherwise {
         mem.write(waddr.asUInt, io.m_wdata )
@@ -67,7 +67,8 @@ class AXI_ar extends Bundle {
 }
 class AXI_w extends Bundle {
     val wdata = Output(UInt(32.W))
-    val wmask = Output(UInt(3.W))
+    val wstrb = Output(UInt(4.W))
+    val wlast = Output(Bool())
     val wvalid = Output(Bool())
     val wready = Input(Bool())
 }
@@ -95,7 +96,7 @@ class SRAM extends Module {
         val clock = Input(Clock())
         val m_waddr = Input(UInt(32.W))
         val m_wdata = Input(UInt(32.W))
-        val m_wmask = Input(UInt(32.W))
+        val m_wstrb = Input(UInt(32.W))
         val m_wen = Input(Bool())
         val m_raddr = Input(UInt(32.W))
         val m_rdata = Output(UInt(32.W))
@@ -113,7 +114,7 @@ class SRAM extends Module {
     m.io.clock := clock
     m.io.m_waddr := 0.U
     m.io.m_wdata := 0.U 
-    m.io.m_wmask := 0.U 
+    m.io.m_wstrb := 0.U 
     m.io.m_wen := false.B
     m.io.m_raddr := 0.U
     m.io.m_rmask := 0.U
@@ -153,7 +154,7 @@ class SRAM extends Module {
     val bvalid_reg = RegEnable(bvalid_en,0.U,(bvalid_en | io.axi_b.bready))
     val bresp_reg = RegEnable(bresp,0.U,(io.axi_w.wvalid | io.axi_aw.awvalid))
     val waddr_reg = RegNext(io.axi_aw.awaddr,0.U)
-    val wmask_reg = RegNext(io.axi_w.wmask,0.U)
+    val wstrb_reg = RegNext(io.axi_w.wstrb,0.U)
     val awvalid_reg =RegNext(io.axi_aw.awvalid,0.U)
     val wvalid_reg = RegNext(io.axi_w.wvalid,0.U)
     io.axi_aw.awready := true.B
@@ -203,16 +204,16 @@ class SRAM extends Module {
     }
     when(io.axi_w.wvalid){
         m.io.m_wdata := io.axi_w.wdata
-        m.io.m_wmask := io.axi_w.wmask
+        m.io.m_wstrb := io.axi_w.wstrb
     }.otherwise{
         m.io.m_wdata := 0.U
-        m.io.m_wmask := 0.U
+        m.io.m_wstrb := 0.U
     }
     when(io.axi_w.wvalid & io.axi_aw.awvalid){
         delay_w.io.inData := true.B
         // invalid的限制是在w和aw拉高时拉高一周期而已
         delay_w.io.inValid :=Mux((io.axi_w.wvalid =/= wvalid_reg & io.axi_w.wvalid === 1.U & io.axi_aw.awvalid =/= awvalid_reg & io.axi_aw.awvalid === 1.U),true.B,false.B) 
-        m.io.m_wen := Mux((io.axi_w.wmask =/= wmask_reg) & (io.axi_aw.awaddr =/= waddr_reg) ,true.B,false.B)
+        m.io.m_wen := Mux((io.axi_w.wstrb =/= wstrb_reg) & (io.axi_aw.awaddr =/= waddr_reg) ,true.B,false.B)
         bvalid_en := Mux(delay_w.io.delayDone,true.B,false.B)
         when(((io.axi_aw.awaddr >= 0x80000000.S.asUInt) & ( io.axi_aw.awaddr < 0x8fffffff.S.asUInt)) /* | (( io.axi_aw.awaddr >= 0xa00003f8.S.asUInt) &( io.axi_aw.awaddr <= 0xa00003ff.S.asUInt)) */| (( io.axi_aw.awaddr >= 0xa0000048.S.asUInt) &( io.axi_aw.awaddr <= 0xa000004f.S.asUInt))){
                 bresp := 1.U

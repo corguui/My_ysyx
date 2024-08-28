@@ -42,22 +42,18 @@ class AXI_arbiter extends Module {
     axi_aw_null.awlen := 0.U
     axi_aw_null.awsize := 0.U
     axi_aw_null.awburst := 0.U
+
+    val axi_w_null = Wire(new AXI_w)
+    axi_w_null.wdata := 0.U
+    axi_w_null.wstrb := 0.U
+    axi_w_null.wvalid := false.B
+    axi_w_null.wlast := false.B
     
     io.axi_ar.raddr := 0.U
     io.axi_ar.rmask := 0.U
     io.axi_ar.arvalid := false.B
     io.axi_r.rready := false.B
-    io.axi_w.wdata := 0.U
-    io.axi_w.wmask := 0.U
-    io.axi_w.wvalid := false.B
-    /*
-    io.axi_aw.awaddr := 0.U
-    io.axi_aw.awvalid := false.B
-    io.axi_aw.awid := 0.U
-    io.axi_aw.awlen := 0.U
-    io.axi_aw.awsize := 0.U
-    io.axi_aw.awburst := 0.U
-    */
+    io.axi_w <> axi_w_null
     io.axi_aw <> axi_aw_null
     io.axi_b.bready := false.B
 
@@ -65,17 +61,7 @@ class AXI_arbiter extends Module {
     io.uart_axi_ar.rmask := 0.U
     io.uart_axi_ar.arvalid := false.B
     io.uart_axi_r.rready := false.B
-    io.uart_axi_w.wdata := 0.U
-    io.uart_axi_w.wmask := 0.U
-    io.uart_axi_w.wvalid := false.B
-    /*
-    io.uart_axi_aw.awaddr := 0.U
-    io.uart_axi_aw.awvalid := false.B
-    io.uart_axi_aw.awid := 0.U
-    io.uart_axi_aw.awlen := 0.U
-    io.uart_axi_aw.awsize := 0.U
-    io.uart_axi_aw.awburst := 0.U
-    */
+    io.uart_axi_w <> axi_w_null
     io.uart_axi_aw <> axi_aw_null
     io.uart_axi_b.bready := false.B
 
@@ -83,13 +69,7 @@ class AXI_arbiter extends Module {
     io.rtc_axi_ar.rmask := 0.U
     io.rtc_axi_ar.arvalid := false.B
     io.rtc_axi_r.rready := false.B
-    io.rtc_axi_w.wdata := 0.U
-    io.rtc_axi_w.wmask := 0.U
-    io.rtc_axi_w.wvalid := false.B
-    /*
-    io.rtc_axi_aw.awaddr := 0.U
-    io.rtc_axi_aw.awvalid := false.B
-    */
+    io.rtc_axi_w <> axi_w_null
     io.rtc_axi_aw <> axi_aw_null
     io.rtc_axi_b.bready := false.B
 
