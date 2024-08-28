@@ -61,6 +61,7 @@ class AXI_arbiter extends Module {
     axi_ar_null.arlen := 0.U
     axi_ar_null.arsize := 0.U
     axi_ar_null.arburst := 0.U
+    axi_ar_null.rmask := 0.U
 
     io.axi_ar <> axi_ar_null
     io.axi_r.rready := false.B
