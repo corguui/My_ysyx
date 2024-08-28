@@ -56,6 +56,7 @@ class AXI_r extends Bundle {
 
 class AXI_b extends Bundle {
     val bresp = Output(UInt(2.W))
+    val bid = Output(UInt(4.W))
     val bvalid = Output(Bool())
     val bready = Input(Bool())
 }
@@ -160,6 +161,7 @@ class SRAM extends Module {
     io.axi_aw.awready := true.B
     io.axi_w.wready := true.B
     io.axi_b.bresp :=  3.U 
+    io.axi_b.bid := 0.U
     io.axi_b.bvalid := bvalid_reg
 
     //AXI-lite read part

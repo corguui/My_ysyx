@@ -60,6 +60,7 @@ class UART extends Module {
     io.axi_aw.awready := true.B
     io.axi_w.wready := true.B
     io.axi_b.bresp :=  3.U 
+    io.axi_b.bid := 0.U
     io.axi_b.bvalid := bvalid_reg
 
     //AXI-lite write part

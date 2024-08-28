@@ -39,6 +39,7 @@ class CLINT extends Module {
     io.axi_aw.awready := false.B
     io.axi_w.wready := false.B
     io.axi_b.bvalid := false.B
+    io.axi_b.bid := 0.U
     io.axi_b.bresp := 0.U
 
     //read_delay

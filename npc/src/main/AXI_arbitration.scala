@@ -48,8 +48,13 @@ class AXI_arbiter extends Module {
     axi_w_null.wstrb := 0.U
     axi_w_null.wvalid := false.B
     axi_w_null.wlast := false.B
-    
-    io.axi_ar.raddr := 0.U
+
+    val axi_b_null = Wire(new AXI_b)
+    axi_b_null.bid := 0.U
+    axi_b_null.bresp := 0.U
+    axi_b_null.bvalid := false.B
+
+    io.axi_ar.araddr := 0.U
     io.axi_ar.rmask := 0.U
     io.axi_ar.arvalid := false.B
     io.axi_r.rready := false.B
@@ -79,8 +84,7 @@ class AXI_arbiter extends Module {
     io.lsu_axi_r.rvalid := false.B
     io.lsu_axi_aw.awready := false.B
     io.lsu_axi_w.wready := false.B
-    io.lsu_axi_b.bvalid := false.B
-    io.lsu_axi_b.bresp := 0.U
+    io.lsu_axi_b <> axi_b_null
 
     io.ifu_axi_ar.arready := false.B
     io.ifu_axi_r.rdata := 0.U
@@ -88,8 +92,7 @@ class AXI_arbiter extends Module {
     io.ifu_axi_r.rvalid := false.B
     io.ifu_axi_aw.awready := false.B
     io.ifu_axi_w.wready := false.B
-    io.ifu_axi_b.bvalid := false.B
-    io.ifu_axi_b.bresp := 0.U
+    io.ifu_axi_b <> axi_b_null
 
     
 
