@@ -64,11 +64,11 @@ class AXI_arbiter extends Module {
     axi_ar_null.rmask := 0.U
 
     val axi_r_null = Wire(new AXI_r)
-    axi_ar_null.rdata := 0.U
-    axi_ar_null.rresp := 0.U
-    axi_ar_null.rvalid := false.B
-    axi_ar_null.rlast := false.B
-    axi_ar_null.rid := 0.U
+    axi_r_null.rdata := 0.U
+    axi_r_null.rresp := 0.U
+    axi_r_null.rvalid := false.B
+    axi_r_null.rlast := false.B
+    axi_r_null.rid := 0.U
 
     io.axi_ar <> axi_ar_null
     io.axi_r.rready := false.B
