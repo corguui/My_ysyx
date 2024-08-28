@@ -103,7 +103,7 @@ class LSU extends Module {
     //Mem write member
     val bready_reg = RegInit(0.U)
     val mem_awaddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
-    val mem_wstrb_reg = RegEnable(io.exu2in.bits.m_wstrb,0.U,exu2in_valid)
+    val mem_wstrb_reg = RegEnable(io.exu2in.bits.m_wmask,0.U,exu2in_valid)
     val mem_wdata_reg = RegEnable(io.exu2in.bits.src2,0.U,exu2in_valid)
     val mem_wen_reg = RegEnable(io.exu2in.bits.mem_wen,0.U,(exu2in_valid | io.lsu_axi_b.bready))
     io.lsu_axi_aw.awaddr := 0.U

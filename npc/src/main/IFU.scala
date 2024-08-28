@@ -45,7 +45,7 @@ class IFU extends Module {
 	io.ifu_axi_aw.awburst := 0.U
 	io.ifu_axi_w.wdata := 0.U
 	io.ifu_axi_w.wstrb := 0.U
-	io.idu_axi_w.wlast := false.B
+	io.ifu_axi_w.wlast := false.B
 	io.ifu_axi_w.wvalid := false.B
 	io.ifu_axi_b.bready := false.B
 	assert(io.ifu_axi_b.bvalid === false.B, "ifu_axi_b.bvalid must be false")
