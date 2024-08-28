@@ -52,6 +52,8 @@ class AXI_r extends Bundle {
     val rresp = Output(UInt(2.W))
     val rvalid = Output(Bool())
     val rready = Input(Bool())
+    val rid = Output(UInt(4.W))
+    val rlast = Output(Bool())
 }
 
 class AXI_b extends Bundle {
@@ -149,6 +151,8 @@ class SRAM extends Module {
     io.axi_ar.arready := true.B
     io.axi_r.rdata := 2.U 
     io.axi_r.rresp := 3.U
+    io.axi_r.rid := 0.U
+    io.axi_r.rlast := 0.U
     io.axi_r.rvalid := rvalid_reg 
 
     //AXI-lite write member

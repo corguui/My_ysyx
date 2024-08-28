@@ -63,6 +63,13 @@ class AXI_arbiter extends Module {
     axi_ar_null.arburst := 0.U
     axi_ar_null.rmask := 0.U
 
+    val axi_r_null = Wire(new AXI_r)
+    axi_ar_null.rdata := 0.U
+    axi_ar_null.rresp := 0.U
+    axi_ar_null.rvalid := false.B
+    axi_ar_null.rlast := false.B
+    axi_ar_null.rid := 0.U
+
     io.axi_ar <> axi_ar_null
     io.axi_r.rready := false.B
     io.axi_w <> axi_w_null
@@ -82,17 +89,13 @@ class AXI_arbiter extends Module {
     io.rtc_axi_b.bready := false.B
 
     io.lsu_axi_ar.arready := false.B
-    io.lsu_axi_r.rdata := 0.U
-    io.lsu_axi_r.rresp := 0.U
-    io.lsu_axi_r.rvalid := false.B
+    io.lsu_axi_r <> axi_r_null
     io.lsu_axi_aw.awready := false.B
     io.lsu_axi_w.wready := false.B
     io.lsu_axi_b <> axi_b_null
 
     io.ifu_axi_ar.arready := false.B
-    io.ifu_axi_r.rdata := 0.U
-    io.ifu_axi_r.rresp := 0.U
-    io.ifu_axi_r.rvalid := false.B
+    io.ifu_axi_r <> axi_r_null
     io.ifu_axi_aw.awready := false.B
     io.ifu_axi_w.wready := false.B
     io.ifu_axi_b <> axi_b_null

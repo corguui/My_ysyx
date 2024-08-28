@@ -61,6 +61,8 @@ class CLINT extends Module {
     io.axi_ar.arready := true.B
     io.axi_r.rdata := 2.U 
     io.axi_r.rresp := 3.U
+    io.axi_r.rid := 0.U
+    io.axi_r.rlast := 0.U
     io.axi_r.rvalid := rvalid_reg
 
      //AXI-lite read part

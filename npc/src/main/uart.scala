@@ -39,6 +39,8 @@ class UART extends Module {
     io.axi_r.rvalid := false.B
     io.axi_r.rdata := 0.U
     io.axi_r.rresp := 0.U
+    io.axi_r.rid := 0.U
+    io.axi_r.rlast := 0.U
 
 
     //write_delay
