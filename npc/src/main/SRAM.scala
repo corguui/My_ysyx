@@ -103,7 +103,7 @@ class SRAM extends Module {
         val clock = Input(Clock())
         val m_waddr = Input(UInt(32.W))
         val m_wdata = Input(UInt(32.W))
-        val m_wstrb = Input(UInt(32.W))
+        val m_wmask = Input(UInt(32.W))
         val m_wen = Input(Bool())
         val m_raddr = Input(UInt(32.W))
         val m_rdata = Output(UInt(32.W))
@@ -121,7 +121,7 @@ class SRAM extends Module {
     m.io.clock := clock
     m.io.m_waddr := 0.U
     m.io.m_wdata := 0.U 
-    m.io.m_wstrb := 0.U 
+    m.io.m_wmask := 0.U 
     m.io.m_wen := false.B
     m.io.m_raddr := 0.U
     m.io.m_rmask := 0.U
@@ -214,10 +214,10 @@ class SRAM extends Module {
     }
     when(io.axi_w.wvalid){
         m.io.m_wdata := io.axi_w.wdata
-        m.io.m_wstrb := io.axi_w.wstrb
+        m.io.m_wmask := io.axi_w.wstrb
     }.otherwise{
         m.io.m_wdata := 0.U
-        m.io.m_wstrb := 0.U
+        m.io.m_wmask := 0.U
     }
     when(io.axi_w.wvalid & io.axi_aw.awvalid){
         delay_w.io.inData := true.B
