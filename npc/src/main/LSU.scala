@@ -76,7 +76,12 @@ class LSU extends Module {
     val mem_ren_reg = RegEnable(io.exu2in.bits.mem_ren,0.U,(exu2in_valid | io.lsu_axi_r.rready))
 
     io.lsu_axi_ar.rmask := 0.U
-    io.lsu_axi_ar.raddr := 0.U 
+    io.lsu_axi_ar.araddr := 0.U 
+    io.lsu_axi_ar.arid := 0.U
+    io.lsu_axi_ar.arlen := 0.U
+    io.lsu_axi_ar.arsize := 0.U
+    io.lsu_axi_ar.arburst := 0.U
+
     //io.lsu_axi_r.rready := rready_reg 
     //io.lsu_axi_ar.arvalid := mem_ren_reg           
 
@@ -103,7 +108,7 @@ class LSU extends Module {
     //Mem write member
     val bready_reg = RegInit(0.U)
     val mem_awaddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
-    val mem_wmask_reg = RegEnable(io.exu2in.bits.m_wmask,0.U,exu2in_valid)
+    val mem_wstrb_reg = RegEnable(io.exu2in.bits.m_wmask,0.U,exu2in_valid)
     val mem_wdata_reg = RegEnable(io.exu2in.bits.src2,0.U,exu2in_valid)
     val mem_wen_reg = RegEnable(io.exu2in.bits.mem_wen,0.U,(exu2in_valid | io.lsu_axi_b.bready))
     io.lsu_axi_aw.awaddr := 0.U
@@ -112,7 +117,8 @@ class LSU extends Module {
     io.lsu_axi_aw.awsize := 0.U
     io.lsu_axi_aw.awburst := 0.U
     io.lsu_axi_w.wdata := 0.U
-    io.lsu_axi_w.wmask := 0.U
+    io.lsu_axi_w.wstrb := 0.U
+    io.lsu_axi_w.wlast := 0.U
     //io.lsu_axi_w.wvalid := mem_wen_reg 
     //io.lsu_axi_aw.awvalid := mem_wen_reg 
     //io.lsu_axi_b.bready := bready_reg
@@ -184,7 +190,7 @@ class LSU extends Module {
                 when(/*(io.lsu_axi_ar.arready)&*/(io.lsu_axi_ar.arvalid))
                 {                    
                     io.lsu_axi_ar.rmask := mem_rmask_reg
-                    io.lsu_axi_ar.raddr := mem_raddr_reg 
+                    io.lsu_axi_ar.araddr := mem_raddr_reg 
                     when(io.lsu_axi_r.rvalid === 1.U)
                     {
                         rready_reg  := 1.U
@@ -213,7 +219,7 @@ class LSU extends Module {
                     }
                 }.otherwise{
                     io.lsu_axi_ar.rmask := 0.U 
-                    io.lsu_axi_ar.raddr := 0.U 
+                    io.lsu_axi_ar.araddr := 0.U 
                     rready_reg := 0.U
                 }
             }
@@ -230,10 +236,10 @@ class LSU extends Module {
                 when(/*io.lsu_axi_w.wready &*/ io.lsu_axi_w.wvalid)
                 {
                     io.lsu_axi_w.wdata := mem_wdata_reg 
-                    io.lsu_axi_w.wmask := mem_wmask_reg 
+                    io.lsu_axi_w.wstrb := mem_wstrb_reg 
                 }.otherwise{
                     io.lsu_axi_w.wdata := 0.U
-                    io.lsu_axi_w.wmask := 0.U
+                    io.lsu_axi_w.wstrb := 0.U
                     bready_reg := 0.U
                 }
                 when(io.lsu_axi_w.wvalid & io.lsu_axi_w.wready & io.lsu_axi_aw.awready & io.lsu_axi_aw.awvalid & io.lsu_axi_b.bvalid) 

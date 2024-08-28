@@ -42,74 +42,63 @@ class AXI_arbiter extends Module {
     axi_aw_null.awlen := 0.U
     axi_aw_null.awsize := 0.U
     axi_aw_null.awburst := 0.U
-    
-    io.axi_ar.raddr := 0.U
-    io.axi_ar.rmask := 0.U
-    io.axi_ar.arvalid := false.B
+
+    val axi_w_null = Wire(new AXI_w)
+    axi_w_null.wdata := 0.U
+    axi_w_null.wstrb := 0.U
+    axi_w_null.wvalid := false.B
+    axi_w_null.wlast := false.B
+
+    val axi_b_null = Wire(new AXI_b)
+    axi_b_null.bid := 0.U
+    axi_b_null.bresp := 0.U
+    axi_b_null.bvalid := false.B
+
+    val axi_ar_null = Wire(new AXI_ar)
+    axi_ar_null.araddr := 0.U
+    axi_ar_null.arvalid := false.B
+    axi_ar_null.arid := 0.U
+    axi_ar_null.arlen := 0.U
+    axi_ar_null.arsize := 0.U
+    axi_ar_null.arburst := 0.U
+    axi_ar_null.rmask := 0.U
+
+    val axi_r_null = Wire(new AXI_r)
+    axi_r_null.rdata := 0.U
+    axi_r_null.rresp := 0.U
+    axi_r_null.rvalid := false.B
+    axi_r_null.rlast := false.B
+    axi_r_null.rid := 0.U
+
+    io.axi_ar <> axi_ar_null
     io.axi_r.rready := false.B
-    io.axi_w.wdata := 0.U
-    io.axi_w.wmask := 0.U
-    io.axi_w.wvalid := false.B
-    /*
-    io.axi_aw.awaddr := 0.U
-    io.axi_aw.awvalid := false.B
-    io.axi_aw.awid := 0.U
-    io.axi_aw.awlen := 0.U
-    io.axi_aw.awsize := 0.U
-    io.axi_aw.awburst := 0.U
-    */
+    io.axi_w <> axi_w_null
     io.axi_aw <> axi_aw_null
     io.axi_b.bready := false.B
 
-    io.uart_axi_ar.raddr := 0.U
-    io.uart_axi_ar.rmask := 0.U
-    io.uart_axi_ar.arvalid := false.B
+    io.uart_axi_ar <> axi_ar_null
     io.uart_axi_r.rready := false.B
-    io.uart_axi_w.wdata := 0.U
-    io.uart_axi_w.wmask := 0.U
-    io.uart_axi_w.wvalid := false.B
-    /*
-    io.uart_axi_aw.awaddr := 0.U
-    io.uart_axi_aw.awvalid := false.B
-    io.uart_axi_aw.awid := 0.U
-    io.uart_axi_aw.awlen := 0.U
-    io.uart_axi_aw.awsize := 0.U
-    io.uart_axi_aw.awburst := 0.U
-    */
+    io.uart_axi_w <> axi_w_null
     io.uart_axi_aw <> axi_aw_null
     io.uart_axi_b.bready := false.B
 
-    io.rtc_axi_ar.raddr := 0.U
-    io.rtc_axi_ar.rmask := 0.U
-    io.rtc_axi_ar.arvalid := false.B
+    io.rtc_axi_ar <> axi_ar_null
     io.rtc_axi_r.rready := false.B
-    io.rtc_axi_w.wdata := 0.U
-    io.rtc_axi_w.wmask := 0.U
-    io.rtc_axi_w.wvalid := false.B
-    /*
-    io.rtc_axi_aw.awaddr := 0.U
-    io.rtc_axi_aw.awvalid := false.B
-    */
+    io.rtc_axi_w <> axi_w_null
     io.rtc_axi_aw <> axi_aw_null
     io.rtc_axi_b.bready := false.B
 
     io.lsu_axi_ar.arready := false.B
-    io.lsu_axi_r.rdata := 0.U
-    io.lsu_axi_r.rresp := 0.U
-    io.lsu_axi_r.rvalid := false.B
+    io.lsu_axi_r <> axi_r_null
     io.lsu_axi_aw.awready := false.B
     io.lsu_axi_w.wready := false.B
-    io.lsu_axi_b.bvalid := false.B
-    io.lsu_axi_b.bresp := 0.U
+    io.lsu_axi_b <> axi_b_null
 
     io.ifu_axi_ar.arready := false.B
-    io.ifu_axi_r.rdata := 0.U
-    io.ifu_axi_r.rresp := 0.U
-    io.ifu_axi_r.rvalid := false.B
+    io.ifu_axi_r <> axi_r_null
     io.ifu_axi_aw.awready := false.B
     io.ifu_axi_w.wready := false.B
-    io.ifu_axi_b.bvalid := false.B
-    io.ifu_axi_b.bresp := 0.U
+    io.ifu_axi_b <> axi_b_null
 
     
 
@@ -129,7 +118,7 @@ class AXI_arbiter extends Module {
             io.lsu_axi_b <> io.uart_axi_b
         }
         //SRAM
-        .elsewhen(((io.lsu_axi_ar.raddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.raddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
+        .elsewhen(((io.lsu_axi_ar.araddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
             io.axi_aw <> io.lsu_axi_aw
             io.axi_w <> io.lsu_axi_w
@@ -137,7 +126,7 @@ class AXI_arbiter extends Module {
             io.lsu_axi_b <> io.axi_b
         }
         //RTC CLINT
-        .elsewhen(((io.lsu_axi_ar.raddr >= 0xa0000048.S.asUInt) & io.lsu_axi_ar.raddr <= 0xa000004f.S.asUInt)){
+        .elsewhen(((io.lsu_axi_ar.araddr >= 0xa0000048.S.asUInt) & io.lsu_axi_ar.araddr <= 0xa000004f.S.asUInt)){
             io.rtc_axi_ar <> io.lsu_axi_ar
             io.rtc_axi_aw <> io.lsu_axi_aw
             io.rtc_axi_w <> io.lsu_axi_w

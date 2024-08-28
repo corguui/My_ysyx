@@ -39,6 +39,7 @@ class CLINT extends Module {
     io.axi_aw.awready := false.B
     io.axi_w.wready := false.B
     io.axi_b.bvalid := false.B
+    io.axi_b.bid := 0.U
     io.axi_b.bresp := 0.U
 
     //read_delay
@@ -60,11 +61,13 @@ class CLINT extends Module {
     io.axi_ar.arready := true.B
     io.axi_r.rdata := 2.U 
     io.axi_r.rresp := 3.U
+    io.axi_r.rid := 0.U
+    io.axi_r.rlast := 0.U
     io.axi_r.rvalid := rvalid_reg
 
      //AXI-lite read part
     when(io.axi_ar.arvalid){ 
-        rtc_raddr := io.axi_ar.raddr
+        rtc_raddr := io.axi_ar.araddr
         rtc_rmask := io.axi_ar.rmask
         rtc_ren := io.axi_ar.arvalid
         delay.io.inData := rtc_rdata

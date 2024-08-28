@@ -44,7 +44,8 @@ class IFU extends Module {
 	io.ifu_axi_aw.awlen := 0.U
 	io.ifu_axi_aw.awburst := 0.U
 	io.ifu_axi_w.wdata := 0.U
-	io.ifu_axi_w.wmask := 0.U
+	io.ifu_axi_w.wstrb := 0.U
+	io.ifu_axi_w.wlast := false.B
 	io.ifu_axi_w.wvalid := false.B
 	io.ifu_axi_b.bready := false.B
 	assert(io.ifu_axi_b.bvalid === false.B, "ifu_axi_b.bvalid must be false")
@@ -83,7 +84,11 @@ class IFU extends Module {
 	val inst_reg 	= RegEnable(inst,0.U,io.ifu_axi_ar.arvalid)
 	//def delay(x:Bool)={RegNext(x)}
 	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_r.rready | exu2in_reg ))
-	io.ifu_axi_ar.raddr := 0.U
+	io.ifu_axi_ar.araddr := 0.U
+	io.ifu_axi_ar.arid := 0.U
+	io.ifu_axi_ar.arsize := 0.U
+	io.ifu_axi_ar.arlen := 0.U
+	io.ifu_axi_ar.arburst := 0.U
 	io.ifu_axi_ar.rmask := 4.U
 	io.ifu_axi_ar.arvalid :=  arvalid_reg
 	io.ifu_sta := Mux(io.ifu_axi_ar.arvalid,true.B,false.B)
@@ -98,7 +103,7 @@ class IFU extends Module {
     	//取指令
 		io.out.bits.pc := RegNext(indata.dnpc.asSInt, 0x80000000.S).asUInt
 		when(io.ifu_axi_ar.arready & io.ifu_axi_ar.arvalid){
-			io.ifu_axi_ar.raddr := ardata_reg 
+			io.ifu_axi_ar.araddr := ardata_reg 
 			when(io.ifu_axi_r.rvalid){
 				rready_reg := true.B
 				when(io.ifu_axi_r.rresp === 1.U){
@@ -110,7 +115,7 @@ class IFU extends Module {
 				rready_reg := false.B
 			}
 		}.otherwise{
-			io.ifu_axi_ar.raddr := 0.U
+			io.ifu_axi_ar.araddr := 0.U
 			rready_reg := false.B
 		}
 
