@@ -63,7 +63,7 @@ class AXI_b extends Bundle {
     val bready = Input(Bool())
 }
 class AXI_ar extends Bundle {
-    val raddr = Output(UInt(32.W))
+    val araddr = Output(UInt(32.W))
     val rmask = Output(UInt(3.W))
     val arvalid = Output(Bool())
     val arready = Input(Bool())
@@ -174,7 +174,7 @@ class SRAM extends Module {
 
     //AXI-lite read part
     when(io.axi_ar.arvalid){ 
-        m.io.m_raddr := io.axi_ar.raddr
+        m.io.m_raddr := io.axi_ar.araddr
         m.io.m_rmask := io.axi_ar.rmask
         m.io.m_ren := io.axi_ar.arvalid
         delay.io.inData := m.io.m_rdata

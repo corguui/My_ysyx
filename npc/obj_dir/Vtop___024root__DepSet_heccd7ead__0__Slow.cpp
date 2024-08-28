@@ -141,12 +141,12 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT___AXI_arbiter_io_axi_r_rready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awvalid = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT___AXI_arbiter_io_axi_w_wmask = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT___AXI_arbiter_io_axi_w_wstrb = VL_RAND_RESET_I(4);
     vlSelf->top__DOT___AXI_arbiter_io_axi_w_wvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___AXI_arbiter_io_axi_b_bready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___AXI_arbiter_io_uart_axi_aw_awaddr = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___AXI_arbiter_io_uart_axi_aw_awvalid = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT___AXI_arbiter_io_uart_axi_w_wmask = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT___AXI_arbiter_io_uart_axi_w_wstrb = VL_RAND_RESET_I(4);
     vlSelf->top__DOT___AXI_arbiter_io_uart_axi_w_wvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___AXI_arbiter_io_uart_axi_b_bready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT___AXI_arbiter_io_rtc_axi_ar_arvalid = VL_RAND_RESET_I(1);
@@ -165,7 +165,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT___LSU_io_lsu_axi_ar_raddr = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___LSU_io_lsu_axi_ar_rmask = VL_RAND_RESET_I(3);
     vlSelf->top__DOT___LSU_io_lsu_axi_w_wdata = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT___LSU_io_lsu_axi_w_wmask = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT___LSU_io_lsu_axi_w_wstrb = VL_RAND_RESET_I(4);
     vlSelf->top__DOT___LSU_io_lsu_axi_aw_awaddr = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___IDU_io_reg_data_csr_raddr = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__IFU__DOT__m2EXUstate = VL_RAND_RESET_I(1);
@@ -247,7 +247,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__LSU__DOT__rvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__LSU__DOT__bready_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__LSU__DOT__mem_awaddr_reg = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__LSU__DOT__mem_wmask_reg = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__LSU__DOT__mem_wstrb_reg = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__LSU__DOT__mem_wdata_reg = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__LSU__DOT__mem_wen_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__LSU__DOT__m_wen_reg_delay = VL_RAND_RESET_I(1);
@@ -357,7 +357,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__SRAM__DOT__bvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__SRAM__DOT__bresp_reg = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__SRAM__DOT__waddr_reg = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__SRAM__DOT__wmask_reg = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT__SRAM__DOT__wstrb_reg = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__SRAM__DOT__awvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__SRAM__DOT__wvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__SRAM__DOT___GEN = VL_RAND_RESET_I(32);
@@ -396,7 +396,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__UART__DOT__bvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__UART__DOT__bresp_reg = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__UART__DOT__waddr_reg = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__UART__DOT__wmask_reg = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT__UART__DOT__wstrb_reg = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__UART__DOT__awvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__UART__DOT__wvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__UART__DOT___GEN = VL_RAND_RESET_I(1);

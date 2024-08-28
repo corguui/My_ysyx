@@ -584,11 +584,11 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                  | (IData)(vlSelf->top__DOT__WBU__DOT___GEN_12))));
     if (vlSelf->top__DOT__LSU__DOT___GEN_5) {
         vlSelf->top__DOT___LSU_io_lsu_axi_w_wdata = 0U;
-        vlSelf->top__DOT___LSU_io_lsu_axi_w_wmask = 0U;
+        vlSelf->top__DOT___LSU_io_lsu_axi_w_wstrb = 0U;
     } else {
         vlSelf->top__DOT___LSU_io_lsu_axi_w_wdata = vlSelf->top__DOT__LSU__DOT__mem_wdata_reg;
-        vlSelf->top__DOT___LSU_io_lsu_axi_w_wmask = 
-            (7U & vlSelf->top__DOT__LSU__DOT__mem_wmask_reg);
+        vlSelf->top__DOT___LSU_io_lsu_axi_w_wstrb = 
+            (0xfU & vlSelf->top__DOT__LSU__DOT__mem_wstrb_reg);
     }
     if (vlSelf->top__DOT__LSU__DOT___GEN_4) {
         vlSelf->top__DOT___LSU_io_lsu_axi_ar_rmask 
@@ -856,22 +856,22 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
            & ((~ (IData)(vlSelf->top__DOT__AXI_arbiter__DOT___GEN_7)) 
               & (IData)(vlSelf->top__DOT__AXI_arbiter__DOT___GEN_6)));
     if (vlSelf->top__DOT__AXI_arbiter__DOT___GEN_5) {
-        vlSelf->top__DOT___AXI_arbiter_io_axi_w_wmask = 0U;
+        vlSelf->top__DOT___AXI_arbiter_io_axi_w_wstrb = 0U;
         vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr = 0U;
     } else {
-        vlSelf->top__DOT___AXI_arbiter_io_axi_w_wmask 
-            = vlSelf->top__DOT___LSU_io_lsu_axi_w_wmask;
+        vlSelf->top__DOT___AXI_arbiter_io_axi_w_wstrb 
+            = vlSelf->top__DOT___LSU_io_lsu_axi_w_wstrb;
         vlSelf->top__DOT___AXI_arbiter_io_axi_aw_awaddr 
             = vlSelf->top__DOT___LSU_io_lsu_axi_aw_awaddr;
     }
     if (vlSelf->top__DOT__AXI_arbiter__DOT___GEN_2) {
         vlSelf->top__DOT___AXI_arbiter_io_uart_axi_aw_awaddr = 0U;
-        vlSelf->top__DOT___AXI_arbiter_io_uart_axi_w_wmask = 0U;
+        vlSelf->top__DOT___AXI_arbiter_io_uart_axi_w_wstrb = 0U;
     } else {
         vlSelf->top__DOT___AXI_arbiter_io_uart_axi_aw_awaddr 
             = vlSelf->top__DOT___LSU_io_lsu_axi_aw_awaddr;
-        vlSelf->top__DOT___AXI_arbiter_io_uart_axi_w_wmask 
-            = vlSelf->top__DOT___LSU_io_lsu_axi_w_wmask;
+        vlSelf->top__DOT___AXI_arbiter_io_uart_axi_w_wstrb 
+            = vlSelf->top__DOT___LSU_io_lsu_axi_w_wstrb;
     }
     vlSelf->top__DOT___AXI_arbiter_io_uart_axi_b_bready 
         = ((IData)(vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_hf6818992__0) 

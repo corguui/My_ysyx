@@ -118,7 +118,7 @@ class AXI_arbiter extends Module {
             io.lsu_axi_b <> io.uart_axi_b
         }
         //SRAM
-        .elsewhen(((io.lsu_axi_ar.raddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.raddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
+        .elsewhen(((io.lsu_axi_ar.araddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
             io.axi_aw <> io.lsu_axi_aw
             io.axi_w <> io.lsu_axi_w
@@ -126,7 +126,7 @@ class AXI_arbiter extends Module {
             io.lsu_axi_b <> io.axi_b
         }
         //RTC CLINT
-        .elsewhen(((io.lsu_axi_ar.raddr >= 0xa0000048.S.asUInt) & io.lsu_axi_ar.raddr <= 0xa000004f.S.asUInt)){
+        .elsewhen(((io.lsu_axi_ar.araddr >= 0xa0000048.S.asUInt) & io.lsu_axi_ar.araddr <= 0xa000004f.S.asUInt)){
             io.rtc_axi_ar <> io.lsu_axi_ar
             io.rtc_axi_aw <> io.lsu_axi_aw
             io.rtc_axi_w <> io.lsu_axi_w

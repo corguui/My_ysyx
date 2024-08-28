@@ -79,7 +79,7 @@ class UART extends Module {
         uart.io.mask := 0.U
     }
     when(io.axi_w.wvalid & io.axi_aw.awvalid){
-        delay_w.io.inData := true.B //m.io.m_wready
+        delay_w.io.inData := true.B //m.io.m_wready:
         // invalid的限制是在w和aw拉高时拉高一周期而已
         delay_w.io.inValid :=Mux((io.axi_w.wvalid =/= wvalid_reg & io.axi_w.wvalid === 1.U & io.axi_aw.awvalid =/= awvalid_reg & io.axi_aw.awvalid === 1.U),true.B,false.B) 
         uart.io.wen := Mux((io.axi_w.wstrb =/= wstrb_reg) & (io.axi_aw.awaddr =/= waddr_reg) ,true.B,false.B)

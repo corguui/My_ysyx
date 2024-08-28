@@ -67,7 +67,7 @@ class CLINT extends Module {
 
      //AXI-lite read part
     when(io.axi_ar.arvalid){ 
-        rtc_raddr := io.axi_ar.raddr
+        rtc_raddr := io.axi_ar.araddr
         rtc_rmask := io.axi_ar.rmask
         rtc_ren := io.axi_ar.arvalid
         delay.io.inData := rtc_rdata
