@@ -77,6 +77,11 @@ class LSU extends Module {
 
     io.lsu_axi_ar.rmask := 0.U
     io.lsu_axi_ar.raddr := 0.U 
+    io.lsu_axi_ar.arid := 0.U
+    io.lsu_axi_ar.arlen := 0.U
+    io.lsu_axi_ar.arsize := 0.U
+    io.lsu_axi_ar.arburst := 0.U
+
     //io.lsu_axi_r.rready := rready_reg 
     //io.lsu_axi_ar.arvalid := mem_ren_reg           
 

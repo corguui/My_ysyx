@@ -85,6 +85,10 @@ class IFU extends Module {
 	//def delay(x:Bool)={RegNext(x)}
 	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_r.rready | exu2in_reg ))
 	io.ifu_axi_ar.raddr := 0.U
+	io.ifu_axi_ar.arid := 0.U
+	io.ifu_axi_ar.arsize := 0.U
+	io.ifu_axi_ar.arlen := 0.U
+	io.ifu_axi_ar.arburst := 0.U
 	io.ifu_axi_ar.rmask := 4.U
 	io.ifu_axi_ar.arvalid :=  arvalid_reg
 	io.ifu_sta := Mux(io.ifu_axi_ar.arvalid,true.B,false.B)

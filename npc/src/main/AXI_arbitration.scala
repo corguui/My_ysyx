@@ -54,25 +54,27 @@ class AXI_arbiter extends Module {
     axi_b_null.bresp := 0.U
     axi_b_null.bvalid := false.B
 
-    io.axi_ar.raddr := 0.U
-    io.axi_ar.rmask := 0.U
-    io.axi_ar.arvalid := false.B
+    val axi_ar_null = Wire(new AXI_ar)
+    axi_ar_null.raddr := 0.U
+    axi_ar_null.arvalid := false.B
+    axi_ar_null.arid := 0.U
+    axi_ar_null.arlen := 0.U
+    axi_ar_null.arsize := 0.U
+    axi_ar_null.arburst := 0.U
+
+    io.axi_ar <> axi_ar_null
     io.axi_r.rready := false.B
     io.axi_w <> axi_w_null
     io.axi_aw <> axi_aw_null
     io.axi_b.bready := false.B
 
-    io.uart_axi_ar.raddr := 0.U
-    io.uart_axi_ar.rmask := 0.U
-    io.uart_axi_ar.arvalid := false.B
+    io.uart_axi_ar <> axi_ar_null
     io.uart_axi_r.rready := false.B
     io.uart_axi_w <> axi_w_null
     io.uart_axi_aw <> axi_aw_null
     io.uart_axi_b.bready := false.B
 
-    io.rtc_axi_ar.raddr := 0.U
-    io.rtc_axi_ar.rmask := 0.U
-    io.rtc_axi_ar.arvalid := false.B
+    io.rtc_axi_ar <> axi_ar_null
     io.rtc_axi_r.rready := false.B
     io.rtc_axi_w <> axi_w_null
     io.rtc_axi_aw <> axi_aw_null

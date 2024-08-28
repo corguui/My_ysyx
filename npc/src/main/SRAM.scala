@@ -65,6 +65,10 @@ class AXI_ar extends Bundle {
     val rmask = Output(UInt(3.W))
     val arvalid = Output(Bool())
     val arready = Input(Bool())
+    val arid = Output(UInt(4.W))
+    val arlen = Output(UInt(8.W))
+    val arsize = Output(UInt(3.W))
+    val arburst = Output(UInt(2.W))
 }
 class AXI_w extends Bundle {
     val wdata = Output(UInt(32.W))
