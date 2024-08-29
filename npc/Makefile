@@ -5,7 +5,7 @@ Cfile +=$(shell find -L ./src/csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
 #TOPfile=./build/top.sv
 #TOPname=top
-Vfile += ./build/top.sv
+Vfile += ./build/ysyx_23060111.sv
 TOPfile= ../ysyxSoC/build/ysyxSoCFull.v
 TOPname= ysyxSoCFull
 
@@ -66,7 +66,7 @@ verilog:
 	$(call git_commit, "generate verilog")
 	mkdir -p $(BUILD_DIR)
 	mill -i $(PRJ).runMain Elaborate --target-dir $(BUILD_DIR)
-	sed -i '/^[^/].*\.v/d' ./build/top.sv
+	sed -i '/^[^/].*\.v/d' ./build/ysyx_23060111.sv
 
 help:
 	mill -i $(PRJ).runMain Elaborate --help
