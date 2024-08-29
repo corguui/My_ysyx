@@ -1,4 +1,4 @@
-#include "Vtop__Dpi.h"
+#include "VysyxSoCFull__Dpi.h"
 #include "config.h"
 #include <cpu/cpu.h>
 #include <cpu/decode.h>
