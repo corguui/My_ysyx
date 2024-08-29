@@ -144,6 +144,6 @@ class top extends Module {
   AXI_arbiter.io.axi_ar.arready := io.master.arready  
   */
 
-  (io.master:Data).waiveAll :<>= (axi_ar:Data).waiveAll
+  (io.master:Data).waiveAll :<>= (axi_ar,axi_aw,aix_w,axi_b,axi_r:Data).waiveAll
 }
 
