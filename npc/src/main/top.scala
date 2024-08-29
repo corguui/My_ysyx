@@ -113,6 +113,9 @@ class top extends Module {
   inv_flag := IDU.io.inv_flag 
   dontTouch(inv_flag)
 
+  io.master :<>= AXI_arbiter.io.axi_ar
+
+/*
   AXI_arbiter.io.axi_aw.awready := io.master.awready  
   io.master.awvalid := AXI_arbiter.io.axi_aw.awvalid  
   io.master.awaddr := AXI_arbiter.io.axi_aw.awaddr  
@@ -142,5 +145,6 @@ class top extends Module {
   AXI_arbiter.io.axi_r.rlast := io.master.rlast  
   AXI_arbiter.io.axi_r.rid := io.master.rid  
   AXI_arbiter.io.axi_r.rresp := io.master.rresp  
+ */
 }
 
