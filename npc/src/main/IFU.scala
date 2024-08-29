@@ -89,7 +89,6 @@ class IFU extends Module {
 	io.ifu_axi_ar.arsize := 0.U
 	io.ifu_axi_ar.arlen := 0.U
 	io.ifu_axi_ar.arburst := 0.U
-	io.ifu_axi_ar.rmask := 4.U
 	io.ifu_axi_ar.arvalid :=  arvalid_reg
 	io.ifu_sta := Mux(io.ifu_axi_ar.arvalid,true.B,false.B)
 	io.ifu_axi_r.rready := rready_reg

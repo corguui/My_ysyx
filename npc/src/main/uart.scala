@@ -34,7 +34,6 @@ class UART extends Module {
     uart.io.mask := 0.U
 
     //read part
-
     io.axi_ar.arready := false.B
     io.axi_r.rvalid := false.B
     io.axi_r.rdata := 0.U

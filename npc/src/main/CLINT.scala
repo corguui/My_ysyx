@@ -68,7 +68,7 @@ class CLINT extends Module {
      //AXI-lite read part
     when(io.axi_ar.arvalid){ 
         rtc_raddr := io.axi_ar.araddr
-        rtc_rmask := io.axi_ar.rmask
+        rtc_rmask := 4.U 
         rtc_ren := io.axi_ar.arvalid
         delay.io.inData := rtc_rdata
         // invalid的限制是在w和aw拉高时拉高一周期而已
@@ -76,11 +76,7 @@ class CLINT extends Module {
         rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
 
         when(((rtc_raddr >= 0xa0000048.S.asUInt)&(rtc_raddr <= 0xa000004f.S.asUInt))){
-            when(rtc_rmask === 1.U){
-            resp := Mux((rtc_rdata(31,8) === 0.U),1.U,0.U)
-            }.elsewhen(rtc_rmask === 2.U){
-            resp := Mux((rtc_rdata(31,16) === 0.U),1.U,0.U)
-            }.elsewhen(rtc_rmask === 4.U){
+            when(rtc_rmask === 4.U){
             resp := 1.U
             }.otherwise{
             resp := 0.U

@@ -64,7 +64,6 @@ class AXI_b extends Bundle {
 }
 class AXI_ar extends Bundle {
     val araddr = Output(UInt(32.W))
-    val rmask = Output(UInt(3.W))
     val arvalid = Output(Bool())
     val arready = Input(Bool())
     val arid = Output(UInt(4.W))
@@ -175,7 +174,7 @@ class SRAM extends Module {
     //AXI-lite read part
     when(io.axi_ar.arvalid){ 
         m.io.m_raddr := io.axi_ar.araddr
-        m.io.m_rmask := io.axi_ar.rmask
+        m.io.m_rmask := 4.U
         m.io.m_ren := io.axi_ar.arvalid
         delay.io.inData := m.io.m_rdata
         // invalid的限制是在w和aw拉高时拉高一周期而已
@@ -183,11 +182,7 @@ class SRAM extends Module {
         rvalid_en := Mux(delay.io.delayDone,true.B,false.B)
 
         when(((m.io.m_raddr >= 0x80000000.S.asUInt)&(m.io.m_raddr < 0x8fffffff.S.asUInt)) | ((m.io.m_raddr >= 0xa0000048.S.asUInt)&(m.io.m_raddr <= 0xa000004f.S.asUInt))){
-            when(m.io.m_rmask === 1.U){
-            resp := Mux((m.io.m_rdata(31,8) === 0.U),1.U,0.U)
-            }.elsewhen(m.io.m_rmask === 2.U){
-            resp := Mux((m.io.m_rdata(31,16) === 0.U),1.U,0.U)
-            }.elsewhen(m.io.m_rmask === 4.U){
+            when(m.io.m_rmask === 4.U){
             resp := 1.U
             }.otherwise{
             resp := 0.U
