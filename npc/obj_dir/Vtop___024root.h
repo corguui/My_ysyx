@@ -168,13 +168,13 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__AXI_arbiter__DOT___GEN_7;
         CData/*0:0*/ top__DOT__AXI_arbiter__DOT___GEN_8;
         CData/*0:0*/ top__DOT__AXI_arbiter__DOT___GEN_9;
-        CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_h7bbdc2e9__0;
-        CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_h363268c6__0;
+        CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_hc8f955bb__0;
+        CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_ha75ffa7c__0;
         CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_hf6818992__0;
-        CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_h2cca1aa5__0;
+        CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_h76d06acc__0;
         CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_ha6f808b4__0;
         CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_h0eb34983__0;
-        CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_h93cb5d78__0;
+        CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_hff3363a0__0;
         CData/*0:0*/ top__DOT__AXI_arbiter__DOT____VdfgTmp_hb0ea07fc__0;
         CData/*0:0*/ top__DOT__UART__DOT__bvalid_reg;
         CData/*1:0*/ top__DOT__UART__DOT__bresp_reg;
@@ -209,7 +209,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT___SRAM_io_axi_r_rdata;
         IData/*31:0*/ top__DOT___WBU_io_reg_wdata;
         IData/*31:0*/ top__DOT___WBU_io_csr_wdata_1;
-        IData/*31:0*/ top__DOT___LSU_io_lsu_axi_ar_raddr;
+        IData/*31:0*/ top__DOT___LSU_io_lsu_axi_ar_araddr;
         IData/*31:0*/ top__DOT___LSU_io_lsu_axi_w_wdata;
         IData/*31:0*/ top__DOT___LSU_io_lsu_axi_aw_awaddr;
         IData/*31:0*/ top__DOT__IFU__DOT__indata_dnpc;

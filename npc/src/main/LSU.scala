@@ -75,7 +75,6 @@ class LSU extends Module {
     val mem_rmask_reg = RegEnable(io.exu2in.bits.m_rmask,0.U,exu2in_valid)
     val mem_ren_reg = RegEnable(io.exu2in.bits.mem_ren,0.U,(exu2in_valid | io.lsu_axi_r.rready))
 
-    io.lsu_axi_ar.rmask := 0.U
     io.lsu_axi_ar.araddr := 0.U 
     io.lsu_axi_ar.arid := 0.U
     io.lsu_axi_ar.arlen := 0.U
@@ -189,7 +188,6 @@ class LSU extends Module {
             when(io.exu2in.bits.inst_type === 3.U){
                 when(/*(io.lsu_axi_ar.arready)&*/(io.lsu_axi_ar.arvalid))
                 {                    
-                    io.lsu_axi_ar.rmask := mem_rmask_reg
                     io.lsu_axi_ar.araddr := mem_raddr_reg 
                     when(io.lsu_axi_r.rvalid === 1.U)
                     {
@@ -201,7 +199,17 @@ class LSU extends Module {
                         wbu_data.mem_rresp := io.lsu_axi_r.rresp
                         when(io.exu2in.bits.il_us === true.B)
                         {
-                           wbu_data.mem_rdata := io.lsu_axi_r.rdata.asUInt
+                           when(mem_rmask_reg === 1.U)
+                           {
+                            wbu_data.mem_rdata := Cat(Fill(24,0.U),io.lsu_axi_r.rdata(7,0)).asUInt
+                           }
+                           .elsewhen(mem_rmask_reg === 2.U)
+                           {
+                            wbu_data.mem_rdata := Cat(Fill(16,0.U),io.lsu_axi_r.rdata(15,0)).asUInt
+                           }.otherwise
+                           {
+                            wbu_data.mem_rdata := 0.U
+                           }
                         }.otherwise{
                         when(mem_rmask_reg === 1.U)
                         {
@@ -218,7 +226,6 @@ class LSU extends Module {
                         rready_reg := 0.U
                     }
                 }.otherwise{
-                    io.lsu_axi_ar.rmask := 0.U 
                     io.lsu_axi_ar.araddr := 0.U 
                     rready_reg := 0.U
                 }

@@ -28,7 +28,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
         bufp->chgBit(oldp+1,(vlSelf->top__DOT__SRAM__DOT__bvalid_reg));
         bufp->chgBit(oldp+2,(vlSelf->top__DOT__UART__DOT__bvalid_reg));
         bufp->chgBit(oldp+3,(vlSelf->top__DOT__RTC__DOT__rvalid_reg));
-        bufp->chgIData(oldp+4,(vlSelf->top__DOT___LSU_io_lsu_axi_ar_raddr),32);
+        bufp->chgIData(oldp+4,(vlSelf->top__DOT___LSU_io_lsu_axi_ar_araddr),32);
         bufp->chgCData(oldp+5,(vlSelf->top__DOT___LSU_io_lsu_axi_ar_rmask),3);
         bufp->chgBit(oldp+6,(vlSelf->top__DOT__LSU__DOT__io_lsu_axi_ar_arvalid_0));
         bufp->chgBit(oldp+7,(vlSelf->top__DOT__LSU__DOT__io_lsu_axi_r_rready_0));
@@ -275,7 +275,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                        ? vlSelf->top__DOT__IFU__DOT__ardata_reg
                                        : 0U) : ((IData)(vlSelf->top__DOT__AXI_arbiter__DOT___GEN_4)
                                                  ? 0U
-                                                 : vlSelf->top__DOT___LSU_io_lsu_axi_ar_raddr))),32);
+                                                 : vlSelf->top__DOT___LSU_io_lsu_axi_ar_araddr))),32);
         bufp->chgCData(oldp+202,(((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg)
                                    ? 4U : ((IData)(vlSelf->top__DOT__AXI_arbiter__DOT___GEN_4)
                                             ? 0U : (IData)(vlSelf->top__DOT___LSU_io_lsu_axi_ar_rmask)))),3);
@@ -298,7 +298,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                        ? (IData)(vlSelf->top__DOT__UART__DOT__bresp_reg)
                                        : 0U) : 3U)),2);
         bufp->chgIData(oldp+208,(((IData)(vlSelf->top__DOT__AXI_arbiter__DOT___GEN_8)
-                                   ? 0U : vlSelf->top__DOT___LSU_io_lsu_axi_ar_raddr)),32);
+                                   ? 0U : vlSelf->top__DOT___LSU_io_lsu_axi_ar_araddr)),32);
         bufp->chgCData(oldp+209,(((IData)(vlSelf->top__DOT__AXI_arbiter__DOT___GEN_8)
                                    ? 0U : (IData)(vlSelf->top__DOT___LSU_io_lsu_axi_ar_rmask))),3);
         bufp->chgIData(oldp+210,(((IData)(vlSelf->top__DOT___AXI_arbiter_io_rtc_axi_ar_arvalid)
@@ -325,7 +325,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                                                     : 3U)
                                                 : 0U)))),2);
         bufp->chgBit(oldp+213,(((IData)(vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_h0eb34983__0) 
-                                & (IData)(vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_h93cb5d78__0))));
+                                & (IData)(vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_hff3363a0__0))));
         bufp->chgCData(oldp+214,(((IData)(vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_hb0ea07fc__0)
                                    ? 0U : ((IData)(vlSelf->top__DOT__AXI_arbiter__DOT___GEN_0)
                                             ? ((IData)(vlSelf->top__DOT__UART__DOT___GEN)

@@ -162,7 +162,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT___WBU_io_csr_waddr_1 = VL_RAND_RESET_I(2);
     vlSelf->top__DOT___WBU_io_csr_wdata_1 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___WBU_io_csr_wen_1 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT___LSU_io_lsu_axi_ar_raddr = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT___LSU_io_lsu_axi_ar_araddr = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___LSU_io_lsu_axi_ar_rmask = VL_RAND_RESET_I(3);
     vlSelf->top__DOT___LSU_io_lsu_axi_w_wdata = VL_RAND_RESET_I(32);
     vlSelf->top__DOT___LSU_io_lsu_axi_w_wstrb = VL_RAND_RESET_I(4);
@@ -385,13 +385,13 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__AXI_arbiter__DOT___GEN_7 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__AXI_arbiter__DOT___GEN_8 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__AXI_arbiter__DOT___GEN_9 = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_h7bbdc2e9__0 = 0;
-    vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_h363268c6__0 = 0;
+    vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_hc8f955bb__0 = 0;
+    vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_ha75ffa7c__0 = 0;
     vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_hf6818992__0 = 0;
-    vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_h2cca1aa5__0 = 0;
+    vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_h76d06acc__0 = 0;
     vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_ha6f808b4__0 = 0;
     vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_h0eb34983__0 = 0;
-    vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_h93cb5d78__0 = 0;
+    vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_hff3363a0__0 = 0;
     vlSelf->top__DOT__AXI_arbiter__DOT____VdfgTmp_hb0ea07fc__0 = 0;
     vlSelf->top__DOT__UART__DOT__bvalid_reg = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__UART__DOT__bresp_reg = VL_RAND_RESET_I(2);
