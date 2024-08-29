@@ -61,7 +61,6 @@ class AXI_arbiter extends Module {
     axi_ar_null.arlen := 0.U
     axi_ar_null.arsize := 0.U
     axi_ar_null.arburst := 0.U
-    axi_ar_null.rmask := 0.U
 
     val axi_r_null = Wire(new AXI_r)
     axi_r_null.rdata := 0.U
