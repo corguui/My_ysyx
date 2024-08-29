@@ -4,11 +4,11 @@
 
 #include <cpu/cpu.h>
 #include <sdb.h>
-#include "Vtop___024root.h"
+#include "Vysyx_23060111___024root.h"
 #include "mem.h"
 
 VerilatedContext* contextp=NULL; 
-Vtop *top=NULL; 
+Vysyx_23060111 *top=NULL; 
 VerilatedVcdC* tfp=NULL;
 
 void init_monitor();
@@ -25,7 +25,7 @@ int main(int argc ,char** argv, char** env)
 	parse_args(argc, argv);
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
-	top = new Vtop{contextp};
+	top = new Vysyx_23060111{contextp};
 	#ifdef CONFIG_VCD
 	contextp->traceEverOn(true);
 	tfp=new VerilatedVcdC;
