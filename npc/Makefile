@@ -88,13 +88,13 @@ clean:
 
 .PHONY: test verilog help reformat checkformat clean
 
-sim:$(TOPfile) $(Cfile) $(Vfile)
+sim: $(Cfile) $(Vfile)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VLTFLAGS) 
 	$(NPC_SIM_RUN) $(RUN_FLAGS)
 	@ctags -R -u
 
-gdb:$(TOPfile)  $(Cfile) $(Vfile)
+gdb: $(Cfile) $(Vfile)
 	verilator $(VLTFLAGS) $(NPC_GDB) 
 	gdb $(NPC_GDB_DIFF) --args $(NPC_GDB_RUN) $(RUN_FLAGS)
 	@ctags -R -u
