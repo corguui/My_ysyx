@@ -16,10 +16,12 @@ void init_mode();
 void parse_args(int argc,char *argv[]);
 
 int main_time=0;
-
+extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
+extern "C" void mrom_read(int32_t addr, int32_t *data) { assert(0); }
 
 int main(int argc ,char** argv, char** env)
 {
+	Verilated::commandArgs(argc, argv);
 	parse_args(argc, argv);
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
