@@ -1,5 +1,5 @@
 BUILD_DIR = ./build
-Vfile=$(shell find -L ../ysyxSoC/perip -name "*.c")
+Vfile=$(shell find -L ../ysyxSoC/perip -name "*.v")
 Cfile=$(wildcard ./src/csrc/*.cpp)
 Cfile +=$(shell find -L ./src/csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
