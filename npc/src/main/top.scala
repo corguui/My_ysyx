@@ -132,7 +132,6 @@ class top extends Module {
   AXI_arbiter.io.axi_b.bid := io.master.bid  
   AXI_arbiter.io.axi_ar.arready := io.master.arready  
   */
-  (io.master:Data).waiveAll :<>= (AXI_arbiter.io.axi_ar, AXI_arbiter.io.axi_aw, AXI_arbiter.io.axi_w,AXI_arbiter.io.axi_r, AXI_arbiter.io.axi_b:Data).waiveAll
+  (io.master:Data).waiveAll :<>= (AXI_arbiter.io.axi_ar, AXI_arbiter.io.axi_aw, AXI_arbiter.io.axi_w,AXI_arbiter.io.axi_r, AXI_arbiter.io.axi_b:Data)
 }
-
 
