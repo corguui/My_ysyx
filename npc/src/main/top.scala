@@ -39,7 +39,7 @@ class top extends Module {
   val io = IO(new Bundle {
     val interrupt = Input(Bool())
     val master = (new AXI) 
-    val slave = Flipped(new AXI)
+    //val slave = Flipped(new AXI)
   })
   val IFU = Module(new IFU)
   val IDU = Module(new IDU)
