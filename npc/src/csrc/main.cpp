@@ -4,11 +4,11 @@
 
 #include <cpu/cpu.h>
 #include <sdb.h>
-#include "Vtop___024root.h"
+#include "VysyxSoCFull___024root.h"
 #include "mem.h"
 
 VerilatedContext* contextp=NULL; 
-Vtop *top=NULL; 
+VysyxSoCFull *top=NULL; 
 VerilatedVcdC* tfp=NULL;
 
 void init_monitor();
@@ -16,14 +16,16 @@ void init_mode();
 void parse_args(int argc,char *argv[]);
 
 int main_time=0;
-
+extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
+extern "C" void mrom_read(int32_t addr, int32_t *data) { assert(0); }
 
 int main(int argc ,char** argv, char** env)
 {
+	Verilated::commandArgs(argc, argv);
 	parse_args(argc, argv);
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
-	top = new Vtop{contextp};
+	top = new VysyxSoCFull{contextp};
 	#ifdef CONFIG_VCD
 	contextp->traceEverOn(true);
 	tfp=new VerilatedVcdC;
@@ -54,15 +56,15 @@ void ebreak (int inst)
 	if(inst == 0x00100073 )
 	{
 		//reg 10
-	   NPCTRAP(top->rootp->top__DOT__Reg__DOT__reg_10);//ebreak
+	   NPCTRAP(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_10);//ebreak
 	}
-	if(inst!=0&&top->io_inv_flag==1)
+	if(inst!=0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__inv_flag==1)
 	{
 		INV();//can't find the command type
 	}
-	else if(inst==0&&top->io_inv_flag==1)
+	else if(inst==0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__inv_flag==1)
 	{
-		top->io_inv_flag=0;
+		top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__inv_flag=0;
 	}
 }
 

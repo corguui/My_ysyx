@@ -1,18 +1,22 @@
 BUILD_DIR = ./build
-Vfile=$(wildcard ./build/*.sv)
+Vfile=$(shell find -L ../ysyxSoC/perip -name "*.v")
 Cfile=$(wildcard ./src/csrc/*.cpp)
 Cfile +=$(shell find -L ./src/csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
-TOPfile=./build/top.sv
-TOPname=top
+#TOPfile=./build/top.sv
+#TOPname=top
+Vfile += ./build/ysyx_23060111.sv
+TOPfile= ../ysyxSoC/build/ysyxSoCFull.v
+TOPname= ysyxSoCFull
 
 #init
 IMG ?= 
-VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint $^
+#--timescale "1ns/1ns" --no-timing -top $(TOPname) $(TOPfile) 
+VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint --timescale "1ns/1ns" --no-timing -top $(TOPname) $(TOPfile)  $^
 RUN_FLAGS = $(IMG)
 
-INC_PATH = $(HOME)/ysyx-workbench/npc/src/include
-VLTFLAGS += -CFLAGS -I$(INC_PATH) 
+INC_PATH = -I$(HOME)/ysyx-workbench/npc/src/include -I$(HOME)/ysyx-workbench/ysyxSoC/perip/uart16550/rtl -I$(HOME)/ysyx-workbench/ysyxSoC/perip/spi/rtl
+VLTFLAGS += -CFLAGS $(INC_PATH) 
 
 NPC_SIM_RUN = ./obj_dir/Vtop 
 NPC_GDB_RUN = obj_dir/Vtop
@@ -62,7 +66,7 @@ verilog:
 	$(call git_commit, "generate verilog")
 	mkdir -p $(BUILD_DIR)
 	mill -i $(PRJ).runMain Elaborate --target-dir $(BUILD_DIR)
-	sed -i '/^[^/].*\.v/d' ./build/top.sv
+	sed -i '/^[^/].*\.v/d' ./build/ysyx_23060111.sv
 
 help:
 	mill -i $(PRJ).runMain Elaborate --help
@@ -84,13 +88,13 @@ clean:
 
 .PHONY: test verilog help reformat checkformat clean
 
-sim:$(TOPfile) $(Cfile) 
+sim: $(Cfile) $(Vfile)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VLTFLAGS) 
 	$(NPC_SIM_RUN) $(RUN_FLAGS)
 	@ctags -R -u
 
-gdb:$(TOPfile)  $(Cfile)
+gdb: $(Cfile) $(Vfile)
 	verilator $(VLTFLAGS) $(NPC_GDB) 
 	gdb $(NPC_GDB_DIFF) --args $(NPC_GDB_RUN) $(RUN_FLAGS)
 	@ctags -R -u

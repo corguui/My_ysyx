@@ -1,4 +1,4 @@
-#include "Vtop__Dpi.h"
+#include "VysyxSoCFull__Dpi.h"
 #include "config.h"
 #include <cpu/cpu.h>
 #include <cpu/decode.h>
@@ -39,83 +39,83 @@ uint32_t cmp_dnpc;
 
 void cpu_read_reg()
 {
-	cpu.pc=top->io_pc;
-	cpu.gpr[0]=top->rootp->top__DOT__Reg__DOT__reg_0;
-	cpu.gpr[1]=top->rootp->top__DOT__Reg__DOT__reg_1;
-	cpu.gpr[2]=top->rootp->top__DOT__Reg__DOT__reg_2;
-	cpu.gpr[3]=top->rootp->top__DOT__Reg__DOT__reg_3;
-	cpu.gpr[4]=top->rootp->top__DOT__Reg__DOT__reg_4;
-	cpu.gpr[5]=top->rootp->top__DOT__Reg__DOT__reg_5;
-	cpu.gpr[6]=top->rootp->top__DOT__Reg__DOT__reg_6;
-	cpu.gpr[7]=top->rootp->top__DOT__Reg__DOT__reg_7;
-	cpu.gpr[8]=top->rootp->top__DOT__Reg__DOT__reg_8;
-	cpu.gpr[9]=top->rootp->top__DOT__Reg__DOT__reg_9;
-	cpu.gpr[10]=top->rootp->top__DOT__Reg__DOT__reg_10;
-	cpu.gpr[11]=top->rootp->top__DOT__Reg__DOT__reg_11;
-	cpu.gpr[12]=top->rootp->top__DOT__Reg__DOT__reg_12;
-	cpu.gpr[13]=top->rootp->top__DOT__Reg__DOT__reg_13;
-	cpu.gpr[14]=top->rootp->top__DOT__Reg__DOT__reg_14;
-	cpu.gpr[15]=top->rootp->top__DOT__Reg__DOT__reg_15;
-	cpu.gpr[16]=top->rootp->top__DOT__Reg__DOT__reg_16;
-	cpu.gpr[17]=top->rootp->top__DOT__Reg__DOT__reg_17;
-	cpu.gpr[18]=top->rootp->top__DOT__Reg__DOT__reg_18;
-	cpu.gpr[19]=top->rootp->top__DOT__Reg__DOT__reg_19;
-	cpu.gpr[20]=top->rootp->top__DOT__Reg__DOT__reg_20;
-	cpu.gpr[21]=top->rootp->top__DOT__Reg__DOT__reg_21;
-	cpu.gpr[22]=top->rootp->top__DOT__Reg__DOT__reg_22;
-	cpu.gpr[23]=top->rootp->top__DOT__Reg__DOT__reg_23;
-	cpu.gpr[24]=top->rootp->top__DOT__Reg__DOT__reg_24;
-	cpu.gpr[25]=top->rootp->top__DOT__Reg__DOT__reg_25;
-	cpu.gpr[26]=top->rootp->top__DOT__Reg__DOT__reg_26;
-	cpu.gpr[27]=top->rootp->top__DOT__Reg__DOT__reg_27;
-	cpu.gpr[28]=top->rootp->top__DOT__Reg__DOT__reg_28;
-	cpu.gpr[29]=top->rootp->top__DOT__Reg__DOT__reg_29;
-	cpu.gpr[30]=top->rootp->top__DOT__Reg__DOT__reg_30;
-	cpu.gpr[31]=top->rootp->top__DOT__Reg__DOT__reg_31;
+	cpu.pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
+	cpu.gpr[0]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_0;
+	cpu.gpr[1]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_1;
+	cpu.gpr[2]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_2;
+	cpu.gpr[3]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_3;
+	cpu.gpr[4]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_4;
+	cpu.gpr[5]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_5;
+	cpu.gpr[6]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_6;
+	cpu.gpr[7]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_7;
+	cpu.gpr[8]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_8;
+	cpu.gpr[9]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_9;
+	cpu.gpr[10]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_10;
+	cpu.gpr[11]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_11;
+	cpu.gpr[12]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_12;
+	cpu.gpr[13]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_13;
+	cpu.gpr[14]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_14;
+	cpu.gpr[15]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_15;
+	cpu.gpr[16]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_16;
+	cpu.gpr[17]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_17;
+	cpu.gpr[18]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_18;
+	cpu.gpr[19]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_19;
+	cpu.gpr[20]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_20;
+	cpu.gpr[21]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_21;
+	cpu.gpr[22]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_22;
+	cpu.gpr[23]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_23;
+	cpu.gpr[24]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_24;
+	cpu.gpr[25]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_25;
+	cpu.gpr[26]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_26;
+	cpu.gpr[27]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_27;
+	cpu.gpr[28]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_28;
+	cpu.gpr[29]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_29;
+	cpu.gpr[30]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_30;
+	cpu.gpr[31]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_31;
 	
 
-	cpu.csr[0]=top->rootp->top__DOT__Reg__DOT__csr_0;
-	cpu.csr[1]=top->rootp->top__DOT__Reg__DOT__csr_1;
-	cpu.csr[2]=top->rootp->top__DOT__Reg__DOT__csr_2;
-	cpu.csr[3]=top->rootp->top__DOT__Reg__DOT__csr_3;
+	cpu.csr[0]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_0;
+	cpu.csr[1]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_1;
+	cpu.csr[2]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_2;
+	cpu.csr[3]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_3;
 	
 
 }
 void cpu_write_reg()
 {
-	top->io_pc=cpu.pc;
-	top->rootp->top__DOT__Reg__DOT__reg_0=cpu.gpr[0];
-	top->rootp->top__DOT__Reg__DOT__reg_1=cpu.gpr[1];
-	top->rootp->top__DOT__Reg__DOT__reg_2=cpu.gpr[2];
-	top->rootp->top__DOT__Reg__DOT__reg_3=cpu.gpr[3];
-	top->rootp->top__DOT__Reg__DOT__reg_4=cpu.gpr[4];
-	top->rootp->top__DOT__Reg__DOT__reg_5=cpu.gpr[5];
-	top->rootp->top__DOT__Reg__DOT__reg_6=cpu.gpr[6];
-	top->rootp->top__DOT__Reg__DOT__reg_7=cpu.gpr[7];
-	top->rootp->top__DOT__Reg__DOT__reg_8=cpu.gpr[8];
-	top->rootp->top__DOT__Reg__DOT__reg_9=cpu.gpr[9];
-	top->rootp->top__DOT__Reg__DOT__reg_10=cpu.gpr[10];
-	top->rootp->top__DOT__Reg__DOT__reg_11=cpu.gpr[11];
-	top->rootp->top__DOT__Reg__DOT__reg_12=cpu.gpr[12];
-	top->rootp->top__DOT__Reg__DOT__reg_13=cpu.gpr[13];
-	top->rootp->top__DOT__Reg__DOT__reg_14=cpu.gpr[14];
-	top->rootp->top__DOT__Reg__DOT__reg_15=cpu.gpr[15];
-	top->rootp->top__DOT__Reg__DOT__reg_16=cpu.gpr[16];
-	top->rootp->top__DOT__Reg__DOT__reg_17=cpu.gpr[17];
-	top->rootp->top__DOT__Reg__DOT__reg_18=cpu.gpr[18];
-	top->rootp->top__DOT__Reg__DOT__reg_19=cpu.gpr[19];
-	top->rootp->top__DOT__Reg__DOT__reg_20=cpu.gpr[20];
-	top->rootp->top__DOT__Reg__DOT__reg_21=cpu.gpr[21];
-	top->rootp->top__DOT__Reg__DOT__reg_22=cpu.gpr[22];
-	top->rootp->top__DOT__Reg__DOT__reg_23=cpu.gpr[23];
-	top->rootp->top__DOT__Reg__DOT__reg_24=cpu.gpr[24];
-	top->rootp->top__DOT__Reg__DOT__reg_25=cpu.gpr[25];
-	top->rootp->top__DOT__Reg__DOT__reg_26=cpu.gpr[26];
-	top->rootp->top__DOT__Reg__DOT__reg_27=cpu.gpr[27];
-	top->rootp->top__DOT__Reg__DOT__reg_28=cpu.gpr[28];	
-	top->rootp->top__DOT__Reg__DOT__reg_29=cpu.gpr[29];
-	top->rootp->top__DOT__Reg__DOT__reg_30=cpu.gpr[30];
-	top->rootp->top__DOT__Reg__DOT__reg_31=cpu.gpr[31];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0=cpu.pc;
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_0=cpu.gpr[0];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_1=cpu.gpr[1];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_2=cpu.gpr[2];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_3=cpu.gpr[3];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_4=cpu.gpr[4];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_5=cpu.gpr[5];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_6=cpu.gpr[6];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_7=cpu.gpr[7];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_8=cpu.gpr[8];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_9=cpu.gpr[9];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_10=cpu.gpr[10];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_11=cpu.gpr[11];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_12=cpu.gpr[12];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_13=cpu.gpr[13];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_14=cpu.gpr[14];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_15=cpu.gpr[15];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_16=cpu.gpr[16];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_17=cpu.gpr[17];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_18=cpu.gpr[18];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_19=cpu.gpr[19];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_20=cpu.gpr[20];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_21=cpu.gpr[21];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_22=cpu.gpr[22];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_23=cpu.gpr[23];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_24=cpu.gpr[24];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_25=cpu.gpr[25];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_26=cpu.gpr[26];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_27=cpu.gpr[27];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_28=cpu.gpr[28];	
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_29=cpu.gpr[29];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_30=cpu.gpr[30];
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_31=cpu.gpr[31];
 
 
 }
@@ -136,8 +136,8 @@ static void trace_and_difftest(Decode *_this) {
   #ifdef CONFIG_DIFFTEST 
   if(valid_flag)
   {
-  difftest_step(_this->pc, top->io_pc);
-  //printf("pc %x npc %x \n",_this->pc,top->io_pc);
+  difftest_step(_this->pc, top->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
+  //printf("pc %x npc %x \n",_this->pc,top->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
   }
   #endif
 
@@ -176,7 +176,7 @@ void cpu_init()
 	#endif
 	main_time++;
 	top->eval();
-	top->rootp->top__DOT__Reg__DOT__csr_2=0x1800;
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_2=0x1800;
 
 	
 }
@@ -185,13 +185,13 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
-		if(top->io_pc!=0&&top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc)
+		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0!=0&&top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc)
 		{
 		valid_flag =1;
-		pc=top->io_pc;
-		s->pc=top->io_pc;
+		pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
+		s->pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
 		s->inst=top->rootp->top__DOT__IFU__DOT__inst_reg;
-    	s->dnpc=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc;
+    	s->dnpc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc;
 		//printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
@@ -360,7 +360,7 @@ void cpu_exec(uint64_t n)
 
       Log("npc: %s at pc = 0x%x",
           (npc_state.state == NPC_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :
-           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :  ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))), top->io_pc);
+           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :  ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))), top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
 
       #ifdef CONFIG_ITRACE
 	    //print the ringbuf

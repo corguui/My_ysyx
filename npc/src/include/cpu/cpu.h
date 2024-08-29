@@ -5,11 +5,11 @@
 #include <cstdint>
 
 #include <mem.h>         
-#include "Vtop.h"
+#include "VysyxSoCFull.h"
+#include "VysyxSoCFull___024root.h"
 #include"verilated.h"    
 #include"verilated_vcd_c.h"
-#include"Vtop__Dpi.h"
-#include "Vtop___024root.h"
+#include"VysyxSoCFull__Dpi.h"
                          
 typedef struct {
   uint32_t gpr[32];
@@ -20,7 +20,7 @@ typedef struct {
 extern NPC_CPU_state cpu;
 extern int main_time;    
 extern VerilatedContext* contextp;
-extern Vtop *top;
+extern VysyxSoCFull *top;
 extern VerilatedVcdC* tfp;
 
 void cpu_exec_once(VerilatedVcdC* tfp);
