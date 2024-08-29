@@ -147,7 +147,7 @@ class top extends Module {
   (io.master:Data).waiveAll :<>= (axi_ar:Data).waiveAll
   (io.master:Data).waiveAll :<>= (axi_aw:Data).waiveAll
   (io.master:Data).waiveAll :<>= (axi_w:Data).waiveAll
-  (io.master:Data).waiveAll :<>= (axi_b:Data).waiveAll
-  (io.master:Data).waiveAll :<>= (axi_r:Data).waiveAll
+  (axi_b:Data).waiveAll :<>= (io.master:Data).waiveAll
+  (axi_r:Data).waiveAll :<>= (io.master:Data).waiveAll
 }
 
