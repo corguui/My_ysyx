@@ -198,7 +198,10 @@ static long load_img(){
    Log("The image is %s, size = %ld", img_file, size); 
    fseek(fp, 0, SEEK_SET);
    int ret = fread(NPC_guest_to_host(0x80000000), size, 1, fp);
-   assert(ret == 1);
+   if(ret != 1)
+   {
+	printf("can't load the image");
+   }
                
    fclose(fp); 
    return size;
