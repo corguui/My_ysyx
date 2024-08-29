@@ -17,7 +17,7 @@ void parse_args(int argc,char *argv[]);
 
 int main_time=0;
 extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
-extern "C" void mrom_read(int32_t addr, int32_t *data) { *data = 0x00100073; }
+extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = 0x00100073; }
 
 int main(int argc ,char** argv, char** env)
 {

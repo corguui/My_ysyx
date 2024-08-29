@@ -200,7 +200,7 @@ static long load_img(){
    int ret = fread(NPC_guest_to_host(0x80000000), size, 1, fp);
    if(ret != 1)
    {
-	printf("can't load the image");
+	printf("can't load the image\r\n");
    }
                
    fclose(fp); 
