@@ -34,13 +34,6 @@ class AXI extends Bundle {
     val rlast = Input(Bool())
     val rid = Input(UInt(4.W))
 }
-class  AXI_ALL extends Bundle{
-    val axi_ar = (new AXI_ar)
-    val axi_r = Flipped(new AXI_r)
-    val axi_aw = (new AXI_aw)
-    val axi_w = (new AXI_w)
-    val axi_b = Flipped(new AXI_b)
-}
 
 class top extends Module {
   val io = IO(new Bundle {
@@ -120,14 +113,26 @@ class top extends Module {
   inv_flag := IDU.io.inv_flag 
   dontTouch(inv_flag)
 
-  val axi_all = Wire(new AXI_ALL)
-  axi_all.axi_ar <> AXI_arbiter.io.axi_ar
-  axi_all.axi_aw <> AXI_arbiter.io.axi_aw
-  axi_all.axi_w <> AXI_arbiter.io.axi_w
-  axi_all.axi_b <> AXI_arbiter.io.axi_b
-  axi_all.axi_r <> AXI_arbiter.io.axi_r
-
-  io.master <> axi_all
+  /*
+  AXI_arbiter.io.axi_aw.awready := io.master.awready  
+  io.master.awvalid := AXI_arbiter.io.axi_aw.awvalid  
+  io.master.awaddr := AXI_arbiter.io.axi_aw.awaddr  
+  io.master.awid := AXI_arbiter.io.axi_aw.awid  
+  io.master.awlen := AXI_arbiter.io.axi_aw.awlen  
+  io.master.awsize := AXI_arbiter.io.axi_aw.awsize  
+  io.master.awburst := AXI_arbiter.io.axi_aw.awburst  
+  AXI_arbiter.io.axi_w.wready := io.master.wready  
+  io.master.wvalid := AXI_arbiter.io.axi_w.wvalid  
+  io.master.wdata := AXI_arbiter.io.axi_w.wdata  
+  io.master.wstrb := AXI_arbiter.io.axi_w.wstrb  
+  io.master.wlast := AXI_arbiter.io.axi_w.wlast  
+  io.master.bready := AXI_arbiter.io.axi_b.bready  
+  AXI_arbiter.io.axi_b.bvalid := io.master.bvalid  
+  AXI_arbiter.io.axi_b.bresp := io.master.bresp  
+  AXI_arbiter.io.axi_b.bid := io.master.bid  
+  AXI_arbiter.io.axi_ar.arready := io.master.arready  
+  */
+  (io.master:Data).waiveAll :<>= (AXI_arbiter.io.axi_ar, AXI_arbiter.io.axi_aw, AXI_arbiter.io.axi_w,AXI_arbiter.io.axi_r, AXI_arbiter.io.axi_b:Data).waiveAll
 }
 
 
