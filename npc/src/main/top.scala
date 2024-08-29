@@ -113,6 +113,17 @@ class top extends Module {
   inv_flag := IDU.io.inv_flag 
   dontTouch(inv_flag)
 
+
+  val axi_ar = Flipped(new AXI_ar)
+  val axi_aw = Flipped(new AXI_aw)
+  val axi_w = Flipped(new AXI_w)
+  val axi_b  = (new AXI_b)
+  val axi_r  = (new AXI_r)
+  axi_ar <> AXI_arbiter.io.axi_ar
+  axi_aw <> AXI_arbiter.io.axi_aw
+  axi_w  <> AXI_arbiter.io.axi_w
+  AXI_arbiter.io.axi_r <> axi_r
+  AXI_arbiter.io.axi_b <> axi_b
   /*
   AXI_arbiter.io.axi_aw.awready := io.master.awready  
   io.master.awvalid := AXI_arbiter.io.axi_aw.awvalid  
@@ -132,6 +143,7 @@ class top extends Module {
   AXI_arbiter.io.axi_b.bid := io.master.bid  
   AXI_arbiter.io.axi_ar.arready := io.master.arready  
   */
-  (io.master:Data).waiveAll :<>= (AXI_arbiter.io.axi_ar, AXI_arbiter.io.axi_aw, AXI_arbiter.io.axi_w,AXI_arbiter.io.axi_r, AXI_arbiter.io.axi_b:Data)
+
+  (io.master:Data).waiveAll :<>= (axi_ar:Data).waiveAll
 }
 
