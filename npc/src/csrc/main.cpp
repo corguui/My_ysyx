@@ -4,11 +4,11 @@
 
 #include <cpu/cpu.h>
 #include <sdb.h>
-#include "Vysyx_23060111___024root.h"
+#include "VysyxSoCFull___024root.h"
 #include "mem.h"
 
 VerilatedContext* contextp=NULL; 
-Vysyx_23060111 *top=NULL; 
+VysyxSoCFull *top=NULL; 
 VerilatedVcdC* tfp=NULL;
 
 void init_monitor();
@@ -25,7 +25,7 @@ int main(int argc ,char** argv, char** env)
 	parse_args(argc, argv);
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
-	top = new Vysyx_23060111{contextp};
+	top = new VysyxSoCFull{contextp};
 	#ifdef CONFIG_VCD
 	contextp->traceEverOn(true);
 	tfp=new VerilatedVcdC;
@@ -56,15 +56,15 @@ void ebreak (int inst)
 	if(inst == 0x00100073 )
 	{
 		//reg 10
-	   NPCTRAP(top->rootp->top__DOT__Reg__DOT__reg_10);//ebreak
+	   NPCTRAP(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_10);//ebreak
 	}
-	if(inst!=0&&top->rootp->top__DOT__inv_flag==1)
+	if(inst!=0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__inv_flag==1)
 	{
 		INV();//can't find the command type
 	}
-	else if(inst==0&&top->rootp->top__DOT__inv_flag==1)
+	else if(inst==0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__inv_flag==1)
 	{
-		top->rootp->top__DOT__inv_flag=0;
+		top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__inv_flag=0;
 	}
 }
 

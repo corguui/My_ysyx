@@ -20,14 +20,14 @@ uint8_t* new_space(int size) {
 
 static void check_bound(IOMap *map, paddr_t addr) {
   if (map == NULL) {
-    log_write("address (" "0x%08x"  ") is out of bound at pc = " "0x%08x", addr,  top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0);
+    log_write("address (" "0x%08x"  ") is out of bound at pc = " "0x%08x", addr,  top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
     assert(map != NULL);
       }
   else {
     if((addr <= map->high && addr >= map->low)==0)
     {
     log_write("address (" "0x%08x" ") is out of bound {%s} [" "0x%08x" ", " "0x%08x" "] at pc = " "0x%08x",
-        addr, map->name, map->low, map->high, top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0);
+        addr, map->name, map->low, map->high, top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
     assert(addr <= map->high && addr >= map->low);
     }
        }

@@ -39,7 +39,7 @@ uint32_t cmp_dnpc;
 
 void cpu_read_reg()
 {
-	cpu.pc=top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0;
+	cpu.pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
 	cpu.gpr[0]=top->rootp->top__DOT__Reg__DOT__reg_0;
 	cpu.gpr[1]=top->rootp->top__DOT__Reg__DOT__reg_1;
 	cpu.gpr[2]=top->rootp->top__DOT__Reg__DOT__reg_2;
@@ -83,7 +83,7 @@ void cpu_read_reg()
 }
 void cpu_write_reg()
 {
-	top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0=cpu.pc;
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0=cpu.pc;
 	top->rootp->top__DOT__Reg__DOT__reg_0=cpu.gpr[0];
 	top->rootp->top__DOT__Reg__DOT__reg_1=cpu.gpr[1];
 	top->rootp->top__DOT__Reg__DOT__reg_2=cpu.gpr[2];
@@ -136,8 +136,8 @@ static void trace_and_difftest(Decode *_this) {
   #ifdef CONFIG_DIFFTEST 
   if(valid_flag)
   {
-  difftest_step(_this->pc, top->top__DOT__IFU__DOT__io_out_bits_pc_0);
-  //printf("pc %x npc %x \n",_this->pc,top->top__DOT__IFU__DOT__io_out_bits_pc_0);
+  difftest_step(_this->pc, top->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
+  //printf("pc %x npc %x \n",_this->pc,top->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
   }
   #endif
 
@@ -185,11 +185,11 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
-		if(top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0!=0&&top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc)
+		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0!=0&&top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc)
 		{
 		valid_flag =1;
-		pc=top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0;
-		s->pc=top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0;
+		pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
+		s->pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
 		s->inst=top->rootp->top__DOT__IFU__DOT__inst_reg;
     	s->dnpc=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc;
 		//printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);
@@ -360,7 +360,7 @@ void cpu_exec(uint64_t n)
 
       Log("npc: %s at pc = 0x%x",
           (npc_state.state == NPC_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :
-           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :  ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))), top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0);
+           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :  ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))), top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
 
       #ifdef CONFIG_ITRACE
 	    //print the ringbuf
