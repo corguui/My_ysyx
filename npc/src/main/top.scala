@@ -114,11 +114,11 @@ class top extends Module {
   dontTouch(inv_flag)
 
 
-  val axi_ar = Flipped(new AXI_ar)
-  val axi_aw = Flipped(new AXI_aw)
-  val axi_w = Flipped(new AXI_w)
-  val axi_b  = (new AXI_b)
-  val axi_r  = (new AXI_r)
+  val axi_ar = Wire(Flipped(new AXI_ar))
+  val axi_aw = Wire(Flipped(new AXI_aw))
+  val axi_w = Wire(Flipped(new AXI_w))
+  val axi_b  = Wire((new AXI_b))
+  val axi_r  = Wire((new AXI_r))
   axi_ar <> AXI_arbiter.io.axi_ar
   axi_aw <> AXI_arbiter.io.axi_aw
   axi_w  <> AXI_arbiter.io.axi_w
