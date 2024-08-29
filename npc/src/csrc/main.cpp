@@ -56,13 +56,13 @@ void ebreak (int inst)
 		//reg 10
 	   NPCTRAP(top->rootp->top__DOT__Reg__DOT__reg_10);//ebreak
 	}
-	if(inst!=0&&top->interrupt==1)
+	if(inst!=0&&top->rootp->top__DOT__inv_flag==1)
 	{
 		INV();//can't find the command type
 	}
-	else if(inst==0&&top->interrupt==1)
+	else if(inst==0&&top->rootp->top__DOT__inv_flag==1)
 	{
-		top->interrupt=0;
+		top->rootp->top__DOT__inv_flag=0;
 	}
 }
 
