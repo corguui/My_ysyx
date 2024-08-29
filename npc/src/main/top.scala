@@ -34,6 +34,13 @@ class AXI extends Bundle {
     val rlast = Input(Bool())
     val rid = Input(UInt(4.W))
 }
+class  AXI_ALL extends Bundle{
+    val axi_ar = (new AXI_ar)
+    val axi_r = Flipped(new AXI_r)
+    val axi_aw = (new AXI_aw)
+    val axi_w = (new AXI_w)
+    val axi_b = Flipped(new AXI_b)
+}
 
 class top extends Module {
   val io = IO(new Bundle {
@@ -113,12 +120,14 @@ class top extends Module {
   inv_flag := IDU.io.inv_flag 
   dontTouch(inv_flag)
 
-  io.master <> AXI_arbiter.io.axi_ar
-  io.master <> AXI_arbiter.io.axi_aw
-  io.master <> AXI_arbiter.io.axi_w
-  io.master <> AXI_arbiter.io.axi_r
-  io.master <> AXI_arbiter.io.axi_b
+  val axi_all = Wire(new AXI_ALL)
+  axi_all.axi_ar <> AXI_arbiter.io.axi_all.axi_ar
+  axi_all.axi_aw <> AXI_arbiter.io.axi_all.axi_aw
+  axi_all.axi_w <> AXI_arbiter.io.axi_all.axi_w
+  axi_all.axi_b <> AXI_arbiter.io.axi_all.axi_b
+  axi_all.axi_r <> AXI_arbiter.io.axi_all.axi_r
 
+  io.master <> axi_all
 }
 
 
