@@ -39,7 +39,7 @@ class top extends Module {
   val io = IO(new Bundle {
     val interrupt = Input(Bool())
     val master = (new AXI) 
-    //val slave = Flipped(new AXI)
+    val slave = Flipped(new AXI)
   })
   val IFU = Module(new IFU)
   val IDU = Module(new IDU)
@@ -144,6 +144,10 @@ class top extends Module {
   AXI_arbiter.io.axi_ar.arready := io.master.arready  
   */
 
-  (io.master:Data):<>= (axi_ar,axi_aw,axi_w,axi_b,axi_r:Data)
+  (io.master:Data).waiveAll :<>= (axi_ar:Data).waiveAll
+  (io.master:Data).waiveAll :<>= (axi_aw:Data).waiveAll
+  (io.master:Data).waiveAll :<>= (axi_w:Data).waiveAll
+  (io.master:Data).waiveAll :<>= (axi_b:Data).waiveAll
+  (io.master:Data).waiveAll :<>= (axi_r:Data).waiveAll
 }
 
