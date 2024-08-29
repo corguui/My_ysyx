@@ -5,7 +5,6 @@ import chisel3.util._
 
 class top extends Module {
   val io = IO(new Bundle {
-    val pc = Output(UInt(32.W))
     val inv_flag = Output(Bool())
   })
   val IFU = Module(new IFU)
@@ -70,7 +69,6 @@ class top extends Module {
   AXI_arbiter.io.rtc_axi_r <> RTC.io.axi_r
   AXI_arbiter.io.rtc_axi_b <> RTC.io.axi_b
 
-  io.pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 
 
 }

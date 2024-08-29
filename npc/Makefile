@@ -1,18 +1,21 @@
 BUILD_DIR = ./build
-Vfile=$(wildcard ./build/*.sv)
+Vfile=$(shell find -L ../ysyxSoC/perip -name "*.c")
 Cfile=$(wildcard ./src/csrc/*.cpp)
 Cfile +=$(shell find -L ./src/csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
-TOPfile=./build/top.sv
-TOPname=top
+#TOPfile=./build/top.sv
+#TOPname=top
+Vfile += ./build/top.sv
+TOPfile= ../ysyxSoC/build/ysyxSoCFull.v
+TOPname= ysyxSoCFull
 
 #init
 IMG ?= 
-VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint $^
+VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint --timescale "1ns/1ns" --no-timing -top $(TOPname) $(TOPfile) $^
 RUN_FLAGS = $(IMG)
 
-INC_PATH = $(HOME)/ysyx-workbench/npc/src/include
-VLTFLAGS += -CFLAGS -I$(INC_PATH) 
+INC_PATH = -I$(HOME)/ysyx-workbench/npc/src/include -I$(HOME)/ysyx-workbench/ysyxSoC/perip/uart16550/rtl -I$(HOME)/ysyx-workbench/ysyxSoC/perip/spi/rtl
+VLTFLAGS += -CFLAGS $(INC_PATH) 
 
 NPC_SIM_RUN = ./obj_dir/Vtop 
 NPC_GDB_RUN = obj_dir/Vtop
@@ -84,13 +87,13 @@ clean:
 
 .PHONY: test verilog help reformat checkformat clean
 
-sim:$(TOPfile) $(Cfile) 
+sim:$(TOPfile) $(Cfile) $(Vfile)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VLTFLAGS) 
 	$(NPC_SIM_RUN) $(RUN_FLAGS)
 	@ctags -R -u
 
-gdb:$(TOPfile)  $(Cfile)
+gdb:$(TOPfile)  $(Cfile) $(Vfile)
 	verilator $(VLTFLAGS) $(NPC_GDB) 
 	gdb $(NPC_GDB_DIFF) --args $(NPC_GDB_RUN) $(RUN_FLAGS)
 	@ctags -R -u
