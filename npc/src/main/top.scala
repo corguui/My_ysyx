@@ -73,6 +73,7 @@ class top extends Module {
 
   pc := IFU.io.out.bits.pc 
   inv_flag := IDU.io.inv_flag 
+  dontTouch(inv_flag)
 
 }
 

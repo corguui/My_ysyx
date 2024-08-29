@@ -506,7 +506,6 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     }
     bufp->chgBit(oldp+284,(vlSelf->clock));
     bufp->chgBit(oldp+285,(vlSelf->reset));
-    bufp->chgBit(oldp+286,(vlSelf->io_inv_flag));
 }
 
 void Vtop___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {

@@ -13,11 +13,9 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     // Body
     tracep->declBit(c+285,"clock", false,-1);
     tracep->declBit(c+286,"reset", false,-1);
-    tracep->declBit(c+287,"io_inv_flag", false,-1);
     tracep->pushNamePrefix("top ");
     tracep->declBit(c+285,"clock", false,-1);
     tracep->declBit(c+286,"reset", false,-1);
-    tracep->declBit(c+287,"io_inv_flag", false,-1);
     tracep->pushNamePrefix("AXI_arbiter ");
     tracep->declBus(c+201,"io_axi_ar_araddr", false,-1, 31,0);
     tracep->declBit(c+234,"io_axi_ar_arvalid", false,-1);
@@ -172,7 +170,6 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+215,"io_reg_data_csr_rdata", false,-1, 31,0);
     tracep->declBus(c+57,"io_reg_data_csr_a5", false,-1, 31,0);
     tracep->declBus(c+58,"io_reg_data_mstatus", false,-1, 31,0);
-    tracep->declBit(c+287,"io_inv_flag", false,-1);
     tracep->declBus(c+16,"exu_data_snpc", false,-1, 31,0);
     tracep->declBus(c+17,"exu_data_pc", false,-1, 31,0);
     tracep->declBit(c+18,"exu_data_mem_ren", false,-1);
@@ -1097,5 +1094,4 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                                 : 0U)),32);
     bufp->fullBit(oldp+285,(vlSelf->clock));
     bufp->fullBit(oldp+286,(vlSelf->reset));
-    bufp->fullBit(oldp+287,(vlSelf->io_inv_flag));
 }

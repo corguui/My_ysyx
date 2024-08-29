@@ -30,7 +30,6 @@ class Vtop VL_NOT_FINAL : public VerilatedModel {
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clock,0,0);
     VL_IN8(&reset,0,0);
-    VL_OUT8(&io_inv_flag,0,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
