@@ -139,10 +139,7 @@ class top extends Module {
   (axi_b:Data).waiveAll :<>= (io.master:Data).waiveAll
   (axi_r:Data).waiveAll :<>= (io.master:Data).waiveAll
   */
-  (io.master:Data).waiveAll :<>= (AXI_arbiter.io.axi_ar:Data).waiveAll
-  (io.master:Data).waiveAll :<>= (AXI_arbiter.io.axi_aw:Data).waiveAll
-  (io.master:Data).waiveAll :<>= (AXI_arbiter.io.axi_w:Data).waiveAll
-  (io.master) :<>= (AXI_arbiter.io.axi_b)
-  (io.master) :<>= (AXI_arbiter.io.axi_r)
+  io.master :<= AXI_arbiter.io.axi_ar
+  io.master := DontCare
 }
 
