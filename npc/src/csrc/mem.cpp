@@ -49,7 +49,7 @@ void init_mem()
 }
 static void out_of_bound(uint32_t addr)
 {
-	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->rootp->top__DOT__IFU__DOT__io_out_bits_pc_0);
+	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
 	#ifdef CONFIG_MTRACE
 		log_write("----------write----------\n");
 		for(int i=0;i<write_num;i++)
@@ -198,7 +198,10 @@ static long load_img(){
    Log("The image is %s, size = %ld", img_file, size); 
    fseek(fp, 0, SEEK_SET);
    int ret = fread(NPC_guest_to_host(0x80000000), size, 1, fp);
-   assert(ret == 1);
+   if(ret != 1)
+   {
+	printf("can't load the image\r\n");
+   }
                
    fclose(fp); 
    return size;
