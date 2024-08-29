@@ -35,7 +35,7 @@ class AXI extends Bundle {
     val rid = Input(UInt(4.W))
 }
 
-class top extends Module {
+class ysyx_23060111 extends Module {
   val io = IO(new Bundle {
     val interrupt = Input(Bool())
     val master = (new AXI) 
