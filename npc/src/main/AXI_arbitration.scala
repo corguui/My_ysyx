@@ -6,16 +6,19 @@ import chisel3.experimental._
 
 class AXI_arbiter extends Module {
     val io = IO(new Bundle {
+        //SRAM
         val axi_ar = (new AXI_ar)
         val axi_r = Flipped(new AXI_r)
         val axi_aw = (new AXI_aw)
         val axi_w = (new AXI_w)
         val axi_b = Flipped(new AXI_b)
+        //UART
         val uart_axi_ar = (new AXI_ar)
         val uart_axi_r = Flipped(new AXI_r)
         val uart_axi_aw = (new AXI_aw)
         val uart_axi_w = (new AXI_w)
         val uart_axi_b = Flipped(new AXI_b)
+        //RTC
         val rtc_axi_ar = (new AXI_ar)
         val rtc_axi_r = Flipped(new AXI_r)
         val rtc_axi_aw = (new AXI_aw)

@@ -5,7 +5,7 @@ import chisel3.util._
 
 class top extends Module {
   val io = IO(new Bundle {
-    val inv_flag = Output(Bool())
+
   })
   val IFU = Module(new IFU)
   val IDU = Module(new IDU)
@@ -13,13 +13,16 @@ class top extends Module {
   val LSU = Module(new LSU)
   val WBU = Module(new WBU)
   val Reg = Module(new Reg)
-  val SRAM = Module(new SRAM)
   val AXI_arbiter = Module(new AXI_arbiter)
+  /*
+  val SRAM = Module(new SRAM)
   val UART = Module(new UART)
+  */
   val RTC = Module(new CLINT)
   //val Mem = Module(new LSU_mem)
   //val Inst_fetch = Module(new Inst_fetch)
   val pc=Wire(UInt(32.W))
+  val inv_flag = Wire(Bool())
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
@@ -52,6 +55,7 @@ class top extends Module {
   LSU.io.lsu_axi_b <> AXI_arbiter.io.lsu_axi_b
   AXI_arbiter.io.lsu_sta := LSU.io.lsu_sta
 
+  /*
   SRAM.io.axi_ar <> AXI_arbiter.io.axi_ar
   SRAM.io.axi_aw <> AXI_arbiter.io.axi_aw
   SRAM.io.axi_w <> AXI_arbiter.io.axi_w
@@ -63,6 +67,7 @@ class top extends Module {
   UART.io.axi_w <> AXI_arbiter.io.uart_axi_w
   AXI_arbiter.io.uart_axi_r <> UART.io.axi_r
   AXI_arbiter.io.uart_axi_b <> UART.io.axi_b
+  */
 
   RTC.io.axi_ar <> AXI_arbiter.io.rtc_axi_ar
   RTC.io.axi_aw <> AXI_arbiter.io.rtc_axi_aw
@@ -71,7 +76,7 @@ class top extends Module {
   AXI_arbiter.io.rtc_axi_b <> RTC.io.axi_b
 
   pc := IFU.io.out.bits.pc 
-  io.inv_flag := IDU.io.inv_flag 
+  inv_flag := IDU.io.inv_flag 
 
 }
 
