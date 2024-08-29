@@ -15,7 +15,6 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     , clock{vlSymsp->TOP.clock}
     , reset{vlSymsp->TOP.reset}
     , io_inv_flag{vlSymsp->TOP.io_inv_flag}
-    , io_pc{vlSymsp->TOP.io_pc}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
 {

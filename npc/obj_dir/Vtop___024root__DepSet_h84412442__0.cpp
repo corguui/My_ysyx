@@ -1020,8 +1020,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                     : vlSelf->top__DOT__LSU__DOT__mem_awaddr_reg);
     if (vlSelf->top__DOT__IDU__DOT__state) {
         vlSelf->top__DOT__IDU__DOT__exu_data_snpc = 
-            ((IData)(4U) + vlSelf->io_pc);
-        vlSelf->top__DOT__IDU__DOT__exu_data_pc = vlSelf->io_pc;
+            ((IData)(4U) + vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_0);
+        vlSelf->top__DOT__IDU__DOT__exu_data_pc = vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_0;
         vlSelf->top__DOT__IDU__DOT__exu_data_mem_ren 
             = ((~ (IData)(vlSelf->top__DOT__IDU__DOT___GEN_20)) 
                & (3U == (0x7fU & vlSelf->top__DOT__IFU__DOT__inst_reg)));
@@ -1587,9 +1587,10 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                                      == vlSelf->top__DOT__WBU__DOT__lastdnpc)));
     vlSelf->top__DOT__IFU__DOT__m2EXUstate = vlSelf->__Vdly__top__DOT__IFU__DOT__m2EXUstate;
     vlSelf->top__DOT__IFU__DOT__arvalid_reg = vlSelf->__Vdly__top__DOT__IFU__DOT__arvalid_reg;
-    vlSelf->io_pc = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
-                      ? vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG
-                      : 0U);
+    vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_0 = 
+        ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
+          ? vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG
+          : 0U);
     if ((0x4000U & vlSelf->top__DOT__IFU__DOT__inst_reg)) {
         if ((0x2000U & vlSelf->top__DOT__IFU__DOT__inst_reg)) {
             if ((0x1000U & vlSelf->top__DOT__IFU__DOT__inst_reg)) {

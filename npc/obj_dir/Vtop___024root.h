@@ -198,7 +198,6 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
-        VL_OUT(io_pc,31,0);
         IData/*31:0*/ top__DOT___AXI_arbiter_io_axi_aw_awaddr;
         IData/*31:0*/ top__DOT___AXI_arbiter_io_uart_axi_aw_awaddr;
         IData/*31:0*/ top__DOT___AXI_arbiter_io_lsu_axi_r_rdata;
@@ -208,6 +207,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT___LSU_io_lsu_axi_ar_araddr;
         IData/*31:0*/ top__DOT___LSU_io_lsu_axi_w_wdata;
         IData/*31:0*/ top__DOT___LSU_io_lsu_axi_aw_awaddr;
+        IData/*31:0*/ top__DOT__IFU__DOT__io_out_bits_pc_0;
         IData/*31:0*/ top__DOT__IFU__DOT__indata_dnpc;
         IData/*31:0*/ top__DOT__IFU__DOT__ardata_reg;
         IData/*31:0*/ top__DOT__IFU__DOT__inst_reg;

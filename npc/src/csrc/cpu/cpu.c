@@ -39,7 +39,7 @@ uint32_t cmp_dnpc;
 
 void cpu_read_reg()
 {
-	cpu.pc=top->io_pc;
+	cpu.pc=top->pc;
 	cpu.gpr[0]=top->rootp->top__DOT__Reg__DOT__reg_0;
 	cpu.gpr[1]=top->rootp->top__DOT__Reg__DOT__reg_1;
 	cpu.gpr[2]=top->rootp->top__DOT__Reg__DOT__reg_2;
@@ -83,7 +83,7 @@ void cpu_read_reg()
 }
 void cpu_write_reg()
 {
-	top->io_pc=cpu.pc;
+	top->pc=cpu.pc;
 	top->rootp->top__DOT__Reg__DOT__reg_0=cpu.gpr[0];
 	top->rootp->top__DOT__Reg__DOT__reg_1=cpu.gpr[1];
 	top->rootp->top__DOT__Reg__DOT__reg_2=cpu.gpr[2];
@@ -185,11 +185,11 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
-		if(top->io_pc!=0&&top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc)
+		if(top->pc!=0&&top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc)
 		{
 		valid_flag =1;
-		pc=top->io_pc;
-		s->pc=top->io_pc;
+		pc=top->pc;
+		s->pc=top->pc;
 		s->inst=top->rootp->top__DOT__IFU__DOT__inst_reg;
     	s->dnpc=top->rootp->top__DOT__WBU__DOT__ifu_outdata_dnpc;
 		//printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);

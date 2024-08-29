@@ -63,12 +63,13 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__IDU__DOT__casez_tmp = 0x10U;
         vlSelf->top__DOT__IDU__DOT__casez_tmp_0 = 0xaU;
     }
-    vlSelf->io_pc = ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
-                      ? vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG
-                      : 0U);
     vlSelf->top__DOT___AXI_arbiter_io_ifu_axi_r_rvalid 
         = ((IData)(vlSelf->top__DOT__IFU__DOT__arvalid_reg) 
            & (IData)(vlSelf->top__DOT__SRAM__DOT__rvalid_reg));
+    vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_0 = 
+        ((IData)(vlSelf->top__DOT__IFU__DOT__m2EXUstate)
+          ? vlSelf->top__DOT__IFU__DOT__io_out_bits_pc_REG
+          : 0U);
     vlSelf->top__DOT__LSU__DOT___GEN_1 = ((4U == (IData)(vlSelf->top__DOT__EXU__DOT__lsu_data_inst_type))
                                            ? (IData)(vlSelf->top__DOT__LSU__DOT__mem_wen_reg)
                                            : 0U);
