@@ -42,12 +42,12 @@ class WBU extends Module {
     val ifu_outdata = Wire(new EXUtoIFU)
     val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
     //或是为了让他第一次能够启动ifu
-    io.out2ifu.valid := ((lastdnpc =/= ifu_outdata.dnpc) & (ifu_outdata.dnpc =/= 0x80000000.S.asUInt)) | (lastdnpc =/= ifu_outdata.dnpc && lastdnpc===0.U)//& (m2LSUstate === m2LSUprocess)
+    io.out2ifu.valid := ((lastdnpc =/= ifu_outdata.dnpc) & (ifu_outdata.dnpc =/= 0x20000000.S.asUInt)) | (lastdnpc =/= ifu_outdata.dnpc && lastdnpc===0.U)//& (m2LSUstate === m2LSUprocess)
     io.out2ifu.bits := ifu_outdata
 
     io.lsu2in.ready := ( m2LSUstate===m2LSUidle )
 
-    ifu_outdata.dnpc := 0x80000000.S.asUInt
+    ifu_outdata.dnpc := 0x20000000.S.asUInt
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
     io.reg_waddr := 0.U
@@ -87,7 +87,7 @@ class WBU extends Module {
                     io.reg_wdata := io.lsu2in.bits.mem_rdata 
                     ifu_outdata.dnpc := io.lsu2in.bits.snpc
                 }.otherwise{
-                    ifu_outdata.dnpc := 0x80000000.S.asUInt
+                    ifu_outdata.dnpc := 0x20000000.S.asUInt
                 }
                 
             }
@@ -97,7 +97,7 @@ class WBU extends Module {
                     {
                         ifu_outdata.dnpc := io.lsu2in.bits.snpc
                     }.otherwise{
-                        ifu_outdata.dnpc := 0x80000000.S.asUInt
+                        ifu_outdata.dnpc := 0x20000000.S.asUInt
                     }
             }
             //b type
