@@ -113,7 +113,6 @@ class top extends Module {
   inv_flag := IDU.io.inv_flag 
   dontTouch(inv_flag)
 
-  /*
   AXI_arbiter.io.axi_aw.awready := io.master.awready  
   io.master.awvalid := AXI_arbiter.io.axi_aw.awvalid  
   io.master.awaddr := AXI_arbiter.io.axi_aw.awaddr  
@@ -131,12 +130,17 @@ class top extends Module {
   AXI_arbiter.io.axi_b.bresp := io.master.bresp  
   AXI_arbiter.io.axi_b.bid := io.master.bid  
   AXI_arbiter.io.axi_ar.arready := io.master.arready  
-  */
-  (io.master:Data).waiveAll :<= (AXI_arbiter.io.axi_ar:Data).waiveAll
-  (io.master:Data).waiveAll :<= (AXI_arbiter.io.axi_aw:Data).waiveAll
-  (io.master:Data).waiveAll :<= (AXI_arbiter.io.axi_w:Data).waiveAll
-  io.master := DontCare
-  AXI_arbiter.io.axi_r := DontCare
-  AXI_arbiter.io.axi_b := DontCare
+  io.master.arvalid := AXI_arbiter.io.axi_ar.arvalid  
+  io.master.araddr := AXI_arbiter.io.axi_ar.araddr  
+  io.master.arid := AXI_arbiter.io.axi_ar.arid  
+  io.master.arlen := AXI_arbiter.io.axi_ar.arlen  
+  io.master.arsize := AXI_arbiter.io.axi_ar.arsize  
+  io.master.arburst := AXI_arbiter.io.axi_ar.arburst  
+  io.master.rready := AXI_arbiter.io.axi_r.rready  
+  AXI_arbiter.io.axi_r.rvalid := io.master.rvalid  
+  AXI_arbiter.io.axi_r.rdata := io.master.rdata  
+  AXI_arbiter.io.axi_r.rlast := io.master.rlast  
+  AXI_arbiter.io.axi_r.rid := io.master.rid  
+  AXI_arbiter.io.axi_r.rresp := io.master.rresp  
 }
 
