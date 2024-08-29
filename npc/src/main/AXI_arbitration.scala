@@ -12,12 +12,14 @@ class AXI_arbiter extends Module {
         val axi_aw = (new AXI_aw)
         val axi_w = (new AXI_w)
         val axi_b = Flipped(new AXI_b)
+        /*
         //UART
         val uart_axi_ar = (new AXI_ar)
         val uart_axi_r = Flipped(new AXI_r)
         val uart_axi_aw = (new AXI_aw)
         val uart_axi_w = (new AXI_w)
         val uart_axi_b = Flipped(new AXI_b)
+        */
         //RTC
         val rtc_axi_ar = (new AXI_ar)
         val rtc_axi_r = Flipped(new AXI_r)
@@ -78,11 +80,13 @@ class AXI_arbiter extends Module {
     io.axi_aw <> axi_aw_null
     io.axi_b.bready := false.B
 
+    /*
     io.uart_axi_ar <> axi_ar_null
     io.uart_axi_r.rready := false.B
     io.uart_axi_w <> axi_w_null
     io.uart_axi_aw <> axi_aw_null
     io.uart_axi_b.bready := false.B
+    */
 
     io.rtc_axi_ar <> axi_ar_null
     io.rtc_axi_r.rready := false.B
@@ -113,11 +117,18 @@ class AXI_arbiter extends Module {
     }.elsewhen(io.lsu_sta&&(!io.ifu_sta)){
         //uart
         when((io.lsu_axi_aw.awaddr >= 0xa00003f8.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0xa00003ff.S.asUInt)) {
+            /*
             io.uart_axi_ar <> io.lsu_axi_ar
             io.uart_axi_aw <> io.lsu_axi_aw
             io.uart_axi_w <> io.lsu_axi_w
             io.lsu_axi_r <> io.uart_axi_r
             io.lsu_axi_b <> io.uart_axi_b
+            */
+            io.axi_ar <> io.lsu_axi_ar
+            io.axi_aw <> io.lsu_axi_aw
+            io.axi_w <> io.lsu_axi_w
+            io.lsu_axi_r <> io.axi_r
+            io.lsu_axi_b <> io.axi_b
         }
         //SRAM
         .elsewhen(((io.lsu_axi_ar.araddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
