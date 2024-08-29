@@ -3,18 +3,19 @@ Vfile=$(shell find -L ../ysyxSoC/perip -name "*.c")
 Cfile=$(wildcard ./src/csrc/*.cpp)
 Cfile +=$(shell find -L ./src/csrc -name "*.c")
 Wavefile=$(wildcard ./*.vcd)
-#TOPfile=./build/top.sv
-#TOPname=top
-Vfile += ./build/top.sv
-TOPfile= ../ysyxSoC/build/ysyxSoCFull.v
-TOPname= ysyxSoCFull
+TOPfile=./build/top.sv
+TOPname=top
+#Vfile += ./build/top.sv
+#TOPfile= ../ysyxSoC/build/ysyxSoCFull.v
+#TOPname= ysyxSoCFull
 
 #init
 IMG ?= 
-VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint --timescale "1ns/1ns" --no-timing -top $(TOPname) $(TOPfile) $^
+#--timescale "1ns/1ns" --no-timing -top $(TOPname) $(TOPfile) 
+VLTFLAGS =-Wall --cc --trace --exe --build -Wno-lint $^
 RUN_FLAGS = $(IMG)
 
-INC_PATH = -I$(HOME)/ysyx-workbench/npc/src/include -I$(HOME)/ysyx-workbench/ysyxSoC/perip/uart16550/rtl -I$(HOME)/ysyx-workbench/ysyxSoC/perip/spi/rtl
+INC_PATH = -I$(HOME)/ysyx-workbench/npc/src/include #-I$(HOME)/ysyx-workbench/ysyxSoC/perip/uart16550/rtl -I$(HOME)/ysyx-workbench/ysyxSoC/perip/spi/rtl
 VLTFLAGS += -CFLAGS $(INC_PATH) 
 
 NPC_SIM_RUN = ./obj_dir/Vtop 
@@ -87,7 +88,7 @@ clean:
 
 .PHONY: test verilog help reformat checkformat clean
 
-sim:$(TOPfile) $(Cfile) $(Vfile)
+sim:$(TOPfile) $(Cfile) #$(Vfile)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VLTFLAGS) 
 	$(NPC_SIM_RUN) $(RUN_FLAGS)

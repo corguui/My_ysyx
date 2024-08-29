@@ -19,6 +19,7 @@ class top extends Module {
   val RTC = Module(new CLINT)
   //val Mem = Module(new LSU_mem)
   //val Inst_fetch = Module(new Inst_fetch)
+  val pc=Wire(UInt(32.W))
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
@@ -69,6 +70,7 @@ class top extends Module {
   AXI_arbiter.io.rtc_axi_r <> RTC.io.axi_r
   AXI_arbiter.io.rtc_axi_b <> RTC.io.axi_b
 
+  pc := IFU.io.out.bits.pc 
   io.inv_flag := IDU.io.inv_flag 
 
 }
