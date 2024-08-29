@@ -121,11 +121,11 @@ class top extends Module {
   dontTouch(inv_flag)
 
   val axi_all = Wire(new AXI_ALL)
-  axi_all.axi_ar <> AXI_arbiter.io.axi_all.axi_ar
-  axi_all.axi_aw <> AXI_arbiter.io.axi_all.axi_aw
-  axi_all.axi_w <> AXI_arbiter.io.axi_all.axi_w
-  axi_all.axi_b <> AXI_arbiter.io.axi_all.axi_b
-  axi_all.axi_r <> AXI_arbiter.io.axi_all.axi_r
+  axi_all.axi_ar <> AXI_arbiter.io.axi_ar
+  axi_all.axi_aw <> AXI_arbiter.io.axi_aw
+  axi_all.axi_w <> AXI_arbiter.io.axi_w
+  axi_all.axi_b <> AXI_arbiter.io.axi_b
+  axi_all.axi_r <> AXI_arbiter.io.axi_r
 
   io.master <> axi_all
 }
