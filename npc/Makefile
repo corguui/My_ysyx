@@ -18,8 +18,8 @@ RUN_FLAGS = $(IMG)
 INC_PATH = -I$(HOME)/ysyx-workbench/npc/src/include -I$(HOME)/ysyx-workbench/ysyxSoC/perip/uart16550/rtl -I$(HOME)/ysyx-workbench/ysyxSoC/perip/spi/rtl
 VLTFLAGS += -CFLAGS $(INC_PATH) 
 
-NPC_SIM_RUN = ./obj_dir/Vtop 
-NPC_GDB_RUN = obj_dir/Vtop
+NPC_SIM_RUN = ./obj_dir/VysyxSoCFull 
+NPC_GDB_RUN = obj_dir/VysyxSoCFull
 
 #logfile
 NPC_LOG = ./npc-log.txt
