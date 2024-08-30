@@ -72,18 +72,17 @@ class IFU extends Module {
 
   	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
 	val inst = Wire(UInt(32.W))
-	inst := 0.U
-	val exu2in_reg = RegNext(io.exu2in.valid)
+	inst := 0.U 
+	val exu2in_reg = RegNext(io.exu2in.valid,0.B)
 	val indata 	= Reg(new EXUtoIFU)
 	when(io.exu2in.valid & (io.exu2in.valid =/= exu2in_reg )){	
 		indata := io.exu2in.bits
 	}
 	
-	val rready_reg = RegInit(false.B)
 	val ardata_reg = RegEnable(indata.dnpc,0x20000000.S.asUInt,exu2in_reg)
 	val inst_reg 	= RegEnable(inst,0.U,io.ifu_axi_ar.arvalid)
 	//def delay(x:Bool)={RegNext(x)}
-	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_r.rready | exu2in_reg ))
+	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_r.rvalid| exu2in_reg ))
 	io.ifu_axi_ar.araddr := 0.U
 	io.ifu_axi_ar.arid := 0.U
 	io.ifu_axi_ar.arsize := 0.U
@@ -91,7 +90,7 @@ class IFU extends Module {
 	io.ifu_axi_ar.arburst := 0.U
 	io.ifu_axi_ar.arvalid :=  arvalid_reg
 	io.ifu_sta := Mux(io.ifu_axi_ar.arvalid,true.B,false.B)
-	io.ifu_axi_r.rready := rready_reg
+	io.ifu_axi_r.rready := false.B
 
 	io.out.bits.pc := 0.U
 	io.out.bits.snpc := io.out.bits.pc + 4.U
@@ -103,20 +102,25 @@ class IFU extends Module {
 		io.out.bits.pc := RegNext(indata.dnpc.asSInt, 0x20000000.S).asUInt
 		when(io.ifu_axi_ar.arready & io.ifu_axi_ar.arvalid){
 			io.ifu_axi_ar.araddr := ardata_reg 
-			when(io.ifu_axi_r.rvalid){
-				rready_reg := true.B
+		}.otherwise{
+			io.ifu_axi_ar.araddr := 0.U
+		}
+		when(io.ifu_axi_r.rvalid){
+			io.ifu_axi_r.rready := true.B
+			when(io.ifu_axi_r.rvalid & io.ifu_axi_r.rready){
 				when(io.ifu_axi_r.rresp === 1.U){
 					inst := io.ifu_axi_r.rdata
 				}.otherwise{
 					inst := io.ifu_axi_r.rdata
 				}
-			}.otherwise{
-				rready_reg := false.B
+			}
+			.otherwise{
+				inst := 0.U
 			}
 		}.otherwise{
-			io.ifu_axi_ar.araddr := 0.U
-			rready_reg := false.B
+				io.ifu_axi_r.rready := false.B
 		}
+			
 
 	}
 
