@@ -116,6 +116,7 @@ class AXI_arbiter extends Module {
         io.ifu_axi_b <> io.axi_b
     }.elsewhen(io.lsu_sta&&(!io.ifu_sta)){
         //uart
+        //when((io.lsu_axi_aw.awaddr >= 0xa00003f8.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0xa00003ff.S.asUInt)) {
         when((io.lsu_axi_aw.awaddr >= 0x10000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x10000fff.S.asUInt)) {
             /*
             io.uart_axi_ar <> io.lsu_axi_ar
@@ -131,7 +132,8 @@ class AXI_arbiter extends Module {
             io.lsu_axi_b <> io.axi_b
         }
         //SRAM
-        .elsewhen(((io.lsu_axi_ar.araddr >= 0x20000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x2fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x20000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x2fffffff.S.asUInt))) {
+        //.elsewhen(((io.lsu_axi_ar.araddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
+        .elsewhen(((io.lsu_axi_ar.araddr >= 0x20000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x20000fff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x20000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x20000fff.S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
             io.axi_aw <> io.lsu_axi_aw
             io.axi_w <> io.lsu_axi_w
