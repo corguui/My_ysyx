@@ -13,7 +13,7 @@ BIN = $(TARGET).bin
 SRC = char-test.c
 
 # Compiler flags
-CFLAGS = -nostdlib -march=rv64imac -mabi=lp64
+CFLAGS = -nostdlib -march=rv32imac -mabi=ilp32e
 
 # Default rule to build everything
 all: $(BIN)
