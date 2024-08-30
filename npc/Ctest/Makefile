@@ -13,10 +13,10 @@ BIN = $(TARGET).bin
 SRC = char-test.c
 
 # Compiler flags
-CFLAGS = -nostdlib -march=rv32imac -mabi=ilp32
-
+CFLAGS = -nostdlib -march=rv32imac -mabi=ilp32 -Ttext=0x20000000
 # Default rule to build everything
 all: $(BIN)
+	riscv64-linux-gnu-objdump -d char-test.elf > char-test.txt
 
 # Rule to compile C source file into an ELF file
 $(ELF): $(SRC)
