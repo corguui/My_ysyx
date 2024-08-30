@@ -103,20 +103,20 @@ class IFU extends Module {
 		io.out.bits.pc := RegNext(indata.dnpc.asSInt, 0x20000000.S).asUInt
 		when(io.ifu_axi_ar.arready & io.ifu_axi_ar.arvalid){
 			io.ifu_axi_ar.araddr := ardata_reg 
-			when(io.ifu_axi_r.rvalid){
+		}.otherwise{
+			io.ifu_axi_ar.araddr := 0.U
+		}
+		when(io.ifu_axi_r.rvalid){
 				rready_reg := true.B
 				when(io.ifu_axi_r.rresp === 1.U){
 					inst := io.ifu_axi_r.rdata
 				}.otherwise{
 					inst := io.ifu_axi_r.rdata
 				}
-			}.otherwise{
-				rready_reg := false.B
-			}
 		}.otherwise{
-			io.ifu_axi_ar.araddr := 0.U
-			rready_reg := false.B
+				rready_reg := false.B
 		}
+			
 
 	}
 
