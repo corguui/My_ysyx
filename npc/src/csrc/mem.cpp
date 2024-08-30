@@ -20,7 +20,11 @@ int read_num=0;
 
 
 static long load_img();
+#ifdef MROM
+static uint8_t pmem[0x2000000] __attribute((aligned(4096)))={};
+#else
 static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
+#endif
 static uint32_t img[]
 {
 	0x00110123,
@@ -67,6 +71,15 @@ static void out_of_bound(uint32_t addr)
 
 }
 //check mem if out_of_bond will excute the fun out_of_bond
+#ifdef MROM
+static inline bool check_mem(uint32_t addr)
+{
+	return (addr>=0x20000000&&addr<0x20000fff);
+}
+
+
+uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-0x20000000;}
+#else
 static inline bool check_mem(uint32_t addr)
 {
 	return (addr>=0x80000000&&addr<0x87ffffff);
@@ -74,6 +87,7 @@ static inline bool check_mem(uint32_t addr)
 
 
 uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-0x80000000;}
+#endif
 
 
 uint32_t pmem_read(uint32_t addr,int len)
@@ -180,8 +194,34 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	printf("npc write\n");
 	out_of_bound(addr);
 }
-
+#ifdef MROM
+uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x20000000; }
+static long load_img(){
+   extern char *img_file;
+   if (img_file == NULL) {
+     printf("No image is given. Use the default build-in image.");
+     return 4096; // built-in image size
+   }           
+               
+   FILE *fp = fopen(img_file, "rb");
+   //assert(fp==NULL);
+               
+   fseek(fp, 0, SEEK_END);
+   long size = ftell(fp);
+   Log("The image is %s, size = %ld", img_file, size); 
+   fseek(fp, 0, SEEK_SET);
+   int ret = fread(NPC_guest_to_host(0x20000000), size, 1, fp);
+   if(ret != 1)
+   {
+	printf("can't load the image\r\n");
+   }
+               
+   fclose(fp); 
+   return size;
+}
+#else
 uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
+
 
 static long load_img(){
    extern char *img_file;
@@ -206,7 +246,7 @@ static long load_img(){
    fclose(fp); 
    return size;
 }
-
+#endif
 void pmem_out()
 {
 		#ifdef CONFIG_MTRACE
@@ -239,4 +279,4 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 	}
 }
 
-extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = 0x00100073; }
+extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(pmem+(uint32_t)addr-0x20000000); }
