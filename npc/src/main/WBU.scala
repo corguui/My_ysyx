@@ -40,7 +40,7 @@ class WBU extends Module {
 	))
 
     val ifu_outdata = Wire(new EXUtoIFU)
-    val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
+    val lastdnpc = RegNext(ifu_outdata.dnpc,1.U)
     //或是为了让他第一次能够启动ifu
     io.out2ifu.valid := ((lastdnpc =/= ifu_outdata.dnpc) & (ifu_outdata.dnpc =/= 0x20000000.S.asUInt)) | (lastdnpc =/= ifu_outdata.dnpc && lastdnpc===0.U)//& (m2LSUstate === m2LSUprocess)
     io.out2ifu.bits := ifu_outdata
