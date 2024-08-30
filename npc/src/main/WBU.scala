@@ -47,7 +47,7 @@ class WBU extends Module {
 
     io.lsu2in.ready := ( m2LSUstate===m2LSUidle )
 
-    val reg_dnpc = RegInit(0.U,0x20000000.S.asUInt)
+    val reg_dnpc = RegNext(0.U,0x20000000.S.asUInt)
     ifu_outdata.dnpc := reg_dnpc 
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
