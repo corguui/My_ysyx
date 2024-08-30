@@ -157,12 +157,31 @@ static void trace_and_difftest(Decode *_this) {
 void cpu_init()
 {
 	top->clock =0; top->eval();
+	#ifdef CONFIG_VCD
+	tfp->dump(main_time);
+	#endif
+	main_time++;
+	top->clock =1; top->eval();
 	top->reset=1;
+	#ifdef CONFIG_VCD
+	tfp->dump(main_time);
+	#endif
+	main_time++;
+
+	for(int i=0;i<10;i++)
+	{
+	top->clock =0; top->eval();
+	#ifdef CONFIG_VCD
+	tfp->dump(main_time);
+	#endif
+	main_time++;
 	top->clock =1; top->eval();
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
 	#endif
 	main_time++;
+	}
+
 	top->clock =0; top->eval();
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
@@ -185,13 +204,16 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
+		#ifdef MROM
+		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0!=0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc!=0x20000000&&cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc)
+		#else
 		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0!=0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc)
+		#endif
 		{
 		valid_flag =1;
 		pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
 		s->pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
 		s->inst=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__inst_reg;
-;
     	s->dnpc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc;
 		//printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);
 		#ifdef CONFIG_VCD
@@ -199,14 +221,12 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		#endif
 		main_time++;
 		top->eval();
-
 		top->clock =1; top->eval();
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
 		main_time++;
 		top->eval();
-
 		top->clock =0; top->eval();
 		//cpu_read_reg(); 
 		}
