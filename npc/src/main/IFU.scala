@@ -101,8 +101,8 @@ class IFU extends Module {
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
 		io.out.bits.pc := RegNext(indata.dnpc.asSInt, 0x20000000.S).asUInt
+		io.ifu_axi_ar.araddr := ardata_reg 
 		when(io.ifu_axi_ar.arready & io.ifu_axi_ar.arvalid){
-			io.ifu_axi_ar.araddr := ardata_reg 
 			when(io.ifu_axi_r.rvalid){
 				rready_reg := true.B
 				when(io.ifu_axi_r.rresp === 1.U){
