@@ -815,7 +815,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__delay_b__DOT__dataReg;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__lastdnpc;
-        IData/*30:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__reg_dnpc;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_0;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_1;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_2;
@@ -875,9 +874,9 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT___deq_q_io_deq_bits_addr;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__r_addr;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__addr;
+        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__r_addr_1;
     };
     struct {
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__r_addr_1;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__addr_1;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk3__DOT___inc_addr_T_1;
         IData/*22:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk3__DOT__unnamedblk4__DOT___wrapMask_T_1;
