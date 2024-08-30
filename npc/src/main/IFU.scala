@@ -72,7 +72,7 @@ class IFU extends Module {
 
   	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
 	val inst = Wire(UInt(32.W))
-	inst := 0.U
+	inst := io.ifu_axi_r.rdata
 	val exu2in_reg = RegNext(io.exu2in.valid)
 	val indata 	= Reg(new EXUtoIFU)
 	when(io.exu2in.valid & (io.exu2in.valid =/= exu2in_reg )){	
