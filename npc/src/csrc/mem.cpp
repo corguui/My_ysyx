@@ -279,5 +279,5 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 	}
 }
 
-extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(pmem+(uint32_t)addr-0x20000000);printf("%x\r\n",*data); }
+extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(pmem+(uint32_t)addr-0x20000000);printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
 
