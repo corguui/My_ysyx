@@ -238,3 +238,5 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 		assert(0);
 	}
 }
+
+extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = 0x00100073; }
