@@ -47,7 +47,7 @@ class WBU extends Module {
 
     io.lsu2in.ready := ( m2LSUstate===m2LSUidle )
 
-    ifu_outdata.dnpc := 0x20000000.S.asUInt
+    ifu_outdata.dnpc := 0.S.asUInt
     io.reg_wdata := 0.U
     io.reg_wen := 0.U
     io.reg_waddr := 0.U
