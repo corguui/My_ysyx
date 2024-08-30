@@ -214,7 +214,6 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
 		s->pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
 		s->inst=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__inst_reg;
-;
     	s->dnpc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc;
 		//printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);
 		#ifdef CONFIG_VCD
@@ -222,14 +221,12 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		#endif
 		main_time++;
 		top->eval();
-
 		top->clock =1; top->eval();
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
 		main_time++;
 		top->eval();
-
 		top->clock =0; top->eval();
 		//cpu_read_reg(); 
 		}
