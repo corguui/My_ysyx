@@ -71,8 +71,7 @@ class IFU extends Module {
 	io.exu2in.ready := (m2EXUstate === m2EXUidle)
 
   	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
-	val inst = Wire(UInt(32.W))
-	inst := 0.U
+	val inst = Reg(UInt(32.W))
 	val exu2in_reg = RegNext(io.exu2in.valid)
 	val indata 	= Reg(new EXUtoIFU)
 	when(io.exu2in.valid & (io.exu2in.valid =/= exu2in_reg )){	
