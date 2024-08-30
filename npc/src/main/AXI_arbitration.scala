@@ -116,7 +116,7 @@ class AXI_arbiter extends Module {
         io.ifu_axi_b <> io.axi_b
     }.elsewhen(io.lsu_sta&&(!io.ifu_sta)){
         //uart
-        when((io.lsu_axi_aw.awaddr >= 0xa00003f8.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0xa00003ff.S.asUInt)) {
+        when((io.lsu_axi_aw.awaddr >= 0x10000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x10000fff.S.asUInt)) {
             /*
             io.uart_axi_ar <> io.lsu_axi_ar
             io.uart_axi_aw <> io.lsu_axi_aw
