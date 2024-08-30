@@ -167,6 +167,21 @@ void cpu_init()
 	tfp->dump(main_time);
 	#endif
 	main_time++;
+
+	for(int i=0;i<10;i++)
+	{
+	top->clock =0; top->eval();
+	#ifdef CONFIG_VCD
+	tfp->dump(main_time);
+	#endif
+	main_time++;
+	top->clock =1; top->eval();
+	#ifdef CONFIG_VCD
+	tfp->dump(main_time);
+	#endif
+	main_time++;
+	}
+
 	top->clock =0; top->eval();
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
