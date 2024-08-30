@@ -156,6 +156,7 @@ static void trace_and_difftest(Decode *_this) {
 
 void cpu_init()
 {
+	/*
 	top->clock =0; top->eval();
 	top->reset=1;
 	top->clock =1; top->eval();
@@ -170,12 +171,12 @@ void cpu_init()
 	main_time++;
 	top->eval();
 	top->clock =1; top->eval();
-	top->reset=0;
 	#ifdef CONFIG_VCD
 	tfp->dump(main_time);
 	#endif
 	main_time++;
 	top->eval();
+	*/
 	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_2=0x1800;
 
 	
