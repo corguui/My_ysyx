@@ -58,7 +58,8 @@ class IFU extends Module {
 		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
 
-	io.out.valid := io.ifu_axi_r.rready 
+	val ready_reg = RegNext(io.ifu_axi_r.rready)
+	io.out.valid := ready_reg 
 
 	//IFU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
@@ -80,7 +81,7 @@ class IFU extends Module {
 	
 	val rready_reg = RegInit(false.B)
 	val ardata_reg = RegEnable(indata.dnpc,0.U,exu2in_reg)
-	val inst_reg 	= RegEnable(inst,0.U,io.ifu_axi_ar.arvalid)
+	val inst_reg 	= RegEnable(inst,0.U,io.ifu_axi_r.rready)
 	//def delay(x:Bool)={RegNext(x)}
 	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_r.rready | exu2in_reg ))
 	io.ifu_axi_ar.araddr := 0.U
