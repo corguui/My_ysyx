@@ -1,12 +1,12 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Tracing implementation internals
-#include "verilated_vcd_c.h"
+#include "verilated_fst_c.h"
 #include "VysyxSoCFull__Syms.h"
 
 
-void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, VerilatedVcd::Buffer* bufp);
+void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, VerilatedFst::Buffer* bufp);
 
-void VysyxSoCFull___024root__trace_chg_top_0(void* voidSelf, VerilatedVcd::Buffer* bufp) {
+void VysyxSoCFull___024root__trace_chg_top_0(void* voidSelf, VerilatedFst::Buffer* bufp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    VysyxSoCFull___024root__trace_chg_top_0\n"); );
     // Init
     VysyxSoCFull___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<VysyxSoCFull___024root*>(voidSelf);
@@ -16,7 +16,7 @@ void VysyxSoCFull___024root__trace_chg_top_0(void* voidSelf, VerilatedVcd::Buffe
     VysyxSoCFull___024root__trace_chg_sub_0((&vlSymsp->TOP), bufp);
 }
 
-void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, VerilatedVcd::Buffer* bufp) {
+void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, VerilatedFst::Buffer* bufp) {
     if (false && vlSelf) {}  // Prevent unused
     VysyxSoCFull__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VysyxSoCFull___024root__trace_chg_sub_0\n"); );
@@ -1694,7 +1694,7 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
     bufp->chgIData(oldp+1054,(vlSelf->ysyxSoCFull__DOT__flash__DOT__data_bswap),32);
 }
 
-void VysyxSoCFull___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
+void VysyxSoCFull___024root__trace_cleanup(void* voidSelf, VerilatedFst* /*unused*/) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    VysyxSoCFull___024root__trace_cleanup\n"); );
     // Init
     VysyxSoCFull___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<VysyxSoCFull___024root*>(voidSelf);
