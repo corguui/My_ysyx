@@ -171,7 +171,7 @@ class LSU extends Module {
     //val mem_bresp = RegInit(0.U)
     io.lsu_addr := RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
     val sta_reg = RegEnable(exu2in_valid,false.B,io.lsu_axi_r.rready | io.lsu_axi_b.bready | exu2in_valid)
-    io.lsu_sta := Mux(sta_reg,true.B,false.B)
+    io.lsu_sta := Mux(sta_reg && (io.exu2in.bits.inst_type === 3.U | io.exu2in.bits.inst_type === 4.U) ,true.B,false.B)
 
     io.exu2in.ready := ( m2EXUstate===m2EXUidle )
     when(io.out2wbu.valid)
