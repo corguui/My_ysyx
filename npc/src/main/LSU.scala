@@ -32,6 +32,7 @@ class LSU extends Module {
         val lsu_axi_w = (new AXI_w)
         val lsu_axi_aw = (new AXI_aw)
         val lsu_axi_b = Flipped(new AXI_b)
+        val lsu_address = Output(UInt(32.W))
         val lsu_sta = Output(Bool())
     })
 
@@ -168,6 +169,7 @@ class LSU extends Module {
     //val mem_rdata = RegInit(0.U)
     //val mem_rresp = RegInit(0.U)
     //val mem_bresp = RegInit(0.U)
+    io.lsu_addr := RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
     val sta_reg = RegEnable(exu2in_valid,false.B,io.lsu_axi_r.rready | io.lsu_axi_b.bready | exu2in_valid)
     io.lsu_sta := Mux(sta_reg,true.B,false.B)
 

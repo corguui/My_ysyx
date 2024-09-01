@@ -88,6 +88,7 @@ class ysyx_23060111 extends Module {
   LSU.io.lsu_axi_r <> AXI_arbiter.io.lsu_axi_r
   LSU.io.lsu_axi_b <> AXI_arbiter.io.lsu_axi_b
   AXI_arbiter.io.lsu_sta := LSU.io.lsu_sta
+  AXI_arbiter.io.lsu_addr := LSU.io.lsu_addr
 
 /*
   SRAM.io.axi_ar <> AXI_arbiter.io.axi_ar
