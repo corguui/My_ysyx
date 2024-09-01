@@ -56,7 +56,7 @@ class ysyx_23060111 extends Module {
   //val Mem = Module(new LSU_mem)
   //val Inst_fetch = Module(new Inst_fetch)
   val pc=Wire(UInt(32.W))
-  val inv_flag = Wire(Bool())
+  val inv_flag = dontTouch(Wire(Bool()))
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
@@ -88,6 +88,7 @@ class ysyx_23060111 extends Module {
   LSU.io.lsu_axi_r <> AXI_arbiter.io.lsu_axi_r
   LSU.io.lsu_axi_b <> AXI_arbiter.io.lsu_axi_b
   AXI_arbiter.io.lsu_sta := LSU.io.lsu_sta
+  AXI_arbiter.io.lsu_addr := LSU.io.lsu_addr
 
 /*
   SRAM.io.axi_ar <> AXI_arbiter.io.axi_ar
@@ -111,7 +112,6 @@ class ysyx_23060111 extends Module {
 
   pc := IFU.io.out.bits.pc 
   inv_flag := IDU.io.inv_flag 
-  dontTouch(inv_flag)
 
   AXI_arbiter.io.axi_aw.awready := io.master.awready  
   io.master.awvalid := AXI_arbiter.io.axi_aw.awvalid  

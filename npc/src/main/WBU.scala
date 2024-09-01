@@ -94,12 +94,12 @@ class WBU extends Module {
             }
             //s type
             is(4.U){
-                    when(io.lsu2in.bits.mem_bresp === 1.U)
-                    {
+                    //when(io.lsu2in.bits.mem_bresp === 1.U)
+                    //{
                         ifu_outdata.dnpc := io.lsu2in.bits.snpc
-                    }.otherwise{
-                        ifu_outdata.dnpc := 0x20000000.S.asUInt
-                    }
+                    //}.otherwise{
+                    //   ifu_outdata.dnpc := 0x20000000.S.asUInt
+                    //}
             }
             //b type
             is(5.U){

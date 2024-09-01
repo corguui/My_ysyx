@@ -31,6 +31,7 @@ class AXI_arbiter extends Module {
         val lsu_axi_aw = Flipped(new AXI_aw)
         val lsu_axi_w = Flipped(new AXI_w)
         val lsu_axi_b = (new AXI_b)
+        val lsu_addr = Input(UInt(32.W))
         val lsu_sta = Input(Bool())
         val ifu_axi_ar = Flipped(new AXI_ar)
         val ifu_axi_r = (new AXI_r)
@@ -117,7 +118,7 @@ class AXI_arbiter extends Module {
     }.elsewhen(io.lsu_sta&&(!io.ifu_sta)){
         //uart
         //when((io.lsu_axi_aw.awaddr >= 0xa00003f8.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0xa00003ff.S.asUInt)) {
-        when((io.lsu_axi_aw.awaddr >= 0x10000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x10000fff.S.asUInt)) {
+        when((io.lsu_addr >= 0x10000000.S.asUInt) & (io.lsu_addr <= 0x10000fff.S.asUInt)) {
             /*
             io.uart_axi_ar <> io.lsu_axi_ar
             io.uart_axi_aw <> io.lsu_axi_aw
@@ -133,7 +134,7 @@ class AXI_arbiter extends Module {
         }
         //SRAM
         //.elsewhen(((io.lsu_axi_ar.araddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
-        .elsewhen(((io.lsu_axi_ar.araddr >= 0x20000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x20000fff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x20000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x20000fff.S.asUInt))) {
+        .elsewhen(((io.lsu_addr >= 0x20000000.S.asUInt) & (io.lsu_addr <= 0x20000fff.S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
             io.axi_aw <> io.lsu_axi_aw
             io.axi_w <> io.lsu_axi_w
@@ -141,7 +142,7 @@ class AXI_arbiter extends Module {
             io.lsu_axi_b <> io.axi_b
         }
         //RTC CLINT
-        .elsewhen(((io.lsu_axi_ar.araddr >= 0xa0000048.S.asUInt) & io.lsu_axi_ar.araddr <= 0xa000004f.S.asUInt)){
+        .elsewhen(((io.lsu_addr >= 0xa0000048.S.asUInt) & io.lsu_addr <= 0xa000004f.S.asUInt)){
             io.rtc_axi_ar <> io.lsu_axi_ar
             io.rtc_axi_aw <> io.lsu_axi_aw
             io.rtc_axi_w <> io.lsu_axi_w

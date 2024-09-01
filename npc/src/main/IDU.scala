@@ -33,6 +33,7 @@ class IDU extends Module {
 	})
     
 	io.inv_flag := false.B
+	dontTouch(io.inv_flag)
 	val exu2s_idle :: exu2s_wait_ready :: Nil = Enum(2)
 	val exu2s_state = RegInit(exu2s_idle)
 	exu2s_state :=MuxLookup(exu2s_state,exu2s_idle)(List(
