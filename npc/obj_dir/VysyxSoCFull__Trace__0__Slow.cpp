@@ -1410,6 +1410,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBit(c+1057,"io_slave_rlast", false,-1);
     tracep->declBus(c+1067,"io_slave_rid", false,-1, 3,0);
     tracep->declBit(c+594,"inv_flag", false,-1);
+    tracep->declBit(c+594,"inv_flag_1", false,-1);
     tracep->pushNamePrefix("AXI_arbiter ");
     tracep->declBus(c+42,"io_axi_ar_araddr", false,-1, 31,0);
     tracep->declBit(c+41,"io_axi_ar_arvalid", false,-1);
