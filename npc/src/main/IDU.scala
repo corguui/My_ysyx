@@ -29,10 +29,11 @@ class IDU extends Module {
 		val ifu2in = Flipped(Decoupled(new IFUtoIDU))
 		val out2exu = Decoupled(new IDUtoEXU)
 		val reg_data = Flipped(new IO_reg_read)
-		val inv_flag = Output(dontTouch(Bool()))
+		val inv_flag = Output(Bool())
 	})
     
 	io.inv_flag := false.B
+	dontTouch(io.inv_flag)
 	val exu2s_idle :: exu2s_wait_ready :: Nil = Enum(2)
 	val exu2s_state = RegInit(exu2s_idle)
 	exu2s_state :=MuxLookup(exu2s_state,exu2s_idle)(List(
