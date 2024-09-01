@@ -10,7 +10,8 @@
 #include"verilated.h"    
 #include"verilated_vcd_c.h"
 #include"VysyxSoCFull__Dpi.h"
-                         
+#include "verilated_fst_c.h"
+
 typedef struct {
   uint32_t gpr[32];
   uint32_t csr[4];
