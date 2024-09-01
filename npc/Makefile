@@ -12,7 +12,7 @@ TOPname= ysyxSoCFull
 #init
 IMG ?= 
 #--timescale "1ns/1ns" --no-timing -top $(TOPname) $(TOPfile) 
-VLTFLAGS =-Wall --cc --trace-fst --trace-strcut --exe --build -Wno-lint --timescale "1ns/1ns" --no-timing -top $(TOPname) $(TOPfile)  $^ 
+VLTFLAGS =-Wall --cc --trace-fst --trace-strcuts --exe --build -Wno-lint --timescale "1ns/1ns" --no-timing -top $(TOPname) $(TOPfile)  $^ 
 RUN_FLAGS = $(IMG)
 
 INC_PATH = -I$(HOME)/ysyx-workbench/npc/src/include -I$(HOME)/ysyx-workbench/ysyxSoC/perip/uart16550/rtl -I$(HOME)/ysyx-workbench/ysyxSoC/perip/spi/rtl
