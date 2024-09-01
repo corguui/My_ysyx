@@ -168,7 +168,7 @@ class LSU extends Module {
     //val mem_rdata = RegInit(0.U)
     //val mem_rresp = RegInit(0.U)
     //val mem_bresp = RegInit(0.U)
-    val sta_reg = RegEnable(exu2in_valid,false.B),(io.lsu_axi_r.rready | io.lsu_axi_b.bready | exu2in_valid)
+    val sta_reg = RegEnable(exu2in_valid,false.B,io.lsu_axi_r.rready | io.lsu_axi_b.bready | exu2in_valid)
     io.lsu_sta := Mux(sta_reg,true.B,false.B)
 
     io.exu2in.ready := ( m2EXUstate===m2EXUidle )
