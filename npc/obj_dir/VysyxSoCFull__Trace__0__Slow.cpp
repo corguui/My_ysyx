@@ -1557,6 +1557,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+598,"io_reg_data_csr_rdata", false,-1, 31,0);
     tracep->declBus(c+390,"io_reg_data_csr_a5", false,-1, 31,0);
     tracep->declBus(c+391,"io_reg_data_mstatus", false,-1, 31,0);
+    tracep->declBit(c+599,"io_inv_flag", false,-1);
     tracep->declBus(c+347,"exu_data_snpc", false,-1, 31,0);
     tracep->declBus(c+348,"exu_data_pc", false,-1, 31,0);
     tracep->declBit(c+349,"exu_data_mem_ren", false,-1);
@@ -1579,7 +1580,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+995,"csr_imm", false,-1, 31,0);
     tracep->declBus(c+996,"casez_tmp", false,-1, 4,0);
     tracep->declBus(c+997,"casez_tmp_0", false,-1, 4,0);
-    tracep->declBit(c+599,"inv_flag", false,-1);
     tracep->pushNamePrefix("npc_break ");
     tracep->declBus(c+989,"inst", false,-1, 31,0);
     tracep->popNamePrefix(2);
