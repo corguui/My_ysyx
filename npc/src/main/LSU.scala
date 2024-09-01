@@ -153,7 +153,7 @@ class LSU extends Module {
     delay_b.io.inValid := 0.U
     io.lsu_axi_b.bready := delay_b.io.outData & bready_reg
     */
-    io.lsu_axi_b.bready := 0.U
+    io.lsu_axi_b.bready := false.B 
 
     val wbu_data = Reg(new LSUtoWBU)
     io.out2wbu.bits := wbu_data
