@@ -1409,6 +1409,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+1072,"io_slave_rdata", false,-1, 31,0);
     tracep->declBit(c+1057,"io_slave_rlast", false,-1);
     tracep->declBus(c+1067,"io_slave_rid", false,-1, 3,0);
+    tracep->declBit(c+594,"inv_flag", false,-1);
     tracep->pushNamePrefix("AXI_arbiter ");
     tracep->declBus(c+42,"io_axi_ar_araddr", false,-1, 31,0);
     tracep->declBit(c+41,"io_axi_ar_arvalid", false,-1);
@@ -1446,17 +1447,17 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+337,"io_lsu_axi_w_wstrb", false,-1, 3,0);
     tracep->declBit(c+338,"io_lsu_axi_w_wvalid", false,-1);
     tracep->declBit(c+339,"io_lsu_axi_w_wready", false,-1);
-    tracep->declBit(c+594,"io_lsu_axi_b_bvalid", false,-1);
+    tracep->declBit(c+595,"io_lsu_axi_b_bvalid", false,-1);
     tracep->declBit(c+987,"io_lsu_axi_b_bready", false,-1);
     tracep->declBus(c+340,"io_lsu_addr", false,-1, 31,0);
     tracep->declBit(c+341,"io_lsu_sta", false,-1);
     tracep->declBus(c+342,"io_ifu_axi_ar_araddr", false,-1, 31,0);
     tracep->declBit(c+343,"io_ifu_axi_ar_arvalid", false,-1);
     tracep->declBit(c+344,"io_ifu_axi_ar_arready", false,-1);
-    tracep->declBus(c+595,"io_ifu_axi_r_rdata", false,-1, 31,0);
-    tracep->declBit(c+596,"io_ifu_axi_r_rvalid", false,-1);
+    tracep->declBus(c+596,"io_ifu_axi_r_rdata", false,-1, 31,0);
+    tracep->declBit(c+597,"io_ifu_axi_r_rvalid", false,-1);
     tracep->declBit(c+988,"io_ifu_axi_r_rready", false,-1);
-    tracep->declBit(c+597,"io_ifu_axi_b_bvalid", false,-1);
+    tracep->declBit(c+598,"io_ifu_axi_b_bvalid", false,-1);
     tracep->declBit(c+345,"io_ifu_sta", false,-1);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("EXU ");
@@ -1554,10 +1555,10 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+992,"io_reg_data_raddr_2", false,-1, 4,0);
     tracep->declBus(c+993,"io_reg_data_rdata_2", false,-1, 31,0);
     tracep->declBus(c+994,"io_reg_data_csr_raddr", false,-1, 1,0);
-    tracep->declBus(c+598,"io_reg_data_csr_rdata", false,-1, 31,0);
+    tracep->declBus(c+599,"io_reg_data_csr_rdata", false,-1, 31,0);
     tracep->declBus(c+390,"io_reg_data_csr_a5", false,-1, 31,0);
     tracep->declBus(c+391,"io_reg_data_mstatus", false,-1, 31,0);
-    tracep->declBit(c+599,"io_inv_flag", false,-1);
+    tracep->declBit(c+594,"io_inv_flag", false,-1);
     tracep->declBus(c+347,"exu_data_snpc", false,-1, 31,0);
     tracep->declBus(c+348,"exu_data_pc", false,-1, 31,0);
     tracep->declBit(c+349,"exu_data_mem_ren", false,-1);
@@ -1595,10 +1596,10 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+342,"io_ifu_axi_ar_araddr", false,-1, 31,0);
     tracep->declBit(c+343,"io_ifu_axi_ar_arvalid", false,-1);
     tracep->declBit(c+344,"io_ifu_axi_ar_arready", false,-1);
-    tracep->declBus(c+595,"io_ifu_axi_r_rdata", false,-1, 31,0);
-    tracep->declBit(c+596,"io_ifu_axi_r_rvalid", false,-1);
+    tracep->declBus(c+596,"io_ifu_axi_r_rdata", false,-1, 31,0);
+    tracep->declBit(c+597,"io_ifu_axi_r_rvalid", false,-1);
     tracep->declBit(c+988,"io_ifu_axi_r_rready", false,-1);
-    tracep->declBit(c+597,"io_ifu_axi_b_bvalid", false,-1);
+    tracep->declBit(c+598,"io_ifu_axi_b_bvalid", false,-1);
     tracep->declBit(c+345,"io_ifu_sta", false,-1);
     tracep->declBit(c+988,"io_ifu_axi_r_rready_0", false,-1);
     tracep->declBus(c+389,"io_out_bits_pc_0", false,-1, 31,0);
@@ -1659,7 +1660,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+333,"io_lsu_axi_aw_awaddr", false,-1, 31,0);
     tracep->declBit(c+334,"io_lsu_axi_aw_awvalid", false,-1);
     tracep->declBit(c+335,"io_lsu_axi_aw_awready", false,-1);
-    tracep->declBit(c+594,"io_lsu_axi_b_bvalid", false,-1);
+    tracep->declBit(c+595,"io_lsu_axi_b_bvalid", false,-1);
     tracep->declBit(c+987,"io_lsu_axi_b_bready", false,-1);
     tracep->declBus(c+340,"io_lsu_addr", false,-1, 31,0);
     tracep->declBit(c+341,"io_lsu_sta", false,-1);
@@ -1755,7 +1756,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+992,"io_reg_read_raddr_2", false,-1, 4,0);
     tracep->declBus(c+993,"io_reg_read_rdata_2", false,-1, 31,0);
     tracep->declBus(c+994,"io_reg_read_csr_raddr", false,-1, 1,0);
-    tracep->declBus(c+598,"io_reg_read_csr_rdata", false,-1, 31,0);
+    tracep->declBus(c+599,"io_reg_read_csr_rdata", false,-1, 31,0);
     tracep->declBus(c+390,"io_reg_read_csr_a5", false,-1, 31,0);
     tracep->declBus(c+391,"io_reg_read_mstatus", false,-1, 31,0);
     tracep->declBit(c+453,"io_wen", false,-1);
@@ -1802,7 +1803,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+492,"reg_31", false,-1, 31,0);
     tracep->declBus(c+991,"casez_tmp", false,-1, 31,0);
     tracep->declBus(c+993,"casez_tmp_0", false,-1, 31,0);
-    tracep->declBus(c+598,"casez_tmp_1", false,-1, 31,0);
+    tracep->declBus(c+599,"casez_tmp_1", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("WBU ");
     tracep->declBit(c+1014,"clock", false,-1);
@@ -3689,27 +3690,30 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
                              & (8U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_out_arid)))));
     bufp->fullBit(oldp+593,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT___GEN_2) 
                              & (9U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_out_arid)))));
-    bufp->fullBit(oldp+594,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_arbiter__DOT____VdfgTmp_h0eb34983__0) 
+    bufp->fullBit(oldp+594,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__state) 
+                             & ((~ ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT___GEN_17) 
+                                    | ((0x23U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT____VdfgTmp_hf0d3b6fe__0)) 
+                                       | ((0x63U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT____VdfgTmp_hf0d3b6fe__0)) 
+                                          | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT___GEN_13))))) 
+                                & (0x73U != (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT____VdfgTmp_hf0d3b6fe__0))))));
+    bufp->fullBit(oldp+595,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_arbiter__DOT____VdfgTmp_h0eb34983__0) 
                              & ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_arbiter__DOT___GEN_0)
                                  ? (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_in_bvalid)
                                  : (~ (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_arbiter__DOT___GEN_3))))));
-    bufp->fullIData(oldp+595,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__sta_reg)
+    bufp->fullIData(oldp+596,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__sta_reg)
                                 ? vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_in_rdata
                                 : 0U)),32);
-    bufp->fullBit(oldp+596,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__in_0_rvalid) 
+    bufp->fullBit(oldp+597,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__in_0_rvalid) 
                              & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__sta_reg))));
-    bufp->fullBit(oldp+597,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_in_bvalid) 
+    bufp->fullBit(oldp+598,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_in_bvalid) 
                              & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__sta_reg))));
-    bufp->fullIData(oldp+598,(((0U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT___IDU_io_reg_data_csr_raddr))
+    bufp->fullIData(oldp+599,(((0U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT___IDU_io_reg_data_csr_raddr))
                                 ? vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_0
                                 : ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT___IDU_io_reg_data_csr_raddr))
                                     ? vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_1
                                     : ((2U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT___IDU_io_reg_data_csr_raddr))
                                         ? vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_2
                                         : vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__csr_3)))),32);
-    bufp->fullBit(oldp+599,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__state) 
-                             & ((~ (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT___GEN_14)) 
-                                & (0x73U != (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT____VdfgTmp_hf0d3b6fe__0))))));
     bufp->fullBit(oldp+600,(((~ (((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__rvalid_reg) 
                                   != (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT___AXI_arbiter_io_lsu_axi_r_rvalid)) 
                                  & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT___AXI_arbiter_io_lsu_axi_r_rvalid))) 
