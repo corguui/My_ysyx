@@ -29,11 +29,10 @@ class IDU extends Module {
 		val ifu2in = Flipped(Decoupled(new IFUtoIDU))
 		val out2exu = Decoupled(new IDUtoEXU)
 		val reg_data = Flipped(new IO_reg_read)
-		//val inv_flag = Output(Bool())
+		val inv_flag = Output(dontTouch(Bool()))
 	})
-
-	val inv_flag = dontTouch(Wire(Bool())) 
-	inv_flag := false.B
+    
+	io.inv_flag := false.B
 	val exu2s_idle :: exu2s_wait_ready :: Nil = Enum(2)
 	val exu2s_state = RegInit(exu2s_idle)
 	exu2s_state :=MuxLookup(exu2s_state,exu2s_idle)(List(
@@ -115,11 +114,11 @@ class IDU extends Module {
 	//译码
 	state := m2IFUidle
 
-	inv_flag := true.B
+	io.inv_flag := true.B
 	switch(opcode){
 		//R-Type
 		is("b0110011".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 1.U
 			exu_data.reg_wen := true.B
 			switch(funct3){
@@ -182,7 +181,7 @@ class IDU extends Module {
 
 		//I-Type
 		is("b0010011".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 2.U
 			exu_data.imm :=  Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt			
 			exu_data.reg_wen := true.B
@@ -241,7 +240,7 @@ class IDU extends Module {
 
 		//IL-Type 		
 		is("b0000011".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 3.U
 			exu_data.alu_op := "b00000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
@@ -283,7 +282,7 @@ class IDU extends Module {
 
 		//S-Type
 		is("b0100011".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 4.U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,25),in_data.inst(11,7)).asUInt
 			exu_data.mem_wen := true.B
@@ -308,7 +307,7 @@ class IDU extends Module {
 
 		//B-Type
 		is("b1100011".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 5.U
 			exu_data.imm := Cat(Fill(19,in_data.inst(31)),in_data.inst(31),in_data.inst(7),in_data.inst(30,25),in_data.inst(11,8),0.U(1.W)).asUInt
 			switch(funct3){
@@ -346,7 +345,7 @@ class IDU extends Module {
 
 		//U-Type lui
 		is("b0110111".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 6.U
 			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W)).asUInt
 			exu_data.reg_wen := true.B
@@ -354,7 +353,7 @@ class IDU extends Module {
 
 		//UPC-Type auipc
 		is("b0010111".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 7.U
 			exu_data.alu_op :="b00000".U
 			exu_data.imm := Cat(in_data.inst(31,12),0.U(12.W)).asUInt
@@ -363,7 +362,7 @@ class IDU extends Module {
 
 		//J-Type jal
 		is("b1101111".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 8.U
 			exu_data.alu_op :="b00000".U
 			exu_data.imm := Cat(Fill(12,in_data.inst(31)),in_data.inst(19,12),in_data.inst(20),in_data.inst(30,21),0.U(1.W)).asUInt
@@ -372,7 +371,7 @@ class IDU extends Module {
 
 		//JR-Type jalr
 		is("b1100111".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.inst_type := 9.U
 			exu_data.alu_op :="b00000".U
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt			
@@ -380,7 +379,7 @@ class IDU extends Module {
 		}
 		//CSR and ebrak
 		is("b1110011".U){
-			inv_flag := false.B
+			io.inv_flag := false.B
 			exu_data.imm := Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 			switch(funct3){
 				//csrrw
