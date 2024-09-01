@@ -22,7 +22,7 @@ extern NPC_CPU_state cpu;
 extern int main_time;    
 extern VerilatedContext* contextp;
 extern VysyxSoCFull *top;
-extern VerilatedVcdC* tfp;
+extern VerilatedFstC* tfp;
 
 void cpu_exec_once(VerilatedVcdC* tfp);
 void cpu_init();
