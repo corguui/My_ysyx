@@ -56,8 +56,7 @@ class ysyx_23060111 extends Module {
   //val Mem = Module(new LSU_mem)
   //val Inst_fetch = Module(new Inst_fetch)
   val pc=Wire(UInt(32.W))
-  val inv_flag = Reg(Bool())
-  dontTouch(inv_flag)
+  val inv_flag = dontTouch(Wire(Bool()))
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
