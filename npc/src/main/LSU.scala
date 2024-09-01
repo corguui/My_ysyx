@@ -32,7 +32,7 @@ class LSU extends Module {
         val lsu_axi_w = (new AXI_w)
         val lsu_axi_aw = (new AXI_aw)
         val lsu_axi_b = Flipped(new AXI_b)
-        val lsu_address = Output(UInt(32.W))
+        val lsu_addr = Output(UInt(32.W))
         val lsu_sta = Output(Bool())
     })
 
