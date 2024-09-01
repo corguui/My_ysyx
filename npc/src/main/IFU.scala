@@ -95,7 +95,7 @@ class IFU extends Module {
 
 	io.out.bits.pc := 0.U
 	io.out.bits.snpc := io.out.bits.pc + 4.U
-	io.out.bits.inst := inst_reg 
+	io.out.bits.inst := inst 
 
 
 	when(m2EXUstate === m2EXUprocess){
