@@ -257,7 +257,7 @@ class LSU extends Module {
                     //bready_reg := 1.U
                     //m2exustate := m2exuidle
                     //b ready delay
-                    io.lsu_axi_b.bready := 1.U
+                    io.lsu_axi_b.bready := false.B 
                     when(io.lsu_axi_b.bvalid & io.lsu_axi_b.bready)
                     {
                     //delay_b.io.inData := 1.U
@@ -270,7 +270,7 @@ class LSU extends Module {
                     }
                 }.otherwise{
                     //bready_reg := 0.U
-                    io.lsu_axi_b.bvalid := 0.U
+                    io.lsu_axi_b.bready := false.B 
                 }
               }
               .otherwise{
