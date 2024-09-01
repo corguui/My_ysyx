@@ -24,7 +24,7 @@ extern VerilatedContext* contextp;
 extern VysyxSoCFull *top;
 extern VerilatedFstC* tfp;
 
-void cpu_exec_once(VerilatedVcdC* tfp);
+void cpu_exec_once(VerilatedFstC* tfp);
 void cpu_init();
 void cpu_exec(uint64_t n);
 void cpu_read_reg();
