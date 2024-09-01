@@ -249,14 +249,21 @@ class LSU extends Module {
                     io.lsu_axi_w.wstrb := 0.U
                     bready_reg := 0.U
                 }
-                when(io.lsu_axi_w.wvalid & io.lsu_axi_w.wready & io.lsu_axi_aw.awready & io.lsu_axi_aw.awvalid & io.lsu_axi_b.bvalid) 
+                when(io.lsu_axi_b.bvalid) 
                 {
                     bready_reg := 1.U
                     //m2exustate := m2exuidle
                     //b ready delay
+                    when(io.lsu_axi_b.bvalid & io.lsu_axi_b.bready)
+                    {
                     delay_b.io.inData := 1.U
                     delay_b.io.inValid := Mux(bvalid_reg =/= io.lsu_axi_b.bvalid & io.lsu_axi_b.bvalid === 1.U,0.U,1.U)  
                     wbu_data.mem_bresp := io.lsu_axi_b.bresp 
+                    }.otherwise{
+                    delay_b.io.inData := 0.U
+                    delay_b.io.inValid := 0.U
+                    wbu_data.mem_bresp := 0.U
+                    }
                 }.otherwise{
                     bready_reg := 0.U
                 }
