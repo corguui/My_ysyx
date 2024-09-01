@@ -57,6 +57,7 @@ class ysyx_23060111 extends Module {
   //val Inst_fetch = Module(new Inst_fetch)
   val pc=Wire(UInt(32.W))
   val inv_flag = Wire(Bool())
+  dontTouch(inv_flag)
 
   IDU.io.ifu2in <> IFU.io.out
   EXU.io.idu2in <> IDU.io.out2exu
@@ -111,7 +112,6 @@ class ysyx_23060111 extends Module {
   AXI_arbiter.io.rtc_axi_b <> RTC.io.axi_b
 
   pc := IFU.io.out.bits.pc 
-  dontTouch(inv_flag)
   inv_flag := IDU.io.inv_flag 
 
   AXI_arbiter.io.axi_aw.awready := io.master.awready  
