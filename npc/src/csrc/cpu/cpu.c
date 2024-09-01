@@ -199,7 +199,7 @@ void cpu_init()
 
 	
 }
-void cpu_exec_once(VerilatedFstC* tfp,Decode *s)
+void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 {
 
 		top->clock =0; top->eval();

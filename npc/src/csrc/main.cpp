@@ -9,7 +9,7 @@
 
 VerilatedContext* contextp=NULL; 
 VysyxSoCFull *top=NULL; 
-VerilatedFstC* tfp=NULL;
+VerilatedVcdC* tfp=NULL;
 
 void init_monitor();
 void init_mode();
@@ -21,17 +21,16 @@ extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
 
 int main(int argc ,char** argv, char** env)
 {
-	Verilated::commandArgs(argc, argv);
 	parse_args(argc, argv);
 	contextp = new VerilatedContext;
 	contextp->commandArgs(argc,argv);
 	top = new VysyxSoCFull{contextp};
 	#ifdef CONFIG_VCD
 	contextp->traceEverOn(true);
-	tfp=new VerilatedFstC;
+	tfp=new VerilatedVcdC;
 
-	top->trace(tfp,99);
-	tfp->open("wave.fst");
+	top->trace(tfp,0);
+	tfp->open("wave.vcd");
 	#endif
 	//init mode
 	init_mode();
@@ -43,10 +42,8 @@ int main(int argc ,char** argv, char** env)
 	sdb_mainloop();
 	#ifdef CONFIG_VCD
 	tfp->close();
-	delete tfp;
 	#endif
 	delete contextp;
-	delete top;
 	#ifdef CONFIG_MTRACE
 	//print the mem read and write  ---logfile
 	pmem_out();
