@@ -30,7 +30,7 @@ int main(int argc ,char** argv, char** env)
 	contextp->traceEverOn(true);
 	tfp=new VerilatedFstC;
 
-	top->trace(tfp,0);
+	top->trace(tfp,99);
 	tfp->open("wave.fst");
 	#endif
 	//init mode
@@ -43,8 +43,10 @@ int main(int argc ,char** argv, char** env)
 	sdb_mainloop();
 	#ifdef CONFIG_VCD
 	tfp->close();
+	delete tfp;
 	#endif
 	delete contextp;
+	delete top;
 	#ifdef CONFIG_MTRACE
 	//print the mem read and write  ---logfile
 	pmem_out();
