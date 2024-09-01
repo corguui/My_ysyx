@@ -31,7 +31,7 @@ int main(int argc ,char** argv, char** env)
 	tfp=new VerilatedFstC;
 
 	top->trace(tfp,0);
-	tfp->open("wave.vcd");
+	tfp->open("wave.fst");
 	#endif
 	//init mode
 	init_mode();
