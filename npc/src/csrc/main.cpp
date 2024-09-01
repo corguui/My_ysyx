@@ -30,7 +30,7 @@ int main(int argc ,char** argv, char** env)
 	contextp->traceEverOn(true);
 	tfp=new VerilatedFstC;
 
-	top->trace(tfp,99);
+	top->trace(tfp,0);
 	tfp->open("wave.fst");
 	#endif
 	//init mode
