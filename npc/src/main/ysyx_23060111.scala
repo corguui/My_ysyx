@@ -111,8 +111,8 @@ class ysyx_23060111 extends Module {
   AXI_arbiter.io.rtc_axi_b <> RTC.io.axi_b
 
   pc := IFU.io.out.bits.pc 
-  inv_flag := IDU.io.inv_flag 
   dontTouch(inv_flag)
+  inv_flag := IDU.io.inv_flag 
 
   AXI_arbiter.io.axi_aw.awready := io.master.awready  
   io.master.awvalid := AXI_arbiter.io.axi_aw.awvalid  
