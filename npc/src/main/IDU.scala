@@ -34,22 +34,19 @@ class IDU extends Module {
     
 	io.inv_flag := false.B
 	dontTouch(io.inv_flag)
+	/*
 	val exu2s_idle :: exu2s_wait_ready :: Nil = Enum(2)
 	val exu2s_state = RegInit(exu2s_idle)
 	exu2s_state :=MuxLookup(exu2s_state,exu2s_idle)(List(
 		exu2s_idle -> Mux(io.out2exu.valid,exu2s_wait_ready,exu2s_idle),
 		exu2s_wait_ready -> Mux(io.out2exu.ready,exu2s_idle,exu2s_wait_ready)
 	))
+	*/
 
-
-	val exu_data = Reg(new IDUtoEXU)
-	
 	//val lastaluop = RegNext(exu_data.alu_op,"b10000".U)
 	//val lastimm = RegNext(exu_data.imm,0.U)
-
 	//io.out2exu.valid := mem_ren | mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
-	io.out2exu.bits := exu_data
-	
+
     class npc_break extends BlackBox with HasBlackBoxPath {
     	val io = IO(new Bundle {
 			val inst = Input(UInt(32.W))
@@ -86,7 +83,6 @@ class IDU extends Module {
 	}.otherwise{
 		io.ifu2in.ready := false.B
 	}
-	val state_reg = RegNext(state,false.B)
 
 	val npc_break = Module(new npc_break)
 	npc_break.io.inst := in_data.inst
@@ -98,19 +94,31 @@ class IDU extends Module {
 	val rs2 = in_data.inst(24,20)
 	val funct7 = in_data.inst(31,25)
 	val csr = in_data.inst(31,20)
-
 	val csr_imm = Cat(Fill(20,in_data.inst(31)),in_data.inst(31,20)).asUInt
 
 	io.reg_data.raddr_1 := rs1
 	io.reg_data.raddr_2 := rs2
 	io.reg_data.csr_raddr := 0.U
 
-	//imm 在 lw sw 时可能为0 导致出问题要加入 mem ren  wen
-	//io.out2exu.valid := exu_data.mem_ren | exu_data.mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
-	io.out2exu.valid := state_reg 
+
+	//val state_reg = RegNext(state,false.B)
+	//io.out2exu.valid := state_reg 
+	val valid_reg = RegInit(false.B)
+	io.out2exu.valid := valid_reg
+	io.out2exu.bits := 0.U.asTypeOf(new IDUtoEXU)
+
+	val exu_data = Reg(new IDUtoEXU)
+	when(io.out2exu.valid & io.out2exu.ready){
+		io.out2exu.bits := exu_data
+		valid_reg := false.B
+	}.otherwise{
+		io.out2exu.bits := 0.U.asTypeOf(new IDUtoEXU)
+	}
+
 	when(state)
 	{
 	state := false.B
+	valid_reg := true.B
 	exu_data.reg_waddr := rd
 	exu_data.snpc := in_data.snpc
 	exu_data.pc := in_data.pc
@@ -129,9 +137,6 @@ class IDU extends Module {
 	exu_data.mem_wen := false.B
 	exu_data.reg_wen := false.B
 	
-	//译码
-	//state := m2IFUidle
-
 	io.inv_flag := true.B
 	switch(opcode){
 		//R-Type
