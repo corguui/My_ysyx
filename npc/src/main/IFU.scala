@@ -51,14 +51,16 @@ class IFU extends Module {
 	assert(io.ifu_axi_b.bvalid === false.B, "ifu_axi_b.bvalid must be false")
 
 	//IFU recive IDU 
+	/*
 	val idu2s_idle :: idu2s_wait_ready :: Nil = Enum(2)
 	val idu2s_state = RegInit(idu2s_idle)
 	idu2s_state :=MuxLookup(idu2s_state,idu2s_idle)(List(
 		idu2s_idle -> Mux(io.out.valid,idu2s_wait_ready,idu2s_idle),
 		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
-
-	io.out.valid := io.ifu_axi_r.rready 
+	*/
+	val ready_reg = RegInit(false.B)
+	io.out.valid := ready_reg //io.ifu_axi_r.rready 
 
 	//IFU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
@@ -81,7 +83,7 @@ class IFU extends Module {
 	
 	val ardata_reg = RegEnable(indata.dnpc,0x20000000.S.asUInt,exu2in_reg)
 	val inst_reg 	= RegEnable(inst,0.U,io.ifu_axi_r.rready )
-	//def delay(x:Bool)={RegNext(x)}
+	val pc_reg = Reg(UInt(32.W))
 	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_ar.arready| exu2in_reg ))
 	val sta_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_r.rready| exu2in_reg ))
 	io.ifu_axi_ar.araddr := 0.U
@@ -94,13 +96,15 @@ class IFU extends Module {
 	io.ifu_axi_r.rready := false.B
 
 	io.out.bits.pc := 0.U
-	io.out.bits.snpc := io.out.bits.pc + 4.U
-	io.out.bits.inst := inst_reg 
+	//io.out.bits.snpc := io.out.bits.pc + 4.U
+	io.out.bits.snpc := 0.U
+	//io.out.bits.inst := inst_reg 
+	io.out.bits.inst := 0.U
 
 
 	when(m2EXUstate === m2EXUprocess){
     	//取指令
-		io.out.bits.pc := RegNext(indata.dnpc.asSInt, 0x20000000.S).asUInt
+		pc_reg := RegNext(indata.dnpc.asSInt, 0x20000000.S).asUInt
 		when(io.ifu_axi_ar.arready & io.ifu_axi_ar.arvalid){
 			io.ifu_axi_ar.araddr := ardata_reg 
 		}.otherwise{
@@ -109,6 +113,7 @@ class IFU extends Module {
 		when(io.ifu_axi_r.rvalid){
 			io.ifu_axi_r.rready := true.B
 			when(io.ifu_axi_r.rvalid & io.ifu_axi_r.rready){
+				ready_reg := true.B
 				when(io.ifu_axi_r.rresp === 1.U){
 					inst := io.ifu_axi_r.rdata
 				}.otherwise{
@@ -125,7 +130,16 @@ class IFU extends Module {
 
 	}
 
-	
+	when(io.out.valid & io.out.ready){
+		io.out.bits.inst := inst_reg
+		io.out.bits.pc := pc_reg 
+		io.out.bits.snpc := io.out.bits.pc + 4.U
+		ready_reg := false.B//将valid置0
+	}.otherwise{
+		io.out.bits.inst := 0.U
+		io.out.bits.pc := 0.U
+		io.out.bits.snpc := 0.U
+	}
 
 }
 

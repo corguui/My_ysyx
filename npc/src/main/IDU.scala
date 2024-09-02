@@ -60,6 +60,7 @@ class IDU extends Module {
 
 
     //IDU to IFU
+	/*
 	val m2IFUidle :: m2IFUprocess :: Nil = Enum(2)
 	val state = RegInit(m2IFUidle)
 	state :=MuxLookup(state,m2IFUidle)(List(
@@ -67,9 +68,25 @@ class IDU extends Module {
 		m2IFUprocess -> Mux(io.ifu2in.ready,m2IFUidle,m2IFUprocess)
 	))
 	io.ifu2in.ready := (state === m2IFUidle)
-    val in_data = Wire(new IFUtoIDU) 
-    in_data := io.ifu2in.bits
-	val state_reg = RegNext(state,m2IFUidle)
+	*/
+	io.ifu2in.ready := false.B
+    val in_data = Reg(new IFUtoIDU) 
+	val state = RegInit(false.B)
+	when(io.ifu2in.valid)
+	{
+		io.ifu2in.ready := true.B
+		when(io.ifu2in.valid & io.ifu2in.ready)
+		{
+    		in_data := io.ifu2in.bits
+			state := true.B
+		}.otherwise{
+			in_data := 0.U.asTypeOf(new IFUtoIDU)
+			state := false.B
+		}
+	}.otherwise{
+		io.ifu2in.ready := false.B
+	}
+	val state_reg = RegNext(state,false.B)
 
 	val npc_break = Module(new npc_break)
 	npc_break.io.inst := in_data.inst
@@ -90,10 +107,10 @@ class IDU extends Module {
 
 	//imm 在 lw sw 时可能为0 导致出问题要加入 mem ren  wen
 	//io.out2exu.valid := exu_data.mem_ren | exu_data.mem_wen | (exu_data.imm =/= lastimm ) | (exu_data.alu_op =/= lastaluop)
-	io.out2exu.valid := (state_reg === m2IFUprocess)
-
-	when(state === m2IFUprocess )
+	io.out2exu.valid := state_reg 
+	when(state)
 	{
+	state := false.B
 	exu_data.reg_waddr := rd
 	exu_data.snpc := in_data.snpc
 	exu_data.pc := in_data.pc
@@ -113,7 +130,7 @@ class IDU extends Module {
 	exu_data.reg_wen := false.B
 	
 	//译码
-	state := m2IFUidle
+	//state := m2IFUidle
 
 	io.inv_flag := true.B
 	switch(opcode){
