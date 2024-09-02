@@ -42,6 +42,7 @@ class EXU extends Module {
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
     */
+    /*
     //EXU receive EXU
 	val lsu2s_idle :: lsu2s_wait_ready :: Nil = Enum(2)
 	val lsu2s_state = RegInit(lsu2s_idle)
@@ -49,19 +50,27 @@ class EXU extends Module {
 		lsu2s_idle -> Mux(io.out2lsu.valid,lsu2s_wait_ready,lsu2s_idle),
 		lsu2s_wait_ready -> Mux(io.out2lsu.ready,lsu2s_idle,lsu2s_wait_ready)
 	))
+    */
 
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
     alu.io.alu_op :=15.U
-    val alu_result_reg = RegInit(0.U)
+
+    val valid_reg = RegInit(false.B)
+    io.out2lsu.valid := valid_reg
+    io.out2lsu.bits := 0.U.asTypeOf(new EXUtoLSU)
 
     val lsu_data = Reg(new EXUtoLSU)
-    io.out2lsu.bits := lsu_data
+    when(io.out2lsu.valid & io.out2lsu.ready){
+        io.out2lsu.bits := lsu_data
+        valid_reg := false.B
+    }.otherwise{
+        io.out2lsu.bits := 0.U.asTypeOf(new EXUtoLSU)
+    }
 
     val in_data = Reg(new IDUtoEXU)
     val state = RegInit(false.B) 
-    val state_reg = RegNext(state,false.B)
     io.idu2in.ready := false.B
     when(io.idu2in.valid)
     {
@@ -77,33 +86,13 @@ class EXU extends Module {
         io.idu2in.ready := false.B
     }
 
-    io.out2lsu.valid := state_reg 
     lsu_data.mem_ren := false.B
     lsu_data.mem_wen := false.B
-    when(io.out2lsu.valid)
-    {
-        lsu_data.snpc := in_data.snpc
-        lsu_data.pc := in_data.pc
-        lsu_data.mem_ren := in_data.mem_ren
-        lsu_data.mem_wen := in_data.mem_wen
-        lsu_data.m_rmask := in_data.m_rmask
-        lsu_data.m_wmask := in_data.m_wmask
-        lsu_data.reg_waddr := in_data.reg_waddr
-        lsu_data.reg_wen := in_data.reg_wen
-        lsu_data.src1 := in_data.src1
-        lsu_data.src2 := in_data.src2
-        lsu_data.csr := in_data.csr
-        lsu_data.csr_a5 := in_data.csr_a5
-        lsu_data.mstatus := in_data.mstatus
-        lsu_data.imm := in_data.imm
-        lsu_data.inst_type := in_data.inst_type
-        lsu_data.il_us := in_data.il_us
-        lsu_data.alu_result := alu_result_reg 
-    }
 
     when(state)
     {
         state := false.B
+        valid_reg := true.B
         switch(in_data.inst_type)
         {
             //R type
@@ -165,6 +154,8 @@ class EXU extends Module {
             //ecall
             //mret
         }
-        alu_result_reg := alu.io.result
+        lsu_data.alu_result := alu.io.result
+        (lsu_data: Data).waiveAll :<>= (in_data: Data).waiveAll
+
     }
 }

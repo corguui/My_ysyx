@@ -59,6 +59,22 @@ class IFU extends Module {
 		idu2s_wait_ready -> Mux(io.out.ready,idu2s_idle,idu2s_wait_ready)
 	))
 	*/
+	val in_data = Reg(new EXUtoIFU)
+	val state = RegInit(false.B)
+	io.exu2in.ready := false.B
+	when(io.exu2in.valid){
+		io.exu2in.ready := true.B
+		when(io.exu2in.ready & io.exu2in.valid){
+			in_data := io.exu2in.bits
+			state := true.B
+		}.otherwise{
+			state := false.B
+			in_data := 0.U.asTypeOf(new EXUtoIFU)
+		}
+	}.otherwise{
+		io.exu2in.ready := false.B
+	}
+
 	val ready_reg = RegInit(false.B)
 	io.out.valid := ready_reg //io.ifu_axi_r.rready 
 
@@ -70,18 +86,13 @@ class IFU extends Module {
 		m2EXUprocess -> Mux(io.exu2in.ready,m2EXUidle,m2EXUprocess)
 	))
 
-	io.exu2in.ready := (m2EXUstate === m2EXUidle)
 
   	//val vlg_pc_read = Module(new pcreadmem)   yosys 使用
 	val inst = Wire(UInt(32.W))
 	inst := 0.U 
 	val exu2in_reg = RegNext(io.exu2in.valid,0.B)
-	val indata 	= Reg(new EXUtoIFU)
-	when(io.exu2in.valid & (io.exu2in.valid =/= exu2in_reg )){	
-		indata := io.exu2in.bits
-	}
 	
-	val ardata_reg = RegEnable(indata.dnpc,0x20000000.S.asUInt,exu2in_reg)
+	val ardata_reg = RegEnable(in_data.dnpc,0x20000000.S.asUInt,exu2in_reg)
 	val inst_reg 	= RegEnable(inst,0.U,io.ifu_axi_r.rready )
 	val pc_reg = Reg(UInt(32.W))
 	val arvalid_reg = RegEnable(exu2in_reg,false.B,(io.ifu_axi_ar.arready| exu2in_reg ))
@@ -102,9 +113,9 @@ class IFU extends Module {
 	io.out.bits.inst := 0.U
 
 
-	when(m2EXUstate === m2EXUprocess){
+	when(state){
     	//取指令
-		pc_reg := RegNext(indata.dnpc.asSInt, 0x20000000.S).asUInt
+		pc_reg := RegNext(in_data.dnpc.asSInt, 0x20000000.S).asUInt
 		when(io.ifu_axi_ar.arready & io.ifu_axi_ar.arvalid){
 			io.ifu_axi_ar.araddr := ardata_reg 
 		}.otherwise{
@@ -114,6 +125,7 @@ class IFU extends Module {
 			io.ifu_axi_r.rready := true.B
 			when(io.ifu_axi_r.rvalid & io.ifu_axi_r.rready){
 				ready_reg := true.B
+				state := false.B
 				when(io.ifu_axi_r.rresp === 1.U){
 					inst := io.ifu_axi_r.rdata
 				}.otherwise{

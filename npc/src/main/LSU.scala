@@ -36,6 +36,7 @@ class LSU extends Module {
         val lsu_sta = Output(Bool())
     })
 
+    /*
     //LSU to EXU
     val m2EXUidle :: m2EXUprocess :: Nil = Enum(2)
 	//val m2EXUstate = RegInit(m2EXUidle)
@@ -44,7 +45,8 @@ class LSU extends Module {
 		m2EXUidle -> Mux(io.exu2in.valid,m2EXUprocess,m2EXUidle),
 		m2EXUprocess -> Mux(io.exu2in.ready,m2EXUidle,m2EXUprocess)
 	))
-
+    */
+    /*
 	//LSU recive WBU 
 	val wbu2s_idle :: wbu2s_wait_ready :: Nil = Enum(2)
 	val wbu2s_state = RegInit(wbu2s_idle)
@@ -52,31 +54,65 @@ class LSU extends Module {
 		wbu2s_idle -> Mux(io.out2wbu.valid,wbu2s_wait_ready,wbu2s_idle),
 		wbu2s_wait_ready -> Mux(io.out2wbu.ready,wbu2s_idle,wbu2s_wait_ready)
 	))
+    */
+
+    val in_data = Reg(new EXUtoLSU)
+    val state = RegInit(false.B)
+    io.exu2in.ready := false.B
+    when(io.exu2in.valid)
+    {
+        io.exu2in.ready := true.B
+        when(io.exu2in.ready & io.exu2in.valid){
+            in_data := io.exu2in.bits
+            state := true.B
+        }.otherwise{
+            state := false.B
+            in_data := 0.U.asTypeOf(new EXUtoLSU)
+        }
+    }.otherwise{
+        io.exu2in.ready := false.B
+        in_data.mem_ren := false.B//确保en拉高一周期让 aw ar valid 拉高后可以拉低
+        in_data.mem_wen := false.B
+    }
+
 
     //两个寄存器记录aw w or ar 先发送过, 有才能说明发送过来的valid有效
     val ready_reg = RegInit(0.B)
     val ready_reg_1 = RegInit(0.B)
-    val state_reg = RegNext(m2EXUstate,m2EXUidle)
-    when(io.exu2in.bits.inst_type === 3.U)
+    val valid_reg = RegInit(0.B)
+    /*
+    when(in_data.inst_type === 3.U)
     {
     io.out2wbu.valid :=  io.lsu_axi_r.rready
     }
-    .elsewhen(io.exu2in.bits.inst_type === 4.U)
+    .elsewhen(in_data.inst_type === 4.U)
     {
     io.out2wbu.valid :=  io.lsu_axi_b.bready
     }
     .otherwise
     {
-    io.out2wbu.valid := (state_reg === m2EXUprocess)//(pc_reg =/= io.out2wbu.bits.pc)
+    io.out2wbu.valid := valid_reg //(pc_reg =/= io.out2wbu.bits.pc)
+    }
+    */
+    io.out2wbu.valid := valid_reg
+    io.out2wbu.bits := 0.U.asTypeOf(new LSUtoWBU)
+
+    val wbu_data = Reg(new LSUtoWBU)
+    when(io.out2wbu.valid & io.out2wbu.ready)
+    {
+        io.out2wbu.bits := wbu_data
+        valid_reg := false.B 
+    }.otherwise{
+        io.out2wbu.bits := 0.U.asTypeOf(new LSUtoWBU)
     }
 
     val exu2in_valid = RegNext(io.exu2in.valid,0.B)
     val exu2in_valid_reg = RegNext(exu2in_valid,0.U)
     //Mem read member
     //val rready_reg = RegInit(0.U)
-    val mem_raddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
-    val mem_rmask_reg = RegEnable(io.exu2in.bits.m_rmask,0.U,exu2in_valid)
-    val mem_ren_reg = RegEnable(io.exu2in.bits.mem_ren,0.U,(exu2in_valid | io.lsu_axi_r.rready))
+    val mem_raddr_reg = RegEnable(in_data.alu_result,0.U,exu2in_valid)
+    val mem_rmask_reg = RegEnable(in_data.m_rmask,0.U,exu2in_valid)
+    val mem_ren_reg = RegEnable(in_data.mem_ren,0.U,(exu2in_valid | io.lsu_axi_r.rready))
 
     io.lsu_axi_ar.araddr := 0.U 
     io.lsu_axi_ar.arid := 0.U
@@ -94,7 +130,7 @@ class LSU extends Module {
     delay_ar.io.inData := 0.U 
     delay_ar.io.inValid := 0.U 
     io.lsu_axi_ar.arvalid := delay_ar.io.outData & mem_ren_reg 
-    when(io.exu2in.bits.inst_type === 3.U)
+    when(in_data.inst_type === 3.U)
     {
     delay_ar.io.inData := mem_ren_reg 
     delay_ar.io.inValid := exu2in_valid_reg 
@@ -111,11 +147,11 @@ class LSU extends Module {
 
     //Mem write member
     //val bready_reg = RegInit(0.U)
-    val mem_awaddr_reg = RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
-    val mem_wstrb_reg = RegEnable(io.exu2in.bits.m_wmask,0.U,exu2in_valid)
-    val mem_wdata_reg = RegEnable(io.exu2in.bits.src2,0.U,exu2in_valid)
-    val awvalid_reg= RegEnable(io.exu2in.bits.mem_wen,0.U,(exu2in_valid | io.lsu_axi_ar.arready))
-    val wvalid_reg = RegEnable(io.exu2in.bits.mem_wen,0.U,(exu2in_valid | io.lsu_axi_w.wready)) 
+    val mem_awaddr_reg = RegEnable(in_data.alu_result,0.U,exu2in_valid)
+    val mem_wstrb_reg = RegEnable(in_data.m_wmask,0.U,exu2in_valid)
+    val mem_wdata_reg = RegEnable(in_data.src2,0.U,exu2in_valid)
+    val awvalid_reg= RegEnable(in_data.mem_wen,0.U,(exu2in_valid | io.lsu_axi_ar.arready))
+    val wvalid_reg = RegEnable(in_data.mem_wen,0.U,(exu2in_valid | io.lsu_axi_w.wready)) 
     io.lsu_axi_aw.awaddr := 0.U
     io.lsu_axi_aw.awid := 0.U
     io.lsu_axi_aw.awlen := 0.U
@@ -136,7 +172,7 @@ class LSU extends Module {
     delay_aw.io.inValid := 0.U
     //得延迟m_wen_reg一个周期,不然会打印两次
     io.lsu_axi_aw.awvalid := delay_aw.io.outData &  m_wen_reg_delay
-    when(io.exu2in.bits.inst_type === 4.U)
+    when(in_data.inst_type === 4.U)
     {
         delay_aw.io.inData := awvalid_reg 
         delay_aw.io.inValid := exu2in_valid_reg
@@ -150,7 +186,7 @@ class LSU extends Module {
     delay_w.io.inValid := 0.U
     //得延迟m_wen_reg一个周期,不然会打印两次
     io.lsu_axi_w.wvalid := delay_w.io.outData & m_wen_reg_delay
-    when(io.exu2in.bits.inst_type === 4.U)
+    when(in_data.inst_type === 4.U)
     {
         delay_w.io.inData := wvalid_reg
         delay_w.io.inValid := exu2in_valid_reg
@@ -167,41 +203,14 @@ class LSU extends Module {
     */
     io.lsu_axi_b.bready := false.B 
 
-    val wbu_data = Reg(new LSUtoWBU)
-    io.out2wbu.bits := wbu_data
-
-    //val mem_rdata = RegInit(0.U)
-    //val mem_rresp = RegInit(0.U)
-    //val mem_bresp = RegInit(0.U)
-    io.lsu_addr := RegEnable(io.exu2in.bits.alu_result,0.U,exu2in_valid)
+    io.lsu_addr := RegEnable(in_data.alu_result,0.U,exu2in_valid)
     val sta_reg = RegEnable(exu2in_valid,false.B,io.lsu_axi_r.rready | io.lsu_axi_b.bready | exu2in_valid)
-    io.lsu_sta := Mux(sta_reg && (io.exu2in.bits.inst_type === 3.U | io.exu2in.bits.inst_type === 4.U) ,true.B,false.B)
+    io.lsu_sta := Mux(sta_reg && (in_data.inst_type === 3.U | in_data.inst_type === 4.U) ,true.B,false.B)
 
-    io.exu2in.ready := ( m2EXUstate===m2EXUidle )
-    when(io.out2wbu.valid)
+    when(state)
     {
-        wbu_data.snpc := io.exu2in.bits.snpc
-        wbu_data.pc := io.exu2in.bits.pc
-        wbu_data.reg_waddr := io.exu2in.bits.reg_waddr
-        wbu_data.reg_wen := io.exu2in.bits.reg_wen
-        wbu_data.src1 := io.exu2in.bits.src1
-        wbu_data.src2 := io.exu2in.bits.src2
-        wbu_data.csr := io.exu2in.bits.csr
-        wbu_data.csr_a5 := io.exu2in.bits.csr_a5
-        wbu_data.mstatus := io.exu2in.bits.mstatus
-        wbu_data.imm := io.exu2in.bits.imm
-        wbu_data.inst_type := io.exu2in.bits.inst_type
-        wbu_data.alu_result := io.exu2in.bits.alu_result
-        //wbu_data.mem_rdata :=  mem_rdata 
-        //wbu_data.mem_rresp :=  mem_rresp 
-        //wbu_data.mem_bresp :=  mem_bresp 
-    }
-    when(m2EXUstate === m2EXUprocess)
-    {
-        //switch(io.exu2in.bits.inst_type){
             //IL type
-            //is(3.U){
-            when(io.exu2in.bits.inst_type === 3.U){
+            when(in_data.inst_type === 3.U){
                 when((io.lsu_axi_ar.arready)&(io.lsu_axi_ar.arvalid))
                 {                    
                     io.lsu_axi_ar.araddr := mem_raddr_reg 
@@ -223,7 +232,9 @@ class LSU extends Module {
                     when(io.lsu_axi_r.rvalid & io.lsu_axi_r.rready)
                     {
                         wbu_data.mem_rresp := io.lsu_axi_r.rresp
-                        when(io.exu2in.bits.il_us === true.B)
+                        state := false.B
+                        valid_reg := true.B
+                        when(in_data.il_us === true.B)
                         {
                            when(mem_rmask_reg === 1.U)
                            {
@@ -251,6 +262,7 @@ class LSU extends Module {
                     }.otherwise{
                         wbu_data.mem_rresp := 0.U
                         wbu_data.mem_rdata := 0.U
+                        state := false.B
                     }
                 }.otherwise{
                         //rready_reg := 0.U
@@ -259,8 +271,7 @@ class LSU extends Module {
                     
             }
             //s type
-            //is(4.U){
-            .elsewhen(io.exu2in.bits.inst_type === 4.U){
+            .elsewhen(in_data.inst_type === 4.U){
                 when(io.lsu_axi_aw.awready & io.lsu_axi_aw.awvalid)
                 {
                     io.lsu_axi_aw.awaddr := mem_awaddr_reg 
@@ -292,10 +303,14 @@ class LSU extends Module {
                     //delay_b.io.inData := 1.U
                     //delay_b.io.inValid := Mux(bvalid_reg =/= io.lsu_axi_b.bvalid & io.lsu_axi_b.bvalid === 1.U,0.U,1.U)  
                     wbu_data.mem_bresp := io.lsu_axi_b.bresp 
+                    state := false.B
+                    valid_reg := true.B
                     }.otherwise{
                     //delay_b.io.inData := 0.U
                     //delay_b.io.inValid := 0.U
                     wbu_data.mem_bresp := 0.U
+                    state := false.B
+                    valid_reg := true.B
                     }
                 }.otherwise{
                     //bready_reg := 0.U
@@ -305,9 +320,10 @@ class LSU extends Module {
               .otherwise{
                 ready_reg := 0.B
                 ready_reg_1 := 0.B
-                m2EXUstate := m2EXUidle
+                state := false.B
+                valid_reg := true.B
               }
-            //}
+            (wbu_data:Data).waiveAll :<>= (in_data:Data).waiveAll
         }
 }
 
