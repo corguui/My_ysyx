@@ -39,7 +39,7 @@ uint32_t cmp_dnpc;
 
 void cpu_read_reg()
 {
-	cpu.pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
+	cpu.pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg;
 	cpu.gpr[0]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_0;
 	cpu.gpr[1]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_1;
 	cpu.gpr[2]=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_2;
@@ -83,7 +83,7 @@ void cpu_read_reg()
 }
 void cpu_write_reg()
 {
-	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0=cpu.pc;
+	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg=cpu.pc;
 	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_0=cpu.gpr[0];
 	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_1=cpu.gpr[1];
 	top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Reg__DOT__reg_2=cpu.gpr[2];
@@ -205,17 +205,18 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		top->clock =0; top->eval();
 		valid_flag=0;
 		#ifdef MROM
-		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0!=0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc!=0x20000000&&cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc)
+		if(cmp_dnpc!=0 && cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc)
 		#else
 		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0!=0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc)
 		#endif
 		{
 		valid_flag =1;
-		pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
-		s->pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0;
+		pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg;
+		s->pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg;
 		s->inst=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__inst_reg;
-    	s->dnpc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc;
+    	s->dnpc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc;
 		//printf("main_time %d pc %x lastdnpc %x dnpc %x\n",main_time,s->pc,cmp_dnpc,s->dnpc);
+		/*
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
@@ -228,9 +229,10 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		main_time++;
 		top->eval();
 		top->clock =0; top->eval();
+		*/
 		//cpu_read_reg(); 
 		}
-		cmp_dnpc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc;
+		cmp_dnpc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc;
 		#ifdef CONFIG_VCD
 		tfp->dump(main_time);
 		#endif
@@ -381,7 +383,7 @@ void cpu_exec(uint64_t n)
 
       Log("npc: %s at pc = 0x%x",
           (npc_state.state == NPC_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :
-           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :  ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))), top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
+           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :  ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))), top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg);
 
       #ifdef CONFIG_ITRACE
 	    //print the ringbuf
