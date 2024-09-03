@@ -106,7 +106,11 @@ void init_monitor() {
 void elf_read(char *elf_file)
 {
     
-    if(elf_file == NULL) return;
+    if(elf_file == NULL)
+    {
+        printf("elf_file is NULL!");
+        return;
+    }
     
     FILE *fp;
     fp = fopen(elf_file, "rb");
@@ -200,6 +204,14 @@ void elf_read(char *elf_file)
             }
         }
     }
+
+    /*
+    for(int i;i < func_num; i++)
+    {
+        printf("%s: 0x%x\n", symbol[i].name, symbol[i].value);
+    }
+    */
+
     fclose(fp);
     free(string_table);
 }

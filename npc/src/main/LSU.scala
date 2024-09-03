@@ -112,7 +112,7 @@ class LSU extends Module {
     //val rready_reg = RegInit(0.U)
     val mem_raddr_reg = RegEnable(in_data.alu_result,0.U,exu2in_valid)
     val mem_rmask_reg = RegEnable(in_data.m_rmask,0.U,exu2in_valid)
-    val mem_ren_reg = RegEnable(in_data.mem_ren,0.U,(exu2in_valid | io.lsu_axi_r.rready))
+    val mem_ren_reg = RegEnable(in_data.mem_ren,0.U,(exu2in_valid | io.lsu_axi_ar.arready))
 
     io.lsu_axi_ar.araddr := 0.U 
     io.lsu_axi_ar.arid := 0.U
@@ -150,7 +150,7 @@ class LSU extends Module {
     val mem_awaddr_reg = RegEnable(in_data.alu_result,0.U,exu2in_valid)
     val mem_wstrb_reg = RegEnable(in_data.m_wmask,0.U,exu2in_valid)
     val mem_wdata_reg = RegEnable(in_data.src2,0.U,exu2in_valid)
-    val awvalid_reg= RegEnable(in_data.mem_wen,0.U,(exu2in_valid | io.lsu_axi_ar.arready))
+    val awvalid_reg= RegEnable(in_data.mem_wen,0.U,(exu2in_valid | io.lsu_axi_aw.awready))
     val wvalid_reg = RegEnable(in_data.mem_wen,0.U,(exu2in_valid | io.lsu_axi_w.wready)) 
     io.lsu_axi_aw.awaddr := 0.U
     io.lsu_axi_aw.awid := 0.U

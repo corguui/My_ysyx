@@ -136,8 +136,8 @@ static void trace_and_difftest(Decode *_this) {
   #ifdef CONFIG_DIFFTEST 
   if(valid_flag)
   {
-  difftest_step(_this->pc, top->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
-  //printf("pc %x npc %x \n",_this->pc,top->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
+  difftest_step(_this->pc, top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc);
+  //printf("pc %x npc %x \n",_this->pc,top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg);
   }
   #endif
 

@@ -6,7 +6,7 @@ NPC_HOME =~/ysyx-workbench/npc
 
 CFLAGS    += -fdata-sections -ffunction-sections
 LDFLAGS   += -T $(AM_HOME)/scripts/ysyxsoc.ld \
-						 --defsym=_pmem_start=0x20000000 --defsym=_entry_offset=0x0 --print-map
+						 --defsym=_pmem_start=0x20000000 --defsym=_entry_offset=0x0 #--print-map
 LDFLAGS   += --gc-sections -e _start
 CFLAGS += -DMAINARGS=\"$(mainargs)\"
 .PHONY: $(AM_HOME)/am/src/riscv/ysyxsoc/trm.c
