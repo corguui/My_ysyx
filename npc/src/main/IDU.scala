@@ -278,13 +278,13 @@ class IDU extends Module {
 
 				//LH
 				is("b001".U){
-					exu_data.m_rmask := 2.U
+					exu_data.m_rmask := 3.U
 					exu_data.il_us   :=	false.B  //true is Uint 
 				}
 
 				//LW
 				is("b010".U){
-					exu_data.m_rmask := 4.U
+					exu_data.m_rmask := 15.U
 					exu_data.il_us   :=	false.B  //true is Uint 
 				}
 
@@ -297,7 +297,7 @@ class IDU extends Module {
 				//LHU
 				is("b101".U){
 					exu_data.il_us   :=	true.B
-					exu_data.m_rmask := 2.U
+					exu_data.m_rmask := 3.U
 				}
 			}
 
@@ -318,12 +318,12 @@ class IDU extends Module {
 
 				//SH
 				is("b001".U){
-					exu_data.m_wmask := 2.U
+					exu_data.m_wmask := 3.U
 				}
 
 				//SW
 				is("b010".U){
-					exu_data.m_wmask := 4.U
+					exu_data.m_wmask := 15.U
 				}
 			}
 		}

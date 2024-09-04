@@ -240,7 +240,7 @@ class LSU extends Module {
                            {
                             wbu_data.mem_rdata := Cat(Fill(24,0.U),io.lsu_axi_r.rdata(7,0)).asUInt
                            }
-                           .elsewhen(mem_rmask_reg === 2.U)
+                           .elsewhen(mem_rmask_reg === 3.U)
                            {
                             wbu_data.mem_rdata := Cat(Fill(16,0.U),io.lsu_axi_r.rdata(15,0)).asUInt
                            }.otherwise
@@ -251,7 +251,7 @@ class LSU extends Module {
                         when(mem_rmask_reg === 1.U)
                         {
                            wbu_data.mem_rdata := Cat(Fill(24,io.lsu_axi_r.rdata(7)),(io.lsu_axi_r.rdata(7,0)).asSInt).asUInt
-                        }.elsewhen(mem_rmask_reg === 2.U)
+                        }.elsewhen(mem_rmask_reg === 3.U)
                         {
                             wbu_data.mem_rdata := Cat(Fill(16,io.lsu_axi_r.rdata(15)),(io.lsu_axi_r.rdata(15,0)).asSInt).asUInt
                         }.otherwise

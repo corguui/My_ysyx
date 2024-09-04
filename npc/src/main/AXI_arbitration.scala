@@ -132,9 +132,17 @@ class AXI_arbiter extends Module {
             io.lsu_axi_r <> io.axi_r
             io.lsu_axi_b <> io.axi_b
         }
-        //SRAM
+        //MROM
         //.elsewhen(((io.lsu_axi_ar.araddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
         .elsewhen(((io.lsu_addr >= 0x20000000.S.asUInt) & (io.lsu_addr <= 0x20000fff.S.asUInt))) {
+            io.axi_ar <> io.lsu_axi_ar
+            io.axi_aw <> io.lsu_axi_aw
+            io.axi_w <> io.lsu_axi_w
+            io.lsu_axi_r <> io.axi_r
+            io.lsu_axi_b <> io.axi_b
+        }
+        //SRAM
+        .elsewhen(((io.lsu_addr >= 0x0f000000.S.asUInt) & (io.lsu_addr <= 0x0fffffff.S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
             io.axi_aw <> io.lsu_axi_aw
             io.axi_w <> io.lsu_axi_w
