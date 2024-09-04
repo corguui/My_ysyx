@@ -260,7 +260,7 @@ class LSU extends Module {
                         }
                         }
                     }.otherwise{
-                        wbu_data.mem_rresp := 0.U
+                        wbu_data.mem_rresp := 3.U
                         wbu_data.mem_rdata := 0.U
                         state := false.B
                     }
@@ -308,7 +308,7 @@ class LSU extends Module {
                     }.otherwise{
                     //delay_b.io.inData := 0.U
                     //delay_b.io.inValid := 0.U
-                    wbu_data.mem_bresp := 0.U
+                    wbu_data.mem_bresp := 3.U
                     state := false.B
                     valid_reg := true.B
                     }

@@ -126,10 +126,10 @@ class IFU extends Module {
 			when(io.ifu_axi_r.rvalid & io.ifu_axi_r.rready){
 				ready_reg := true.B
 				state := false.B
-				when(io.ifu_axi_r.rresp === 1.U){
+				when(io.ifu_axi_r.rresp === 0.U){
 					inst := io.ifu_axi_r.rdata
 				}.otherwise{
-					inst := io.ifu_axi_r.rdata
+					inst := 0.U 
 				}
 			}
 			.otherwise{

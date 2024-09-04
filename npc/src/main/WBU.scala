@@ -106,25 +106,25 @@ class WBU extends Module {
             }
             //IL type
             is(3.U){
-                //when(in_data.mem_rresp === 1.U)
-                //{
+                when(in_data.mem_rresp === 0.U)
+                {
                     io.reg_wen := in_data.reg_wen 
                     io.reg_waddr := in_data.reg_waddr 
                     io.reg_wdata := in_data.mem_rdata 
                     ifu_outdata.dnpc := in_data.snpc
-                //}.otherwise{
-                //   ifu_outdata.dnpc := 0x20000000.S.asUInt
-                //}
+                }.otherwise{
+                   ifu_outdata.dnpc := 0x00000001.S.asUInt
+                }
                 
             }
             //s type
             is(4.U){
-                    //when(in_data.mem_bresp === 1.U)
-                    //{
+                    when(in_data.mem_bresp === 0.U)
+                    {
                         ifu_outdata.dnpc := in_data.snpc
-                    //}.otherwise{
-                    //   ifu_outdata.dnpc := 0x20000000.S.asUInt
-                    //}
+                    }.otherwise{
+                       ifu_outdata.dnpc := 0x00000001.S.asUInt
+                    }
             }
             //b type
             is(5.U){

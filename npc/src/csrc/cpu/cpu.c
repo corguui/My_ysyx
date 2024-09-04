@@ -137,7 +137,7 @@ static void trace_and_difftest(Decode *_this) {
   if(valid_flag)
   {
   difftest_step(_this->pc, top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc);
-  //printf("pc %x npc %x \n",_this->pc,top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg);
+  //printf("pc %x npc %x \n",_this->pc,top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc);
   }
   #endif
 
@@ -204,13 +204,10 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 
 		top->clock =0; top->eval();
 		valid_flag=0;
-		#ifdef MROM
 		if(cmp_dnpc!=0 && cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc)
-		#else
-		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0!=0&&top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc!=0x80000000&&cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__WBU__DOT__ifu_outdata_dnpc)
-		#endif
 		{
 		valid_flag =1;
+		//printf("wave once times %d \n",main_time);
 		pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg;
 		s->pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg;
 		s->inst=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__inst_reg;
