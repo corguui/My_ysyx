@@ -57,11 +57,11 @@ class ysyx_23060111 extends Module {
   //val Inst_fetch = Module(new Inst_fetch)
   val inv_flag = dontTouch(Wire(Bool()))
 
-  IDU.io.ifu2in <> IFU.io.out
+  IDU.io.ifu2in <> IFU.io.out2idu
   EXU.io.idu2in <> IDU.io.out2exu
   LSU.io.exu2in <> EXU.io.out2lsu
   WBU.io.lsu2in <> LSU.io.out2wbu
-  IFU.io.exu2in <> WBU.io.out2ifu
+  IFU.io.wbu2in <> WBU.io.out2ifu
 
   Reg.io.reg_read <> IDU.io.reg_data
   Reg.io.wen := WBU.io.reg_wen

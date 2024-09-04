@@ -97,10 +97,10 @@ class LSU extends Module {
     io.out2wbu.valid := valid_reg
     io.out2wbu.bits := 0.U.asTypeOf(new LSUtoWBU)
 
-    val wbu_data = Reg(new LSUtoWBU)
+    val out_data = Reg(new LSUtoWBU)
     when(io.out2wbu.valid & io.out2wbu.ready)
     {
-        io.out2wbu.bits := wbu_data
+        io.out2wbu.bits := out_data
         valid_reg := false.B 
     }.otherwise{
         io.out2wbu.bits := 0.U.asTypeOf(new LSUtoWBU)
@@ -231,37 +231,37 @@ class LSU extends Module {
                         */
                     when(io.lsu_axi_r.rvalid & io.lsu_axi_r.rready)
                     {
-                        wbu_data.mem_rresp := io.lsu_axi_r.rresp
+                        out_data.mem_rresp := io.lsu_axi_r.rresp
                         state := false.B
                         valid_reg := true.B
                         when(in_data.il_us === true.B)
                         {
                            when(mem_rmask_reg === 1.U)
                            {
-                            wbu_data.mem_rdata := Cat(Fill(24,0.U),io.lsu_axi_r.rdata(7,0)).asUInt
+                            out_data.mem_rdata := Cat(Fill(24,0.U),io.lsu_axi_r.rdata(7,0)).asUInt
                            }
                            .elsewhen(mem_rmask_reg === 3.U)
                            {
-                            wbu_data.mem_rdata := Cat(Fill(16,0.U),io.lsu_axi_r.rdata(15,0)).asUInt
+                            out_data.mem_rdata := Cat(Fill(16,0.U),io.lsu_axi_r.rdata(15,0)).asUInt
                            }.otherwise
                            {
-                            wbu_data.mem_rdata := 0.U
+                            out_data.mem_rdata := 0.U
                            }
                         }.otherwise{
                         when(mem_rmask_reg === 1.U)
                         {
-                           wbu_data.mem_rdata := Cat(Fill(24,io.lsu_axi_r.rdata(7)),(io.lsu_axi_r.rdata(7,0)).asSInt).asUInt
+                           out_data.mem_rdata := Cat(Fill(24,io.lsu_axi_r.rdata(7)),(io.lsu_axi_r.rdata(7,0)).asSInt).asUInt
                         }.elsewhen(mem_rmask_reg === 3.U)
                         {
-                            wbu_data.mem_rdata := Cat(Fill(16,io.lsu_axi_r.rdata(15)),(io.lsu_axi_r.rdata(15,0)).asSInt).asUInt
+                            out_data.mem_rdata := Cat(Fill(16,io.lsu_axi_r.rdata(15)),(io.lsu_axi_r.rdata(15,0)).asSInt).asUInt
                         }.otherwise
                         {
-                            wbu_data.mem_rdata := (io.lsu_axi_r.rdata.asSInt).asUInt
+                            out_data.mem_rdata := (io.lsu_axi_r.rdata.asSInt).asUInt
                         }
                         }
                     }.otherwise{
-                        wbu_data.mem_rresp := 3.U
-                        wbu_data.mem_rdata := 0.U
+                        out_data.mem_rresp := 3.U
+                        out_data.mem_rdata := 0.U
                         state := false.B
                     }
                 }.otherwise{
@@ -302,13 +302,13 @@ class LSU extends Module {
                     {
                     //delay_b.io.inData := 1.U
                     //delay_b.io.inValid := Mux(bvalid_reg =/= io.lsu_axi_b.bvalid & io.lsu_axi_b.bvalid === 1.U,0.U,1.U)  
-                    wbu_data.mem_bresp := io.lsu_axi_b.bresp 
+                    out_data.mem_bresp := io.lsu_axi_b.bresp 
                     state := false.B
                     valid_reg := true.B
                     }.otherwise{
                     //delay_b.io.inData := 0.U
                     //delay_b.io.inValid := 0.U
-                    wbu_data.mem_bresp := 3.U
+                    out_data.mem_bresp := 3.U
                     state := false.B
                     valid_reg := true.B
                     }
@@ -323,7 +323,7 @@ class LSU extends Module {
                 state := false.B
                 valid_reg := true.B
               }
-            (wbu_data:Data).waiveAll :<>= (in_data:Data).waiveAll
+            (out_data:Data).waiveAll :<>= (in_data:Data).waiveAll
         }
 }
 

@@ -53,7 +53,7 @@ void init_mem()
 }
 static void out_of_bound(uint32_t addr)
 {
-	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__io_out_bits_pc_0);
+	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg);
 	#ifdef CONFIG_MTRACE
 		log_write("----------write----------\n");
 		for(int i=0;i<write_num;i++)

@@ -61,9 +61,9 @@ class EXU extends Module {
     io.out2lsu.valid := valid_reg
     io.out2lsu.bits := 0.U.asTypeOf(new EXUtoLSU)
 
-    val lsu_data = Reg(new EXUtoLSU)
+    val out_data = Reg(new EXUtoLSU)
     when(io.out2lsu.valid & io.out2lsu.ready){
-        io.out2lsu.bits := lsu_data
+        io.out2lsu.bits := out_data
         valid_reg := false.B
     }.otherwise{
         io.out2lsu.bits := 0.U.asTypeOf(new EXUtoLSU)
@@ -86,8 +86,8 @@ class EXU extends Module {
         io.idu2in.ready := false.B
     }
 
-    lsu_data.mem_ren := false.B
-    lsu_data.mem_wen := false.B
+    out_data.mem_ren := false.B
+    out_data.mem_wen := false.B
 
     when(state)
     {
@@ -154,8 +154,8 @@ class EXU extends Module {
             //ecall
             //mret
         }
-        lsu_data.alu_result := alu.io.result
-        (lsu_data: Data).waiveAll :<>= (in_data: Data).waiveAll
+        out_data.alu_result := alu.io.result
+        (out_data: Data).waiveAll :<>= (in_data: Data).waiveAll
 
     }
 }

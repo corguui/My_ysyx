@@ -4,13 +4,13 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental._
 
-class EXUtoIFU extends Bundle {
+class WBUtoIFU extends Bundle {
     val dnpc = Output(UInt(32.W))
 }
 class WBU extends Module {
     val io = IO(new Bundle {
         val lsu2in = Flipped(Decoupled(new LSUtoWBU))
-        val out2ifu = Decoupled(new EXUtoIFU)
+        val out2ifu = Decoupled(new WBUtoIFU)
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
@@ -58,18 +58,18 @@ class WBU extends Module {
         io.lsu2in.ready := false.B
     }
     
-    val ifu_outdata = Reg(new EXUtoIFU)
-    val lastdnpc = RegNext(ifu_outdata.dnpc,0.U)
+    val out_data = Reg(new WBUtoIFU)
+    val lastdnpc = RegNext(out_data.dnpc,0.U)
     val valid_reg = RegInit(true.B)
-    ifu_outdata.dnpc :=  RegInit(0x20000000.S.asUInt)
+    out_data.dnpc :=  RegInit(0x20000000.S.asUInt)
     //或是为了让他第一次能够启动ifu
-    io.out2ifu.valid := valid_reg//((lastdnpc =/= ifu_outdata.dnpc))//& (ifu_outdata.dnpc =/= 0x20000000.S.asUInt)) | (lastdnpc =/= ifu_outdata.dnpc && lastdnpc===0.U)//& (m2LSUstate === m2LSUprocess)
-    io.out2ifu.bits := 0.U.asTypeOf(new EXUtoIFU)
+    io.out2ifu.valid := valid_reg//((lastdnpc =/= out_data.dnpc))//& (out_data.dnpc =/= 0x20000000.S.asUInt)) | (lastdnpc =/= out_data.dnpc && lastdnpc===0.U)//& (m2LSUstate === m2LSUprocess)
+    io.out2ifu.bits := 0.U.asTypeOf(new WBUtoIFU)
     when(io.out2ifu.valid & io.out2ifu.ready){
-        io.out2ifu.bits := ifu_outdata
+        io.out2ifu.bits := out_data
         valid_reg := false.B
     }.otherwise{
-        io.out2ifu.bits := 0.U.asTypeOf(new EXUtoIFU)
+        io.out2ifu.bits := 0.U.asTypeOf(new WBUtoIFU)
     } 
 
     io.reg_wdata := 0.U
@@ -90,7 +90,7 @@ class WBU extends Module {
         {
             //R type
             is(1.U){
-                ifu_outdata.dnpc := in_data.snpc 
+                out_data.dnpc := in_data.snpc 
                 io.reg_wdata := in_data.alu_result
                 io.reg_wen := in_data.reg_wen
                 io.reg_waddr := in_data.reg_waddr
@@ -98,7 +98,7 @@ class WBU extends Module {
             }
             //I type
             is(2.U){
-                ifu_outdata.dnpc := in_data.snpc
+                out_data.dnpc := in_data.snpc
                 io.reg_wdata := in_data.alu_result
                 io.reg_wen := in_data.reg_wen
                 io.reg_waddr := in_data.reg_waddr
@@ -111,9 +111,9 @@ class WBU extends Module {
                     io.reg_wen := in_data.reg_wen 
                     io.reg_waddr := in_data.reg_waddr 
                     io.reg_wdata := in_data.mem_rdata 
-                    ifu_outdata.dnpc := in_data.snpc
+                    out_data.dnpc := in_data.snpc
                 }.otherwise{
-                   ifu_outdata.dnpc := 0x00000001.S.asUInt
+                   out_data.dnpc := 0x00000001.S.asUInt
                 }
                 
             }
@@ -121,19 +121,19 @@ class WBU extends Module {
             is(4.U){
                     when(in_data.mem_bresp === 0.U)
                     {
-                        ifu_outdata.dnpc := in_data.snpc
+                        out_data.dnpc := in_data.snpc
                     }.otherwise{
-                       ifu_outdata.dnpc := 0x00000001.S.asUInt
+                       out_data.dnpc := 0x00000001.S.asUInt
                     }
             }
             //b type
             is(5.U){
-                ifu_outdata.dnpc :=  Mux((in_data.alu_result===1.U),(in_data.pc+in_data.imm),in_data.snpc)
+                out_data.dnpc :=  Mux((in_data.alu_result===1.U),(in_data.pc+in_data.imm),in_data.snpc)
                 //m2LSUstate := m2LSUidle
             }
             //u type
             is(6.U){
-                ifu_outdata.dnpc := in_data.snpc
+                out_data.dnpc := in_data.snpc
                 io.reg_wdata := in_data.imm
                 io.reg_wen := in_data.reg_wen
                 io.reg_waddr := in_data.reg_waddr
@@ -141,7 +141,7 @@ class WBU extends Module {
             }
             //upc type
             is(7.U){
-                ifu_outdata.dnpc := in_data.snpc
+                out_data.dnpc := in_data.snpc
                 io.reg_wdata := in_data.alu_result 
                 io.reg_wen := in_data.reg_wen
                 io.reg_waddr := in_data.reg_waddr
@@ -150,7 +150,7 @@ class WBU extends Module {
             //j type
             is(8.U){
                 io.reg_wdata := in_data.snpc
-                ifu_outdata.dnpc := in_data.alu_result 
+                out_data.dnpc := in_data.alu_result 
                 io.reg_wen := in_data.reg_wen
                 io.reg_waddr := in_data.reg_waddr
                 //m2LSUstate := m2LSUidle
@@ -158,14 +158,14 @@ class WBU extends Module {
             //jr type
             is(9.U){
                 io.reg_wdata := in_data.snpc
-                ifu_outdata.dnpc := in_data.alu_result 
+                out_data.dnpc := in_data.alu_result 
                 io.reg_wen := in_data.reg_wen
                 io.reg_waddr := in_data.reg_waddr
                 //m2LSUstate := m2LSUidle
             }
             //csrrw
             is(10.U){
-                ifu_outdata.dnpc := in_data.snpc
+                out_data.dnpc := in_data.snpc
                 io.reg_wdata := in_data.csr
                 io.reg_wen := in_data.reg_wen
                 io.reg_waddr := in_data.reg_waddr
@@ -181,7 +181,7 @@ class WBU extends Module {
             }
             //csrrs
             is(11.U){
-                ifu_outdata.dnpc := in_data.snpc
+                out_data.dnpc := in_data.snpc
                 io.reg_wdata := in_data.csr
                 io.reg_wen := in_data.reg_wen
                 io.reg_waddr := in_data.reg_waddr
@@ -203,7 +203,7 @@ class WBU extends Module {
                 io.csr_wdata_2 := in_data.pc      //mepc
                 io.csr_wen_2  := true.B 
                 io.csr_waddr_2 := 0.U
-                ifu_outdata.dnpc := in_data.csr //mtvec
+                out_data.dnpc := in_data.csr //mtvec
                 //m2LSUstate := m2LSUidle
             }
             //mret
@@ -211,7 +211,7 @@ class WBU extends Module {
                 io.csr_wdata_1 := in_data.mstatus    //mstaus
                 io.csr_wen_1  := true.B 
                 io.csr_waddr_1 := 2.U
-                ifu_outdata.dnpc := in_data.csr //mepc
+                out_data.dnpc := in_data.csr //mepc
                 //m2LSUstate := m2LSUidle
             }
         }
