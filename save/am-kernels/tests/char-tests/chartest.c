@@ -1,0 +1,12 @@
+#include <stdio.h>
+#define UART_BASE 0x10000000L
+#define UART_TX   0
+void _start() {
+  *(volatile char *)(UART_BASE + UART_TX) = 'A';
+  while (1);
+}
+int main()
+{
+  _start();
+  return 0;
+}
