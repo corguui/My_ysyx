@@ -3,6 +3,7 @@
 !*/
 !/nemu/*
 !/nexus-am/*
+/fceux-am
 !/am-kernels/*
 !/nanos-lite/*
 !/navy-apps/*
