@@ -143,13 +143,52 @@ class LSU extends Module {
     io.lsu_axi_r.rready := delay_r.io.outData & rready_reg
     */
 
+    val mem_wstrb = Wire(UInt(32.W))
+    val mem_wdata = Wire(UInt(32.W))
+    mem_wstrb := 0.U
+    mem_wdata := 0.U
+    when(in_data.m_wmask === 1.U)
+    {
+        when(in_data.alu_result(1,0) === 0.U)
+        {
+            mem_wstrb := 1.U
+            mem_wdata := in_data.src2 
+        }.elsewhen(in_data.alu_result(1,0) === 1.U)
+        {
+            mem_wstrb := 2.U
+            mem_wdata := in_data.src2 << 8.U
+        }.elsewhen(in_data.alu_result(1,0) === 2.U)
+        {
+            mem_wstrb := 4.U
+            mem_wdata := in_data.src2 << 16.U
+        }.otherwise{
+            mem_wstrb := 8.U
+            mem_wdata := in_data.src2 << 24.U
+        }
+    }.elsewhen(in_data.m_wmask === 3.U)
+    {
+        when(in_data.alu_result(1,0) === 0.U)
+        {
+            mem_wstrb := 3.U
+        }.otherwise{
+            mem_wstrb := 12.U
+            mem_wdata := in_data.src2 << 16.U
+        }
+    }.elsewhen(in_data.m_wmask === 15.U)
+    {
+        mem_wstrb := 15.U
+        mem_wdata := in_data.src2
+    }.otherwise{
+        mem_wstrb := 0.U
+        mem_wdata := 0.U
+    }
 
 
     //Mem write member
     //val bready_reg = RegInit(0.U)
     val mem_awaddr_reg = RegEnable(in_data.alu_result,0.U,exu2in_valid)
-    val mem_wstrb_reg = RegEnable(in_data.m_wmask,0.U,exu2in_valid)
-    val mem_wdata_reg = RegEnable(in_data.src2,0.U,exu2in_valid)
+    val mem_wstrb_reg = RegEnable(mem_wstrb,0.U,exu2in_valid)
+    val mem_wdata_reg = RegEnable(mem_wdata,0.U,exu2in_valid)
     val awvalid_reg= RegEnable(in_data.mem_wen,0.U,(exu2in_valid | io.lsu_axi_aw.awready))
     val wvalid_reg = RegEnable(in_data.mem_wen,0.U,(exu2in_valid | io.lsu_axi_w.wready)) 
     io.lsu_axi_aw.awaddr := 0.U

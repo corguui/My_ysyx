@@ -16,7 +16,7 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at build/ysyx_23060111.sv:2440:30
+    // DPI import at build/ysyx_23060111.sv:2477:30
     extern void ebreak(int inst);
     // DPI import at ../ysyxSoC/perip/flash/flash.v:84:30
     extern void flash_read(int addr, int* data);

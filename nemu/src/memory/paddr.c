@@ -102,16 +102,21 @@ word_t paddr_read(paddr_t addr, int len) {
   return data;
   }
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
-  printf("read\n");
+  printf("paddr read\n");
   out_of_bound(addr);
   return 0;
 }
 word_t saddr_read(paddr_t addr, int len) {
+  uint32_t data=0;
   if (likely(in_sram(addr))){
-    uint32_t data=sram_read(addr, len);
+    data=sram_read(addr, len);
     return data;
   }
-  printf("read\n");
+  else if (likely(in_pmem(addr))){
+    data=pmem_read(addr, len);
+    return data;
+  }
+  printf("saddr read\n");
   out_of_bound(addr);
   return 0;
 }
@@ -125,13 +130,13 @@ void paddr_write(paddr_t addr, int len, word_t data) {
 #endif
   return; }
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
-  printf("nemu write\n");
+  printf("paddr write\n");
   out_of_bound(addr);
 }
 void saddr_write(paddr_t addr, int len, word_t data) {
   if (likely(in_sram(addr))) { sram_write(addr, len, data);
   return; }
-  printf("nemu write\n");
+  printf("saddr write\n");
   out_of_bound(addr);
 }
 

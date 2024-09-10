@@ -1,29 +1,38 @@
 ENTRY(_start)
 PHDRS { text PT_LOAD; data PT_LOAD; }
 
+MEMORY {
+  mrom : ORIGIN = 0x20000000, LENGTH = 4K
+  sram : ORIGIN = 0x0f000000, LENGTH = 8K
+}
+
 SECTIONS {
   /* _pmem_start and _entry_offset are defined in LDFLAGS */
   . = _pmem_start + _entry_offset;
   .text : {
     *(entry)
     *(.text*)
-  } : text
+  } >mrom AT >mrom :text
   etext = .;
   _etext = .;
   .rodata : {
     *(.rodata*)
-  }
+  } >mrom AT >mrom
+
+  _data_start = LOADADDR(.data);
   .data : {
     *(.data)
-  } : data
-  edata = .;
+  } >sram AT >mrom :data
+  
+  _data_end = LOADADDR(.bss);
   _data = .;
+  edata = .;
   .bss : {
 	_bss_start = .;
     *(.bss*)
     *(.sbss*)
     *(.scommon)
-  }
+  } >mrom AT >mrom
   
   /* 设置堆的起始地址，手动设置为 0x0f000000 */
   /* heap 0x0f00_0000 -> 0x0f00_1800 */
