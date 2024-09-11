@@ -106,12 +106,43 @@ class LSU extends Module {
         io.out2wbu.bits := 0.U.asTypeOf(new LSUtoWBU)
     }
 
+
+    val mem_rmask = Wire(UInt(32.W))
+    when(in_data.m_rmask === 1.U)
+    {
+        when(in_data.alu_result(1,0) === 0.U)
+        {
+            mem_rmask := 1.U
+        }.elsewhen(in_data.alu_result(1,0) === 1.U)
+        {
+            mem_rmask := 2.U
+        }.elsewhen(in_data.alu_result(1,0) === 2.U)
+        {
+            mem_rmask := 4.U
+        }.otherwise{
+            mem_rmask := 8.U
+        }
+    }.elsewhen(in_data.m_rmask === 3.U)
+    {
+        when(in_data.alu_result(1,0) === 0.U)
+        {
+            mem_rmask := 3.U
+        }.otherwise{
+            mem_rmask := 12.U
+        }
+    }.elsewhen(in_data.m_rmask === 15.U)
+    {
+        mem_rmask := 15.U
+    }.otherwise{
+        mem_rmask := 0.U
+    }
+
     val exu2in_valid = RegNext(io.exu2in.valid,0.B)
     val exu2in_valid_reg = RegNext(exu2in_valid,0.U)
     //Mem read member
     //val rready_reg = RegInit(0.U)
     val mem_raddr_reg = RegEnable(in_data.alu_result,0.U,exu2in_valid)
-    val mem_rmask_reg = RegEnable(in_data.m_rmask,0.U,exu2in_valid)
+    val mem_rmask_reg = RegEnable(mem_rmask,0.U,exu2in_valid)
     val mem_ren_reg = RegEnable(in_data.mem_ren,0.U,(exu2in_valid | io.lsu_axi_ar.arready))
 
     io.lsu_axi_ar.araddr := 0.U 
@@ -278,25 +309,56 @@ class LSU extends Module {
                            when(mem_rmask_reg === 1.U)
                            {
                             out_data.mem_rdata := Cat(Fill(24,0.U),io.lsu_axi_r.rdata(7,0)).asUInt
+                           }.elsewhen(mem_rmask_reg === 2.U)
+                           {
+                            out_data.mem_rdata := Cat(Fill(24,0.U),io.lsu_axi_r.rdata(15,8)).asUInt
+                           }
+                           .elsewhen(mem_rmask_reg === 4.U)
+                           {
+                            out_data.mem_rdata := Cat(Fill(24,0.U),io.lsu_axi_r.rdata(23,16)).asUInt
+                           }
+                           .elsewhen(mem_rmask_reg === 8.U)
+                           {
+                            out_data.mem_rdata := Cat(Fill(24,0.U),io.lsu_axi_r.rdata(31,24)).asUInt
                            }
                            .elsewhen(mem_rmask_reg === 3.U)
                            {
                             out_data.mem_rdata := Cat(Fill(16,0.U),io.lsu_axi_r.rdata(15,0)).asUInt
+                           }
+                           .elsewhen(mem_rmask_reg === 12.U)
+                           {
+                            out_data.mem_rdata := Cat(Fill(16,0.U),io.lsu_axi_r.rdata(31,16)).asUInt
                            }.otherwise
                            {
                             out_data.mem_rdata := 0.U
-                           }
+                           }                        
                         }.otherwise{
-                        when(mem_rmask_reg === 1.U)
-                        {
+                           when(mem_rmask_reg === 1.U)
+                           {
                            out_data.mem_rdata := Cat(Fill(24,io.lsu_axi_r.rdata(7)),(io.lsu_axi_r.rdata(7,0)).asSInt).asUInt
-                        }.elsewhen(mem_rmask_reg === 3.U)
-                        {
+                           }.elsewhen(mem_rmask_reg === 2.U)
+                           {
+                           out_data.mem_rdata := Cat(Fill(24,io.lsu_axi_r.rdata(15)),(io.lsu_axi_r.rdata(15,8)).asSInt).asUInt
+                           }
+                           .elsewhen(mem_rmask_reg === 4.U)
+                           {
+                           out_data.mem_rdata := Cat(Fill(24,io.lsu_axi_r.rdata(23)),(io.lsu_axi_r.rdata(23,16)).asSInt).asUInt
+                           }
+                           .elsewhen(mem_rmask_reg === 8.U)
+                           {
+                           out_data.mem_rdata := Cat(Fill(24,io.lsu_axi_r.rdata(31)),(io.lsu_axi_r.rdata(31,24)).asSInt).asUInt
+                           }
+                           .elsewhen(mem_rmask_reg === 3.U)
+                           {
                             out_data.mem_rdata := Cat(Fill(16,io.lsu_axi_r.rdata(15)),(io.lsu_axi_r.rdata(15,0)).asSInt).asUInt
-                        }.otherwise
-                        {
+                           }
+                           .elsewhen(mem_rmask_reg === 12.U)
+                           {
+                            out_data.mem_rdata := Cat(Fill(16,io.lsu_axi_r.rdata(31)),(io.lsu_axi_r.rdata(31,16)).asSInt).asUInt
+                           }.otherwise
+                           {
                             out_data.mem_rdata := (io.lsu_axi_r.rdata.asSInt).asUInt
-                        }
+                           }                        
                         }
                     }.otherwise{
                         out_data.mem_rresp := 3.U

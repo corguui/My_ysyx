@@ -21,9 +21,9 @@ SECTIONS {
 
   _data_start = LOADADDR(.data);
   .data : {
-    *(.data)
+    *(.data*)
   } >sram AT >mrom :data
-  
+
   _data_end = LOADADDR(.bss);
   _data = .;
   edata = .;
@@ -32,7 +32,7 @@ SECTIONS {
     *(.bss*)
     *(.sbss*)
     *(.scommon)
-  } >mrom AT >mrom
+  } >sram AT >mrom
   
   /* 设置堆的起始地址，手动设置为 0x0f000000 */
   /* heap 0x0f00_0000 -> 0x0f00_1800 */

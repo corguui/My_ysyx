@@ -1736,11 +1736,11 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+402,"out_data_mem_bresp", false,-1, 1,0);
     tracep->declBus(c+403,"out_data_mem_rresp", false,-1, 1,0);
     tracep->declBus(c+404,"out_data_alu_result", false,-1, 31,0);
-    tracep->declBit(c+405,"exu2in_valid", false,-1);
-    tracep->declBus(c+406,"mem_raddr_reg", false,-1, 31,0);
-    tracep->declBus(c+407,"mem_rmask_reg", false,-1, 31,0);
+    tracep->declBus(c+405,"casez_tmp", false,-1, 31,0);
+    tracep->declBit(c+406,"exu2in_valid", false,-1);
+    tracep->declBus(c+407,"mem_raddr_reg", false,-1, 31,0);
+    tracep->declBus(c+408,"mem_rmask_reg", false,-1, 31,0);
     tracep->declBit(c+269,"mem_ren_reg", false,-1);
-    tracep->declBus(c+408,"casez_tmp", false,-1, 31,0);
     tracep->declBus(c+409,"casez_tmp_0", false,-1, 31,0);
     tracep->declBus(c+410,"mem_awaddr_reg", false,-1, 31,0);
     tracep->declBus(c+411,"mem_wstrb_reg", false,-1, 31,0);
@@ -3371,18 +3371,10 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
     bufp->fullCData(oldp+402,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__out_data_mem_bresp),2);
     bufp->fullCData(oldp+403,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__out_data_mem_rresp),2);
     bufp->fullIData(oldp+404,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__out_data_alu_result),32);
-    bufp->fullBit(oldp+405,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__exu2in_valid));
-    bufp->fullIData(oldp+406,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__mem_raddr_reg),32);
-    bufp->fullIData(oldp+407,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__mem_rmask_reg),32);
-    bufp->fullIData(oldp+408,(((0U == (3U & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__in_data_alu_result))
-                                ? 1U : ((1U == (3U 
-                                                & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__in_data_alu_result))
-                                         ? 2U : ((2U 
-                                                  == 
-                                                  (3U 
-                                                   & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__in_data_alu_result))
-                                                  ? 4U
-                                                  : 8U)))),32);
+    bufp->fullIData(oldp+405,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__casez_tmp),32);
+    bufp->fullBit(oldp+406,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__exu2in_valid));
+    bufp->fullIData(oldp+407,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__mem_raddr_reg),32);
+    bufp->fullIData(oldp+408,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__mem_rmask_reg),32);
     bufp->fullIData(oldp+409,(((0U == (3U & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__in_data_alu_result))
                                 ? vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__in_data_src2
                                 : ((1U == (3U & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__in_data_alu_result))
