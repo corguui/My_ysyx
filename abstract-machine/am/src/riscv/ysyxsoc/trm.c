@@ -20,6 +20,7 @@ extern char _data;
 #define UART_MSB (*(volatile unsigned char *)(UART + 0x01))
 #define UART_LSR (*(volatile unsigned char *)(UART + 0x05))
 
+
 #define npc_trap(code) asm volatile("mv a0, %0; ebreak" : :"r"(code))
 
 Area heap = RANGE(&_heap_start, HEAP_END);
@@ -37,6 +38,7 @@ void mrom_2_sram(){
     *dst++ = *src++;
   }
 }
+
 
 void UART_init(){
   unsigned int divisor = 2;

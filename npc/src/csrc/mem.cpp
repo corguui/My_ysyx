@@ -279,5 +279,7 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 	}
 }
 
+static uint8_t flash[10] __attribute((aligned(4096)))={1,0,0,0,2,0,0,0};
+
 extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASEADDR);}//printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
-extern "C" void flash_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASE); }
+extern "C" void flash_read(int32_t addr, int32_t *data) {printf("%x\n",addr); *(uint32_t*)data = *(uint32_t*)(flash+(uint32_t)addr); /*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }

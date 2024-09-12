@@ -2,7 +2,7 @@
 #define __CONFIG_H__
 
 #define CONFIG_MBASEADDR 0x20000000
-#define CONFIG_MLEN 0xfffffff
+#define CONFIG_MLEN 0xfff
 #define CONFIG_MODE 1
 //0 --batch 1 --log  
 #define MROM 1
@@ -14,7 +14,7 @@
 #define __GUEST_ISA__ "riscv32" 
 //#define CONFIG_FTRACE 1
 //#define CONFIG_DTRACE 1
-#define CONFIG_DIFFTEST 1
+//#define CONFIG_DIFFTEST 1
 //#define CONFIG_MTRACE 1
 #define CONFIG_SERIAL_MMIO 0xa00003f8
 #define CONFIG_RTC_MMIO 0xa0000048
