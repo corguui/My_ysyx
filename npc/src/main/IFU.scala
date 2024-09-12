@@ -94,7 +94,7 @@ class IFU extends Module {
 	inst := 0.U 
 	val wbu2in_reg = RegNext(io.wbu2in.valid,0.B)
 	
-	val ardata_reg = RegEnable(in_data.dnpc,0x20000000.S.asUInt,wbu2in_reg)
+	val ardata_reg = RegEnable(in_data.dnpc,M_members.M_base.S.asUInt,wbu2in_reg)
 	val inst_reg 	= RegEnable(inst,0.U,io.ifu_axi_r.rready )
 	val pc_reg = Reg(UInt(32.W))
 	val arvalid_reg = RegEnable(wbu2in_reg,false.B,(io.ifu_axi_ar.arready| wbu2in_reg ))
@@ -117,7 +117,7 @@ class IFU extends Module {
 
 	when(state){
     	//取指令
-		pc_reg := RegNext(in_data.dnpc.asSInt, 0x20000000.S).asUInt
+		pc_reg := RegNext(in_data.dnpc.asSInt, M_members.M_base.S).asUInt
 		when(io.ifu_axi_ar.arready & io.ifu_axi_ar.arvalid){
 			io.ifu_axi_ar.araddr := ardata_reg 
 		}.otherwise{

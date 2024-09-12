@@ -21,9 +21,9 @@ int read_num=0;
 
 static long load_img();
 #ifdef MROM
-static uint8_t pmem[0x2000000] __attribute((aligned(4096)))={};
+static uint8_t pmem[CONFIG_MBASEADDR] __attribute((aligned(4096)))={};
 #else
-static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
+static uint8_t pmem[CONFIG_MBASEADDR] __attribute((aligned(4096)))={};
 #endif
 static uint32_t img[]
 {
@@ -74,19 +74,19 @@ static void out_of_bound(uint32_t addr)
 #ifdef MROM
 static inline bool check_mem(uint32_t addr)
 {
-	return (addr>=0x20000000&&addr<0x20000fff);
+	return (addr>=CONFIG_MBASEADDR&&addr<(CONFIG_MBASEADDR+CONFIG_MLEN));
 }
 
 
-uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-0x20000000;}
+uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-CONFIG_MBASEADDR;}
 #else
 static inline bool check_mem(uint32_t addr)
 {
-	return (addr>=0x80000000&&addr<0x87ffffff);
+	return (addr>=CONFIG_MBASEADDR&&addr<(CONFIG_MBASEADDR+CONFIG_MLEN));
 }
 
 
-uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-0x80000000;}
+uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-CONFIG_MBASEADDR;}
 #endif
 
 
@@ -195,7 +195,7 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	out_of_bound(addr);
 }
 #ifdef MROM
-uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x20000000; }
+uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASEADDR; }
 static long load_img(){
    extern char *img_file;
    if (img_file == NULL) {
@@ -210,7 +210,7 @@ static long load_img(){
    long size = ftell(fp);
    Log("The image is %s, size = %ld", img_file, size); 
    fseek(fp, 0, SEEK_SET);
-   int ret = fread(NPC_guest_to_host(0x20000000), size, 1, fp);
+   int ret = fread(NPC_guest_to_host(CONFIG_MBASEADDR), size, 1, fp);
    if(ret != 1)
    {
 	printf("can't load the image\r\n");
@@ -220,7 +220,7 @@ static long load_img(){
    return size;
 }
 #else
-uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
+uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASEADDR; }
 
 
 static long load_img(){
@@ -237,7 +237,7 @@ static long load_img(){
    long size = ftell(fp);
    Log("The image is %s, size = %ld", img_file, size); 
    fseek(fp, 0, SEEK_SET);
-   int ret = fread(NPC_guest_to_host(0x80000000), size, 1, fp);
+   int ret = fread(NPC_guest_to_host(CONFIG_MBASEADDR), size, 1, fp);
    if(ret != 1)
    {
 	printf("can't load the image\r\n");
@@ -279,5 +279,5 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 	}
 }
 
-extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-0x20000000);}//printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
-
+extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASEADDR);}//printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
+extern "C" void flash_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASE); }

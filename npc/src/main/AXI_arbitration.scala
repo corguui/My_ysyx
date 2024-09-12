@@ -137,7 +137,7 @@ class AXI_arbiter extends Module {
         }
         //MROM
         //.elsewhen(((io.lsu_axi_ar.araddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
-        .elsewhen(((io.lsu_addr >= 0x20000000.S.asUInt) & (io.lsu_addr <= 0x20000fff.S.asUInt))) {
+        .elsewhen(((io.lsu_addr >= M_members.M_base.S.asUInt) & (io.lsu_addr <= (M_members.M_base+M_members.M_len).S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
             io.axi_aw <> io.lsu_axi_aw
             io.axi_w <> io.lsu_axi_w

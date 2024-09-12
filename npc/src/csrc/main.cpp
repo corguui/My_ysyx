@@ -16,7 +16,7 @@ void init_mode();
 void parse_args(int argc,char *argv[]);
 
 int main_time=0;
-extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
+
 
 
 int main(int argc ,char** argv, char** env)

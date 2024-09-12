@@ -61,7 +61,7 @@ class WBU extends Module {
     val out_data = Reg(new WBUtoIFU)
     val lastdnpc = RegNext(out_data.dnpc,0.U)
     val valid_reg = RegInit(true.B)
-    out_data.dnpc :=  RegInit(0x20000000.S.asUInt)
+    out_data.dnpc :=  RegInit(M_members.M_base.S.asUInt)
     //或是为了让他第一次能够启动ifu
     io.out2ifu.valid := valid_reg//((lastdnpc =/= out_data.dnpc))//& (out_data.dnpc =/= 0x20000000.S.asUInt)) | (lastdnpc =/= out_data.dnpc && lastdnpc===0.U)//& (m2LSUstate === m2LSUprocess)
     io.out2ifu.bits := 0.U.asTypeOf(new WBUtoIFU)

@@ -3,6 +3,11 @@ package npc
 import chisel3._
 import chisel3.util._
 
+object M_members{
+  val M_base =0x20000000
+  val M_len = 0xfff
+}
+
 class AXI extends Bundle {
     val awready = Input(Bool())
     val awvalid = Output(Bool())
