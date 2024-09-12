@@ -12,7 +12,13 @@ extern char _data;
 #define PMEM_SIZE (4 * 1024)
 #define PMEM_END  ((uintptr_t)&_pmem_start + PMEM_SIZE)
 #define HEAP_END  ((uintptr_t)&_heap_start + 6 * 1024)
-#define UART_TX  0x10000000
+
+#define UART  0x10000000
+#define UART_TX UART
+#define UART_LCR (*(volatile unsigned char *)(UART + 0x03))
+#define UART_LSB (*(volatile unsigned char *)(UART))
+#define UART_MSB (*(volatile unsigned char *)(UART + 0x01))
+#define UART_LSR (*(volatile unsigned char *)(UART + 0x05))
 
 #define npc_trap(code) asm volatile("mv a0, %0; ebreak" : :"r"(code))
 
@@ -32,7 +38,20 @@ void mrom_2_sram(){
   }
 }
 
-void putch(char ch) {
+void UART_init(){
+  unsigned int divisor = 2;
+
+  UART_LCR |= 0x80;
+  UART_LSB = divisor&0xff;
+  UART_MSB = (divisor>>8) & 0xff;
+
+  UART_LCR &= ~0X80;
+  UART_LCR = 0x03;
+}
+
+void putch(char ch) 
+{
+  while (!(UART_LSR & 0x20));
   outb(UART_TX, ch);
 }
 
@@ -43,6 +62,7 @@ void halt(int code) {
 
 void _trm_init() {
   mrom_2_sram();
+  UART_init();
   int ret = main(mainargs);
   halt(ret);
 }
