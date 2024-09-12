@@ -201,6 +201,7 @@ class LSU extends Module {
         when(in_data.alu_result(1,0) === 0.U)
         {
             mem_wstrb := 3.U
+            mem_wdata := in_data.src2
         }.otherwise{
             mem_wstrb := 12.U
             mem_wdata := in_data.src2 << 16.U

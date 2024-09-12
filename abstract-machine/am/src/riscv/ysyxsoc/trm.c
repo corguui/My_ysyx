@@ -8,7 +8,7 @@ int main(const char *args);
 extern char _pmem_start;
 extern char _data_start;
 extern char _data_end;
-#define sram ((char *)0x0f000000)
+extern char _data;
 #define PMEM_SIZE (4 * 1024)
 #define PMEM_END  ((uintptr_t)&_pmem_start + PMEM_SIZE)
 #define HEAP_END  ((uintptr_t)&_heap_start + 6 * 1024)
@@ -24,7 +24,7 @@ static const char mainargs[] = MAINARGS;
 
 void mrom_2_sram(){
   uintptr_t len= (uintptr_t)&_data_end - (uintptr_t)&_data_start;
-  char *dst = sram;
+  char *dst = &_data;
   char *src = &_data_start;
   for(uintptr_t i=0;i<len;i++)
   {

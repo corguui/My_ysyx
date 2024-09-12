@@ -87,6 +87,7 @@ class IDU extends Module {
 	val npc_break = Module(new npc_break)
 	npc_break.io.inst := in_data.inst
 
+
 	val opcode = in_data.inst(6,0)
 	val rd = in_data.inst(11,7)
 	val funct3 = in_data.inst(14,12)

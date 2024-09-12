@@ -6,6 +6,7 @@
 #include <sched.h>
 #include <sdb.h>
 #include <stdio.h>
+#include <cpu/difftest.h>
 
 #if defined(CONFIG_FTRACE) or defined(CONFIG_ITRACE)
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code,int nbyte);
@@ -207,6 +208,10 @@ void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
 		if(cmp_dnpc!=0 && cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc)
 		{
 		valid_flag =1;
+		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__io_lsu_addr_r==0x10000000);
+		{
+			difftest_skip_ref();
+		}
 		//printf("wave once times %d \n",main_time);
 		pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg;
 		s->pc=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg;

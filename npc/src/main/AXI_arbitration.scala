@@ -33,6 +33,7 @@ class AXI_arbiter extends Module {
         val lsu_axi_b = (new AXI_b)
         val lsu_addr = Input(UInt(32.W))
         val lsu_sta = Input(Bool())
+        val uart_flag =Output(Bool())
         val ifu_axi_ar = Flipped(new AXI_ar)
         val ifu_axi_r = (new AXI_r)
         val ifu_axi_aw = Flipped(new AXI_aw)
@@ -107,7 +108,8 @@ class AXI_arbiter extends Module {
     io.ifu_axi_w.wready := false.B
     io.ifu_axi_b <> axi_b_null
 
-    
+    io.uart_flag := false.B
+    dontTouch(io.uart_flag)
 
     when(io.ifu_sta) {
         io.axi_ar <> io.ifu_axi_ar
@@ -119,6 +121,7 @@ class AXI_arbiter extends Module {
         //uart
         //when((io.lsu_axi_aw.awaddr >= 0xa00003f8.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0xa00003ff.S.asUInt)) {
         when((io.lsu_addr >= 0x10000000.S.asUInt) & (io.lsu_addr <= 0x10000fff.S.asUInt)) {
+            io.uart_flag :=true.B
             /*
             io.uart_axi_ar <> io.lsu_axi_ar
             io.uart_axi_aw <> io.lsu_axi_aw

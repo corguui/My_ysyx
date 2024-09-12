@@ -56,6 +56,7 @@ class ysyx_23060111 extends Module {
   //val Mem = Module(new LSU_mem)
   //val Inst_fetch = Module(new Inst_fetch)
   val inv_flag = dontTouch(Wire(Bool()))
+  val uart_flag =dontTouch(Wire(Bool()))
 
   IDU.io.ifu2in <> IFU.io.out2idu
   EXU.io.idu2in <> IDU.io.out2exu
@@ -110,6 +111,7 @@ class ysyx_23060111 extends Module {
   AXI_arbiter.io.rtc_axi_b <> RTC.io.axi_b
 
   inv_flag := IDU.io.inv_flag 
+  uart_flag := AXI_arbiter.io.uart_flag
 
   AXI_arbiter.io.axi_aw.awready := io.master.awready  
   io.master.awvalid := AXI_arbiter.io.axi_aw.awvalid  

@@ -1,5 +1,5 @@
 ENTRY(_start)
-PHDRS { text PT_LOAD; data PT_LOAD; }
+PHDRS { text PT_LOAD; data PT_LOAD; bss PT_LOAD; }
 
 MEMORY {
   mrom : ORIGIN = 0x20000000, LENGTH = 4K
@@ -21,19 +21,20 @@ SECTIONS {
 
   _data_start = LOADADDR(.data);
   .data : {
-    *(.data*)
-  } >sram AT >mrom :data
-
-  _data_end = LOADADDR(.bss);
   _data = .;
-  edata = .;
+    *(.data*)
+    *(.sdata*) /*子段*/
+  _edata = .; /*子段得定义好 end_data才能正确显示*/
+  } >sram AT >mrom :data
+  _data_end = LOADADDR(.bss);
+
   .bss : {
 	_bss_start = .;
     *(.bss*)
     *(.sbss*)
     *(.scommon)
-  } >sram AT >mrom
-  
+  _bss_end = .;
+  } >sram AT>mrom :bss
   /* 设置堆的起始地址，手动设置为 0x0f000000 */
   /* heap 0x0f00_0000 -> 0x0f00_1800 */
   _heap_start = 0x0f000000;
