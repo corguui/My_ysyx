@@ -55,6 +55,10 @@ class LSU extends Module {
 		wbu2s_wait_ready -> Mux(io.out2wbu.ready,wbu2s_idle,wbu2s_wait_ready)
 	))
     */
+    //两个寄存器记录aw w or ar 先发送过, 有才能说明发送过来的valid有效
+    val ready_reg = RegInit(0.B)
+    val ready_reg_1 = RegInit(0.B)
+    val valid_reg = RegInit(0.B)
 
     val in_data = Reg(new EXUtoLSU)
     val state = RegInit(false.B)
@@ -65,6 +69,7 @@ class LSU extends Module {
         when(io.exu2in.ready & io.exu2in.valid){
             in_data := io.exu2in.bits
             state := true.B
+
         }.otherwise{
             state := false.B
             in_data := 0.U.asTypeOf(new EXUtoLSU)
@@ -76,10 +81,7 @@ class LSU extends Module {
     }
 
 
-    //两个寄存器记录aw w or ar 先发送过, 有才能说明发送过来的valid有效
-    val ready_reg = RegInit(0.B)
-    val ready_reg_1 = RegInit(0.B)
-    val valid_reg = RegInit(0.B)
+
     /*
     when(in_data.inst_type === 3.U)
     {
@@ -288,7 +290,6 @@ class LSU extends Module {
                     ready_reg := 1.B
                 }.otherwise{
                     io.lsu_axi_ar.araddr := 0.U 
-                    ready_reg := 0.B
                 }
                 when(io.lsu_axi_r.rvalid & ready_reg)
                 {
@@ -305,6 +306,7 @@ class LSU extends Module {
                         out_data.mem_rresp := io.lsu_axi_r.rresp
                         state := false.B
                         valid_reg := true.B
+                        ready_reg :=0.B
                         when(in_data.il_us === true.B)
                         {
                            when(mem_rmask_reg === 1.U)
@@ -380,8 +382,6 @@ class LSU extends Module {
                     ready_reg := 1.B
                 }.otherwise{
                     io.lsu_axi_aw.awaddr := 0.U
-                    ready_reg := 0.B
-                    //bready_reg := 0.U
                 }
                 when(io.lsu_axi_w.wready & io.lsu_axi_w.wvalid)
                 {
@@ -391,8 +391,6 @@ class LSU extends Module {
                 }.otherwise{
                     io.lsu_axi_w.wdata := 0.U
                     io.lsu_axi_w.wstrb := 0.U
-                    ready_reg_1 := 0.B
-                    //bready_reg := 0.U
                 }
                 when(io.lsu_axi_b.bvalid & ready_reg & ready_reg_1 )  
                 {
@@ -402,6 +400,8 @@ class LSU extends Module {
                     io.lsu_axi_b.bready := true.B 
                     when(io.lsu_axi_b.bvalid & io.lsu_axi_b.bready)
                     {
+                    ready_reg :=0.B
+                    ready_reg_1 :=0.B
                     //delay_b.io.inData := 1.U
                     //delay_b.io.inValid := Mux(bvalid_reg =/= io.lsu_axi_b.bvalid & io.lsu_axi_b.bvalid === 1.U,0.U,1.U)  
                     out_data.mem_bresp := io.lsu_axi_b.bresp 
@@ -420,8 +420,6 @@ class LSU extends Module {
                 }
               }
               .otherwise{
-                ready_reg := 0.B
-                ready_reg_1 := 0.B
                 state := false.B
                 valid_reg := true.B
               }

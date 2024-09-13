@@ -25,11 +25,12 @@ static uint8_t pmem[CONFIG_MBASEADDR] __attribute((aligned(4096)))={};
 #else
 static uint8_t pmem[CONFIG_MBASEADDR] __attribute((aligned(4096)))={};
 #endif
+static uint8_t flash[128] __attribute((aligned(4096)))={};
 static uint32_t img[]
 {
-	0x00110123,
-	0x00110008,
-	0x00100073, //ebreak
+	0x00000001,
+	0x00000002,
+	0x00000003, //ebreak
 };
 long img_size;
 
@@ -38,7 +39,7 @@ void init_mem()
 
 	img_size=load_img();
 
-	//memcpy(pmem,img,sizeof(img));
+	memcpy(flash,img,sizeof(img));
 	
 
 	/*   print the pmem
@@ -279,7 +280,7 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 	}
 }
 
-static uint8_t flash[10] __attribute((aligned(4096)))={1,0,0,0,2,0,0,0};
+
 
 extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASEADDR);}//printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
 extern "C" void flash_read(int32_t addr, int32_t *data) {printf("%x\n",addr); *(uint32_t*)data = *(uint32_t*)(flash+(uint32_t)addr); /*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }
