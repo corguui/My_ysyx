@@ -28,9 +28,10 @@ static uint8_t pmem[CONFIG_MBASEADDR] __attribute((aligned(4096)))={};
 static uint8_t flash[128] __attribute((aligned(4096)))={};
 static uint32_t img[]
 {
-	0x00000001,
-	0x00000002,
-	0x00000003, //ebreak
+	0x100007b7,
+	0x04100713,
+	0x00e78023, //ebreak
+	0x0000006f,
 };
 long img_size;
 
