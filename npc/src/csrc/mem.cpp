@@ -284,4 +284,4 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 
 
 extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASEADDR);}//printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
-extern "C" void flash_read(int32_t addr, int32_t *data) {printf("%x\n",addr); *(uint32_t*)data = *(uint32_t*)(flash+(uint32_t)addr); /*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }
+extern "C" void flash_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(flash+(uint32_t)addr); /*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }
