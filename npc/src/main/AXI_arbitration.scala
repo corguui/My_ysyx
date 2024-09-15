@@ -135,7 +135,7 @@ class AXI_arbiter extends Module {
             io.lsu_axi_r <> io.axi_r
             io.lsu_axi_b <> io.axi_b
         }
-        //MROM
+        //code save Mem
         //.elsewhen(((io.lsu_axi_ar.araddr >= 0x80000000.S.asUInt) & (io.lsu_axi_ar.araddr <= 0x8fffffff.S.asUInt)) | ((io.lsu_axi_aw.awaddr >= 0x80000000.S.asUInt) & (io.lsu_axi_aw.awaddr <= 0x8fffffff.S.asUInt))) {
         .elsewhen(((io.lsu_addr >= M_members.M_base.S.asUInt) & (io.lsu_addr <= (M_members.M_base+M_members.M_len).S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
@@ -144,6 +144,7 @@ class AXI_arbiter extends Module {
             io.lsu_axi_r <> io.axi_r
             io.lsu_axi_b <> io.axi_b
         }
+        /*
         //flash
         .elsewhen(((io.lsu_addr >= 0x30000000.S.asUInt) & (io.lsu_addr <= 0x3fffffff.S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar
@@ -152,6 +153,7 @@ class AXI_arbiter extends Module {
             io.lsu_axi_r <> io.axi_r
             io.lsu_axi_b <> io.axi_b
         }
+        */
         //spi
         .elsewhen(((io.lsu_addr >= 0x10001000.S.asUInt) & (io.lsu_addr <= 0x10001fff.S.asUInt))) {
             io.axi_ar <> io.lsu_axi_ar

@@ -4,8 +4,8 @@ import chisel3._
 import chisel3.util._
 
 object M_members{
-  val M_base =0x20000000
-  val M_len = 0xfff
+  val M_base =0x30000000
+  val M_len = 0xfffffff
 }
 
 class AXI extends Bundle {

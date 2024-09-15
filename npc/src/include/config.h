@@ -1,8 +1,8 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
-#define CONFIG_MBASEADDR 0x20000000
-#define CONFIG_MLEN 0xfff
+#define CONFIG_MBASEADDR 0x30000000
+#define CONFIG_MLEN 0xfffffff
 #define CONFIG_MODE 1
 //0 --batch 1 --log  
 #define MROM 1

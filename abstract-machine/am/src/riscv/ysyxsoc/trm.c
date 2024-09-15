@@ -41,7 +41,7 @@ void mrom_2_sram(){
 
 
 void UART_init(){
-  unsigned int divisor = 2;
+  unsigned int divisor = 1;
 
   UART_LCR |= 0x80;
   UART_LSB = divisor&0xff;
