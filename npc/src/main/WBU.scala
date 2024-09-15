@@ -14,10 +14,10 @@ class WBU extends Module {
         val reg_wdata = Output(UInt(32.W))
         val reg_wen = Output(Bool())
         val reg_waddr = Output(UInt(5.W))
-        val csr_waddr_1 = Output(UInt(2.W))
+        val csr_waddr_1 = Output(UInt(3.W))
         val csr_wdata_1 = Output(UInt(32.W))
         val csr_wen_1 = Output(Bool())
-        val csr_waddr_2 = Output(UInt(2.W))
+        val csr_waddr_2 = Output(UInt(3.W))
         val csr_wdata_2 = Output(UInt(32.W))
         val csr_wen_2 = Output(Bool())
     })
@@ -192,6 +192,8 @@ class WBU extends Module {
                 is(0x342.U) { io.csr_waddr_1 := 1.U } // mcause
                 is(0x300.U) { io.csr_waddr_1 := 2.U } // mstatus
                 is(0x305.U) { io.csr_waddr_1 := 3.U } // mtvec
+				is(0x011.U) { io.csr_waddr_1 := 4.U} // mvendorid ysyx
+				is(0x022.U) { io.csr_waddr_1 := 5.U} // marchid                 
                 }
                 //m2LSUstate := m2LSUidle
             }

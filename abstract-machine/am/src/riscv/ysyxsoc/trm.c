@@ -20,7 +20,6 @@ extern char _data;
 #define UART_MSB (*(volatile unsigned char *)(UART + 0x01))
 #define UART_LSR (*(volatile unsigned char *)(UART + 0x05))
 
-
 #define npc_trap(code) asm volatile("mv a0, %0; ebreak" : :"r"(code))
 
 Area heap = RANGE(&_heap_start, HEAP_END);
@@ -39,6 +38,29 @@ void mrom_2_sram(){
   }
 }
 
+
+void id_show()
+{
+    unsigned int csr_val_011, csr_val_022;
+
+    asm volatile("csrr %0, 0x011" : "=r"(csr_val_011));
+
+    asm volatile("csrr %0, 0x022" : "=r"(csr_val_022));
+    
+    putch((char)(csr_val_011 >> 24)); 
+    putch((char)(csr_val_011 >> 16)); 
+    putch((char)(csr_val_011 >> 8)); 
+    putch((char)(csr_val_011));      
+    putch('_');
+    putch(((csr_val_022) >> 28) + '0');
+    putch((((csr_val_022) >> 24)&0xF) + '0');
+    putch((((csr_val_022) >> 20)&0xF) + '0');
+    putch((((csr_val_022) >> 16)&0xF) + '0');
+    putch((((csr_val_022) >> 12)&0xF) + '0');
+    putch((((csr_val_022) >> 8)&0xF) + '0');
+    putch((((csr_val_022) >> 4)&0xF) + '0');
+    putch(((csr_val_022)&0xF) + '0');
+}
 
 void UART_init(){
   unsigned int divisor = 1;
@@ -65,6 +87,7 @@ void halt(int code) {
 void _trm_init() {
   mrom_2_sram();
   UART_init();
+  id_show();
   int ret = main(mainargs);
   halt(ret);
 }
