@@ -26,10 +26,10 @@ module psram_top_apb (
     .dat_i(in_pwdata),
     .dat_o(in_prdata),
     .sel_i(in_pstrb),
-    .cyc_i(in_psel),
+    .cyc_i(in_psel), //cyc 和 stb 作为wb的valid
     .stb_i(in_psel),
     .ack_o(ack),
-    .we_i(in_pwrite),
+    .we_i(in_pwrite), //控制 wb 的 wen 和 ren
   
     .sck(qspi_sck),
     .ce_n(qspi_ce_n),
