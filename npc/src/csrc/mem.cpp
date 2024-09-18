@@ -18,14 +18,16 @@ int write_num=0;
 int read_num=0;
 #endif
 
-
 static long load_img();
+
 #ifdef MROM
-static uint8_t pmem[CONFIG_MBASEADDR] __attribute((aligned(4096)))={};
+static uint8_t pmem[CONFIG_MLEN] __attribute((aligned(4096)))={};
 #else
-static uint8_t pmem[CONFIG_MBASEADDR] __attribute((aligned(4096)))={};
+static uint8_t pmem[CONFIG_MLEN] __attribute((aligned(4096)))={};
 #endif
-static uint8_t flash[128] __attribute((aligned(4096)))={};
+
+static uint8_t psram_mem[0xffffff] __attribute((aligned(4096)))={};// 0x8 ~ 0x9ff.... 
+
 static uint32_t img[]
 {
 	0x100007b7,
@@ -33,6 +35,7 @@ static uint32_t img[]
 	0x00e78023, //ebreak
 	0x0000006f,
 };
+
 long img_size;
 
 void init_mem()
@@ -41,17 +44,6 @@ void init_mem()
 	img_size=load_img();
 
 	//memcpy(flash,img,sizeof(img));
-	
-
-	/*   print the pmem
-	uint32_t b=0x80000000;
-	int i=0;
-	for(i=0;i<(size-1)/4;i++)
-	{
-		printf("%x\n",pmem_read(b,4));
-		b=b+0x4;
-	i 
-	*/
 }
 static void out_of_bound(uint32_t addr)
 {
@@ -72,6 +64,10 @@ static void out_of_bound(uint32_t addr)
 	assert(0);
 
 }
+static inline bool check_psram(uint32_t addr)
+{
+	return (addr >= 0x0000000 && addr < 0xfffffff);
+}
 //check mem if out_of_bond will excute the fun out_of_bond
 #ifdef MROM
 static inline bool check_mem(uint32_t addr)
@@ -86,7 +82,6 @@ static inline bool check_mem(uint32_t addr)
 {
 	return (addr>=CONFIG_MBASEADDR&&addr<(CONFIG_MBASEADDR+CONFIG_MLEN));
 }
-
 
 uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-CONFIG_MBASEADDR;}
 #endif
@@ -197,7 +192,9 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	out_of_bound(addr);
 }
 #ifdef MROM
+
 uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASEADDR; }
+
 static long load_img(){
    extern char *img_file;
    if (img_file == NULL) {
@@ -224,7 +221,6 @@ static long load_img(){
 #else
 uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASEADDR; }
 
-
 static long load_img(){
    extern char *img_file;
    if (img_file == NULL) {
@@ -249,6 +245,8 @@ static long load_img(){
    return size;
 }
 #endif
+
+
 void pmem_out()
 {
 		#ifdef CONFIG_MTRACE
@@ -281,7 +279,32 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 	}
 }
 
+extern "C" int psram_read(int32_t addr){
+	uint32_t ad = ((uint32_t)addr & ~3);
+	if(likely(check_psram(addr)))
+	{
+	uint32_t data = host_read(ad+psram_mem,4);
+	return (int)data; 
+	}
+	printf("read\n");
+	out_of_bound(addr);
+	return 0;
+}
+
+extern "C" void psram_write(int32_t addr, int32_t data)
+{
+	uint32_t ad = ((uint32_t)addr & ~3);
+	uint32_t da = (uint32_t)data;
+	printf("psram %x  %x\n",ad,da);
+	if(likely(check_psram(addr)))
+	{
+	host_write(ad+psram_mem,4,da);
+	return ;
+	}
+	printf("npc write\n");
+	out_of_bound(addr);
+}
 
 
 extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASEADDR);}//printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
-extern "C" void flash_read(int32_t addr, int32_t *data) {  *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)); /*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }
+extern "C" void flash_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)); /*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }

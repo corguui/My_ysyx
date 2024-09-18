@@ -9,8 +9,6 @@ extern char _pmem_start;
 extern char _data_start;
 extern char _data_end;
 extern char _data;
-#define PMEM_SIZE (4 * 1024)
-#define PMEM_END  ((uintptr_t)&_pmem_start + PMEM_SIZE)
 #define HEAP_END  ((uintptr_t)&_heap_start + 6 * 1024)
 
 #define UART  0x10000000
@@ -87,7 +85,7 @@ void halt(int code) {
 void _trm_init() {
   mrom_2_sram();
   UART_init();
-  id_show();
+  //id_show();
   int ret = main(mainargs);
   halt(ret);
 }
