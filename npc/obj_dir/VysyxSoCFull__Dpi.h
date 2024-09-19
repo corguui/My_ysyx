@@ -20,11 +20,11 @@ extern "C" {
     extern void ebreak(int inst);
     // DPI import at ../ysyxSoC/perip/flash/flash.v:84:30
     extern void flash_read(int addr, int* data);
-    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5049:30
+    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5057:30
     extern void mrom_read(int raddr, int* rdata);
-    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5068:29
+    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5076:29
     extern int psram_read(int addr);
-    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5067:30
+    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5075:30
     extern void psram_write(int addr, int data);
 
 #ifdef __cplusplus

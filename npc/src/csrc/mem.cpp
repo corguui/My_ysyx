@@ -280,7 +280,7 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 }
 
 extern "C" int psram_read(int32_t addr){
-	uint32_t ad = ((uint32_t)addr & ~3);
+	uint32_t ad = (uint32_t)addr;
 	if(likely(check_psram(addr)))
 	{
 	uint32_t data = host_read(ad+psram_mem,4);
@@ -293,12 +293,28 @@ extern "C" int psram_read(int32_t addr){
 
 extern "C" void psram_write(int32_t addr, int32_t data)
 {
-	uint32_t ad = ((uint32_t)addr & ~3);
+	uint32_t ad = (uint32_t)addr;
 	uint32_t da = (uint32_t)data;
+	int len = 4;
 	printf("psram %x  %x\n",ad,da);
 	if(likely(check_psram(addr)))
 	{
-	host_write(ad+psram_mem,4,da);
+	if(da <= 0xff)
+	{
+		len = 1;
+	}
+	else if (da > 0xff && da <= 0xffff)
+	{
+		len = 2;
+		da = (da & 0xff) << 8 | (da & 0xff00) >>8;
+	}
+	else{
+		da = ((da >> 24) & 0xFF) |      
+           ((da >> 8) & 0xFF00) |      
+           ((da << 8) & 0xFF0000) |    
+           ((da << 24) & 0xFF000000);  
+	}
+	host_write(ad+psram_mem,len,da);
 	return ;
 	}
 	printf("npc write\n");

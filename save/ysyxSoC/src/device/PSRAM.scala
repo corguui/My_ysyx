@@ -138,6 +138,7 @@ class psramChisel extends RawModule {
       is(wait_r)
       {
         state := cmd
+        data_out := 0.U
         cnt := 0.U
       }
       is(write)
@@ -145,6 +146,7 @@ class psramChisel extends RawModule {
         psram_rw.io.addr := r_addr
         psram_rw.io.data_in := data_in
         psram_rw.io.write_en := true.B
+        data_in := 0.U
         cnt := 0.U
         state := cmd
       }
