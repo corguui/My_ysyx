@@ -26,7 +26,7 @@ static uint8_t pmem[CONFIG_MLEN] __attribute((aligned(4096)))={};
 static uint8_t pmem[CONFIG_MLEN] __attribute((aligned(4096)))={};
 #endif
 
-static uint8_t psram_mem[0xffffff] __attribute((aligned(4096)))={};// 0x8 ~ 0x9ff.... 
+static uint8_t psram_mem[0x400000] __attribute((aligned(4096)))={};// 0x8 ~ 0x9ff.... 
 
 static uint32_t img[]
 {
@@ -66,7 +66,7 @@ static void out_of_bound(uint32_t addr)
 }
 static inline bool check_psram(uint32_t addr)
 {
-	return (addr >= 0x0000000 && addr < 0xfffffff);
+	return (addr >= 0x000000 && addr < 0x400000);
 }
 //check mem if out_of_bond will excute the fun out_of_bond
 #ifdef MROM

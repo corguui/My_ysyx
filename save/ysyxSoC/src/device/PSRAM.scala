@@ -64,14 +64,15 @@ class psram extends BlackBox {
 class psramChisel extends RawModule {
   val io = IO(Flipped(new QSPIIO))
 
-  val cmd :: wait_r :: write :: Nil = Enum(3)
+  val cmd :: addr :: wait_r :: write :: Nil = Enum(4)
   val state = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(RegInit(cmd))
 
   val cnt = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(RegInit(0.U(4.W)))
-  val r_cmd = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(Reg(UInt(8.W))) 
-  val r_addr = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(Reg(UInt(24.W)))
-  val data_out = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(Reg(UInt(32.W)))
-  val data_in = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(Reg(UInt(32.W)))
+  val r_cmd = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(RegInit(0.U(8.W))) 
+  val r_addr = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(RegInit(0.U(24.W)))
+  val data_out = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(RegInit(0.U(32.W)))
+  val data_in = withClockAndReset(io.sck.asClock,io.ce_n.asAsyncReset)(RegInit(0.U(32.W)))
+  val qpi_reg =  withClock(io.sck.asClock)(Reg(Bool()))
   val out_en = Wire(Bool())
   out_en := false.B
 
@@ -84,23 +85,57 @@ class psramChisel extends RawModule {
   psram_rw.io.data_in := 0.U
   psram_rw.io.addr := 0.U
 
+
   when(!io.ce_n)
   {
   switch(state)
   {
     is(cmd)
     {
+      when(!qpi_reg)
+      {
         when(cnt < 8.U)
         {
           r_cmd := (r_cmd << 1.U) | di(0)
           cnt := cnt + 1.U
-        }.elsewhen(cnt >= 8.U && cnt < 14.U)
+        }.elsewhen(cnt === 8.U)
+        {
+          when(r_cmd =/= 0x35.U)
+          {
+          state := addr
+          r_addr := (r_addr << 4.U) | di
+          cnt := cnt + 1.U
+          }.elsewhen(r_cmd === 0x35.U)
+          {
+          qpi_reg := true.B
+          cnt := 0.U
+          }
+        }
+      }.elsewhen(qpi_reg)
+      {
+        when(cnt < 2.U)
+        {
+          r_cmd := (r_cmd << 4.U) | di
+          cnt := cnt + 1.U
+        }.elsewhen(cnt === 2.U)
+        {
+          state := addr
+          r_addr := (r_addr << 4.U) | di
+          cnt := cnt + 1.U
+        }
+      }
+        
+    }
+    is(addr)
+    {
+      when(!qpi_reg)
+      {
+      when(cnt >= 8.U && cnt < 14.U)
         {
           r_addr := (r_addr << 4.U) | di 
           cnt := cnt + 1.U
         }.elsewhen(cnt === 14.U)
         {
-          state := Mux( r_cmd === 0xEB.U, wait_r, Mux( r_cmd === 0x38.U, write, cmd))
           when(r_cmd === 0xEB.U)
           {
             state := wait_r
@@ -112,14 +147,44 @@ class psramChisel extends RawModule {
           {
             state := write
             data_in := (data_in << 4.U) | di
+          }.otherwise{
+            state := cmd
           }
         }
+      }.elsewhen(qpi_reg)
+      {
+      when(cnt >= 2.U && cnt < 8.U)
+        {
+          r_addr := (r_addr << 4.U) | di 
+          cnt := cnt + 1.U
+        }.elsewhen(cnt === 8.U)
+        {
+          when(r_cmd === 0xEB.U)
+          {
+            state := wait_r
+            psram_rw.io.addr := r_addr
+            data_out := psram_rw.io.data_out
+            psram_rw.io.read_en := true.B
+            cnt := 0.U
+          }.elsewhen(r_cmd === 0x38.U)
+          {
+            state := write
+            data_in := (data_in << 4.U) | di
+          }.otherwise{
+            state := cmd
+          }
+        }
+      }
     }
     is(wait_r)
     {
       when(cnt < 6.U)
       {
         cnt := cnt + 1.U
+        when(cnt === 3.U)
+        {
+        data_out := Cat(data_out(7,0),data_out(15,8),data_out(23,16),data_out(31,24))
+        }
       }.elsewhen(cnt === 6.U)
       {
         out_en := true.B
@@ -138,7 +203,6 @@ class psramChisel extends RawModule {
       is(wait_r)
       {
         state := cmd
-        data_out := 0.U
         cnt := 0.U
       }
       is(write)
@@ -146,7 +210,6 @@ class psramChisel extends RawModule {
         psram_rw.io.addr := r_addr
         psram_rw.io.data_in := data_in
         psram_rw.io.write_en := true.B
-        data_in := 0.U
         cnt := 0.U
         state := cmd
       }
