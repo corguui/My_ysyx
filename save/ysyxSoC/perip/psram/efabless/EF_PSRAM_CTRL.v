@@ -60,7 +60,7 @@ module PSRAM_READER (
     localparam  IDLE = 1'b0,
                 READ = 1'b1;
 
-    wire [7:0]  FINAL_COUNT = 19 + size*2; // was 27: Always read 1 word
+    wire [7:0]  FINAL_COUNT = 13 + size*2; // was 27: Always read 1 word
 
     reg         state, nstate;
     reg [7:0]   counter;
@@ -113,22 +113,23 @@ module PSRAM_READER (
             saddr <= {addr[23:0]};
 
     // Sample with the negedge of sck
-    wire[1:0] byte_index = {counter[7:1] - 8'd10}[1:0];
+    wire[1:0] byte_index = {counter[7:1] - 8'd11}[1:0];
     always @ (posedge clk)
-        if(counter >= 20 && counter <= FINAL_COUNT)
+        if(counter >= 14 && counter <= FINAL_COUNT)
             if(sck)
                 data[byte_index] <= {data[byte_index][3:0], din}; // Optimize!
 
-    assign dout     =   (counter < 8)   ?   {3'b0, CMD_EBH[7 - counter]}:
-                        (counter == 8)  ?   saddr[23:20]        :
-                        (counter == 9)  ?   saddr[19:16]        :
-                        (counter == 10) ?   saddr[15:12]        :
-                        (counter == 11) ?   saddr[11:8]         :
-                        (counter == 12) ?   saddr[7:4]          :
-                        (counter == 13) ?   saddr[3:0]          :
+    assign dout     =   (counter == 0)  ?   CMD_EBH[7:4]        :
+                        (counter == 1)  ?   CMD_EBH[3:0]        :
+                        (counter == 2)  ?   saddr[23:20]        :
+                        (counter == 3)  ?   saddr[19:16]        :
+                        (counter == 4) ?   saddr[15:12]        :
+                        (counter == 5) ?   saddr[11:8]         :
+                        (counter == 6) ?   saddr[7:4]          :
+                        (counter == 7) ?   saddr[3:0]          :
                         4'h0;
 
-    assign douten   = (counter < 14);
+    assign douten   = (counter < 8);
 
     assign done     = (counter == FINAL_COUNT+1);
 
@@ -158,26 +159,33 @@ module PSRAM_WRITER (
     output  wire            douten
 );
     //localparam  DATA_START = 14;
-    localparam  IDLE = 1'b0,
-                WRITE = 1'b1;
+    localparam  IDLE  = 2'b00,
+                WRITE = 2'b01,
+                QPI   = 2'b10;
 
-    wire[7:0]        FINAL_COUNT = 13 + size*2;
+    wire[7:0]   FINAL_COUNT = (size==0) ? 8 : 7 + size*2; //QPI 及size==0 需要多一个周期让psram的qpi模式拉高
 
-    reg         state, nstate;
+    reg [1:0]   state;
+    reg [1:0]   nstate;
     reg [7:0]   counter;
     reg [23:0]  saddr;
     //reg [7:0]   data [3:0];
 
     wire[7:0]   CMD_38H = 8'h38;
+    wire[7:0]   CMD_QPI = 8'h35;
 
     always @*
+        begin
         case (state)
             IDLE: if(wr) nstate = WRITE; else nstate = IDLE;
             WRITE: if(done) nstate = IDLE; else nstate = WRITE;
+            QPI :  if(done) nstate = IDLE; else nstate = QPI;
+            default: nstate = IDLE;
         endcase
+        end
 
     always @ (posedge clk or negedge rst_n)
-        if(!rst_n) state <= IDLE;
+        if(!rst_n) state <= QPI;
         else state <= nstate;
 
     // Drive the Serial Clock (sck) @ clk/2
@@ -193,7 +201,7 @@ module PSRAM_WRITER (
     always @ (posedge clk or negedge rst_n)
         if(!rst_n)
             ce_n <= 1'b1;
-        else if(state == WRITE)
+        else if(state == WRITE || state == QPI)
             ce_n <= 1'b0;
         else
             ce_n <= 1'b1;
@@ -212,20 +220,22 @@ module PSRAM_WRITER (
         else if((state == IDLE) && wr)
             saddr <= addr;
 
-    assign dout     =   (counter < 8)   ?   {3'b0, CMD_38H[7 - counter]}:
-                        (counter == 8)  ?   saddr[23:20]        :
-                        (counter == 9)  ?   saddr[19:16]        :
-                        (counter == 10) ?   saddr[15:12]        :
-                        (counter == 11) ?   saddr[11:8]         :
-                        (counter == 12) ?   saddr[7:4]          :
-                        (counter == 13) ?   saddr[3:0]          :
-                        (counter == 14) ?   line[7:4]           :
-                        (counter == 15) ?   line[3:0]           :
-                        (counter == 16) ?   line[15:12]         :
-                        (counter == 17) ?   line[11:8]          :
-                        (counter == 18) ?   line[23:20]         :
-                        (counter == 19) ?   line[19:16]         :
-                        (counter == 20) ?   line[31:28]         :
+    assign dout     =   (counter <8 && state == QPI )      ?   {3'b0, CMD_QPI[7 - counter]}:
+                        (counter == 0 && state == WRITE )  ?   CMD_38H[7:4]        :
+                        (counter == 1 && state == WRITE )  ?   CMD_38H[3:0]        :
+                        (counter == 2 && state == WRITE )  ?   saddr[23:20]        :
+                        (counter == 3 && state == WRITE )  ?   saddr[19:16]        :
+                        (counter == 4 && state == WRITE )  ?   saddr[15:12]        :
+                        (counter == 5 && state == WRITE )  ?   saddr[11:8]         :
+                        (counter == 6 && state == WRITE )  ?   saddr[7:4]          :
+                        (counter == 7 && state == WRITE )  ?   saddr[3:0]          :
+                        (counter == 8 && state == WRITE )  ?   line[7:4]           :
+                        (counter == 9 && state == WRITE )  ?   line[3:0]           :
+                        (counter == 10 && state == WRITE ) ?   line[15:12]         :
+                        (counter == 11 && state == WRITE ) ?   line[11:8]          :
+                        (counter == 12 && state == WRITE ) ?   line[23:20]         :
+                        (counter == 13 && state == WRITE ) ?   line[19:16]         :
+                        (counter == 14 && state == WRITE ) ?   line[31:28]         :
                         line[27:24];
 
     assign douten   = (~ce_n);
