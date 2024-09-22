@@ -40,8 +40,8 @@ static uint8_t sram[CONFIG_SRAMSIZE] PG_ALIGN = {};
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
-uint8_t *sram_guest_to_host(paddr_t paddr) { return sram + paddr - CONFIG_SRAMSIZE; }
-paddr_t sram_host_to_guest(uint8_t *haddr) { return haddr - sram + CONFIG_SRAMSIZE; }
+uint8_t *sram_guest_to_host(paddr_t paddr) { return sram + paddr - CONFIG_SRAMBASE; }
+paddr_t sram_host_to_guest(uint8_t *haddr) { return haddr - sram + CONFIG_SRAMBASE; }
 
 static word_t pmem_read(paddr_t addr, int len) {
   word_t ret = host_read(guest_to_host(addr), len);

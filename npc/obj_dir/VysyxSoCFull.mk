@@ -43,6 +43,7 @@ VM_USER_CFLAGS = \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
+	-lz \
 	-lLLVM-14 \
 	-lreadline \
 

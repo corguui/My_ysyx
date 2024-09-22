@@ -3,13 +3,14 @@
 #include <stdint.h>
 #include "../riscv.h"
 extern char _heap_start;
+extern char _heap_end;
+extern char _stack_top;
 int main(const char *args);
 
 extern char _pmem_start;
 extern char _data_start;
 extern char _data_end;
 extern char _data;
-#define HEAP_END  ((uintptr_t)&_heap_start + 6 * 1024)
 
 #define UART  0x10000000
 #define UART_TX UART
@@ -20,7 +21,7 @@ extern char _data;
 
 #define npc_trap(code) asm volatile("mv a0, %0; ebreak" : :"r"(code))
 
-Area heap = RANGE(&_heap_start, HEAP_END);
+Area heap = RANGE(&_heap_start, &_heap_end);
 #ifndef MAINARGS
 #define MAINARGS ""
 #endif

@@ -200,15 +200,16 @@ void cpu_init()
 
 	
 }
-void cpu_exec_once(VerilatedVcdC* tfp,Decode *s)
+void cpu_exec_once(VerilatedFstC* tfp,Decode *s)
 {
-
+		uint32_t addr;
 		top->clock =0; top->eval();
 		valid_flag=0;
 		if(cmp_dnpc!=0 && cmp_dnpc!=top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__in_data_dnpc)
 		{
 		valid_flag =1;
-		if(top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__io_lsu_addr_r==0x10000000);
+		addr =top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__mem_raddr_reg;
+		if( (addr>= 0x10000000 && addr<= 0x10000fff)||(addr>=0xa0000048 && addr <= 0xa000004f))
 		{
 			difftest_skip_ref();
 		}

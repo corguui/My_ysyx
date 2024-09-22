@@ -57,6 +57,7 @@ class APBSPI(address: Seq[AddressSet])(implicit p: Parameters) extends LazyModul
     val psel = Reg(Bool())
     val penable = Reg(Bool())
     val write = Reg(Bool())
+    val cnt = Reg(UInt(2.W))
 
     mspi.io.in.psel := 0.U
     mspi.io.in.penable := 0.U
@@ -90,6 +91,7 @@ class APBSPI(address: Seq[AddressSet])(implicit p: Parameters) extends LazyModul
       {
         when(in.paddr>=0x30000000.S.asUInt && in.paddr <= 0x3fffffff.S.asUInt && in.penable)
         {
+          cnt := 0.U
           addr_reg := in.paddr
           state :=ssh
           pwdata_reg := 0x0.U
@@ -186,9 +188,10 @@ class APBSPI(address: Seq[AddressSet])(implicit p: Parameters) extends LazyModul
       }
       is(rx)
       {
-        when(mspi.io.in.prdata === 0x40.U)
+        when(mspi.io.in.prdata === 0x40.U && cnt<2.U)
         {
           paddr_reg := 0x10001000.S.asUInt
+          cnt := cnt + 1.U
         }
         .elsewhen(mspi.io.in.paddr === 0x10001000.S.asUInt)
         {

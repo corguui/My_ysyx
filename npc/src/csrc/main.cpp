@@ -9,7 +9,7 @@
 
 VerilatedContext* contextp=NULL; 
 VysyxSoCFull *top=NULL; 
-VerilatedVcdC* tfp=NULL;
+VerilatedFstC* tfp=NULL;
 
 void init_monitor();
 void init_mode();
@@ -28,7 +28,7 @@ int main(int argc ,char** argv, char** env)
 	top = new VysyxSoCFull{contextp};
 	#ifdef CONFIG_VCD
 	contextp->traceEverOn(true);
-	tfp=new VerilatedVcdC;
+	tfp= new VerilatedFstC;
 
 	top->trace(tfp,0);
 	tfp->open("wave.vcd");

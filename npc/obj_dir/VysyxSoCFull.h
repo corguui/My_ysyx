@@ -13,7 +13,7 @@
 
 class VysyxSoCFull__Syms;
 class VysyxSoCFull___024root;
-class VerilatedVcdC;
+class VerilatedFstC;
 class VysyxSoCFull___024unit;
 
 
@@ -88,7 +88,7 @@ class VysyxSoCFull VL_NOT_FINAL : public VerilatedModel {
     /// Returns time at next time slot. Aborts if !eventsPending()
     uint64_t nextTimeSlot();
     /// Trace signals in the model; called by application code
-    void trace(VerilatedVcdC* tfp, int levels, int options = 0);
+    void trace(VerilatedFstC* tfp, int levels, int options = 0);
     /// Retrieve name of this model instance (as passed to constructor).
     const char* name() const;
 

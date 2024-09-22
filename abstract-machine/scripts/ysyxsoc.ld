@@ -3,7 +3,7 @@ PHDRS { text PT_LOAD; data PT_LOAD; bss PT_LOAD; }
 
 MEMORY {
   mrom : ORIGIN = 0x30000000, LENGTH = 0xfffffff /*now is flash but I don't change name */
-  sram : ORIGIN = 0x0f000000, LENGTH = 8K
+  sram : ORIGIN = 0x80000000, LENGTH = 0x400000 
 }
 
 SECTIONS {
@@ -37,12 +37,13 @@ SECTIONS {
   } >sram AT>mrom :bss
   /* 设置堆的起始地址，手动设置为 0x0f000000 */
   /* heap 0x0f00_0000 -> 0x0f00_1800 */
-  _heap_start = 0x0f000000;
+  _heap_start = .;
 
     /* 设置堆栈的起始地址 */
     /*stack 0x0f00_1800 -> 0x0f00_2000 */
-  _stack_top = (_heap_start + 0x1800); /* 栈的起始地址 */
-  . = (_stack_top + 0x800);
+  _stack_top = (_heap_start + 0x300000); /* 栈的起始地址 */
+  _heap_end = _stack_top;
+  . = (_stack_top + 0x80000);
   _stack_pointer = .;
   
   /* 记录数据段结束地址 */

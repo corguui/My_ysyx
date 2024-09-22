@@ -16,16 +16,16 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at build/ysyx_23060111.sv:2554:30
+    // DPI import at build/ysyx_23060111.sv:2488:30
     extern void ebreak(int inst);
     // DPI import at ../ysyxSoC/perip/flash/flash.v:84:30
     extern void flash_read(int addr, int* data);
     // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5121:30
     extern void mrom_read(int raddr, int* rdata);
-    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5140:29
+    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5141:29
     extern int psram_read(int addr);
-    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5139:30
-    extern void psram_write(int addr, int data);
+    // DPI import at ../ysyxSoC/build/ysyxSoCFull.v:5140:30
+    extern void psram_write(int addr, int data, int cnt);
 
 #ifdef __cplusplus
 }

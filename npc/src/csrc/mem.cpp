@@ -280,7 +280,7 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 }
 
 extern "C" int psram_read(int32_t addr){
-	uint32_t ad = (uint32_t)addr;
+	uint32_t ad = ((uint32_t)addr&~3);
 	if(likely(check_psram(addr)))
 	{
 	uint32_t data = host_read(ad+psram_mem,4);
@@ -291,19 +291,19 @@ extern "C" int psram_read(int32_t addr){
 	return 0;
 }
 
-extern "C" void psram_write(int32_t addr, int32_t data)
+extern "C" void psram_write(int32_t addr, int32_t data,int32_t cnt)
 {
 	uint32_t ad = (uint32_t)addr;
 	uint32_t da = (uint32_t)data;
 	int len = 4;
-	printf("psram %x  %x\n",ad,da);
+	//printf("psram %x  %x\n",ad,da);
 	if(likely(check_psram(addr)))
 	{
-	if(da <= 0xff)
+	if(cnt == 2 ) 
 	{
 		len = 1;
 	}
-	else if (da > 0xff && da <= 0xffff)
+	else if (cnt==4)
 	{
 		len = 2;
 		da = (da & 0xff) << 8 | (da & 0xff00) >>8;
@@ -323,4 +323,4 @@ extern "C" void psram_write(int32_t addr, int32_t data)
 
 
 extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASEADDR);}//printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
-extern "C" void flash_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)); /*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }
+extern "C" void flash_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3));/*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }

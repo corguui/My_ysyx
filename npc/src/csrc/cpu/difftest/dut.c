@@ -17,7 +17,7 @@ enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
-int ref_skip_wait=0;
+int ref_skip_wait=1;
 
 void difftest_skip_ref() {
   is_skip_ref = true;
@@ -101,12 +101,12 @@ void difftest_step(uint32_t pc, uint32_t npc) {
     //传入的pc 会加4 在nemu diff ref.c
     ref_difftest_regcpy(cpu.gpr,&cpu.pc, DIFFTEST_TO_REF);
     is_skip_ref = false;
-    ref_skip_wait=1;
     return;
   }
   //等待npc多执行一次
   if(ref_skip_wait==1)
   {
+    ref_skip_wait = 0; 
     return;
   }
   ref_difftest_exec(1);

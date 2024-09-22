@@ -13,6 +13,7 @@ class PsramDPI extends BlackBox with HasBlackBoxInline{
   val io = IO(new Bundle{
     val addr = Input(UInt(24.W))
     val data_in = Input(UInt(32.W))
+    val cnt     = Input(UInt(32.W))
     val data_out = Output(UInt(32.W))
     val write_en = Input(Bool())
     val read_en = Input(Bool())
@@ -22,17 +23,18 @@ class PsramDPI extends BlackBox with HasBlackBoxInline{
     """module PsramDPI (
       |  input [31:0] addr,   
       |  input [31:0] data_in,  
+      |  input [31:0] cnt,
       |  output reg [31:0] data_out,
       |  input write_en,
       |  input read_en
       |);
       |
-      |import "DPI-C" function void psram_write(input int addr, input int data);
+      |import "DPI-C" function void psram_write(input int addr, input int data,input int cnt);
       |import "DPI-C" function int psram_read(input int addr);
       |
       |always @(*) begin
       |  if (write_en) begin
-      |    psram_write(addr, data_in);  
+      |    psram_write(addr, data_in,cnt);  
       |  end
       |  if (read_en) begin
       |    data_out = psram_read(addr);  
@@ -84,6 +86,7 @@ class psramChisel extends RawModule {
   psram_rw.io.write_en := false.B
   psram_rw.io.data_in := 0.U
   psram_rw.io.addr := 0.U
+  psram_rw.io.cnt := 0.U
 
 
   when(!io.ce_n)
@@ -147,6 +150,7 @@ class psramChisel extends RawModule {
           {
             state := write
             data_in := (data_in << 4.U) | di
+            cnt := 1.U 
           }.otherwise{
             state := cmd
           }
@@ -170,6 +174,7 @@ class psramChisel extends RawModule {
           {
             state := write
             data_in := (data_in << 4.U) | di
+            cnt :=1.U
           }.otherwise{
             state := cmd
           }
@@ -194,6 +199,7 @@ class psramChisel extends RawModule {
     is(write)
     {
       data_in := (data_in << 4.U) | di
+      cnt := cnt + 1.U
     }
   }
   }.elsewhen(io.ce_n)
@@ -203,15 +209,18 @@ class psramChisel extends RawModule {
       is(wait_r)
       {
         state := cmd
-        cnt := 0.U
       }
       is(write)
       {
         psram_rw.io.addr := r_addr
         psram_rw.io.data_in := data_in
         psram_rw.io.write_en := true.B
-        cnt := 0.U
+        psram_rw.io.cnt := cnt
         state := cmd
+      }
+      is(cmd)
+      {
+        cnt := 0.U
       }
     }
   }
