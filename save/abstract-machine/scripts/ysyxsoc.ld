@@ -1,9 +1,10 @@
 ENTRY(_start)
-PHDRS { text PT_LOAD; data PT_LOAD; bss PT_LOAD; }
+PHDRS { text PT_LOAD; rodata PT_LOAD; boot_rodata PT_LOAD; boot_text PT_LOAD;  data PT_LOAD; bss PT_LOAD;  }
 
 MEMORY {
-  mrom : ORIGIN = 0x30000000, LENGTH = 0xfffffff /*now is flash but I don't change name */
-  sram : ORIGIN = 0x0f000000, LENGTH = 8K
+  flash : ORIGIN = 0x30000000, LENGTH = 0xfffffff 
+  psram : ORIGIN = 0x80000000, LENGTH = 0x400000 
+  sram  : ORIGIN = 0x0f000000, LENGTH = 0x2000 
 }
 
 SECTIONS {
@@ -11,22 +12,33 @@ SECTIONS {
   . = _pmem_start + _entry_offset;
   .text : {
     *(entry)
-    *(.text*)
-  } >mrom AT >mrom :text
-  etext = .;
-  _etext = .;
-  .rodata : {
-    *(.rodata*)
-  } >mrom AT >mrom
+    *(.text._trm_init)
+    *(.text.bootloader)
+    *(.text.UART_init)
+    *(.text.halt)
+  } >flash AT >flash : text
 
-  _data_start = LOADADDR(.data);
-  .data : {
+  .rodata :{
+    *(.srodata.mainargs)
+  } >flash AT >flash : rodata 
+
+  _data_start = LOADADDR(.boot_text);
+  .boot_text :{
   _data = .;
+    *(.text*)
+  } >psram AT >flash : boot_text
+  
+  .boot_rodata : {
+  _rodata_start = .;
+    *(.rodata*)
+    *(.srodata*)   /* 添加 .srodata* */
+  } >psram AT >flash :boot_rodata
+
+  .data : {
     *(.data*)
     *(.sdata*) /*子段*/
   _edata = .; /*子段得定义好 end_data才能正确显示*/
-  } >sram AT >mrom :data
-  _data_end = LOADADDR(.bss);
+  } >psram AT >flash :data
 
   .bss : {
 	_bss_start = .;
@@ -34,15 +46,13 @@ SECTIONS {
     *(.sbss*)
     *(.scommon)
   _bss_end = .;
-  } >sram AT>mrom :bss
-  /* 设置堆的起始地址，手动设置为 0x0f000000 */
-  /* heap 0x0f00_0000 -> 0x0f00_1800 */
-  _heap_start = 0x0f000000;
-
+  } >psram AT>flash :bss
+  _heap_start = .;
+  _data_end = LOADADDR(.bss)+SIZEOF(.bss);
     /* 设置堆栈的起始地址 */
-    /*stack 0x0f00_1800 -> 0x0f00_2000 */
-  _stack_top = (_heap_start + 0x1800); /* 栈的起始地址 */
-  . = (_stack_top + 0x800);
+  _stack_top = 0x0f000000; /* 栈的起始地址 */
+  _heap_end = (_heap_start + 0x300000); 
+  . = (_stack_top + 0x2000);
   _stack_pointer = .;
   
   /* 记录数据段结束地址 */

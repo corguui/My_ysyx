@@ -4,13 +4,13 @@
 #include "../riscv.h"
 extern char _heap_start;
 extern char _heap_end;
-extern char _stack_top;
 int main(const char *args);
 
-extern char _pmem_start;
 extern char _data_start;
 extern char _data_end;
 extern char _data;
+
+
 
 #define UART  0x10000000
 #define UART_TX UART
@@ -27,7 +27,7 @@ Area heap = RANGE(&_heap_start, &_heap_end);
 #endif
 static const char mainargs[] = MAINARGS;
 
-void mrom_2_sram(){
+void bootloader(){
   uintptr_t len= (uintptr_t)&_data_end - (uintptr_t)&_data_start;
   char *dst = &_data;
   char *src = &_data_start;
@@ -84,7 +84,7 @@ void halt(int code) {
 }
 
 void _trm_init() {
-  mrom_2_sram();
+  bootloader();
   UART_init();
   //id_show();
   int ret = main(mainargs);
