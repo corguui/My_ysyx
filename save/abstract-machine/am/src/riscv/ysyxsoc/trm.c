@@ -6,9 +6,13 @@ extern char _heap_start;
 extern char _heap_end;
 int main(const char *args);
 
-extern char _data_start;
-extern char _data_end;
-extern char _data;
+extern char _boot;
+extern char _bss_end;
+extern char _boot_start;
+
+extern char _SSBL_addr;
+extern char _SSBL_end;
+extern char _SSBL_start;
 
 
 
@@ -20,6 +24,8 @@ extern char _data;
 #define UART_LSR (*(volatile unsigned char *)(UART + 0x05))
 
 #define npc_trap(code) asm volatile("mv a0, %0; ebreak" : :"r"(code))
+void FSBL() __attribute__((used));
+void SSBL() __attribute__((used));
 
 Area heap = RANGE(&_heap_start, &_heap_end);
 #ifndef MAINARGS
@@ -27,13 +33,24 @@ Area heap = RANGE(&_heap_start, &_heap_end);
 #endif
 static const char mainargs[] = MAINARGS;
 
-void bootloader(){
-  uintptr_t len= (uintptr_t)&_data_end - (uintptr_t)&_data_start;
-  char *dst = &_data;
-  char *src = &_data_start;
+
+void SSBL() {
+  uintptr_t len= (uintptr_t)&_bss_end - (uintptr_t)&_boot;
+  char *dst = &_boot;
+  char *src = &_boot_start;
   for(uintptr_t i=0;i<len;i++)
   {
     *dst++ = *src++;
+  }
+  putch('s');//这个putch让这个节不会被丢弃
+}
+void FSBL(){
+  uintptr_t flen = (uintptr_t)&_SSBL_end - (uintptr_t)&_SSBL_start;  
+  char *fdst = &_SSBL_start;
+  char *fsrc = &_SSBL_addr;
+  for(uintptr_t k=0;k<flen;k++)
+  {
+    *fdst++ = *fsrc++;
   }
 }
 
@@ -84,9 +101,10 @@ void halt(int code) {
 }
 
 void _trm_init() {
-  bootloader();
+  FSBL();
+  SSBL();
   UART_init();
-  //id_show();
+  //id_show(); //使用时记得在ld文件中添加
   int ret = main(mainargs);
   halt(ret);
 }

@@ -1,5 +1,5 @@
 ENTRY(_start)
-PHDRS { text PT_LOAD; rodata PT_LOAD; boot_rodata PT_LOAD; boot_text PT_LOAD;  data PT_LOAD; bss PT_LOAD;  }
+PHDRS {  text PT_LOAD; ssbl PT_LOAD;  boot_text PT_LOAD; rodata PT_LOAD;  data PT_LOAD; data.extra PT_LOAD; bss.extra PT_LOAD; bss.extra PT_LOAD; bss PT_LOAD;  }
 
 MEMORY {
   flash : ORIGIN = 0x30000000, LENGTH = 0xfffffff 
@@ -10,52 +10,65 @@ MEMORY {
 SECTIONS {
   /* _pmem_start and _entry_offset are defined in LDFLAGS */
   . = _pmem_start + _entry_offset;
-  .text : {
+  .text ALIGN(4):{
     *(entry)
     *(.text._trm_init)
-    *(.text.bootloader)
-    *(.text.UART_init)
-    *(.text.halt)
-  } >flash AT >flash : text
+    *(.text.FSBL)
+  } >flash AT>flash : text
 
-  .rodata :{
-    *(.srodata.mainargs)
-  } >flash AT >flash : rodata 
+  _SSBL_addr = LOADADDR(.ssbl);
+  . = ORIGIN(sram);
+  .ssbl ALIGN(4):{
+  _SSBL_start = .;
+    *(.text.SSBL)
+  _SSBL_end = .;
+  } >sram AT>flash : ssbl
 
-  _data_start = LOADADDR(.boot_text);
-  .boot_text :{
-  _data = .;
+  _boot_start = LOADADDR(.boot_text);
+  . = ORIGIN(psram);
+
+  .boot_text ALIGN(4):{
+  _boot = .;
     *(.text*)
-  } >psram AT >flash : boot_text
-  
-  .boot_rodata : {
-  _rodata_start = .;
+  _boot_text_end = .;
+  } >psram AT>flash : boot_text
+
+
+  .rodata ALIGN(4): {
+  _rodata = .;
     *(.rodata*)
-    *(.srodata*)   /* 添加 .srodata* */
-  } >psram AT >flash :boot_rodata
+    *(.srodata*)  
+  _erodata = .;
+  . = ALIGN(4);
+  } >psram AT>flash :rodata
 
-  .data : {
+  _ad3 = ADDR(.data);
+
+  .data ALIGN(4):{
+  _data = . ;
     *(.data*)
-    *(.sdata*) /*子段*/
-  _edata = .; /*子段得定义好 end_data才能正确显示*/
-  } >psram AT >flash :data
+    *(.sdata*) 
+  _edata = .; 
+  } >psram AT>flash :data
 
-  .bss : {
+  _ad4 = LOADADDR(.bss);
+
+  .bss ALIGN(4): {
 	_bss_start = .;
     *(.bss*)
     *(.sbss*)
     *(.scommon)
   _bss_end = .;
   } >psram AT>flash :bss
+
   _heap_start = .;
-  _data_end = LOADADDR(.bss)+SIZEOF(.bss);
     /* 设置堆栈的起始地址 */
-  _stack_top = 0x0f000000; /* 栈的起始地址 */
-  _heap_end = (_heap_start + 0x300000); 
-  . = (_stack_top + 0x2000);
+  _stack_top = (0xf000080); /* 栈的起始地址 */
+  _heap_end = (_heap_start + 0x280000); 
+  . = (_stack_top + 0x1e00);
   _stack_pointer = .;
   
-  /* 记录数据段结束地址 */
+    /* 记录数据段结束地址 */
   end = .;
   _end = .;
 }
