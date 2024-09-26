@@ -55,7 +55,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 			switch(*fmt)
 			{
-			  	
+			  case 'l':	
 			  case 'd':
 			    int val=va_arg(ap,int); 
 			    if(val==0)

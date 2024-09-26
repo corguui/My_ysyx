@@ -34,7 +34,7 @@ Area heap = RANGE(&_heap_start, &_heap_end);
 static const char mainargs[] = MAINARGS;
 
 
-void SSBL() {
+volatile void SSBL() {
   uintptr_t len= (uintptr_t)&_bss_end - (uintptr_t)&_boot;
   char *dst = &_boot;
   char *src = &_boot_start;
@@ -42,7 +42,7 @@ void SSBL() {
   {
     *dst++ = *src++;
   }
-  putch('s');//这个putch让这个节不会被丢弃
+  putch('s');
 }
 void FSBL(){
   uintptr_t flen = (uintptr_t)&_SSBL_end - (uintptr_t)&_SSBL_start;  
