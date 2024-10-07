@@ -25,10 +25,10 @@ class CLINT extends Module {
     rtc_rmask := 0.U
     rtc_ren := false.B
 
-    when(rtc_raddr === 0xa0000048.S.asUInt && rtc_ren){
+    when(rtc_raddr === 0x02000048.S.asUInt && rtc_ren){
         rtc_rdata := mtime(31,0)
     }
-    .elsewhen(rtc_raddr === 0xa000004c.S.asUInt && rtc_ren){
+    .elsewhen(rtc_raddr === 0x0200004c.S.asUInt && rtc_ren){
         rtc_rdata := mtime(63,32)
     }
     .otherwise{
@@ -80,7 +80,7 @@ class CLINT extends Module {
         ready_reg :=true.B
         // invalid的限制是在w和aw拉高时拉高一周期而已
         rvalid_en := true.B 
-        when(((rtc_raddr >= 0xa0000048.S.asUInt)&(rtc_raddr <= 0xa000004f.S.asUInt))){
+        when(((rtc_raddr >= 0x02000048.S.asUInt)&(rtc_raddr <= 0x0200004f.S.asUInt))){
             when(rtc_rmask === 15.U){
             resp := 0.U
             }.otherwise{

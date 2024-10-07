@@ -42,7 +42,6 @@ volatile void SSBL() {
   {
     *dst++ = *src++;
   }
-  putch('s');
 }
 void FSBL(){
   uintptr_t flen = (uintptr_t)&_SSBL_end - (uintptr_t)&_SSBL_start;  

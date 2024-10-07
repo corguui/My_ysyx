@@ -27,6 +27,8 @@ static uint8_t pmem[CONFIG_MLEN] __attribute((aligned(4096)))={};
 #endif
 
 static uint8_t psram_mem[0x400000] __attribute((aligned(4096)))={};// 0x8 ~ 0x9ff.... 
+static uint16_t sdram_mem[4][8192][512] __attribute((aligned(4096)))={};
+
 
 static uint32_t img[]
 {
@@ -319,6 +321,20 @@ extern "C" void psram_write(int32_t addr, int32_t data,int32_t cnt)
 	}
 	printf("npc write\n");
 	out_of_bound(addr);
+}
+
+extern "C" int sdram_read (int row_addr, int col_addr, int bank)
+{
+	uint16_t data = 0;
+	data = sdram_mem[bank][row_addr][col_addr]; 
+	printf("sdram read data   %x bank  %d r_addr  %d c_addr  %x\n",data,bank,row_addr,col_addr);
+	return (int)data;
+}
+
+extern "C" void sdram_write (int row_addr, int col_addr, int data_in, int bank)
+{
+	printf("sdram write data  %x bank  %d r_addr  %d c_addr  %x\n",(uint16_t)data_in,bank,row_addr,col_addr);
+	sdram_mem[bank][row_addr][col_addr] = (uint16_t)data_in;
 }
 
 

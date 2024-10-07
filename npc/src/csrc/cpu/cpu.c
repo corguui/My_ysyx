@@ -209,7 +209,7 @@ void cpu_exec_once(VerilatedFstC* tfp,Decode *s)
 		{
 		valid_flag =1;
 		addr =top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__mem_raddr_reg;
-		if( (addr>= 0x10000000 && addr<= 0x10000fff)||(addr>=0xa0000048 && addr <= 0xa000004f))
+		if( (addr>= 0x10000000 && addr<= 0x10000fff)||(addr>=0x02000048 && addr <= 0x0200004f))
 		{
 			difftest_skip_ref();
 		}
