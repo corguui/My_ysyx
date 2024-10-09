@@ -331,10 +331,22 @@ extern "C" int sdram_read (int row_addr, int col_addr, int bank)
 	return (int)data;
 }
 
-extern "C" void sdram_write (int row_addr, int col_addr, int data_in, int bank)
+extern "C" void sdram_write (int row_addr, int col_addr, int data_in, int bank,int dqm)
 {
-	printf("sdram write data  %x bank  %d r_addr  %d c_addr  %x\n",(uint16_t)data_in,bank,row_addr,col_addr);
+	printf("sdram write data=%x  bank=%d  r_addr=%d  c_addr=%x\n  dqm=%x\n",(uint16_t)data_in,bank,row_addr,col_addr,dqm);
+	uint16_t data = sdram_mem[bank][row_addr][col_addr];
+	if(dqm == 0)
+	{
 	sdram_mem[bank][row_addr][col_addr] = (uint16_t)data_in;
+	}
+	else if(dqm == 1)
+	{
+	sdram_mem[bank][row_addr][col_addr] = ((uint16_t)data_in&0xFF00) | (data&0x00FF);
+	}
+	else if(dqm == 2)
+	{
+	sdram_mem[bank][row_addr][col_addr] = ((uint16_t)data_in&0x00FF) | (data&0xFF00);
+	}
 }
 
 

@@ -46,9 +46,9 @@ VL_INLINE_OPT void VysyxSoCFull___024root____Vdpiimwrap_ysyxSoCFull__DOT__psram_
     psram_read__Vfuncrtn = psram_read__Vfuncrtn__Vcvt;
 }
 
-extern "C" void sdram_write(int row_addr, int col_addr, int data_in, int bank);
+extern "C" void sdram_write(int row_addr, int col_addr, int data_in, int bank, int dqm);
 
-VL_INLINE_OPT void VysyxSoCFull___024root____Vdpiimwrap_ysyxSoCFull__DOT__sdram__DOT__sdram_dpi__DOT__sdram_write_TOP(IData/*31:0*/ row_addr, IData/*31:0*/ col_addr, IData/*31:0*/ data_in, IData/*31:0*/ bank) {
+VL_INLINE_OPT void VysyxSoCFull___024root____Vdpiimwrap_ysyxSoCFull__DOT__sdram__DOT__sdram_dpi__DOT__sdram_write_TOP(IData/*31:0*/ row_addr, IData/*31:0*/ col_addr, IData/*31:0*/ data_in, IData/*31:0*/ bank, IData/*31:0*/ dqm) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    VysyxSoCFull___024root____Vdpiimwrap_ysyxSoCFull__DOT__sdram__DOT__sdram_dpi__DOT__sdram_write_TOP\n"); );
     // Body
     int row_addr__Vcvt;
@@ -59,7 +59,9 @@ VL_INLINE_OPT void VysyxSoCFull___024root____Vdpiimwrap_ysyxSoCFull__DOT__sdram_
     for (size_t data_in__Vidx = 0; data_in__Vidx < 1; ++data_in__Vidx) data_in__Vcvt = data_in;
     int bank__Vcvt;
     for (size_t bank__Vidx = 0; bank__Vidx < 1; ++bank__Vidx) bank__Vcvt = bank;
-    sdram_write(row_addr__Vcvt, col_addr__Vcvt, data_in__Vcvt, bank__Vcvt);
+    int dqm__Vcvt;
+    for (size_t dqm__Vidx = 0; dqm__Vidx < 1; ++dqm__Vidx) dqm__Vcvt = dqm;
+    sdram_write(row_addr__Vcvt, col_addr__Vcvt, data_in__Vcvt, bank__Vcvt, dqm__Vcvt);
 }
 
 extern "C" int sdram_read(int row_addr, int col_addr, int bank);
