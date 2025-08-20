@@ -18,15 +18,26 @@ int write_num=0;
 int read_num=0;
 #endif
 
-
 static long load_img();
-static uint8_t pmem[0x8000000] __attribute((aligned(4096)))={};
+
+#ifdef MROM
+static uint8_t pmem[CONFIG_MLEN] __attribute((aligned(4096)))={};
+#else
+static uint8_t pmem[CONFIG_MLEN] __attribute((aligned(4096)))={};
+#endif
+
+static uint8_t psram_mem[0x400000] __attribute((aligned(4096)))={};// 0x8 ~ 0x9ff.... 
+static uint16_t sdram_mem[4][8192][512] __attribute((aligned(4096)))={};
+
+
 static uint32_t img[]
 {
-	0x00110123,
-	0x00110008,
-	0x00100073, //ebreak
+	0x100007b7,
+	0x04100713,
+	0x00e78023, //ebreak
+	0x0000006f,
 };
+
 long img_size;
 
 void init_mem()
@@ -34,22 +45,11 @@ void init_mem()
 
 	img_size=load_img();
 
-	//memcpy(pmem,img,sizeof(img));
-	
-
-	/*   print the pmem
-	uint32_t b=0x80000000;
-	int i=0;
-	for(i=0;i<(size-1)/4;i++)
-	{
-		printf("%x\n",pmem_read(b,4));
-		b=b+0x4;
-	i 
-	*/
+	//memcpy(flash,img,sizeof(img));
 }
 static void out_of_bound(uint32_t addr)
 {
-	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->io_pc);
+	printf("error out_of_bound\naddress = 0x%x\npc = 0x%x\n",addr,top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg);
 	#ifdef CONFIG_MTRACE
 		log_write("----------write----------\n");
 		for(int i=0;i<write_num;i++)
@@ -66,14 +66,27 @@ static void out_of_bound(uint32_t addr)
 	assert(0);
 
 }
+static inline bool check_psram(uint32_t addr)
+{
+	return (addr >= 0x000000 && addr < 0x400000);
+}
 //check mem if out_of_bond will excute the fun out_of_bond
+#ifdef MROM
 static inline bool check_mem(uint32_t addr)
 {
-	return (addr>=0x80000000&&addr<0x87ffffff);
+	return (addr>=CONFIG_MBASEADDR&&addr<(CONFIG_MBASEADDR+CONFIG_MLEN));
 }
 
 
-uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-0x80000000;}
+uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-CONFIG_MBASEADDR;}
+#else
+static inline bool check_mem(uint32_t addr)
+{
+	return (addr>=CONFIG_MBASEADDR&&addr<(CONFIG_MBASEADDR+CONFIG_MLEN));
+}
+
+uint8_t* guest_to_host(uint32_t paddr) {return pmem+paddr-CONFIG_MBASEADDR;}
+#endif
 
 
 uint32_t pmem_read(uint32_t addr,int len)
@@ -180,8 +193,9 @@ extern "C" void vlg_pmem_write(int ad,int wdata,int len)
 	printf("npc write\n");
 	out_of_bound(addr);
 }
+#ifdef MROM
 
-uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - 0x80000000; }
+uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASEADDR; }
 
 static long load_img(){
    extern char *img_file;
@@ -197,12 +211,43 @@ static long load_img(){
    long size = ftell(fp);
    Log("The image is %s, size = %ld", img_file, size); 
    fseek(fp, 0, SEEK_SET);
-   int ret = fread(NPC_guest_to_host(0x80000000), size, 1, fp);
-   assert(ret == 1);
+   int ret = fread(NPC_guest_to_host(CONFIG_MBASEADDR), size, 1, fp);
+   if(ret != 1)
+   {
+	printf("can't load the image\r\n");
+   }
                
    fclose(fp); 
    return size;
 }
+#else
+uint8_t* NPC_guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASEADDR; }
+
+static long load_img(){
+   extern char *img_file;
+   if (img_file == NULL) {
+     printf("No image is given. Use the default build-in image.");
+     return 4096; // built-in image size
+   }           
+               
+   FILE *fp = fopen(img_file, "rb");
+   //assert(fp==NULL);
+               
+   fseek(fp, 0, SEEK_END);
+   long size = ftell(fp);
+   Log("The image is %s, size = %ld", img_file, size); 
+   fseek(fp, 0, SEEK_SET);
+   int ret = fread(NPC_guest_to_host(CONFIG_MBASEADDR), size, 1, fp);
+   if(ret != 1)
+   {
+	printf("can't load the image\r\n");
+   }
+               
+   fclose(fp); 
+   return size;
+}
+#endif
+
 
 void pmem_out()
 {
@@ -235,3 +280,75 @@ extern "C" void vlg_uart(int ad,int data,int mask){
 		assert(0);
 	}
 }
+
+extern "C" int psram_read(int32_t addr){
+	uint32_t ad = ((uint32_t)addr&~3);
+	if(likely(check_psram(addr)))
+	{
+	uint32_t data = host_read(ad+psram_mem,4);
+	return (int)data; 
+	}
+	printf("read\n");
+	out_of_bound(addr);
+	return 0;
+}
+
+extern "C" void psram_write(int32_t addr, int32_t data,int32_t cnt)
+{
+	uint32_t ad = (uint32_t)addr;
+	uint32_t da = (uint32_t)data;
+	int len = 4;
+	//printf("psram %x  %x\n",ad,da);
+	if(likely(check_psram(addr)))
+	{
+	if(cnt == 2 ) 
+	{
+		len = 1;
+	}
+	else if (cnt==4)
+	{
+		len = 2;
+		da = (da & 0xff) << 8 | (da & 0xff00) >>8;
+	}
+	else{
+		da = ((da >> 24) & 0xFF) |      
+           ((da >> 8) & 0xFF00) |      
+           ((da << 8) & 0xFF0000) |    
+           ((da << 24) & 0xFF000000);  
+	}
+	host_write(ad+psram_mem,len,da);
+	return ;
+	}
+	printf("npc write\n");
+	out_of_bound(addr);
+}
+
+extern "C" int sdram_read (int row_addr, int col_addr, int bank)
+{
+	uint16_t data = 0;
+	data = sdram_mem[bank][row_addr][col_addr]; 
+	printf("sdram read data   %x bank  %d r_addr  %d c_addr  %x\n",data,bank,row_addr,col_addr);
+	return (int)data;
+}
+
+extern "C" void sdram_write (int row_addr, int col_addr, int data_in, int bank,int dqm)
+{
+	printf("sdram write data=%x  bank=%d  r_addr=%d  c_addr=%x\n  dqm=%x\n",(uint16_t)data_in,bank,row_addr,col_addr,dqm);
+	uint16_t data = sdram_mem[bank][row_addr][col_addr];
+	if(dqm == 0)
+	{
+	sdram_mem[bank][row_addr][col_addr] = (uint16_t)data_in;
+	}
+	else if(dqm == 1)
+	{
+	sdram_mem[bank][row_addr][col_addr] = ((uint16_t)data_in&0xFF00) | (data&0x00FF);
+	}
+	else if(dqm == 2)
+	{
+	sdram_mem[bank][row_addr][col_addr] = ((uint16_t)data_in&0x00FF) | (data&0xFF00);
+	}
+}
+
+
+extern "C" void mrom_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3)-CONFIG_MBASEADDR);}//printf("%x %x\r\n",(uint32_t)addr,*(uint32_t*)data); }
+extern "C" void flash_read(int32_t addr, int32_t *data) { *(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)(addr & ~3));/*(uint32_t*)data = *(uint32_t*)(pmem+(uint32_t)addr);*/ }

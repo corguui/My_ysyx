@@ -1,13 +1,16 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
+#define CONFIG_MBASEADDR 0x30000000
+#define CONFIG_MLEN 0xfffffff
 #define CONFIG_MODE 1
 //0 --batch 1 --log  
-//#define CONFIG_VCD 1
+#define MROM 1
+#define CONFIG_VCD 1
 //#define CONFIG_CC_WATCHPOINT 1
 #define CONFIG_ITRACE 1
 //#define CONFIG_IQUEUE 1
-//#define CONFIG_TARGET_NATIVE_ELF 1
+//#define CONFIG_TARGET_NATIVE_ELF 1  //这个才能有npc-text
 #define __GUEST_ISA__ "riscv32" 
 //#define CONFIG_FTRACE 1
 //#define CONFIG_DTRACE 1

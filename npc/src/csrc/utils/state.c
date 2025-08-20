@@ -16,11 +16,11 @@ void set_npc_state(int state,int halt_ret)
 
 void invalid_inst()
 {	
-        printf("invalid opcode (PC = 0x%x)\n",top->io_pc);
+        printf("invalid opcode (PC = 0x%x)\n",top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg);
   printf("There are two cases which will trigger this unexpected exception:\n"
       "1. The instruction at PC = \" 0x%x \" is not implemented.\n"
-      "2. Something is implemented incorrectly.\n", top->io_pc);
-  printf("Find this PC(\" 0x%x \") in the disassembling result to distinguish which case it is.\n\n", top->io_pc);
+      "2. Something is implemented incorrectly.\n", top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg);
+  printf("Find this PC(\" 0x%x \") in the disassembling result to distinguish which case it is.\n\n", top->rootp->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__pc_reg);
   printf(ANSI_FMT("If it is the first case, see\n%s\nfor more details.\n\n"
         "If it is the second case, remember:\n"
         "* The machine is always right!\n"

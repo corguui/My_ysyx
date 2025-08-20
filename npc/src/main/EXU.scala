@@ -32,6 +32,7 @@ class EXU extends Module {
         val out2lsu = Decoupled(new EXUtoLSU)
     })
 
+    /*
     //EXU to IDU
     val m2IDUidle :: m2IDUprocess :: Nil = Enum(2)
 	//val m2IDUstate = RegInit(m2IDUidle)
@@ -40,6 +41,8 @@ class EXU extends Module {
 		m2IDUidle -> Mux(io.idu2in.valid,m2IDUprocess,m2IDUidle),
 		m2IDUprocess -> Mux(io.idu2in.ready,m2IDUidle,m2IDUprocess)
 	))
+    */
+    /*
     //EXU receive EXU
 	val lsu2s_idle :: lsu2s_wait_ready :: Nil = Enum(2)
 	val lsu2s_state = RegInit(lsu2s_idle)
@@ -47,106 +50,112 @@ class EXU extends Module {
 		lsu2s_idle -> Mux(io.out2lsu.valid,lsu2s_wait_ready,lsu2s_idle),
 		lsu2s_wait_ready -> Mux(io.out2lsu.ready,lsu2s_idle,lsu2s_wait_ready)
 	))
+    */
 
-    val state_reg = RegNext(m2IDUstate,m2IDUidle)
     val alu = Module(new ALU)
     alu.io.src1 :=0.U
     alu.io.src2 :=0.U
     alu.io.alu_op :=15.U
-    val alu_result_reg = RegInit(0.U)
 
-    val lsu_data = Reg(new EXUtoLSU)
-    io.out2lsu.bits := lsu_data
+    val valid_reg = RegInit(false.B)
+    io.out2lsu.valid := valid_reg
+    io.out2lsu.bits := 0.U.asTypeOf(new EXUtoLSU)
 
-    io.out2lsu.valid := (state_reg === m2IDUprocess)
-    io.idu2in.ready := ( m2IDUstate===m2IDUidle )
-    lsu_data.mem_ren := false.B
-    lsu_data.mem_wen := false.B
-    when(io.out2lsu.valid)
-    {
-        lsu_data.snpc := io.idu2in.bits.snpc
-        lsu_data.pc := io.idu2in.bits.pc
-        lsu_data.mem_ren := io.idu2in.bits.mem_ren
-        lsu_data.mem_wen := io.idu2in.bits.mem_wen
-        lsu_data.m_rmask := io.idu2in.bits.m_rmask
-        lsu_data.m_wmask := io.idu2in.bits.m_wmask
-        lsu_data.reg_waddr := io.idu2in.bits.reg_waddr
-        lsu_data.reg_wen := io.idu2in.bits.reg_wen
-        lsu_data.src1 := io.idu2in.bits.src1
-        lsu_data.src2 := io.idu2in.bits.src2
-        lsu_data.csr := io.idu2in.bits.csr
-        lsu_data.csr_a5 := io.idu2in.bits.csr_a5
-        lsu_data.mstatus := io.idu2in.bits.mstatus
-        lsu_data.imm := io.idu2in.bits.imm
-        lsu_data.inst_type := io.idu2in.bits.inst_type
-        lsu_data.il_us := io.idu2in.bits.il_us
-        lsu_data.alu_result := alu_result_reg 
+    val out_data = Reg(new EXUtoLSU)
+    when(io.out2lsu.valid & io.out2lsu.ready){
+        io.out2lsu.bits := out_data
+        valid_reg := false.B
+    }.otherwise{
+        io.out2lsu.bits := 0.U.asTypeOf(new EXUtoLSU)
     }
-    when(m2IDUstate === m2IDUprocess)
-    {
 
-        m2IDUstate := m2IDUidle
-        switch(io.idu2in.bits.inst_type)
+    val in_data = Reg(new IDUtoEXU)
+    val state = RegInit(false.B) 
+    io.idu2in.ready := false.B
+    when(io.idu2in.valid)
+    {
+        io.idu2in.ready := true.B
+        when(io.idu2in.valid & io.idu2in.ready){
+            in_data := io.idu2in.bits
+            state := true.B
+        }.otherwise{
+            state := false.B
+            in_data := 0.U.asTypeOf(new IDUtoEXU)
+        }
+    }.otherwise{
+        io.idu2in.ready := false.B
+    }
+
+    out_data.mem_ren := false.B
+    out_data.mem_wen := false.B
+
+    when(state)
+    {
+        state := false.B
+        valid_reg := true.B
+        switch(in_data.inst_type)
         {
             //R type
             is(1.U){
-                alu.io.src1 := io.idu2in.bits.src1
-                alu.io.src2 := io.idu2in.bits.src2
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.src1
+                alu.io.src2 := in_data.src2
+                alu.io.alu_op := in_data.alu_op
             }
             //I type
             is(2.U){
-                alu.io.src1 := io.idu2in.bits.src1 
-                alu.io.src2 := io.idu2in.bits.imm
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.src1 
+                alu.io.src2 := in_data.imm
+                alu.io.alu_op := in_data.alu_op
             }
             //IL type
             is(3.U){
-                alu.io.src1 := io.idu2in.bits.src1
-                alu.io.src2 := io.idu2in.bits.imm
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.src1
+                alu.io.src2 := in_data.imm
+                alu.io.alu_op := in_data.alu_op
             }
             //s type
             is(4.U){
-                alu.io.src1 := io.idu2in.bits.src1
-                alu.io.src2 := io.idu2in.bits.imm
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.src1
+                alu.io.src2 := in_data.imm
+                alu.io.alu_op := in_data.alu_op
             }
             //b type
             is(5.U){
-                alu.io.src1 := io.idu2in.bits.src1
-                alu.io.src2 := io.idu2in.bits.src2
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.src1
+                alu.io.src2 := in_data.src2
+                alu.io.alu_op := in_data.alu_op
             }
             //u type
             //upc type
             is(7.U){
-                alu.io.src1 := io.idu2in.bits.imm
-                alu.io.src2 := io.idu2in.bits.pc
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.imm
+                alu.io.src2 := in_data.pc
+                alu.io.alu_op := in_data.alu_op
             }
             //j type
             is(8.U){
-                alu.io.src1 := io.idu2in.bits.imm
-                alu.io.src2 := io.idu2in.bits.pc
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.imm
+                alu.io.src2 := in_data.pc
+                alu.io.alu_op := in_data.alu_op
             }
             //jr type
             is(9.U){
-                alu.io.src1 := io.idu2in.bits.imm
-                alu.io.src2 := io.idu2in.bits.src1
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.imm
+                alu.io.src2 := in_data.src1
+                alu.io.alu_op := in_data.alu_op
             }
             //csrrw
             //csrrs
             is(11.U){
-                alu.io.src1 := io.idu2in.bits.csr
-                alu.io.src2 := io.idu2in.bits.src1
-                alu.io.alu_op := io.idu2in.bits.alu_op
+                alu.io.src1 := in_data.csr
+                alu.io.src2 := in_data.src1
+                alu.io.alu_op := in_data.alu_op
             }
             //ecall
             //mret
         }
-        alu_result_reg := alu.io.result
+        out_data.alu_result := alu.io.result
+        (out_data: Data).waiveAll :<>= (in_data: Data).waiveAll
+
     }
 }

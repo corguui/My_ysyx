@@ -51,7 +51,7 @@ __EXPORT void difftest_regcpy(void *dut,uint32_t *pc, bool direction) {
   }
   else if(direction==DIFFTEST_TO_REF)
   {
-    if(*pc==0x80000000)
+    if(*pc==0x20000000)
     {
     cpu.pc=(*pc);
     }

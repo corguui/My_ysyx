@@ -3,6 +3,8 @@
 !*/
 !/nemu/*
 !/nexus-am/*
+/fceux-am
+!/am-kernels/*
 !/nanos-lite/*
 !/navy-apps/*
 !/npc/*
@@ -10,6 +12,5 @@
 !README.md
 !.gitignore
 !init.sh
-/fceux-am
 /nvboard
-/am-kernels
+/save/ysyxSoC/rocket-chip
